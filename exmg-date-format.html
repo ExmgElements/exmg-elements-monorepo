@@ -1,0 +1,101 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`exmg-date-format`
+Lightweight element for formatting dates
+
+```html
+  <exmg-date-format timestamp="1493214988336"></exmg-date-format>
+```
+
+### Styling
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--exmg-date-format` | Mixin applied to host element | `{}`
+
+@demo demo/index.html
+-->
+
+<dom-module id="exmg-date-format">
+  <template>
+    <style>
+    :host {
+      display: inline-block;
+      @apply(--exmg-date-format);
+    }
+    </style>
+    [[_formattedDate]]
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'exmg-date-format',
+
+    properties: {
+      /**
+       * Timestamp value of the date to format
+       */
+      timestamp: {
+        type: Number,
+      },
+      /**
+       * Specify the date pattern that should be used. Default pattern is 'MM/dd/yyyy hh:mm:ss a'
+       */
+      datePattern: {
+        type: String,
+        value: 'MM/dd/yyyy hh:mm:ss a',
+      },
+      /**
+       * Computed property that updates when timestamp or date patern changes
+       */
+      _formattedDate: {
+        type: String,
+        computed: '_computeDate(timestamp, datePattern)',
+      }
+    },
+
+    _computeDate: function(timestamp, datePattern) {
+      return this.formatDate(timestamp, datePattern);
+    },
+
+    /**
+     * This function can be used to manualy format dates. The first parameter
+     * can be a timestamp or a Date. Second parmeter pattern is optionaly.
+     */
+    formatDate: function(date, datePattern) {
+      return date ? this._format(date, datePattern || this.datePattern) : '';
+    },
+
+    _pad: function(str, len, ch) {
+      str = String(str);
+      len = parseInt(len, 10) || 2;
+      ch = ch || '0';
+      while (str.length < len) {
+        str = ch + str;
+      }
+      return str;
+    },
+
+    _format: function(date, pattern) {
+      if (typeof date === 'number') {
+        date = new Date(date);
+      }
+      var hours = date.getHours();
+      var hours12 = hours <= 12 ? (hours == 0 ? 12 : hours) : hours - 12;
+      var dayMode = hours < 12 ? 'AM' : 'PM';
+      return pattern.
+        replace(/yyyy/g, this._pad(date.getFullYear(), 4)).
+        replace(/yy/g, this._pad(('' + date.getFullYear()).substr(2), 2)).
+        replace(/MM/g, this._pad(date.getMonth() + 1, 2)).
+        replace(/dd/g, this._pad(date.getDate(), 2)).
+        replace(/hh/g, this._pad(hours12, 2)).
+        replace(/HH/g, this._pad(hours, 2)).
+        replace(/mm/g, this._pad(date.getMinutes(), 2)).
+        replace(/ss/g, this._pad(date.getSeconds(), 2)).
+        replace(/tt/g, dayMode).
+        replace(/a/g, dayMode);
+    },
+  });
+</script>
