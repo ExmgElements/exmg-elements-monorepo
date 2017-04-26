@@ -1,0 +1,130 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`exmg-copy-to-clipboard`
+Helper element to create icon/buttons that lets the user copy content to the clipboard. Just wrap it arround
+the button or icon and set the value that needs to be copied.
+
+```html
+  <exmg-copy-to-clipboard value="mark@test.com">
+    <paper-icon-button icon="content-copy"></paper-icon-button>
+  </exmg-copy-to-clipboard>
+```
+
+### Styling
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--exmg-copy-to-clipboard` | Mixin applied to host element | `{}`
+
+@demo demo/index.html
+-->
+
+<dom-module id="exmg-copy-to-clipboard">
+  <template>
+    <style>
+      :host {
+        display: inline-block;
+        @apply(--exmg-copy-to-clipboard);
+      }
+    </style>
+    <content></content>
+    <span id="clipboard" style="display:none;">[[value]]</span>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'exmg-copy-to-clipboard',
+
+      /**
+       * Fired when copy is successful
+       *
+       * @event value-copied
+       */
+
+      /**
+       * Fired when copy command is not supported
+       *
+       * @event copy-not-supported
+       */
+
+      properties: {
+        /**
+         * Value used for the copy
+         */
+        value: {
+          type: String
+        },
+        /**
+         * Boolean indicating if document.execCommand('copy') is supported
+         */
+        _isCopySupported: {
+          type: Boolean,
+          value: document.queryCommandSupported('copy')
+        },
+      },
+      listeners: {
+        'tap': '_handleCopy'
+      },
+      observers: [
+        '_hideCopy(_isCopySupported, _buttonElement)'
+      ],
+      /**
+       * Monitor if button is replaced at a later moment and as a result update reference
+       */
+      attached: function() {
+        this._observer = Polymer.dom(this).observeNodes(function(info) {
+          this._buttonElement = this.getEffectiveChildren()[0];
+        }.bind(this));
+      },
+      /**
+       * Cleanup node observer
+       */
+      detached: function() {
+        if (this._observer) {
+          Polymer.dom(this).unobserveNodes(this._observer);
+          this._observer = null;
+        }
+      },
+      /**
+       * Copy the given value to the clipboard
+       */
+      copyToClipboard: function() {
+        this.$.clipboard.style.display = 'block';
+
+        var range = document.createRange();
+        range.selectNodeContents(this.$.clipboard);
+
+        var selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+
+        try {
+          document.execCommand('copy');
+          this.fire('value-copied', this.value);
+        } catch (err) {
+          console.log('copy to clipboard failed', err);
+        }
+
+        selection.removeAllRanges();
+        this.$.clipboard.style.display = 'none';
+      },
+      /**
+       * Hide button when copy functionality is not supported in browser
+       */
+      _hideCopy: function(_isCopySupported, _buttonElement) {
+        if(!_isCopySupported && _buttonElement) {
+          _buttonElement.setAttribute('hidden','');
+          this.fire('copy-not-supported');
+        }
+      },
+      /**
+       * Handle button tap event and trigger the actual copy to clipboard
+       */
+      _handleCopy: function(e) {
+        this.copyToClipboard();
+        e.stopPropagation();
+      }
+    });
+  </script>
+</dom-module>

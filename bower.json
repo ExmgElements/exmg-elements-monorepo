@@ -1,0 +1,32 @@
+{
+  "name": "exmg-copy-to-clipboard",
+  "description": "Helper element to create a copy to clipboard button",
+  "main": "exmg-copy-to-clipboard.html",
+  "version": "1.0.0",
+  "authors": [
+    "Mark Smits"
+  ],
+  "homepage": "http://exmg.github.io/exmg-copy-to-clipboard/",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/exmg/exmg-copy-to-clipboard.git"
+  },
+  "keywords": [
+    "web-components",
+    "web-component",
+    "polymer",
+    "copy",
+    "clipboard"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.4.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "iron-icons": "PolymerElements/iron-icons#^1.2.1",
+    "paper-icon-button": "PolymerElements/paper-icon-button#^1.0.6",
+    "web-component-tester": "^4.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  }
+}

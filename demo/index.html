@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>exmg-copy-to-clipboard demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="../../iron-icons/iron-icons.html">
+
+    <link rel="import" href="../exmg-copy-to-clipboard.html">
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+      [hidden] {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Copy using a button element</h3>
+      <demo-snippet>
+        <template>
+          <exmg-copy-to-clipboard value="copied content">
+            <button>Copy to clipboard</button>
+          </exmg-copy-to-clipboard>
+        </template>
+      </demo-snippet>
+      <h3>Copy using a paper-icon-button</h3>
+      <demo-snippet>
+        <template>
+          mark@test.com
+          <exmg-copy-to-clipboard value="mark@test.com">
+            <paper-icon-button icon="content-copy"></paper-icon-button>
+          </exmg-copy-to-clipboard>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>

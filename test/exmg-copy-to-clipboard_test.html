@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>exmg-copy-to-clipboard test</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../exmg-copy-to-clipboard.html">
+  </head>
+  <body>
+    <test-fixture id="basic">
+      <template>
+        <exmg-copy-to-clipboard></exmg-copy-to-clipboard>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('exmg-copy-to-clipboard', function() {
+        test('instantiating the element works', function() {
+          var element = fixture('basic');
+          assert.equal(element.is, 'exmg-copy-to-clipboard');
+        });
+      });
+    </script>
+  </body>
+</html>
