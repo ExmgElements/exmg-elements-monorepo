@@ -11,14 +11,12 @@
         @apply --paper-font-common-base;
         font-size: 14px;
         margin: 0;
-        padding: 24px;
         background-color: var(--paper-blue-grey-50);
         @apply --layout-fullbleed;
         @apply --layout-vertical;
       }
 
       .page-container {
-        padding: 16px 24px;
         @apply(--layout-vertical);
         @apply(--layout-center-justified);
       }
@@ -53,9 +51,9 @@
       }
 
       @media only screen and (min-width: 920px) {
-        .page-container {
+        .page-content {
           max-width: 936px;
-          margin: 0 auto;
+          margin: 20px auto;
           width: 100%;
         }
       }
