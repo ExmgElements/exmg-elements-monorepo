@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <title>exmg-cms-styles demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-ajax/iron-ajax.html">
+    <link rel="import" href="../../iron-flex-layout/iron-flex-layout.html">
+    <link rel="import" href="../../paper-button/paper-button.html">
+
+    <link rel="import" href="../../exmg-datatable/exmg-datatable.html">
+    <link rel="import" href="../../exmg-datatable/exmg-toolbar.html">
+    <link rel="import" href="../../exmg-datatable/exmg-thead.html">
+    <link rel="import" href="../../exmg-datatable/exmg-tbody.html">
+    <link rel="import" href="../../exmg-datatable/exmg-data-helper.html">
+
+    <link rel="import" href="../exmg-cms-page-styles.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+        body {
+          margin: 0;
+          padding: 0;
+        }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <dom-module id="x-demo">
+        <template>
+          <style include="exmg-cms-page-styles">
+            paper-button {
+              --paper-button: {
+                padding: 0 16px;
+              };
+              min-height: 36px;
+              min-width: 88px;
+              line-height: 36px;
+              font-weight: 500;
+              font-size: 14px;
+              color: rgb(255,255,255);
+              background-color: rgb(3,155,229);
+            }
+            .flex {
+              @apply(--layout-flex);
+            }
+          </style>
+
+          <div class="page-container">
+            <div class="page-content">
+
+              <h2>Contacts</h2>
+
+              <div class="card">
+
+                <!-- DataTable -->
+                <exmg-datatable>
+                  <!-- Colgroup -->
+                  <template>
+                    <div class="colgroup">
+                      <div class="col" style="width:140px;"></div>
+                      <div class="col" style="width:220px;"></div>
+                      <div class="col" style="width:120px;"></div>
+                      <div class="col" style="width:50%;"></div>
+                    </div>
+                  </template>
+                  <!-- THead -->
+                  <exmg-thead sorted="{{sorted}}" sort-direction="{{sortDirection}}">
+                    <template>
+                      <div class="tr">
+                        <div class="th" sortable="name">Name</div>
+                        <div class="th" sortable="email">Email</div>
+                        <div class="th" sortable="city">City</div>
+                        <div class="th" sortable="country">Country</div>
+                      </div>
+                    </template>
+                  </exmg-thead>
+                  <!-- TBody -->
+                  <exmg-tbody items='[[items]]' selection-enabled>
+                    <template>
+                      <div class="tr">
+                        <div class="td">[[item.name]]</div>
+                        <div class="td">[[item.email]]</div>
+                        <div class="td">[[item.city]]</div>
+                        <div class="td">[[item.country]]</div>
+                      </div>
+                    </template>
+                  </exmg-tbody>
+                </exmg-datatable>
+
+              </div>
+
+              <h2>Contacts</h2>
+
+              <div class="card">
+
+                <!-- Table Toobar -->
+                <exmg-toolbar selected-items="[[selectedItems]]">
+                  <div slot="default">
+                    <div class="flex"></div>
+                    <paper-button raised>Add Customer</paper-button>
+                  </div>
+                </exmg-toolbar>
+                <!-- DataTable -->
+                <exmg-datatable>
+                  <!-- Colgroup -->
+                  <template>
+                    <div class="colgroup">
+                      <div class="col" style="width:140px;"></div>
+                      <div class="col" style="width:220px;"></div>
+                      <div class="col" style="width:120px;"></div>
+                      <div class="col" style="width:50%;"></div>
+                    </div>
+                  </template>
+                  <!-- THead -->
+                  <exmg-thead sorted="{{sorted}}" sort-direction="{{sortDirection}}">
+                    <template>
+                      <div class="tr">
+                        <div class="th" sortable="name">Name</div>
+                        <div class="th" sortable="email">Email</div>
+                        <div class="th" sortable="city">City</div>
+                        <div class="th" sortable="country">Country</div>
+                      </div>
+                    </template>
+                  </exmg-thead>
+                  <!-- TBody -->
+                  <exmg-tbody items='[[items]]' selection-enabled>
+                    <template>
+                      <div class="tr">
+                        <div class="td">[[item.name]]</div>
+                        <div class="td">[[item.email]]</div>
+                        <div class="td">[[item.city]]</div>
+                        <div class="td">[[item.country]]</div>
+                      </div>
+                    </template>
+                  </exmg-tbody>
+                </exmg-datatable>
+
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Manage sorting and paging  -->
+          <exmg-data-helper raw-items="[[contacts]]" items="{{items}}" page-index="[[pageIndex]]" sorted="[[sorted]]" sort-direction="[[sortDirection]]" page-size="[[pageSize]]" ></exmg-data-helper>
+
+          <!-- Load contacts from json file  -->
+          <iron-ajax url="../../exmg-datatable/demo/data/contacts.json" last-response="{{contacts}}" auto></iron-ajax>
+
+        </template>
+        <script>
+        window.addEventListener('WebComponentsReady', function() {
+          class XDemo extends Polymer.Element {
+            static get is() { return 'x-demo'; }
+            static get properties() {
+              return {
+                pageIndex: {
+                  type: Number,
+                  value: 0
+                },
+                pageSize: {
+                  type: Number,
+                  value: 5
+                },
+                sorted: {
+                  type: String,
+                  value: 'name',
+                },
+                sortDirection: {
+                  type: String,
+                  value: 'ASC',
+                }
+              };
+            }
+          }
+          window.customElements.define(XDemo.is, XDemo);
+        });
+        </script>
+      </dom-module>
+
+      <x-demo></x-demo>
+
+  </body>
+</html>
