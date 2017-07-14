@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <title>exmg-cms-styles demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-flex-layout/iron-flex-layout.html">
+    <link rel="import" href="../../paper-header-panel/paper-header-panel.html">
+    <link rel="import" href="../../paper-listbox/paper-listbox.html">
+    <link rel="import" href="../../paper-item/paper-item.html">
+    <link rel="import" href="../../paper-toolbar/paper-toolbar.html">
+    <link rel="import" href="../../iron-ajax/iron-ajax.html">
+    <link rel="import" href="../../iron-icon/iron-icon.html">
+    <link rel="import" href="../../iron-icons/iron-icons.html">
+    <link rel="import" href="../../paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="../../paper-drawer-panel/paper-drawer-panel.html">
+    <link rel="import" href="../../exmg-cms-sidemenu/exmg-cms-sidemenu.html">
+    <link rel="import" href="../../exmg-cms-sidemenu/demo/dev-icons.html">
+
+    <link rel="import" href="../exmg-cms-page-styles.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+        body {
+          margin: 0;
+          padding: 0;
+        }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <dom-module id="x-demo">
+        <template>
+          <style>
+            :host {
+              display: block;
+              @apply(--layout-fullbleed);
+              @apply(--layout-vertical);
+              background-color: #eceff1;
+              font-family: Roboto,"Helvetica Neue",sans-serif;
+            }
+            .logo-text { margin: auto 12px; }
+            .nav-heading {
+              -webkit-box-sizing: border-box;
+              box-sizing: border-box;
+              -webkit-flex-shrink: 0;
+              flex-shrink: 0;
+              padding: 0 24px;
+              overflow: hidden;
+              cursor: default;
+              -webkit-user-select: none;
+              color: rgba(0,0,0,0.38);
+              font-size: 12px;
+              line-height: 24px;
+              letter-spacing: .5px;
+              text-transform: uppercase;
+              height: 32px;
+              -webkit-transition: height .3s ease,opacity .3s ease .15s;
+              transition: height .3s ease,opacity .3s
+            }
+            .main-toolbar button {
+              height: 48px;
+              background: transparent;
+              border: 0;
+              min-height: 36px;
+              min-width: 88px;
+              line-height: 36px;
+              vertical-align: middle;
+              -webkit-box-align: center;
+              @apply(--layout-horizontal);
+            }
+            .main-toolbar button .logo-text{
+              width: 82px;
+              height: 18px;
+              margin-left: 12px;
+            }
+
+            .side-bar {
+              height: 100%;
+              -webkit-box-sizing: border-box;
+              box-sizing: border-box;
+              -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
+              box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
+              background-color: white;
+              z-index: 11;
+            }
+
+            .main-toolbar paper-item {
+               height: 32px;
+               min-height: 32px;
+               box-sizing: border-box;
+            }
+            .main-toolbar hr {
+              border: 0;
+              height: 0;
+              border-top: 1px solid #ddd;
+            }
+            paper-header-panel:not([narrow]) .main-toolbar paper-icon-button { display: none; }
+            paper-toolbar.page-toolbar {
+              background: #0B1F54;
+              color: white;
+              --paper-toolbar-height: 56px;
+            }
+            paper-toolbar.page-toolbar[data-production] {
+              background: #f15252;
+            }
+            paper-toolbar.main-toolbar {
+              background-color: #081536;;
+              color: white;
+              -webkit-box-shadow: 0 0px 0px 0 rgba(0,0,0,0.14),0 0px 0px 0px rgba(0,0,0,0.12),0 0px 0px 0 rgba(0,0,0,0.2);
+              box-shadow: 0 0px 0px 0 rgba(0,0,0,0.14),0 0px 0px 0px rgba(0,0,0,0.12),0 0px 0px 0 rgba(0,0,0,0.2);
+              z-index: 20;
+              --paper-toolbar-height: 48px;
+            }
+            paper-toolbar .title { margin-left: 10px; }
+            paper-menu {
+              --paper-menu: {
+                padding: 0px;
+              }
+            }
+            .menu paper-item {
+              --paper-item: {
+                min-height: 32px;
+                padding: 0px 24px;
+                box-sizing: border-box;
+              }
+            }
+            paper-item > iron-icon { padding-right: 16px; }
+
+            .main-toolbar paper-dropdown-menu{ line-height: 28px; }
+            paper-header-panel[narrow] .main-toolbar paper-dropdown-menu { display: none; }
+            paper-toolbar paper-icon-button[icon=menu] { margin-right: 6px; }
+
+            paper-drawer-panel {
+              --paper-drawer-panel-left-drawer-container: { width:500px; }
+            }
+            div.main {
+              overflow: scroll;
+            }
+            iron-icon.dropdown-trigger {
+              margin: 0 8px;
+              cursor: pointer;
+            }
+            footer {
+              font-weight: 200;
+              padding: 16px;
+              text-align: center;
+            }
+            .flex {
+              @apply(--layout-flex);
+            }
+
+            exmg-cms-sidemenu {
+              box-sizing: border-box;
+              width: 256px;
+            }
+            exmg-cms-sidemenu[collapsed] {
+              width: 68px;
+            }
+          </style>
+
+          <paper-header-panel narrow$="[[narrow]]">
+            <!-- Main toolbar -->
+            <paper-toolbar class="main-toolbar" slot="header">
+              <paper-icon-button slot="top" icon="menu" on-tap="_showDrawer"></paper-icon-button>
+              <button slot="top">
+                <img src="../logo.svg" alt="Winview" style="height: 30px;">
+              </button>
+              <span slot="top" class="flex"></span>
+              <span slot="top">Logout</span>
+            </paper-toolbar>
+
+            <paper-drawer-panel id="drawerPanel" narrow={{narrow}} drawer-width="{{drawerWidth}}" disable-edge-swipe>
+              <div slot="drawer" class="side-bar">
+                <exmg-cms-sidemenu id="sidemenu" menu="[[menu]]" collapsed="{{collapsed}}"></exmg-cms-sidemenu>
+              </div>
+              <div slot="main" class="main">
+                <!-- Page toolbar -->
+                <paper-toolbar class="page-toolbar" data-production$="[[isProduction]]">
+                  <span class="title">Title</span>
+                  <!--paper-icon-button icon="winview-icons:help"></paper-icon-button-->
+                </paper-toolbar>
+                <slot></slot>
+                <footer>
+                  (C)opyright <a href="http://www.exmachinagroup.tv">Ex Machina</a> 2017 - Version x
+                </footer>
+              </div>
+            </paper-drawer-panel>
+          </paper-header-panel>
+
+          <!-- Load contacts from json file  -->
+          <iron-ajax url="../../exmg-cms-sidemenu/demo/data/menu.json" last-response="{{menu}}" auto></iron-ajax>
+
+        </template>
+        <script>
+        window.addEventListener('WebComponentsReady', function() {
+          class XDemo extends Polymer.Element {
+            static get is() { return 'x-demo'; }
+            static get properties() {
+              return {
+                narrow: Boolean,
+                drawerWidth: {
+                  type: String,
+                  computed: '_computeWidth(collapsed)'
+                },
+                collapsed: {
+                  type: Boolean,
+                  value: false,
+                }
+              };
+            }
+
+            static get observers() {
+              return [
+                '_observeNarrowChange(narrow)',
+              ]
+            }
+
+            _observeNarrowChange(narrow) {
+              if(narrow) {
+                this.set('collapsed', false);
+              }
+            }
+
+            _showDrawer() {
+              this.$.drawerPanel.togglePanel();
+            }
+
+            _computeWidth(collapsed) {
+              return collapsed ? '68px' : '256px';
+            }
+
+          }
+          window.customElements.define(XDemo.is, XDemo);
+        });
+        </script>
+      </dom-module>
+
+      <x-demo>Main content</x-demo>
+
+  </body>
+</html>
