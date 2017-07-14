@@ -61,7 +61,7 @@
               </div>
               <div slot="main" class="main">
                 <!-- Page toolbar -->
-                <paper-toolbar class="page-toolbar" data-production$="[[isProduction]]">
+                <paper-toolbar class="page-toolbar">
                   <span class="title">Title</span>
                   <!--paper-icon-button icon="winview-icons:help"></paper-icon-button-->
                 </paper-toolbar>
@@ -86,19 +86,19 @@
                 narrow: Boolean,
                 drawerWidth: {
                   type: String,
-                  computed: '_computeWidth(collapsed)'
+                  computed: '_computeWidth(collapsed)',
                 },
                 collapsed: {
                   type: Boolean,
                   value: false,
-                }
+                },
               };
             }
 
             static get observers() {
               return [
                 '_observeNarrowChange(narrow)',
-              ]
+              ];
             }
 
             _observeNarrowChange(narrow) {

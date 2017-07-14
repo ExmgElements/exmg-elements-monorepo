@@ -98,7 +98,7 @@
               <div class="card">
 
                 <!-- Table Toobar -->
-                <exmg-toolbar selected-items="[[selectedItems]]">
+                <exmg-toolbar>
                   <div slot="default">
                     <div class="flex"></div>
                     <paper-button raised>Add Customer</paper-button>
@@ -159,11 +159,11 @@
               return {
                 pageIndex: {
                   type: Number,
-                  value: 0
+                  value: 0,
                 },
                 pageSize: {
                   type: Number,
-                  value: 5
+                  value: 5,
                 },
                 sorted: {
                   type: String,
@@ -172,7 +172,7 @@
                 sortDirection: {
                   type: String,
                   value: 'ASC',
-                }
+                },
               };
             }
           }

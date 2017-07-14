@@ -13,39 +13,8 @@
   </head>
   <body>
 
-    <test-fixture id="BasicTestFixture">
-      <template>
-        <exmg-cms-styles></exmg-cms-styles>
-      </template>
-    </test-fixture>
-
-    <test-fixture id="ChangedPropertyTestFixture">
-      <template>
-        <exmg-cms-styles prop1="new-prop1"></exmg-cms-styles>
-      </template>
-    </test-fixture>
-
     <script>
-      suite('exmg-cms-styles', function() {
-
-        test('instantiating the element with default properties works', function() {
-          var element = fixture('BasicTestFixture');
-          assert.equal(element.prop1, 'exmg-cms-styles');
-          var elementShadowRoot = element.shadowRoot;
-          var elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello exmg-cms-styles!');
-        });
-
-        test('setting a property on the element works', function() {
-          // Create a test fixture
-          var element = fixture('ChangedPropertyTestFixture');
-          assert.equal(element.prop1, 'new-prop1');
-          var elementShadowRoot = element.shadowRoot;
-          var elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello new-prop1!');
-        });
-
-      });
+      suite('exmg-cms-styles', function() {});
     </script>
 
   </body>
