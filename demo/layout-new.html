@@ -80,10 +80,6 @@
               height: 18px;
               margin-left: 12px;
             }
-
-            app-drawer.collapsed {
-              --app-drawer-width: 68px;
-            }
           </style>
 
           <app-header reveals class="main-header" narrow$="[[narrow]]">
@@ -98,7 +94,7 @@
             </app-toolbar>
           </app-header>
           <app-drawer-layout narrow={{narrow}}>
-            <app-drawer id="drawer" slot="drawer" class$="[[_isCollapsed(collapsed)]]">
+            <app-drawer id="drawer" slot="drawer">
               <exmg-cms-sidemenu id="sidemenu" menu="[[menu]]" collapsed="{{collapsed}}" debug></exmg-cms-sidemenu>
             </app-drawer>
             <div class="main">
@@ -133,7 +129,11 @@
             static get observers() {
               return [
                 '_observeNarrowChange(narrow)',
+                '_observeCollapsed(collapsed)',
               ];
+            }
+            _observeCollapsed(collapsed) {
+              this.updateStyles({'--app-drawer-width': collapsed ? '64px' : '256px' });
             }
 
             _observeNarrowChange(narrow) {
@@ -144,10 +144,6 @@
 
             _showDrawer() {
               this.$.drawer.toggle();
-            }
-
-            _isCollapsed(collapse) {
-              return collapse ? 'collapsed' : '';
             }
 
           }
