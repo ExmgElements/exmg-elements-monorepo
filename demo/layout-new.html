@@ -47,56 +47,83 @@
     <dom-module id="x-demo">
         <template>
           <style include="exmg-cms-global-layout-styles">
+
             app-header:not([narrow]) paper-icon-button {
               display: none;
             }
-            .main > header {
-              background: #0B1F54;
-              color: white;
-              height: 56px;
-            }
-            app-header.main-header {
+
+            .main-header {
               background-color: #081536;;
-              color: white;
-              -webkit-box-shadow: 0 0px 0px 0 rgba(0,0,0,0.14),0 0px 0px 0px rgba(0,0,0,0.12),0 0px 0px 0 rgba(0,0,0,0.2);
-              box-shadow: 0 0px 0px 0 rgba(0,0,0,0.14),0 0px 0px 0px rgba(0,0,0,0.12),0 0px 0px 0 rgba(0,0,0,0.2);
+              color: #fff;
+              box-shadow: 0 3px 0 0 rgba(0,0,0,.2);
               z-index: 20;
-              height: 48px;
             }
 
-            .main-header button {
-              display: inline-block;
+            .main-header app-toolbar {
+              padding: 0 24px;
+            }
+
+            .main-header img {
+              height: 38px;
+            }
+
+            .main-header paper-icon-button {
+              position: absolute;
+              top: 50%;
+              left: 0;
+              width: 48px;
               height: 48px;
-              background: transparent;
-              border: 0;
-              min-height: 36px;
-              min-width: 88px;
-              line-height: 36px;
-              vertical-align: middle;
-              -webkit-box-align: center;
+              margin-top: -24px;
             }
-            .main-header button .logo-text{
-              width: 82px;
-              height: 18px;
-              margin-left: 12px;
+
+            @media all and (max-width: 599px) {
+              .main-header app-toolbar {
+                text-align: center;
+              }
+              .main-header img {
+                margin: 0 auto;
+              }
             }
+
+            .main {
+              position: relative;
+            }
+
+            .main > header {
+              background: #0B1F54;
+              color: #fff;
+              height: 56px;
+            }
+
+            app-drawer-layout {
+              min-height: calc(100vh - 64px);
+              z-index: 200;
+              position: relative;
+              overflow: hidden;
+            }
+
+            @media only screen and (min-width: 919px) {
+              app-drawer {
+                position: absolute;
+              }
+            }
+
           </style>
 
           <app-header reveals class="main-header" narrow$="[[narrow]]">
             <app-toolbar>
               <paper-icon-button icon="menu" on-tap="_showDrawer"></paper-icon-button>
-              <div main-title>
-                <button>
-                  <img src="../logo.svg" alt="Winview" style="height: 30px;">
-                </button>
-                My app
+              <img src="../logo.svg" alt="Winview">
               </div>
             </app-toolbar>
           </app-header>
-          <app-drawer-layout narrow={{narrow}}>
+
+          <app-drawer-layout narrow="{{narrow}}">
+
             <app-drawer id="drawer" slot="drawer">
               <exmg-cms-sidemenu id="sidemenu" menu="[[menu]]" collapsed="{{collapsed}}" debug></exmg-cms-sidemenu>
             </app-drawer>
+
             <div class="main">
               <header>
                 <span class="title">Title</span>
@@ -106,6 +133,7 @@
                 (C)opyright <a href="http://www.exmachinagroup.tv">Ex Machina</a> 2017 - Version x
               </footer>
             </div>
+
           </app-drawer-layout>
 
           <!-- Load contacts from json file  -->
