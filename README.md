@@ -3,8 +3,9 @@
 The `&lt;exmg-cms-styles&gt;` component provides simple ways to use Material Design CSS styles
 in your application. The following imports are available:
 
-1. exmg-cms-page.html - generic styles
 
+* exmg-cms-global-page.html - Global layout which can be used in a CMS project by including it in the main app.html. Also the exmg-cms-global-layout-mixin.html should be used to add some functionality needed for collapsing the menu etc. Please see the layout.html in the demo folder for an example.
+* exmg-cms-page.html - Styles definitions for al supported page types like pages containing cards/tables and tabs. Please see the examples in the demo folder.
 
 ## Install the Polymer-CLI
 
