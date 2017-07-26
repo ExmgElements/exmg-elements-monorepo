@@ -1,0 +1,32 @@
+<script>
+  ExmgCmsGlobalLayoutMixin = function(superClass) {
+    return class extends superClass {
+      static get properties() {
+        return {
+          narrow: Boolean,
+          collapsed: {
+            type: Boolean,
+            value: false,
+          },
+        };
+      }
+      static get observers() {
+        return [
+          '_observeNarrowChange(narrow)',
+          '_observeCollapsed(collapsed)',
+        ];
+      }
+      _observeCollapsed(collapsed) {
+        this.updateStyles({ '--app-drawer-width': collapsed ? '64px' : '256px' });
+      }
+      _observeNarrowChange(narrow) {
+        if(narrow) {
+          this.set('collapsed', false);
+        }
+      }
+      toggleDrawer() {
+        this.$.drawer.toggle();
+      }
+    }
+  }
+</script>
