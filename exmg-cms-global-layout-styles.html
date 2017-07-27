@@ -11,6 +11,7 @@
       /* Layout Styles */
 
       :host {
+        --main-header-height: 48px;
         @apply --paper-font-common-base;
         @apply(--layout-vertical);
         background-color: var(--paper-blue-grey-50);
@@ -21,18 +22,19 @@
       }
 
       .main-header {
-        background-color: #081536;;
+        background-color: #081536;
         color: #fff;
-        box-shadow: 0 3px 0 0 rgba(0,0,0,.2);
-        z-index: 20;
+        height: var(--main-header-height);
+        z-index: 201;
       }
 
       .main-header app-toolbar {
+        height: var(--main-header-height);
         padding: 0 20px;
       }
 
       .main-header img {
-        height: 38px;
+        height: calc(100% - 30%);
       }
 
       .main-header paper-icon-button {
@@ -64,7 +66,7 @@
       }
 
       app-drawer-layout {
-        min-height: calc(100vh - 64px);
+        min-height: calc(100vh - var(--main-header-height));
         z-index: 200;
         position: relative;
         overflow: hidden;
