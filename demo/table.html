@@ -7,6 +7,9 @@
 
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,500italic,700|Roboto+Mono:400,500,700">
+
+
     <link rel="import" href="../../iron-ajax/iron-ajax.html">
     <link rel="import" href="../../iron-flex-layout/iron-flex-layout.html">
     <link rel="import" href="../../paper-button/paper-button.html">
@@ -52,7 +55,7 @@
           <div class="page-container">
             <div class="page-content">
 
-              <h2>Contacts</h2>
+              <h2>Simple Table</h2>
 
               <div class="card">
 
@@ -93,17 +96,13 @@
 
               </div>
 
-              <h2>Contacts</h2>
+              <h2>Action Bar</h2>
 
               <div class="card">
-
-                <!-- Table Toobar -->
-                <exmg-toolbar>
-                  <div slot="default">
-                    <div class="flex"></div>
-                    <paper-button raised>Add Customer</paper-button>
-                  </div>
-                </exmg-toolbar>
+                <div class="card-header">
+                  <div class="flex"></div>
+                  <paper-button raised>Add Customer</paper-button>
+                </div>
                 <!-- DataTable -->
                 <exmg-datatable>
                   <!-- Colgroup -->
