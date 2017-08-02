@@ -9,6 +9,7 @@
   "devDependencies": {
     "exmg-datatable": "^2.0.0",
     "exmg-cms-sidemenu": "git@bitbucket.org:exmachina/exmg-cms-sidemenu.git",
+    "exmg-card": "git@bitbucket.org:exmachina/exmg-card.git",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
     "app-layout": "PolymerElements/app-layout#^2.0.1",

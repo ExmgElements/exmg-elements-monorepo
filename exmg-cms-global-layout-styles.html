@@ -1,20 +1,19 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../paper-styles/typography.html">
 <link rel="import" href="../paper-styles/color.html">
 <link rel="import" href="../paper-styles/shadow.html">
+
+<link rel="import" href="exmg-cms-styles.html">
 
 <dom-module id="exmg-cms-global-layout-styles">
   <template>
     <style>
 
       /* Layout Styles */
-
-      body {
+      :host {
         --main-header-height: 48px;
-        @apply --paper-font-common-base;
         @apply(--layout-vertical);
-        background-color: var(--paper-blue-grey-50);
       }
 
       app-header:not([narrow]) paper-icon-button {
@@ -82,12 +81,6 @@
       }
       exmg-cms-sidemenu[collapsed] {
         width: 68px;
-      }
-
-      /* Global Styles */
-
-      .flex {
-        @apply(--layout-flex);
       }
 
       footer {
