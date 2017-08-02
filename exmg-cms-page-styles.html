@@ -4,12 +4,15 @@
 <link rel="import" href="../paper-styles/color.html">
 <link rel="import" href="../paper-styles/shadow.html">
 
+<link rel="import" href="material-icons.html">
 <link rel="import" href="exmg-cms-styles.html">
 
 <dom-module id="exmg-cms-page-styles">
   <template>
     <style>
       :host {
+        @apply --paper-font-common-base;
+        font-size: 14px;
         @apply --layout-fullbleed;
         @apply --layout-vertical;
       }
@@ -69,21 +72,23 @@
         font-size: 22px;
       }
 
-      h2 {
+      .page-content > * {
+        margin-bottom: 54px;
+      }
+      .page-content > h2 {
         color: rgba(0, 0, 0, var(--light-secondary-opacity));
         display: block;
         margin-bottom: 16px;
-        color: rgba(0,0,0,0.54);
         font-size: 14px;
         line-height: 24px;
-        font-weight: 700;
+        font-weight: 400;
       }
 
       a {
         color: #039be5;
         text-decoration: underline;
       }
-      a::after {
+      a.open-new::after {
         font-family: 'Material Icons Extended';
         font-weight: normal;
         font-style: normal;
