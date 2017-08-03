@@ -10,11 +10,20 @@
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons+Extended">
 
     <link rel="import" href="../../paper-button/paper-button.html">
+    <link rel="import" href="../../paper-icon-button/paper-icon-button.html">
+    
+    <link rel="import" href="../../exmg-datatable/exmg-datatable.html">
+    <link rel="import" href="../../exmg-datatable/exmg-thead.html">
+    <link rel="import" href="../../exmg-datatable/exmg-tbody.html">
+    <link rel="import" href="../../exmg-datatable/exmg-icons.html">
+
     <link rel="import" href="../../exmg-card/exmg-card.html">
+    <link rel="import" href="../../exmg-card/exmg-info-card.html">
+
     <link rel="import" href="../exmg-cms-page-styles.html">
 
     <custom-style>
-      <style is="custom-style" include="demo-pages-shared-styles">
+      <style is="custom-style" include="exmg-cms-page-styles">
         body {
           margin: 0;
           padding: 0;
@@ -25,35 +34,51 @@
   <body>
     <dom-module id="x-demo">
         <template>
-          <style include="exmg-cms-page-styles">
-
-          </style>
+          <style include="exmg-cms-page-styles"></style>
 
           <div class="page-container">
-            <div class="page-content test">
+            
+            <div class="page-content">
 
-              <h2>Normal</h2>
-              <exmg-card>
-                <div class="header">
-                  <span class="flex"></span>
-                  <paper-button raised>Action</paper-button>
-                </div>
-                <div class="body">Lorem ipsum dolor sit amet, dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. <a href="#" target="_blank" class="open-new">More information</a></div>
+              <h2>Active Users</h2>
+               <exmg-card>
+                <exmg-datatable>
+                  <!-- THead -->
+                  <exmg-thead>
+                    <template>
+                      <div class="tr">
+                        <div class="th">Name</div>
+                        <div class="th">Email</div>
+                        <div class="th">Country</div>
+                        <div class="th"></div>
+                      </div>
+                    </template>
+                  </exmg-thead>
+                  <!-- TBody -->
+                  <exmg-tbody items='[{"name": "Mark", "email": "mark@test.com","country": "Netherlands"}, {"name": "Jesse", "email": "jesse@test.com","country": "Netherlands"}]'>
+                    <template>
+                      <div class="tr">
+                        <div class="td">[[item.name]]</div>
+                        <div class="td">[[item.email]]</div>
+                        <div class="td">[[item.country]]</div>
+                        <div class="td hover" style="text-align:right;">
+                          <span><paper-icon-button icon="exmg-icons:content-copy"></paper-icon-button></span>
+                          <span><paper-icon-button icon="exmg-icons:more-vert"></paper-icon-button></span>
+                        </div>
+                      </div>
+                    </template>
+                  </exmg-tbody>
+                </exmg-datatable>
               </exmg-card>
 
-              <h2>Without Header</h2>
-              <exmg-card>
-                <div class="header">
-                  <span class="flex"></span>
-                  <paper-button raised>Action</paper-button>
-                </div>
-                <div class="body">Lorem ipsum dolor sit amet, dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. <a href="#" target="_blank">More information</a></div>
-              </exmg-card>
+              <h2>Advanced</h2>
+              <exmg-info-card title="Restrict account access by IP Address" full>
+                <div slot="body" class="body">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh. euismod tincidunt ad minim veniam, ex ea commodo consequat. Duis autem vel vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit feugait nulla facilisi.<br><a href="#" target="_blank" class="open-new">More information</a></div>
+                <div slot="actions" class="actions"><paper-button raised class="normal">Modify</paper-button></div>
+              </exmg-info-card>
 
             </div>
           </div>
-
-
 
         </template>
         <script>

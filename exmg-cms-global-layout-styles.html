@@ -13,8 +13,11 @@
 
       /* Layout Styles */
       :host {
+        @apply --paper-font-common-base;
+        font-size: 14px;
+        background-color: var(--paper-grey-50);
         --main-header-height: 48px;
-        @apply(--layout-vertical);
+        @apply --layout-vertical;
       }
 
       app-header:not([narrow]) paper-icon-button {
@@ -59,7 +62,7 @@
         position: relative;
       }
 
-      .main > header {
+      .main > app-toolbar {
         background: #0B1F54;
         color: #fff;
         height: 56px;
