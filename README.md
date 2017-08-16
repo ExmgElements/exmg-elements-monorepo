@@ -1,6 +1,6 @@
 # \<exmg-cms-styles\>
 
-The `&lt;exmg-cms-styles&gt;` component provides simple ways to use Material Design CSS styles
+The `exmg-cms-styles` component provides simple ways to use Material Design CSS styles
 in your application. The following imports are available:
 
 
