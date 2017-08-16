@@ -9,6 +9,8 @@ in your application. The following imports are available:
 * exmg-cms-color.html - This element contains the primary and secondary color palette.
 * exmg-cms-default-theme.html - This element overrides the default paper colors to our EM color set.
 
+Please visit the [demo](http://ExmgElements.github.io/exmg-cms-styles/) page for live examples.
+
 ## Install the Polymer-CLI
 
 First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your element locally.
