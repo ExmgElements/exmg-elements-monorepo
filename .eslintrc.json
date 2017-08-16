@@ -1,5 +1,8 @@
 {
   "extends": ["eslint:recommended", "google"],
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
   "env": {
     "browser": true,
     "es6": true
@@ -10,7 +13,7 @@
   "rules": {
     "max-len": ["error", 120],
     "brace-style": "off",
-    "new-cap": ["error", { "capIsNewExceptions": ["Polymer"] }],
+    "new-cap": ["error", { "capIsNewExceptions": ["Polymer", "GestureEventListeners"] }],
     "no-var": "off",
     "no-console": "off",
     "require-jsdoc": "off",

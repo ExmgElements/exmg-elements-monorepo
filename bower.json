@@ -1,15 +1,29 @@
 {
   "name": "exmg-cms-styles",
+  "version": "1.0.0",
   "description": "The `&lt;exmg-cms-styles&gt;` component provides simple ways to use Material Design CSS styles",
+  "authors": [
+    "Ex Machina Group"
+  ],
+  "keywords": [
+    "web-components",
+    "polymer",
+    "style"
+  ],
   "main": "exmg-cms-styles.html",
+  "homepage": "https://github.com/ExmgElements/exmg-cms-styles",
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:ExmgElements/exmg-cms-styles.git"
+  },
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
     "paper-styles": "PolymerElements/paper-styles#^2.0.0"
   },
   "devDependencies": {
-    "exmg-datatable": "^2.0.0",
-    "exmg-cms-sidemenu": "git@bitbucket.org:exmachina/exmg-cms-sidemenu.git",
-    "exmg-card": "git@bitbucket.org:exmachina/exmg-card.git",
+    "exmg-paper-datatable": "ExmgElements/exmg-paper-datatable#^2.0.0",
+    "exmg-paper-sidemenu": "ExmgElements/exmg-paper-sidemenu",
+    "exmg-paper-card": "ExmgElements/exmg-paper-card",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
     "app-layout": "PolymerElements/app-layout#^2.0.1",
@@ -22,6 +36,7 @@
     "paper-icon-button": "PolymerElements/paper-icon-button#^2.0.0",
     "paper-header-panel": "PolymerElements/paper-header-panel#^2.0.0",
     "paper-drawer-panel": "PolymerElements/paper-drawer-panel#^2.0.0",
+    "paper-card": "PolymerElements/paper-card#^2.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
   },
   "resolutions": {

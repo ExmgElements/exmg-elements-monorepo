@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <title>exmg-cms-styles demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons+Extended">
+
+    <link rel="import" href="../../paper-styles/paper-styles.html">
+    <link rel="import" href="../../paper-button/paper-button.html">
+    <link rel="import" href="../../paper-card/paper-card.html">
+    <link rel="import" href="../../paper-icon-button/paper-icon-button.html">
+
+    <link rel="import" href="../exmg-cms-default-theme.html">
+    <link rel="import" href="../exmg-cms-page-styles.html">
+
+    <custom-style>
+      <style is="custom-style" include="exmg-cms-page-styles">
+        body {
+          margin: 0;
+          padding: 0;
+          background-color: #ECEFF1;
+        }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <dom-module id="x-demo">
+        <template>
+          <style include="exmg-cms-page-styles"></style>
+
+          <div class="page-container">
+
+            <div class="page-content">
+
+              <div md-row>
+                <h2 md-cell="12">Recent Broadcasts</h2>
+              </div>
+              <div md-row>
+                <div class="card add" md-cell="4">
+                  <div>
+                    <div class="plus">+</div>
+                    <div class="plus-title">Add Broadcast</div>
+                  </div>
+                </div>
+                <div class="card" md-cell="4"><div class="title">Broadcast 1</div></div>
+                <div class="card" md-cell="4"><div class="title">Broadcast 2</div></div>
+                <div class="card" md-cell="4"><div class="title">Broadcast 3</div></div>
+                <div class="card" md-cell="4"><div class="title">Broadcast 4</div></div>
+                <div class="card" md-cell="4"><div class="title">Broadcast 5</div></div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </template>
+        <script>
+        window.addEventListener('WebComponentsReady', function() {
+          class XDemo extends Polymer.Element {
+            static get is() { return 'x-demo'; }
+          }
+          window.customElements.define(XDemo.is, XDemo);
+        });
+        </script>
+      </dom-module>
+
+      <x-demo></x-demo>
+
+  </body>
+</html>

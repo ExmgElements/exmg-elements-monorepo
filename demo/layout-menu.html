@@ -12,7 +12,6 @@
     <link rel="import" href="../../iron-flex-layout/iron-flex-layout.html">
     <link rel="import" href="../../paper-header-panel/paper-header-panel.html">
     <link rel="import" href="../../paper-listbox/paper-listbox.html">
-    <link rel="import" href="../../paper-styles/color.html">
 
     <link rel="import" href="../../iron-ajax/iron-ajax.html">
     <link rel="import" href="../../iron-icon/iron-icon.html">
@@ -26,9 +25,7 @@
     <link rel="import" href="../../paper-icon-button/paper-icon-button.html">
     <link rel="import" href="../../exmg-paper-sidemenu/exmg-paper-sidemenu.html">
     <link rel="import" href="../../exmg-paper-sidemenu/demo/dev-icons.html">
-    <link rel="import" href="../../exmg-paper-sidemenu/exmg-paper-sidemenu-header.html">
 
-    <link rel="import" href="../exmg-cms-default-theme.html">
     <link rel="import" href="../exmg-cms-global-layout-styles.html">
     <link rel="import" href="../exmg-cms-global-layout-mixin.html">
 
@@ -62,9 +59,7 @@
           <app-drawer-layout narrow="{{narrow}}">
 
             <app-drawer id="drawer" slot="drawer">
-              <exmg-paper-sidemenu menu="[[menu]]" selected="{{selected}}" collapsed="{{collapsed}}" narrow$="[[narrow]]" debug>
-                <exmg-paper-sidemenu-header slot="header" selected="{{selected}}" collapsed="[[collapsed]]" debug></exmg-paper-sidemenu-header>
-              </exmg-paper-sidemenu>
+              <exmg-paper-sidemenu id="sidemenu" menu="[[menu]]" collapsed="{{collapsed}}" narrow$="[[narrow]]" debug></exmg-paper-sidemenu>
             </app-drawer>
 
             <div class="main">

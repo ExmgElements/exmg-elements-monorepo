@@ -14,52 +14,154 @@
         font-size: 14px;
         background-color: var(--paper-grey-50);
         @apply --layout-fullbleed;
-        @apply --layout-vertical;
+
       }
 
-      .flex {
-        @apply(--layout-flex);
+      [md-row] {
+        margin: 0 auto;
+        @apply --layout-wrap;
+        @apply --layout-horizontal;
       }
 
-      .page-container {
-        @apply(--layout-vertical);
-        @apply(--layout-center-justified);
-      }
+      @media only screen and (min-width: 984px){
+        [md-row] {
+          width: 960px;
+          padding: 0 12px;
+        }
 
-      .page-content {
-        padding: 0 16px;
-      }
+        [md-row] [md-cell="4"] {
+          width: 296px;
+        }
 
-      exmg-info-card .actions paper-button {
-       color: rgb(3,155,229);
-      }
-
-      exmg-search-header paper-button{
-        color: rgb(255,255,255);
-        background-color: rgb(3,155,229);
-        margin: 12px 12px;
-        height: 32px;
-      }
-      exmg-card .header paper-button {
-        color: rgb(255,255,255);
-        background-color: rgb(3,155,229);
-        padding: 8px 20px;
-      }
-
-      @media only screen and (min-width: 920px) {
-        .page-content {
-          max-width: 936px;
-          margin: 20px auto;
-          width: 100%;
+        [md-row] [md-cell] {
+          margin: 0 12px 24px 12px;
         }
       }
 
-      paper-tabs {
-        --paper-tabs-selection-bar-color: #57CB08;
+      @media only screen and (max-width: 983px) and (min-width: 664px){
+        [md-row] {
+          width: 640px;
+          padding: 0 12px;
+        }
+        [md-row] [md-cell="4"] {
+          width: 296px;
+        }
+
+        [md-row] [md-cell] {
+          margin: 0 12px 24px 12px;
+        }
+      }
+
+      @media only screen and (max-width: 663px){
+        [md-row] {
+          width: 100%;
+          padding: 0 8px;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+        }
+        [md-row] [md-cell="4"] {
+          width: 100%;
+        }
+        [md-row] [md-cell] {
+          margin: 0 8px 16px 8px;
+        }
+      }
+
+      .card {
+        height: 204px;
+        background: white;
+        @apply --shadow-elevation-2dp;
+        cursor: pointer;
+        padding: 16px 20px 20px 20px;
+        box-sizing: border-box;
+        @apply(--layout-horizontal);
+        @apply(--layout-justified);
+      }
+      .card.add {
+        background: none;
+        @apply --shadow-none;
+        border: 1px solid var(--divider-color);
+        color: var(--primary-color);
+        @apply(--layout-center-justified);
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
+      }
+      .card .title {
+        color: rgba(0, 0, 0, var(--dark-primary-opacity));
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 28px;
+        word-wrap: break-word;
+      }
+      .card:hover {
+        background: var(--paper-grey-200);
+      }
+
+      .card.add:hover {
+        background: var(--primary-color);
+        color: white;
+      }
+
+      .card.add > div {
+        @apply(--layout-vertical);
+        @apply(--layout-center);
+      }
+
+      .card.add .plus {
+        font-size: 40px;
+        font-weight: 500;
+      }
+
+      .card.add .plus-title {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+      }
+
+      .page-container {
+        @apply --layout-vertical;
+      }
+
+      .page-content {
+        padding: 40px 0 48px 0;
+      }
+
+      h2 {
+        color: rgba(0, 0, 0, var(--dark-secondary-opacity));
+        display: block;
+        font-size: 14px;
+        line-height: 24px;
+        margin-bottom: -8px;
+        position: relative;
+      }
+
+      .flex {
+        @apply --layout-flex;
+      }
+
+      exmg-paper-info-card .actions paper-button {
+        color: var(--secondary-text-color);
+      }
+
+      exmg-paper-search-header paper-button{
+        color: var(--text-primary-color);
+        background-color: var(--primary-color);
+        margin: 12px 12px;
+        height: 32px;
+      }
+
+      exmg-paper-card .header paper-button {
+        color: var(--text-primary-color);
+        background-color: var(--primary-color);
+        padding: 8px 20px;
       }
 
       paper-tabs {
-        background: #0B1F54;
+        --paper-tabs-selection-bar-color: var(--secondary-text-color);
+      }
+
+      paper-tabs {
+        background: var(--light-primary-color);
         height: 40px;
         text-transform: uppercase;
         color: white;
@@ -70,7 +172,7 @@
       }
 
       .main header .title{
-        color: white;
+        color: var(--text-primary-color);
         font-size: 20px;
         font-weight: 400;
         line-height: 24px;
@@ -79,16 +181,10 @@
         white-space: nowrap;
       }
 
-      h1 {
-        margin: 16px 0;
-        color: #212121;
-        font-size: 22px;
-      }
-
-      .page-content > * {
+      [md-row] > * {
         margin-bottom: 54px;
       }
-      .page-content > h2 {
+      [md-row] > h2 {
         color: rgba(0, 0, 0, var(--light-secondary-opacity));
         display: block;
         margin-bottom: 16px;
@@ -98,7 +194,7 @@
       }
 
       a {
-        color: #039be5;
+        color: var(--secondary-text-color);
         text-decoration: underline;
       }
       a.open-new::after {
@@ -129,6 +225,10 @@
         .page-content > * {
           margin-bottom: 24px;
         }
+      }
+
+      exmg-paper-card{
+        width: 100%;
       }
 
   </style>
