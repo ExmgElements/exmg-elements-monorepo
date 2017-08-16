@@ -6,6 +6,8 @@ in your application. The following imports are available:
 
 * exmg-cms-global-page.html - Global layout which can be used in a CMS project by including it in the main app.html. Also the exmg-cms-global-layout-mixin.html should be used to add some functionality needed for collapsing the menu etc. Please see the layout.html in the demo folder for an example.
 * exmg-cms-page.html - Styles definitions for al supported page types like pages containing cards/tables and tabs. Please see the examples in the demo folder.
+* exmg-cms-color.html - This element contains the primary and secondary color palette.
+* exmg-cms-default-theme.html - This element overrides the default paper colors to our EM color set.
 
 ## Install the Polymer-CLI
 
