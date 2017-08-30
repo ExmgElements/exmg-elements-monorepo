@@ -85,17 +85,17 @@
         cursor: pointer;
         padding: 16px 20px 20px 20px;
         box-sizing: border-box;
-        @apply(--layout-horizontal);
-        @apply(--layout-justified);
+        @apply --layout-horizontal;
+        @apply --layout-justified;
       }
       .card.add {
         background: none;
         @apply --shadow-none;
         border: 1px solid var(--divider-color);
         color: var(--primary-color);
-        @apply(--layout-center-justified);
-        @apply(--layout-horizontal);
-        @apply(--layout-center);
+        @apply --layout-center-justified;
+        @apply --layout-horizontal;
+        @apply --layout-center;
       }
       .card .title {
         color: rgba(0, 0, 0, var(--dark-primary-opacity));
@@ -114,8 +114,8 @@
       }
 
       .card.add > div {
-        @apply(--layout-vertical);
-        @apply(--layout-center);
+        @apply --layout-vertical;
+        @apply --layout-center;
       }
 
       .card.add .plus {
