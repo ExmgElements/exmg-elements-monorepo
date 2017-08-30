@@ -65,10 +65,11 @@ Please see the demo pages for a working example
         @apply --layout-vertical;
       }
 
-      app-header:not([narrow]) paper-icon-button:first-child {
+      app-header:not([narrow]) app-toolbar > paper-icon-button:first-child {
         display: none;
       }
 
+      .main-header a,
       .main-header {
         background-color: var(--primary-color);
         color: var(--text-primary-color);
@@ -78,7 +79,6 @@ Please see the demo pages for a working example
 
       .main-header app-toolbar {
         height: var(--main-header-height);
-        padding: 0 20px;
       }
 
       .main-header img {
@@ -89,12 +89,15 @@ Please see the demo pages for a working example
         @apply --layout-center;
       }
 
-      .main-header paper-icon-button:first-child {
+      .main-header app-toolbar paper-icon-button {
+        width: 48px;
+        height: 48px;
+      }
+
+      .main-header app-toolbar > paper-icon-button:first-child {
         position: absolute;
         top: 50%;
         left: 0;
-        width: 48px;
-        height: 48px;
         margin-top: -24px;
       }
 
