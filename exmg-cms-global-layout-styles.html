@@ -65,7 +65,7 @@ Please see the demo pages for a working example
         @apply --layout-vertical;
       }
 
-      app-header:not([narrow]) paper-icon-button {
+      app-header:not([narrow]) paper-icon-button:first-child {
         display: none;
       }
 
@@ -82,10 +82,14 @@ Please see the demo pages for a working example
       }
 
       .main-header img {
-        height: calc(100% - 30%);
+        height: 28px;
+      }
+      .main-header [main-title]{
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
       }
 
-      .main-header paper-icon-button {
+      .main-header paper-icon-button:first-child {
         position: absolute;
         top: 50%;
         left: 0;
