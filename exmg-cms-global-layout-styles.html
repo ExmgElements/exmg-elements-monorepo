@@ -69,13 +69,15 @@ Please see the demo pages for a working example
         display: none;
       }
 
-      .main-header a,
       .main-header {
         background-color: var(--primary-color);
         color: var(--text-primary-color);
         height: var(--main-header-height);
-        line-height: var(--main-header-height);
         z-index: 201;
+      }
+
+      .main-header a {
+        color: var(--text-primary-color);
       }
 
       .main-header app-toolbar {
