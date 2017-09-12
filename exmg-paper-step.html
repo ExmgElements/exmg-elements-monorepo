@@ -8,50 +8,82 @@
     <style>
       :host {
         display: block;
-        background: white;
         cursor: pointer;
+        @apply --layout-flex;
+
       }
 
-      :host([finished]) {
-        background: grey;
+      .container {
+        text-align: center;
+        width: 100%;
+        font-size: 12px;
       }
-      :host([selected]) {
+
+      .badgeWrapper {
+        @apply --layout-flex;
+        @apply --layout;
+        @apply --layout-center;
+        width: 100%;
+      }
+
+      .badgeWrapper::after, .badgeWrapper::before {
+        content: '';
+        height: 1px;
+        min-width: 16px;
+        background: var(--paper-grey-400);
+        @apply --layout-flex;
+      }
+
+      .badge {
+        @apply --layout;
+        @apply --layout-center;
+        @apply --layout-center-justified;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        box-sizing: border-box;
+        background: var(--disabled-text-color);
         color: white;
+        margin: 0 8px;
+        font-weight: 300;
 
-        @apply --exmg-paper-stepper-indicator;
+        @apply --exmg-paper-stepper-badge;
       }
 
-      .indicator {
+      :host([finished]) .badge {
+        background: white;
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
+      }
+
+      :host([selected]) .badge {
         background: var(--primary-color);
+        color: white;
+      }
+
+      :host([selected]) .label {
+        color: var(--primary-color);
+      }
+
+      :host(:first-child) .badgeWrapper::before  {
+        visibility: hidden;
+      }
+
+      :host(:last-child) .badgeWrapper::after  {
+        visibility: hidden;
       }
 
       .label {
-        font-size: ;
-
         @apply --exmg-paper-stepper-label;
       }
     </style>
+
     <div class="container" on-tap="_handleTap">
-      <div class="indicator">[[index]]</div>
+      <div class="badgeWrapper">
+        <div class="badge">[[index]]</div>
+      </div>
       <div class="label">[[label]]</label>
     </div>
-
-    <!-- <step-horizontal-label
-      id="horizontalStepLabel"
-      editable="[[editable]]"
-      label="[[label]]"
-      alternative-label="[[_alternativeLabel]]"
-      optional="[[optional]]"
-      opened="[[opened]]"
-      selectable="[[selectable]]"
-      index="[[index]]"
-      saved="[[saved]]"
-      stepper-data="[[_stepperData]]">
-    </step-horizontal-label>
-    <div id="slideshowViewport">
-      <div id="contentWrapper">
-      </div>
-    </div> -->
 
   </template>
 
