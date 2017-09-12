@@ -63,7 +63,11 @@
         this._observer = new Polymer.FlattenedNodesObserver(this, this._nodesChanged);
       }
       notifySelected(e) {
-        this.stepElements.forEach((el) => el.index === e.detail.index ? el.select() : el.deselect());
+        let index = e.detail.index;
+        this.stepElements.forEach((el) => {
+          el.index === index ? el.select() : el.deselect();
+          el.setFinished(el.index < index);
+        });
       }
       _nodesChanged(e) {
         this.set('stepElements', e.addedNodes.filter(n => n.nodeType === Node.ELEMENT_NODE));

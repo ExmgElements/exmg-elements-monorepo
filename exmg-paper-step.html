@@ -8,14 +8,20 @@
     <style>
       :host {
         display: block;
-        background: yellow;
+        background: white;
         cursor: pointer;
+      }
+      :host([selected]) {
+        background: yellow;
+      }
+      :host([finished]) {
+        background: grey;
       }
       .selected {
         color: white;
       }
     </style>
-    <div class="container" on-tap="_handleTap" class$="[[_computeClass(selected)]]">
+    <div class="container" on-tap="_handleTap">
       <div class="indicator">[[index]]</div>
       <div class="label">[[label]]</label>
     </div>
@@ -43,6 +49,12 @@
           },
           selected: {
             type: Boolean,
+            reflectToAttribute: true,
+            value: false,
+          },
+          finished: {
+            type: Boolean,
+            reflectToAttribute: true,
             value: false,
           }
         };
@@ -50,11 +62,13 @@
       setIndex(index) {
         this.set('index', index);
       }
-      _computeClass(selected) {
-        return selected ? 'selected' : '';
-      }
       _handleTap(e) {
         this.select();
+      }
+      setFinished(finished) {
+        if(this.finished !== finished) {
+          this.set('finished', finished);
+        }
       }
       deselect() {
         if(this.selected) {
