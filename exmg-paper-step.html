@@ -36,8 +36,6 @@
         return {
           index: {
             type: Number,
-            notify: true,
-            readOnly: true
           },
           label: {
             type: String,
@@ -57,11 +55,13 @@
       }
       _handleTap(e) {
         console.log('_handleTap', e);
-        this.select();
+        if(!this.selected) {
+          this.select();
+        }
       }
       select() {
         this.set('selected', true);
-        this.dispatchEvent(new CustomEvent('some-event', { bubbles: true, composed: true, detail: { index: this.index } } ));
+        this.dispatchEvent(new CustomEvent('selected', { bubbles: true, composed: true, detail: { index: this.index } } ));
       }
 
     }

@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../paper-styles/paper-styles.html">
+<link rel="import" href="../polymer/lib/utils/flattened-nodes-observer.html">
 
 <dom-module id="exmg-paper-stepper">
   <template>
@@ -40,9 +41,29 @@
           }
         };
       }
+      constructor() {
+        super();
+        this._boundNotifySelected = this.notifySelected.bind(this);
+      }
+      connectedCallback() {
+        if (super.connectedCallback) {
+          super.connectedCallback();
+        }
+        window.addEventListener('selected', this._boundNotifySelected);
+
+      }
+      disconnectCallback() {
+        if (super.disconnectCallback) {
+          super.disconnectCallback();
+        }
+        window.removeEventListener('selected', this._boundNotifySelected);
+      }
       ready() {
         super.ready();
         this._observer = new Polymer.FlattenedNodesObserver(this, this._nodesChanged);
+      }
+      notifySelected(e) {
+        console.log('notifySelected', e);
       }
       _nodesChanged(e) {
         this.set('stepElements', e.addedNodes.filter(n => n.nodeType === Node.ELEMENT_NODE));
@@ -50,7 +71,11 @@
       }
       initSteps() {
         let index = 1;
-        this.stepElements.forEach((el) => el.setindex(index++));
+        this.stepElements.forEach((el) => {
+          console.log('el', el);
+          el.setAttribute('index', index++);
+        //  el.setindex(index++)
+        });
       }
     }
 
