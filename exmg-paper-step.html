@@ -1,0 +1,71 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../paper-styles/paper-styles.html">
+<link rel="import" href="../polymer/lib/mixins/gesture-event-listeners.html">
+
+<dom-module id="exmg-paper-step">
+  <template>
+    <style>
+      :host {
+        display: block;
+        background: yellow;
+        cursor: pointer;
+      }
+      .selected {
+        color: white;
+      }
+    </style>
+    <div class="container" on-tap="_handleTap" class$="[[_computeClass(selected)]]">
+      <div class="indicator">[[index]]</div>
+      <div class="label">[[label]]</label>
+    </div>
+  </template>
+
+  <script>
+    /**
+     * `exmg-paper-stepper`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class ExmgPaperStep extends Polymer.GestureEventListeners(Polymer.Element) {
+      static get is() { return 'exmg-paper-step'; }
+      static get properties() {
+        return {
+          index: {
+            type: Number,
+            notify: true,
+            readOnly: true
+          },
+          label: {
+            type: String,
+            value: ''
+          },
+          selected: {
+            type: Boolean,
+            value: false,
+          }
+        };
+      }
+      setIndex(index) {
+        this.set('index', index);
+      }
+      _computeClass(selected) {
+        return selected ? 'selected' : '';
+      }
+      _handleTap(e) {
+        console.log('_handleTap', e);
+        this.select();
+      }
+      select() {
+        this.set('selected', true);
+        this.dispatchEvent(new CustomEvent('some-event', { bubbles: true, composed: true, detail: { index: this.index } } ));
+      }
+
+    }
+
+    window.customElements.define(ExmgPaperStep.is, ExmgPaperStep);
+  </script>
+</dom-module>

@@ -1,0 +1,59 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../paper-styles/paper-styles.html">
+
+<dom-module id="exmg-paper-stepper">
+  <template>
+    <style>
+      :host {
+        display: block;
+        background: red;
+      }
+      .container {
+        @apply(--shadow-elevation-2dp);
+        @apply(--layout-horizontal);
+        @apply(--layout-flex-none);
+        @apply(--layout-justified);
+        overflow: hidden;
+      }
+    </style>
+    <div class="container">
+      <slot></slot>
+    </div>
+  </template>
+
+  <script>
+    /**
+     * `exmg-paper-stepper`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class ExmgPaperStepper extends Polymer.Element {
+      static get is() { return 'exmg-paper-stepper'; }
+      static get properties() {
+        return {
+          stepElements: {
+            type: Array,
+          }
+        };
+      }
+      ready() {
+        super.ready();
+        this._observer = new Polymer.FlattenedNodesObserver(this, this._nodesChanged);
+      }
+      _nodesChanged(e) {
+        this.set('stepElements', e.addedNodes.filter(n => n.nodeType === Node.ELEMENT_NODE));
+        this.initSteps();
+      }
+      initSteps() {
+        let index = 1;
+        this.stepElements.forEach((el) => el.setindex(index++));
+      }
+    }
+
+    window.customElements.define(ExmgPaperStepper.is, ExmgPaperStepper);
+  </script>
+</dom-module>
