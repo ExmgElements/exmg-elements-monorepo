@@ -45,17 +45,12 @@
         this._boundNotifySelected = this.notifySelected.bind(this);
       }
       connectedCallback() {
-        if (super.connectedCallback) {
-          super.connectedCallback();
-        }
-        window.addEventListener('selected', this._boundNotifySelected);
-
+        super.connectedCallback();
+        this.addEventListener('selected', this._boundNotifySelected);
       }
       disconnectCallback() {
-        if (super.disconnectCallback) {
-          super.disconnectCallback();
-        }
-        window.removeEventListener('selected', this._boundNotifySelected);
+        super.disconnectCallback();
+        this.removeEventListener('selected', this._boundNotifySelected);
       }
       ready() {
         super.ready();
@@ -75,7 +70,6 @@
       initSteps() {
         let index = 1;
         this.stepElements.forEach((el) => {
-          console.log('el', el);
           el.setAttribute('index', index++);
         });
       }
