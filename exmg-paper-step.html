@@ -10,7 +10,6 @@
         display: block;
         cursor: pointer;
         @apply --layout-flex;
-
       }
 
       .container {
@@ -54,15 +53,28 @@
         background: white;
         border: 1px solid var(--primary-color);
         color: var(--primary-color);
+
+        @apply --exmg-paper-stepper-finished-badge;
       }
 
       :host([selected]) .badge {
         background: var(--primary-color);
         color: white;
+
+        @apply --exmg-paper-stepper-selected-badge;
+      }
+
+      .label {
+        margin-top: 12px;
+        color: var(--disabled-text-color);
+
+        @apply --exmg-paper-stepper-label;
       }
 
       :host([selected]) .label {
         color: var(--primary-color);
+
+        @apply --exmg-paper-stepper-selected-label;
       }
 
       :host(:first-child) .badgeWrapper::before  {
@@ -73,9 +85,6 @@
         visibility: hidden;
       }
 
-      .label {
-        @apply --exmg-paper-stepper-label;
-      }
     </style>
 
     <div class="container" on-tap="_handleTap">
