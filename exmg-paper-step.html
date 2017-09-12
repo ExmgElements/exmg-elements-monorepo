@@ -15,17 +15,16 @@
       .container {
         text-align: center;
         width: 100%;
-        font-size: 12px;
       }
 
-      .badgeWrapper {
+      .circleWrapper {
         @apply --layout-flex;
         @apply --layout;
         @apply --layout-center;
         width: 100%;
       }
 
-      .badgeWrapper::after, .badgeWrapper::before {
+      .circleWrapper::after, .circleWrapper::before {
         content: '';
         height: 1px;
         min-width: 16px;
@@ -33,7 +32,7 @@
         @apply --layout-flex;
       }
 
-      .badge {
+      .circle {
         @apply --layout;
         @apply --layout-center;
         @apply --layout-center-justified;
@@ -41,55 +40,59 @@
         height: 24px;
         border-radius: 50%;
         box-sizing: border-box;
-        background: var(--disabled-text-color);
+        background: black;
+        font-size: 12px;
+        opacity: .38;
         color: white;
         margin: 0 8px;
         font-weight: 300;
 
-        @apply --exmg-paper-stepper-badge;
+        @apply --exmg-paper-stepper-circle;
       }
 
-      :host([finished]) .badge {
+      :host([finished]) .circle {
         background: white;
         border: 1px solid var(--primary-color);
         color: var(--primary-color);
+        opacity: 1;
 
-        @apply --exmg-paper-stepper-finished-badge;
+        @apply --exmg-paper-stepper-finished-circle;
       }
 
-      :host([selected]) .badge {
+      :host([selected]) .circle {
         background: var(--primary-color);
         color: white;
+        opacity: 1;
 
-        @apply --exmg-paper-stepper-selected-badge;
+        @apply --exmg-paper-stepper-selected-circle;
       }
 
       .label {
         margin-top: 12px;
-        color: var(--disabled-text-color);
+        color: black;
+        opacity: .87;
 
         @apply --exmg-paper-stepper-label;
       }
 
       :host([selected]) .label {
-        color: var(--primary-color);
 
         @apply --exmg-paper-stepper-selected-label;
       }
 
-      :host(:first-of-type) .badgeWrapper::before  {
+      :host(:first-of-type) .circleWrapper::before  {
         visibility: hidden;
       }
 
-      :host(:last-of-type) .badgeWrapper::after  {
+      :host(:last-of-type) .circleWrapper::after  {
         visibility: hidden;
       }
 
     </style>
 
     <div class="container" on-tap="_handleTap">
-      <div class="badgeWrapper">
-        <div class="badge">[[index]]</div>
+      <div class="circleWrapper">
+        <div class="circle">[[index]]</div>
       </div>
       <div class="label">[[label]]</label>
     </div>
