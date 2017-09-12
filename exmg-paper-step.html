@@ -54,16 +54,20 @@
         return selected ? 'selected' : '';
       }
       _handleTap(e) {
-        console.log('_handleTap', e);
-        if(!this.selected) {
-          this.select();
+        this.select();
+      }
+      deselect() {
+        if(this.selected) {
+          this.set('selected', false);
+          this.dispatchEvent(new CustomEvent('deselected', { bubbles: true, composed: true, detail: { index: this.index } } ));
         }
       }
       select() {
-        this.set('selected', true);
-        this.dispatchEvent(new CustomEvent('selected', { bubbles: true, composed: true, detail: { index: this.index } } ));
+        if(!this.selected) {
+          this.set('selected', true);
+          this.dispatchEvent(new CustomEvent('selected', { bubbles: true, composed: true, detail: { index: this.index } } ));
+        }
       }
-
     }
 
     window.customElements.define(ExmgPaperStep.is, ExmgPaperStep);
