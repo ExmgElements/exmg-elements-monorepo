@@ -11,20 +11,48 @@
         background: white;
         cursor: pointer;
       }
-      :host([selected]) {
-        background: yellow;
-      }
+
       :host([finished]) {
         background: grey;
       }
-      .selected {
+      :host([selected]) {
         color: white;
+
+        @apply --exmg-paper-stepper-indicator;
+      }
+
+      .indicator {
+        background: var(--primary-color);
+      }
+
+      .label {
+        font-size: ;
+
+        @apply --exmg-paper-stepper-label;
       }
     </style>
     <div class="container" on-tap="_handleTap">
       <div class="indicator">[[index]]</div>
       <div class="label">[[label]]</label>
     </div>
+
+    <!-- <step-horizontal-label
+      id="horizontalStepLabel"
+      editable="[[editable]]"
+      label="[[label]]"
+      alternative-label="[[_alternativeLabel]]"
+      optional="[[optional]]"
+      opened="[[opened]]"
+      selectable="[[selectable]]"
+      index="[[index]]"
+      saved="[[saved]]"
+      stepper-data="[[_stepperData]]">
+    </step-horizontal-label>
+    <div id="slideshowViewport">
+      <div id="contentWrapper">
+      </div>
+    </div> -->
+
   </template>
 
   <script>
