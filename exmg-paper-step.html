@@ -1,7 +1,11 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../paper-ripple/paper-ripple.html">
 <link rel="import" href="../paper-styles/paper-styles.html">
 <link rel="import" href="../polymer/lib/mixins/gesture-event-listeners.html">
+
+<link rel="import" href="exmg-paper-stepper-icons.html">
 
 <dom-module id="exmg-paper-step">
   <template>
@@ -15,6 +19,18 @@
       .container {
         text-align: center;
         width: 100%;
+        position: relative;
+        padding: 24px 0;
+
+        @apply --exmg-paper-stepper-step;
+      }
+
+      .container:hover {
+        background: var(--paper-grey-100);
+      }
+
+      paper-ripple {
+        color: var(--primary-color);
       }
 
       .circleWrapper {
@@ -50,13 +66,27 @@
         @apply --exmg-paper-stepper-circle;
       }
 
+      .circle iron-icon {
+        display: none;
+      }
+
       :host([finished]) .circle {
-        background: white;
-        border: 1px solid var(--primary-color);
-        color: var(--primary-color);
         opacity: 1;
+        background: var(--primary-color);
+        color: white;
 
         @apply --exmg-paper-stepper-finished-circle;
+      }
+
+      :host([finished]) .circle > span {
+        display: none;
+      }
+
+      :host([finished]) .circle iron-icon {
+        width: 16px;
+        height: 16px;
+        display: block;
+        fill: white;
       }
 
       :host([selected]) .circle {
@@ -91,10 +121,15 @@
     </style>
 
     <div class="container" on-tap="_handleTap">
+      <paper-ripple></paper-ripple>
       <div class="circleWrapper">
-        <div class="circle">[[index]]</div>
+        <div class="circle">
+          <iron-icon icon="exmg-paper-stepper-icons:check"></iron-icon>
+          <span>[[index]]</span>
+        </div>
       </div>
       <div class="label">[[label]]</label>
+
     </div>
 
   </template>
