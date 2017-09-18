@@ -159,7 +159,7 @@
           selected: {
             type: Boolean,
             reflectToAttribute: true,
-            value: false,
+            observer: '_observeSelected'
           },
           finished: {
             type: Boolean,
@@ -167,6 +167,11 @@
             value: false,
           }
         };
+      }
+      _observeSelected(selected) {
+        if(selected){
+          this.dispatchEvent(new CustomEvent('selected', { bubbles: true, composed: true, detail: { index: this.index } } ));
+        }
       }
       setIndex(index) {
         this.set('index', index);
@@ -182,13 +187,13 @@
       deselect() {
         if(this.selected) {
           this.set('selected', false);
-          this.dispatchEvent(new CustomEvent('deselected', { bubbles: true, composed: true, detail: { index: this.index } } ));
+          //this.dispatchEvent(new CustomEvent('deselected', { bubbles: true, composed: true, detail: { index: this.index } } ));
         }
       }
       select() {
         if(!this.selected) {
           this.set('selected', true);
-          this.dispatchEvent(new CustomEvent('selected', { bubbles: true, composed: true, detail: { index: this.index } } ));
+        //  this.dispatchEvent(new CustomEvent('selected', { bubbles: true, composed: true, detail: { index: this.index } } ));
         }
       }
     }

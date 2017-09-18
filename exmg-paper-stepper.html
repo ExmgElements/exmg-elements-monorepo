@@ -37,6 +37,9 @@
         return {
           stepElements: {
             type: Array,
+          },
+          selected: {
+            type: Number,
           }
         };
       }
@@ -58,9 +61,14 @@
       }
       notifySelected(e) {
         let index = e.detail.index;
+        this.selectIndex(index);
+      }
+      selectIndex(index){
         this.stepElements.forEach((el) => {
-          el.index === index ? el.select() : el.deselect();
-          el.setFinished(el.index < index);
+          if(el.index){
+            el.selected = el.index === index;
+            el.setFinished(el.index < index);
+          }
         });
       }
       _nodesChanged(e) {
@@ -70,8 +78,15 @@
       initSteps() {
         let index = 1;
         this.stepElements.forEach((el) => {
-          el.setAttribute('index', index++);
+          el.setAttribute('index', index);
+          if(this.selected === index) {
+            el.setAttribute('selected', true);
+          } else {
+            el.removeAttribute('selected');
+          }
+          index++;
         });
+        //this.selectIndex();
       }
     }
 
