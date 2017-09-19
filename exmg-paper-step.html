@@ -91,7 +91,7 @@
         fill: white;
       }
 
-      :host([selected]) .circle {
+      :host(.iron-selected) .circle {
         background: var(--primary-color);
         color: white;
         opacity: 1;
@@ -107,7 +107,7 @@
         @apply --exmg-paper-stepper-label;
       }
 
-      :host([selected]) .label {
+      :host(.iron-selected) .label {
 
         @apply --exmg-paper-stepper-selected-label;
       }
@@ -151,15 +151,12 @@
         return {
           index: {
             type: Number,
+            notify: true,
+            reflectToAttribute: true,
           },
           label: {
             type: String,
             value: ''
-          },
-          selected: {
-            type: Boolean,
-            reflectToAttribute: true,
-            observer: '_observeSelected'
           },
           finished: {
             type: Boolean,
@@ -167,11 +164,6 @@
             value: false,
           }
         };
-      }
-      _observeSelected(selected) {
-        if(selected){
-          this.dispatchEvent(new CustomEvent('selected', { bubbles: true, composed: true, detail: { index: this.index } } ));
-        }
       }
       setIndex(index) {
         this.set('index', index);
@@ -184,17 +176,8 @@
           this.set('finished', finished);
         }
       }
-      deselect() {
-        if(this.selected) {
-          this.set('selected', false);
-          //this.dispatchEvent(new CustomEvent('deselected', { bubbles: true, composed: true, detail: { index: this.index } } ));
-        }
-      }
       select() {
-        if(!this.selected) {
-          this.set('selected', true);
-        //  this.dispatchEvent(new CustomEvent('selected', { bubbles: true, composed: true, detail: { index: this.index } } ));
-        }
+        this.dispatchEvent(new CustomEvent('selected', { bubbles: true, composed: true, detail: { index: this.index, item: this } } ));
       }
     }
 

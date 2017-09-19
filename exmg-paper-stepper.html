@@ -1,6 +1,8 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../paper-styles/paper-styles.html">
+<link rel="import" href="../iron-selector/iron-selector.html">
+
 <link rel="import" href="../polymer/lib/utils/flattened-nodes-observer.html">
 
 <dom-module id="exmg-paper-stepper">
@@ -17,9 +19,9 @@
       }
 
     </style>
-    <div class="container">
+    <iron-selector id="selector" class="container" selected="{{selected}}" on-iron-select="_onIronSelect">
       <slot></slot>
-    </div>
+    </iron-selector>
   </template>
 
   <script>
@@ -43,6 +45,17 @@
           }
         };
       }
+      _onIronSelect(e) {
+        let index = this.selected;
+        let items = this.$.selector.items;
+        for (var i = 0; i < items.length; i++) {
+          if(i < index) {
+            this.$.selector.items[i].setAttribute('finished','');
+          } else {
+            this.$.selector.items[i].removeAttribute('finished');
+          }
+        }
+      }
       constructor() {
         super();
         this._boundNotifySelected = this.notifySelected.bind(this);
@@ -60,33 +73,14 @@
         this._observer = new Polymer.FlattenedNodesObserver(this, this._nodesChanged);
       }
       notifySelected(e) {
-        let index = e.detail.index;
-        this.selectIndex(index);
-      }
-      selectIndex(index){
-        this.stepElements.forEach((el) => {
-          if(el.index){
-            el.selected = el.index === index;
-            el.setFinished(el.index < index);
-          }
-        });
+        this.set('selected', this.$.selector.indexOf(e.detail.item));
       }
       _nodesChanged(e) {
-        this.set('stepElements', e.addedNodes.filter(n => n.nodeType === Node.ELEMENT_NODE));
-        this.initSteps();
-      }
-      initSteps() {
         let index = 1;
+        this.set('stepElements', e.addedNodes.filter(n => n.nodeType === Node.ELEMENT_NODE));
         this.stepElements.forEach((el) => {
-          el.setAttribute('index', index);
-          if(this.selected === index) {
-            el.setAttribute('selected', true);
-          } else {
-            el.removeAttribute('selected');
-          }
-          index++;
+          el.setAttribute('index', index++);
         });
-        //this.selectIndex();
       }
     }
 
