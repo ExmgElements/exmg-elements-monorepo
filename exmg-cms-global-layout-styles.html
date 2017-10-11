@@ -59,10 +59,12 @@ Please see the demo pages for a working example
       /* Layout Styles */
       :host {
         @apply --paper-font-common-base;
+        @apply --layout-vertical;
+        --main-header-height: 48px;
+
         font-size: 14px;
         background-color: var(--primary-background-color);
-        --main-header-height: 48px;
-        @apply --layout-vertical;
+        height: 100vh;
       }
 
       app-header:not([narrow]) app-toolbar > paper-icon-button:first-child {
@@ -116,6 +118,8 @@ Please see the demo pages for a working example
 
       .main {
         position: relative;
+        height: calc(100vh - var(--main-header-height));
+        overflow-y: auto;
       }
 
       .main > app-toolbar {
