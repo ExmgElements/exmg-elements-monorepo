@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <title>exmg-cms-styles demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons+Extended">
+
+    <link rel="import" href="../../paper-button/paper-button.html">
+    <link rel="import" href="../../paper-icon-button/paper-icon-button.html">
+
+    <link rel="import" href="../../iron-overlay/iron-overlay.html">
+    <link rel="import" href="../../iron-overlay/iron-overlay-container.html">
+
+    <link rel="import" href="../../exmg-paper-card/exmg-paper-card.html">
+    <link rel="import" href="../../exmg-paper-card/exmg-paper-info-card.html">
+
+    <link rel="import" href="../exmg-cms-default-theme.html">
+    <link rel="import" href="../exmg-cms-page-styles.html">
+
+    <custom-style>
+      <style is="custom-style" include="exmg-cms-page-styles">
+        body {
+          margin: 0;
+          padding: 0;
+          background-color: #ECEFF1;
+        }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <dom-module id="x-demo">
+        <template>
+          <style include="exmg-cms-page-styles">
+            :host{
+              /*
+              --light-theme-background-color: yellow;
+              --primary-color: pink;
+              --light-primary-color: purple;
+              --dark-primary-color: green;
+              --secondary-text-color: var(--paper-ems-500);*/
+            }
+          </style>
+
+          <!--
+            iron-overlay elements are rendered in the iron-overlay-container. This demo component also contains the
+            iron-overlay-container, but it's generally advised to insert a single instance at the bottom of your app
+            node. This way there is a single insert point for all overlays, wherever they originate.
+          -->
+          <iron-overlay id="overlay1" with-backdrop>
+            <template>
+              <exmg-paper-card md-cell="4">
+                <div class="body">
+                  <h2>Overlay test</h2>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                  </p>
+                  <div class="buttons">
+                    <paper-button raised on-tap="_closeOverlays">Cancel</paper-button>
+                    <paper-button raised on-tap="_closeOverlays">Accept</paper-button>
+                  </div>
+                </div>
+              </exmg-paper-card>
+            </template>
+          </iron-overlay>
+
+          <iron-overlay id="overlay2" with-backdrop>
+            <template>
+              <exmg-paper-card md-cell="3">
+                <div class="body">
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                    <a href="#" on-tap="_closeOverlays">Ok I see!</a>
+                  </p>
+                </div>
+              </exmg-paper-card>
+            </template>
+          </iron-overlay>
+
+           <iron-overlay id="overlay3" with-backdrop>
+            <template>
+              <exmg-paper-info-card title="Paper info card overlay" md-cell="5">
+                <div slot="body" class="body">
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                  </p>
+                </div>
+                <div slot="actions" class="actions">
+                  <paper-button raised on-tap="_closeOverlays">Ok</paper-button>
+                </div>
+              </exmg-paper-info-card>
+            </template>
+          </iron-overlay>
+
+          <div class="page-container">
+
+            <div class="page-content">
+              <div md-row>
+                <h2 md-cell="12">Overlays</h2>
+              </div>
+
+              <div md-row>
+                <exmg-paper-card md-cell="12">
+                  <div class="body">
+                    <!-- TODO: allow generic HTML elements inside .body like paragraphs and lists -->
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh. euismod tincidunt ad minim veniam, ex ea commodo consequat. Duis autem vel vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit feugait nulla facilisi.
+                    </p>
+                    <p>
+                      <a href="#" target="_blank" class="open-new">More information</a>
+                    </p>
+                  </div>
+                  <div class="actions">
+                    <paper-button raised class="normal" on-tap="_openOverlay1">Overlay 1</paper-button>
+                    <paper-button raised class="normal" on-tap="_openOverlay2">Overlay 2</paper-button>
+                    <paper-button raised class="normal" on-tap="_openOverlay3">Overlay 3</paper-button>
+                  </div>
+                </exmg-paper-card>
+              </div>
+
+            </div>
+
+            <iron-overlay-container>
+              <!-- iron-overlay elements are rendered here -->
+            </iron-overlay-container>
+
+          </div>
+
+        </template>
+        <script>
+        window.addEventListener('WebComponentsReady', function() {
+          class XDemo extends Polymer.Element {
+            static get is() { return 'x-demo'; }
+            _openOverlay1() {
+              this._openOverlay('overlay1', true);
+            }
+            _openOverlay2() {
+              this._openOverlay('overlay2', true);
+            }
+            _openOverlay3() {
+              this._openOverlay('overlay3', true);
+            }
+
+            _openOverlay(name, toggle) {
+              let overlay = this.$[name];
+              if (
+                // stop here if overlay is not found
+                !overlay ||
+                // don't do anything if toggle is current value
+                (overlay.opened === toggle) ||
+                // from undefined to false triggers some error about .transitioning, ignore too
+                (!toggle && overlay.opened === undefined)
+              ) {
+                return;
+              }
+
+              overlay.opened = toggle;
+            }
+            _closeOverlays() {
+              // demo code, don't use
+              [1,2,3].map(index => this._openOverlay('overlay' + index, false));
+            }
+          }
+
+          window.customElements.define(XDemo.is, XDemo);
+        });
+        </script>
+      </dom-module>
+
+      <x-demo></x-demo>
+
+  </body>
+</html>
+
