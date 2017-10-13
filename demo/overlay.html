@@ -24,6 +24,7 @@
     <link rel="import" href="../exmg-cms-default-theme.html">
     <link rel="import" href="../exmg-cms-page-styles.html">
     <link rel="import" href="../exmg-cms-dialog-styles.html">
+    <link rel="import" href="../exmg-cms-form-styles.html">
 
     <custom-style>
       <style is="custom-style">
@@ -39,12 +40,10 @@
     <dom-module id="x-demo">
         <template>
           <style include="exmg-cms-page-styles"></style>
+          <style include="exmg-cms-form-styles"></style>
           <style include="exmg-cms-dialog-styles">
             :host {
-
             }
-
-
           </style>
 
           <!--
@@ -89,14 +88,11 @@
                 <iron-form id="addBroadcastForm">
                   <form>
                     <paper-input label="Name" name="name" always-float-label autofocus required></paper-input>
+                    <paper-input label="Points Per Question" name="defaultPoints" value="10" type="number" required></paper-input>
                     <div class="checkbox">
-                      <label>Settings</label>
                       <paper-checkbox name="reactions" checked>Reactions Voting</paper-checkbox>
                       <paper-checkbox name="hashtags" checked>Participate using Hashtags</paper-checkbox>
-                      <paper-checkbox name="widget" checked>Widget Available</paper-checkbox>
-                      <paper-checkbox name="vp" checked>Video Processor enabled</paper-checkbox>
                     </div>
-                    <paper-input label="Points Per Question" name="defaultPoints" value="10" type="number" required></paper-input>
                   </form>
                 </iron-form>
                 <div class="actions">
