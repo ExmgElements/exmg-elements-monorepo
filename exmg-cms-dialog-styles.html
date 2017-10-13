@@ -12,11 +12,6 @@
       :host {
       }
 
-      iron-overlay-container {
-        border: 2px solid red;
-        padding: 0 24px; /* margin werkt niet. */
-      }
-
       exmg-paper-card[dialog] {
         min-width: calc(52px * 5);
         max-width: calc(52px * 10);
@@ -28,8 +23,8 @@
       @media all and (max-width: 599px) {
         exmg-paper-card[dialog-wide] {
           border: 1px solid green;
-          max-width: 100%;
-          /*margin: 0 24px;*/
+          max-width: calc(100% - 48px);
+          margin: 0 24px;
         }
       }
 
