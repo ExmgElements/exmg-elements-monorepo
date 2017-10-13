@@ -12,17 +12,21 @@
       :host {
       }
 
-      exmg-paper-card[dialog] {
-        min-width: calc(52px * 5);
-        max-width: calc(52px * 10);
-
-        border: 1px solid orange;
+      [data-overlay] {
+        --iron-overlay-background-color: transparent;
       }
 
+      exmg-paper-card[dialog] {
+        width: calc(52px * 5);
+      }
+
+      exmg-paper-card[dialog-wide] {
+        width: calc(52px * 10);
+      }
 
       @media all and (max-width: 599px) {
         exmg-paper-card[dialog-wide] {
-          border: 1px solid green;
+
           max-width: calc(100% - 48px);
           margin: 0 24px;
         }
@@ -35,6 +39,10 @@
 
       p {
         @apply --paper-font-subhead;
+        margin: 24px;
+      }
+
+      iron-form {
         margin: 24px;
       }
 
@@ -51,7 +59,6 @@
       .actions paper-button:hover {
         background: var(--paper-grey-100);
       }
-
 
   </style>
 </custom-style>

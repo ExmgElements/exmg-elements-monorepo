@@ -10,8 +10,11 @@
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons+Extended">
 
     <link rel="import" href="../../paper-button/paper-button.html">
+    <link rel="import" href="../../paper-input/paper-input.html">
+    <link rel="import" href="../../paper-checkbox/paper-checkbox.html">
     <link rel="import" href="../../paper-icon-button/paper-icon-button.html">
 
+    <link rel="import" href="../../iron-form/iron-form.html">
     <link rel="import" href="../../iron-overlay/iron-overlay.html">
     <link rel="import" href="../../iron-overlay/iron-overlay-container.html">
 
@@ -23,7 +26,7 @@
     <link rel="import" href="../exmg-cms-dialog-styles.html">
 
     <custom-style>
-      <style is="custom-style" include="exmg-cms-page-styles">
+      <style is="custom-style">
         body {
           margin: 0;
           padding: 0;
@@ -37,14 +40,11 @@
         <template>
           <style include="exmg-cms-page-styles"></style>
           <style include="exmg-cms-dialog-styles">
-            :host{
-              /*
-              --light-theme-background-color: yellow;
-              --primary-color: pink;
-              --light-primary-color: purple;
-              --dark-primary-color: green;
-              --secondary-text-color: var(--paper-ems-500);*/
+            :host {
+
             }
+
+
           </style>
 
           <!--
@@ -84,11 +84,25 @@
 
           <iron-overlay id="overlay3" with-backdrop>
             <template>
-              <exmg-paper-card dialog>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                  <a href="#" on-tap="_closeOverlays">Ok I see!</a>
-                </p>
+              <exmg-paper-card dialog-wide>
+                <h2>Add Episode</h2>
+                <iron-form id="addBroadcastForm">
+                  <form>
+                    <paper-input label="Name" name="name" always-float-label autofocus required></paper-input>
+                    <div class="checkbox">
+                      <label>Settings</label>
+                      <paper-checkbox name="reactions" checked>Reactions Voting</paper-checkbox>
+                      <paper-checkbox name="hashtags" checked>Participate using Hashtags</paper-checkbox>
+                      <paper-checkbox name="widget" checked>Widget Available</paper-checkbox>
+                      <paper-checkbox name="vp" checked>Video Processor enabled</paper-checkbox>
+                    </div>
+                    <paper-input label="Points Per Question" name="defaultPoints" value="10" type="number" required></paper-input>
+                  </form>
+                </iron-form>
+                <div class="actions">
+                  <paper-button on-tap="_closeOverlays">Cancel</paper-button>
+                  <paper-button on-tap="_closeOverlays">Add Broadcast</paper-button>
+                </div>
               </exmg-paper-card>
             </template>
           </iron-overlay>
@@ -109,8 +123,8 @@
                     </p>
                     <p>
                       <a href="#" on-tap="_openOverlay1">Alert without title</a><br>
-                      <a href="#" on-tap="_openOverlay2">Alert with title</a><br>
-                      <a href="#" on-tap="_openOverlay3">Alert 2</a><br>
+                      <a href="#" on-tap="_openOverlay2">Dialog with title</a><br>
+                      <a href="#" on-tap="_openOverlay3">Dialog with form</a><br>
                     </p>
                   </div>
                 </exmg-paper-card>

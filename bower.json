@@ -18,7 +18,9 @@
   },
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
-    "paper-styles": "PolymerElements/paper-styles#^2.0.0"
+    "paper-styles": "PolymerElements/paper-styles#^2.0.0",
+    "iron-form": "PolymerElements/iron-form#^2.0.1",
+    "paper-checkbox": "PolymerElements/paper-checkbox#^2.0.1"
   },
   "devDependencies": {
     "exmg-paper-datatable": "ExmgElements/exmg-paper-datatable#^2.0.0",
