@@ -20,6 +20,7 @@
 
     <link rel="import" href="../exmg-cms-default-theme.html">
     <link rel="import" href="../exmg-cms-page-styles.html">
+    <link rel="import" href="../exmg-cms-dialog-styles.html">
 
     <custom-style>
       <style is="custom-style" include="exmg-cms-page-styles">
@@ -34,7 +35,8 @@
   <body>
     <dom-module id="x-demo">
         <template>
-          <style include="exmg-cms-page-styles">
+          <style include="exmg-cms-page-styles"></style>
+          <style include="exmg-cms-dialog-styles">
             :host{
               /*
               --light-theme-background-color: yellow;
@@ -50,48 +52,44 @@
             iron-overlay-container, but it's generally advised to insert a single instance at the bottom of your app
             node. This way there is a single insert point for all overlays, wherever they originate.
           -->
+
           <iron-overlay id="overlay1" with-backdrop>
             <template>
-              <exmg-paper-card md-cell="4">
-                <div class="body">
-                  <h2>Overlay test</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                  </p>
-                  <div class="buttons">
-                    <paper-button raised on-tap="_closeOverlays">Cancel</paper-button>
-                    <paper-button raised on-tap="_closeOverlays">Accept</paper-button>
-                  </div>
+              <exmg-paper-card dialog>
+                <p>
+                  Discard Draft?
+                </p>
+                <div class="actions">
+                  <paper-button on-tap="_closeOverlays">Cancel</paper-button>
+                  <paper-button on-tap="_closeOverlays">Discard</paper-button>
                 </div>
               </exmg-paper-card>
             </template>
           </iron-overlay>
 
-          <iron-overlay id="overlay2" with-backdrop>
+           <iron-overlay id="overlay2" with-backdrop>
             <template>
-              <exmg-paper-card md-cell="3">
-                <div class="body">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                    <a href="#" on-tap="_closeOverlays">Ok I see!</a>
-                  </p>
+              <exmg-paper-card dialog-wide>
+                <h2>Use Google's location service?</h2>
+                <p>
+                  Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.
+                </p>
+                <div class="actions">
+                  <paper-button on-tap="_closeOverlays">Disagree</paper-button>
+                  <paper-button on-tap="_closeOverlays">Agree</paper-button>
                 </div>
               </exmg-paper-card>
             </template>
           </iron-overlay>
 
-           <iron-overlay id="overlay3" with-backdrop>
+          <iron-overlay id="overlay3" with-backdrop>
             <template>
-              <exmg-paper-info-card title="Paper info card overlay" md-cell="5">
-                <div slot="body" class="body">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                  </p>
-                </div>
-                <div slot="actions" class="actions">
-                  <paper-button raised on-tap="_closeOverlays">Ok</paper-button>
-                </div>
-              </exmg-paper-info-card>
+              <exmg-paper-card dialog>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                  <a href="#" on-tap="_closeOverlays">Ok I see!</a>
+                </p>
+              </exmg-paper-card>
             </template>
           </iron-overlay>
 
@@ -99,7 +97,7 @@
 
             <div class="page-content">
               <div md-row>
-                <h2 md-cell="12">Overlays</h2>
+                <h2 md-cell="12">Dialogs</h2>
               </div>
 
               <div md-row>
@@ -110,13 +108,10 @@
                       Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh. euismod tincidunt ad minim veniam, ex ea commodo consequat. Duis autem vel vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit feugait nulla facilisi.
                     </p>
                     <p>
-                      <a href="#" target="_blank" class="open-new">More information</a>
+                      <a href="#" on-tap="_openOverlay1">Alert without title</a><br>
+                      <a href="#" on-tap="_openOverlay2">Alert with title</a><br>
+                      <a href="#" on-tap="_openOverlay3">Alert 2</a><br>
                     </p>
-                  </div>
-                  <div class="actions">
-                    <paper-button raised class="normal" on-tap="_openOverlay1">Overlay 1</paper-button>
-                    <paper-button raised class="normal" on-tap="_openOverlay2">Overlay 2</paper-button>
-                    <paper-button raised class="normal" on-tap="_openOverlay3">Overlay 3</paper-button>
                   </div>
                 </exmg-paper-card>
               </div>
@@ -174,4 +169,3 @@
 
   </body>
 </html>
-

@@ -1,0 +1,62 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../paper-styles/typography.html">
+<link rel="import" href="../paper-styles/color.html">
+<link rel="import" href="../paper-styles/shadow.html">
+
+<link rel="import" href="material-icons.html">
+
+<dom-module id="exmg-cms-dialog-styles">
+  <template>
+    <style>
+      :host {
+      }
+
+      iron-overlay-container {
+        border: 2px solid red;
+        padding: 0 24px; /* margin werkt niet. */
+      }
+
+      exmg-paper-card[dialog] {
+        min-width: calc(52px * 5);
+        max-width: calc(52px * 10);
+
+        border: 1px solid orange;
+      }
+
+
+      @media all and (max-width: 599px) {
+        exmg-paper-card[dialog-wide] {
+          border: 1px solid green;
+          max-width: 100%;
+          /*margin: 0 24px;*/
+        }
+      }
+
+      h2 {
+        @apply --paper-font-title;
+        margin: 24px 24px 0;
+      }
+
+      p {
+        @apply --paper-font-subhead;
+        margin: 24px;
+      }
+
+      .actions {
+        @apply --layout;
+        @apply --layout-end-justified;
+        padding: 8px 8px 8px 24px;
+      }
+
+      .actions paper-button {
+        --paper-button-ink-color: var(--primary-color);
+      }
+
+      .actions paper-button:hover {
+        background: var(--paper-grey-100);
+      }
+
+
+  </style>
+</custom-style>
