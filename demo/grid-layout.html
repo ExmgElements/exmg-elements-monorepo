@@ -52,13 +52,18 @@
           </style>
 
           <div class="page-container">
-            <div row>
-              <paper-input id="colPadding" name="--col-padding" label="Col Padding" on-change="_handleChange"></paper-input>
-              <paper-input id="colBackgroundColor" name="--col-background-color" label="Col Background Color" on-change="_handleChange"></paper-input>
-              <paper-input id="colBorderColor" name="--col-border-color" label="Col Border Color" on-change="_handleChange"></paper-input>
-            </div>
+
 
             <div class="page-content">
+
+              <div row>
+                <h2>Grid Col CSS Vars</h2>
+              </div>
+              <div row>
+                <paper-input col-4 id="colPadding" name="--col-padding" label="Col Padding" on-change="_handleChange"></paper-input>
+                <paper-input col-4 id="colBackgroundColor" name="--col-background-color" label="Col Background Color" on-change="_handleChange"></paper-input>
+                <paper-input col-4 id="colBorderColor" name="--col-border-color" label="Col Border Color" on-change="_handleChange"></paper-input>
+              </div>
 
               <div row>
                 <h2>Grid</h2>
