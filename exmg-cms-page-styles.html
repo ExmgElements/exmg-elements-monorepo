@@ -20,10 +20,17 @@
         @apply --layout-horizontal;
       }
 
+      [md-cell] {
+        box-sizing: border-box;
+      }
+
       @media only screen and (min-width: 984px) {
         [md-row] {
           width: 960px;
           padding: 0 12px;
+        }
+        [md-row] [md-cell="3"] {
+          width: 216px;
         }
         [md-row] [md-cell="4"] {
           width: 296px;
@@ -43,6 +50,9 @@
         [md-row] {
           width: 640px;
           padding: 0 12px;
+        }
+        [md-row] [md-cell="3"] {
+          width: 216px;
         }
         [md-row] [md-cell="4"] {
           width: 296px;
@@ -69,6 +79,9 @@
         [md-row] [md-cell="6"],
         [md-row] [md-cell="4"] {
           width: 100%;
+        }
+        [md-row] [md-cell="3"] {
+          width: 50%;
         }
         [md-row] [md-cell] {
           margin: 0 16px 16px 16px;

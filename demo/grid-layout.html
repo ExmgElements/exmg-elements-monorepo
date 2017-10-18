@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <title>exmg-cms-styles demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../paper-tabs/paper-tabs.html">
+    <link rel="import" href="../../paper-tabs/paper-tab.html">
+
+    <link rel="import" href="../../exmg-paper-card/exmg-paper-card.html">
+
+    <link rel="import" href="../exmg-cms-default-theme.html">
+    <link rel="import" href="../exmg-cms-page-styles.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+        body {
+          margin: 0;
+          padding: 0;
+          background-color: #ECEFF1;
+        }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <dom-module id="x-demo">
+        <template>
+          <style include="exmg-cms-page-styles">
+
+            div[md-cell] {
+              background: yellow;
+              padding: 10px;
+            }
+          </style>
+
+          <div class="page-container">
+
+            <div class="page-content">
+              <div md-row>
+                <h2 md-cell="12">Cell 3</h2>
+              </div>
+              <div md-row>
+                <template is="dom-repeat" items="[[_loopX(4)]]" index-as="index">
+                  <div md-cell="3">[[item]]</div>
+                </template>
+              </div>
+              <div md-row>
+                <h2 md-cell="12">Cell 4</h2>
+              </div>
+              <div md-row>
+                <template is="dom-repeat" items="[[_loopX(3)]]" index-as="index">
+                  <div md-cell="4">[[item]]</div>
+                </template>
+              </div>
+              <div md-row>
+                <h2 md-cell="12">Cell 6</h2>
+              </div>
+              <div md-row>
+                <template is="dom-repeat" items="[[_loopX(2)]]" index-as="index">
+                  <div md-cell="6">[[item]]</div>
+                </template>
+              </div>
+              <div md-row>
+                <h2 md-cell="12">Cell 12</h2>
+              </div>
+              <div md-row>
+                <template is="dom-repeat" items="[[_loopX(1)]]" index-as="index">
+                  <div md-cell="12">[[item]]</div>
+                </template>
+              </div>
+            </div>
+          </div>
+
+        </template>
+        <script>
+        window.addEventListener('WebComponentsReady', function() {
+          class XDemo extends Polymer.Element {
+            static get is() { return 'x-demo'; }
+            _loopX(count) {
+              return [...Array(count).keys()];
+            }
+          }
+          window.customElements.define(XDemo.is, XDemo);
+        });
+        </script>
+      </dom-module>
+
+      <x-demo></x-demo>
+
+  </body>
+</html>
