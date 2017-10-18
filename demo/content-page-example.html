@@ -1,0 +1,53 @@
+<link rel="import" href="../../polymer/polymer-element.html">
+<link rel="import" href="../exmg-cms-default-theme.html">
+<link rel="import" href="../exmg-cms-page-styles.html">
+
+<dom-module id="content-page-example">
+  <template>
+    <style include="exmg-cms-page-styles">
+
+    </style>
+    <div class="page-container">
+      <div class="page-content">
+        <div row>
+          <h2 col>Tests</h2>
+        </div>
+        <div row>
+          <div col-6 col-md-4 col-xl-3>
+            <div class="card add">
+              <div>
+                <div class="plus">+</div>
+                <div class="plus-title">Add Broadcast</div>
+              </div>
+            </div>
+          </div>
+          <div col-6 col-md-4 col-xl-3>
+            <div class="card"><div class="title">Broadcast 1</div></div>
+          </div>
+          <div col-6 col-md-4 col-xl-3>
+            <div class="card"><div class="title">Broadcast 2</div></div>
+          </div>
+          <div col-6 col-md-4 col-xl-3>
+            <div class="card"><div class="title">Broadcast 3</div></div>
+          </div>
+          <div col-6 col-md-4 col-xl-3>
+            <div class="card"><div class="title">Broadcast 4</div></div>
+          </div>
+          <div col-6 col-md-4 col-xl-3>
+            <div class="card"><div class="title">Broadcast 5</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    class ContentPageExample extends Polymer.Element {
+      static get is() {
+        return 'content-page-example';
+      }
+    }
+
+    window.customElements.define(ContentPageExample.is, ContentPageExample);
+  </script>
+</dom-module>

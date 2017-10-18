@@ -32,6 +32,8 @@
     <link rel="import" href="../exmg-cms-global-layout-styles.html">
     <link rel="import" href="../exmg-cms-global-layout-mixin.html">
 
+    <link rel="import" href="content-page-example.html">
+
     <custom-style>
       <style is="custom-style">
         body {
@@ -73,7 +75,7 @@
                 <span main-title>Page Title</span>
               </app-toolbar>
 
-              <slot></slot>
+              <content-page-example></content-page-example>
               <footer>
                 (C)opyright <a href="http://www.exmachinagroup.tv">Ex Machina</a> 2017 - Version x
               </footer>
@@ -95,7 +97,7 @@
         </script>
       </dom-module>
 
-      <x-demo><div>page content</div></x-demo>
+      <x-demo></x-demo>
 
   </body>
 </html>
