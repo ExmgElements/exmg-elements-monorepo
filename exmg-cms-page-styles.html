@@ -15,7 +15,10 @@
       }
 
       [row] {
+        box-sizing: border-box;
         margin: 0 auto;
+        padding-left: var(--col-padding, 8px);
+        padding-right: var(--col-padding, 8px);
         width: 100%;
         @apply --layout;
         @apply --layout-wrap;
@@ -54,7 +57,7 @@
         width: 100%;
         min-height: 1px;
         box-sizing: border-box;
-        padding: var(--col-padding, 16px);
+        padding: var(--col-padding, 8px);
         background: var(--col-background-color);
         border: 1px solid var(--col-border-color, --divider-color);
       }
