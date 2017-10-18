@@ -9,6 +9,7 @@
 
     <link rel="import" href="../../paper-tabs/paper-tabs.html">
     <link rel="import" href="../../paper-tabs/paper-tab.html">
+    <link rel="import" href="../../paper-input/paper-input.html">
 
     <link rel="import" href="../../exmg-paper-card/exmg-paper-card.html">
 
@@ -34,15 +35,18 @@
               --col-background-color: #ddd;
               --col-border-color: #ccc;
             }
-
             [row] > * {
               padding-top: 8px;
               padding-bottom: 8px;
             }
-
           </style>
 
           <div class="page-container">
+            <div row>
+              <paper-input id="colPadding" name="--col-padding" label="Col Padding" on-change="_handleChange"></paper-input>
+              <paper-input id="colBackgroundColor" name="--col-background-color" label="Col Background Color" on-change="_handleChange"></paper-input>
+              <paper-input id="colBorderColor" name="--col-border-color" label="Col Border Color" on-change="_handleChange"></paper-input>
+            </div>
 
             <div class="page-content">
               <div row>
@@ -115,6 +119,20 @@
             static get is() { return 'x-demo'; }
             _loopX(count) {
               return [...Array(count).keys()].map(i => i+1);
+            }
+            _handleChange(e) {
+              let inputElement = e.path.find((p) => p.tagName === 'PAPER-INPUT');
+              this.updateStyles((({name, value}) => ({[name]: value}))(inputElement));
+            }
+            _getPropValue(p) {
+              return window.ShadyCSS ?
+                ShadyCSS.getComputedStyleValue(this, p) : getComputedStyle(this).getPropertyValue(p);
+            }
+            ready() {
+              super.ready();
+              this.$.colPadding.value = ShadyCSS.getComputedStyleValue(this, '--col-padding');
+              this.$.colBackgroundColor.value = ShadyCSS.getComputedStyleValue(this, '--col-background-color');
+              this.$.colBorderColor.value = ShadyCSS.getComputedStyleValue(this, '--col-border-color');
             }
           }
           window.customElements.define(XDemo.is, XDemo);
