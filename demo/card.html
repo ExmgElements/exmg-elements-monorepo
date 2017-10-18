@@ -50,59 +50,63 @@
           <div class="page-container">
 
             <div class="page-content">
-              <div md-row>
-                <h2 md-cell="12">Active Users</h2>
+              <div row>
+                <h2 col>Active Users</h2>
               </div>
 
-              <div md-row>
-                <exmg-paper-card md-cell="12">
-                  <exmg-paper-datatable>
-                    <!-- THead -->
-                    <exmg-paper-thead>
-                      <template>
-                        <div class="tr" >
-                          <div class="th flex"><span>Name</span></div>
-                          <div class="th flex collapsable"><span>Email</span></div>
-                          <div class="th flex collapsable"><span>Country</span></div>
-                          <div class="th flex-right flex-none" style="width: 120px"></div>
-                        </div>
-                      </template>
-                    </exmg-paper-thead>
-                    <!-- TBody -->
-                    <exmg-paper-tbody items='[{"name": "Mark Blabla", "email": "mark@test.com","country": "Netherlands"}, {"name": "Jesse Blabla", "email": "jesse@test.com","country": "Netherlands"}]'>
-                      <template>
-                        <div class="tr">
-                          <div class="td flex">
-                            <span>[[item.name]]</span>
+              <div row>
+                <div col>
+                  <exmg-paper-card>
+                    <exmg-paper-datatable>
+                      <!-- THead -->
+                      <exmg-paper-thead>
+                        <template>
+                          <div class="tr">
+                            <div class="th flex"><span>Name</span></div>
+                            <div class="th flex collapsable"><span>Email</span></div>
+                            <div class="th flex collapsable"><span>Country</span></div>
+                            <div class="th flex-right flex-none" style="width: 120px"></div>
                           </div>
-                          <div class="td flex collapsable">
-                            <span>[[item.email]]</span>
+                        </template>
+                      </exmg-paper-thead>
+                      <!-- TBody -->
+                      <exmg-paper-tbody items='[{"name": "Mark Blabla", "email": "mark@test.com","country": "Netherlands"}, {"name": "Jesse Blabla", "email": "jesse@test.com","country": "Netherlands"}]'>
+                        <template>
+                          <div class="tr">
+                            <div class="td flex">
+                              <span>[[item.name]]</span>
+                            </div>
+                            <div class="td flex collapsable">
+                              <span>[[item.email]]</span>
+                            </div>
+                            <div class="td flex collapsable">
+                              <span>[[item.country]]</span>
+                            </div>
+                            <div class="td flex-right flex-none hover" style="width: 120px">
+                              <span>
+                                <span><paper-icon-button icon="exmg-paper-icons:content-copy"></paper-icon-button></span>
+                                <span><paper-icon-button icon="exmg-paper-icons:more-vert"></paper-icon-button></span>
+                              </span>
+                            </div>
                           </div>
-                          <div class="td flex collapsable">
-                            <span>[[item.country]]</span>
-                          </div>
-                          <div class="td flex-right flex-none hover" style="width: 120px">
-                            <span>
-                              <span><paper-icon-button icon="exmg-paper-icons:content-copy"></paper-icon-button></span>
-                              <span><paper-icon-button icon="exmg-paper-icons:more-vert"></paper-icon-button></span>
-                            </span>
-                          </div>
-                        </div>
-                      </template>
-                    </exmg-tbody>
-                  </exmg-paper-datatable>
-                </exmg-paper-card>
+                        </template>
+                      </exmg-paper-tbody>
+                    </exmg-paper-datatable>
+                  </exmg-paper-card>
+                </div>
               </div>
 
-              <div md-row class="between-cards-margin">
-                <h2 md-cell="12">Advanced</h2>
+              <div row class="between-cards-margin">
+                <h2 col>Advanced</h2>
               </div>
 
-              <div md-row>
-                <exmg-paper-info-card title="Restrict account access by IP Address" full md-cell="12">
-                  <div slot="body" class="body">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh. euismod tincidunt ad minim veniam, ex ea commodo consequat. Duis autem vel vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit feugait nulla facilisi.<br><a href="#" target="_blank" class="open-new">More information</a></div>
-                  <div slot="actions" class="actions"><paper-button raised class="normal">Modify</paper-button></div>
-                </exmg-paper-info-card>
+              <div row>
+                <div col>
+                  <exmg-paper-info-card title="Restrict account access by IP Address" full>
+                    <div slot="body" class="body">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh. euismod tincidunt ad minim veniam, ex ea commodo consequat. Duis autem vel vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit feugait nulla facilisi.<br><a href="#" target="_blank" class="open-new">More information</a></div>
+                    <div slot="actions" class="actions"><paper-button raised class="normal">Modify</paper-button></div>
+                  </exmg-paper-info-card>
+                </div>
               </div>
 
             </div>

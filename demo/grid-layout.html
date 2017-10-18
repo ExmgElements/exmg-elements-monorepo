@@ -29,48 +29,82 @@
     <dom-module id="x-demo">
         <template>
           <style include="exmg-cms-page-styles">
-
-            div[md-cell] {
-              background: yellow;
-              padding: 10px;
+            :host {
+              --col-padding: 16px;
+              --col-background-color: #ddd;
+              --col-border-color: #ccc;
             }
+
+            [row] > * {
+              padding-top: 8px;
+              padding-bottom: 8px;
+            }
+
           </style>
 
           <div class="page-container">
 
             <div class="page-content">
-              <div md-row>
-                <h2 md-cell="12">Cell 3</h2>
+              <div row>
+                <h2>Columns of equal width</h2>
               </div>
-              <div md-row>
+              <div row>
                 <template is="dom-repeat" items="[[_loopX(4)]]" index-as="index">
-                  <div md-cell="3">[[item]]</div>
+                  <div col>col</div>
                 </template>
               </div>
-              <div md-row>
-                <h2 md-cell="12">Cell 4</h2>
-              </div>
-              <div md-row>
+              <div row>
                 <template is="dom-repeat" items="[[_loopX(3)]]" index-as="index">
-                  <div md-cell="4">[[item]]</div>
+                  <div col>col</div>
                 </template>
               </div>
-              <div md-row>
-                <h2 md-cell="12">Cell 6</h2>
-              </div>
-              <div md-row>
+              <div row>
                 <template is="dom-repeat" items="[[_loopX(2)]]" index-as="index">
-                  <div md-cell="6">[[item]]</div>
+                  <div col>col</div>
                 </template>
               </div>
-              <div md-row>
-                <h2 md-cell="12">Cell 12</h2>
+
+              <div row>
+                <h2>Combine different column sizes (3, 4, 6, 8, 9, 12)</h2>
               </div>
-              <div md-row>
-                <template is="dom-repeat" items="[[_loopX(1)]]" index-as="index">
-                  <div md-cell="12">[[item]]</div>
-                </template>
+              <div row>
+                <div col-3>col-3</div>
+                <div col-9>col-9</div>
               </div>
+              <div row>
+                <div col-8>col-8</div>
+                <div col-4>col-4</div>
+              </div>
+              <div row>
+                <div col-6>col-6</div>
+                <div col-3>col-3</div>
+                <div col-3>col-3</div>
+              </div>
+
+              <div row>
+                <h2>Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop</h2>
+              </div>
+              <div row>
+                <div col-6 col-md-4>col-6 col-md-4</div>
+                <div col-6 col-md-4>col-6 col-md-4</div>
+                <div col-6 col-md-4>col-6 col-md-4</div>
+              </div>
+              <div row>
+                <h2>Columns are always 50% wide, on mobile and desktop</h2>
+              </div>
+              <div row>
+                <div col-6>col-6</div>
+                <div col-6>col-6</div>
+              </div>
+
+              <div row>
+                <h2>Stack the columns on mobile by making one full-width and the other half-width</h2>
+              </div>
+              <div row>
+                <div col-12 col-md-8>col-12 col-md-8</div>
+                <div col-6 col-md-4>col-6 col-md-4</div>
+              </div>
+
             </div>
           </div>
 
@@ -80,7 +114,7 @@
           class XDemo extends Polymer.Element {
             static get is() { return 'x-demo'; }
             _loopX(count) {
-              return [...Array(count).keys()];
+              return [...Array(count).keys()].map(i => i+1);
             }
           }
           window.customElements.define(XDemo.is, XDemo);

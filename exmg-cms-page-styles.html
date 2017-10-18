@@ -14,77 +14,238 @@
         font-size: 14px;
       }
 
-      [md-row] {
+      [row] {
         margin: 0 auto;
+        width: 100%;
+        @apply --layout;
         @apply --layout-wrap;
-        @apply --layout-horizontal;
       }
 
-      [md-cell] {
+      @media (min-width: 576px) {
+        [row] {
+          max-width: 540px;
+        }
+      }
+
+      @media (min-width: 768px) {
+        [row] {
+          max-width: 720px;
+        }
+      }
+
+      @media (min-width: 992px) {
+        [row] {
+          max-width: 960px;
+        }
+      }
+
+      @media (min-width: 1200px) {
+        [row] {
+          max-width: 1140px;
+        }
+      }
+
+      [col-3], [col-4], [col-6], [col-8], [col-9], [col-12], [col], [col-auto],
+      [col-sm-3], [col-sm-4], [col-sm-6], [col-sm-8], [col-sm-9], [col-sm-12], [col-sm], [col-sm-auto],
+      [col-md-3], [col-md-4], [col-md-6], [col-md-8], [col-md-9], [col-md-12], [col-md], [col-md-auto],
+      [col-lg-3], [col-lg-4], [col-lg-6], [col-lg-8], [col-lg-9], [col-lg-12], [col-lg], [col-lg-auto],
+      [col-xl-3], [col-xl-4], [col-xl-6], [col-xl-8], [col-xl-9], [col-xl-12], [col-xl], [col-xl-auto] {
+        position: relative;
+        width: 100%;
+        min-height: 1px;
         box-sizing: border-box;
+        padding: var(--col-padding, 16px);
+        background: var(--col-background-color);
+        border: 1px solid var(--col-border-color, --divider-color);
       }
 
-      @media only screen and (min-width: 984px) {
-        [md-row] {
-          width: 960px;
-          padding: 0 12px;
+      [col] {
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%;
+      }
+
+      [col-auto] {
+        flex: 0 0 auto;
+        width: auto;
+        max-width: none;
+      }
+
+      [col-3] {
+        flex: 0 0 25%;
+        max-width: 25%;
+      }
+
+      [col-4] {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+      }
+
+      [col-6] {
+        flex: 0 0 50%;
+        max-width: 50%;
+      }
+
+      [col-8] {
+        flex: 0 0 66.666667%;
+        max-width: 66.666667%;
+      }
+
+      [col-9] {
+        flex: 0 0 75%;
+        max-width: 75%;
+      }
+
+      [col-12] {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+
+      @media (min-width: 576px) {
+        [col-sm] {
+          flex-basis: 0;
+          flex-grow: 1;
+          max-width: 100%;
         }
-        [md-row] [md-cell="3"] {
-          width: 216px;
+        [col-sm-auto] {
+          flex: 0 0 auto;
+          width: auto;
+          max-width: none;
         }
-        [md-row] [md-cell="4"] {
-          width: 296px;
+        [col-sm-3] {
+          flex: 0 0 25%;
+          max-width: 25%;
         }
-        [md-row] [md-cell="6"] {
-          width: 456px;
+        [col-sm-4] {
+          flex: 0 0 33.333333%;
+          max-width: 33.333333%;
         }
-        [md-row] [md-cell="12"] {
-          width: 936px;
+        [col-sm-6] {
+          flex: 0 0 50%;
+          max-width: 50%;
         }
-        [md-row] [md-cell] {
-          margin: 0 12px 24px 12px;
+        [col-sm-8] {
+          flex: 0 0 66.666667%;
+          max-width: 66.666667%;
+        }
+        [col-sm-9] {
+          flex: 0 0 75%;
+          max-width: 75%;
+        }
+        [col-sm-12] {
+          flex: 0 0 100%;
+          max-width: 100%;
         }
       }
 
-      @media only screen and (max-width: 983px) and (min-width: 664px) {
-        [md-row] {
-          width: 640px;
-          padding: 0 12px;
+      @media (min-width: 768px) {
+        [col-md] {
+          flex-basis: 0;
+          flex-grow: 1;
+          max-width: 100%;
         }
-        [md-row] [md-cell="3"] {
-          width: 216px;
+        [col-md-auto] {
+          flex: 0 0 auto;
+          width: auto;
+          max-width: none;
         }
-        [md-row] [md-cell="4"] {
-          width: 296px;
+        [col-md-3] {
+          flex: 0 0 25%;
+          max-width: 25%;
         }
-        [md-row] [md-cell="6"] {
-          width: 456px;
+        [col-md-4] {
+          flex: 0 0 33.333333%;
+          max-width: 33.333333%;
         }
-        [md-row] [md-cell="12"] {
-          width: 936px;
+        [col-md-6] {
+          flex: 0 0 50%;
+          max-width: 50%;
         }
-        [md-row] [md-cell] {
-          margin: 0 12px 24px 12px;
+        [col-md-8] {
+          flex: 0 0 66.666667%;
+          max-width: 66.666667%;
+        }
+        [col-md-9] {
+          flex: 0 0 75%;
+          max-width: 75%;
+        }
+        [col-md-12] {
+          flex: 0 0 100%;
+          max-width: 100%;
         }
       }
 
-      @media only screen and (max-width: 663px) {
-        [md-row] {
-          width: 100%;
-          padding: 0 8px;
-          -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+      @media (min-width: 992px) {
+        [col-lg] {
+          flex-basis: 0;
+          flex-grow: 1;
+          max-width: 100%;
         }
-        [md-row] [md-cell="12"],
-        [md-row] [md-cell="6"],
-        [md-row] [md-cell="4"] {
-          width: 100%;
+        [col-lg-auto] {
+          flex: 0 0 auto;
+          width: auto;
+          max-width: none;
         }
-        [md-row] [md-cell="3"] {
-          width: 50%;
+        [col-lg-3] {
+          flex: 0 0 25%;
+          max-width: 25%;
         }
-        [md-row] [md-cell] {
-          margin: 0 16px 16px 16px;
+        [col-lg-4] {
+          flex: 0 0 33.333333%;
+          max-width: 33.333333%;
+        }
+        [col-lg-6] {
+          flex: 0 0 50%;
+          max-width: 50%;
+        }
+        [col-lg-8] {
+          flex: 0 0 66.666667%;
+          max-width: 66.666667%;
+        }
+        [col-lg-9] {
+          flex: 0 0 75%;
+          max-width: 75%;
+        }
+        [col-lg-12] {
+          flex: 0 0 100%;
+          max-width: 100%;
+        }
+      }
+
+      @media (min-width: 1200px) {
+        [col-xl] {
+          flex-basis: 0;
+          flex-grow: 1;
+          max-width: 100%;
+        }
+        [col-xl-auto] {
+          flex: 0 0 auto;
+          width: auto;
+          max-width: none;
+        }
+        [col-xl-3] {
+          flex: 0 0 25%;
+          max-width: 25%;
+        }
+        [col-xl-4] {
+          flex: 0 0 33.333333%;
+          max-width: 33.333333%;
+        }
+        [col-xl-6] {
+          flex: 0 0 50%;
+          max-width: 50%;
+        }
+        [col-xl-8] {
+          flex: 0 0 66.666667%;
+          max-width: 66.666667%;
+        }
+        [col-xl-9] {
+          flex: 0 0 75%;
+          max-width: 75%;
+        }
+        [col-xl-12] {
+          flex: 0 0 100%;
+          max-width: 100%;
         }
       }
 
