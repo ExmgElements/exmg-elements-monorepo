@@ -1,5 +1,6 @@
 <link rel="import" href="../../polymer/polymer-element.html">
 <link rel="import" href="../../exmg-paper-card/exmg-paper-card.html">
+<link rel="import" href="../../exmg-paper-card/exmg-paper-info-card.html">
 <link rel="import" href="../exmg-cms-default-theme.html">
 <link rel="import" href="../exmg-cms-page-styles.html">
 
@@ -14,13 +15,28 @@
     <div class="page-container">
       <div class="page-content">
 
-      <div row>
-        <div col>
-          <exmg-paper-card>
-            <div class="body">Lorem ipsum dolor sit amet, dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</div>
-          </exmg-paper-card>
+        <div row>
+          <div col>
+            <exmg-paper-info-card title="Title">
+              <div class="body">
+                <p>Lorem ipsum dolor sit amet, dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+              </div>
+            </exmg-paper-info-card>
+          </div>
         </div>
-      </div>
+
+        <div row>
+          <div col>
+            <exmg-paper-info-card tagline="Tagline" minor>
+              <div class="body">
+                <p>Lorem ipsum dolor sit amet, dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+                <div class="links">
+                  <a href="#" target="_blank" class="open-new">More information</a>
+                </div>
+              </div>
+            </exmg-paper-info-card>
+          </div>
+        </div>
 
         <div row>
           <h2 col>Tests</h2>
