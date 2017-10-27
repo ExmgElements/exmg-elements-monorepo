@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>exmg-dialog demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../iron-overlay/iron-overlay-container.html">
+    <link rel="import" href="../exmg-dialog.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      .box {
+        padding: 20px;
+        background: white;
+      }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic exmg-dialog demo</h3>
+      <demo-snippet>
+        <template>
+
+          <exmg-dialog id="exmgDialog" animated with-backdrop>
+            <template>
+              <div class="box">
+                <p>dialog</p>
+                <p>
+                  <a href="#" dialog-cancel>cancel me</a>
+                  <a href="#" dialog-close>close me</a>
+                  <a href="#" dialog-confirm>confirm me</a>
+                </p>
+              </div>
+            </template>
+          </exmg-dialog>
+
+          <p onclick="exmgDialog.open();">
+            Click to open a dialog
+          </p>
+
+          <iron-overlay-container></iron-overlay-container>
+
+        </template>
+      </demo-snippet>
+
+
+    </div>
+  </body>
+</html>
