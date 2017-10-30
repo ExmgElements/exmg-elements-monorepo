@@ -13,13 +13,15 @@
   "rules": {
     "max-len": ["error", 120],
     "brace-style": "off",
-    "new-cap": ["error", { "capIsNewExceptions": ["Polymer", "GestureEventListeners"] }],
+    "new-cap": ["error", { "capIsNewExceptions": ["Polymer", "GestureEventListeners", "CmsGlobalLayoutMixin"] }],
     "no-var": "off",
     "no-console": "off",
     "require-jsdoc": "off",
     "valid-jsdoc": "off"
   },
   "globals": {
-    "Polymer": true
+    "Polymer": true,
+    "Exmg": true,
+    "ShadyCSS": true
   }
 }

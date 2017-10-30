@@ -140,7 +140,7 @@
         <script>
         window.addEventListener('WebComponentsReady', function() {
           class XDemo extends Polymer.Element {
-            static get is() { return 'x-demo'; }
+            static get is() {return 'x-demo';}
             _openOverlay1() {
               this._openOverlay('overlay1', true);
             }
@@ -168,7 +168,7 @@
             }
             _closeOverlays() {
               // demo code, don't use
-              [1,2,3].map(index => this._openOverlay('overlay' + index, false));
+              [1, 2, 3].map((index) => this._openOverlay('overlay' + index, false));
             }
           }
 

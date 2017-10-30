@@ -43,7 +43,7 @@ the html needs to be added this way:
 
 Also the global layout mixin needs to be loaded
 ```js
-class XDemo extends ExmgCmsGlobalLayoutMixin(Polymer.Element) {
+class XDemo extends Exmg.CmsGlobalLayoutMixin(Polymer.Element) {
   static get is() { return 'x-demo'; }
 }
 window.customElements.define(XDemo.is, XDemo);
@@ -201,6 +201,10 @@ Please see the demo pages for a working example
 
       [dialog] .actions paper-button:hover, [dialog-wide] .actions paper-button:hover {
         background: var(--paper-grey-100);
+      }
+
+      iron-overlay-renderer {
+        z-index: 199;
       }
 
   </style>

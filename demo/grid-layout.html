@@ -191,9 +191,9 @@
         <script>
         window.addEventListener('WebComponentsReady', function() {
           class XDemo extends Polymer.Element {
-            static get is() { return 'x-demo'; }
+            static get is() {return 'x-demo';}
             _loopX(count) {
-              return [...Array(count).keys()].map(i => i+1);
+              return [...Array(count).keys()].map((i) => i+1);
             }
             _handleChange(e) {
               let inputElement = e.path.find((p) => p.tagName === 'PAPER-INPUT');

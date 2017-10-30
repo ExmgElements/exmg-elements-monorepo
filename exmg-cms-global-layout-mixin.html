@@ -1,31 +1,56 @@
 <script>
-  /* @polymerMixin */
-  const ExmgCmsGlobalLayoutMixin = superclass => class extends superclass {
-    static get properties() {
-      return {
-        narrow: Boolean,
-        collapsed: {
-          type: Boolean,
-          value: false,
-        },
-      };
-    }
-    static get observers() {
-      return [
-        '_observeNarrowChange(narrow)',
-        '_observeCollapsed(collapsed)',
-      ];
-    }
-    _observeCollapsed(collapsed) {
-      this.updateStyles({ '--app-drawer-width': collapsed ? '64px' : '256px' });
-    }
-    _observeNarrowChange(narrow) {
-      if(narrow) {
-        this.set('collapsed', false);
+'use strict';
+{
+  /**
+   * @namespace Exmg
+   */
+  window.Exmg = window.Exmg || {};
+
+ /**
+  * Element class mixin that enables collapsible layout.
+  *
+  * @polymer
+  * @mixinFunction
+  * @demo demo/index.html
+  */
+  Exmg.CmsGlobalLayoutMixin = Polymer.dedupingMixin((superClass) => {
+    /**
+     * @polymer
+     * @memberof Exmg
+     * @mixinClass
+     */
+    return class CmsGlobalLayoutMixin extends superClass {
+      static get properties() {
+        return {
+          narrow: Boolean,
+          collapsed: {
+            type: Boolean,
+            value: false,
+          },
+        };
       }
-    }
-    toggleDrawer() {
-      this.$.drawer.toggle();
-    }
-  }
+
+      static get observers() {
+        return [
+          '_observeNarrowChange(narrow)',
+          '_observeCollapsed(collapsed)',
+        ];
+      }
+
+      _observeCollapsed(collapsed) {
+        this.updateStyles({'--app-drawer-width': collapsed ? '64px' : '256px'});
+      }
+
+      _observeNarrowChange(narrow) {
+        if (narrow) {
+          this.set('collapsed', false);
+        }
+      }
+
+      toggleDrawer() {
+        this.$.drawer.toggle();
+      }
+    };
+  });
+}
 </script>

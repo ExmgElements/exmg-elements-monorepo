@@ -1,0 +1,29 @@
+{
+  "name": "exmg-cms-styles",
+  "private": true,
+  "description": "The `&lt;exmg-cms-styles&gt;` component provides simple ways to use Material Design CSS styles",
+  "main": "exmg-sortable.html",
+  "repository": "ExmgElements/exmg-cms-styles",
+  "keywords": [
+    "Exmg",
+    "ExmgElements",
+    "exmg-cms-styles",
+    "web-components",
+    "web-component",
+    "polymer"
+  ],
+  "author": "Ex Machina",
+  "devDependencies": {
+    "bower": "latest",
+    "eslint": "^4.10.0",
+    "eslint-config-google": "^0.9.1",
+    "eslint-plugin-html": "^3.0.0",
+    "polymer-cli": "^1.2.0"
+  },
+  "homepage": "https://github.com/ExmgElements/",
+  "scripts": {
+    "lint": "polymer lint --rules polymer-2 --input *.html",
+    "eslint": "eslint . --ext js,html --ignore-path .gitignore",
+    "analyze": "polymer analyze --input exmg-cms-global-layout-mixin.html > analysis.json"
+  }
+}

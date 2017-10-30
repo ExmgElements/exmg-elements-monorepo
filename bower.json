@@ -41,7 +41,8 @@
     "paper-drawer-panel": "PolymerElements/paper-drawer-panel#^2.0.0",
     "paper-card": "PolymerElements/paper-card#^2.0.0",
     "paper-input": "PolymerElements/paper-input#^2.0.0",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0",
+    "iron-component-page": "^3.0.1"
   },
   "resolutions": {
     "polymer": "^2.0.0"
