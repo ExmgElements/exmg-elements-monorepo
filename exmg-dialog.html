@@ -68,11 +68,26 @@
     }
 
     /**
-     * Closes this dialog with closingReason.canceled set to true. Automatically called for buttons in this dialog
-     * that have a `dialog-cancel` attribute.
+     * Overruled IronOverlay's _cancel to route it through public `cancel` and `_toggle` for consistency.
+     *
+     * @param {Event} event
      */
-    cancel() {
-      this._toggle(false, true);
+    _cancel(event) {
+      this.cancel(event);
+    }
+
+    /**
+     * Closes this dialog with closingReason.canceled set to true. Automatically called for buttons in this dialog
+     * that have a `dialog-cancel` attribute. This functions fires an `iron-overlay-canceled` event which may be
+     * prevented to keep the dialog from closing.
+     */
+    cancel(event = {}) {
+      const cancelEvent = this._fire('iron-overlay-canceled', event, {
+        cancelable: true
+      });
+      if (!cancelEvent.defaultPrevented) {
+        this._toggle(false, true, false);
+      }
     }
 
     /**
@@ -85,10 +100,16 @@
 
     /**
      * Closes this dialog with closingReason.confirmed set to true. Automatically called for buttons in this dialog
-     * that have a `dialog-confirm` attribute.
+     * that have a `dialog-confirm` attribute. This function fires an `iron-overlay-confirmed` event which may be
+     * prevented to keep the dialog from closing.
      */
-    confirm() {
-      this._toggle(false, false, true);
+    confirm(event = {}) {
+      const confirmEvent = this._fire('iron-overlay-confirmed', event, {
+        cancelable: true
+      });
+      if (!confirmEvent.defaultPrevented) {
+        this._toggle(false, false, true);
+      }
     }
 
     /**
@@ -125,7 +146,7 @@
         let node = event.composedPath().find(item => this._hasAction(item));
         let action = node ? this._getAction(node) : false;
         if (action && (typeof this[action] === 'function')) {
-          this[action].call(this);
+          this[action].call(this, event);
         }
       }
 
@@ -149,18 +170,24 @@
    */
 
   /**
-   * Fired after the dialog has been fully opened, including any transitions.
-   * @event iron-overlay-opened
-   */
-
-  /**
    * Fired when the dialog is canceled, but before it is closed. Prevent to prevent the dialog from closing.
    * @event iron-overlay-canceled
    * @param {Event} event
    */
 
   /**
-   * Fired after the dialog has been fully closed, including transitions. The event's `detail` is the `closingReaon`
+   * Fired when the dialog is confirmed, but before it is closed. Prevent to prevent the dialog from closing.
+   * @event iron-overlay-confirmed
+   * @param {Event} event
+   */
+
+  /**
+   * Fired after the dialog has been fully opened, including any transitions.
+   * @event iron-overlay-opened
+   */
+
+  /**
+   * Fired after the dialog has been fully closed, including transitions. The event's `detail` is the `closingReason`
    * property, and states whether the dialog has been canceled or confirmed.
    * @event iron-overlay-closed
    * @param {Event} event
