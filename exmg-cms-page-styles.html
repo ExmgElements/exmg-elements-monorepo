@@ -17,8 +17,8 @@
       [row] {
         box-sizing: border-box;
         margin: 0 auto;
-        padding-left: var(--col-padding, 8px);
-        padding-right: var(--col-padding, 8px);
+        padding-left: var(--col-padding, 12px);
+        padding-right: var(--col-padding, 12px);
         width: 100%;
         @apply --layout;
         @apply --layout-wrap;
@@ -374,13 +374,11 @@
         white-space: nowrap;
       }
 
-      [row] > * {
-        margin-bottom: 54px;
-      }
+
       [row] > h2 {
         color: rgba(0, 0, 0, var(--light-secondary-opacity));
         display: block;
-        margin-bottom: 16px;
+        margin-bottom: 0px;
         font-size: 14px;
         line-height: 24px;
         font-weight: 400;
@@ -415,7 +413,7 @@
       }
 
       @media (max-width: 400px) {
-        .page-content > * {
+        .page-content [row] > * {
           margin-bottom: 24px;
         }
       }
