@@ -167,6 +167,12 @@ Please see the demo pages for a working example
         width: calc(52px * 10);
       }
 
+      @media all and (max-width: 576px) {
+        [data-overlay] .dialog.wide {
+          width: calc(100%);
+        }
+      }
+
       [data-overlay] .dialog > * {
         margin-top: 20px;
         padding: 0 24px;
