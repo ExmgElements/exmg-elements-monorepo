@@ -2,6 +2,21 @@
   "name": "exmg-dialog",
   "description": "Dialog component that simplifies UI flow with a set of common dialog related features",
   "main": "exmg-dialog.html",
+  "version": "1.0.0",
+  "authors": [
+    "Ex Machina Group"
+  ],
+  "keywords": [
+    "web-components",
+    "polymer",
+    "dialog"
+  ],
+  "private": false,
+  "homepage": "https://github.com/ExmgElements/exmg-dialog",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ExmgElements/exmg-dialog.git"
+  },
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0"
   },

@@ -6,6 +6,14 @@ Dialog component that simplifies UI flow with a set of common dialog related fea
 
 First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your element locally.
 
+## Install
+
+Install the component using bower
+
+```
+$ bower install --save ExmgElements/exmg-dialog
+```
+
 ## Viewing Your Element
 
 ```
