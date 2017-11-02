@@ -156,6 +156,52 @@ Please see the demo pages for a working example
 
       /* DIALOG STYLES */
 
+      [data-overlay] .dialog {
+        width: calc(52px * 5);
+        display: block;
+        color: var(--primary-text-color);
+        @apply --paper-font-body1;
+      }
+
+      [data-overlay] .dialog.wide {
+        width: calc(52px * 10);
+      }
+
+      [data-overlay] .dialog > * {
+        margin-top: 20px;
+        padding: 0 24px;
+      }
+
+      [data-overlay] .dialog > .no-padding {
+        padding: 0;
+      }
+
+      [data-overlay] .dialog > h2 {
+        position: relative;
+        margin: 0;
+        @apply --paper-font-title;
+        @apply --paper-dialog-title;
+      }
+
+      [data-overlay] .dialog > *:first-child {
+        margin-top: 24px;
+      }
+
+      [data-overlay] .dialog > *:last-child {
+        margin-bottom: 24px;
+      }
+
+      [data-overlay] .dialog > .actions {
+        position: relative;
+        padding: 8px 8px 8px 24px;
+        margin: 0;
+        color: var(--primary-color);
+        @apply --layout-horizontal;
+        @apply --layout-end-justified;
+      }
+
+      /* DIALOG STYLES
+
       [data-overlay] {
         --iron-overlay-background-color: transparent;
       }
@@ -202,7 +248,7 @@ Please see the demo pages for a working example
       [dialog] .actions paper-button:hover, [dialog-wide] .actions paper-button:hover {
         background: var(--paper-grey-100);
       }
-
+*/
       iron-overlay-renderer {
         z-index: 199;
       }

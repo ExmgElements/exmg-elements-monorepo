@@ -17,9 +17,12 @@
     <link rel="import" href="../../iron-form/iron-form.html">
     <link rel="import" href="../../iron-overlay/iron-overlay.html">
     <link rel="import" href="../../iron-overlay/iron-overlay-container.html">
+    <link rel="import" href="../../exmg-dialog/exmg-dialog.html">
+
 
     <link rel="import" href="../../exmg-paper-card/exmg-paper-card.html">
     <link rel="import" href="../../exmg-paper-card/exmg-paper-info-card.html">
+
 
     <link rel="import" href="../exmg-cms-default-theme.html">
     <link rel="import" href="../exmg-cms-global-layout-styles.html">
@@ -52,38 +55,38 @@
             node. This way there is a single insert point for all overlays, wherever they originate.
           -->
 
-          <iron-overlay id="overlay1" with-backdrop>
+          <exmg-dialog id="overlay1" with-backdrop>
             <template>
-              <exmg-paper-card dialog>
+              <div class="dialog">
                 <p>
-                  Discard Draft?
+                  Are you sure you want to delete this record?
                 </p>
                 <div class="actions">
-                  <paper-button on-tap="_closeOverlays">Cancel</paper-button>
-                  <paper-button on-tap="_closeOverlays">Discard</paper-button>
+                  <paper-button dialog-cancel>Cancel</paper-button>
+                  <paper-button on-tap="_closeOverlays">Delete Record</paper-button>
                 </div>
-              </exmg-paper-card>
+              </div>
             </template>
-          </iron-overlay>
+          </exmg-dialog>
 
-           <iron-overlay id="overlay2" with-backdrop>
+          <exmg-dialog id="overlay2" with-backdrop>
             <template>
-              <exmg-paper-card dialog-wide>
+              <div class="dialog wide">
                 <h2>Use Google's location service?</h2>
                 <p>
                   Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.
                 </p>
                 <div class="actions">
-                  <paper-button on-tap="_closeOverlays">Disagree</paper-button>
+                  <paper-button dialog-cancel>Disagree</paper-button>
                   <paper-button on-tap="_closeOverlays">Agree</paper-button>
                 </div>
-              </exmg-paper-card>
+              </div>
             </template>
-          </iron-overlay>
+          </exmg-dialog>
 
-          <iron-overlay id="overlay3" with-backdrop>
+          <exmg-dialog id="overlay3" with-backdrop>
             <template>
-              <exmg-paper-card dialog-wide>
+              <div class="dialog wide">
                 <h2>Add Episode</h2>
                 <iron-form id="addBroadcastForm">
                   <form>
@@ -96,12 +99,26 @@
                   </form>
                 </iron-form>
                 <div class="actions">
-                  <paper-button on-tap="_closeOverlays">Cancel</paper-button>
+                  <paper-button dialog-cancel>Cancel</paper-button>
                   <paper-button on-tap="_closeOverlays">Add Broadcast</paper-button>
                 </div>
-              </exmg-paper-card>
+              </div>
             </template>
-          </iron-overlay>
+          </exmg-dialog>
+
+          <exmg-dialog id="overlay4" with-backdrop>
+            <template>
+              <div class="dialog">
+                <p class="no-padding">
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh. euismod tincidunt ad minim veniam, ex ea commodo consequat. Duis autem vel vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit feugait nulla facilisi.
+                </p>
+                <div class="actions">
+                  <paper-button dialog-cancel>Cancel</paper-button>
+                  <paper-button on-tap="_closeOverlays">Add Broadcast</paper-button>
+                </div>
+              </div>
+            </template>
+          </exmg-dialog>
 
           <div class="page-container">
 
@@ -122,6 +139,7 @@
                         <a href="#" on-tap="_openOverlay1">Alert without title</a><br>
                         <a href="#" on-tap="_openOverlay2">Dialog with title</a><br>
                         <a href="#" on-tap="_openOverlay3">Dialog with form</a><br>
+                        <a href="#" on-tap="_openOverlay4">Dialog with no padding</a><br>
                       </p>
                     </div>
                   </exmg-paper-card>
@@ -150,7 +168,9 @@
             _openOverlay3() {
               this._openOverlay('overlay3', true);
             }
-
+            _openOverlay4() {
+              this._openOverlay('overlay4', true);
+            }
             _openOverlay(name, toggle) {
               let overlay = this.$[name];
               if (
