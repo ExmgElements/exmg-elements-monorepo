@@ -10,11 +10,20 @@
 
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    
+
     <link rel="import" href="../../paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="../../iron-iconset-svg/iron-iconset-svg.html">
     <link rel="import" href="../../iron-icons/iron-icons.html">
 
     <link rel="import" href="../exmg-copy-to-clipboard.html">
+
+    <iron-iconset-svg name="icons" size="24">
+      <svg>
+        <defs>
+          <g id="content-copy"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></g>
+        </defs>
+      </svg>
+    </iron-iconset-svg>
 
     <style is="custom-style" include="demo-pages-shared-styles">
       [hidden] {
@@ -27,8 +36,8 @@
       <h3>Copy using a button element</h3>
       <demo-snippet>
         <template>
-          <exmg-copy-to-clipboard value="copied content">
-            <button>Copy to clipboard</button>
+          <exmg-copy-to-clipboard value="copied content 1">
+            <button>&#x2398; Copy to clipboard</button>
           </exmg-copy-to-clipboard>
         </template>
       </demo-snippet>
@@ -38,6 +47,14 @@
           mark@test.com
           <exmg-copy-to-clipboard value="mark@test.com">
             <paper-icon-button icon="content-copy"></paper-icon-button>
+          </exmg-copy-to-clipboard>
+        </template>
+      </demo-snippet>
+      <h3>Copy using a normal html element</h3>
+      <demo-snippet>
+        <template>
+          <exmg-copy-to-clipboard value="copied content 2">
+            <span style="cursor:pointer;">&#x2398; Copy to clipboard</span>
           </exmg-copy-to-clipboard>
         </template>
       </demo-snippet>

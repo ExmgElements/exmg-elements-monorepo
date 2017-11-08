@@ -3,7 +3,7 @@
 Helper element to create icon/buttons that lets the user copy content to the clipboard. Just wrap it arround
 the button or icon and set the value that needs to be copied.
 
-Please visit the [API Documentation and demo](http://exmg.github.io/exmg-copy-to-clipboard/) page for more information.
+Please visit the [API Documentation and demo](http://ExmgElements.github.io/exmg-copy-to-clipboard/) page for more information.
 
 ## Usage
 
@@ -18,7 +18,7 @@ Please visit the [API Documentation and demo](http://exmg.github.io/exmg-copy-to
 Install the component using bower
 
 ```
-$ bower install --save exmg-copy-to-clipboard
+$ bower install --save ExmgElements/exmg-copy-to-clipboard
 ```
 
 ## Development
