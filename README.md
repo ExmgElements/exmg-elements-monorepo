@@ -2,7 +2,7 @@
 
 Lightweight element for formatting dates
 
-Please visit the [API Documentation and demo](http://exmg.github.io/exmg-date-format/) page for more information.
+Please visit the [API Documentation and demo](http://ExmgElements.github.io/exmg-date-format/) page for more information.
 
 ## Usage
 
@@ -15,7 +15,7 @@ Please visit the [API Documentation and demo](http://exmg.github.io/exmg-date-fo
 Install the component using bower
 
 ```
-$ bower install --save exmg-date-format
+$ bower install --save ExmgElements/exmg-date-format
 ```
 
 ## Development
