@@ -2,6 +2,8 @@
 
 Dialog component that simplifies UI flow with a set of common dialog related features
 
+Please visit the [API Documentation and demo](http://ExmgElements.github.io/exmg-dialog/) page for more information.
+
 ## Install the Polymer-CLI
 
 First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your element locally.
