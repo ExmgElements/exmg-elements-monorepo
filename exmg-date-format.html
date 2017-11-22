@@ -4,16 +4,15 @@
 'use strict';
 {
   if (!String.prototype.padStart) {
-    String.prototype.padStart = function padStart(targetLength,padString) {
-      targetLength = targetLength >> 0; //floor if number or convert non-number to 0;
+    String.prototype.padStart = function padStart(targetLength, padString) {
+      targetLength = targetLength >> 0; // floor if number or convert non-number to 0;
       padString = String(padString || ' ');
       if (this.length > targetLength) {
-          return String(this);
-      }
-      else {
-        targetLength = targetLength-this.length;
+        return String(this);
+      } else {
+        targetLength = targetLength - this.length;
         if (targetLength > padString.length) {
-          padString += padString.repeat(targetLength / padString.length); //append to original to ensure we are longer than needed
+          padString += padString.repeat(targetLength / padString.length); // append to original to ensure we are longer than needed
         }
         return padString.slice(0, targetLength) + String(this);
       }
@@ -112,13 +111,13 @@
       var dayMode = hours < 12 ? 'AM' : 'PM';
       return pattern.
         replace(/yyyy/g, String(date.getFullYear())).
-        replace(/yy/g, String(date.getFullYear()).substr(2).padStart(2,'0')).
-        replace(/MM/g, String(date.getMonth() + 1).padStart(2,'0')).
-        replace(/dd/g, String(date.getDate()).padStart(2,'0')).
-        replace(/hh/g, String(hours12).padStart(2,'0')).
-        replace(/HH/g, String(hours).padStart(2,'0')).
-        replace(/mm/g, String(date.getMinutes()).padStart(2,'0')).
-        replace(/ss/g, String(date.getSeconds()).padStart(2,'0')).
+        replace(/yy/g, String(date.getFullYear()).substr(2).padStart(2, '0')).
+        replace(/MM/g, String(date.getMonth() + 1).padStart(2, '0')).
+        replace(/dd/g, String(date.getDate()).padStart(2, '0')).
+        replace(/hh/g, String(hours12).padStart(2, '0')).
+        replace(/HH/g, String(hours).padStart(2, '0')).
+        replace(/mm/g, String(date.getMinutes()).padStart(2, '0')).
+        replace(/ss/g, String(date.getSeconds()).padStart(2, '0')).
         replace(/tt/g, dayMode).
         replace(/a/g, dayMode);
     }
