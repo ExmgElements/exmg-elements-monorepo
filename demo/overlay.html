@@ -44,10 +44,7 @@
         <template>
           <style include="exmg-cms-global-layout-styles"></style>
           <style include="exmg-cms-page-styles"></style>
-          <style include="exmg-cms-form-styles">
-            :host {
-            }
-          </style>
+          <style include="exmg-cms-form-styles"></style>
 
           <!--
             iron-overlay elements are rendered in the iron-overlay-container. This demo component also contains the
@@ -158,7 +155,9 @@
         <script>
         window.addEventListener('WebComponentsReady', function() {
           class XDemo extends Polymer.Element {
-            static get is() {return 'x-demo';}
+            static get is() {
+              return 'x-demo';
+            }
             _openOverlay1() {
               this._openOverlay('overlay1', true);
             }
@@ -172,7 +171,7 @@
               this._openOverlay('overlay4', true);
             }
             _openOverlay(name, toggle) {
-              let overlay = this.$[name];
+              const overlay = this.$[name];
               if (
                 // stop here if overlay is not found
                 !overlay ||

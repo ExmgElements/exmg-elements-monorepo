@@ -83,7 +83,9 @@
         <script>
         window.addEventListener('WebComponentsReady', function() {
           class XDemo extends Exmg.CmsGlobalLayoutMixin(Polymer.Element) {
-            static get is() {return 'x-demo';}
+            static get is() {
+              return 'x-demo';
+            }
             static get properties() {
               return {
                 collapsed: Boolean,
