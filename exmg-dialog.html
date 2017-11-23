@@ -20,7 +20,9 @@
       this.__actionKeys = Object.keys(DialogElement.actions);
     }
 
-    static get is() { return 'exmg-dialog'; }
+    static get is() {
+      return 'exmg-dialog';
+    }
 
     /**
      * Actions known to this dialog class. The key must be implemented as a function. The value may be used as an
@@ -62,7 +64,7 @@
      */
     _toggle(opened, canceled, confirmed) {
       this.opened = opened;
-      let reason = this.closingReason;
+      const reason = this.closingReason;
       reason.canceled = Boolean(canceled);
       reason.confirmed = Boolean(confirmed);
     }
@@ -143,8 +145,8 @@
      */
     _onTap(event) {
       if (!this._isTapOutside(event)) {
-        let node = event.composedPath().find(item => this._hasAction(item));
-        let action = node ? this._getAction(node) : false;
+        const node = event.composedPath().find(item => this._hasAction(item));
+        const action = node ? this._getAction(node) : false;
         if (action && (typeof this[action] === 'function')) {
           this[action].call(this, event);
         }
