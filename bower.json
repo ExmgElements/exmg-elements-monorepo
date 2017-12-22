@@ -20,6 +20,7 @@
     "format",
     "formatting"
   ],
+  "license": "MIT License",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0"
   },
@@ -27,7 +28,6 @@
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0",
-    "iron-component": "page#^1.7.1",
     "iron-component-page": "^3.0.1"
   },
   "resolutions": {
