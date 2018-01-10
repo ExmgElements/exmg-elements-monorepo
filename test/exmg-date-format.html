@@ -32,19 +32,19 @@
         el = fixture('BasicDateFormat');
       });
 
-      suite('basic usage', _ => {
+      suite('basic usage', function() {
         test('element is upgraded', () => {
           assert.equal(el.constructor.is, 'exmg-date-format');
         });
 
-        test('element default date format', (done) => {
+        test('element default date format', function(done) {
           timePasses(20).then(_ => {
             expect(el.formattedDate).to.be.equal('04/26/2017 03:56:28 PM');
             done();
           });
         });
 
-        test('element custom date format', (done) => {
+        test('element custom date format', function(done) {
           el.datePattern = 'dd/MM/yyyy';
           timePasses(20).then(_ => {
             expect(el.formattedDate).to.be.equal('26/04/2017');
