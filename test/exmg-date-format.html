@@ -32,21 +32,19 @@
         el = fixture('BasicDateFormat');
       });
 
-      suite('basic usage', function() {
+      suite('basic usage', _ => {
         test('element is upgraded', () => {
           assert.equal(el.constructor.is, 'exmg-date-format');
         });
 
-        test('element default date format', function(done) {
-          setTimeout(() => {
-            assert.equal(el.constructor.is, 'exmg-date-format');
-            done();
-          }, 100);
-          //  expect(el.formattedDate).to.be.equal('04/26/2017 03:56:28 PM');
-
+        test('element default date format', () => {
+          expect(el.formattedDate).to.be.equal('04/26/2017 03:56:28 PM');
         });
 
-
+        test('element custom date format', () => {
+          el.datePattern = 'dd/MM/yyyy';
+          expect(el.formattedDate).to.be.equal('26/04/2017');
+        });
       });
 
     });
