@@ -20,6 +20,14 @@
     suite('<exmg-date-format>', _ => {
       let el;
 
+      const timePasses = (ms) => {
+        return new Promise((resolve) => {
+          window.setTimeout(_ => {
+            resolve();
+          }, ms);
+        });
+      };
+
       setup(() => {
         el = fixture('BasicDateFormat');
       });
@@ -29,13 +37,19 @@
           assert.equal(el.constructor.is, 'exmg-date-format');
         });
 
-        test('element default date format', () => {
-          expect(el.formattedDate).to.be.equal('04/26/2017 03:56:28 PM');
+        test('element default date format', (done) => {
+          timePasses(20).then(_ => {
+            expect(el.formattedDate).to.be.equal('04/26/2017 03:56:28 PM');
+            done();
+          });
         });
 
-        test('element custom date format', () => {
+        test('element custom date format', (done) => {
           el.datePattern = 'dd/MM/yyyy';
-          expect(el.formattedDate).to.be.equal('26/04/2017');
+          timePasses(20).then(_ => {
+            expect(el.formattedDate).to.be.equal('26/04/2017');
+            done();
+          });
         });
       });
 
