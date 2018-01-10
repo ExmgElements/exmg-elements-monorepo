@@ -2,7 +2,7 @@
   "name": "exmg-date-format",
   "description": "Lightweight element for formatting dates",
   "main": "exmg-date-format.html",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "authors": [
     "Ex Machina"
   ],

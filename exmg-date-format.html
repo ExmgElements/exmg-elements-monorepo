@@ -73,7 +73,7 @@
         /**
          * Computed property that updates when timestamp or date patern changes
          */
-        _formattedDate: {
+        formattedDate: {
           type: String,
           computed: '_computeDate(timestamp, datePattern)',
         },
@@ -87,7 +87,7 @@
           @apply --exmg-date-format;
         }
         </style>
-        [[_formattedDate]]`;
+        [[formattedDate]]`;
     }
 
     _computeDate(timestamp, datePattern) {

@@ -1,4 +1,4 @@
-# exmg-date-format
+# exmg-date-format [![Build Status](https://travis-ci.org/ExmgElements/exmg-date-format.svg?branch=master)](https://travis-ci.org/ExmgElements/exmg-date-format)
 
 Lightweight element for formatting dates
 
