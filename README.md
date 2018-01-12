@@ -1,21 +1,27 @@
 # \<exmg-paper-stepper\>
 
+## Usage
 
+```html
+  <exmg-paper-stepper selected="1">
+    <exmg-paper-step label="step 1"></exmg-paper-step>
+    <exmg-paper-step label="step 2"></exmg-paper-step>
+    <exmg-paper-step label="step 3"></exmg-paper-step>
+  </exmg-paper-stepper>
+```
 
-## Install the Polymer-CLI
+## Install
 
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your element locally.
+Install the component using bower
 
-## Viewing Your Element
+```
+$ bower install --save ExmgElements/exmg-paper-stepper
+```
+
+## Development
+
+First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run polymer server to launch the demo page.
 
 ```
 $ polymer serve
 ```
-
-## Running Tests
-
-```
-$ polymer test
-```
-
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
