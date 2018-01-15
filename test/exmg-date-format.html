@@ -10,19 +10,10 @@
   <link rel="import" href="../exmg-date-format.html">
 </head>
 <body>
-  <test-fixture id="BasicDateFormat">
-    <template>
-      <exmg-date-format timestamp="1493214988336"></exmg-date-format>
-    </template>
-  </test-fixture>
 
   <script>
     suite('<exmg-date-format>', function() {
-      let el;
 
-      setup(() => {
-        el = fixture('BasicDateFormat');
-      });
 
       test('element is upgraded', function(done) {
         // assert.equal(el.constructor.is, 'exmg-date-format');
