@@ -17,7 +17,7 @@
   </test-fixture>
 
   <script>
-    suite('<exmg-date-format>', _ => {
+    suite('<exmg-date-format>', function() {
       let el;
 
       setup(() => {
@@ -27,7 +27,6 @@
       test('element is upgraded', () => {
         assert.equal(el.constructor.is, 'exmg-date-format');
       });
-
 
     });
   </script>
