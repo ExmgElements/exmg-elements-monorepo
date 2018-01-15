@@ -2,10 +2,6 @@ sudo: required
 language: node_js
 node_js: 8.0
 
-cache:
-  directories:
-    - node_modules
-
 before_install:
 - export TZ=Europe/Amsterdam
 
