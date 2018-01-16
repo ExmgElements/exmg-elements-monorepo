@@ -1,24 +1,24 @@
 <!doctype html>
 <html>
 <head>
-  <title>exmg-swagger-client-config</title>
+  <title>exmg-date-format</title>
 
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <script src="../../web-component-tester/browser.js"></script>
 
   <link rel="import" href="../../polymer/polymer.html">
-  <link rel="import" href="../../promise-polyfill/promise-polyfill.html">
   <link rel="import" href="../exmg-date-format.html">
 </head>
 <body>
-  <test-fixture id="BasicRequest">
+  <test-fixture id="BasicDateFormat">
     <template>
-      <exmg-date-format></exmg-date-format>
+      <exmg-date-format timestamp="1493214988336"></exmg-date-format>
     </template>
   </test-fixture>
+
   <script>
-    suite('<exmg-paper-token-input>', _ => {
-      let fixtureNodes;
+    suite('<exmg-date-format>', _ => {
+      let el;
 
       const timePasses = (ms) => {
         return new Promise((resolve) => {
@@ -28,19 +28,22 @@
         });
       };
 
-      setup(function() {
-        fixtureNodes = fixture('BasicRequest');
-      });
-
-      teardown(function() {
-
+      setup(() => {
+        el = fixture('BasicDateFormat');
       });
 
       suite('basic usage', _ => {
-        test('Test basic api pet list call', function(done) {
-          timePasses(100).then(_ => {
-            done();
-          });
+        test('element is upgraded', () => {
+          assert.equal(el.constructor.is, 'exmg-date-format');
+        });
+
+        test('element default date format', () => {
+          expect(el.formattedDate).to.be.equal('04/26/2017 03:56:28 PM');
+        });
+
+        test('element custom date format', () => {
+          el.datePattern = 'dd/MM/yyyy';
+          expect(el.formattedDate).to.be.equal('26/04/2017');
         });
       });
 
