@@ -218,21 +218,7 @@
         }
       }
       _handleKeyDown(e) {
-        this._inputValue = this._inputValue || '';
-        switch (e.keyCode) {
-          case BACKSPACE:
-            this.splice('selectedValues', this.selectedValues.length - 1, 1);
-            this.focus();
-            break;
-          case ARROWDOWN:
-            this.opened = true;
-            this.$.listbox.focus();
-            break;
-          default:
-            this.opened = true;
-            Polymer.RenderStatus.afterNextRender(this, _ => this.focus());
-            break;
-        }
+
       }
       _hasSelectedItems() {
         return this.selectedValues && this.selectedValues.length > 0;
