@@ -29,6 +29,7 @@
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0",
     "test-fixture": "PolymerElements/test-fixture#^3.0.0-rc.1",
+    "promise-polyfill": "PolymerLabs/promise-polyfill#1 - 2",
     "iron-component-page": "^3.0.1"
   },
   "resolutions": {
