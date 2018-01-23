@@ -11,19 +11,36 @@
 <dom-module id="exmg-cms-form-styles">
   <template>
     <style>
-      .checkbox {
-        margin: 8px 0;
-      }
 
-      label {
+      iron-form label {
         @apply --paper-font-caption;
         color: var(--primary-color);
         display: block;
         margin: 0 0 4px;
       }
 
-      paper-checkbox {
+      iron-form paper-checkbox {
         margin-right: 24px;
+        margin-top: 24px;
+      }
+
+      iron-form {
+        margin: 30px;
+      }
+
+      iron-form h4 {
+        color: rgba(0, 0, 0, var(--light-secondary-opacity));
+        margin-bottom: 0;
+      }
+
+      iron-form footer .actions{
+        text-align: right;
+        margin-top: 20px;
+      }
+
+      iron-form paper-button[submit]{
+        background-color: var(--primary-color);
+        color: var(--text-primary-color);
       }
 
   </style>

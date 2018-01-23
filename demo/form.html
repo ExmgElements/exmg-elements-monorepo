@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <title>exmg-cms-styles demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons+Extended">
+
+    <link rel="import" href="../../paper-button/paper-button.html">
+    <link rel="import" href="../../paper-input/paper-input.html">
+    <link rel="import" href="../../paper-checkbox/paper-checkbox.html">
+
+    <link rel="import" href="../../iron-form/iron-form.html">
+
+    <link rel="import" href="../../exmg-paper-card/exmg-paper-card.html">
+
+    <link rel="import" href="../exmg-cms-default-theme.html">
+    <link rel="import" href="../exmg-cms-page-styles.html">
+    <link rel="import" href="../exmg-cms-form-styles.html">
+
+    <custom-style>
+      <style is="custom-style" include="exmg-cms-page-styles">
+        body {
+          margin: 0;
+          padding: 0;
+          background-color: #ECEFF1;
+        }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <dom-module id="x-demo">
+        <template>
+          <style include="exmg-cms-page-styles"></style>
+          <style include="exmg-cms-form-styles"></style>
+
+          <div class="page-container">
+
+            <div class="page-content">
+              <div row>
+                <h2 col>Active Users</h2>
+              </div>
+
+              <div row>
+                <div col>
+                  <exmg-paper-card>
+                    <iron-form>
+                     <form method="get" action="/form/handler">
+                       <h4>User details</h4>
+                       <paper-input type="text" name="name" value="Name"></paper-input>
+                       <paper-input type="text" name="email" value="Email"></paper-input>
+                       <paper-checkbox name="cheese" value="yes" label="" checked>Add user details</paper-checkbox>
+                     </form>
+                     <footer>
+                       <div class="actions">
+                         <paper-button>Cancel</paper-button>
+                         <paper-button submit>Save</paper-button>
+                       </div>
+                     </footer>
+                   </iron-form>
+                  </exmg-paper-card>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </template>
+        <script>
+        window.addEventListener('WebComponentsReady', function() {
+          class XDemo extends Polymer.Element {
+            static get is() {
+              return 'x-demo';
+            }
+          }
+          window.customElements.define(XDemo.is, XDemo);
+        });
+        </script>
+      </dom-module>
+
+      <x-demo></x-demo>
+
+  </body>
+</html>

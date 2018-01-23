@@ -1,6 +1,6 @@
 {
   "name": "exmg-cms-styles",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "The `&lt;exmg-cms-styles&gt;` component provides simple ways to use Material Design CSS styles",
   "authors": [
     "Ex Machina Group"
@@ -18,9 +18,7 @@
   },
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
-    "paper-styles": "PolymerElements/paper-styles#^2.0.0",
-    "iron-form": "PolymerElements/iron-form#^2.0.1",
-    "paper-checkbox": "PolymerElements/paper-checkbox#^2.0.1"
+    "paper-styles": "PolymerElements/paper-styles#^2.0.0"
   },
   "devDependencies": {
     "exmg-paper-datatable": "ExmgElements/exmg-paper-datatable#^2.0.0",
@@ -42,6 +40,8 @@
     "paper-drawer-panel": "PolymerElements/paper-drawer-panel#^2.0.0",
     "paper-card": "PolymerElements/paper-card#^2.0.0",
     "paper-input": "PolymerElements/paper-input#^2.0.0",
+    "iron-form": "PolymerElements/iron-form#^2.1.0",
+    "paper-checkbox": "PolymerElements/paper-checkbox#^2.0.1",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0",
     "iron-component-page": "^3.0.1"
   },
