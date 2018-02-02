@@ -11,7 +11,6 @@
     "polymer",
     "stepper"
   ],
-  "private": true,
   "dependencies": {
     "paper-styles": "PolymerElements/paper-styles#^2.0.0",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#^2.0.0",
