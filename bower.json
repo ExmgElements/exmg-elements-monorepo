@@ -2,7 +2,7 @@
   "name": "exmg-dialog",
   "description": "Dialog component that simplifies UI flow with a set of common dialog related features",
   "main": "exmg-dialog.html",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "authors": [
     "Ex Machina Group"
   ],
@@ -18,11 +18,11 @@
     "url": "git@github.com:ExmgElements/exmg-dialog.git"
   },
   "dependencies": {
+    "iron-overlay": "PolymerLabs/iron-overlay#^1.0.0",
     "polymer": "Polymer/polymer#^2.0.0"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
-    "iron-overlay": "PolymerLabs/iron-overlay#^1.0.0",
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0",
     "paper-button": "PolymerElements/paper-button#^2.0.0",
