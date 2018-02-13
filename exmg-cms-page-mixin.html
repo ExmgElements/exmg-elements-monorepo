@@ -43,12 +43,12 @@
           }
         }
         /**
-        * catch change path event and go to the given url. When ref param is available in query params those params should be used and added 
-        * to the return url. If ref param is not available it should be added and current params should be stored in ref. This way it is possible 
-        * to restore the page state after returning from edit or create.
+        * catch change path event and go to the given url. When ref param is available in query params those
+        * params should be used and added to the return url. If ref param is not available it should be added
+        * and current params should be stored in ref. This way it is possible to restore the page state after
+        * returning from edit or create
         */
         _changePath(e) {
-          //debugger;
           this.set('route.path', e.detail.path);
           if (this.queryParams.hasOwnProperty('ref')) {
             var searchParams = new URLSearchParams(this.queryParams.ref);
@@ -68,8 +68,9 @@
         * Helper method to set initial query param. If available return from query param otherwise return default value.
         */
         _initialParamValue(queryParams, propertyName, defaultValue) {
+          const isNumber = !isNaN(defaultValue);
           console.log('_initialParamValue', queryParams, propertyName, defaultValue);
-          return queryParams[propertyName] || defaultValue;
+          return isNumber ? Number(queryParams[propertyName] || defaultValue) : queryParams[propertyName] || defaultValue;
         }
         /**
         * Check if current page is default
