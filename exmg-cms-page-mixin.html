@@ -68,7 +68,7 @@
         * Helper method to set initial query param. If available return from query param otherwise return default value.
         */
         _initialParamValue(queryParams, propertyName, defaultValue) {
-          const isNumber = !isNaN(defaultValue);
+          const isNumber = defaultValue !== '' && !isNaN(defaultValue);
           console.log('_initialParamValue', queryParams, propertyName, defaultValue);
           return isNumber ? Number(queryParams[propertyName] || defaultValue) : queryParams[propertyName] || defaultValue;
         }
