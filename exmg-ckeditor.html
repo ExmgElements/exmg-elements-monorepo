@@ -1,0 +1,45 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="exmg-ckeditor">
+  <template>
+  </template>
+
+  <script>
+    {
+      'use strict';
+      /**
+      * Element to convert time/text to show time passed
+      *
+      * ```html
+      * <exmg-ckeditor"></exmg-ckeditor>
+      * ```
+      *
+      * @customElement
+      * @polymer
+      * @group Exmg Core Elements
+      * @element exmg-ckeditor
+      * @demo demo/index.html
+      * @memberof Exmg
+      * @extends Polymer.Element
+      * @summary WYSIWYG Element Polymer 2.0.
+      */
+      class CkeditorElement extends Polymer.Element {
+        static get is() {
+          return 'exmg-ckeditor';
+        }
+        static get properties() {
+          return {
+          };
+        }
+      }
+
+      window.customElements.define(CkeditorElement.is, CkeditorElement);
+
+      /**
+      * @namespace Exmg
+      */
+      window.Exmg = window.Exmg || {};
+      Exmg.CkeditorElement = CkeditorElement;
+    }
+  </script>
+</dom-module>
