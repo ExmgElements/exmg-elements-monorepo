@@ -3,6 +3,7 @@
   "private": true,
   "description": "Lightweight element for formatting dates",
   "main": "exmg-date-format.html",
+  "version": "2.0.2",
   "repository": "ExmgElements/exmg-date-format",
   "keywords": [
     "Exmg",
