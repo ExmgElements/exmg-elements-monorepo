@@ -69,7 +69,6 @@
         */
         _initialParamValue(queryParams, propertyName, defaultValue) {
           const isNumber = defaultValue !== '' && !isNaN(defaultValue);
-          console.log('_initialParamValue', queryParams, propertyName, defaultValue);
           return isNumber ? Number(queryParams[propertyName] || defaultValue) : queryParams[propertyName] || defaultValue;
         }
         /**
