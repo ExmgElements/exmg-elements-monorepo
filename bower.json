@@ -9,7 +9,7 @@
   "homepage": "http://exmg.github.io/ExmgElements/exmg-date-format/",
   "repository": {
     "type": "git",
-    "url": "git@github.com:ExmgElements/exmg-date-format.git"
+    "url": "git://github.com:ExmgElements/exmg-date-format.git"
   },
   "keywords": [
     "web-components",
