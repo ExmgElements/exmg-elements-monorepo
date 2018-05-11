@@ -11,6 +11,9 @@
   "rules": {
     "no-extend-native": [2, {"exceptions": ["String"]}]
   },
+  "parserOptions": {
+    "sourceType": "module"
+  },
   "globals": {
     "Polymer": true,
     "Exmg": true,
