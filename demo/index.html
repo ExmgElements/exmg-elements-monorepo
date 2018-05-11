@@ -6,27 +6,17 @@
 
     <title>exmg-date-format demo</title>
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../exmg-date-format.html">
-
+    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
+    <script type="module" src="../exmg-date-format.js"></script>
+   
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
-        demo-snippet {
-          max-width: 600px;
-        }
       </style>
     </custom-style>
   </head>
-  <script>
-    /*
-    // Example of how to set the default date patter in the global scope
-    window.Exmg = window.Exmg || {};
-    window.Exmg.defaultDatePattern = 'dd/MM/yy';
-    */
-  </script>
   <body>
     <div class="vertical-section-container centered">
       <h3>Default example</h3>
@@ -35,6 +25,7 @@
           <exmg-date-format timestamp="1493214988336"></exmg-date-format>
         </template>
       </demo-snippet>
+
       <h3>Different date pattern</h3>
       <demo-snippet>
         <template>
@@ -43,4 +34,5 @@
       </demo-snippet>
     </div>
   </body>
+
 </html>
