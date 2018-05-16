@@ -22,16 +22,15 @@
   },
   "homepage": "http://exmg.github.io/ExmgElements/exmg-date-format/",
   "dependencies": {
-    "@polymer/iron-component-page": "^3.0.0-pre.19",
     "@polymer/polymer": "^3.0.0-pre.13"
   },
   "devDependencies": {
     "eslint": "^4.11.0",
     "eslint-config-exmg": "latest",
     "eslint-plugin-html": "^3.0.0",
-    "polymer-cli": "^1.7.1",
     "@polymer/iron-demo-helpers": "^3.0.0-pre.12",
     "@webcomponents/webcomponentsjs": "^2.0.0-beta.2",
+    "@polymer/iron-component-page": "^3.0.0-pre.19",
     "wct-browser-legacy": "^1.0.0"
   },
   "resolutions": {
