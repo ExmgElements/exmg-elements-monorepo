@@ -5,15 +5,18 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
     <title>exmg-cms-styles demo</title>
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 
-    <link rel="import" href="../../paper-tabs/paper-tabs.html">
-    <link rel="import" href="../../paper-tabs/paper-tab.html">
+    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
 
-    <link rel="import" href="../../exmg-paper-card/exmg-paper-card.html">
+    <script type="module" src="../node_modules/@polymer/paper-tabs/paper-tabs.js"></script>
+    <script type="module" src="../node_modules/@polymer/paper-tabs/paper-tab.js"></script>
 
-    <link rel="import" href="../exmg-cms-default-theme.html">
-    <link rel="import" href="../exmg-cms-page-styles.html">
+    <script type="module" src="../node_modules/@exmg/exmg-paper-card/exmg-paper-card.js"></script>
+
+    <script type="module" src="../exmg-cms-default-theme.js"></script>
+    <script type="module" src="../exmg-cms-page-styles.js"></script>
 
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
@@ -26,48 +29,44 @@
     </custom-style>
   </head>
   <body>
-    <dom-module id="x-demo">
-        <template>
-          <style include="exmg-cms-page-styles"></style>
+    <script type="module">
+      import {PolymerElement, html} from '../node_modules/@polymer/polymer/polymer-element.js?module';
 
-          <div class="page-container">
-            <div class="tabs-container">
-              <paper-tabs selected="0" scrollable>
-                <paper-tab>The first tab</paper-tab>
-                <paper-tab>Tab two</paper-tab>
-                <paper-tab>The third tab</paper-tab>
-                <paper-tab>Fourth tab</paper-tab>
-                <paper-tab>Fifth tab</paper-tab>
-              </paper-tabs>
-            </div>
-            <div class="page-content">
-              <div row>
-                <h2 col>Style Demo</h2>
+      class XDemo extends PolymerElement {
+        static get is() {
+          return 'x-demo';
+        }
+        static get template() {
+          return html`<style include="exmg-cms-page-styles"></style>
+
+            <div class="page-container">
+              <div class="tabs-container">
+                <paper-tabs selected="0" scrollable="">
+                  <paper-tab>The first tab</paper-tab>
+                  <paper-tab>Tab two</paper-tab>
+                  <paper-tab>The third tab</paper-tab>
+                  <paper-tab>Fourth tab</paper-tab>
+                  <paper-tab>Fifth tab</paper-tab>
+                </paper-tabs>
               </div>
-              <div row>
-                <div col>
-                  <exmg-paper-card>
-                    <div class="body">Lorem ipsum dolor sit amet, dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</div>
-                  </exmg-paper-card>
+              <div class="page-content">
+                <div row="">
+                  <h2 col="">Style Demo</h2>
+                </div>
+                <div row="">
+                  <div col="">
+                    <exmg-paper-card>
+                      <div class="body">Lorem ipsum dolor sit amet, dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</div>
+                    </exmg-paper-card>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-
-        </template>
-        <script>
-        window.addEventListener('WebComponentsReady', function() {
-          class XDemo extends Polymer.Element {
-            static get is() {
-              return 'x-demo';
-            }
-          }
-          window.customElements.define(XDemo.is, XDemo);
-        });
-        </script>
-      </dom-module>
-
-      <x-demo></x-demo>
-
+          `;
+        }
+      }
+      window.customElements.define(XDemo.is, XDemo);
+    </script>
+    <x-demo></x-demo>
   </body>
 </html>

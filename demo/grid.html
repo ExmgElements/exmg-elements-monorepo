@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
     <title>exmg-cms-styles demo</title>
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
 
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons+Extended">
 
-    <link rel="import" href="../../paper-styles/paper-styles.html">
-    <link rel="import" href="../../paper-button/paper-button.html">
-    <link rel="import" href="../../paper-card/paper-card.html">
-    <link rel="import" href="../../paper-icon-button/paper-icon-button.html">
+    <script type="module" src="../node_modules/@polymer/paper-styles/paper-styles.js"></script>
+    <script type="module" src="../node_modules/@polymer/paper-button/paper-button.js"></script>
+    <script type="module" src="../node_modules/@polymer/paper-card/paper-card.js"></script>
+    <script type="module" src="../node_modules/@polymer/paper-icon-button/paper-icon-button.js"></script>
 
-    <link rel="import" href="../exmg-cms-default-theme.html">
-    <link rel="import" href="../exmg-cms-page-styles.html">
+    <script type="module" src="../exmg-cms-default-theme.js"></script>
+    <script type="module" src="../exmg-cms-page-styles.js"></script>
 
     <custom-style>
       <style is="custom-style" include="exmg-cms-page-styles">
@@ -28,72 +31,68 @@
     </custom-style>
   </head>
   <body>
-    <dom-module id="x-demo">
-        <template>
-          <style include="exmg-cms-page-styles">
-            :host {
-              --col-padding: 12px;
-            }
-          </style>
+    <script type="module">
+      import {PolymerElement, html} from '../node_modules/@polymer/polymer/polymer-element.js?module';
 
-          <div class="page-container">
-            <div class="page-header-bar">
-              <div row class="page-content">
-                <h2 col-12 col-md-6>Information</h2>
-                <div col-12 col-md-6 class="body">
-                  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</p>
-                </div>
-              </div>
-            </div>
+      class XDemo extends PolymerElement {
+        static get is() {
+          return 'x-demo';
+        }
+        static get template() {
+          return html`<style include="exmg-cms-page-styles">
+              :host {
+                --col-padding: 12px;
+              }
+            </style>
 
-            <div class="page-content">
-              <div row>
-                <h2 col>Recent Broadcasts</h2>
-              </div>
-              <div row>
-                <div col-12 col-sm-6 col-md-4 col-xl-3>
-                  <div class="card add">
-                    <div>
-                      <div class="plus">+</div>
-                      <div class="plus-title">Add Broadcast</div>
-                    </div>
+            <div class="page-container">
+              <div class="page-header-bar">
+                <div row="" class="page-content">
+                  <h2 col-12="" col-md-6="">Information</h2>
+                  <div col-12="" col-md-6="" class="body">
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</p>
                   </div>
                 </div>
-                <div col-12 col-sm-6 col-md-4 col-xl-3>
-                  <div class="card"><div class="title">Broadcast 1</div></div>
+              </div>
+
+              <div class="page-content">
+                <div row="">
+                  <h2 col="">Recent Broadcasts</h2>
                 </div>
-                <div col-12 col-sm-6 col-md-4 col-xl-3>
-                  <div class="card"><div class="title">Broadcast 2</div></div>
+                <div row="">
+                  <div col-12="" col-sm-6="" col-md-4="" col-xl-3="">
+                    <div class="card add">
+                      <div>
+                        <div class="plus">+</div>
+                        <div class="plus-title">Add Broadcast</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div col-12="" col-sm-6="" col-md-4="" col-xl-3="">
+                    <div class="card"><div class="title">Broadcast 1</div></div>
+                  </div>
+                  <div col-12="" col-sm-6="" col-md-4="" col-xl-3="">
+                    <div class="card"><div class="title">Broadcast 2</div></div>
+                  </div>
+                  <div col-12="" col-sm-6="" col-md-4="" col-xl-3="">
+                    <div class="card"><div class="title">Broadcast 3</div></div>
+                  </div>
+                  <div col-12="" col-sm-6="" col-md-4="" col-xl-3="">
+                    <div class="card"><div class="title">Broadcast 4</div></div>
+                  </div>
+                  <div col-12="" col-sm-6="" col-md-4="" col-xl-3="">
+                    <div class="card"><div class="title">Broadcast 5</div></div>
+                  </div>
                 </div>
-                <div col-12 col-sm-6 col-md-4 col-xl-3>
-                  <div class="card"><div class="title">Broadcast 3</div></div>
-                </div>
-                <div col-12 col-sm-6 col-md-4 col-xl-3>
-                  <div class="card"><div class="title">Broadcast 4</div></div>
-                </div>
-                <div col-12 col-sm-6 col-md-4 col-xl-3>
-                  <div class="card"><div class="title">Broadcast 5</div></div>
-                </div>
+
               </div>
 
             </div>
-
-          </div>
-
-        </template>
-        <script>
-        window.addEventListener('WebComponentsReady', function() {
-          class XDemo extends Polymer.Element {
-            static get is() {
-              return 'x-demo';
-            }
-          }
-          window.customElements.define(XDemo.is, XDemo);
-        });
-        </script>
-      </dom-module>
-
-      <x-demo></x-demo>
-
+          `;
+        }
+      }
+      window.customElements.define(XDemo.is, XDemo);
+    </script>
+    <x-demo></x-demo>
   </body>
 </html>

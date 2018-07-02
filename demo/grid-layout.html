@@ -5,16 +5,19 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
     <title>exmg-cms-styles demo</title>
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 
-    <link rel="import" href="../../paper-tabs/paper-tabs.html">
-    <link rel="import" href="../../paper-tabs/paper-tab.html">
-    <link rel="import" href="../../paper-input/paper-input.html">
+    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
 
-    <link rel="import" href="../../exmg-paper-card/exmg-paper-card.html">
+    <script type="module" src="../node_modules/@polymer/paper-tabs/paper-tabs.js"></script>
+    <script type="module" src="../node_modules/@polymer/paper-tabs/paper-tab.js"></script>
+    <script type="module" src="../node_modules/@polymer/paper-input/paper-input.js"></script>
 
-    <link rel="import" href="../exmg-cms-default-theme.html">
-    <link rel="import" href="../exmg-cms-page-styles.html">
+    <script type="module" src="../node_modules/@exmg/exmg-paper-card/exmg-paper-card.js"></script>
+
+    <script type="module" src="../exmg-cms-default-theme.js"></script>
+    <script type="module" src="../exmg-cms-page-styles.js"></script>
 
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
@@ -27,197 +30,193 @@
     </custom-style>
   </head>
   <body>
-    <dom-module id="x-demo">
-        <template>
-          <style include="exmg-cms-page-styles">
-            :host {
-              --col-padding: 16px;
-              --col-background-color: #ddd;
-              --col-border-color: #ccc;
-            }
-            [row] > * {
-              padding-top: 8px;
-              padding-bottom: 8px;
-            }
-            table {
-              border-collapse: collapse;
-            }
-            th, td {
-              padding: 4px;
-              border: 1px solid #ccc;
-            }
-            tbody th {
-              text-align: right;
-            }
-          </style>
+    <script type="module">
+      import {PolymerElement, html} from '../node_modules/@polymer/polymer/polymer-element.js?module';
 
-          <div class="page-container">
+      class XDemo extends PolymerElement {
+        static get is() {
+          return 'x-demo';
+        }
+        _loopX(count) {
+          return [...Array(count).keys()].map((i) => i + 1);
+        }
+        _handleChange(e) {
+          const inputElement = e.path.find((p) => p.tagName === 'PAPER-INPUT');
+          this.updateStyles((({name, value}) => ({[name]: value}))(inputElement));
+        }
+        _getPropValue(p) {
+          return window.ShadyCSS ?
+            ShadyCSS.getComputedStyleValue(this, p) : getComputedStyle(this).getPropertyValue(p);
+        }
+        ready() {
+          super.ready();
+          this.$.colPadding.value = ShadyCSS.getComputedStyleValue(this, '--col-padding');
+          this.$.colBackgroundColor.value = ShadyCSS.getComputedStyleValue(this, '--col-background-color');
+          this.$.colBorderColor.value = ShadyCSS.getComputedStyleValue(this, '--col-border-color');
+        }
+        static get template() {
+          return html`
+            <style include="exmg-cms-page-styles">
+              :host {
+                --col-padding: 16px;
+                --col-background-color: #ddd;
+                --col-border-color: #ccc;
+              }
+              [row] > * {
+                padding-top: 8px;
+                padding-bottom: 8px;
+              }
+              table {
+                border-collapse: collapse;
+              }
+              th, td {
+                padding: 4px;
+                border: 1px solid #ccc;
+              }
+              tbody th {
+                text-align: right;
+              }
+            </style>
 
+            <div class="page-container">
 
-            <div class="page-content">
+              <div class="page-content">
 
-              <div row>
-                <h2>Grid Col CSS Vars</h2>
-              </div>
-              <div row>
-                <paper-input col-4 id="colPadding" name="--col-padding" label="Col Padding" on-change="_handleChange"></paper-input>
-                <paper-input col-4 id="colBackgroundColor" name="--col-background-color" label="Col Background Color" on-change="_handleChange"></paper-input>
-                <paper-input col-4 id="colBorderColor" name="--col-border-color" label="Col Border Color" on-change="_handleChange"></paper-input>
-              </div>
+                <div row="">
+                  <h2>Grid Col CSS Vars</h2>
+                </div>
+                <div row="">
+                  <paper-input col-4="" id="colPadding" name="--col-padding" label="Col Padding" on-change="_handleChange"></paper-input>
+                  <paper-input col-4="" id="colBackgroundColor" name="--col-background-color" label="Col Background Color" on-change="_handleChange"></paper-input>
+                  <paper-input col-4="" id="colBorderColor" name="--col-border-color" label="Col Border Color" on-change="_handleChange"></paper-input>
+                </div>
 
-              <div row>
-                <h2>Grid</h2>
-              </div>
-              <div row>
-                <table col>
-                  <thead>
-                    <tr>
-                      <th></th>
-                      <th class="text-center">
-                        Extra small<br>
-                        <small>&lt;576px</small>
-                      </th>
-                      <th class="text-center">
-                        Small<br>
-                        <small>≥576px</small>
-                      </th>
-                      <th class="text-center">
-                        Medium<br>
-                        <small>≥768px</small>
-                      </th>
-                      <th class="text-center">
-                        Large<br>
-                        <small>≥992px</small>
-                      </th>
-                      <th class="text-center">
-                        Extra large<br>
-                        <small>≥1200px</small>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th class="text-nowrap" scope="row">Max container width</th>
-                      <td>None (auto)</td>
-                      <td>540px</td>
-                      <td>720px</td>
-                      <td>960px</td>
-                      <td>1140px</td>
-                    </tr>
-                    <tr>
-                      <th class="text-nowrap" scope="row">Attributes</th>
-                      <td><code>col-</code></td>
-                      <td><code>col-sm-</code></td>
-                      <td><code>col-md-</code></td>
-                      <td><code>col-lg-</code></td>
-                      <td><code>col-xl-</code></td>
-                    </tr>
-                    <tr>
-                      <th class="text-nowrap" scope="row"># of columns</th>
-                      <td colspan="5">12</td>
-                    </tr>
-                    <tr>
-                      <th class="text-nowrap" scope="row">Gutter width</th>
-                      <td colspan="5">-col-padding, default 8px</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+                <div row="">
+                  <h2>Grid</h2>
+                </div>
+                <div row="">
+                  <table col="">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th class="text-center">
+                          Extra small<br>
+                          <small>&lt;576px</small>
+                        </th>
+                        <th class="text-center">
+                          Small<br>
+                          <small>≥576px</small>
+                        </th>
+                        <th class="text-center">
+                          Medium<br>
+                          <small>≥768px</small>
+                        </th>
+                        <th class="text-center">
+                          Large<br>
+                          <small>≥992px</small>
+                        </th>
+                        <th class="text-center">
+                          Extra large<br>
+                          <small>≥1200px</small>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th class="text-nowrap" scope="row">Max container width</th>
+                        <td>None (auto)</td>
+                        <td>540px</td>
+                        <td>720px</td>
+                        <td>960px</td>
+                        <td>1140px</td>
+                      </tr>
+                      <tr>
+                        <th class="text-nowrap" scope="row">Attributes</th>
+                        <td><code>col-</code></td>
+                        <td><code>col-sm-</code></td>
+                        <td><code>col-md-</code></td>
+                        <td><code>col-lg-</code></td>
+                        <td><code>col-xl-</code></td>
+                      </tr>
+                      <tr>
+                        <th class="text-nowrap" scope="row"># of columns</th>
+                        <td colspan="5">12</td>
+                      </tr>
+                      <tr>
+                        <th class="text-nowrap" scope="row">Gutter width</th>
+                        <td colspan="5">-col-padding, default 8px</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
 
-              <div row>
-                <h2>Columns of equal width</h2>
-              </div>
-              <div row>
-                <template is="dom-repeat" items="[[_loopX(4)]]" index-as="index">
-                  <div col><code>col</code></div>
-                </template>
-              </div>
-              <div row>
-                <template is="dom-repeat" items="[[_loopX(3)]]" index-as="index">
-                  <div col><code>col</code></div>
-                </template>
-              </div>
-              <div row>
-                <template is="dom-repeat" items="[[_loopX(2)]]" index-as="index">
-                  <div col><code>col</code></div>
-                </template>
-              </div>
+                <div row="">
+                  <h2>Columns of equal width</h2>
+                </div>
+                <div row="">
+                  <template is="dom-repeat" items="[[_loopX(4)]]" index-as="index">
+                    <div col=""><code>col</code></div>
+                  </template>
+                </div>
+                <div row="">
+                  <template is="dom-repeat" items="[[_loopX(3)]]" index-as="index">
+                    <div col=""><code>col</code></div>
+                  </template>
+                </div>
+                <div row="">
+                  <template is="dom-repeat" items="[[_loopX(2)]]" index-as="index">
+                    <div col=""><code>col</code></div>
+                  </template>
+                </div>
 
-              <div row>
-                <h2>Combine different column sizes (3, 4, 6, 8, 9, 12)</h2>
-              </div>
-              <div row>
-                <div col-3><code>col-3</code></div>
-                <div col-9><code>col-9</code></div>
-              </div>
-              <div row>
-                <div col-8><code>col-8</code></div>
-                <div col-4><code>col-4</code></div>
-              </div>
-              <div row>
-                <div col-6><code>col-6</code></div>
-                <div col-3><code>col-3</code></div>
-                <div col-3><code>col-3</code></div>
-              </div>
+                <div row="">
+                  <h2>Combine different column sizes (3, 4, 6, 8, 9, 12)</h2>
+                </div>
+                <div row="">
+                  <div col-3=""><code>col-3</code></div>
+                  <div col-9=""><code>col-9</code></div>
+                </div>
+                <div row="">
+                  <div col-8=""><code>col-8</code></div>
+                  <div col-4=""><code>col-4</code></div>
+                </div>
+                <div row="">
+                  <div col-6=""><code>col-6</code></div>
+                  <div col-3=""><code>col-3</code></div>
+                  <div col-3=""><code>col-3</code></div>
+                </div>
 
-              <div row>
-                <h2>Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop</h2>
-              </div>
-              <div row>
-                <div col-6 col-md-4><code>col-6 col-md-4</code></div>
-                <div col-6 col-md-4><code>col-6 col-md-4</code></div>
-                <div col-6 col-md-4><code>col-6 col-md-4</code></div>
-              </div>
-              <div row>
-                <h2>Columns are always 50% wide, on mobile and desktop</h2>
-              </div>
-              <div row>
-                <div col-6><code>col-6</code></div>
-                <div col-6><code>col-6</code></div>
-              </div>
+                <div row="">
+                  <h2>Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop</h2>
+                </div>
+                <div row="">
+                  <div col-6="" col-md-4=""><code>col-6 col-md-4</code></div>
+                  <div col-6="" col-md-4=""><code>col-6 col-md-4</code></div>
+                  <div col-6="" col-md-4=""><code>col-6 col-md-4</code></div>
+                </div>
+                <div row="">
+                  <h2>Columns are always 50% wide, on mobile and desktop</h2>
+                </div>
+                <div row="">
+                  <div col-6=""><code>col-6</code></div>
+                  <div col-6=""><code>col-6</code></div>
+                </div>
 
-              <div row>
-                <h2>Stack the columns on mobile by making one full-width and the other half-width</h2>
-              </div>
-              <div row>
-                <div col-12 col-md-8><code>col-12 col-md-8</code></div>
-                <div col-6 col-md-4><code>col-6 col-md-4</code></div>
-              </div>
+                <div row="">
+                  <h2>Stack the columns on mobile by making one full-width and the other half-width</h2>
+                </div>
+                <div row="">
+                  <div col-12="" col-md-8=""><code>col-12 col-md-8</code></div>
+                  <div col-6="" col-md-4=""><code>col-6 col-md-4</code></div>
+                </div>
 
+              </div>
             </div>
-          </div>
-
-        </template>
-        <script>
-        window.addEventListener('WebComponentsReady', function() {
-          class XDemo extends Polymer.Element {
-            static get is() {
-              return 'x-demo';
-            }
-            _loopX(count) {
-              return [...Array(count).keys()].map((i) => i + 1);
-            }
-            _handleChange(e) {
-              const inputElement = e.path.find((p) => p.tagName === 'PAPER-INPUT');
-              this.updateStyles((({name, value}) => ({[name]: value}))(inputElement));
-            }
-            _getPropValue(p) {
-              return window.ShadyCSS ?
-                ShadyCSS.getComputedStyleValue(this, p) : getComputedStyle(this).getPropertyValue(p);
-            }
-            ready() {
-              super.ready();
-              this.$.colPadding.value = ShadyCSS.getComputedStyleValue(this, '--col-padding');
-              this.$.colBackgroundColor.value = ShadyCSS.getComputedStyleValue(this, '--col-background-color');
-              this.$.colBorderColor.value = ShadyCSS.getComputedStyleValue(this, '--col-border-color');
-            }
-          }
-          window.customElements.define(XDemo.is, XDemo);
-        });
-        </script>
-      </dom-module>
-
-      <x-demo></x-demo>
-
+          `;
+        }
+      }
+      window.customElements.define(XDemo.is, XDemo);
+    </script>
+    <x-demo></x-demo>
   </body>
 </html>

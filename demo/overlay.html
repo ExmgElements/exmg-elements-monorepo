@@ -5,29 +5,27 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
     <title>exmg-cms-styles demo</title>
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
 
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons+Extended">
 
-    <link rel="import" href="../../paper-button/paper-button.html">
-    <link rel="import" href="../../paper-input/paper-input.html">
-    <link rel="import" href="../../paper-checkbox/paper-checkbox.html">
-    <link rel="import" href="../../paper-icon-button/paper-icon-button.html">
+    <script type="module" src="@polymer/paper-button/paper-button.js"></script>
+    <script type="module" src="@polymer/paper-input/paper-input.js"></script>
+    <script type="module" src="@polymer/paper-checkbox/paper-checkbox.js"></script>
+    <script type="module" src="@polymer/paper-icon-button/paper-icon-button.js"></script>
 
-    <link rel="import" href="../../iron-form/iron-form.html">
-    <link rel="import" href="../../iron-overlay/iron-overlay.html">
-    <link rel="import" href="../../iron-overlay/iron-overlay-container.html">
-    <link rel="import" href="../../exmg-dialog/exmg-dialog.html">
+    <script type="module" src="@polymer/iron-form/iron-form.js"></script>
+    <script type="module" src="iron-overlay/iron-overlay.js"></script>
+    <script type="module" src="iron-overlay/iron-overlay-container.js"></script>
+    <!-- script type="module" src="exmg-dialog/exmg-dialog.js"></script-->
 
+    <script type="module" src="exmg-paper-card/exmg-paper-card.js"></script>
+    <script type="module" src="exmg-paper-card/exmg-paper-info-card.js"></script>
 
-    <link rel="import" href="../../exmg-paper-card/exmg-paper-card.html">
-    <link rel="import" href="../../exmg-paper-card/exmg-paper-info-card.html">
-
-
-    <link rel="import" href="../exmg-cms-default-theme.html">
-    <link rel="import" href="../exmg-cms-global-layout-styles.html">
-    <link rel="import" href="../exmg-cms-page-styles.html">
-    <link rel="import" href="../exmg-cms-form-styles.html">
+    <script type="module" src="../exmg-cms-default-theme.js"></script>
+    <script type="module" src="../exmg-cms-global-layout-styles.js"></script>
+    <script type="module" src="../exmg-cms-page-styles.js"></script>
+    <script type="module" src="../exmg-cms-form-styles.js"></script>
 
     <custom-style>
       <style is="custom-style">
@@ -152,48 +150,61 @@
           </div>
 
         </template>
-        <script>
-        window.addEventListener('WebComponentsReady', function() {
-          class XDemo extends Polymer.Element {
-            static get is() {
-              return 'x-demo';
-            }
-            _openOverlay1() {
-              this._openOverlay('overlay1', true);
-            }
-            _openOverlay2() {
-              this._openOverlay('overlay2', true);
-            }
-            _openOverlay3() {
-              this._openOverlay('overlay3', true);
-            }
-            _openOverlay4() {
-              this._openOverlay('overlay4', true);
-            }
-            _openOverlay(name, toggle) {
-              const overlay = this.$[name];
-              if (
-                // stop here if overlay is not found
-                !overlay ||
-                // don't do anything if toggle is current value
-                (overlay.opened === toggle) ||
-                // from undefined to false triggers some error about .transitioning, ignore too
-                (!toggle && overlay.opened === undefined)
-              ) {
-                return;
-              }
+        <script type="module">
+import '@polymer/paper-button/paper-button.js';
+import '@polymer/paper-input/paper-input.js';
+import '@polymer/paper-checkbox/paper-checkbox.js';
+import '@polymer/paper-icon-button/paper-icon-button.js';
+import '@polymer/iron-form/iron-form.js';
+import 'iron-overlay/iron-overlay.js';
+import 'iron-overlay/iron-overlay-container.js';
+// import 'exmg-dialog/exmg-dialog.js';
+import 'exmg-paper-card/exmg-paper-card.js';
+import 'exmg-paper-card/exmg-paper-info-card.js';
+import '../exmg-cms-default-theme.js';
+import '../exmg-cms-global-layout-styles.js';
+import '../exmg-cms-page-styles.js';
+import '../exmg-cms-form-styles.js';
+import { Element } from '@polymer/polymer/polymer-element.js';
+class XDemo extends Element {
+  static get is() {
+    return 'x-demo';
+  }
+  _openOverlay1() {
+    this._openOverlay('overlay1', true);
+  }
+  _openOverlay2() {
+    this._openOverlay('overlay2', true);
+  }
+  _openOverlay3() {
+    this._openOverlay('overlay3', true);
+  }
+  _openOverlay4() {
+    this._openOverlay('overlay4', true);
+  }
+  _openOverlay(name, toggle) {
+    const overlay = this.$[name];
+    if (
+      // stop here if overlay is not found
+      !overlay ||
+      // don't do anything if toggle is current value
+      (overlay.opened === toggle) ||
+      // from undefined to false triggers some error about .transitioning, ignore too
+      (!toggle && overlay.opened === undefined)
+    ) {
+      return;
+    }
 
-              overlay.opened = toggle;
-            }
-            _closeOverlays() {
-              // demo code, don't use
-              [1, 2, 3].map((index) => this._openOverlay('overlay' + index, false));
-            }
-          }
+    overlay.opened = toggle;
+  }
+  _closeOverlays() {
+    // demo code, don't use
+    [1, 2, 3].map((index) => this._openOverlay('overlay' + index, false));
+  }
+}
 
-          window.customElements.define(XDemo.is, XDemo);
-        });
-        </script>
+window.customElements.define(XDemo.is, XDemo);
+</script>
       </dom-module>
 
       <x-demo></x-demo>

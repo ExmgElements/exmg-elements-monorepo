@@ -1,10 +1,10 @@
-<link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../paper-styles/color.html">
-<link rel="import" href="exmg-cms-color.html">
+import '@polymer/polymer/polymer-element.js';
+import '@polymer/paper-styles/color.js';
+import './exmg-cms-color.js';
+const documentContainer = document.createElement('div');
+documentContainer.setAttribute('style', 'display: none;');
 
-<!-- Taken from https://www.google.com/design/spec/style/color.html#color-ui-color-application -->
-
-<custom-style>
+documentContainer.innerHTML = `<custom-style>
   <style is="custom-style">
     html {
         --primary-background-color: var(--paper-grey-200);
@@ -30,4 +30,8 @@
         };
     }
   </style>
-</custom-style>
+</custom-style>`;
+
+document.head.appendChild(documentContainer);
+
+/* Taken from https://www.google.com/design/spec/style/color.html#color-ui-color-application */

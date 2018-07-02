@@ -5,29 +5,32 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
     <title>exmg-cms-styles demo</title>
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
 
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,500italic,700|Roboto+Mono:400,500,700">
 
-    <link rel="import" href="../../iron-flex-layout/iron-flex-layout.html">
-    <link rel="import" href="../../paper-header-panel/paper-header-panel.html">
-    <link rel="import" href="../../paper-listbox/paper-listbox.html">
+    <script type="module" src="../node_modules/@polymer/iron-flex-layout/iron-flex-layout.js"></script>
+    <script type="module" src="../node_modules/@polymer/paper-header-panel/paper-header-panel.js"></script>
+    <script type="module" src="../node_modules/@polymer/paper-listbox/paper-listbox.js"></script>
 
-    <link rel="import" href="../../iron-ajax/iron-ajax.html">
-    <link rel="import" href="../../iron-icon/iron-icon.html">
-    <link rel="import" href="../../iron-icons/iron-icons.html">
-    <link rel="import" href="../../app-layout/app-drawer-layout/app-drawer-layout.html">
-    <link rel="import" href="../../app-layout/app-drawer/app-drawer.html">
-    <link rel="import" href="../../app-layout/app-header-layout/app-header-layout.html">
-    <link rel="import" href="../../app-layout/app-header/app-header.html">
-    <link rel="import" href="../../app-layout/app-toolbar/app-toolbar.html">
+    <script type="module" src="../node_modules/@polymer/iron-ajax/iron-ajax.js"></script>
+    <script type="module" src="../node_modules/@polymer/iron-icon/iron-icon.js"></script>
+    <script type="module" src="../node_modules/@polymer/iron-icons/iron-icons.js"></script>
+    <script type="module" src="../node_modules/@polymer/app-layout/app-drawer-layout/app-drawer-layout.js"></script>
+    <script type="module" src="../node_modules/@polymer/app-layout/app-drawer/app-drawer.js"></script>
+    <script type="module" src="../node_modules/@polymer/app-layout/app-header-layout/app-header-layout.js"></script>
+    <script type="module" src="../node_modules/@polymer/app-layout/app-header/app-header.js"></script>
+    <script type="module" src="../node_modules/@polymer/app-layout/app-toolbar/app-toolbar.js"></script>
 
-    <link rel="import" href="../../paper-icon-button/paper-icon-button.html">
-    <link rel="import" href="../../exmg-paper-sidemenu/exmg-paper-sidemenu.html">
-    <link rel="import" href="../../exmg-paper-sidemenu/demo/dev-icons.html">
+    <script type="module" src="../node_modules/@polymer/paper-icon-button/paper-icon-button.js"></script>
+    <script type="module" src="../node_modules/@exmg/exmg-paper-sidemenu/exmg-paper-sidemenu.js"></script>
+    <script type="module" src="../node_modules/@exmg/exmg-paper-sidemenu/demo/dev-icons.js"></script>
 
-    <link rel="import" href="../exmg-cms-global-layout-styles.html">
-    <link rel="import" href="../exmg-cms-global-layout-mixin.html">
+    <script type="module" src="../exmg-cms-global-layout-styles.js"></script>
+    <script type="module" src="../exmg-cms-global-layout-mixin.js"></script>
 
     <custom-style>
       <style is="custom-style">
@@ -45,59 +48,57 @@
     </custom-style>
   </head>
   <body>
-    <dom-module id="x-demo">
-        <template>
-          <style include="exmg-cms-global-layout-styles"></style>
+    <script type="module">
+      import {PolymerElement, html} from '../node_modules/@polymer/polymer/polymer-element.js?module';
+      import {CmsGlobalLayoutMixin} from '../exmg-cms-global-layout-mixin.js';
+      
+      class XDemo extends CmsGlobalLayoutMixin(PolymerElement) {
+        static get is() {
+          return 'x-demo';
+        }
+        static get properties() {
+          return {
+            collapsed: Boolean,
+          };
+        }
+        static get template() {
+          return html`
+            <style include="exmg-cms-global-layout-styles"></style>
 
-          <app-header reveals class="main-header" narrow$="[[narrow]]" shadow>
-            <app-toolbar>
-              <paper-icon-button icon="menu" on-tap="toggleDrawer"></paper-icon-button>
-              <img src="logo.svg" alt="Logo">
-            </app-toolbar>
-          </app-header>
-
-          <app-drawer-layout narrow="{{narrow}}" responsive-width="768px">
-
-            <app-drawer id="drawer" slot="drawer">
-              <exmg-paper-sidemenu id="sidemenu" menu="[[menu]]" collapsed="{{collapsed}}" narrow$="[[narrow]]" debug></exmg-paper-sidemenu>
-            </app-drawer>
-
-            <div class="main">
+            <app-header reveals class="main-header" narrow$="[[narrow]]" shadow>
               <app-toolbar>
-                <span main-title>Page Title</span>
+                <paper-icon-button icon="menu" on-tap="toggleDrawer"></paper-icon-button>
+                <img src="logo.svg" alt="Logo">
               </app-toolbar>
+            </app-header>
 
-              <slot></slot>
+            <app-drawer-layout narrow="{{narrow}}" responsive-width="768px">
 
-              <footer>
-                (C)opyright <a href="http://www.exmachinagroup.tv">Ex Machina</a> 2017 - Version x
-              </footer>
-            </div>
+              <app-drawer id="drawer" slot="drawer">
+                <exmg-paper-sidemenu id="sidemenu" menu="[[menu]]" collapsed="{{collapsed}}" narrow$="[[narrow]]" debug></exmg-paper-sidemenu>
+              </app-drawer>
 
-          </app-drawer-layout>
+              <div class="main">
+                <app-toolbar>
+                  <span main-title>Page Title</span>
+                </app-toolbar>
 
-          <!-- Load contacts from json file  -->
-          <iron-ajax url="../../exmg-paper-sidemenu/demo/data/menu.json" last-response="{{menu}}" auto></iron-ajax>
+                <slot></slot>
 
-        </template>
-        <script>
-        window.addEventListener('WebComponentsReady', function() {
-          class XDemo extends Exmg.CmsGlobalLayoutMixin(Polymer.Element) {
-            static get is() {
-              return 'x-demo';
-            }
-            static get properties() {
-              return {
-                collapsed: Boolean,
-              };
-            }
-          }
-          window.customElements.define(XDemo.is, XDemo);
-        });
-        </script>
-      </dom-module>
+                <footer>
+                  (C)opyright <a href="http://www.exmachinagroup.tv">Ex Machina</a> 2017 - Version x
+                </footer>
+              </div>
 
-      <x-demo><div>page content</div></x-demo>
+            </app-drawer-layout>
 
+            <!-- Load contacts from json file  -->
+            <iron-ajax url="../node_modules/@exmg/exmg-paper-sidemenu/demo/data/menu.json" last-response="{{menu}}" auto></iron-ajax>
+          `;
+        }
+      }
+      window.customElements.define(XDemo.is, XDemo);
+    </script>
+    <x-demo><div>page content</div></x-demo>
   </body>
 </html>

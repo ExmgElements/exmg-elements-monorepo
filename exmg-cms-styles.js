@@ -1,4 +1,10 @@
-<!--
+import '@polymer/iron-flex-layout/iron-flex-layout.js';
+import './exmg-cms-global-layout-styles.js';
+import './exmg-cms-page-styles.js';
+import './exmg-cms-color.js';
+import './exmg-cms-default-theme.js';
+
+/**
 The <exmg-cms-styles> element provides a way to style the app global layout and pages in you application.
 
 Available imports:
@@ -16,10 +22,5 @@ It is recommended to importing these files individualy.
 @group Cms Elements
 @pseudoElement exmg-cms-styles
 @demo demo/index.html
--->
+*/
 
-<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="exmg-cms-global-layout-styles.html">
-<link rel="import" href="exmg-cms-page-styles.html">
-<link rel="import" href="exmg-cms-color.html">
-<link rel="import" href="exmg-cms-default-theme.html">

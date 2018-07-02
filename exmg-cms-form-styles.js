@@ -1,14 +1,13 @@
-<link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../paper-styles/typography.html">
-<link rel="import" href="../paper-styles/color.html">
-<link rel="import" href="../paper-styles/shadow.html">
+import '@polymer/polymer/polymer-element.js';
+import '@polymer/iron-flex-layout/iron-flex-layout.js';
+import '@polymer/paper-styles/typography.js';
+import '@polymer/paper-styles/color.js';
+import '@polymer/paper-styles/shadow.js';
 
-<link rel="import" href="material-icons.html">
+const documentContainer = document.createElement('div');
+documentContainer.setAttribute('style', 'display: none;');
 
-<!-- NOTE: This file needs work. Lots of it. -->
-
-<dom-module id="exmg-cms-form-styles">
+documentContainer.innerHTML = `<dom-module id="exmg-cms-form-styles">
   <template>
     <style>
 
@@ -58,4 +57,9 @@
       }
 
   </style>
-</custom-style>
+
+</template></dom-module>`;
+
+document.head.appendChild(documentContainer);
+
+/* NOTE: This file needs work. Lots of it. */

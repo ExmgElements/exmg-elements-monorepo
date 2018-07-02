@@ -1,7 +1,9 @@
-<link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../polymer/lib/elements/custom-style.html">
+import '@polymer/polymer/polymer-element.js';
+import '@polymer/polymer/lib/elements/custom-style.js';
+const documentContainer = document.createElement('div');
+documentContainer.setAttribute('style', 'display: none;');
 
-<custom-style>
+documentContainer.innerHTML = `<custom-style>
   <style is="custom-style">
     html {
 
@@ -37,4 +39,6 @@
 
     }
   </style>
-</custom-style>
+</custom-style>`;
+
+document.head.appendChild(documentContainer);

@@ -1,29 +1,64 @@
 {
-  "name": "exmg-cms-styles",
-  "private": true,
+  "name": "@exmg/exmg-cms-styles",
+  "version": "3.0.2",
   "description": "The `&lt;exmg-cms-styles&gt;` component provides simple ways to use Material Design CSS styles",
-  "main": "exmg-sortable.html",
-  "repository": "ExmgElements/exmg-cms-styles",
-  "keywords": [
-    "Exmg",
-    "ExmgElements",
-    "exmg-cms-styles",
-    "web-components",
-    "web-component",
-    "polymer"
+  "contributors": [
+    "Ex Machina Group"
   ],
-  "author": "Ex Machina",
+  "keywords": [
+    "web-components",
+    "polymer",
+    "style"
+  ],
+  "main": "exmg-cms-styles.html",
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:ExmgElements/exmg-cms-styles.git"
+  },
+  "homepage": "https://github.com/ExmgElements/exmg-cms-styles",
+  "dependencies": {
+    "@polymer/paper-styles": "^3.0.0-pre.1",
+    "@polymer/polymer": "^3.0.0-pre.1"
+  },
   "devDependencies": {
-    "bower": "latest",
+    "@exmg/exmg-paper-card": "^3.0.0",
+    "@exmg/exmg-paper-datatable": "^3.0.0",
+    "@exmg/exmg-paper-sidemenu": "^3.0.0",
+    "@polymer/iron-ajax": "^3.0.0-pre.19",
+    "@polymer/app-layout": "^3.0.0-pre.19",
+    "@polymer/iron-icons": "^3.0.0-pre.19",
+    "@polymer/paper-input": "^3.0.0-pre.19",
+    "@polymer/paper-listbox": "^3.0.0-pre.19",
+    "@polymer/paper-tabs": "^3.0.0-pre.19",
+    "@polymer/paper-toolbar": "^3.0.0-pre.19",
+    "@polymer/iron-component-page": "^3.0.0-pre.19",
+    "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
+    "@polymer/iron-form": "^3.0.0-pre.19",
+    "@polymer/iron-input": "^3.0.0-pre.19",
+    "@polymer/iron-media-query": "^3.0.0-pre.19",
+    "@polymer/paper-button": "^3.0.0-pre.19",
+    "@polymer/paper-card": "^3.0.0-pre.19",
+    "@polymer/paper-checkbox": "^3.0.0-pre.19",
+    "@polymer/paper-drawer-panel": "^3.0.0-pre.19",
+    "@polymer/paper-header-panel": "^3.0.0-pre.19",
+    "@polymer/paper-icon-button": "^3.0.0-pre.19",
+    "@polymer/paper-styles": "^3.0.0-pre.19",
+    "@webcomponents/webcomponentsjs": "^2.0.0-beta.2",
     "eslint": "^4.11.0",
     "eslint-config-exmg": "latest",
     "eslint-plugin-html": "^3.0.0",
-    "polymer-cli": "^1.2.0"
+    "wct-browser-legacy": "^1.0.0"
   },
-  "homepage": "https://github.com/ExmgElements/",
+  "resolutions": {
+    "@webcomponents/webcomponentsjs": "2.0.0",
+    "type-detect": "1.0.0",
+    "supports-color": "3.1.2",
+    "inherits": "2.0.3",
+    "samsam": "1.1.2"
+  },
   "scripts": {
-    "lint": "polymer lint --rules polymer-2 --input *.html",
+    "lint": "polymer lint --rules polymer-3 --input *.js",
     "eslint": "eslint . --ext js,html --ignore-path .gitignore",
-    "analyze": "polymer analyze --input exmg-cms-global-layout-mixin.html > analysis.json"
+    "analyze": "polymer analyze --input exmg-cms-global-layout-mixin.js exmg-cms-page-mixin.js  > analysis.json"
   }
 }

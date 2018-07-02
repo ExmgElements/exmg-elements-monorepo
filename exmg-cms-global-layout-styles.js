@@ -1,58 +1,13 @@
-<link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../paper-styles/typography.html">
-<link rel="import" href="../paper-styles/color.html">
-<link rel="import" href="../paper-styles/shadow.html">
+import '@polymer/polymer/polymer-element.js';
+import '@polymer/iron-flex-layout/iron-flex-layout.js';
+import '@polymer/paper-styles/typography.js';
+import '@polymer/paper-styles/color.js';
+import '@polymer/paper-styles/shadow.js';
+import './exmg-cms-styles.js';
+const documentContainer = document.createElement('div');
+documentContainer.setAttribute('style', 'display: none;');
 
-<link rel="import" href="material-icons.html">
-<link rel="import" href="exmg-cms-styles.html">
-
-<!--
-The `<exmg-cms-global-layout-styles>` element provides a way to style the app global layout and pages in you application. To do this
-the html needs to be added this way:
-
-```html
-<template>
-  <style include="exmg-cms-global-layout-styles"></style>
-
-  <app-header reveals class="main-header" narrow$="[[narrow]]" shadow>
-    <app-toolbar>
-      <paper-icon-button icon="menu" on-tap="toggleDrawer"></paper-icon-button>
-      <img src="logo.svg" alt="Logo">
-    </app-toolbar>
-  </app-header>
-
-  <app-drawer-layout narrow="{{narrow}}">
-
-    <app-drawer id="drawer" slot="drawer">
-      <exmg-paper-sidemenu id="sidemenu" menu="[[menu]]" collapsed="{{collapsed}}" narrow$="[[narrow]]" debug></exmg-paper-sidemenu>
-    </app-drawer>
-
-    <div class="main">
-      <app-toolbar>
-        <span main-title>Page Title</span>
-      </app-toolbar>
-      <slot></slot>
-      <footer>...</footer>
-    </div>
-
-  </app-drawer-layout>
-
-</template>
-```
-
-Also the global layout mixin needs to be loaded
-```js
-class XDemo extends Exmg.CmsGlobalLayoutMixin(Polymer.Element) {
-  static get is() { return 'x-demo'; }
-}
-window.customElements.define(XDemo.is, XDemo);
-```
-
-Please see the demo pages for a working example
--->
-
-<dom-module id="exmg-cms-global-layout-styles">
+documentContainer.innerHTML = `<dom-module id="exmg-cms-global-layout-styles">
   <template>
     <style>
 
@@ -211,4 +166,53 @@ Please see the demo pages for a working example
       }
 
   </style>
-</custom-style>
+
+</template></dom-module>`;
+
+document.head.appendChild(documentContainer);
+
+/*
+The `<exmg-cms-global-layout-styles>` element provides a way to style the app global layout and pages in you application. To do this
+the html needs to be added this way:
+
+```html
+<template>
+  <style include="exmg-cms-global-layout-styles"></style>
+
+  <app-header reveals class="main-header" narrow$="[[narrow]]" shadow>
+    <app-toolbar>
+      <paper-icon-button icon="menu" on-tap="toggleDrawer"></paper-icon-button>
+      <img src="logo.svg" alt="Logo">
+    </app-toolbar>
+  </app-header>
+
+  <app-drawer-layout narrow="{{narrow}}">
+
+    <app-drawer id="drawer" slot="drawer">
+      <exmg-paper-sidemenu id="sidemenu" menu="[[menu]]" collapsed="{{collapsed}}" narrow$="[[narrow]]" debug></exmg-paper-sidemenu>
+    </app-drawer>
+
+    <div class="main">
+      <app-toolbar>
+        <span main-title>Page Title</span>
+      </app-toolbar>
+      <slot></slot>
+      <footer>...</footer>
+    </div>
+
+  </app-drawer-layout>
+
+</template>
+```
+
+Also the global layout mixin needs to be loaded
+```js
+class XDemo extends Exmg.CmsGlobalLayoutMixin(Polymer.Element) {
+  static get is() { return 'x-demo'; }
+}
+window.customElements.define(XDemo.is, XDemo);
+```
+
+Please see the demo pages for a working example
+*/
+

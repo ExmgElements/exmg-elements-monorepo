@@ -6,16 +6,17 @@
 
     <title>exmg-cms-styles test</title>
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <script src="../../web-component-tester/browser.js"></script>
+    <script src="@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="web-component-tester/browser.js"></script>
 
-    <link rel="import" href="../exmg-cms-styles.html">
+    <script type="module" src="../exmg-cms-styles.js"></script>
   </head>
   <body>
 
-    <script>
-      suite('exmg-cms-styles', function() {});
-    </script>
+    <script type="module">
+import '../exmg-cms-styles.js';
+suite('exmg-cms-styles', function() {});
+</script>
 
   </body>
 </html>
