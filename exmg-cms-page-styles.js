@@ -1,19 +1,15 @@
+import {html} from '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@polymer/paper-styles/typography.js';
 import '@polymer/paper-styles/color.js';
 import '@polymer/paper-styles/shadow.js';
 
-const documentContainer = document.createElement('div');
-documentContainer.setAttribute('style', 'display: none;');
-
-documentContainer.innerHTML = `<dom-module id="exmg-cms-page-styles">
-  <template>
+export const sharedPageStyles = html`
     <style>
       :host {
         @apply --paper-font-common-base;
         font-size: 14px;
       }
-
       [row] {
         box-sizing: border-box;
         margin: 0 auto;
@@ -23,31 +19,26 @@ documentContainer.innerHTML = `<dom-module id="exmg-cms-page-styles">
         @apply --layout;
         @apply --layout-wrap;
       }
-
       @media (min-width: 576px) {
         [row] {
           max-width: 540px;
         }
       }
-
       @media (min-width: 768px) {
         [row] {
           max-width: 720px;
         }
       }
-
       @media (min-width: 992px) {
         [row] {
           max-width: 960px;
         }
       }
-
       @media (min-width: 1200px) {
         [row] {
           max-width: 1140px;
         }
       }
-
       [col-3], [col-4], [col-6], [col-8], [col-9], [col-12], [col], [col-auto],
       [col-sm-3], [col-sm-4], [col-sm-6], [col-sm-8], [col-sm-9], [col-sm-12], [col-sm], [col-sm-auto],
       [col-md-3], [col-md-4], [col-md-6], [col-md-8], [col-md-9], [col-md-12], [col-md], [col-md-auto],
@@ -61,49 +52,40 @@ documentContainer.innerHTML = `<dom-module id="exmg-cms-page-styles">
         background: var(--col-background-color);
         border: 1px solid var(--col-border-color, none);
       }
-
       [col] {
         flex-basis: 0;
         flex-grow: 1;
         max-width: 100%;
       }
-
       [col-auto] {
         flex: 0 0 auto;
         width: auto;
         max-width: none;
       }
-
       [col-3] {
         flex: 0 0 25%;
         max-width: 25%;
       }
-
       [col-4] {
         flex: 0 0 33.333333%;
         max-width: 33.333333%;
       }
-
       [col-6] {
         flex: 0 0 50%;
         max-width: 50%;
       }
-
       [col-8] {
         flex: 0 0 66.666667%;
         max-width: 66.666667%;
       }
-
       [col-9] {
         flex: 0 0 75%;
         max-width: 75%;
       }
-
       [col-12] {
         flex: 0 0 100%;
         max-width: 100%;
       }
-
       @media (min-width: 576px) {
         [col-sm] {
           flex-basis: 0;
@@ -140,7 +122,6 @@ documentContainer.innerHTML = `<dom-module id="exmg-cms-page-styles">
           max-width: 100%;
         }
       }
-
       @media (min-width: 768px) {
         [col-md] {
           flex-basis: 0;
@@ -177,7 +158,6 @@ documentContainer.innerHTML = `<dom-module id="exmg-cms-page-styles">
           max-width: 100%;
         }
       }
-
       @media (min-width: 992px) {
         [col-lg] {
           flex-basis: 0;
@@ -214,7 +194,6 @@ documentContainer.innerHTML = `<dom-module id="exmg-cms-page-styles">
           max-width: 100%;
         }
       }
-
       @media (min-width: 1200px) {
         [col-xl] {
           flex-basis: 0;
@@ -251,11 +230,9 @@ documentContainer.innerHTML = `<dom-module id="exmg-cms-page-styles">
           max-width: 100%;
         }
       }
-
       .between-cards-margin {
         margin-top: 24px;
       }
-
       .card {
         height: 204px;
         background: var(--secondary-background-color);
@@ -266,7 +243,6 @@ documentContainer.innerHTML = `<dom-module id="exmg-cms-page-styles">
         @apply --layout-horizontal;
         @apply --layout-justified;
       }
-
       .card.add {
         background: none;
         @apply --shadow-none;
@@ -276,7 +252,6 @@ documentContainer.innerHTML = `<dom-module id="exmg-cms-page-styles">
         @apply --layout-horizontal;
         @apply --layout-center;
       }
-
       .card .title {
         color: rgba(0, 0, 0, var(--dark-primary-opacity));
         font-size: 20px;
@@ -284,41 +259,33 @@ documentContainer.innerHTML = `<dom-module id="exmg-cms-page-styles">
         line-height: 28px;
         word-wrap: break-word;
       }
-
       .card:hover {
         background: var(--paper-grey-200);
       }
-
       .card.add:hover {
         background: var(--primary-color);
         color: white;
       }
-
       .card.add > div {
         @apply --layout-vertical;
         @apply --layout-center;
       }
-
       .card.add .plus {
         font-size: 40px;
         font-weight: 500;
       }
-
       .card.add .plus-title {
         font-size: 14px;
         font-weight: 500;
         line-height: 20px;
       }
-
       .page-container {
         @apply --layout-vertical;
       }
-
       .page-content {
         padding-top: 40px;
         padding-bottom: 48px;
       }
-
       h2 {
         color: rgba(0, 0, 0, var(--dark-secondary-opacity));
         display: block;
@@ -327,35 +294,29 @@ documentContainer.innerHTML = `<dom-module id="exmg-cms-page-styles">
         margin-bottom: -8px;
         position: relative;
       }
-
       .flex {
         @apply --layout-flex;
       }
-
       exmg-paper-info-card .actions paper-button {
         color: var(--secondary-color);
       }
-
       exmg-paper-search-header paper-button {
         color: var(--text-primary-color);
         background-color: var(--primary-color);
         margin: 12px 12px;
         height: 32px;
       }
-
       exmg-paper-toolbar paper-button {
         color: var(--text-primary-color);
         background-color: var(--primary-color);
         margin: 12px 0px;
         height: 32px;
       }
-
       exmg-paper-card .header paper-button {
         color: var(--text-primary-color);
         background-color: var(--primary-color);
         padding: 8px 20px;
       }
-
       .tabs-container {
         background: var(--light-primary-color);
       }
@@ -368,11 +329,9 @@ documentContainer.innerHTML = `<dom-module id="exmg-cms-page-styles">
         text-transform: uppercase;
         color: white;
       }
-
       paper-tab {
        padding: 0px 26px;
       }
-
       .main header .title{
         color: var(--text-primary-color);
         font-size: 20px;
@@ -382,8 +341,6 @@ documentContainer.innerHTML = `<dom-module id="exmg-cms-page-styles">
         overflow: hidden;
         white-space: nowrap;
       }
-
-
       [row] > h2 {
         color: rgba(0, 0, 0, var(--light-secondary-opacity));
         display: block;
@@ -392,7 +349,6 @@ documentContainer.innerHTML = `<dom-module id="exmg-cms-page-styles">
         line-height: 24px;
         font-weight: 400;
       }
-
       a {
         color: var(--secondary-text-color);
         text-decoration: underline;
@@ -419,13 +375,11 @@ documentContainer.innerHTML = `<dom-module id="exmg-cms-page-styles">
         margin-left: 4px;
         vertical-align: middle;
       }
-
       @media (max-width: 400px) {
         .page-content [row] > * {
           margin-bottom: 24px;
         }
       }
-
       .page-header-bar h2 {
         color: rgba(0,0,0,0.87);
         font-size: 26px;
@@ -446,11 +400,9 @@ documentContainer.innerHTML = `<dom-module id="exmg-cms-page-styles">
       .page-header-bar .body p {
         margin: 0;
       }
-
       exmg-paper-card {
         width: 100%;
       }
-
       [hidden]{
         display: none;
       }
@@ -458,9 +410,4 @@ documentContainer.innerHTML = `<dom-module id="exmg-cms-page-styles">
         color: white;
         background:  var(--error-color);
       }
-
-  </style>
-
-</template></dom-module>`;
-
-document.head.appendChild(documentContainer);
+  </style>`;
