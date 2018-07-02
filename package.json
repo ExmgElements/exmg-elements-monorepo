@@ -1,6 +1,6 @@
 {
   "name": "@exmg/exmg-cms-styles",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "The `&lt;exmg-cms-styles&gt;` component provides simple ways to use Material Design CSS styles",
   "contributors": [
     "Ex Machina Group"

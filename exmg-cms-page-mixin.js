@@ -6,8 +6,7 @@ import {dedupingMixin} from '@polymer/polymer/lib/utils/mixin.js';
 window.Exmg = window.Exmg || {};
 
 /**
- * This mixin is used by exmg-swagger-client element to specify which
- * client condig is used and when the API is ready.
+ * This mixin is used by pages to help navigate sub pages and manage params
  *
  *
  * @polymer
@@ -28,13 +27,6 @@ const ExmgCmsPage = (superClass) => class extends superClass {
       routeTail: Object,
       defaultPage: String,
     };
-  }
-  ready() {
-    super.ready();
-    // If we do not have an initial URL, we redirect to defaultPage
-    if (!this.route || !this.route.path) {
-      this.set('route.path', `/${this.defaultPage}`);
-    }
   }
   /**
   * catch change path event and go to the given url. When ref param is available in query params those
