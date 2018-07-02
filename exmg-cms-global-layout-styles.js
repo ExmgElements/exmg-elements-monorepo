@@ -109,62 +109,6 @@ documentContainer.innerHTML = `<dom-module id="exmg-cms-global-layout-styles">
         text-align: center;
       }
 
-      /* DIALOG STYLES */
-
-      [data-overlay] .dialog {
-        width: calc(52px * 5);
-        display: block;
-        color: var(--primary-text-color);
-        @apply --paper-font-body1;
-      }
-
-      [data-overlay] .dialog.wide {
-        width: calc(52px * 10);
-      }
-
-      @media all and (max-width: 576px) {
-        [data-overlay] .dialog.wide {
-          width: calc(100%);
-        }
-      }
-
-      [data-overlay] .dialog > * {
-        margin-top: 20px;
-        padding: 0 24px;
-      }
-
-      [data-overlay] .dialog > .no-padding {
-        padding: 0;
-      }
-
-      [data-overlay] .dialog > h2 {
-        position: relative;
-        margin: 0;
-        @apply --paper-font-title;
-        @apply --paper-dialog-title;
-      }
-
-      [data-overlay] .dialog > *:first-child {
-        margin-top: 24px;
-      }
-
-      [data-overlay] .dialog > *:last-child {
-        margin-bottom: 24px;
-      }
-
-      [data-overlay] .dialog > .actions {
-        position: relative;
-        padding: 8px 8px 8px 24px;
-        margin: 0;
-        color: var(--primary-color);
-        @apply --layout-horizontal;
-        @apply --layout-end-justified;
-      }
-
-      iron-overlay-renderer {
-        z-index: 199;
-      }
-
   </style>
 
 </template></dom-module>`;
