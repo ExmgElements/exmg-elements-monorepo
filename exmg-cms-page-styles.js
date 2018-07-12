@@ -3,8 +3,10 @@ import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@polymer/paper-styles/typography.js';
 import '@polymer/paper-styles/color.js';
 import '@polymer/paper-styles/shadow.js';
+import {sharedButtonStyles} from './exmg-cms-button-styles.js';
 
 export const sharedPageStyles = html`
+    ${sharedButtonStyles}
     <style>
       :host {
         @apply --paper-font-common-base;
@@ -402,6 +404,8 @@ export const sharedPageStyles = html`
       }
       exmg-paper-card {
         width: 100%;
+        border-radius: 8px;
+        overflow: hidden;
       }
       [hidden]{
         display: none;

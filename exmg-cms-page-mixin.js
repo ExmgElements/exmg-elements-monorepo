@@ -26,6 +26,10 @@ const ExmgCmsPage = (superClass) => class extends superClass {
       },
       routeTail: Object,
       defaultPage: String,
+      activeTail: {
+        type: Boolean,
+        value: false,
+      },
     };
   }
   /**
