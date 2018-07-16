@@ -410,8 +410,4 @@ export const sharedPageStyles = html`
       [hidden]{
         display: none;
       }
-      paper-button.alert {
-        color: white;
-        background:  var(--error-color);
-      }
   </style>`;

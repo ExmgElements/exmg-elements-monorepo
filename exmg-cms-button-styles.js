@@ -17,5 +17,13 @@ export const sharedButtonStyles = html`
       letter-spacing: .25px;
       min-width: 60px;
     }
+    paper-button[disabled] {
+      opacity: 0.5;
+    }
+    paper-button.error,
+    paper-button.alert {
+      color: white;
+      background: var(--error-color);
+    }
   </style>
 `;
