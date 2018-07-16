@@ -410,22 +410,22 @@ export const sharedPageStyles = html`
       [hidden]{
         display: none;
       }
-      .page-container > .tabs,
-      .page-container > app-toolbar{
+      .tabs,
+      app-toolbar.page{
         background: var(--app-primary-color);
         color:white;
         height: 50px;
       }
-      .page-container > paper-tabs {
+      paper-tabs {
         height: 100%;
         width: 100%;
         background: var(--app-primary-color);
         color: white;
       }
-      .page-container > app-toolbar {
+      app-toolbar.page {
         padding: 0 8px 0 26px;
       }
-      .page-container > app-toolbar a{
+      app-toolbar.page a{
         color: white;   
       }
   </style>`;
