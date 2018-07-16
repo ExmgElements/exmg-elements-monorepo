@@ -65,7 +65,7 @@ const ExmgCmsPage = (superClass) => class extends superClass {
   * Helper method to check if route page is in given pages list
   */
   _isPage(page, pages, activeTail) {
-    return activeTail && pages.split('|').indexOf(page) !== -1;
+    return pages.split('|').indexOf(page) !== -1;
   }
 };
 
