@@ -1,5 +1,7 @@
 {
-  "name": "exmg-form-dialog",
+  "name": "@exmg/exmg-cms-dialogs",
+  "flat": true,
+  "version": "3.0.0",
   "main": "exmg-form-dialog.js",
   "dependencies": {
     "@exmg/exmg-cms-styles": "^3.0.12",
@@ -38,5 +40,8 @@
     "lint": "polymer lint --rules polymer-3 --input *.js",
     "eslint": "eslint . --ext js,html --ignore-path .gitignore",
     "analyze": "polymer analyze > analysis.json"
+  },
+  "publishConfig": {
+    "access": "restricted"
   }
 }
