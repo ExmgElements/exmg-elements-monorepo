@@ -1,7 +1,7 @@
 {
   "name": "@exmg/exmg-cms-dialogs",
   "flat": true,
-  "version": "3.0.0",
+  "version": "3.0.1",
   "main": "exmg-form-dialog.js",
   "dependencies": {
     "@exmg/exmg-cms-styles": "^3.0.12",
