@@ -14,7 +14,6 @@ export const exmgDialogStyles = html`
     paper-dialog{
       max-width: 512px;
       box-sizing: border-box;
-      overflow: hidden;
     }
     :host([large]) paper-dialog{
       max-width: 810px;
