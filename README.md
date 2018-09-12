@@ -13,14 +13,6 @@ Please visit the [API Documentation and demo](http://ExmgElements.github.io/exmg
   </exmg-copy-to-clipboard>
 ```
 
-## Install
-
-Install the component using bower
-
-```
-$ bower install --save ExmgElements/exmg-copy-to-clipboard
-```
-
 ## Development
 
 First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run polymer server to launch the demo page.
