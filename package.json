@@ -1,29 +1,44 @@
 {
   "name": "exmg-copy-to-clipboard",
   "private": true,
+  "version": "3.0.0",
   "description": "Helper element to create a copy to clipboard button",
-  "main": "exmg-copy-to-clipboard.html",
-  "repository": "ExmgElements/exmg-copy-to-clipboard",
+  "main": "exmg-copy-to-clipboard.js",
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:ExmgElements/exmg-copy-to-clipboard.git"
+  },
+  "license": "MIT",
   "keywords": [
     "Exmg",
     "ExmgElements",
-    "exmg-date-format",
     "copy",
     "clipboard",
     "Polymer"
   ],
   "author": "Ex Machina",
+  "dependencies": {
+    "@polymer/polymer": "^3.0.5"
+  },
   "devDependencies": {
-    "bower": "latest",
-    "eslint": "^4.11.0",
+    "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
+    "@polymer/iron-component-page": "^3.0.0-pre.21",
+    "@polymer/paper-icon-button": "^3.0.0-pre.21",
+    "@polymer/iron-iconset-svg": "^3.0.0-pre.21",
+    "@polymer/iron-icons": "^3.0.0-pre.21",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "eslint": "^4.19.1",
     "eslint-config-exmg": "latest",
     "eslint-plugin-html": "^3.0.0",
-    "polymer-cli": "^1.2.0"
+    "wct-browser-legacy": "^1.0.0"
   },
   "homepage": "https://github.com/ExmgElements/",
   "scripts": {
-    "lint": "polymer lint --rules polymer-2 --input *.html",
+    "lint": "polymer lint --rules polymer-3 --input *.js",
     "eslint": "eslint . --ext js,html --ignore-path .gitignore",
     "analyze": "polymer analyze --input exmg-copy-to-clipboard.html > analysis.json"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
