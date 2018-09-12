@@ -1,7 +1,7 @@
-import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
-import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event-listeners.js';
-import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
-import { addListener, removeListener } from '@polymer/polymer/lib/utils/gestures.js';
+import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
+import {GestureEventListeners} from '@polymer/polymer/lib/mixins/gesture-event-listeners.js';
+import {FlattenedNodesObserver} from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
+import {addListener, removeListener} from '@polymer/polymer/lib/utils/gestures.js';
 
 /**
 * `<exmg-copy-to-clipboard>` Helper element to create icon/buttons that
@@ -32,7 +32,7 @@ import { addListener, removeListener } from '@polymer/polymer/lib/utils/gestures
 * @group Exmg Core Elements
 * @demo demo/index.html
 */
-class CopyToClipboardElement extends GestureEventListeners(PolymerElement) {
+export class CopyToClipboardElement extends GestureEventListeners(PolymerElement) {
   static get is() {
     return 'exmg-copy-to-clipboard';
   }
