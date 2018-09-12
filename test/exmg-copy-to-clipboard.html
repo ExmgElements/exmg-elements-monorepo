@@ -21,22 +21,20 @@
     </test-fixture>
 
     <script type="module">
-        import { menu } from './menu-example.js';
         var copyEl;
         suite('exmg-copy-to-clipboard', () => {
 
           setup(() => {
-            copyEl = fixture('BasicTestFixtureMenu');
+            copyEl = fixture('BasicTestFixture');
           });
   
-          test('check if menu items rendered matches the amount of items in menu config file', (done) => {
+          test('check copy success event', (done) => {
             copyEl.addEventListener('copy-successful', () => {
-              debugger;
               done();
             });
             flush(() => {
               var button = copyEl.querySelector('button');
-              buton.click();
+              button.click();
             });
           });
 

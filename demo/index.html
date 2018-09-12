@@ -15,29 +15,28 @@
     <script type="module" src="../node_modules/@polymer/iron-iconset-svg/iron-iconset-svg.js"></script>
     <script type="module" src="../node_modules/@polymer/iron-icons/iron-icons.js"></script>
 
-    <link rel="import" href="../exmg-copy-to-clipboard.html">
+    <script type="module" src="../exmg-copy-to-clipboard.js"></script>
 
-    <iron-iconset-svg name="icons" size="24">
-      <svg>
-        <defs>
-          <g id="content-copy"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></g>
-        </defs>
-      </svg>
-    </iron-iconset-svg>
-
-    <style is="custom-style" include="demo-pages-shared-styles">
+    <style>
       [hidden] {
         display: none !important;
       }
     </style>
   </head>
+  <iron-iconset-svg name="icons" size="24">
+    <svg>
+      <defs>
+        <g id="content-copy"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"></path></g>
+      </defs>
+    </svg>
+  </iron-iconset-svg>
   <body>
     <div class="vertical-section-container centered">
       <h3>Copy using a button element</h3>
       <demo-snippet>
         <template>
           <exmg-copy-to-clipboard value="copied content 1">
-            <button>&#x2398; Copy to clipboard</button>
+            <button>⎘ Copy to clipboard</button>
           </exmg-copy-to-clipboard>
         </template>
       </demo-snippet>
@@ -54,7 +53,7 @@
       <demo-snippet>
         <template>
           <exmg-copy-to-clipboard value="copied content 2">
-            <span style="cursor:pointer;">&#x2398; Copy to clipboard</span>
+            <span style="cursor:pointer;">⎘ Copy to clipboard</span>
           </exmg-copy-to-clipboard>
         </template>
       </demo-snippet>
