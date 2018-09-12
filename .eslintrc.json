@@ -10,7 +10,8 @@
   ],
   "rules": {
     "no-extend-native": [2, {"exceptions": ["String"]}],
-    "max-len": ["error", { "code": 140, "ignoreTemplateLiterals": true }]
+    "max-len": ["error", { "code": 140, "ignoreTemplateLiterals": true }],
+    "no-console": "off"
   },
   "parserOptions": {
     "sourceType": "module"
