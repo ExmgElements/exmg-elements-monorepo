@@ -33,16 +33,12 @@
     "@polymer/iron-component-page": "^3.0.0-pre.19",
     "wct-browser-legacy": "^1.0.0"
   },
-  "resolutions": {
-    "@webcomponents/webcomponentsjs": "2.0.0",
-    "type-detect": "1.0.0",
-    "supports-color": "3.1.2",
-    "inherits": "2.0.3",
-    "samsam": "1.1.2"
-  },
   "scripts": {
     "lint": "polymer lint --rules polymer-3 --input *.js",
     "eslint": "eslint . --ext js,html --ignore-path .gitignore",
     "analyze": "polymer analyze --input exmg-date-format.js > analysis.json"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
