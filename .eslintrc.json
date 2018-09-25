@@ -1,25 +1,24 @@
 {
-  "extends": ["eslint:recommended"],
-  "parserOptions": {
-    "ecmaVersion": 6
-  },
+  "extends": "exmg",
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "node": true
   },
   "plugins": [
     "html"
   ],
   "rules": {
-    "max-len": ["error", 120],
-    "brace-style": "off",
-    "new-cap": ["error", { "capIsNewExceptions": ["Polymer", "GestureEventListeners"] }],
-    "no-var": "off",
-    "no-console": "off",
-    "require-jsdoc": "off",
-    "valid-jsdoc": "off"
+    "no-extend-native": [2, {"exceptions": ["String"]}],
+    "max-len": ["error", { "code": 140, "ignoreTemplateLiterals": true }],
+    "no-console": "off"
+  },
+  "parserOptions": {
+    "sourceType": "module"
   },
   "globals": {
-    "Polymer": true
+    "Polymer": true,
+    "Exmg": true,
+    "CustomElements": false
   }
 }
