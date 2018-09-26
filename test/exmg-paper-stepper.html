@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>test-el test</title>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../node_modules/wct-browser-legacy/browser.js"></script>
+
+    <script type="module" src="../exmg-paper-stepper.js"></script>
+    <script type="module" src="../exmg-paper-step.js"></script>
+  </head>
+  <body>
+
+    <test-fixture id="BasicTestFixture">
+      <template>
+        <exmg-paper-stepper selected="1">
+          <exmg-paper-step label="step 1"></exmg-paper-step>
+          <exmg-paper-step label="step 2"></exmg-paper-step>
+          <exmg-paper-step label="step 3"></exmg-paper-step>
+        </exmg-paper-stepper>
+      </template>
+    </test-fixture>
+
+    <script type="module">
+        suite('exmg-paper-stepper', () => {
+
+          test('instantiating the element and check shadowdom for step elements', () => {
+            const element = fixture('BasicTestFixture');
+            
+          });
+         
+        });
+      </script>
+  </body>
+</html>
