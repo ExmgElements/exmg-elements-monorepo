@@ -1,9 +1,9 @@
-import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@polymer/iron-icon/iron-icon.js';
 import '@polymer/paper-ripple/paper-ripple.js';
 import '@polymer/paper-styles/paper-styles.js';
-import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event-listeners.js';
+import {GestureEventListeners} from '@polymer/polymer/lib/mixins/gesture-event-listeners.js';
 import './exmg-paper-stepper-icons.js';
 
 /**
@@ -138,7 +138,9 @@ class PaperStepElement extends GestureEventListeners(PolymerElement) {
   `;
   }
 
-  static get is() { return 'exmg-paper-step'; }
+  static get is() {
+    return 'exmg-paper-step';
+  }
   static get properties() {
     return {
       index: {
@@ -164,12 +166,12 @@ class PaperStepElement extends GestureEventListeners(PolymerElement) {
     this.select();
   }
   setFinished(finished) {
-    if(this.finished !== finished) {
+    if (this.finished !== finished) {
       this.set('finished', finished);
     }
   }
   select() {
-    this.dispatchEvent(new CustomEvent('selected', { bubbles: true, composed: true, detail: { index: this.index, item: this } } ));
+    this.dispatchEvent(new CustomEvent('selected', {bubbles: true, composed: true, detail: {index: this.index, item: this}}));
   }
 }
 

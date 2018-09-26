@@ -1,8 +1,8 @@
-import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@polymer/paper-styles/paper-styles.js';
 import '@polymer/iron-selector/iron-selector.js';
-import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
+import {FlattenedNodesObserver} from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 
 /**
 * The `<exmg-paper-stepper>` is an material design horizontal stepper
@@ -22,7 +22,9 @@ import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nod
 * @demo demo/index.html
 */
 class PaperStepperElement extends PolymerElement {
-  static get is() { return 'exmg-paper-stepper'; }
+  static get is() {
+    return 'exmg-paper-stepper';
+  }
   static get properties() {
     return {
       stepElements: {
@@ -52,11 +54,11 @@ class PaperStepperElement extends PolymerElement {
     `;
   }
   _onIronSelect(e) {
-    let index = this.selected;
-    let items = this.$.selector.items;
+    const index = this.selected;
+    const items = this.$.selector.items;
     for (var i = 0; i < items.length; i++) {
-      if(i < index) {
-        this.$.selector.items[i].setAttribute('finished','');
+      if (i < index) {
+        this.$.selector.items[i].setAttribute('finished', '');
       } else {
         this.$.selector.items[i].removeAttribute('finished');
       }
