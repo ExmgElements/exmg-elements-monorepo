@@ -86,8 +86,11 @@ class ExmgFormDialog extends PolymerElement {
       large: Boolean,
     };
   }
-  _onCloseDialog() {
-    this._reset();
+  _onCloseDialog(e) {
+    /* only reset form if close event originates from dialog */
+    if (e.path[0].tagName === 'PAPER-DIALOG') {
+      this._reset();
+    }
   }
   _hasErrorMessage(message) {
     return !!message ? 'show' : '';
