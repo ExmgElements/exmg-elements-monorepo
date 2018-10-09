@@ -8,7 +8,7 @@ import {exmgDialogStyles} from './exmg-cms-dialog-styles.js';
 
 /**
  * `exmg-form-dialog`
- * 
+ *
  *
  * @customElement
  * @polymer
@@ -20,7 +20,7 @@ import {exmgDialogStyles} from './exmg-cms-dialog-styles.js';
       ${exmgDialogStyles}
 
       <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click on-iron-overlay-closed="_onCloseDialog">
-        <header>  
+        <header>
           <h2 class="title">[[title]]</h2>
           <paper-icon-button icon="em-icons:close" dialog-dismiss></paper-icon-button>
         </header>
@@ -62,7 +62,7 @@ import {exmgDialogStyles} from './exmg-cms-dialog-styles.js';
         type: String,
       },
       /*
-      * Indicator if submit is in progress This boolean will display the progress 
+      * Indicator if submit is in progress This boolean will display the progress
       * bar at the bottom of the dialog
       */
       submitting: {
@@ -71,7 +71,7 @@ import {exmgDialogStyles} from './exmg-cms-dialog-styles.js';
         value: false,
       },
       /*
-      * Close icon. Default the close icon from the em-icons set. Set this property 
+      * Close icon. Default the close icon from the em-icons set. Set this property
       * if you want to use a different icon set
       */
       closeIcon: {
@@ -94,7 +94,7 @@ import {exmgDialogStyles} from './exmg-cms-dialog-styles.js';
     this.set('errorMessage', null);
 
     submitBtn.removeAttribute('disabled');
-  } 
+  }
   open() {
     this.$.dialog.open();
   }
