@@ -15,7 +15,8 @@ import {exmgDialogStyles} from './exmg-cms-dialog-styles.js';
  * @polymer
  * @demo demo/index.html
  */
-class ExmgFormDialog extends PolymerElement {
+
+export class ExmgFormDialog extends PolymerElement {
   static get template() {
     return html`
       ${exmgDialogStyles}
