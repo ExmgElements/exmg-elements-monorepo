@@ -20,6 +20,11 @@
     "type": "git",
     "url": "git://github.com:ExmgElements/exmg-date-format.git"
   },
+  "files": [
+    "**/*.js",
+    "**/*.d.ts",
+    "**/template.html"
+  ],
   "homepage": "http://exmg.github.io/ExmgElements/exmg-date-format/",
   "dependencies": {
     "@polymer/lit-element": "^0.6.2",
@@ -40,6 +45,8 @@
     "wct-browser-legacy": "^1.0.0"
   },
   "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
     "start": "gulp serve",
     "lint": "polymer lint --rules polymer-3 --input *.js",
     "eslint": "eslint . --ext js,html --ignore-path .gitignore",
