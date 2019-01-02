@@ -53,14 +53,11 @@ export class DateFormatElement extends LitElement {
   @property({type: Number})
   timestamp: number | undefined;
 
-  @property({type: String})
+  @property({type: String, attribute: 'date-pattern'})
   datePattern?: string;
 
   @property({type: String})
   _defaultDatePattern: string = 'MM/dd/yyyy hh:mm:ss a';
-
-  @property({type: String})
-  formattedDate: string = '';
 
   render() {
     return html`
