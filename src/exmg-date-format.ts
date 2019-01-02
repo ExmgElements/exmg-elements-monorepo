@@ -1,5 +1,11 @@
 import { LitElement, html, property, customElement } from '@polymer/lit-element';
 
+declare global {
+  interface Window { Exmg: any; }
+}
+window.Exmg = window.Exmg || {};
+
+/* Polyfill for padStart */
 if (!String.prototype.padStart) {
   String.prototype.padStart = function padStart(targetLength, padString) {
     targetLength = targetLength >> 0; // floor if number or convert non-number to 0;
@@ -15,11 +21,6 @@ if (!String.prototype.padStart) {
     }
   };
 }
-
-declare global {
-  interface Window { Exmg: any; }
-}
-window.Exmg = window.Exmg || {};
 
 /**
 * The `<exmg-date-format>` Lightweight element for formatting dates
