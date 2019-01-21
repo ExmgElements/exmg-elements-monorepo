@@ -18,24 +18,26 @@
   "license": "MIT",
   "author": "Ex Machina",
   "dependencies": {
-    "@polymer/polymer": "^3.0.0"
+    "@polymer/polymer": "^3.0.0",
+    "lit-element": "^2.0.0-rc.3"
   },
   "devDependencies": {
-    "@polymer/iron-component-page": "^3.0.0-pre.18",
-    "@polymer/paper-icon-button": "^3.0.0-pre.18",
-    "@polymer/iron-iconset-svg": "^3.0.0-pre.18",
-    "@polymer/iron-icons": "^3.0.0-pre.21",
-    "eslint": "^4.19.1",
-    "eslint-config-exmg": "latest",
-    "eslint-plugin-html": "^3.0.0",
     "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
+    "@polymer/iron-icons": "^3.0.0-pre.21",
+    "@polymer/iron-iconset-svg": "^3.0.0-pre.18",
+    "@polymer/paper-icon-button": "^3.0.0-pre.18",
     "@webcomponents/webcomponentsjs": "^2.0.0",
+    "gulp": "^4.0.0",
+    "tslint": "^5.12.1",
+    "tslint-config-airbnb": "^5.11.1",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.2.4",
     "wct-browser-legacy": "^1.0.0"
   },
   "scripts": {
-    "lint": "polymer lint --rules polymer-3 --input *.js",
-    "eslint": "eslint . --ext js,html --ignore-path .gitignore",
-    "analyze": "polymer analyze --input exmg-copy-to-clipboard.html > analysis.json"
+    "start": "gulp serve",
+    "tslint": "tslint -c ./tslint.json --project ./",
+    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts"
   },
   "publishConfig": {
     "access": "public"
