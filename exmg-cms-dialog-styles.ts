@@ -1,4 +1,4 @@
-import {html} from '@polymer/polymer/polymer-element.js';
+import {html} from 'lit-element';
 import {sharedDialogStyles} from '@exmg/exmg-cms-styles/exmg-cms-dialog-styles.js';
 import {sharedButtonStyles} from '@exmg/exmg-cms-styles/exmg-cms-button-styles.js';
 
