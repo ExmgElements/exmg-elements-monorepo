@@ -1,4 +1,4 @@
-{
+module.exports = {
   "parserOptions": {
     "sourceType": "module",
     "allowImportExportEverywhere": false
@@ -22,7 +22,7 @@
           "typeLiterals": "ignore"
         }
       }
-     ],
+    ],
     "ter-indent": [
       "error",
       "tab",
@@ -64,4 +64,4 @@
     "Exmg": true,
     "CustomElements": false
   }
-}
+};
