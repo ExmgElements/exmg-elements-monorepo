@@ -11,9 +11,13 @@
     "type": "git",
     "url": "git@bitbucket.org:ExmgElements/exmg-copy-to-clipboard.git"
   },
+  "files": [
+    "**/exmg-*.js",
+    "**/exmg-*.d.ts"
+  ],
   "homepage": "https://github.com/ExmgElements/",
   "name": "@exmg/exmg-copy-to-clipboard",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "main": "exmg-copy-to-clipboard.js",
   "license": "MIT",
   "author": "Ex Machina",
