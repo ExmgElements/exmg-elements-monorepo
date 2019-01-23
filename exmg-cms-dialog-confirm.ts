@@ -163,13 +163,7 @@ export class ExmgConfirmDialog extends LitElement {
       <paper-button dialog-dismiss>Cancel</paper-button>
       <paper-button id="submitBtn" @click="${this.submit}" class="primary">${this.buttonCopy}</paper-button>
     </div>
-    ${this.submitting ?
-      html`
-        <template is="dom-if" restamp>
-          <paper-progress indeterminate></paper-progress>
-        </template>
-        ` : ''
-      }
+    ${this.submitting ? html`<paper-progress indeterminate></paper-progress>` : '' }
     
   </paper-dialog>
 `;
