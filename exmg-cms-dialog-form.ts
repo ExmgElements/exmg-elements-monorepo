@@ -41,9 +41,6 @@ export class ExmgFormDialog extends LitElement {
   @property({type: String})
   private errorMessage?: string;
 
-  @property({type: Boolean})
-  private large: boolean = false;
-
   constructor() {
     super();
 
@@ -58,7 +55,7 @@ export class ExmgFormDialog extends LitElement {
     }
   }
 
-  private hasErrorMessage(message: string) {
+  private hasErrorMessage(message?: string) {
     return !!message ? 'show' : '';
   }
 
@@ -67,7 +64,7 @@ export class ExmgFormDialog extends LitElement {
   }
 
   open() {
-    const dialogNodeElem = this.getElementBySelector('#dialog');
+    const dialogNodeElem = this.getElementBySelector('#dialog') as HTMLElement|any;
 
     if (dialogNodeElem) {
       dialogNodeElem.open();
@@ -77,7 +74,7 @@ export class ExmgFormDialog extends LitElement {
   }
 
   close() {
-    const dialogNodeElem = this.getElementBySelector('#dialog');
+    const dialogNodeElem = this.getElementBySelector('#dialog') as HTMLElement|any;
 
     if (dialogNodeElem) {
       dialogNodeElem.close();
@@ -88,7 +85,7 @@ export class ExmgFormDialog extends LitElement {
 
   private reset() {
     const submitBtnElem = this.getElementBySelector('#submitBtn');
-    const formElem = this.getElementBySelector('#form');
+    const formElem = this.getElementBySelector('#form') as HTMLElement|any;
 
     this.submitting = false;
     this.errorMessage = undefined;
@@ -102,7 +99,7 @@ export class ExmgFormDialog extends LitElement {
     }
   }
 
-  error(error) {
+  error(error: Error) {
     const submitBtnElem = this.getElementBySelector('#submitBtn');
 
     this.submitting = false;
@@ -120,7 +117,7 @@ export class ExmgFormDialog extends LitElement {
 
   submit() {
     const submitBtnElem = this.getElementBySelector('#submitBtn');
-    const formElem = this.getElementBySelector('#form');
+    const formElem = this.getElementBySelector('#form') as HTMLElement|any;
 
 
     // reset error message on new submit
