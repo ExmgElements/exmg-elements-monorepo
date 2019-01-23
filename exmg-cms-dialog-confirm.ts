@@ -161,7 +161,7 @@ export class ExmgConfirmDialog extends LitElement {
     </div>
     <div class="actions">
       <paper-button dialog-dismiss>Cancel</paper-button>
-      <paper-button id="submitBtn" on-click="${this.submit}" class="primary">${this.buttonCopy}</paper-button>
+      <paper-button id="submitBtn" @click="${this.submit}" class="primary">${this.buttonCopy}</paper-button>
     </div>
     ${this.submitting ?
       html`
