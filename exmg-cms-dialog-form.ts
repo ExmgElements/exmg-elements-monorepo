@@ -18,7 +18,7 @@ export class ExmgFormDialog extends LitElement {
   /**
    * Copy for submit button
    */
-  @property({type: String})
+  @property({type: String, attribute: 'button-copy'})
   public buttonCopy: string = '';
 
   /**
@@ -32,13 +32,13 @@ export class ExmgFormDialog extends LitElement {
    * Close icon. Default the close icon from the em-icons set. Set this property
    * if you want to use a different icon set
    */
-  @property({type: String})
+  @property({type: String, attribute: 'close-icon'})
   private closeIcon: string = 'em-icons:close';
 
   /**
    * When set this will be shown in the error section of the dialog
    */
-  @property({type: String})
+  @property({type: String, attribute: 'error-message'})
   private errorMessage?: string;
 
   constructor() {
