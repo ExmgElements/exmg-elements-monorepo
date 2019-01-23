@@ -3,9 +3,10 @@ import {sharedDialogStyles} from '@exmg/exmg-cms-styles/exmg-cms-dialog-styles.j
 import {sharedButtonStyles} from '@exmg/exmg-cms-styles/exmg-cms-button-styles.js';
 
 export const exmgDialogStyles = html`
-  ${sharedDialogStyles.content}
-  ${sharedButtonStyles.content}
   <style>
+    ${sharedDialogStyles.innerHTML.replace('<style>', '').replace('</style>', '')}
+    ${sharedButtonStyles.innerHTML.replace('<style>', '').replace('</style>', '')}
+  
     paper-dialog > header {
       display: -ms-flexbox;
       display: -webkit-flex;
