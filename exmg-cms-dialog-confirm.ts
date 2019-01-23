@@ -34,11 +34,11 @@ export class ExmgConfirmDialog extends LitElement {
   private submitting: boolean = false;
 
   /**
-   * Close icon. Default the close icon from the exmg-icons set. Set this property
+   * Close icon. Default the close icon from the em-icons set. Set this property
    * if you want to use a different icon set
    */
   @property({type: String, attribute: 'close-icon'})
-  private closeIcon: string = 'exmg-icons:close';
+  private closeIcon: string = 'em-icons:close';
 
   /**
    * When set this will be shown in the error section of the dialog
@@ -141,171 +141,7 @@ export class ExmgConfirmDialog extends LitElement {
 
   protected render() {
     return html`
-      <style>
-          paper-dialog {
-      border-radius: 8px;
-      min-width: 500px;
-      box-shadow: var(--shadow-elevation-8dp_-_box-shadow);
-    }
-    paper-dialog > .actions {
-      margin: 24px 0;
-      text-align: right;
-    }
-    paper-dialog > header {
-      -webkit-box-flex: 0 0 auto;
-      -webkit-flex: 0 0 auto;
-      flex: 0 0 auto;
-      padding: 4px 24px 0 24px;
-      @apply --layout-horizontal;
-    }
-    paper-dialog > header > .title {
-      @apply --layout-flex;
-    }
-    paper-dialog > header > paper-icon-button {
-      position: relative;
-      top: -8px;
-    }
-    paper-dialog > header > .title {
-      -webkit-flex-shrink: 0;
-      flex-shrink: 0;
-      color: #000;
-      font-family: 'Google Sans',sans-serif;
-      font-size: 20px;
-      font-weight: 500;
-      line-height: 28px;
-      margin: 0 32px 16px 0;
-    }
-    
-    
-    
-    
-    
-    paper-button.primary {
-      background: var(--primary-color);
-      color: white;
-    }
-    paper-button {
-      border-radius: 6px;
-      text-transform: initial;
-      padding-left: 16px;
-      padding-right: 16px;
-      -webkit-border-radius: 8px;
-      border-radius: 8px;
-      text-transform: none;
-      letter-spacing: .25px;
-      min-width: 60px;
-    }
-    paper-button[disabled] {
-      opacity: 0.5;
-    }
-    paper-button.error,
-    paper-button.alert {
-      color: white;
-      background: var(--error-color);
-    }
-    
-    
-      
-      
-      
-    paper-progress {
-      width: 100%;
-      margin-top: 0px;
-      box-sizing: border-box;
-    }
-    paper-dialog{
-      max-width: 512px;
-      box-sizing: border-box;
-    }
-    :host([large]) paper-dialog{
-      max-width: 810px;
-      width: 100%;
-    }
-    paper-dialog > .actions {
-      margin: 24px 0 24px;
-    }
-    ::slotted(hr) {
-      border: none;
-      height: 1px;
-      background: var(--divider-color);
-      margin: 16px 0 8px;
-    }
-    :host([submitting]) paper-dialog > .actions {
-      margin: 24px 0 20px;
-    }
-    p,
-    ::slotted(p) {
-      font-size: 14px;
-      line-height: 20px;
-      color: rgba(0,0,0,0.54);
-    }
-    ::slotted(label) {
-      font-size:12px;
-      font-weight:400;
-      height:20px;
-      justify-content:normal;
-      letter-spacing:0.132px;
-      line-height:20px;
-      text-overflow:ellipsis;
-      color: var(--secondary-text-color);
-    }
-    ::slotted(p.help) {
-      margin-top: -2px;
-      font-size: 0.8em;
-    }
-    .error {
-      display: none;
-      font-size: 14px;
-      line-height: 20px;
-      color: rgba(0,0,0,0.54);
-      -webkit-box-flex: 0 0 auto;
-      -webkit-flex: 0 0 auto;
-      flex: 0 0 auto;
-      padding: 0;
-    }
-    .error > span {
-      background-color: #fbe9e7;
-      color: #ff5252;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      padding: 0 0 0 24px;
-      margin: 0 0 12px;
-      min-height: 48px;
-    }
-    .error > span > span {
-      padding-left: 36px;
-      margin-right: 24px;
-      position: relative;
-      padding: 12px 0;
-      line-height: 20px;
-      font-size: 14px;
-      white-space: normal;
-      font-weight: 500;
-      display: inline-block;
-      vertical-align: middle;
-    }
-    .error iron-icon {
-      margin-right: 12px;
-      color: #ff5252;
-    }
-    .error.show {
-      display: block;
-    }
-    .body {
-      margin-top: 0px;
-      margin-bottom: 24px;
-    }    
-    paper-dialog > .actions {
-      margin: 18px 0 18px;
-    }
-    :host([submitting]) paper-dialog > .actions {
-      margin: 18px 0 14px;
-    }
-    paper-dialog-scrollable {
-      margin-top: 4px;
-    }
-  </style>
+      ${exmgDialogStyles}
       <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click on-iron-overlay-closed="${this.onCloseDialog}">
         <header>
           <h2 class="title">${this.title}</h2>
