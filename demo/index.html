@@ -127,7 +127,7 @@
               @submit="${this._delete}"></exmg-cms-dialog-confirm>
 
             <!-- Normal dialog including progress bar on submit -->
-            <paper-button @click="_openDialog1">Dialog Normal</paper-button>
+            <paper-button @click="${this._openDialog1}">Dialog Normal</paper-button>
             <exmg-cms-dialog-form
               id="dialog1"
               title="Create account"
@@ -147,7 +147,7 @@
                 <paper-input name="name" label="Name" required></paper-input>
                 <paper-input name="password" label="Password" required></paper-input>
             </exmg-cms-dialog-form>
-            <paper-button @click="_openDialog2">Dialog Error</paper-button>
+            <paper-button @click="${this._openDialog2}">Dialog Error</paper-button>
 
             <!-- Normal dialog showing complex form -->
             <exmg-cms-dialog-form
@@ -183,7 +183,7 @@
                 </exmg-markdown-editor>
                 <paper-input name="test" label="Test" type="number" always-float-label></paper-input>
             </exmg-cms-dialog-form>
-            <paper-button @click="_openDialog3">Dialog Large</paper-button>
+            <paper-button @click="${this._openDialog3}">Dialog Large</paper-button>
           `;
         }
       }
