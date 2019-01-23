@@ -146,7 +146,7 @@ export class ExmgConfirmDialog extends LitElement {
   <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click on-iron-overlay-closed="${this.onCloseDialog}">
     <header>
       <h2 class="title">${this.title}</h2>
-      <paper-icon-button icon="em-icons:close${this.closeIcon}" dialog-dismiss></paper-icon-button>
+      <paper-icon-button icon="${this.closeIcon}" dialog-dismiss></paper-icon-button>
     </header>
     <div class="body">
       <div class="error ${this.hasErrorMessage(this.errorMessage)}">
