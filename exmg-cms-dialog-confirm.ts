@@ -58,6 +58,10 @@ export class ExmgConfirmDialog extends LitElement {
     this.reset();
   }
 
+  private hasErrorMessage(message: string) {
+    return !!message ? 'show' : '';
+  }
+
   protected getElementBySelector(selector: string): HTMLElement|null {
     return this.shadowRoot ? this.shadowRoot.querySelector(selector) : null;
   }
@@ -93,25 +97,31 @@ export class ExmgConfirmDialog extends LitElement {
     // this.$.dialog.close();
   }
 
-// error(error) {
-//   const {submitBtn} = this.$;
-//
-//   // Reset properties when submit is finished
-//   this.set('submitting', false);
-//   submitBtn.removeAttribute('disabled');
-//
-//   this.set('errorMessage', error.message);
-// }
-// done() {
-//   const {submitBtn} = this.$;
-//
-//   // Reset properties when submit is finished
-//   this.set('submitting', false);
-//   submitBtn.removeAttribute('disabled');
-//
-//   // Close dialog
-//   this.close();
-// }
+  error(error) {
+    const submitBtnElem = this.getElementBySelector('#submitBtn');
+
+    this.submitting = false;
+    this.errorMessage = error.message;
+
+    if (submitBtnElem) {
+      submitBtnElem.removeAttribute('disabled');
+    }
+  }
+
+  done() {
+    const submitBtnElem = this.getElementBySelector('#submitBtn');
+
+    // Reset properties when submit is finished
+    this.submitting = false;
+
+    if (submitBtnElem) {
+      submitBtnElem.removeAttribute('disabled');
+    }
+
+    // Close dialog
+    this.close();
+  }
+
   private submit() {
     const submitBtnElem = this.getElementBySelector('#submitBtn');
 
@@ -139,7 +149,7 @@ export class ExmgConfirmDialog extends LitElement {
       <paper-icon-button icon="em-icons:close" dialog-dismiss></paper-icon-button>
     </header>
     <div class="body">
-      <div class$="error [[_hasErrorMessage(errorMessage)]]">
+      <div class$="error ${this.hasErrorMessage(this.errorMessage)}">
         <span class="body">
           <span>
             <iron-icon icon="exmg-icons:warning"></iron-icon>
