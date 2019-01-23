@@ -149,7 +149,7 @@ export class ExmgConfirmDialog extends LitElement {
       <paper-icon-button icon="em-icons:close${this.closeIcon}" dialog-dismiss></paper-icon-button>
     </header>
     <div class="body">
-      <div class$="error ${this.hasErrorMessage(this.errorMessage)}">
+      <div class="error ${this.hasErrorMessage(this.errorMessage)}">
         <span class="body">
           <span>
             <iron-icon icon="exmg-icons:warning"></iron-icon>
