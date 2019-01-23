@@ -29,11 +29,11 @@ export class ExmgFormDialog extends LitElement {
   private submitting: boolean = false;
 
   /**
-   * Close icon. Default the close icon from the em-icons set. Set this property
+   * Close icon. Default the close icon from the exmg-icons set. Set this property
    * if you want to use a different icon set
    */
   @property({type: String, attribute: 'close-icon'})
-  private closeIcon: string = 'em-icons:close';
+  private closeIcon: string = 'exmg-icons:close';
 
   /**
    * When set this will be shown in the error section of the dialog
