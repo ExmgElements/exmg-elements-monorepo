@@ -59,12 +59,12 @@ export class ExmgFormDialog extends LitElement {
     return !!message ? 'show' : '';
   }
 
-  protected getElementBySelector(selector: string): HTMLElement|null {
+  protected getElementBySelector(selector: string): HTMLElement | null {
     return this.shadowRoot ? this.shadowRoot.querySelector(selector) : null;
   }
 
   open() {
-    const dialogNodeElem = this.getElementBySelector('#dialog') as HTMLElement|any;
+    const dialogNodeElem = this.getElementBySelector('#dialog') as HTMLElement | any;
 
     if (dialogNodeElem) {
       dialogNodeElem.open();
@@ -74,7 +74,7 @@ export class ExmgFormDialog extends LitElement {
   }
 
   close() {
-    const dialogNodeElem = this.getElementBySelector('#dialog') as HTMLElement|any;
+    const dialogNodeElem = this.getElementBySelector('#dialog') as HTMLElement | any;
 
     if (dialogNodeElem) {
       dialogNodeElem.close();
@@ -85,7 +85,7 @@ export class ExmgFormDialog extends LitElement {
 
   private reset() {
     const submitBtnElem = this.getElementBySelector('#submitBtn');
-    const formElem = this.getElementBySelector('#form') as HTMLElement|any;
+    const formElem = this.getElementBySelector('#form') as HTMLElement | any;
 
     this.submitting = false;
     this.errorMessage = undefined;
@@ -117,14 +117,14 @@ export class ExmgFormDialog extends LitElement {
 
   submit() {
     const submitBtnElem = this.getElementBySelector('#submitBtn');
-    const formElem = this.getElementBySelector('#form') as HTMLElement|any;
+    const formElem = this.getElementBySelector('#form') as HTMLElement | any;
 
 
     // reset error message on new submit
     this.errorMessage = undefined;
 
     // Validate form elements
-    if(!formElem.validate()) {
+    if (!formElem.validate()) {
       return;
     }
 
@@ -142,7 +142,6 @@ export class ExmgFormDialog extends LitElement {
   protected render() {
     return html`
       ${exmgDialogStyles}
-      
       <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click on-iron-overlay-closed="${this.onCloseDialog}">
         <header>  
           <h2 class="title">${this.title}</h2>
@@ -169,7 +168,7 @@ export class ExmgFormDialog extends LitElement {
           <paper-button dialog-dismiss>Cancel</paper-button>
           <paper-button id="submitBtn" @click="${this.submit}" class="primary">${this.buttonCopy}</paper-button>
         </div>
-        ${this.submitting ? html`<paper-progress indeterminate></paper-progress>` : '' }
+        ${this.submitting ? html`<paper-progress indeterminate></paper-progress>` : ''}
       </paper-dialog>
 `;
   }

@@ -62,7 +62,7 @@ export class ExmgConfirmDialog extends LitElement {
     return !!message ? 'show' : '';
   }
 
-  protected getElementBySelector(selector: string): HTMLElement|null {
+  protected getElementBySelector(selector: string): HTMLElement | null {
     return this.shadowRoot ? this.shadowRoot.querySelector(selector) : null;
   }
 
@@ -78,7 +78,7 @@ export class ExmgConfirmDialog extends LitElement {
   }
 
   open() {
-    const dialogNodeElem = this.getElementBySelector('#dialog') as HTMLElement|any;
+    const dialogNodeElem = this.getElementBySelector('#dialog') as HTMLElement | any;
 
     if (dialogNodeElem) {
       dialogNodeElem.open();
@@ -88,7 +88,7 @@ export class ExmgConfirmDialog extends LitElement {
   }
 
   close() {
-    const dialogNodeElem = this.getElementBySelector('#dialog') as HTMLElement|any;
+    const dialogNodeElem = this.getElementBySelector('#dialog') as HTMLElement | any;
 
     if (dialogNodeElem) {
       dialogNodeElem.close();
@@ -141,30 +141,29 @@ export class ExmgConfirmDialog extends LitElement {
 
   protected render() {
     return html`
-  ${exmgDialogStyles}
-
-  <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click on-iron-overlay-closed="${this.onCloseDialog}">
-    <header>
-      <h2 class="title">${this.title}</h2>
-      <paper-icon-button icon="${this.closeIcon}" dialog-dismiss></paper-icon-button>
-    </header>
-    <div class="body">
-      <div class="error ${this.hasErrorMessage(this.errorMessage)}">
-        <span class="body">
-          <span>
-            <iron-icon icon="exmg-icons:warning"></iron-icon>
-            <span class="msg">${this.errorMessage}</span>
-          </span>
-        </span>
-      </div>
-      <p>${this.message}</p>
-    </div>
-    <div class="actions">
-      <paper-button dialog-dismiss>Cancel</paper-button>
-      <paper-button id="submitBtn" @click="${this.submit}" class="primary">${this.buttonCopy}</paper-button>
-    </div>
-    ${this.submitting ? html`<paper-progress indeterminate></paper-progress>` : '' }
-  </paper-dialog>
-`;
+      ${exmgDialogStyles}
+      <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click on-iron-overlay-closed="${this.onCloseDialog}">
+        <header>
+          <h2 class="title">${this.title}</h2>
+          <paper-icon-button icon="${this.closeIcon}" dialog-dismiss></paper-icon-button>
+        </header>
+        <div class="body">
+          <div class="error ${this.hasErrorMessage(this.errorMessage)}">
+            <span class="body">
+              <span>
+                <iron-icon icon="exmg-icons:warning"></iron-icon>
+                <span class="msg">${this.errorMessage}</span>
+              </span>
+            </span>
+          </div>
+          <p>${this.message}</p>
+        </div>
+        <div class="actions">
+          <paper-button dialog-dismiss>Cancel</paper-button>
+          <paper-button id="submitBtn" @click="${this.submit}" class="primary">${this.buttonCopy}</paper-button>
+        </div>
+        ${this.submitting ? html`<paper-progress indeterminate></paper-progress>` : ''}
+      </paper-dialog>
+    `;
   }
 }
