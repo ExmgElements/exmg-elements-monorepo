@@ -140,7 +140,6 @@ export class ExmgConfirmDialog extends LitElement {
   }
 
   protected render() {
-    console.log(this.buttonCopy);
     return html`
   ${exmgDialogStyles}
 
