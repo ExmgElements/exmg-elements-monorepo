@@ -164,7 +164,6 @@ export class ExmgConfirmDialog extends LitElement {
       <paper-button id="submitBtn" @click="${this.submit}" class="primary">${this.buttonCopy}</paper-button>
     </div>
     ${this.submitting ? html`<paper-progress indeterminate></paper-progress>` : '' }
-    
   </paper-dialog>
 `;
   }
