@@ -3,8 +3,8 @@ import {sharedDialogStyles} from '@exmg/exmg-cms-styles/exmg-cms-dialog-styles.j
 import {sharedButtonStyles} from '@exmg/exmg-cms-styles/exmg-cms-button-styles.js';
 
 export const exmgDialogStyles = html`
-  ${sharedDialogStyles}
-  ${sharedButtonStyles}
+  ${sharedDialogStyles.content}
+  ${sharedButtonStyles.content}
   <style>
     paper-progress {
       width: 100%;
