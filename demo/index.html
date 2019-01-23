@@ -117,7 +117,6 @@
         render () {
           //language=html
           return html`
-            <!-- Default confirmation dialog -->
             <paper-button @click="${this._openDialog0}">Dialog Confirm</paper-button>
             <exmg-cms-dialog-confirm
               id="dialog0"
@@ -126,7 +125,6 @@
               button-copy="Delete account"
               @submit="${this._delete}"></exmg-cms-dialog-confirm>
 
-            <!-- Normal dialog including progress bar on submit -->
             <paper-button @click="${this._openDialog1}">Dialog Normal</paper-button>
             <exmg-cms-dialog-form
               id="dialog1"
@@ -137,7 +135,6 @@
                 <paper-input name="test" label="Test"></paper-input>
             </exmg-cms-dialog-form>
 
-            <!-- Normal dialog showing error on submit -->
             <exmg-cms-dialog-form
               id="dialog2"
               title="Create account"
@@ -149,7 +146,6 @@
             </exmg-cms-dialog-form>
             <paper-button @click="${this._openDialog2}">Dialog Error</paper-button>
 
-            <!-- Normal dialog showing complex form -->
             <exmg-cms-dialog-form
               id="dialog3"
               title="Create Ticket"
