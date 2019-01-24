@@ -29,13 +29,6 @@ export class ExmgFormDialog extends LitElement {
   private submitting: boolean = false;
 
   /**
-   * Close icon. Default the close icon from the exmg-icons set. Set this property
-   * if you want to use a different icon set
-   */
-  @property({type: String, attribute: 'close-icon'})
-  private closeIcon: string = 'exmg-icons:close';
-
-  /**
    * When set this will be shown in the error section of the dialog
    */
   @property({type: String, attribute: 'error-message'})
@@ -69,8 +62,6 @@ export class ExmgFormDialog extends LitElement {
     if (dialogNodeElem) {
       dialogNodeElem.open();
     }
-
-    // this.$.dialog.open();
   }
 
   close() {
@@ -79,8 +70,6 @@ export class ExmgFormDialog extends LitElement {
     if (dialogNodeElem) {
       dialogNodeElem.close();
     }
-
-    // this.$.dialog.close();
   }
 
   private reset() {
@@ -111,7 +100,6 @@ export class ExmgFormDialog extends LitElement {
   }
 
   done() {
-    // Close dialog
     this.close();
   }
 
@@ -144,7 +132,7 @@ export class ExmgFormDialog extends LitElement {
       <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click on-iron-overlay-closed="${this.onCloseDialog}">
         <header>
           <h2 class="title">${this.title}</h2>
-          <paper-icon-button icon="${this.closeIcon}" dialog-dismiss></paper-icon-button>
+          <paper-icon-button icon="exmg-icons:close" dialog-dismiss></paper-icon-button>
         </header>
         <paper-dialog-scrollable>
           <div class="body">

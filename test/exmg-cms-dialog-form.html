@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>exmg-form-dialog form test</title>
+    <title>exmg-cms-dialog-form test</title>
 
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
     <script src="../node_modules/wct-browser-legacy/browser.js"></script>
@@ -27,27 +27,26 @@
     </test-fixture>
 
     <script type="module">
-      let basicElement;
-
-      setup(() => {
-        basicElement = fixture('BasicTestFixture');
-      });
-
       suite('exmg-cms-dialog-form', () => {
-        test('instantiating the element with default properties works', () => {
-          assert.equal(basicElement.title, 'Create account');
-          const elementShadowRoot = basicElement.shadowRoot;
-          const elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Create account');
+        let element;
+
+        setup((done) => {
+          element = fixture('BasicTestFixture');
+          flush(done);
         });
 
-        test('setting a property on the element works', () => {
-          assert.equal(basicElement.buttonCopy, 'Save');
-          const elementShadowRoot = basicElement.shadowRoot;
-          const elementHeader = elementShadowRoot.querySelector('#submitBtn');
-          assert.equal(elementHeader.innerHTML, 'Save');
+        test('instantiating the element with default properties works', (done) => {
+          element.addEventListener('submit', (event) => {
+            done();
+          });
+          flush(() => {
+            assert.equal(element.title, 'Create account');
+            assert.equal(element.buttonCopy, 'Save');
+            assert.equal(element.shadowRoot.querySelector('h2').innerText, 'Create account');
+            assert.equal(element.shadowRoot.querySelector('#submitBtn').innerText, 'Save');
+            element.shadowRoot.querySelector('#submitBtn').click();
+          });
         });
-
       });
     </script>
 

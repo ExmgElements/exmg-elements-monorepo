@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>exmg-form-dialog form test</title>
+    <title>exmg-cms-dialog-confirm test</title>
 
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
     <script src="../node_modules/wct-browser-legacy/browser.js"></script>
@@ -25,27 +25,27 @@
     </test-fixture>
 
     <script type="module">
-      let basicElement;
-
-      setup(() => {
-        basicElement = fixture('BasicTestFixture');
-      });
-
       suite('exmg-cms-dialog-confirm', () => {
-        test('instantiating the element with default properties works', () => {
-          assert.equal(basicElement.title, 'Confirmation');
-          const elementShadowRoot = basicElement.shadowRoot;
-          const elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Confirmation');
+        let element;
+
+        setup((done) => {
+          element = fixture('BasicTestFixture');
+          flush(done);
         });
 
-        test('setting a property on the element works', () => {
-          assert.equal(basicElement.message, 'Are you sure you want to delete this item?');
-          const elementShadowRoot = basicElement.shadowRoot;
-          const elementHeader = elementShadowRoot.querySelector('p');
-          assert.equal(elementHeader.innerHTML, 'Are you sure you want to delete this item?');
+        test('instantiating the element with default properties works', (done) => {
+          element.addEventListener('submit', (event) => {
+            done();
+          });
+          flush(() => {
+            assert.equal(element.title, 'Confirmation');
+            assert.equal(element.message, 'Are you sure you want to delete this item?');
+            assert.equal(element.buttonCopy, 'Delete account');
+            assert.equal(element.shadowRoot.querySelector('h2').innerText, 'Confirmation');
+            assert.equal(element.shadowRoot.querySelector('#submitBtn').innerText, 'Delete account');
+            element.shadowRoot.querySelector('#submitBtn').click();
+          });
         });
-
       });
     </script>
 
