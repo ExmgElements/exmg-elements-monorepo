@@ -6,7 +6,7 @@ export const exmgDialogStyles = html`
   <style>
     ${sharedDialogStyles.innerHTML.replace('<style>', '').replace('</style>', '')}
     ${sharedButtonStyles.innerHTML.replace('<style>', '').replace('</style>', '')}
-    
+
     paper-progress {
       width: 100%;
       margin-top: 0px;
@@ -94,7 +94,7 @@ export const exmgDialogStyles = html`
     .body {
       margin-top: 0px;
       margin-bottom: 24px;
-    }    
+    }
     paper-dialog > .actions {
       margin: 18px 0 18px;
     }

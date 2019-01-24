@@ -119,7 +119,6 @@ export class ExmgFormDialog extends LitElement {
     const submitBtnElem = this.getElementBySelector('#submitBtn');
     const formElem = this.getElementBySelector('#form') as HTMLElement | any;
 
-
     // reset error message on new submit
     this.errorMessage = undefined;
 
@@ -143,7 +142,7 @@ export class ExmgFormDialog extends LitElement {
     return html`
       ${exmgDialogStyles}
       <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click on-iron-overlay-closed="${this.onCloseDialog}">
-        <header>  
+        <header>
           <h2 class="title">${this.title}</h2>
           <paper-icon-button icon="${this.closeIcon}" dialog-dismiss></paper-icon-button>
         </header>

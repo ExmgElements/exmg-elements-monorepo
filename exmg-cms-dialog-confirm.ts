@@ -53,7 +53,6 @@ export class ExmgConfirmDialog extends LitElement {
     this.submit = this.submit.bind(this);
   }
 
-
   private onCloseDialog() {
     this.reset();
   }
