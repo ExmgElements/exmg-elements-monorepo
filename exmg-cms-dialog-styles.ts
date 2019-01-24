@@ -6,23 +6,6 @@ export const exmgDialogStyles = html`
   <style>
     ${sharedDialogStyles.innerHTML.replace('<style>', '').replace('</style>', '')}
     ${sharedButtonStyles.innerHTML.replace('<style>', '').replace('</style>', '')}
-  
-    paper-dialog > header {
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      
-      -ms-flex-direction: row;
-      -webkit-flex-direction: row;
-      flex-direction: row;
-    }
-    paper-dialog > header > .title {
-        -ms-flex: 1 1 0.000000001px;
-        -webkit-flex: 1;
-        flex: 1;
-        -webkit-flex-basis: 0.000000001px;
-        flex-basis: 0.000000001px;
-    }
     
     paper-progress {
       width: 100%;
