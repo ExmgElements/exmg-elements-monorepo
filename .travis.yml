@@ -8,11 +8,10 @@ cache:
 
 install:
 - npm install
-- npm i polymer-cli
+- tsc
 
 before_script:
-- polymer lint --rules polymer-3 --input *.html
-- eslint . --ext js,html --ignore-path .gitignore
+- tslint -c ./tslint.json --project ./
 
 addons:
   firefox: latest

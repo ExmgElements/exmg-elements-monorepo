@@ -27,9 +27,10 @@
           setup(() => {
             copyEl = fixture('BasicTestFixture');
           });
-  
+
           test('check copy success event', (done) => {
-            copyEl.addEventListener('copy-successful', () => {
+            copyEl.addEventListener('copy-successful', (event) => {
+              assert.equal(event.detail, 'copied content 1');
               done();
             });
             flush(() => {
