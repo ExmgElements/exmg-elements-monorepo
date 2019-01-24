@@ -19,7 +19,7 @@
           id="dialog1"
           title="Create account"
           button-copy="Save"
-          on-submit="_saveData">
+          @submit="_saveData">
             <paper-input name="name" label="Name" required></paper-input>
             <paper-input name="test" label="Test"></paper-input>
         </exmg-cms-dialog-form>
@@ -33,7 +33,7 @@
         basicElement = fixture('BasicTestFixture');
       });
 
-      suite('exmg-form-dialog', () => {
+      suite('exmg-cms-dialog-form', () => {
         test('instantiating the element with default properties works', () => {
           assert.equal(basicElement.title, 'Create account');
           const elementShadowRoot = basicElement.shadowRoot;

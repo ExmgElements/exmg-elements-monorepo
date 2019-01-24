@@ -20,7 +20,7 @@
           title="Confirmation"
           message="Are you sure you want to delete this item?"
           button-copy="Delete account"
-          on-submit="_delete"></exmg-cms-dialog-confirm>
+          @submit="_delete"></exmg-cms-dialog-confirm>
       </template>
     </test-fixture>
 
@@ -31,7 +31,7 @@
         basicElement = fixture('BasicTestFixture');
       });
 
-      suite('exmg-form-dialog', () => {
+      suite('exmg-cms-dialog-confirm', () => {
         test('instantiating the element with default properties works', () => {
           assert.equal(basicElement.title, 'Confirmation');
           const elementShadowRoot = basicElement.shadowRoot;
