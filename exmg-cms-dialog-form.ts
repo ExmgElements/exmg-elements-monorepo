@@ -59,13 +59,13 @@ export class ExmgFormDialog extends LitElement {
     return this.shadowRoot ? this.shadowRoot.querySelector(selector) : null;
   }
 
-  open() {
+  public open() {
     if (this.dialogNode) {
       this.dialogNode.open();
     }
   }
 
-  close() {
+  public close() {
    if (this.dialogNode) {
       this.dialogNode.close();
     }
@@ -87,7 +87,7 @@ export class ExmgFormDialog extends LitElement {
     }
   }
 
-  error(error: Error) {
+  public  error(error: Error) {
     const submitBtnElem = this.getElementBySelector('#submitBtn');
 
     this.submitting = false;
@@ -98,7 +98,17 @@ export class ExmgFormDialog extends LitElement {
     }
   }
 
-  done() {
+  public done() {
+    const submitBtnElem = this.getElementBySelector('#submitBtn');
+
+    // Reset properties when submit is finished
+    this.submitting = false;
+
+    if (submitBtnElem) {
+      submitBtnElem.removeAttribute('disabled');
+    }
+
+    // Close dialog
     this.close();
   }
 
@@ -128,7 +138,7 @@ export class ExmgFormDialog extends LitElement {
   protected render() {
     return html`
       ${exmgDialogStyles}
-      <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click on-iron-overlay-closed="${this.onCloseDialog}">
+      <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click @iron-overlay-closed="${this.onCloseDialog}">
         <header>
           <h2 class="title">${this.title}</h2>
           <paper-icon-button icon="exmg-icons:close" dialog-dismiss></paper-icon-button>

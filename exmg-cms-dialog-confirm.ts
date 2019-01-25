@@ -68,6 +68,18 @@ export class ExmgConfirmDialog extends LitElement {
     return this.shadowRoot ? this.shadowRoot.querySelector(selector) : null;
   }
 
+  public open() {
+    if (this.dialogNode) {
+      this.dialogNode.open();
+    }
+  }
+
+  public close() {
+    if (this.dialogNode) {
+      this.dialogNode.close();
+    }
+  }
+
   private reset() {
     const submitBtnElem = this.getElementBySelector('#submitBtn');
 
@@ -79,19 +91,7 @@ export class ExmgConfirmDialog extends LitElement {
     }
   }
 
-  open() {
-    if (this.dialogNode) {
-      this.dialogNode.open();
-    }
-  }
-
-  close() {
-    if (this.dialogNode) {
-      this.dialogNode.close();
-    }
-  }
-
-  error(error: Error) {
+  public error(error: Error) {
     const submitBtnElem = this.getElementBySelector('#submitBtn');
 
     this.submitting = false;
@@ -102,7 +102,7 @@ export class ExmgConfirmDialog extends LitElement {
     }
   }
 
-  done() {
+  public done() {
     const submitBtnElem = this.getElementBySelector('#submitBtn');
 
     // Reset properties when submit is finished
@@ -136,7 +136,7 @@ export class ExmgConfirmDialog extends LitElement {
   protected render() {
     return html`
       ${exmgDialogStyles}
-      <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click on-iron-overlay-closed="${this.onCloseDialog}">
+      <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click @iron-overlay-closed="${this.onCloseDialog}">
         <header>
           <h2 class="title">${this.title}</h2>
           <paper-icon-button icon="${this.closeIcon}" dialog-dismiss></paper-icon-button>
