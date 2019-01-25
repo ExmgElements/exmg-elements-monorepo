@@ -3,6 +3,7 @@
   "version": "3.1.0",
   "main": "exmg-form-dialog.js",
   "files": [
+    "typings/*",
     "exmg-*.js",
     "exmg-*.d.ts"
   ],

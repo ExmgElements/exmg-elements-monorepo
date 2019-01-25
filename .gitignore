@@ -5,4 +5,5 @@ node_modules/
 *.d.ts
 *.js
 !gulpfile.js
-!/typings/dialogs.d.ts
+!typings/exmg-cms-styles/exmg-cms-button-styles.d.ts
+!typings/exmg-cms-styles/exmg-cms-dialog-styles.d.ts
