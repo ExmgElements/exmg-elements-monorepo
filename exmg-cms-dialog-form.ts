@@ -87,7 +87,7 @@ export class ExmgFormDialog extends LitElement {
     }
   }
 
-  public  error(error: Error) {
+  public error(error: Error) {
     const submitBtnElem = this.getElementBySelector('#submitBtn');
 
     this.submitting = false;
