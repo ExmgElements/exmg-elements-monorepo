@@ -82,8 +82,6 @@ export class ExmgConfirmDialog extends LitElement {
     if (dialogNodeElem) {
       dialogNodeElem.open();
     }
-
-    // this.$.dialog.open();
   }
 
   close() {
@@ -92,8 +90,6 @@ export class ExmgConfirmDialog extends LitElement {
     if (dialogNodeElem) {
       dialogNodeElem.close();
     }
-
-    // this.$.dialog.close();
   }
 
   error(error: Error) {
