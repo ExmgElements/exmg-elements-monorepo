@@ -37,6 +37,12 @@ export class ExmgFormDialog extends LitElement {
   @query('#dialog')
   private dialogNode?: HTMLElement | any;
 
+  @query('#form')
+  private formNode?: HTMLElement | any;
+
+  @query('#submitBtn')
+  private submitBtnNode?: HTMLElement | any;
+
   constructor() {
     super();
 
@@ -49,14 +55,6 @@ export class ExmgFormDialog extends LitElement {
     if (e.path[0].tagName === 'PAPER-DIALOG') {
       this.reset();
     }
-  }
-
-  private hasErrorMessage(message?: string) {
-    return !!message ? 'show' : '';
-  }
-
-  protected getElementBySelector(selector: string): HTMLElement | null {
-    return this.shadowRoot ? this.shadowRoot.querySelector(selector) : null;
   }
 
   public open() {
@@ -72,40 +70,33 @@ export class ExmgFormDialog extends LitElement {
   }
 
   private reset() {
-    const submitBtnElem = this.getElementBySelector('#submitBtn');
-    const formElem = this.getElementBySelector('#form') as HTMLElement | any;
-
     this.submitting = false;
     this.errorMessage = undefined;
 
-    if (submitBtnElem) {
-      submitBtnElem.removeAttribute('disabled');
+    if (this.submitBtnNode) {
+      this.submitBtnNode.removeAttribute('disabled');
     }
 
-    if (formElem) {
-      formElem.reset();
+    if (this.formNode) {
+      this.formNode.reset();
     }
   }
 
   public error(error: Error) {
-    const submitBtnElem = this.getElementBySelector('#submitBtn');
-
     this.submitting = false;
     this.errorMessage = error.message;
 
-    if (submitBtnElem) {
-      submitBtnElem.removeAttribute('disabled');
+    if (this.submitBtnNode) {
+      this.submitBtnNode.removeAttribute('disabled');
     }
   }
 
   public done() {
-    const submitBtnElem = this.getElementBySelector('#submitBtn');
-
     // Reset properties when submit is finished
     this.submitting = false;
 
-    if (submitBtnElem) {
-      submitBtnElem.removeAttribute('disabled');
+    if (this.submitBtnNode) {
+      this.submitBtnNode.removeAttribute('disabled');
     }
 
     // Close dialog
@@ -113,26 +104,23 @@ export class ExmgFormDialog extends LitElement {
   }
 
   submit() {
-    const submitBtnElem = this.getElementBySelector('#submitBtn');
-    const formElem = this.getElementBySelector('#form') as HTMLElement | any;
-
     // reset error message on new submit
     this.errorMessage = undefined;
 
     // Validate form elements
-    if (!formElem.validate()) {
+    if (!this.formNode.validate()) {
       return;
     }
 
     // Disabled submit button + display progress bar
     this.submitting = true;
 
-    if (submitBtnElem) {
-      submitBtnElem.setAttribute('disabled', 'disabled');
+    if (this.submitBtnNode) {
+      this.submitBtnNode.setAttribute('disabled', 'disabled');
     }
 
     // dispatch event containing the serialized form data
-    this.dispatchEvent(new CustomEvent('submit', {bubbles: false, composed: true, detail: formElem.serializeForm()}));
+    this.dispatchEvent(new CustomEvent('submit', {bubbles: false, composed: true, detail: this.formNode.serializeForm()}));
   }
 
   protected render() {
@@ -145,7 +133,7 @@ export class ExmgFormDialog extends LitElement {
         </header>
         <paper-dialog-scrollable>
           <div class="body">
-            <div class="error ${this.hasErrorMessage(this.errorMessage)}">
+            <div class="error ${ !!this.errorMessage ? 'show' : '' }">
               <span class="body">
                 <span>
                   <iron-icon icon="exmg-icons:warning"></iron-icon>

@@ -49,6 +49,9 @@ export class ExmgConfirmDialog extends LitElement {
   @query('#dialog')
   private dialogNode?: HTMLElement | any;
 
+  @query('#submitBtn')
+  private submitBtnNode?: HTMLElement | any;
+
   constructor() {
     super();
 
@@ -58,14 +61,6 @@ export class ExmgConfirmDialog extends LitElement {
 
   private onCloseDialog() {
     this.reset();
-  }
-
-  private hasErrorMessage(message?: string) {
-    return !!message ? 'show' : '';
-  }
-
-  protected getElementBySelector(selector: string): HTMLElement | null {
-    return this.shadowRoot ? this.shadowRoot.querySelector(selector) : null;
   }
 
   public open() {
@@ -81,35 +76,29 @@ export class ExmgConfirmDialog extends LitElement {
   }
 
   private reset() {
-    const submitBtnElem = this.getElementBySelector('#submitBtn');
-
     this.submitting = false;
     this.errorMessage = undefined;
 
-    if (submitBtnElem) {
-      submitBtnElem.removeAttribute('disabled');
+    if (this.submitBtnNode) {
+      this.submitBtnNode.removeAttribute('disabled');
     }
   }
 
   public error(error: Error) {
-    const submitBtnElem = this.getElementBySelector('#submitBtn');
-
     this.submitting = false;
     this.errorMessage = error.message;
 
-    if (submitBtnElem) {
-      submitBtnElem.removeAttribute('disabled');
+    if (this.submitBtnNode) {
+      this.submitBtnNode.removeAttribute('disabled');
     }
   }
 
   public done() {
-    const submitBtnElem = this.getElementBySelector('#submitBtn');
-
     // Reset properties when submit is finished
     this.submitting = false;
 
-    if (submitBtnElem) {
-      submitBtnElem.removeAttribute('disabled');
+    if (this.submitBtnNode) {
+      this.submitBtnNode.removeAttribute('disabled');
     }
 
     // Close dialog
@@ -117,16 +106,14 @@ export class ExmgConfirmDialog extends LitElement {
   }
 
   private submit() {
-    const submitBtnElem = this.getElementBySelector('#submitBtn');
-
     // reset error message on new submit
     this.errorMessage = undefined;
 
     // Disabled submit button + display progress bar
     this.submitting = true;
 
-    if (submitBtnElem) {
-      submitBtnElem.setAttribute('disabled', 'disabled');
+    if (this.submitBtnNode) {
+      this.submitBtnNode.setAttribute('disabled', 'disabled');
     }
 
     // dispatch event
@@ -142,7 +129,7 @@ export class ExmgConfirmDialog extends LitElement {
           <paper-icon-button icon="${this.closeIcon}" dialog-dismiss></paper-icon-button>
         </header>
         <div class="body">
-          <div class="error ${this.hasErrorMessage(this.errorMessage)}">
+          <div class="error ${ !!this.errorMessage ? 'show' : '' }">
             <span class="body">
               <span>
                 <iron-icon icon="exmg-icons:warning"></iron-icon>
