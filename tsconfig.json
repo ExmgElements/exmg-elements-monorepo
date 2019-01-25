@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "./",
     "target": "es2017",
     "module": "esnext",
@@ -11,7 +12,11 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "paths":{
+      "@exmg/exmg-cms-styles/exmg-cms-dialog-styles.js": ["typings/dialogs.d.ts"],
+      "@exmg/exmg-cms-styles/exmg-cms-button-styles.js": ["typings/dialogs.d.ts"]
+    }
   },
   "include": [
     "**/*.ts"
