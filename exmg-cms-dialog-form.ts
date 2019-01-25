@@ -1,4 +1,4 @@
-import {customElement, html, LitElement, property} from 'lit-element';
+import {customElement, html, LitElement, property, query} from 'lit-element';
 import '@polymer/paper-dialog';
 import '@polymer/paper-dialog-scrollable';
 import '@polymer/paper-button';
@@ -34,6 +34,9 @@ export class ExmgFormDialog extends LitElement {
   @property({type: String, attribute: 'error-message'})
   private errorMessage?: string;
 
+  @query('#dialog')
+  private dialogNode?: HTMLElement | any;
+
   constructor() {
     super();
 
@@ -57,18 +60,14 @@ export class ExmgFormDialog extends LitElement {
   }
 
   open() {
-    const dialogNodeElem = this.getElementBySelector('#dialog') as HTMLElement | any;
-
-    if (dialogNodeElem) {
-      dialogNodeElem.open();
+    if (this.dialogNode) {
+      this.dialogNode.open();
     }
   }
 
   close() {
-    const dialogNodeElem = this.getElementBySelector('#dialog') as HTMLElement | any;
-
-    if (dialogNodeElem) {
-      dialogNodeElem.close();
+   if (this.dialogNode) {
+      this.dialogNode.close();
     }
   }
 
