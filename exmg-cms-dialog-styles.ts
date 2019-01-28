@@ -10,6 +10,7 @@ export const exmgDialogStyles = html`
     paper-progress {
       width: 100%;
       margin-top: 0px;
+      margin-bottom: 0px;
       box-sizing: border-box;
     }
     paper-dialog{
