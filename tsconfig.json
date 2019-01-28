@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./",
+    "target": "es2017",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "declaration": true,
+    "lib": ["es2017", "dom"],
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "experimentalDecorators": true,
+    "paths":{
+      "@exmg/exmg-cms-styles/exmg-cms-button-styles.js": ["typings/exmg-cms-styles/exmg-cms-button-styles.d.ts"],
+      "@exmg/exmg-cms-styles/exmg-cms-dialog-styles.js": ["typings/exmg-cms-styles/exmg-cms-dialog-styles.d.ts"]
+    }
+  },
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

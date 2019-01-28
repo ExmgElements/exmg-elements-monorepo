@@ -16,16 +16,14 @@
     <script src="../node_modules/codemirror/mode/xml/xml.js"></script>
 
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/@webcomponents/shadycss/apply-shim.min.js"></script>
 
     <!-- Ensure Web Animations polyfill is loaded -->
-    <script src="../node_modules//web-animations-js/web-animations-next-lite.min.js"></script>
-
-    <script type="module" src="../exmg-cms-dialog-form.js"></script>
-
+    <script src="../node_modules/web-animations-js/web-animations-next-lite.min.js"></script>
   </head>
   <body>
     <script type="module">
-      import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
+      import {LitElement, html} from 'lit-element';
       import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
       import '@polymer/iron-demo-helpers/demo-snippet';
       import '@exmg/exmg-paper-combobox/exmg-paper-combobox.js';
@@ -38,51 +36,122 @@
       import '@polymer/paper-item/paper-icon-item.js';
       import './exmg-icons.js';
       import '../exmg-cms-dialog-confirm.js';
-        
-      class XDemo extends PolymerElement {
-        static get is() {
-          return 'x-demo';
-        }
-        static get template() {
-          return html`
-            <!-- Default confirmation dialog -->
-            <paper-button on-click="_deleteThis">Dialog Confirm</paper-button>
-            <exmg-cms-dialog-confirm 
-              id="dialog0" 
-              title="Confirmation" 
-              message="Are you sure you want to delete this item?" 
-              button-copy="Delete account" 
-              on-submit="_delete"></exmg-cms-dialog-confirm>
+      import '../exmg-cms-dialog-form.js';
 
-            <!-- Normal dialog including progress bar on submit -->
-            <paper-button on-click="_openDialog1">Dialog Normal</paper-button>
-            <exmg-cms-dialog-form 
-              id="dialog1" 
-              title="Create account" 
-              button-copy="Save" 
-              on-submit="_saveData">
+      class XDemo extends LitElement {
+        constructor() {
+          super();
+
+          this._openDialog0 = this._openDialog0.bind(this);
+          this._openDialog1 = this._openDialog1.bind(this);
+          this._openDialog2 = this._openDialog2.bind(this);
+          this._openDialog3 = this._openDialog3.bind(this);
+          this._delete = this._delete.bind(this);
+          this._saveData = this._saveData.bind(this);
+          this._saveDataTicket = this._saveDataTicket.bind(this);
+          this._saveDataError = this._saveDataError.bind(this);
+        }
+
+        getElementBySelector(selector) {
+          return this.shadowRoot ? this.shadowRoot.querySelector(selector) : null;
+        }
+
+        _openDialog0() {
+          this.getElementBySelector('#dialog0').open();
+        }
+        _openDialog1() {
+          this.getElementBySelector('#dialog1').open();
+        }
+        _openDialog2() {
+          this.getElementBySelector('#dialog2').open();
+        }
+        _openDialog3() {
+          this.getElementBySelector('#dialog3').open();
+        }
+        _delete(e) {
+          const {target} = e;
+          // Trigger done after 1s
+          setTimeout(_ => {
+            // finished
+            target.done();
+          }, 1000);
+        }
+        _saveData(e) {
+          const {detail, target} = e;
+          // Save data
+          console.log('Data: ', e.detail);
+          // Trigger done after 1s
+          setTimeout(_ => {
+            // finished
+            target.done();
+          }, 1000);
+        }
+        _saveDataTicket(e) {
+          const {detail, target} = e;
+          // Save data
+          console.log('Data: ', e.detail);
+          // Trigger done after 1s
+          setTimeout(_ => {
+            // finished
+            target.done();
+          }, 1000);
+        }
+        _saveDataError(e) {
+          const {detail, target} = e;
+          // Save data
+          console.log('Data: ', e.detail);
+
+          // Trigger done after 1s
+          setTimeout(_ => {
+            try {
+              // Throw error to simulate error
+              if(true) {
+                throw Error('User does not have permission to save data')
+              }
+              target.done();
+            } catch (error) {
+              target.error(error);
+            }
+          }, 1000);
+        }
+
+        render () {
+          //language=html
+          return html`
+            <paper-button @click="${this._openDialog0}">Dialog Confirm</paper-button>
+            <exmg-cms-dialog-confirm
+              id="dialog0"
+              title="Confirmation"
+              message="Are you sure you want to delete this item?"
+              button-copy="Delete account"
+              @submit="${this._delete}"></exmg-cms-dialog-confirm>
+
+            <paper-button @click="${this._openDialog1}">Dialog Normal</paper-button>
+            <exmg-cms-dialog-form
+              id="dialog1"
+              title="Create account"
+              button-copy="Save"
+              @submit="${this._saveData}">
                 <paper-input name="name" label="Name" required></paper-input>
                 <paper-input name="test" label="Test"></paper-input>
             </exmg-cms-dialog-form>
-            
-            <!-- Normal dialog showing error on submit -->
-            <exmg-cms-dialog-form 
-              id="dialog2" 
-              title="Create account" 
-              button-copy="Save" 
-              on-submit="_saveDataError">
+
+            <exmg-cms-dialog-form
+              id="dialog2"
+              title="Create account"
+              button-copy="Save"
+              @submit="${this._saveDataError}">
                 <p>This setting either prevents or allows users to create multiple accounts using the same email address if they sign in to your app using different authentication providers.</p>
                 <paper-input name="name" label="Name" required></paper-input>
                 <paper-input name="password" label="Password" required></paper-input>
             </exmg-cms-dialog-form>
-            <paper-button on-click="_openDialog2">Dialog Error</paper-button>
+            <paper-button @click="${this._openDialog2}">Dialog Error</paper-button>
 
-            <!-- Normal dialog showing complex form -->
-            <exmg-cms-dialog-form 
-              id="dialog3" 
-              title="Create Ticket" 
-              button-copy="Create" 
-              on-submit="_saveDataTicket" large>
+            <exmg-cms-dialog-form
+              id="dialog3"
+              title="Create Ticket"
+              button-copy="Create"
+              @submit="${this._saveDataTicket}" large>
                 <exmg-paper-combobox label="Project" style="max-width:280px;" always-float-label required>
                   <paper-item>PlayToTV</paper-item>
                   <paper-item>Website</paper-item>
@@ -111,59 +180,11 @@
                 </exmg-markdown-editor>
                 <paper-input name="test" label="Test" type="number" always-float-label></paper-input>
             </exmg-cms-dialog-form>
-            <paper-button on-click="_openDialog3">Dialog Large</paper-button>
+            <paper-button @click="${this._openDialog3}">Dialog Large</paper-button>
           `;
         }
-        _deleteThis() {
-          this.$.dialog0.open();
-        }
-        _openDialog1() {
-          this.$.dialog1.open();
-        }
-        _openDialog2() {
-          this.$.dialog2.open();
-        }
-        _openDialog3() {
-          this.$.dialog3.open();
-        }
-        _delete(e) {
-          const {target} = e;
-          // Trigger done after 1s
-          setTimeout(_ => {
-            // finished
-            target.done();
-          }, 1000);
-        }
-        _saveData(e) {
-          const {detail, target} = e;
-          // Save data
-          console.log('Data: ', e.detail);
-          // Trigger done after 1s
-          setTimeout(_ => {
-            // finished
-            target.done();
-          }, 1000);
-        }
-        _saveDataError(e) {
-          const {detail, target} = e;
-          // Save data
-          console.log('Data: ', e.detail);
-
-          // Trigger done after 1s
-          setTimeout(_ => {
-            try {
-              // Throw error to simulate error
-              if(true) {
-                throw Error('User does not have permission to save data')
-              }
-              target.done();
-            } catch (error) {
-              target.error(error);
-            }
-          }, 1000);
-        }
       }
-      window.customElements.define(XDemo.is, XDemo);
+      window.customElements.define('x-demo', XDemo);
     </script>
     <x-demo></x-demo>
   </body>

@@ -1,14 +1,16 @@
-import {html} from '@polymer/polymer/polymer-element.js';
+import {html} from 'lit-element';
 import {sharedDialogStyles} from '@exmg/exmg-cms-styles/exmg-cms-dialog-styles.js';
 import {sharedButtonStyles} from '@exmg/exmg-cms-styles/exmg-cms-button-styles.js';
 
 export const exmgDialogStyles = html`
-  ${sharedDialogStyles}
-  ${sharedButtonStyles}
   <style>
+    ${sharedDialogStyles.innerHTML.replace('<style>', '').replace('</style>', '')}
+    ${sharedButtonStyles.innerHTML.replace('<style>', '').replace('</style>', '')}
+
     paper-progress {
       width: 100%;
       margin-top: 0px;
+      margin-bottom: 0px;
       box-sizing: border-box;
     }
     paper-dialog{
@@ -93,7 +95,7 @@ export const exmgDialogStyles = html`
     .body {
       margin-top: 0px;
       margin-bottom: 24px;
-    }    
+    }
     paper-dialog > .actions {
       margin: 18px 0 18px;
     }
