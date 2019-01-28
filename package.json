@@ -48,6 +48,8 @@
     "samsam": "1.1.2"
   },
   "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
     "start": "gulp serve",
     "lint": "tslint -c ./tslint.json --project ./",
     "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts"
