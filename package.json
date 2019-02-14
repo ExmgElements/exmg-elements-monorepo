@@ -2,6 +2,29 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "lerna": "^3.11.1"
+    "@polymer/iron-component-page": "^4.0.1",
+    "@polymer/iron-demo-helpers": "^3.0.2",
+    "@polymer/paper-item": "^3.0.1",
+    "@polymer/test-fixture": "^4.0.2",
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "@types/polymer": "^1.2.7",
+    "@webcomponents/webcomponentsjs": "^2.2.7",
+    "chai": "^4.2.0",
+    "gulp": "^4.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-replace": "^1.0.0",
+    "lerna": "^3.11.1",
+    "mocha": "^5.2.0",
+    "tslint": "^5.12.1",
+    "tslint-config-exmg": "^1.0.2",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.3.3",
+    "wct-mocha": "^1.0.0",
+    "web-animations-js": "^2.3.1"
+  },
+  "dependencies": {
+    "@exmg/exmg-paper-combobox": "file:packages/exmg-paper-combobox",
+    "@exmg/exmg-paper-token-input": "file:packages/exmg-paper-token-input"
   }
 }
