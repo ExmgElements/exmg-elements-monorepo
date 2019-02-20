@@ -55,6 +55,7 @@ class MyApp extends ConnectedLitElement<RootState> {
   }
 
   disconnectedCallback(): void {
+    super.disconnectedCallback();
     this.unsubscribe.forEach(fn => fn());
   }
 
@@ -130,13 +131,13 @@ class MyApp extends ConnectedLitElement<RootState> {
 
   protected firstUpdated() {
     const outlet = this.shadowRoot!.querySelector<HTMLElement>('.main-content')!;
-    const result = installRouter(
+    const installationResult = installRouter(
       store,
       outlet,
       appRoutes,
       () => store.dispatch(showSnackbar())
     );
-    this.unsubscribe.push(result.unsubscribe);
+    this.unsubscribe.push(installationResult.unsubscribe);
 
     installMediaQueryWatcher(`(min-width: 460px)`,
       () => store.dispatch(updateDrawerState(false)));

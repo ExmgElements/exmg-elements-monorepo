@@ -1,22 +1,14 @@
-import {connectStore} from '../src/router/connect';
-
-declare global {
-  interface Window {
-    process?: Object;
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-  }
-}
-
 import {
   createStore,
   compose,
   applyMiddleware,
   combineReducers,
-  // Reducer,
   StoreEnhancer
 } from 'redux';
 import reduxThunk, {ThunkMiddleware} from 'redux-thunk';
 import {lazyReducerEnhancer} from 'pwa-helpers/lazy-reducer-enhancer.js';
+
+import {connectStore, StateWithRouter} from '../src/router/connect';
 
 import app, {AppState} from './reducers/app';
 import {CounterState} from './reducers/counter';
@@ -25,11 +17,18 @@ import {AppAction} from './actions/app';
 import {CounterAction} from './actions/counter';
 import {ShopAction} from './actions/shop';
 
-import router, {RouterState} from '../src/reducers/router';
+import {routerReducer as router, RouterState} from '../src/reducers/router';
 import {RouterAction} from '../src/actions/router';
 
+declare global {
+  interface Window {
+    process?: Object;
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+
 // Overall state extends static states and partials lazy states.
-export interface RootState {
+export interface RootState extends StateWithRouter {
   app?: AppState;
   counter?: CounterState;
   shop?: ShopState;

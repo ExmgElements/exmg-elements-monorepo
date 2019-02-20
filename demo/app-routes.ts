@@ -3,9 +3,8 @@ import {RouteItem} from '@vaadin/router';
 export const appRoutes: RouteItem[] = [
   {
     path: '', breadcrumb: {label: 'HOME', href: 'view1'}, name: 'home',
-    // component: 'my-view1', action: () => import('./pages/my-view1.js') as Promise<any>,
     children: [
-      {path: '', redirect: 'view1'},
+      {path: '', component: 'my-view1', action: () => import('./pages/my-view1.js') as Promise<any>},
       {path: 'view1/:user?/:name?', title: 'View 1', component: 'my-view1', action: () => import('./pages/my-view1.js') as Promise<any>},
       /**
        * !!NOTE: Leveraging bundle.module import is not working

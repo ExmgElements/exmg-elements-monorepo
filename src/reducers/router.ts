@@ -1,4 +1,4 @@
-import  {Reducer} from 'redux';
+import {Reducer} from 'redux';
 import {
   ROUTER_CHANGED,
   UPDATE_QUERY_PARAMS,
@@ -31,7 +31,7 @@ const INITIAL_STATE: RouterState = {
   allQueryParams: {},
 };
 
-const routerReducer: Reducer<RouterState, RouterAction> = (state = INITIAL_STATE, action: RouterAction) => {
+export const routerReducer: Reducer<RouterState, RouterAction> = (state = INITIAL_STATE, action: RouterAction) => {
   const {type, ...rest} = action;
   switch (type) {
     case ROUTER_CHANGED:
@@ -48,5 +48,3 @@ const routerReducer: Reducer<RouterState, RouterAction> = (state = INITIAL_STATE
       return state;
   }
 };
-
-export default routerReducer;
