@@ -8,7 +8,7 @@
  subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-import {html, LitElement, property} from 'lit-element';
+import {html, property} from 'lit-element';
 
 // This element is connected to the Redux store.
 import {store, RootState} from '../store';
@@ -29,9 +29,9 @@ import '../components/counter-element';
 // These are the shared styles needed by this element.
 import {SharedStyles} from '../components/shared-styles';
 
-import {BaseClassConnectedLitElement, connect} from '../../src/router/connect';
+import {ConnectedLitElement} from '../../src/router/connect';
 
-class MyView2 extends (<BaseClassConnectedLitElement<RootState>>connect(store)(LitElement)) {
+class MyView2 extends ConnectedLitElement<RootState> {
   @property({type: Number})
   private clicks = 0;
 

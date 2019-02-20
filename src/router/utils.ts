@@ -1,5 +1,6 @@
-import {generateUrlByPath} from './url-generator';
 import {Location as VaadinLocation} from '@vaadin/router';
+import {generateUrlByPath} from './url-generator';
+import {BreadcrumbItem} from '../actions/router';
 
 export type QueryParams = {
   queryParams: Record<string, string>;
@@ -28,20 +29,23 @@ export const replaceParamsPlaceholders = (text: string, params: Record<string, s
   return tmpText;
 };
 
-export const extractBreadcrumbsFromLocation = (location: VaadinLocation) => {
+export const extractBreadcrumbsFromLocation = (location: VaadinLocation): BreadcrumbItem[] => {
   let prevPath = '';
   const {routes, params} = location;
-
   console.log('location', location);
   return routes
     .filter(({breadcrumb}) => !!breadcrumb)
     .map(it => {
-      const slash = it.path === '' || prevPath.endsWith('/') ? '' : '/';
+      const slash = it.path === '' || prevPath.endsWith('/') || it.path.startsWith('/') ? '' : '/';
       const path = !!prevPath ?  `${prevPath}${slash}${it.path}` : it.path;
-      const href = generateUrlByPath(path, params);
-      const {label} = it.breadcrumb!;
+      const {label, href, disabled = false} = it.breadcrumb!;
       prevPath = path;
 
-      return {path, href, label: replaceParamsPlaceholders(label, params)};
+      return {
+        path,
+        disabled,
+        href: !!href ? href : generateUrlByPath(path, params),
+        label: replaceParamsPlaceholders(label, params),
+      };
     });
 };

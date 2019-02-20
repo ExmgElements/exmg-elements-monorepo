@@ -1,4 +1,4 @@
-import {connectLink} from '../src/components/exmg-link';
+import {connectStore} from '../src/router/connect';
 
 declare global {
   interface Window {
@@ -68,5 +68,5 @@ store.addReducers({
   router,
 });
 
-// Link element should be connected with store
-connectLink(store);
+// Router must be connected with store
+connectStore(store);

@@ -1,4 +1,4 @@
-import {LitElement, html, css, property, PropertyValues} from 'lit-element';
+import {html, css, property, PropertyValues} from 'lit-element';
 import {setPassiveTouchGestures} from '@polymer/polymer/lib/utils/settings.js';
 import {installMediaQueryWatcher} from 'pwa-helpers/media-query.js';
 
@@ -29,11 +29,11 @@ import {styles} from './app-styles';
 import {RouterState} from '../src/reducers/router';
 import {installRouter} from '../src/router/instal-router';
 
-import {BaseClassConnectedLitElement, connect} from '../src/router/connect';
+import {ConnectedLitElement} from '../src/router/connect';
 import {appRoutes} from './app-routes';
 import './components/breadcrumb';
 
-class MyApp extends (<BaseClassConnectedLitElement<RootState>>connect(store)(LitElement)) {
+class MyApp extends ConnectedLitElement<RootState> {
   static styles = css`
     ${styles}
   `;

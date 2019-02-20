@@ -8,7 +8,7 @@
  subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-import {html, css, property, LitElement} from 'lit-element';
+import {html, css, property} from 'lit-element';
 import {BeforeLeaveCommand, Location, PreventResult, RouteItem, Router} from '@vaadin/router';
 
 // This element is connected to the Redux store.
@@ -33,9 +33,9 @@ import {SharedStyles} from '../components/shared-styles';
 import {ButtonSharedStyles} from '../components/button-shared-styles';
 import {addToCartIcon} from '../components/my-icons';
 
-import {BaseClassConnectedLitElement, connect} from '../../src/router/connect';
+import {ConnectedLitElement} from '../../src/router/connect';
 
-class MyView3 extends (<BaseClassConnectedLitElement<RootState>>connect(store)(LitElement)) {
+class MyView3 extends ConnectedLitElement<RootState> {
   @property({type: Number})
   private quantity = 0;
 

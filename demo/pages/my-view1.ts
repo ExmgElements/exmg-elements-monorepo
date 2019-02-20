@@ -8,16 +8,16 @@
  subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-import {html, LitElement, property} from 'lit-element';
+import {html, property} from 'lit-element';
 
 // These are the shared styles needed by this element.
 import {SharedStyles} from '../components/shared-styles';
-import {RootState, store} from '../store';
+import {RootState} from '../store';
 import {RouterState} from '../../src/reducers/router';
 
-import {BaseClassConnectedLitElement, connect} from '../../src/router/connect';
+import {ConnectedLitElement} from '../../src/router/connect';
 
-export class MyView1 extends (<BaseClassConnectedLitElement<RootState>>connect(store)(LitElement)) {
+export class MyView1 extends ConnectedLitElement<RootState> {
   static styles = SharedStyles;
 
   @property({type: Object}) private router: Partial<RouterState> = {};

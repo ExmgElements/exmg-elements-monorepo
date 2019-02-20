@@ -63,6 +63,10 @@ export const styles: CSSResult = css`
       border-bottom: 4px solid var(--app-header-selected-color);
     }
 
+    exmg-link a[disabled] {
+      pointer-events: none;
+    }
+
     .menu-btn {
       background: none;
       border: none;

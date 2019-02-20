@@ -1,5 +1,6 @@
 import {mockStore, promisifyFlush} from './utils';
-import {Link, connectLink} from '../src/components/exmg-link';
+import {ExmgLink} from '../src/components/exmg-link';
+import {connectStore} from '../src/router/connect';
 
 declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
 declare const flush: (cb?: Function) => void;
@@ -7,12 +8,12 @@ declare const flush: (cb?: Function) => void;
 const {assert} = chai;
 
 suite('<exmg-link>', function () {
-  let element: Link;
+  let element: ExmgLink;
   const flushCompleted = promisifyFlush(flush);
 
   suite('base usage', function () {
     setup(async () => {
-      connectLink(mockStore({router: {
+      connectStore(mockStore({router: {
           baseUrl: '',
           pathname: '/selected',
           component: '',
@@ -33,7 +34,7 @@ suite('<exmg-link>', function () {
       assert.equal(anchor!.href, `${window.location.origin}/test`, 'Anchor href is setup');
       assert.equal(anchor!.getAttribute('selected'), null, 'Link is not selected');
       assert.equal(element.href, '/test', 'Anchor href is setup');
-      assert.equal(anchor!.innerText, 'click-me', 'Anchor text content is stupe');
+      assert.equal(anchor!.innerText, 'click-me', 'Anchor text content is setup');
     });
 
     test('check if link is selected', async function () {

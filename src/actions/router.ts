@@ -15,6 +15,7 @@ export type BreadcrumbItem = {
   href: string;
   path: string;
   label: string;
+  disabled?: boolean;
 };
 
 export interface RouterActionRouterChanged extends Action<ROUTER_CHANGED_TYPE> {

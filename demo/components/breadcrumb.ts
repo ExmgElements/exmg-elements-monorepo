@@ -24,8 +24,8 @@ export class ExmgBreadcrumb extends LitElement {
           ${
             repeat(
               this.breadcrumbs,
-              breadcrumb => breadcrumb.href,
-              breadcrumb => html`<exmg-link href="${breadcrumb.href}" content="${breadcrumb.label}"></exmg-link>`)
+              breadcrumb => `${breadcrumb.href}-${breadcrumb.path}`,
+              breadcrumb => html`<exmg-link href="${breadcrumb.href}" ?disabled="${breadcrumb.disabled}" content="${breadcrumb.label}"></exmg-link>`)
           }
         </nav>
       `;
