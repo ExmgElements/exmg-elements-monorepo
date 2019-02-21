@@ -9,7 +9,7 @@
  */
 
 import {html, LitElement} from 'lit-element';
-import {generateUrlByNameOrComponentName} from '../../src/router/url-generator';
+import {generateUrlByNameOrComponentName} from '../../index';
 
 // These are the shared styles needed by this element.
 import {SharedStyles} from '../components/shared-styles';

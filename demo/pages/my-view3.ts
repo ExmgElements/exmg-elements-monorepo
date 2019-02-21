@@ -33,7 +33,7 @@ import {SharedStyles} from '../components/shared-styles';
 import {ButtonSharedStyles} from '../components/button-shared-styles';
 import {addToCartIcon} from '../components/my-icons';
 
-import {ConnectedLitElement} from '../../src/router/connect';
+import {ConnectedLitElement} from '../../index';
 
 class MyView3 extends ConnectedLitElement<RootState> {
   @property({type: Number})

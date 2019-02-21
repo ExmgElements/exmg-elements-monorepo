@@ -38,14 +38,14 @@ Your application is already set up to be tested via [web-component-tester](https
   Here is the list of added features 
   * router is manged by redux and is placed in object state.router 
   * component connected with router have hook methods stateChanged and routeChanged
-  * supported queryParams - can available in state.router
-  * supported params - can available in state.router
+  * supported queryParams - can obtained from state.router
+  * supported params - can obtained from state.router
   * possible to add title to route with placeholder for params
   * possible to add breadcrumbs to route
 * [pwa-helpers](https://github.com/Polymer/pwa-helpers) 
 * [Redux](https://redux.js.org/) 
 
-## First of all you need to install router
+## First of all you need to install router package
 ```bash
 npm i @exmg/exmg-lit-router -S
 ```
@@ -86,11 +86,35 @@ connectStore(store);
 
 ## Create and install router config
 
-### You need to have routes configuration file like
+### Set base href
+Inside index.html in head section setup
+```html
+<base href="/">
+```
+or prefixed
+```html
+<base href="/demo/">
+```
+
+### You need to have routes configuration file
+
+#### Route NOT FOUND
+You have to define route where user will be redirected once page not found.
+Then name this route `not-found`. Base on this name we can later on programmatically redirect user to this page  
+
+```typescript
+const routeItems = [
+     // this path may be used explicitly to redirect user
+    {path: '404-not-found', component: 'my-view404', name: 'not-found'},
+    // this is most general rules - should be placed as te last route entry
+    {path: '(.*)', component: 'my-view404'},
+];
+```
 
 #### Statically imported components
 ```typescript
 import {RouteItem} from '@vaadin/router';
+// import my-component and user-list here
 
 export const appRoutes: RouteItem[] = [
   {
@@ -120,22 +144,30 @@ export const appRoutes: RouteItem[] = [
       return module.routes;
     }),
   },
-    {
-      // load module dynamically and define children config manually
-      path: 'users2',
-      action: () => import('./shared_pages/user/routes.js') as Promise<any>,
-      children: [
-        {
-          path: '',
-          component: 'user-list'
-        },
-        {
-          path: 'details/:id',
-          component: 'user-detail'
-        }
-      ],
-    },
+  {
+    // load module dynamically and define children config manually
+    path: 'users2',
+    action: () => import('./shared_pages/user/routes.js') as Promise<any>,
+    children: [
+      {
+        path: '',
+        component: 'user-list'
+      },
+      {
+        path: 'details/:id',
+        component: 'user-detail'
+      }
+    ],
+  },
 ];
+```
+
+```text
+  !!NOTE: Leveraging bundle.module import is not working
+  {path: 'view2/:color?', component: 'my-view2', bundle: {module: './pages/my-view2.js'}},
+  This is not working in chrome mobile mode when <base href="/demo/" /> then dependencies are imported
+  without prefix which end up with 404 - not found network response
+  Recommended to use dynamic import('package.js')
 ```
 
 Once you have defined routes you have to install them in app
@@ -175,7 +207,7 @@ export class MyApp extends LitElement {
 Router config has been extended by:
 * title
 ```typescript
-const routerItme = {
+const routerItem = {
   path: 'details/:name',
   title: 'User detail {name}',
 };
@@ -183,7 +215,7 @@ const routerItme = {
 entering route `/details/john` you should have value of state.router.title equal to `User detail john`
 * breadcrumb
 ```typescript
-const routerItme = {
+const routerItem = {
   path: 'details/:name',
   component: 'exmg-user-detail',
   breadcrumb: {label: 'User {name}'},
@@ -203,7 +235,7 @@ entering route `/details/john` you should have value of state.router.breadcrumbs
 ```
 You can also pass custom href
 ```typescript
-const routerItme = {
+const routerItem = {
   path: 'details/:name',
   component: 'exmg-user-detail',
   breadcrumb: {label: 'User {name}', href: '/custom/path/to/'},
@@ -213,7 +245,7 @@ const routerItme = {
 
 You can pass anything (what is serializable) to the route which will be accessible in element
 ```typescript
-const routerItme = {
+const  routerItem = {
   path: 'details/:name',
   data: {
     showAge: true,
@@ -250,7 +282,7 @@ export class ExternalPage extends ConnectedLitElement<StateWithRouter> {
 }
 ```
 
-You can pass wider state type 
+You can pass broader state type or your rootState 
 
 ```typescript
 import {property} from 'lit-element';
@@ -271,3 +303,142 @@ export class Page extends ConnectedLitElement<ExtendedState> {
 }
 ```
 
+## Lifecycle callbacks
+Is support exactly the same callback like defined in vaadin/router you can read [here](https://vaadin.github.io/vaadin-router/vaadin-router/demo/#vaadin-router-lifecycle-callbacks-demos)
+
+Lifecycle callbacks may be used as guards, redirection or preventing leave router
+
+* Redirect to page not-found
+```typescript
+import {BeforeEnterCommand, Location, Router} from '@vaadin/router';
+import {property} from 'lit-element';
+import {ConnectedLitElement, StateWithRouter, RouterState} from '@exmg/exmg-lit-router';
+
+export class Page extends ConnectedLitElement<StateWithRouter> {
+  @property({type: Object}) private router: Partial<RouterState> = {};
+  users = new Map();
+  
+  routeChanged(state: StateWithRouter, prevState: StateWithRouter) {
+    this.router = state.router;
+    this.app = state.myReducer;
+  }
+
+  onBeforeEnter(location: Location, command: BeforeEnterCommand, router: Router): any {
+    const {params} = location;
+    const {name = ''} = params || {};
+    if (!this.users.has(name) || !this.users.get(name)!.active) {
+      return command.redirect(router.urlForName('not-found', {}));
+    }
+  }
+}
+```
+
+* Redirect to page when page is forbidden
+```typescript
+import {BeforeEnterCommand, Location, Router} from '@vaadin/router';
+import {property} from 'lit-element';
+import {ConnectedLitElement, StateWithRouter, RouterState} from '@exmg/exmg-lit-router';
+
+export class Page extends ConnectedLitElement<StateWithRouter> {
+  @property({type: Object}) private router: Partial<RouterState> = {};
+  app: any;
+  
+  routeChanged(state: StateWithRouter, prevState: StateWithRouter) {
+    this.router = state.router;
+    this.app = state.app;
+  }
+
+  onBeforeEnter(location: Location, command: BeforeEnterCommand, router: Router): any {
+    if (!this.app.authenticated) {
+      // here i redirect to named router "forbidden"
+      return command.redirect(router.urlForName('forbidden', {}));
+    }
+  }
+}
+```
+
+* Prevent leave page
+
+Please note that even we prevent page leave next history entry is added.
+In that case you should back history right before prevent command
+```typescript
+window.history.back();
+// then return command.prevent();
+```
+```typescript
+import {BeforeLeaveCommand, Location, Router} from '@vaadin/router';
+import {property} from 'lit-element';
+import {ConnectedLitElement, StateWithRouter, RouterState} from '@exmg/exmg-lit-router';
+
+export class Page extends ConnectedLitElement<StateWithRouter> {
+  @property({type: Object}) private router: Partial<RouterState> = {};
+  users = new Map();
+  haveTaskInProgress: boolean = true;
+  
+  routeChanged(state: StateWithRouter) {
+    this.router = state.router;
+  }
+
+  onBeforeLeave(location: Location, command: BeforeLeaveCommand, router: Router): PreventResult | void {
+    if (this.haveTaskInProgress) {
+      alert('You should finish yor job before leave!');
+      window.history.back();
+      return command.prevent();
+    }
+  }
+}
+```
+
+## Links
+### URL
+Let say we have setup `<base href="/my-app"`
+and our route is 
+```typescript
+const routes = [
+  {
+    pathname: 'view1',
+    children: [
+      {
+        path: 'detail',
+        name: 'detail-route',
+        component: 'detail-component'
+      }
+    ],
+  }
+];
+```
+
+Then url to `detail-component` might be:
+* /my-app/view1/detail - just absolute path to base href
+* view1/detail - relative path to base href
+* generated path by name or path see [generate url](#generate-urls)
+
+To navigate you can use:
+* anchor `<a href="view1/details">Details</a>`
+* exmg-link
+```html
+<exmg-link href="view1/details" content="Details"></exmg-link>
+```
+This element is just helper which wrap `<a> tag` and reflect 2 attributes
+`selected and disabled` on `<a>`. It allow you to style selected routes.
+```css
+a[selected] {color: red;}
+a[disabled] {color: gray;}
+```
+This element is not added to shadowRoot.
+It cause 2 consequences.
+First it means that you can style it easily from outside 
+Secondly `<slot>` won't work, this is why we have to pass content via attribute.
+
+* redux action
+You can also programmatically navigate to url.
+```typescript
+import {navigateToPath} from '@exmg/exmg-lit-router';
+
+navigateToPath({path: '/my-app/view1'});
+
+```
+
+## Redux - RouterState
+
+## Generate urls

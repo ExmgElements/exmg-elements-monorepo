@@ -3,11 +3,9 @@ import {BeforeEnterCommand, Location, Router} from '@vaadin/router';
 
 import {SharedStyles} from '../../components/shared-styles';
 
-import {StateWithRouter, ConnectedLitElement} from '../../../src/router/connect';
 import '../../../src/components/exmg-link';
 
-import {RouterState} from '../../../src/reducers/router';
-import {generateUrlByNameOrComponentName} from '../../../src/router/url-generator';
+import {RouterState, generateUrlByNameOrComponentName, StateWithRouter, ConnectedLitElement} from '../../../index';
 
 @customElement('exmg-user-detail')
 export class ExmgDetail extends ConnectedLitElement<StateWithRouter> {

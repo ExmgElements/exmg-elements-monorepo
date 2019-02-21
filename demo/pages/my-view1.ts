@@ -13,9 +13,7 @@ import {html, property} from 'lit-element';
 // These are the shared styles needed by this element.
 import {SharedStyles} from '../components/shared-styles';
 import {RootState} from '../store';
-import {RouterState} from '../../src/reducers/router';
-
-import {ConnectedLitElement} from '../../src/router/connect';
+import {RouterState, ConnectedLitElement} from '../../index';
 
 export class MyView1 extends ConnectedLitElement<RootState> {
   static styles = SharedStyles;

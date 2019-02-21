@@ -29,7 +29,7 @@ import '../components/counter-element';
 // These are the shared styles needed by this element.
 import {SharedStyles} from '../components/shared-styles';
 
-import {ConnectedLitElement} from '../../src/router/connect';
+import {ConnectedLitElement} from '../../index';
 
 class MyView2 extends ConnectedLitElement<RootState> {
   @property({type: Number})
