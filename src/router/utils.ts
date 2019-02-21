@@ -32,7 +32,7 @@ export const replaceParamsPlaceholders = (text: string, params: Record<string, s
 export const extractBreadcrumbsFromLocation = (location: VaadinLocation): BreadcrumbItem[] => {
   let prevPath = '';
   const {routes, params} = location;
-  console.log('location', location);
+
   return routes
     .filter(({breadcrumb}) => !!breadcrumb)
     .map(it => {
