@@ -436,7 +436,6 @@ You can also programmatically navigate to url.
 import {navigateToPath} from '@exmg/exmg-lit-router';
 
 navigateToPath({path: '/my-app/view1'});
-
 ```
 
 ## Redux - RouterState
