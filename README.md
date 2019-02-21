@@ -31,19 +31,28 @@ Your application is already set up to be tested via [web-component-tester](https
 ## Intro
 
 @exmg-lit-router is based on:
-* [@vaadin/router redux](https://vaadin.github.io/vaadin-router/vaadin-router/demo/#vaadin-router-getting-started-demos)
+
+* vaadin/router [@vaadin/router](https://vaadin.github.io/vaadin-router/vaadin-router/demo/#vaadin-router-getting-started-demos)
 
   Most important role play vaadin router. Above documentation is also valid for this repository and 
   is recommended to read it. This library add some features on top on vaadin router but not changing behaviour.
-  Here is the list of added features 
-  * router is manged by redux and is placed in object state.router 
+  Here is the list of added features
+ 
+  * router is manged by redux and is placed in object state.router
+ 
   * component connected with router have hook methods stateChanged and routeChanged
+
   * supported queryParams - can obtained from state.router
+
   * supported params - can obtained from state.router
+
   * possible to add title to route with placeholder for params
+
   * possible to add breadcrumbs to route
-* [pwa-helpers](https://github.com/Polymer/pwa-helpers) 
-* [Redux](https://redux.js.org/) 
+
+* pwa-helpers [pwa-helpers](https://github.com/Polymer/pwa-helpers)
+ 
+* redux - [Redux](https://redux.js.org/) 
 
 ## First of all you need to install router package
 ```bash
@@ -100,13 +109,13 @@ or prefixed
 
 #### Route NOT FOUND
 You have to define route where user will be redirected once page not found.
-Then name this route `not-found`. Base on this name we can later on programmatically redirect user to this page  
+Then set route name to `not-found`. Base on this name we can later on programmatically redirect user to this page  
 
 ```typescript
 const routeItems = [
      // this path may be used explicitly to redirect user
     {path: '404-not-found', component: 'my-view404', name: 'not-found'},
-    // this is most general rules - should be placed as te last route entry
+    // pattern for any path - should be defined as te last entry
     {path: '(.*)', component: 'my-view404'},
 ];
 ```
@@ -204,8 +213,10 @@ export class MyApp extends LitElement {
 }
 ```
 
-Router config has been extended by:
+### Router config has been enhanced by:
+
 * title
+
 ```typescript
 const routerItem = {
   path: 'details/:name',
@@ -213,7 +224,9 @@ const routerItem = {
 };
 ```
 entering route `/details/john` you should have value of state.router.title equal to `User detail john`
+
 * breadcrumb
+
 ```typescript
 const routerItem = {
   path: 'details/:name',
@@ -241,6 +254,7 @@ const routerItem = {
   breadcrumb: {label: 'User {name}', href: '/custom/path/to/'},
 };
 ```
+
 * data
 
 You can pass anything (what is serializable) to the route which will be accessible in element
@@ -258,11 +272,13 @@ const  routerItem = {
 Generally element class should inherit form `ConnectedLitElement`.
 That base class is already connected with store.
 You can override hook methods:
+
 * routeChanged(state: StateWithRouter, prevState: StateWithRouter): void
 
 It is triggered whenever reducer router is updated in state
 
 * stateChanged*state: StateWithRouter): void
+
 It is triggered whenever any reducer update state
 
 If you will update class property decorated by `@property` then automatically
@@ -310,7 +326,7 @@ Lifecycle callbacks may be used as guards, redirection or preventing leave route
 
 * Redirect to page not-found
 ```typescript
-import {BeforeEnterCommand, Location, Router} from '@vaadin/router';
+import {BeforeEnterCommand, Location, Router} from '@exmg/exmg-lit-router/index-router';
 import {property} from 'lit-element';
 import {ConnectedLitElement, StateWithRouter, RouterState} from '@exmg/exmg-lit-router';
 
@@ -335,7 +351,7 @@ export class Page extends ConnectedLitElement<StateWithRouter> {
 
 * Redirect to page when page is forbidden
 ```typescript
-import {BeforeEnterCommand, Location, Router} from '@vaadin/router';
+import {BeforeEnterCommand, Location, Router} from '@exmg/exmg-lit-router/index-router';
 import {property} from 'lit-element';
 import {ConnectedLitElement, StateWithRouter, RouterState} from '@exmg/exmg-lit-router';
 
@@ -366,7 +382,7 @@ window.history.back();
 // then return command.prevent();
 ```
 ```typescript
-import {BeforeLeaveCommand, Location, Router} from '@vaadin/router';
+import {BeforeLeaveCommand, Location, Router} from '@exmg/exmg-lit-router/index-router';
 import {property} from 'lit-element';
 import {ConnectedLitElement, StateWithRouter, RouterState} from '@exmg/exmg-lit-router';
 

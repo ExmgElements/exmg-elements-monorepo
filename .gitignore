@@ -5,4 +5,5 @@ node_modules/
 *.js
 !gulpfile.js
 *.log
+.DS_Store
 !typings/*
