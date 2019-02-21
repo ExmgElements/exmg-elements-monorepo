@@ -38,17 +38,17 @@ Your application is already set up to be tested via [web-component-tester](https
   is recommended to read it. This library add some features on top on vaadin router but not changing behaviour.
   Here is the list of added features
  
-  * router is manged by redux and is placed in object state.router
+  - router is manged by redux and is placed in object state.router
  
-  * component connected with router have hook methods stateChanged and routeChanged
+  - component connected with router have hook methods stateChanged and routeChanged
 
-  * supported queryParams - can obtained from state.router
+  - supported queryParams - can obtained from state.router
 
-  * supported params - can obtained from state.router
+  - supported params - can obtained from state.router
 
-  * possible to add title to route with placeholder for params
+  - possible to add title to route with placeholder for params
 
-  * possible to add breadcrumbs to route
+  - possible to add breadcrumbs to route
 
 * pwa-helpers [pwa-helpers](https://github.com/Polymer/pwa-helpers)
  
