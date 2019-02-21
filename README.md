@@ -1,5 +1,6 @@
 # EXMG LIT ROUTER
 ## exmg-lit-router is powered by:
+
 * pwa-helpers/router
 * redux
 * @vaadin/router
@@ -37,18 +38,17 @@ Your application is already set up to be tested via [web-component-tester](https
   Most important role play vaadin router. Above documentation is also valid for this repository and 
   is recommended to read it. This library add some features on top on vaadin router but not changing behaviour.
   Here is the list of added features
+  1 router is manged by redux and is placed in object state.router
  
-  - router is manged by redux and is placed in object state.router
- 
-  - component connected with router have hook methods stateChanged and routeChanged
+  2 component connected with router have hook methods stateChanged and routeChanged
 
-  - supported queryParams - can obtained from state.router
+  3 supported queryParams - can obtained from state.router
 
-  - supported params - can obtained from state.router
+  4 supported params - can obtained from state.router
 
-  - possible to add title to route with placeholder for params
+  5 possible to add title to route with placeholder for params
 
-  - possible to add breadcrumbs to route
+  6 possible to add breadcrumbs to route
 
 * pwa-helpers [pwa-helpers](https://github.com/Polymer/pwa-helpers)
  
@@ -430,8 +430,11 @@ Then url to `detail-component` might be:
 * generated path by name or path see [generate url](#generate-urls)
 
 To navigate you can use:
+
 * anchor `<a href="view1/details">Details</a>`
+
 * exmg-link
+
 ```html
 <exmg-link href="view1/details" content="Details"></exmg-link>
 ```
@@ -447,6 +450,7 @@ First it means that you can style it easily from outside
 Secondly `<slot>` won't work, this is why we have to pass content via attribute.
 
 * redux action
+
 You can also programmatically navigate to url.
 ```typescript
 import {navigateToPath} from '@exmg/exmg-lit-router';
