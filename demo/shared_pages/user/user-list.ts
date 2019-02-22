@@ -41,6 +41,14 @@ export class ExmgUserList extends ConnectedLitElement<StateWithRouter> {
     this.getStore().dispatch(updateQueryParams({queryParams: `?sort=${sortValue}`}));
   }
 
+  private renderUserList(users:string[], userListUrl: string) {
+    return repeat(
+      users,
+      user => user,
+      user => html`<li><a class="user" href="${userListUrl}/details/${user.toLowerCase()}">${user}</a></li>`
+    );
+  }
+
   protected render() {
     const userListUrl = generateUrl();
 
@@ -54,16 +62,12 @@ export class ExmgUserList extends ConnectedLitElement<StateWithRouter> {
         <section>
           <h1>User list where Thom is inactive and should cause 404 when navigate to details</h1>
           <ul>
-            ${
-      repeat(this.users, user => user, user => html`<li><a class="user" href="${userListUrl}/details/${user.toLowerCase()}">${user}</a></li>`)
-      }
+            ${this.renderUserList(this.users, userListUrl)}
           </ul>
 
           <h2>Inactive users</h2>
           <ul>
-            ${
-      repeat(this.inactiveUsers, user => user, user => html`<li><a class="user" href="${userListUrl}/details/${user.toLowerCase()}">${user}</a></li>`)
-      }
+            ${this.renderUserList(this.inactiveUsers, userListUrl)}
           </ul>
         </section>
       `;
@@ -80,8 +84,8 @@ export class ExmgUserList extends ConnectedLitElement<StateWithRouter> {
       const ascComparator = (a: string, b: string) => a > b ? 1 : -1;
       const descComparator = (a: string, b: string) => a > b ? -1 : 1;
       const comparator = this.sort === 'ASC' ? ascComparator : descComparator;
-      this.users = this.users.sort(comparator);
-      this.inactiveUsers = this.inactiveUsers.sort(comparator);
+      this.users = [...this.users.sort(comparator)];
+      this.inactiveUsers = [...this.inactiveUsers.sort(comparator)];
     }
   }
 }

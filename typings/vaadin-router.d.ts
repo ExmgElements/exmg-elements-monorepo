@@ -77,7 +77,7 @@ declare module '@vaadin/router' {
 
     export class Router {
         baseUrl: string;
-        ready: Promise<any>;
+        readonly ready: Promise<any>;
         readonly location: Location;
         static go(path: string): boolean;
 

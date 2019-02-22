@@ -32,6 +32,7 @@ import {installRouter} from '../src/router/instal-router';
 import {ConnectedLitElement} from '../src/router/connect';
 import {appRoutes} from './app-routes';
 import './components/breadcrumb';
+import {navigateToPath} from '../src/actions/router';
 
 class MyApp extends ConnectedLitElement<RootState> {
   static styles = css`
@@ -45,18 +46,12 @@ class MyApp extends ConnectedLitElement<RootState> {
   private drawerOpened = false;
   @property({type: Boolean})
   private snackbarOpened = false;
-  private unsubscribe: Function[] = [];
 
   constructor() {
     super();
     // To force all event listeners for gestures to be passive.
     // See https://www.polymer-project.org/3.0/docs/devguide/settings#setting-passive-touch-gestures
     setPassiveTouchGestures(true);
-  }
-
-  disconnectedCallback(): void {
-    super.disconnectedCallback();
-    this.unsubscribe.forEach(fn => fn());
   }
 
   stateChanged(state: RootState): void {
@@ -131,13 +126,13 @@ class MyApp extends ConnectedLitElement<RootState> {
 
   protected firstUpdated() {
     const outlet = this.shadowRoot!.querySelector<HTMLElement>('.main-content')!;
-    const installationResult = installRouter(
+    installRouter(
       store,
       outlet,
       appRoutes,
       () => store.dispatch(showSnackbar())
     );
-    this.unsubscribe.push(installationResult.unsubscribe);
+    this.fixDemoServerRedirection();
 
     installMediaQueryWatcher(`(min-width: 460px)`,
       () => store.dispatch(updateDrawerState(false)));
@@ -161,6 +156,16 @@ class MyApp extends ConnectedLitElement<RootState> {
 
   private drawerOpenedChanged(e: Event) {
     store.dispatch(updateDrawerState((e.target as AppDrawerElement).opened));
+  }
+
+  private fixDemoServerRedirection(): void {
+    const ref = window.localStorage.getItem('_ref');
+    if (ref) {
+      window.localStorage.removeItem('_ref');
+      const [path] = ref.split('?');
+
+      store.dispatch(navigateToPath({path}));
+    }
   }
 }
 
