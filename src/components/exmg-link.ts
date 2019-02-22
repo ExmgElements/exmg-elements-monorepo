@@ -6,70 +6,68 @@ import {generateUrlByPath} from '../router/url-generator';
 
 /**
  * Element helper for anchor which is connected with router reducer.
- * By add attribute [selected]
- * !Note that this element is not attached to shadowRoot just in case to be possible style it from outside but
- * it cause that <slot> won't work. To setup text content user attribute `content`
+ * This element render children as the slot. Children should be anchor with attribute href
+ * When href match with current router then attribute [selected] will be added to the child element.
+ * Matching href with current path can be done in 2 ways, depending on attribute [exact]
  *
  * Example
  * ```
- * <exmg-link href="/view1" content="View on link"></exmg-link>
+ * <exmg-link><a href="/view1">View on link"</a></exmg-link>
  * ```
  */
 @customElement('exmg-link')
 export class ExmgLink extends ConnectedLitElement<StateWithRouter> {
   /**
-   * Used to pass uri
+   * Perhaps if exact is true then link is selected when href is same like current router
+   * otherwise if href start with current router then will be also selected
    */
-  @property({type: String, reflect: true}) href: string = '';
-  /**
-   * Used to set text content
-   */
-  @property({type: String}) content: string = '';
-
-  @property({type: Boolean}) disabled: boolean = false;
+  @property({type: Boolean}) exact: boolean = false;
 
   @property({type: Object}) private router: Partial<RouterState> = {};
 
-  private pathNameFromHref?: string;
-
-  createRenderRoot(): ExmgLink {
-    return this;
-  }
-
   stateChanged(state: StateWithRouter) {
-    this.router = state.router || {};
+    this.router = state.router;
   }
 
-  protected update(changedProperties: PropertyValues): void {
-    if (changedProperties.has('href') || changedProperties.has('router')) {
-      if (this.href && this.href.startsWith('/')) {
-        this.pathNameFromHref = this.href.split('?')[0];
-      } else {
-        try {
-          this.pathNameFromHref = generateUrlByPath(this.href, this.router.params);
-        } catch (e) {
-          this.pathNameFromHref = undefined;
-        }
+  protected updated(changedProperties: PropertyValues): void {
+    if (changedProperties.has('router')) {
+      const child = this.children.item(0);
+
+      if (child && child.hasAttribute('href')) {
+        const href = child.getAttribute('href')!;
+        const pathname = this.preparePathFromHref(href);
+        const isSelected = !!pathname && this.isSelected(pathname);
+
+        isSelected ? child.setAttribute('selected', 'true') : child.removeAttribute('selected');
       }
     }
-
-    super.update(changedProperties);
   }
 
   protected render() {
-    if (this.disabled) {
-      return html`
-        <a
-          href="javascript:void(0);"
-          ?disabled="${this.disabled}"
-          ?selected="${this.router.pathname === this.pathNameFromHref}">
-            ${this.content}
-        </a>
+    return html`
+        <slot></slot>
       `;
+  }
+
+  private preparePathFromHref(href: string): string | void {
+    if (href && href.startsWith('/')) {
+      return href.split('?')[0];
     }
 
-    return html`
-        <a href="${this.href}" ?selected="${this.router.pathname === this.pathNameFromHref}">${this.content}</a>
-      `;
+    try {
+      return generateUrlByPath(href.split('?')[0], this.router.params);
+    } catch (e) {
+      return undefined;
+    }
+  }
+
+  private isSelected(pathname: string): boolean {
+    const isExactlySame = this.router.pathname === pathname;
+    if (this.exact) {
+      return isExactlySame;
+    }
+
+    const parentPathname = pathname.endsWith('/') ? pathname :`${pathname}/`;
+    return isExactlySame || (this.router.pathname || '').startsWith(parentPathname);
   }
 }

@@ -436,18 +436,16 @@ To navigate you can use:
 * exmg-link
 
 ```html
-<exmg-link href="view1/details" content="Details"></exmg-link>
+<exmg-link><a href="view1">View on link"</a></exmg-link>
 ```
-This element is just helper which wrap `<a> tag` and reflect 2 attributes
-`selected and disabled` on `<a>`. It allow you to style selected routes.
+ Element helper for anchor which is connected with router reducer.
+ This element render children as the slot. Children should be anchor with attribute href
+ When href match with current router path then attribute [selected] will be added to the child element.
+ Matching href with current path can be done in 2 ways, depending on attribute [exact]
+ Example of adding style for selected link
 ```css
 a[selected] {color: red;}
-a[disabled] {color: gray;}
 ```
-This element is not added to shadowRoot.
-It cause 2 consequences.
-First it means that you can style it easily from outside 
-Secondly `<slot>` won't work, this is why we have to pass content via attribute.
 
 * redux action
 
@@ -455,7 +453,14 @@ You can also programmatically navigate to url.
 ```typescript
 import {navigateToPath} from '@exmg/exmg-lit-router';
 
-navigateToPath({path: '/my-app/view1'});
+store.dispatch(navigateToPath({path: '/my-app/view1'}));
+```
+
+You can also programmatically change queryParams
+```typescript
+import {updateQueryParams} from '@exmg/exmg-lit-router';
+
+store.dispatch(updateQueryParams({queryParams: '?page=1&limit=10'}));
 ```
 
 ## Redux - RouterState

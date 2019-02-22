@@ -60,6 +60,19 @@ class MyApp extends ConnectedLitElement<RootState> {
     this.router = state.router;
   }
 
+  private renderLinks() {
+    return html`
+      <exmg-link ?exact="${true}"><a href="">Demo</a></exmg-link>
+      <exmg-link><a href="view1">View on link</a></exmg-link>
+      <exmg-link><a href="view1?page=10&sort=desc">View on link with query</a></exmg-link>
+      <exmg-link><a href="view2">View 2</a></exmg-link>
+      <exmg-link><a href="/demo/view3/details">View 3</a></exmg-link>
+      <exmg-link><a href="users-with-predefined-router">Users list</a></exmg-link>
+      <exmg-link><a href="users-with-predefined-router/details/john">Users John</a></exmg-link>
+      <exmg-link><a href="users-lazy">Users list - lazy</a></exmg-link>
+    `;
+  }
+
   protected render() {
     // Anything that's related to rendering should be done in here.
     return html`
@@ -73,32 +86,14 @@ class MyApp extends ConnectedLitElement<RootState> {
         </app-toolbar>
 
         <!-- This gets hidden on a small screen-->
-        <nav class="toolbar-list">
-          <exmg-link href="" content="Demo"></exmg-link>
-          <exmg-link href="view1" content="View on link"></exmg-link>
-          <exmg-link href="view1?page=10&sort=desc" content="View on link with query"></exmg-link>
-          <exmg-link href="view2" content="View 2"></exmg-link>
-          <exmg-link href="/demo/view3/details" content="View 3"></exmg-link>
-          <exmg-link href="users-with-predefined-router" content="Users list"></exmg-link>
-          <exmg-link href="users-with-predefined-router/details/john" content="Users John"></exmg-link>
-          <exmg-link href="users-lazy" content="Users list - lazy"></exmg-link>
-        </nav>
+        <nav class="toolbar-list">${this.renderLinks()}</nav>
       </app-header>
 
       <!-- Drawer content -->
       <app-drawer
           .opened="${this.drawerOpened}"
           @opened-changed="${this.drawerOpenedChanged}">
-        <nav class="drawer-list">
-          <exmg-link href="" content="Demo"></exmg-link>
-          <exmg-link href="view1" content="View on link"></exmg-link>
-          <exmg-link href="view1?page=10&sort=desc" content="View on link with query"></exmg-link>
-          <exmg-link href="view2" content="View 2"></exmg-link>
-          <exmg-link href="/demo/view3/details" content="View 3"></exmg-link>
-          <exmg-link href="users-with-predefined-router" content="Users list"></exmg-link>
-          <exmg-link href="users-with-predefined-router/details/john" content="Users John"></exmg-link>
-          <exmg-link href="users-lazy" content="Users list - lazy"></exmg-link>
-        </nav>
+        <nav class="drawer-list">${this.renderLinks()}</nav>
       </app-drawer>
 
       <div class="breadcrumb"><exmg-breadcrumb .breadcrumbs="${this.router.breadcrumbs}"></exmg-breadcrumb></div>
