@@ -3,7 +3,7 @@ import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 
 import {Router} from '@vaadin/router';
 import {StateWithRouter} from '../router/connect';
-import {convertSearchQueryToQueryParams} from '../router/utils';
+import {convertSearchQueryToQueryParams, QueryParams} from '../router/utils';
 
 export const ROUTER_CHANGED = 'ROUTER_CHANGED';
 export const NAVIGATE_TO_PATH = 'NAVIGATE_TO_PATH';
@@ -26,8 +26,7 @@ export interface RouterActionRouterChanged extends Action<ROUTER_CHANGED_TYPE> {
   title?: string;
   data: Record<string, any>;
   breadcrumbs: BreadcrumbItem[];
-  queryParams?: Record<string, string>;
-  allQueryParams?: Record<string, string[]>;
+  queryParams?: Record<string, string[]>;
 }
 
 export interface RouterActionChangedPayload {
@@ -38,8 +37,7 @@ export interface RouterActionChangedPayload {
   title?: string;
   data: Record<string, any>;
   breadcrumbs: BreadcrumbItem[];
-  queryParams?: Record<string, string>;
-  allQueryParams?: Record<string, string[]>;
+  queryParams?: Record<string, string[]>;
 }
 
 export interface RouterActionNavigateToPath extends Action<'NAVIGATE_TO_PATH'> {}
@@ -49,8 +47,7 @@ export interface RouterActionNavigateToPathPayload {
 }
 
 export interface RouterActionUpdateQueryParams extends Action<'UPDATE_QUERY_PARAMS'> {
-  queryParams: Record<string, string>;
-  allQueryParams: Record<string, string[]>;
+  queryParams: Record<string, string[]>;
 }
 
 export interface RouterActionUpdateQueryParamsPayload {
@@ -61,7 +58,7 @@ export type RouterAction = RouterActionRouterChanged | RouterActionNavigateToPat
 
 type ThunkResult = ThunkAction<void, StateWithRouter, undefined, RouterAction>;
 
-const hasQueryParams = (queryParams?: Record<string, string>): boolean =>
+const hasQueryParams = (queryParams?: QueryParams): boolean =>
     !!queryParams && Object.keys(queryParams).length > 0;
 
 export const routerChanged = (payload: RouterActionChangedPayload): ThunkResult =>
@@ -84,10 +81,10 @@ export const navigateToPath = (payload: RouterActionNavigateToPathPayload): Rout
 
 export const updateQueryParams = (payload: RouterActionUpdateQueryParamsPayload): RouterActionUpdateQueryParams => {
   window.history.pushState({}, '', `${window.location.origin}${window.location.pathname}${payload.queryParams}`);
-  const searchParams = convertSearchQueryToQueryParams(payload.queryParams);
+  const queryParams = convertSearchQueryToQueryParams(payload.queryParams);
 
   return {
+    queryParams,
     type: UPDATE_QUERY_PARAMS,
-    ...searchParams,
   };
 };

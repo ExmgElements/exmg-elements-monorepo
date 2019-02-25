@@ -18,6 +18,12 @@ export const generateUrl = (params?: Record<string, string>): string => {
   return getRouter().location.getUrl(params);
 };
 
+/**
+ * Will generate path and fulfill params placeholders if necessary
+ * @param path {string} - relative path to baseUrl
+ * @param params {object}
+ * @return string
+ */
 export const generateUrlByPath = (path: string, params: Record<string, string> = {}): string => {
   return getRouter().urlForPath(path, params);
 };

@@ -19,7 +19,6 @@ suite('<exmg-link>', function () {
     data: {},
     breadcrumbs: [],
     queryParams: {},
-    allQueryParams: {},
   };
 
   suite('base usage', function () {

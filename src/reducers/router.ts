@@ -16,8 +16,7 @@ export interface RouterState {
   title?: string;
   data: Record<string, any>;
   breadcrumbs: BreadcrumbItem[];
-  queryParams: Record<string, string>;
-  allQueryParams: Record<string, string[]>;
+  queryParams: Record<string, string[]>;
 }
 
 const INITIAL_STATE: RouterState = {
@@ -28,7 +27,6 @@ const INITIAL_STATE: RouterState = {
   data: {},
   breadcrumbs: [],
   queryParams: {},
-  allQueryParams: {},
 };
 
 export const routerReducer: Reducer<RouterState, RouterAction> = (state = INITIAL_STATE, action: RouterAction) => {

@@ -464,5 +464,211 @@ store.dispatch(updateQueryParams({queryParams: '?page=1&limit=10'}));
 ```
 
 ## Redux - RouterState
+Router state reflect current page.
+Typing for RouterState looks:
+```typescript
+interface RouterState {
+  baseUrl: string;
+  pathname: string;
+  component: string;
+  params: Record<string, string>;
+  title?: string;
+  data: Record<string, any>;
+  breadcrumbs: {
+      href: string;
+      path: string;
+      label: string;
+      disabled?: boolean;
+  }[];
+  queryParams: Record<string, string[]>;
+}
+```
+Here is example of router state:
+```json
+{
+  "router": {
+    "baseUrl": "/demo/",
+    "pathname": "/demo/users/details/allan",
+    "params": {
+      "name": "allan"
+    },
+    "data": {
+      "showHistory": false
+    },
+    "breadcrumbs": [
+      {
+        "path": "",
+        "disabled": false,
+        "href": "home",
+        "label": "HOME"
+      },
+      {
+        "path": "users-lazy",
+        "disabled": false,
+        "href": "/demo/users",
+        "label": "Users"
+      },
+      {
+        "path": "users/details/:name",
+        "disabled": false,
+        "href": "/demo/users/details/allan",
+        "label": "User allan"
+      }
+    ],
+    "queryParams": {
+      "mode": [
+        "simplified"
+      ],
+      "purchaseFilters[][status]": [
+        "pending",
+        "accepted",
+        "open"
+      ]
+    },
+    "title": "User detail allan"
+  }
+}
+```
+
+* baseUrl - this is value which is set as `<base href="/" />`
+
+* pathname - this is absolute pathname of resolved route.
+It also includes `baseUrl`
+
+* params - object with parameters which was defined in `route path` config.
+It will also includes parent routes parameters if any
+
+* data - plain object defined in router item config which can be serialized.
+This allow pass static context of certain route which will be accessible to read from router state.
+
+* breadcrumbs - it is just collection of items defined in router config which will allow to build breadcrumb component.
+The order of items is from root to the leaf
+
+* queryParams - object with parsed url search phrase. All keys are associated with an array of values
+even search phrase contains unique `key=value` entries.
+Example `?a=x&a=x1&a[]=y&a[]=y1&a[key]=z&a[key]=z2`, available keys are `a, a[], a[key]`
+and object looks like
+`{"a": ["x", "x1"], "a[]": ["y", "y1"], "a[key]": ["z", "z1"]}`
 
 ## Generate urls
+Sometimes we need to generate urls for navigation or programmatically navigation or redirection.
+For this use case you can use helpers `src/router/url-generator` which are build on top of
+vaadin url generation. Inside lifecycle callback it is also possible to use directly vaadin helpers
+which are passed as parameters.
+
+We can distinguish helpers:
+
+* generate url by route name or component name
+
+Route name is optional configuration options which must be unique across all routers.
+```typescript
+import {generateUrlByNameOrComponentName} from '@exmg/exmg-lit-router'
+
+const url = generateUrlByNameOrComponentName('home-page-name');
+const urlWithParameters = generateUrlByNameOrComponentName('home-page-name', {paramName: 'param-value'});
+```
+You can also generate url by component name but remember that component must be used in routes configuration only once.
+When same component is reused for more routes then you should stick to route name.
+
+```typescript
+import {generateUrlByNameOrComponentName} from '@exmg/exmg-lit-router'
+
+const url = generateUrlByNameOrComponentName('home-page-component');
+const urlWithParameters = generateUrlByNameOrComponentName('home-page-component', {paramName: 'param-value'});
+```
+
+In lifecycle callback you can directly generate url
+
+```typescript
+import {generateUrlByNameOrComponentName} from '@exmg/exmg-lit-router'
+class ExmplePage {
+  onBeforeEnter(location: Location, command: BeforeEnterCommand, router: Router): any {
+    const url = router.urlForName('not-found', {});
+  }
+}
+```
+
+```text
+Note that generating urls by name or components may failed when you are trying generate url
+for children components which are not loaded yet.
+
+Here is example of lazy loaded children routes
+
+{
+  path: 'some-path',
+  children: () => import('./path/to/routes.js').then(module => {
+    return module.routes;
+  }),
+},
+
+if you really need lazy loading and have access to routs by name or component name
+you can configure route:
+
+{
+  path: 'some-path',
+  action: () => import('./path/to/routes.js') as Promise<any>,
+  children: (): RouteItem[] => (
+    [
+      {
+        path: '',
+        component: 'some-list-component',
+        name: 'some-list',
+      },
+      {
+        path: 'show/:id',
+        component: 'some-detail-component',
+        name: 'some-detail',
+      },
+    ]
+  ),
+},
+
+```
+
+* generate url by path
+This helper is not related with router config. It means you can pass here anything what
+is valid pathname. This method will just prepend base url and replace parameter placeholders if any. 
+
+```typescript
+import {generateUrlByPath} from '@exmg/exmg-lit-router'
+
+const url = generateUrlByPath('relative-path-to-base/domain');
+const urlWithParameters = generateUrlByPath('relative-path-to-base/domain/:id', {id: '123'});
+```
+
+In lifecycle callback you can directly generate url
+
+```typescript
+import {generateUrlByNameOrComponentName} from '@exmg/exmg-lit-router'
+class ExmplePage {
+  onBeforeEnter(location: Location, command: BeforeEnterCommand, router: Router): any {
+    const url = router.urlForPath('relative-path-to-base/domain', {});
+    const urlWithParametrs = router.urlForPath('relative-path-to-base/domain/:id', {id: '123'});
+  }
+}
+```
+
+* generate url of current page
+
+It is also useful to generate current page url
+
+```typescript
+import {generateUrl} from '@exmg/exmg-lit-router'
+
+const url = generateUrl();
+const generateUrl = generateUrl({id: '123'});
+```
+
+In lifecycle callback you can directly generate url
+
+```typescript
+import {generateUrlByNameOrComponentName} from '@exmg/exmg-lit-router'
+class ExmplePage {
+  onBeforeEnter(location: Location, command: BeforeEnterCommand, router: Router): any {
+    const url = location.getUrl({});
+    const urlWithParametrs = location.getUrl({id: '123'});
+  }
+}
+```
+
+ 

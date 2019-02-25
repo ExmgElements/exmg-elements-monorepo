@@ -113,7 +113,7 @@ class MyApp extends ConnectedLitElement<RootState> {
 
         <h6>QueryParams:</h6>
         <pre>
-          <code>${JSON.stringify(this.router.allQueryParams)}</code>
+          <code>${JSON.stringify(this.router.queryParams)}</code>
         </pre>
       </snack-bar>
     `;

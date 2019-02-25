@@ -2,22 +2,17 @@ import {Location as VaadinLocation} from '@vaadin/router';
 import {generateUrlByPath} from './url-generator';
 import {BreadcrumbItem} from '../actions/router';
 
-export type QueryParams = {
-  queryParams: Record<string, string>;
-  allQueryParams: Record<string, string[]>;
-};
+export type QueryParams = Record<string, string[]>;
 
 export const convertSearchQueryToQueryParams = (searchQuery: string): QueryParams => {
-    const searchParams = new URLSearchParams(searchQuery);
-    const queryParams: Record<string, string> = {};
-    const allQueryParams: Record<string, string[]> = {};
+  const searchParams = new URLSearchParams(searchQuery);
+  const queryParams: Record<string, string[]> = {};
 
-    searchParams.forEach((_: string, key: string) => {
-        queryParams[key] = searchParams.get(key) || '';
-        allQueryParams[key] = searchParams.getAll(key);
-    });
+  searchParams.forEach((_: string, key: string) => {
+    queryParams[key] = searchParams.getAll(key);
+  });
 
-    return {queryParams, allQueryParams};
+  return queryParams;
 };
 
 export const replaceParamsPlaceholders = (text: string, params: Record<string, string> = {}): string => {

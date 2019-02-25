@@ -19,7 +19,7 @@ const onRouteChanged = (store: Store<any, any>) => (event: Event) => {
         breadcrumbs: extractBreadcrumbsFromLocation(location),
         title: route && route.title ? replaceParamsPlaceholders(route.title, params) : undefined,
         data: route && route.data && typeof route.data === 'object' ? route.data : {},
-        ...convertSearchQueryToQueryParams(window.location.search),
+        queryParams: convertSearchQueryToQueryParams(window.location.search),
     }));
 };
 

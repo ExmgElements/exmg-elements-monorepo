@@ -20,7 +20,7 @@ export class ExmgBreadcrumb extends LitElement {
     }
 
     return html`
-      <exmg-link ?disabled="${breadcrumb.disabled}"><a href="${breadcrumb.href}">${breadcrumb.label}</a></exmg-link>
+      <exmg-link><a href="${breadcrumb.href}">${breadcrumb.label}</a></exmg-link>
     `;
   }
   protected render() {

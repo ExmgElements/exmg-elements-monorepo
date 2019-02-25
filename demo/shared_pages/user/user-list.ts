@@ -9,6 +9,7 @@ import {
   ConnectedLitElement
 } from '../../../src/router/connect';
 import {updateQueryParams} from '../../../src/actions/router';
+import {getQueryParamOrDefault} from '../../../src/selectors/router';
 import '../../../src/components/exmg-link';
 import {generateUrl} from '../../../src/router/url-generator';
 
@@ -75,7 +76,7 @@ export class ExmgUserList extends ConnectedLitElement<StateWithRouter> {
 
   // This is called every time something is updated in the store.
   routeChanged(state: StateWithRouter) {
-    const sortValue = (state.router.queryParams || {}).sort || '';
+    const sortValue = getQueryParamOrDefault(state, 'sort', '');
     this.sort = sortValue.toUpperCase() === 'DESC' ? 'DESC' : 'ASC';
   }
 
