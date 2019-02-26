@@ -550,6 +550,8 @@ Example `?a=x&a=x1&a[]=y&a[]=y1&a[key]=z&a[key]=z2`, available keys are `a, a[],
 and object looks like
 `{"a": ["x", "x1"], "a[]": ["y", "y1"], "a[key]": ["z", "z1"]}`
 
+* title - title from router config with replaced params placeholders
+
 ## Generate urls
 Sometimes we need to generate urls for navigation or programmatically navigation or redirection.
 For this use case you can use helpers `src/router/url-generator` which are build on top of

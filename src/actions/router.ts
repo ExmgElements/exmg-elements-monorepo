@@ -21,7 +21,7 @@ export type BreadcrumbItem = {
 export interface RouterActionRouterChanged extends Action<ROUTER_CHANGED_TYPE> {
   baseUrl: string;
   pathname: string;
-  component: string;
+  component?: string;
   params: Record<string, string>;
   title?: string;
   data: Record<string, any>;
@@ -56,14 +56,16 @@ export interface RouterActionUpdateQueryParamsPayload {
 
 export type RouterAction = RouterActionRouterChanged | RouterActionNavigateToPath | RouterActionUpdateQueryParams;
 
-type ThunkResult = ThunkAction<void, StateWithRouter, undefined, RouterAction>;
+type ThunkResult<R> = ThunkAction<R, StateWithRouter, undefined, RouterAction>;
 
 const hasQueryParams = (queryParams?: QueryParams): boolean =>
     !!queryParams && Object.keys(queryParams).length > 0;
 
-export const routerChanged = (payload: RouterActionChangedPayload): ThunkResult =>
-  (dispatch: ThunkDispatch<any, any, any>, getState: () => StateWithRouter) => {
+type RouterChangedDispatch = ThunkDispatch<StateWithRouter, undefined, RouterActionRouterChanged>;
+export const routerChanged = (payload: RouterActionChangedPayload): ThunkResult<RouterActionRouterChanged> =>
+  (dispatch: RouterChangedDispatch, getState: () => StateWithRouter): RouterActionRouterChanged => {
     const {router: {queryParams}} = getState();
+
     if (hasQueryParams(queryParams) && !hasQueryParams(payload.queryParams)) {
       window.history.replaceState({}, '', `${window.location.origin}${window.location.pathname}`);
     }
