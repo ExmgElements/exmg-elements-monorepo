@@ -27,7 +27,9 @@
     "src/**/*.js",
     "src/**/*.d.ts",
     "index.js",
-    "index.d.ts"
+    "index.d.ts",
+    "index-router.js",
+    "index-router.d.ts"
   ],
   "dependencies": {
     "@vaadin/router": "^1.2.0",

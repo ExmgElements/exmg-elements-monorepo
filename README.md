@@ -171,13 +171,12 @@ export const appRoutes: RouteItem[] = [
 ];
 ```
 
-```text
-  !!NOTE: Leveraging bundle.module import is not working
-  {path: 'view2/:color?', component: 'my-view2', bundle: {module: './pages/my-view2.js'}},
-  This is not working in chrome mobile mode when <base href="/demo/" /> then dependencies are imported
-  without prefix which end up with 404 - not found network response
-  Recommended to use dynamic import('package.js')
-```
+
+> !!NOTE: Leveraging bundle.module import is not working
+>  {path: 'view2/:color?', component: 'my-view2', bundle: {module: './pages/my-view2.js'}},
+>  This is not working in chrome mobile mode when <base href="/demo/" \/> then dependencies are imported
+>  without prefix which end up with 404 - not found network response
+>  Recommended to use dynamic import('package.js')
 
 Once you have defined routes you have to install them in app
 
@@ -576,7 +575,7 @@ class ExmplePage {
 }
 ```
 
-```text
+```
 Note that generating urls by name or components may failed when you are trying generate url
 for children components which are not loaded yet.
 
