@@ -73,4 +73,6 @@ export const createInstallRouter = (installer: Installer) =>
     };
 };
 
-export const installRouter =  createInstallRouter(installRouteHelper);
+export const installRouter: (
+  store: Store<any, AnyAction>, outlet: HTMLElement, routes: RouteItem[], locationUpdatedCallback?: LocationUpdatedCallback
+) => InstallationResult =  createInstallRouter(installRouteHelper);

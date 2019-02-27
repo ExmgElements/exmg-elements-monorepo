@@ -171,12 +171,13 @@ export const appRoutes: RouteItem[] = [
 ];
 ```
 
-
-> !!NOTE: Leveraging bundle.module import is not working
->  {path: 'view2/:color?', component: 'my-view2', bundle: {module: './pages/my-view2.js'}},
->  This is not working in chrome mobile mode when <base href="/demo/" \/> then dependencies are imported
->  without prefix which end up with 404 - not found network response
->  Recommended to use dynamic import('package.js')
+```text
+!!NOTE: Leveraging bundle.module import is not working
+{path: 'view2/:color?', component: 'my-view2', bundle: {module: './pages/my-view2.js'}},
+This is not working in chrome mobile mode when <base href="/demo/" \/> then dependencies are imported
+without prefix which end up with 404 - not found network response
+Recommended to use dynamic import('package.js')
+```
 
 Once you have defined routes you have to install them in app
 
@@ -324,6 +325,7 @@ Is support exactly the same callback like defined in vaadin/router you can read 
 Lifecycle callbacks may be used as guards, redirection or preventing leave router
 
 * Redirect to page not-found
+
 ```typescript
 import {BeforeEnterCommand, Location, Router} from '@exmg/exmg-lit-router/index-router';
 import {property} from 'lit-element';
@@ -349,6 +351,7 @@ export class Page extends ConnectedLitElement<StateWithRouter> {
 ```
 
 * Redirect to page when page is forbidden
+
 ```typescript
 import {BeforeEnterCommand, Location, Router} from '@exmg/exmg-lit-router/index-router';
 import {property} from 'lit-element';
@@ -376,10 +379,13 @@ export class Page extends ConnectedLitElement<StateWithRouter> {
 
 Please note that even we prevent page leave next history entry is added.
 In that case you should back history right before prevent command
+
 ```typescript
 window.history.back();
 // then return command.prevent();
 ```
+___
+
 ```typescript
 import {BeforeLeaveCommand, Location, Router} from '@exmg/exmg-lit-router/index-router';
 import {property} from 'lit-element';
@@ -575,7 +581,9 @@ class ExmplePage {
 }
 ```
 
-```
+___
+
+```text
 Note that generating urls by name or components may failed when you are trying generate url
 for children components which are not loaded yet.
 

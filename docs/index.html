@@ -189,13 +189,11 @@ connectStore(store);</code></pre>
     ],
   },
 ];</code></pre>
-				<blockquote>
-					<p>!!NOTE: Leveraging bundle.module import is not working
-						{path: &#39;view2/:color?&#39;, component: &#39;my-view2&#39;, bundle: {module: &#39;./pages/my-view2.js&#39;}},
-						This is not working in chrome mobile mode when &lt;base href=&quot;/demo/&quot; /&gt; then dependencies are imported
-						without prefix which end up with 404 - not found network response
-					Recommended to use dynamic import(&#39;package.js&#39;)</p>
-				</blockquote>
+				<pre><code class="language-text">!!NOTE: Leveraging bundle.module import is not working
+{path: &#39;view2/:color?&#39;, component: &#39;my-view2&#39;, bundle: {module: &#39;./pages/my-view2.js&#39;}},
+This is not working in chrome mobile mode when &lt;base href=&quot;/demo/&quot; \/&gt; then dependencies are imported
+without prefix which end up with 404 - not found network response
+Recommended to use dynamic import(&#39;package.js&#39;)</code></pre>
 				<p>Once you have defined routes you have to install them in app</p>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {LitElement, html} <span class="hljs-keyword">from</span> <span class="hljs-string">'lit-element'</span>;
 <span class="hljs-keyword">import</span> {installRouter} <span class="hljs-keyword">from</span> <span class="hljs-string">'@exmg/exmg-lit-router'</span>;
@@ -316,56 +314,60 @@ connectStore(store);</code></pre>
 				<p>Is support exactly the same callback like defined in vaadin/router you can read <a href="https://vaadin.github.io/vaadin-router/vaadin-router/demo/#vaadin-router-lifecycle-callbacks-demos">here</a></p>
 				<p>Lifecycle callbacks may be used as guards, redirection or preventing leave router</p>
 				<ul>
-					<li>Redirect to page not-found
-						<code>`</code>typescript
-						import {BeforeEnterCommand, Location, Router} from &#39;@exmg/exmg-lit-router/index-router&#39;;
-						import {property} from &#39;lit-element&#39;;
-					import {ConnectedLitElement, StateWithRouter, RouterState} from &#39;@exmg/exmg-lit-router&#39;;</li>
+					<li>Redirect to page not-found</li>
 				</ul>
-				<p>export class Page extends ConnectedLitElement<StateWithRouter> {
-						@property({type: Object}) private router: Partial<RouterState> = {};
-				users = new Map();</p>
-				<p>  routeChanged(state: StateWithRouter, prevState: StateWithRouter) {
-					this.router = state.router;
-					this.app = state.myReducer;
-				}</p>
-				<p>  onBeforeEnter(location: Location, command: BeforeEnterCommand, router: Router): any {
-					const {params} = location;
-					const {name = &#39;&#39;} = params || {};
-					if (!this.users.has(name) || !this.users.get(name)!.active) {
-					return command.redirect(router.urlForName(&#39;not-found&#39;, {}));
-					}
-					}
-				}</p>
-				<pre><code>
-* <span class="hljs-type">Redirect</span> to page when page is forbidden
-```typescript
-<span class="hljs-keyword">import</span> {<span class="hljs-type">BeforeEnterCommand</span>, <span class="hljs-type">Location</span>, <span class="hljs-type">Router</span>} from '<span class="hljs-meta">@exmg</span>/exmg-lit-router/index-router';
-<span class="hljs-keyword">import</span> {property} from <span class="hljs-symbol">'lit</span>-element';
-<span class="hljs-keyword">import</span> {<span class="hljs-type">ConnectedLitElement</span>, <span class="hljs-type">StateWithRouter</span>, <span class="hljs-type">RouterState</span>} from '<span class="hljs-meta">@exmg</span>/exmg-lit-router';
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {BeforeEnterCommand, Location, Router} <span class="hljs-keyword">from</span> <span class="hljs-string">'@exmg/exmg-lit-router/index-router'</span>;
+<span class="hljs-keyword">import</span> {property} <span class="hljs-keyword">from</span> <span class="hljs-string">'lit-element'</span>;
+<span class="hljs-keyword">import</span> {ConnectedLitElement, StateWithRouter, RouterState} <span class="hljs-keyword">from</span> <span class="hljs-string">'@exmg/exmg-lit-router'</span>;
 
-export <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Page</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ConnectedLitElement&lt;StateWithRouter&gt;</span> </span>{
-  <span class="hljs-meta">@property</span>({<span class="hljs-class"><span class="hljs-keyword">type</span></span>: <span class="hljs-type">Object</span>}) <span class="hljs-keyword">private</span> router: <span class="hljs-type">Partial</span>&lt;<span class="hljs-type">RouterState</span>&gt; = {};
-  app: any;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Page <span class="hljs-keyword">extends</span> ConnectedLitElement&lt;StateWithRouter&gt; {
+  <span class="hljs-meta">@property</span>({<span class="hljs-keyword">type</span>: <span class="hljs-built_in">Object</span>}) <span class="hljs-keyword">private</span> router: Partial&lt;RouterState&gt; = {};
+  users = <span class="hljs-keyword">new</span> Map();
 
-  routeChanged(state: <span class="hljs-type">StateWithRouter</span>, prevState: <span class="hljs-type">StateWithRouter</span>) {
+  routeChanged(state: StateWithRouter, prevState: StateWithRouter) {
+    <span class="hljs-keyword">this</span>.router = state.router;
+    <span class="hljs-keyword">this</span>.app = state.myReducer;
+  }
+
+  onBeforeEnter(location: Location, command: BeforeEnterCommand, router: Router): <span class="hljs-built_in">any</span> {
+    <span class="hljs-keyword">const</span> {params} = location;
+    <span class="hljs-keyword">const</span> {name = <span class="hljs-string">''</span>} = params || {};
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.users.has(name) || !<span class="hljs-keyword">this</span>.users.get(name)!.active) {
+      <span class="hljs-keyword">return</span> command.redirect(router.urlForName(<span class="hljs-string">'not-found'</span>, {}));
+    }
+  }
+}</code></pre>
+				<ul>
+					<li>Redirect to page when page is forbidden</li>
+				</ul>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {BeforeEnterCommand, Location, Router} <span class="hljs-keyword">from</span> <span class="hljs-string">'@exmg/exmg-lit-router/index-router'</span>;
+<span class="hljs-keyword">import</span> {property} <span class="hljs-keyword">from</span> <span class="hljs-string">'lit-element'</span>;
+<span class="hljs-keyword">import</span> {ConnectedLitElement, StateWithRouter, RouterState} <span class="hljs-keyword">from</span> <span class="hljs-string">'@exmg/exmg-lit-router'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Page <span class="hljs-keyword">extends</span> ConnectedLitElement&lt;StateWithRouter&gt; {
+  <span class="hljs-meta">@property</span>({<span class="hljs-keyword">type</span>: <span class="hljs-built_in">Object</span>}) <span class="hljs-keyword">private</span> router: Partial&lt;RouterState&gt; = {};
+  app: <span class="hljs-built_in">any</span>;
+
+  routeChanged(state: StateWithRouter, prevState: StateWithRouter) {
     <span class="hljs-keyword">this</span>.router = state.router;
     <span class="hljs-keyword">this</span>.app = state.app;
   }
 
-  onBeforeEnter(location: <span class="hljs-type">Location</span>, command: <span class="hljs-type">BeforeEnterCommand</span>, router: <span class="hljs-type">Router</span>): any {
+  onBeforeEnter(location: Location, command: BeforeEnterCommand, router: Router): <span class="hljs-built_in">any</span> {
     <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.app.authenticated) {
       <span class="hljs-comment">// here i redirect to named router "forbidden"</span>
-      <span class="hljs-keyword">return</span> command.redirect(router.urlForName(<span class="hljs-symbol">'forbidde</span>n', {}));
+      <span class="hljs-keyword">return</span> command.redirect(router.urlForName(<span class="hljs-string">'forbidden'</span>, {}));
     }
   }
-}</code></pre><ul>
+}</code></pre>
+				<ul>
 					<li>Prevent leave page</li>
 				</ul>
 				<p>Please note that even we prevent page leave next history entry is added.
 				In that case you should back history right before prevent command</p>
 				<pre><code class="language-typescript"><span class="hljs-built_in">window</span>.history.back();
 <span class="hljs-comment">// then return command.prevent();</span></code></pre>
+				<hr>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {BeforeLeaveCommand, Location, Router} <span class="hljs-keyword">from</span> <span class="hljs-string">'@exmg/exmg-lit-router/index-router'</span>;
 <span class="hljs-keyword">import</span> {property} <span class="hljs-keyword">from</span> <span class="hljs-string">'lit-element'</span>;
 <span class="hljs-keyword">import</span> {ConnectedLitElement, StateWithRouter, RouterState} <span class="hljs-keyword">from</span> <span class="hljs-string">'@exmg/exmg-lit-router'</span>;
@@ -537,40 +539,42 @@ store.dispatch(updateQueryParams({queryParams: <span class="hljs-string">'?page=
     <span class="hljs-keyword">const</span> url = router.urlForName(<span class="hljs-string">'not-found'</span>, {});
   }
 }</code></pre>
-				<pre><code>Note that generating urls <span class="hljs-keyword">by</span><span class="hljs-built_in"> name</span> <span class="hljs-keyword">or</span> components may failed <span class="hljs-keyword">when</span> you are trying generate url
-<span class="hljs-keyword">for</span> children components which are<span class="hljs-built_in"> not</span> loaded yet.
+				<hr>
+				<pre><code class="language-text">Note that generating urls by name or components may failed when you are trying generate url
+for children components which are not loaded yet.
 
-Here <span class="hljs-literal">is</span> example <span class="hljs-keyword">of</span> lazy loaded children routes
+Here is example of lazy loaded children routes
 
 {
- <span class="hljs-built_in"> path</span>: <span class="hljs-string">'some-path'</span>,
-  children: () =&gt; <span class="hljs-keyword">import</span>(<span class="hljs-string">'./path/to/routes.js'</span>).<span class="hljs-keyword">then</span>(<span class="hljs-keyword">module</span> =&gt; {
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">module</span>.routes;
+  path: &#39;some-path&#39;,
+  children: () =&gt; import(&#39;./path/to/routes.js&#39;).then(module =&gt; {
+    return module.routes;
   }),
 },
 
-<span class="hljs-keyword">if</span> you really need lazy loading <span class="hljs-keyword">and</span> have access <span class="hljs-keyword">to</span> routs <span class="hljs-keyword">by</span><span class="hljs-built_in"> name</span> <span class="hljs-keyword">or</span> component<span class="hljs-built_in"> name</span>
+if you really need lazy loading and have access to routs by name or component name
 you can configure route:
 
 {
- <span class="hljs-built_in"> path</span>: <span class="hljs-string">'some-path'</span>,
-  action: () =&gt; <span class="hljs-keyword">import</span>(<span class="hljs-string">'./path/to/routes.js'</span>) <span class="hljs-keyword">as</span> Promise<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">any</span>&gt;</span>,
+  path: &#39;some-path&#39;,
+  action: () =&gt; import(&#39;./path/to/routes.js&#39;) as Promise&lt;any&gt;,
   children: (): RouteItem[] =&gt; (
     [
-      </span><span class="xquery">{
-       <span class="hljs-built_in"> path</span>: <span class="hljs-string">''</span>,
-        component: <span class="hljs-string">'some-list-component'</span>,
-       <span class="hljs-built_in"> name</span>: <span class="hljs-string">'some-list'</span>,
-      }</span><span class="xml">,
-      </span><span class="xquery">{
-       <span class="hljs-built_in"> path</span>: <span class="hljs-string">'show/:id'</span>,
-        component: <span class="hljs-string">'some-detail-component'</span>,
-       <span class="hljs-built_in"> name</span>: <span class="hljs-string">'some-detail'</span>,
-      }</span><span class="xml">,
+      {
+        path: &#39;&#39;,
+        component: &#39;some-list-component&#39;,
+        name: &#39;some-list&#39;,
+      },
+      {
+        path: &#39;show/:id&#39;,
+        component: &#39;some-detail-component&#39;,
+        name: &#39;some-detail&#39;,
+      },
     ]
   ),
 },
-</span></code></pre><ul>
+</code></pre>
+				<ul>
 					<li>generate url by path
 						This helper is not related with router config. It means you can pass here anything what
 					is valid pathname. This method will just prepend base url and replace parameter placeholders if any. </li>
@@ -612,10 +616,28 @@ you can configure route:
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_index_.html">"index"</a>
+						<a href="modules/_actions_router_.html">"actions/router"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_index_router_.html">"index-<wbr>router"</a>
+						<a href="modules/_reducers_router_.html">"reducers/router"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_router_connect_.html">"router/connect"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_router_instal_router_.html">"router/instal-<wbr>router"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_router_url_generator_.html">"router/url-<wbr>generator"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_router_utils_.html">"router/utils"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_router_vaadin_router_.html">"router/vaadin-<wbr>router"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_selectors_router_.html">"selectors/router"</a>
 					</li>
 				</ul>
 			</nav>

@@ -64,7 +64,7 @@
     "wct-mocha": "^1.0.0"
   },
   "scripts": {
-    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts",
+    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ src/**/*.ts",
     "build": "npm run lint && npm run tsc",
     "tsc": "tsc -b ./tsconfig.json",
     "prepublishOnly": "npm run build",
