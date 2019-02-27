@@ -1,4 +1,3 @@
-export * from './src/components/exmg-link';
 export * from './src/reducers/router';
 export * from './src/actions/router';
 export * from './src/selectors/router';

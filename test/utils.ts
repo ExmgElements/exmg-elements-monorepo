@@ -2,8 +2,6 @@ import {AnyAction, Store, Action} from 'redux';
 import {LazyStore} from 'pwa-helpers/lazy-reducer-enhancer';
 import {RouterState} from '../src/reducers/router';
 
-export const promisifyFlush = (flush: Function) => () => new Promise(resolve => flush(resolve));
-
 export const mockStore = <S = any, A extends Action = AnyAction>(state: S): Store<S> & LazyStore => {
   return {
     getState: (): S => {

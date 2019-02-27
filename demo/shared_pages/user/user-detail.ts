@@ -3,7 +3,7 @@ import {BeforeEnterCommand, Location, Router} from '@vaadin/router';
 
 import {SharedStyles} from '../../components/shared-styles';
 
-import '../../../src/components/exmg-link';
+import '../../components/exmg-link';
 
 import {RouterState, generateUrlByNameOrComponentName, StateWithRouter, ConnectedLitElement} from '../../../index';
 

@@ -1,8 +1,8 @@
 import {html, property, customElement, PropertyValues} from 'lit-element';
 
-import {ConnectedLitElement, StateWithRouter} from '../router/connect';
-import {RouterState} from '../reducers/router';
-import {generateUrlByPath} from '../router/url-generator';
+import {ConnectedLitElement, StateWithRouter} from '../../src/router/connect';
+import {RouterState} from '../../src/reducers/router';
+import {generateUrlByPath} from '../../src/router/url-generator';
 
 /**
  * Element helper for anchor which is connected with router reducer.

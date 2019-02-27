@@ -5,7 +5,7 @@ import {repeat} from 'lit-html/directives/repeat';
 import {SharedStyles} from './shared-styles';
 
 import {BreadcrumbItem} from '../../src/actions/router';
-import '../../src/components/exmg-link';
+import './exmg-link';
 
 @customElement('exmg-breadcrumb')
 export class ExmgBreadcrumb extends LitElement {

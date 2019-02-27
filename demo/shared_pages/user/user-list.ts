@@ -10,7 +10,7 @@ import {
 } from '../../../src/router/connect';
 import {updateQueryParams} from '../../../src/actions/router';
 import {getQueryParamOrDefault} from '../../../src/selectors/router';
-import '../../../src/components/exmg-link';
+import '../../components/exmg-link';
 import {generateUrl} from '../../../src/router/url-generator';
 
 @customElement('exmg-user-list')

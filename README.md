@@ -433,20 +433,6 @@ To navigate you can use:
 
 * anchor `<a href="view1/details">Details</a>`
 
-* exmg-link
-
-```html
-<exmg-link><a href="view1">View on link"</a></exmg-link>
-```
- Element helper for anchor which is connected with router reducer.
- This element render children as the slot. Children should be anchor with attribute href
- When href match with current router path then attribute [selected] will be added to the child element.
- Matching href with current path can be done in 2 ways, depending on attribute [exact]
- Example of adding style for selected link
-```css
-a[selected] {color: red;}
-```
-
 * redux action
 
 You can also programmatically navigate to url.
