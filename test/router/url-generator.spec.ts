@@ -19,6 +19,19 @@ suite('router/url-generator', () => {
     return router;
   };
 
+  const restoreModuleState = () => {
+    // @ts-ignore - let's restore module state
+    connectUrlGeneratorWithRouter(undefined);
+  };
+
+  setup(() => {
+    // restoreModuleState();
+  });
+
+  teardown(() => {
+    restoreModuleState();
+  });
+
   suite('connectUrlGeneratorWithRouter', () => {
     test('If not connected then error should be thrown', () => {
       assert.throws(generateUrl, Error);

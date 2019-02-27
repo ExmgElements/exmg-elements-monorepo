@@ -37,17 +37,22 @@ const beforeInstall = (routes: RouteItem[]): void => {
   }
 };
 
-export const installRouter = (
-  store: Store<any, AnyAction>, outlet: HTMLElement, routes: RouteItem[], locationUpdatedCallback?: LocationUpdatedCallback
-): InstallationResult => {
+export type Installer = (locationUpdatedCallback: (location: Location, e: Event|null) => void) => void;
+
+export const locationUpdatedHandler = (locationUpdatedCallback?: LocationUpdatedCallback) => (location: Location, e: Event | null) => {
+  if (Router.go(location.pathname.toLowerCase())) {
+    locationUpdatedCallback && locationUpdatedCallback(location);
+  }
+};
+
+export const createInstallRouter = (installer: Installer) =>
+  (
+    store: Store<any, AnyAction>, outlet: HTMLElement, routes: RouteItem[], locationUpdatedCallback?: LocationUpdatedCallback
+  ): InstallationResult => {
     beforeInstall(routes);
 
     // install pwa-helpers/route - this will catch link click and dispatch window history update
-    installRouteHelper((location: Location, e: Event | null) => {
-        if (Router.go(location.pathname.toLowerCase())) {
-          locationUpdatedCallback && locationUpdatedCallback(location);
-        }
-    });
+    installer(locationUpdatedHandler(locationUpdatedCallback));
 
     // listen to route change - this will dispatch action to router reducer
     const routerChangedHandler = onRouteChanged(store);
@@ -61,9 +66,11 @@ export const installRouter = (
     connectUrlGeneratorWithRouter(router);
 
     return {
-        router,
-        unsubscribe: () => {
-            window.removeEventListener('vaadin-router-location-changed', routerChangedHandler);
-        },
+      router,
+      unsubscribe: () => {
+        window.removeEventListener('vaadin-router-location-changed', routerChangedHandler);
+      },
     };
 };
+
+export const installRouter =  createInstallRouter(installRouteHelper);
