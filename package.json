@@ -28,7 +28,9 @@
     "index.d.ts"
   ],
   "dependencies": {
-    "lit-element": "^2.0.1"
+    "lit-element": "^2.0.1",
+    "@polymer/iron-iconset-svg": "^3.0.1",
+    "@polymer/iron-icon": "^3.0.1"
   },
   "devDependencies": {
     "@polymer/iron-demo-helpers": "^3.0.2",
