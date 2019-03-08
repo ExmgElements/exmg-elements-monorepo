@@ -3,7 +3,7 @@
   "flat": true,
   "version": "1.0.0",
   "description": "Element to display breadcrumbs navigation",
-  "main": "index.js",
+  "main": "index.html",
   "contributors": [
     "Ex Machina Group"
   ],
@@ -21,11 +21,9 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/exmachina/exmg-cms-breadcrumbs",
   "files": [
-    "typings/*.d.ts",
-    "src/**/*.js",
-    "src/**/*.d.ts",
-    "index.js",
-    "index.d.ts"
+    "exmg-*.js",
+    "exmg-*.d.ts",
+    "scripts/**/*.js"
   ],
   "dependencies": {
     "lit-element": "^2.0.1",
@@ -46,6 +44,7 @@
     "gulp-rename": "^1.3.0",
     "gulp-replace": "^1.0.0",
     "mocha": "^5.2.0",
+    "replace": "^1.1.0",
     "tslint": "^5.12.1",
     "tslint-config-exmg": "^1.0.2",
     "typedoc": "^0.14.2",
@@ -53,7 +52,7 @@
     "wct-mocha": "^1.0.0"
   },
   "scripts": {
-    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ **/*.ts",
+    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts && node ./scripts/gen-docs/index.js",
     "build": "npm run lint && npm run tsc",
     "tsc": "tsc -b ./tsconfig.json",
     "prepublishOnly": "npm run build",

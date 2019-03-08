@@ -117,7 +117,6 @@ export class BreadcrumbsElement extends LitElement {
   }
 
   protected update(changedProperties: SmartPropertyValue): void {
-    console.log('updated', changedProperties, this.limit);
     if (changedProperties.has('items') || changedProperties.has('limit')) {
       this.prepareItems();
     }
