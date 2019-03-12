@@ -66,7 +66,7 @@ export class BreadcrumbsElement extends LitElement {
     exmgCmsBreadcrumbsStyles,
   ];
 
-  private renderSeparator (currentIndex: number, lastIndex: number) {
+  private renderSeparator(currentIndex: number, lastIndex: number) {
     if (currentIndex === lastIndex) {
       return null;
     }
@@ -81,7 +81,7 @@ export class BreadcrumbsElement extends LitElement {
   private renderItems() {
     const lastIndex = this.preparedItems.length - 1;
     return repeat(
-        this.preparedItems,
+      this.preparedItems,
       ({href, content}) => `${href}${content}`,
       ({href, content, selected, disabled}, index) => {
         return html`
@@ -89,7 +89,7 @@ export class BreadcrumbsElement extends LitElement {
             <a href=${href} ?inactive="${!selected}" ?disabled="${disabled}">${content}</a>
             ${this.renderSeparator(index, lastIndex)}
           </div>
-        `;
+      `;
       }
       );
   }
