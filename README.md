@@ -269,17 +269,22 @@ const  routerItem = {
 ```
 
 ## Pages
-Generally element class should inherit form `ConnectedLitElement`.
-That base class is already connected with store.
+Generally element class should inherit form `PageLitElement`.
+That base page class is already connected with store.
 You can override hook methods:
 
 * routeChanged(state: StateWithRouter, prevState: StateWithRouter): void
 
-It is triggered whenever reducer router is updated in state
+It is triggered whenever reducer router is updated.
 
 * stateChanged*state: StateWithRouter): void
 
 It is triggered whenever any reducer update state
+
+There is one exception when both hooks will be omitted:
+Generally transition from one route to another cause connecting to new page component and disconnect from old page component.
+At some point in time we have instantiated 2 pages components. Depending on lifecycle callback one of them will be mounted second one will
+be disconnected. After resolving navigation transition there will be notified component which will be newly rendered if any. 
 
 If you will update class property decorated by `@property` then automatically
 element will be rerender.
@@ -287,9 +292,9 @@ element will be rerender.
 ### Page from external repository
 ```typescript
 import {property} from 'lit-element';
-import {ConnectedLitElement, StateWithRouter, RouterState} from '@exmg/exmg-lit-router';
+import {PageLitElement, StateWithRouter, RouterState} from '@exmg/exmg-lit-router';
 
-export class ExternalPage extends ConnectedLitElement<StateWithRouter> {
+export class ExternalPage extends PageLitElement<StateWithRouter> {
   @property({type: Object}) private router: Partial<RouterState> = {};
   
   routeChanged(state: StateWithRouter, prevState: StateWithRouter) {
@@ -302,18 +307,54 @@ You can pass broader state type or your rootState
 
 ```typescript
 import {property} from 'lit-element';
-import {ConnectedLitElement, StateWithRouter, RouterState} from '@exmg/exmg-lit-router';
+import {PageLitElement, StateWithRouter, RouterState} from '@exmg/exmg-lit-router';
 
 interface ExtendedState extends StateWithRouter {
   myReducer: object,
 } 
 
-export class Page extends ConnectedLitElement<ExtendedState> {
+export class Page extends PageLitElement<ExtendedState> {
   @property({type: Object}) private router: Partial<RouterState> = {};
   @property({type: Object}) private app: any;
   
   routeChanged(state: ExtendedState, prevState: ExtendedState) {
     this.router = state.router;
+    this.app = state.myReducer;
+  }
+}
+```
+
+## Components/Elements
+Next to the Pages we can distinguish components/elements which are not coupled with router directly but needs to be
+connected with store. In that case you should inherit from `ConnectedLitElement`.
+This component inherit from `PageLitElement`. There is only small difference perhaps hooks `routerChanged, stateChanged`
+should be triggered or not.
+
+* stateChanged*state: StateWithRouter): void
+
+It is triggered whenever any reducer update state. It is also triggered when routerChanged
+
+* routeChanged(state: StateWithRouter, prevState: StateWithRouter): void
+
+It is triggered whenever reducer router is updated in state
+
+```typescript
+import {property} from 'lit-element';
+import {ConnectedLitElement, StateWithRouter, RouterState} from '@exmg/exmg-lit-router';
+
+interface RootState extends StateWithRouter {
+  myReducer: object,
+} 
+
+export class MyElement extends ConnectedLitElement<RootState> {
+  @property({type: Object}) private router: Partial<RouterState> = {};
+  @property({type: Object}) private app: any;
+  
+  routeChanged(state: RootState, prevState: RootState) {
+    this.router = state.router;
+  }
+  
+  stateChanged(state: RootState) {
     this.app = state.myReducer;
   }
 }
@@ -329,9 +370,9 @@ Lifecycle callbacks may be used as guards, redirection or preventing leave route
 ```typescript
 import {BeforeEnterCommand, Location, Router} from '@exmg/exmg-lit-router/index-router';
 import {property} from 'lit-element';
-import {ConnectedLitElement, StateWithRouter, RouterState} from '@exmg/exmg-lit-router';
+import {PageLitElement, StateWithRouter, RouterState} from '@exmg/exmg-lit-router';
 
-export class Page extends ConnectedLitElement<StateWithRouter> {
+export class Page extends PageLitElement<StateWithRouter> {
   @property({type: Object}) private router: Partial<RouterState> = {};
   users = new Map();
   
@@ -355,9 +396,9 @@ export class Page extends ConnectedLitElement<StateWithRouter> {
 ```typescript
 import {BeforeEnterCommand, Location, Router} from '@exmg/exmg-lit-router/index-router';
 import {property} from 'lit-element';
-import {ConnectedLitElement, StateWithRouter, RouterState} from '@exmg/exmg-lit-router';
+import {PageLitElement, StateWithRouter, RouterState} from '@exmg/exmg-lit-router';
 
-export class Page extends ConnectedLitElement<StateWithRouter> {
+export class Page extends PageLitElement<StateWithRouter> {
   @property({type: Object}) private router: Partial<RouterState> = {};
   app: any;
   
@@ -389,9 +430,9 @@ ___
 ```typescript
 import {BeforeLeaveCommand, Location, Router} from '@exmg/exmg-lit-router/index-router';
 import {property} from 'lit-element';
-import {ConnectedLitElement, StateWithRouter, RouterState} from '@exmg/exmg-lit-router';
+import {PageLitElement, StateWithRouter, RouterState} from '@exmg/exmg-lit-router';
 
-export class Page extends ConnectedLitElement<StateWithRouter> {
+export class Page extends PageLitElement<StateWithRouter> {
   @property({type: Object}) private router: Partial<RouterState> = {};
   users = new Map();
   haveTaskInProgress: boolean = true;

@@ -70,6 +70,7 @@
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_router_utils_.html#queryparams" class="tsd-kind-icon">Query<wbr>Params</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_router_utils_.html#selectedinfo" class="tsd-kind-icon">Selected<wbr>Info</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -77,6 +78,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_router_utils_.html#convertsearchquerytoqueryparams" class="tsd-kind-icon">convert<wbr>Search<wbr>Query<wbr>ToQuery<wbr>Params</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_router_utils_.html#extractbreadcrumbsfromlocation" class="tsd-kind-icon">extract<wbr>Breadcrumbs<wbr>From<wbr>Location</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_router_utils_.html#prepareselectedinfo" class="tsd-kind-icon">prepare<wbr>Selected<wbr>Info</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_router_utils_.html#replaceparamsplaceholders" class="tsd-kind-icon">replace<wbr>Params<wbr>Placeholders</a></li>
 							</ul>
 						</section>
@@ -94,6 +96,21 @@
 							<li>Defined in router/utils.ts:5</li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
+					<a name="selectedinfo" class="tsd-anchor"></a>
+					<h3>Selected<wbr>Info</h3>
+					<div class="tsd-signature tsd-kind-icon">Selected<wbr>Info<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in router/utils.ts:43</li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+						</ul>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -125,13 +142,13 @@
 					<a name="extractbreadcrumbsfromlocation" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> extract<wbr>Breadcrumbs<wbr>From<wbr>Location</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">extract<wbr>Breadcrumbs<wbr>From<wbr>Location<span class="tsd-signature-symbol">(</span>location<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">VaadinLocation</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_actions_router_.html#breadcrumbitem" class="tsd-signature-type">BreadcrumbItem</a><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon">extract<wbr>Breadcrumbs<wbr>From<wbr>Location<span class="tsd-signature-symbol">(</span>location<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">VaadinLocation</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_actions_router_.breadcrumbitem.html" class="tsd-signature-type">BreadcrumbItem</a><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in router/utils.ts:27</li>
+									<li>Defined in router/utils.ts:60</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -140,7 +157,36 @@
 									<h5>location: <span class="tsd-signature-type">VaadinLocation</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_actions_router_.html#breadcrumbitem" class="tsd-signature-type">BreadcrumbItem</a><span class="tsd-signature-symbol">[]</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_actions_router_.breadcrumbitem.html" class="tsd-signature-type">BreadcrumbItem</a><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="prepareselectedinfo" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> prepare<wbr>Selected<wbr>Info</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">prepare<wbr>Selected<wbr>Info<span class="tsd-signature-symbol">(</span>href<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, routerPathname<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, routerParams<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_router_utils_.html#selectedinfo" class="tsd-signature-type">SelectedInfo</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in router/utils.ts:48</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>href: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>routerPathname: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> routerParams: <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_router_utils_.html#selectedinfo" class="tsd-signature-type">SelectedInfo</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -209,11 +255,17 @@
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
 						<a href="_router_utils_.html#queryparams" class="tsd-kind-icon">Query<wbr>Params</a>
 					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="_router_utils_.html#selectedinfo" class="tsd-kind-icon">Selected<wbr>Info</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_router_utils_.html#convertsearchquerytoqueryparams" class="tsd-kind-icon">convert<wbr>Search<wbr>Query<wbr>ToQuery<wbr>Params</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_router_utils_.html#extractbreadcrumbsfromlocation" class="tsd-kind-icon">extract<wbr>Breadcrumbs<wbr>From<wbr>Location</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_router_utils_.html#prepareselectedinfo" class="tsd-kind-icon">prepare<wbr>Selected<wbr>Info</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_router_utils_.html#replaceparamsplaceholders" class="tsd-kind-icon">replace<wbr>Params<wbr>Placeholders</a>

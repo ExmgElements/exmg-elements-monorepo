@@ -269,24 +269,28 @@ Recommended to use dynamic import(&#39;package.js&#39;)</code></pre>
   },
 };</code></pre>
 				<h2 id="pages">Pages</h2>
-				<p>Generally element class should inherit form <code>ConnectedLitElement</code>.
-					That base class is already connected with store.
+				<p>Generally element class should inherit form <code>PageLitElement</code>.
+					That base page class is already connected with store.
 				You can override hook methods:</p>
 				<ul>
 					<li>routeChanged(state: StateWithRouter, prevState: StateWithRouter): void</li>
 				</ul>
-				<p>It is triggered whenever reducer router is updated in state</p>
+				<p>It is triggered whenever reducer router is updated.</p>
 				<ul>
 					<li>stateChanged*state: StateWithRouter): void</li>
 				</ul>
 				<p>It is triggered whenever any reducer update state</p>
+				<p>There is one exception when both hooks will be omitted:
+					Generally transition from one route to another cause connecting to new page component and disconnect from old page component.
+					At some point in time we have instantiated 2 pages components. Depending on lifecycle callback one of them will be mounted second one will
+				be disconnected. After resolving navigation transition there will be notified component which will be newly rendered if any. </p>
 				<p>If you will update class property decorated by <code>@property</code> then automatically
 				element will be rerender.</p>
 				<h3 id="page-from-external-repository">Page from external repository</h3>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {property} <span class="hljs-keyword">from</span> <span class="hljs-string">'lit-element'</span>;
-<span class="hljs-keyword">import</span> {ConnectedLitElement, StateWithRouter, RouterState} <span class="hljs-keyword">from</span> <span class="hljs-string">'@exmg/exmg-lit-router'</span>;
+<span class="hljs-keyword">import</span> {PageLitElement, StateWithRouter, RouterState} <span class="hljs-keyword">from</span> <span class="hljs-string">'@exmg/exmg-lit-router'</span>;
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> ExternalPage <span class="hljs-keyword">extends</span> ConnectedLitElement&lt;StateWithRouter&gt; {
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> ExternalPage <span class="hljs-keyword">extends</span> PageLitElement&lt;StateWithRouter&gt; {
   <span class="hljs-meta">@property</span>({<span class="hljs-keyword">type</span>: <span class="hljs-built_in">Object</span>}) <span class="hljs-keyword">private</span> router: Partial&lt;RouterState&gt; = {};
 
   routeChanged(state: StateWithRouter, prevState: StateWithRouter) {
@@ -295,18 +299,50 @@ Recommended to use dynamic import(&#39;package.js&#39;)</code></pre>
 }</code></pre>
 				<p>You can pass broader state type or your rootState </p>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {property} <span class="hljs-keyword">from</span> <span class="hljs-string">'lit-element'</span>;
-<span class="hljs-keyword">import</span> {ConnectedLitElement, StateWithRouter, RouterState} <span class="hljs-keyword">from</span> <span class="hljs-string">'@exmg/exmg-lit-router'</span>;
+<span class="hljs-keyword">import</span> {PageLitElement, StateWithRouter, RouterState} <span class="hljs-keyword">from</span> <span class="hljs-string">'@exmg/exmg-lit-router'</span>;
 
 <span class="hljs-keyword">interface</span> ExtendedState <span class="hljs-keyword">extends</span> StateWithRouter {
   myReducer: object,
 } 
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Page <span class="hljs-keyword">extends</span> ConnectedLitElement&lt;ExtendedState&gt; {
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Page <span class="hljs-keyword">extends</span> PageLitElement&lt;ExtendedState&gt; {
   <span class="hljs-meta">@property</span>({<span class="hljs-keyword">type</span>: <span class="hljs-built_in">Object</span>}) <span class="hljs-keyword">private</span> router: Partial&lt;RouterState&gt; = {};
   <span class="hljs-meta">@property</span>({<span class="hljs-keyword">type</span>: <span class="hljs-built_in">Object</span>}) <span class="hljs-keyword">private</span> app: <span class="hljs-built_in">any</span>;
 
   routeChanged(state: ExtendedState, prevState: ExtendedState) {
     <span class="hljs-keyword">this</span>.router = state.router;
+    <span class="hljs-keyword">this</span>.app = state.myReducer;
+  }
+}</code></pre>
+				<h2 id="components-elements">Components/Elements</h2>
+				<p>Next to the Pages we can distinguish components/elements which are not coupled with router directly but needs to be
+					connected with store. In that case you should inherit from <code>ConnectedLitElement</code>.
+					This component inherit from <code>PageLitElement</code>. There is only small difference perhaps hooks <code>routerChanged, stateChanged</code>
+				should be triggered or not.</p>
+				<ul>
+					<li>stateChanged*state: StateWithRouter): void</li>
+				</ul>
+				<p>It is triggered whenever any reducer update state. It is also triggered when routerChanged</p>
+				<ul>
+					<li>routeChanged(state: StateWithRouter, prevState: StateWithRouter): void</li>
+				</ul>
+				<p>It is triggered whenever reducer router is updated in state</p>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {property} <span class="hljs-keyword">from</span> <span class="hljs-string">'lit-element'</span>;
+<span class="hljs-keyword">import</span> {ConnectedLitElement, StateWithRouter, RouterState} <span class="hljs-keyword">from</span> <span class="hljs-string">'@exmg/exmg-lit-router'</span>;
+
+<span class="hljs-keyword">interface</span> RootState <span class="hljs-keyword">extends</span> StateWithRouter {
+  myReducer: object,
+} 
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyElement <span class="hljs-keyword">extends</span> ConnectedLitElement&lt;RootState&gt; {
+  <span class="hljs-meta">@property</span>({<span class="hljs-keyword">type</span>: <span class="hljs-built_in">Object</span>}) <span class="hljs-keyword">private</span> router: Partial&lt;RouterState&gt; = {};
+  <span class="hljs-meta">@property</span>({<span class="hljs-keyword">type</span>: <span class="hljs-built_in">Object</span>}) <span class="hljs-keyword">private</span> app: <span class="hljs-built_in">any</span>;
+
+  routeChanged(state: RootState, prevState: RootState) {
+    <span class="hljs-keyword">this</span>.router = state.router;
+  }
+
+  stateChanged(state: RootState) {
     <span class="hljs-keyword">this</span>.app = state.myReducer;
   }
 }</code></pre>
@@ -318,9 +354,9 @@ Recommended to use dynamic import(&#39;package.js&#39;)</code></pre>
 				</ul>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {BeforeEnterCommand, Location, Router} <span class="hljs-keyword">from</span> <span class="hljs-string">'@exmg/exmg-lit-router/index-router'</span>;
 <span class="hljs-keyword">import</span> {property} <span class="hljs-keyword">from</span> <span class="hljs-string">'lit-element'</span>;
-<span class="hljs-keyword">import</span> {ConnectedLitElement, StateWithRouter, RouterState} <span class="hljs-keyword">from</span> <span class="hljs-string">'@exmg/exmg-lit-router'</span>;
+<span class="hljs-keyword">import</span> {PageLitElement, StateWithRouter, RouterState} <span class="hljs-keyword">from</span> <span class="hljs-string">'@exmg/exmg-lit-router'</span>;
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Page <span class="hljs-keyword">extends</span> ConnectedLitElement&lt;StateWithRouter&gt; {
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Page <span class="hljs-keyword">extends</span> PageLitElement&lt;StateWithRouter&gt; {
   <span class="hljs-meta">@property</span>({<span class="hljs-keyword">type</span>: <span class="hljs-built_in">Object</span>}) <span class="hljs-keyword">private</span> router: Partial&lt;RouterState&gt; = {};
   users = <span class="hljs-keyword">new</span> Map();
 
@@ -342,9 +378,9 @@ Recommended to use dynamic import(&#39;package.js&#39;)</code></pre>
 				</ul>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {BeforeEnterCommand, Location, Router} <span class="hljs-keyword">from</span> <span class="hljs-string">'@exmg/exmg-lit-router/index-router'</span>;
 <span class="hljs-keyword">import</span> {property} <span class="hljs-keyword">from</span> <span class="hljs-string">'lit-element'</span>;
-<span class="hljs-keyword">import</span> {ConnectedLitElement, StateWithRouter, RouterState} <span class="hljs-keyword">from</span> <span class="hljs-string">'@exmg/exmg-lit-router'</span>;
+<span class="hljs-keyword">import</span> {PageLitElement, StateWithRouter, RouterState} <span class="hljs-keyword">from</span> <span class="hljs-string">'@exmg/exmg-lit-router'</span>;
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Page <span class="hljs-keyword">extends</span> ConnectedLitElement&lt;StateWithRouter&gt; {
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Page <span class="hljs-keyword">extends</span> PageLitElement&lt;StateWithRouter&gt; {
   <span class="hljs-meta">@property</span>({<span class="hljs-keyword">type</span>: <span class="hljs-built_in">Object</span>}) <span class="hljs-keyword">private</span> router: Partial&lt;RouterState&gt; = {};
   app: <span class="hljs-built_in">any</span>;
 
@@ -370,9 +406,9 @@ Recommended to use dynamic import(&#39;package.js&#39;)</code></pre>
 				<hr>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {BeforeLeaveCommand, Location, Router} <span class="hljs-keyword">from</span> <span class="hljs-string">'@exmg/exmg-lit-router/index-router'</span>;
 <span class="hljs-keyword">import</span> {property} <span class="hljs-keyword">from</span> <span class="hljs-string">'lit-element'</span>;
-<span class="hljs-keyword">import</span> {ConnectedLitElement, StateWithRouter, RouterState} <span class="hljs-keyword">from</span> <span class="hljs-string">'@exmg/exmg-lit-router'</span>;
+<span class="hljs-keyword">import</span> {PageLitElement, StateWithRouter, RouterState} <span class="hljs-keyword">from</span> <span class="hljs-string">'@exmg/exmg-lit-router'</span>;
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Page <span class="hljs-keyword">extends</span> ConnectedLitElement&lt;StateWithRouter&gt; {
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Page <span class="hljs-keyword">extends</span> PageLitElement&lt;StateWithRouter&gt; {
   <span class="hljs-meta">@property</span>({<span class="hljs-keyword">type</span>: <span class="hljs-built_in">Object</span>}) <span class="hljs-keyword">private</span> router: Partial&lt;RouterState&gt; = {};
   users = <span class="hljs-keyword">new</span> Map();
   haveTaskInProgress: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">true</span>;

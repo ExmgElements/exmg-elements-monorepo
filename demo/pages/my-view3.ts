@@ -33,9 +33,9 @@ import {SharedStyles} from '../components/shared-styles';
 import {ButtonSharedStyles} from '../components/button-shared-styles';
 import {addToCartIcon} from '../components/my-icons';
 
-import {ConnectedLitElement} from '../../index';
+import {PageLitElement} from '../../index';
 
-class MyView3 extends ConnectedLitElement<RootState> {
+class MyView3 extends PageLitElement<RootState> {
   @property({type: Number})
   private quantity = 0;
 

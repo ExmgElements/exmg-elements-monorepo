@@ -36,10 +36,21 @@ const getConnectedStore = <S extends StateWithRouter>(): StoreWithRouter<S> => {
   return <StoreWithRouter<S>>connectedStore;
 };
 
-export class ConnectedLitElement<S extends StateWithRouter = StateWithRouter> extends LitElement implements Connect<S>{
+export class ConnectedLitElement<S extends StateWithRouter = StateWithRouter> extends LitElement implements Connect<S> {
+  /**
+   * Keep information perhaps connected component is page.
+   * Navigating between pages cause that at some point we have instantiated 2 pages during transition.
+   * Page which we navigate from shouldn't have called hooks stateChanged and routerChanged.
+   * For none page component id doesn't matter.
+   * Based on this flag we need to determine what hooks needs to be called
+   */
+  protected readonly isPage: boolean = false;
   private storeUnsubscribe?: Unsubscribe;
   private lastState?: S;
-  private ownPath?: string;
+  /**
+   * Copy and store router pathname value once component is connecting
+   */
+  private initialPathname?: string;
 
   constructor() {
     super();
@@ -53,10 +64,21 @@ export class ConnectedLitElement<S extends StateWithRouter = StateWithRouter> ex
     this.storeUnsubscribe = this.getStore().subscribe(
       () => {
         const nextState = this.getStore().getState();
-        this.stateChanged(nextState);
-        if (this.ownPath === nextState.router.pathname && this.lastState && this.lastState.router !== nextState.router) {
-          this.routeChanged(nextState, this.lastState);
+        const routerChanged = !this.lastState || (this.lastState.router !== nextState.router);
+
+        if (routerChanged) {
+          /**
+           * When route changed trigger hooks only if not page component or is navigation target page component
+           */
+          const triggerHooks = !this.isPage || this.initialPathname === nextState.router.pathname;
+          if (triggerHooks) {
+            this.stateChanged(nextState);
+            this.routeChanged(nextState, this.lastState);
+          }
+        } else {
+          this.stateChanged(nextState);
         }
+
         this.lastState = nextState;
       }
     );
@@ -65,7 +87,7 @@ export class ConnectedLitElement<S extends StateWithRouter = StateWithRouter> ex
     this.stateChanged(state);
     this.routeChanged(state);
     this.lastState = state;
-    this.ownPath = state.router.pathname;
+    this.initialPathname = state.router.pathname;
   }
 
   disconnectedCallback(): void {
@@ -101,4 +123,8 @@ export class ConnectedLitElement<S extends StateWithRouter = StateWithRouter> ex
   onBeforeEnter(location: Location, command: BeforeEnterCommand, router: Router): Promise<any> | RedirectResult | PreventResult | any {}
 
   onAfterEnter(location: Location, command: EmptyCommand, router: Router): void {}
+}
+
+export class PageLitElement<S extends StateWithRouter = StateWithRouter> extends ConnectedLitElement<S> {
+  protected readonly isPage: boolean = true;
 }

@@ -3,7 +3,7 @@ import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 
 import {Router} from '@vaadin/router';
 import {StateWithRouter} from '../router/connect';
-import {convertSearchQueryToQueryParams, QueryParams} from '../router/utils';
+import {convertSearchQueryToQueryParams, QueryParams, SelectedInfo} from '../router/utils';
 
 export const ROUTER_CHANGED = 'ROUTER_CHANGED';
 export const NAVIGATE_TO_PATH = 'NAVIGATE_TO_PATH';
@@ -11,12 +11,12 @@ export const UPDATE_QUERY_PARAMS = 'UPDATE_QUERY_PARAMS';
 
 type ROUTER_CHANGED_TYPE = 'ROUTER_CHANGED';
 
-export type BreadcrumbItem = {
+export interface BreadcrumbItem extends  SelectedInfo {
   href: string;
   path: string;
   label: string;
   disabled?: boolean;
-};
+}
 
 export interface RouterActionRouterChanged extends Action<ROUTER_CHANGED_TYPE> {
   baseUrl: string;
