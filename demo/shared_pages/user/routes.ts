@@ -7,12 +7,12 @@ export const routes: RouteItem[] = [
     path: '',
     component: 'exmg-user-list',
     name: 'user-list',
-    breadcrumb: {label: 'User List'},
+    breadcrumb: {label: 'User List - shared'},
   },
   {
     path: 'details/:name',
     component: 'exmg-user-detail',
     name: 'exmg-user-detail',
-    breadcrumb: {label: 'User Details {name}'},
+    breadcrumb: {label: 'User Details {name} - shared'},
   },
 ];
