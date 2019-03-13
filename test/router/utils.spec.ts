@@ -1,7 +1,7 @@
 import {convertSearchQueryToQueryParams, replaceParamsPlaceholders, extractBreadcrumbsFromLocation} from '../../src/router/utils';
 import {mockLocation} from '../utils';
 import {connectUrlGeneratorWithRouter} from '../../src/router/url-generator';
-import {Router} from "@vaadin/router";
+import {Router} from '@vaadin/router';
 
 const {assert} = chai;
 
@@ -86,7 +86,7 @@ suite('router/utils', function () {
     });
   });
 
-  suite.only('extractBreadcrumbsFromLocation', () => {
+  suite('extractBreadcrumbsFromLocation', () => {
     const createRouter = () => {
       const outlet = document.createElement('div');
       return new Router(outlet);
