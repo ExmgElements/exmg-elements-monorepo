@@ -36,7 +36,7 @@ const getConnectedStore = <S extends StateWithRouter>(): StoreWithRouter<S> => {
   return <StoreWithRouter<S>>connectedStore;
 };
 
-export class ConnectedLitElement<S extends StateWithRouter = StateWithRouter> extends LitElement implements Connect<S> {
+export abstract class ConnectedLitElement<S extends StateWithRouter = StateWithRouter> extends LitElement implements Connect<S> {
   /**
    * Keep information perhaps connected component is page.
    * Navigating between pages cause that at some point we have instantiated 2 pages during transition.
@@ -125,6 +125,6 @@ export class ConnectedLitElement<S extends StateWithRouter = StateWithRouter> ex
   onAfterEnter(location: Location, command: EmptyCommand, router: Router): void {}
 }
 
-export class PageLitElement<S extends StateWithRouter = StateWithRouter> extends ConnectedLitElement<S> {
+export abstract class PageLitElement<S extends StateWithRouter = StateWithRouter> extends ConnectedLitElement<S> {
   protected readonly isPage: boolean = true;
 }

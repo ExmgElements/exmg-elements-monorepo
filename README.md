@@ -269,15 +269,16 @@ const  routerItem = {
 ```
 
 ## Pages
-Generally element class should inherit form `PageLitElement`.
-That base page class is already connected with store.
+Generally classes which are designed to be a pages in application should inherit form `PageLitElement`.
+That base class `PageLitElement` is already connected with store and provide some hook methods.
+
 You can override hook methods:
 
 * routeChanged(state: StateWithRouter, prevState: StateWithRouter): void
 
 It is triggered whenever reducer router is updated.
 
-* stateChanged*state: StateWithRouter): void
+* stateChanged(state: StateWithRouter): void
 
 It is triggered whenever any reducer update state
 
@@ -327,10 +328,10 @@ export class Page extends PageLitElement<ExtendedState> {
 ## Components/Elements
 Next to the Pages we can distinguish components/elements which are not coupled with router directly but needs to be
 connected with store. In that case you should inherit from `ConnectedLitElement`.
-This component inherit from `PageLitElement`. There is only small difference perhaps hooks `routerChanged, stateChanged`
+This component is base class for `PageLitElement`. There is only small difference perhaps hooks `routerChanged, stateChanged`
 should be triggered or not.
 
-* stateChanged*state: StateWithRouter): void
+* stateChanged(state: StateWithRouter): void
 
 It is triggered whenever any reducer update state. It is also triggered when routerChanged
 
