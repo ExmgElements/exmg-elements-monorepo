@@ -1,7 +1,7 @@
 {
   "name": "@exmg/exmg-lit-router",
   "flat": true,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Element that brings router to lit-html powered by vaadin/router, pwa-helpers, redux and lit-element",
   "main": "index.js",
   "contributors": [
