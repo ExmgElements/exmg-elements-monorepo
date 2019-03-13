@@ -24,6 +24,7 @@
   "homepage": "https://bitbucket.org/exmachina/exmg-lit-router",
   "files": [
     "typings/*.d.ts",
+    "scripts/**/*.js",
     "src/**/*.js",
     "src/**/*.d.ts",
     "index.js",
@@ -56,6 +57,7 @@
     "gulp-rename": "^1.3.0",
     "gulp-replace": "^1.0.0",
     "mocha": "^5.2.0",
+    "replace": "^1.1.0",
     "reselect": "^4.0.0",
     "tslint": "^5.12.1",
     "tslint-config-exmg": "^1.0.2",
@@ -64,7 +66,7 @@
     "wct-mocha": "^1.0.0"
   },
   "scripts": {
-    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ src/**/*.ts",
+    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ src/**/*.ts && node ./scripts/gen-docs/index.js",
     "build": "npm run lint && npm run tsc",
     "tsc": "tsc -b ./tsconfig.json",
     "prepublishOnly": "npm run build",

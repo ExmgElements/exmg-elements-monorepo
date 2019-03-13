@@ -24,6 +24,7 @@ export const appRoutes: RouteItem[] = [
       },
       {
         path: 'users-with-predefined-router',
+        breadcrumb: {label: 'Users - shared'},
         children: () => import('./shared_pages/user/routes.js').then(module => {
           return module.routes;
         }),

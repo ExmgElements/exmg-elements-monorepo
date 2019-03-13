@@ -6,15 +6,15 @@ import {SharedStyles} from '../../components/shared-styles';
 
 import {
   StateWithRouter,
-  ConnectedLitElement
-} from '../../../src/router/connect';
-import {updateQueryParams} from '../../../src/actions/router';
-import {getQueryParamOrDefault} from '../../../src/selectors/router';
+  PageLitElement,
+  generateUrl,
+  updateQueryParams,
+  getQueryParamOrDefault
+} from '../../../index';
 import '../../components/exmg-link';
-import {generateUrl} from '../../../src/router/url-generator';
 
 @customElement('exmg-user-list')
-export class ExmgUserList extends ConnectedLitElement<StateWithRouter> {
+export class ExmgUserList extends PageLitElement<StateWithRouter> {
   @property({type: Array})
   users: string[] = [
     'Allan',

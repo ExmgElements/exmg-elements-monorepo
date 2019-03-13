@@ -5,10 +5,10 @@ import {SharedStyles} from '../../components/shared-styles';
 
 import '../../components/exmg-link';
 
-import {RouterState, generateUrlByNameOrComponentName, StateWithRouter, ConnectedLitElement} from '../../../index';
+import {RouterState, generateUrlByNameOrComponentName, StateWithRouter, PageLitElement} from '../../../index';
 
 @customElement('exmg-user-detail')
-export class ExmgDetail extends ConnectedLitElement<StateWithRouter> {
+export class ExmgDetail extends PageLitElement<StateWithRouter> {
   @property({type: Object}) private router: Partial<RouterState> = {};
 
   static styles = SharedStyles;

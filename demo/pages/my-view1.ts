@@ -13,9 +13,9 @@ import {html, property} from 'lit-element';
 // These are the shared styles needed by this element.
 import {SharedStyles} from '../components/shared-styles';
 import {RootState} from '../store';
-import {RouterState, ConnectedLitElement} from '../../index';
+import {RouterState, PageLitElement} from '../../index';
 
-export class MyView1 extends ConnectedLitElement<RootState> {
+export class MyView1 extends PageLitElement<RootState> {
   static styles = SharedStyles;
 
   @property({type: Object}) private router: Partial<RouterState> = {};
