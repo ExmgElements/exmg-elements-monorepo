@@ -6,8 +6,7 @@ import './exmg-cms-breadcrumbs-icons';
 import exmgCmsBreadcrumbsStyles from './exmg-cms-breadcrumbs-styles';
 
 type GenericPropertyValues<T, V = unknown> = Map<T, V>;
-type PrivateProps = 'styleInfo';
-type Props = Exclude<keyof BreadcrumbsElement, number | Symbol> | PrivateProps;
+type Props = Exclude<keyof BreadcrumbsElement, number | Symbol>;
 
 type SmartPropertyValue = GenericPropertyValues<Props>;
 
