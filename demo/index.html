@@ -5,10 +5,46 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
     <title>exmg-grid demo</title>
+
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/@webcomponents/shadycss/apply-shim.min.js"></script>
+
+    <!-- Ensure Web Animations polyfill is loaded -->
+    <script src="../node_modules/web-animations-js/web-animations-next-lite.min.js"></script>
   </head>
   <body>
-    <ul>
-      <li><a href="simple.html">Simple data grid</a></li>
-    </ul>
+    <div class="vertical-section-container centered">
+      <script type="module">
+        import {LitElement, html} from 'lit-element';
+        import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+        import '@polymer/iron-demo-helpers/demo-snippet';
+        import './exmg-icons.js';
+
+        class ExmgGridDemo extends LitElement {
+          static get properties() {
+            return {
+              selected: { type: Boolean },
+            };
+          }
+
+          constructor() {
+            super();
+          }
+
+          render () {
+            //language=html
+            return html`
+
+            `;
+          }
+        }
+        window.customElements.define('exmg-grid-demo', ExmgGridDemo);
+      </script>
+      <demo-snippet>
+        <template>
+          <exmg-grid-demo></exmg-grid-demo>
+        </template>
+      </demo-snippet>
+    </div>
   </body>
 </html>
