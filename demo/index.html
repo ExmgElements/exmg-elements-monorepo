@@ -11,38 +11,21 @@
 
     <!-- Ensure Web Animations polyfill is loaded -->
     <script src="../node_modules/web-animations-js/web-animations-next-lite.min.js"></script>
+
+    <script type="module">
+      import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+      import '@polymer/iron-demo-helpers/demo-snippet';
+    </script>
+
+    <script type="module" src="../exmg-grid-toolbar.js"></script>
   </head>
   <body>
     <div class="vertical-section-container centered">
-      <script type="module">
-        import {LitElement, html} from 'lit-element';
-        import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
-        import '@polymer/iron-demo-helpers/demo-snippet';
-        import './exmg-icons.js';
+      <script type="module" src="./exmg-grid-toolbar-demo.js"></script>
 
-        class ExmgGridDemo extends LitElement {
-          static get properties() {
-            return {
-              selected: { type: Boolean },
-            };
-          }
-
-          constructor() {
-            super();
-          }
-
-          render () {
-            //language=html
-            return html`
-
-            `;
-          }
-        }
-        window.customElements.define('exmg-grid-demo', ExmgGridDemo);
-      </script>
       <demo-snippet>
         <template>
-          <exmg-grid-demo></exmg-grid-demo>
+          <exmg-grid-toolbar-demo></exmg-grid-toolbar-demo>
         </template>
       </demo-snippet>
     </div>
