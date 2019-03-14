@@ -1,4 +1,6 @@
 import {property, customElement, html, LitElement} from 'lit-element';
+import {repeat} from 'lit-html/directives/repeat';
+import '@material/mwc-button';
 import {styles as exmgGridToolbarStyles} from './exmg-grid-toolbar-styles';
 import {Action} from './exmg-grid-toolbar-types';
 
@@ -20,6 +22,7 @@ export class ExmgRadioGroup extends LitElement {
   connectedCallback(): void {
     super.connectedCallback();
 
+
     // this.addEventListener('exmg-radio-group-item-changed', this.handleRadioGroupItemChanged);
   }
 
@@ -29,10 +32,19 @@ export class ExmgRadioGroup extends LitElement {
     super.disconnectedCallback();
   }
 
+  private renderActions() {
+    return repeat(
+      this.actions,
+      (action) => html`
+        <mwc-button class="light" label="${action.label}" icon="${action.icon}" title="${action.title}"></mwc-button>
+      `
+    );
+  }
+
   render() {
     return html`
       <div>
-        toolbar
+        ${this.renderActions()}
       </div>
     `;
   }
