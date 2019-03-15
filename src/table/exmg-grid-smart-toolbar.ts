@@ -49,11 +49,11 @@ export class ExmgRadioGroup extends LitElement {
 
   render() {
     return html`
-        <exmg-grid-toolbar
-            .actions="${this.getActions()}"
-            description="${this.description}"
-            .filters="${this.filters}"
-        ></exmg-grid-toolbar>
+      <exmg-grid-toolbar
+        .actions="${this.getActions()}"
+        description="${this.description}"
+        .filters="${this.filters}"
+      ></exmg-grid-toolbar>
     `;
   }
 }
