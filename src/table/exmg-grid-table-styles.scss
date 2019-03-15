@@ -1,0 +1,33 @@
+:host {
+  font-family: Roboto;
+}
+
+th[sort] {
+  padding-right: 25px;
+  color: green;
+}
+th[data-sort-direction="ASC"] {
+  color: red;
+}
+th[data-sort-direction="DESC"] {
+  color: red;
+}
+
+th[sort]::after {
+  content: ' DESC';
+  opacity: 0;
+}
+th[data-sort-direction=ASC]::after {
+  content: ' ASC';
+  opacity: 1;
+}
+
+th[data-sort-direction=DESC]::after {
+  content: ' DESC';
+  opacity: 1
+}
+
+tr[data-selected] {
+  background-color: purple;
+}
+

@@ -20,19 +20,19 @@ function renderSass (pathWithFileName, stopOnError = false) {
 }
 
 gulp.task('render-styles', (done) => {
-  glob.sync('*.{scss,css}', {absolute: true})
-      .forEach(path => renderSass(path, true));
+  glob.sync('src/**/*.{scss,css}', {absolute: true})
+    .forEach(path => renderSass(path, true));
 
   done();
 });
 
 gulp.task('watch-styles', () => {
   return watch(
-      '*.{scss,css}',
-      {read: false, events: ['add', 'change'], ignoreInitial: false},
-      (vinyl) => {
-        renderSass(vinyl.path, false);
-      });
+    'src/**/*.{scss,css}',
+    {read: false, events: ['add', 'change'], ignoreInitial: false},
+    (vinyl) => {
+      renderSass(vinyl.path, false);
+    });
 });
 
 /**
