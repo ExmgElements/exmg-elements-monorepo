@@ -2,12 +2,12 @@ import {customElement, html, LitElement, property} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 import '@material/mwc-button';
 import {style as exmgGridToolbarStyles} from './exmg-grid-toolbar-styles';
-import {Action, Filter, FilterType, SingleSelectFilterExtraOptions} from './exmg-grid-toolbar-types';
+import {Action, Filter, FilterType, FilterSingleSelectExtraOptions} from './exmg-grid-toolbar-types';
 
 @customElement('exmg-grid-toolbar')
 export class ExmgRadioGroup extends LitElement {
   @property({type: String})
-  title: string = '';
+  description: string = '';
 
   @property({type: Object})
   actions: Action[] = [];
@@ -76,8 +76,8 @@ export class ExmgRadioGroup extends LitElement {
     );
   }
 
-  private renderTitle() {
-    return html`${this.title}`;
+  private renderDescription() {
+    return html`${this.description}`;
   }
 
   private renderFilters() {
@@ -94,7 +94,7 @@ export class ExmgRadioGroup extends LitElement {
     }
   }
 
-  private renderSingleSelectFilter(filter: Filter<SingleSelectFilterExtraOptions>) {
+  private renderSingleSelectFilter(filter: Filter<FilterSingleSelectExtraOptions>) {
     return html`
       <select name="${filter.id}" @change="${this.emitFilterChangedEvent(filter)}">
         ${repeat(
@@ -112,8 +112,8 @@ export class ExmgRadioGroup extends LitElement {
       <div class="actions">
         ${this.renderActions()}
       </div>
-      <div class="title">
-        ${this.renderTitle()}
+      <div class="description">
+        ${this.renderDescription()}
       </div>
       <div class="filters">
         ${this.renderFilters()}

@@ -3,20 +3,19 @@ export type Action = {
   icon?: string;
   text?: string;
   tooltip?: string;
-  condition?: any;
 };
 
-export type Filter<ExtraOptionsType> = {
+export type Filter<TExtraOptions> = {
   id: string;
   type: FilterType;
   name: string;
-  extraOptions: ExtraOptionsType;
+  extraOptions: TExtraOptions;
 };
 
 export enum FilterType {
   SingleSelect = 'single_select',
 }
 
-export type SingleSelectFilterExtraOptions = {
+export type FilterSingleSelectExtraOptions = {
   data: { id: string; title: string }[];
 };

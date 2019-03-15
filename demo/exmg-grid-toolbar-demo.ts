@@ -1,14 +1,24 @@
 import {LitElement, html, customElement} from 'lit-element';
-import {Action, Filter, FilterType, SingleSelectFilterExtraOptions} from '../src/table/exmg-grid-toolbar-types';
+import {Filter, FilterType, FilterSingleSelectExtraOptions} from '../src/table/exmg-grid-toolbar-types';
+import {ActionAmountSelectedItemsCondition, ActionWithCondition} from '../src/table/exmg-grid-smart-toolbar-types';
 
 @customElement('exmg-grid-toolbar-demo')
 export class ExmgGridToolbarDemo extends LitElement {
-  private actions: Action[] = [
+  private actions: ActionWithCondition<ActionAmountSelectedItemsCondition>[] = [
     {
       id: 'export',
       text: '',
       tooltip: 'Export',
       icon: 'get_app',
+    },
+    {
+      id: 'merge',
+      text: '',
+      tooltip: 'Merge',
+      icon: 'merge_type',
+      condition: {
+        min: 2,
+      },
     },
     {
       id: 'delete',
@@ -18,9 +28,9 @@ export class ExmgGridToolbarDemo extends LitElement {
     },
   ];
 
-  private tableTitle: string = 'Table 1';
+  private description: string = 'Table 1';
 
-  private filters: Filter<SingleSelectFilterExtraOptions>[] = [
+  private filters: Filter<FilterSingleSelectExtraOptions>[] = [
     {
       id: 'status',
       type: FilterType.SingleSelect,
@@ -54,13 +64,14 @@ export class ExmgGridToolbarDemo extends LitElement {
 
   render() {
     return html`
-        <exmg-grid-toolbar
+        <exmg-grid-smart-toolbar
+            amount-of-selected-items="1"
             .actions="${this.actions}"
-            title="${this.tableTitle}"
+            description="${this.description}"
             .filters="${this.filters}"
             @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
             @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
-        ></exmg-grid-toolbar>
+        ></exmg-grid-smart-toolbar>
     `;
   }
 }
