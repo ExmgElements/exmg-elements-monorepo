@@ -7,5 +7,6 @@ export type Action = {
 };
 
 export type Filter = {
-
+  id: string;
+  name: string;
 };

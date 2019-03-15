@@ -1,8 +1,8 @@
 import {property, customElement, html, LitElement} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 import '@material/mwc-button';
-import {styles as exmgGridToolbarStyles} from './exmg-grid-toolbar-styles';
-import {Action} from './exmg-grid-toolbar-types';
+import {style as exmgGridToolbarStyles} from './exmg-grid-toolbar-styles';
+import {Action, Filter} from './exmg-grid-toolbar-types';
 
 @customElement('exmg-grid-toolbar')
 export class ExmgRadioGroup extends LitElement {
@@ -13,7 +13,7 @@ export class ExmgRadioGroup extends LitElement {
   actions: Action[] = [];
 
   @property({type: Object})
-  filters: Action[] = [];
+  filters: Filter[] = [];
 
   static styles = [
     exmgGridToolbarStyles,
@@ -21,7 +21,6 @@ export class ExmgRadioGroup extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback();
-
 
     // this.addEventListener('exmg-radio-group-item-changed', this.handleRadioGroupItemChanged);
   }
@@ -41,11 +40,24 @@ export class ExmgRadioGroup extends LitElement {
     );
   }
 
+  private renderTitle() {
+    return html`<h1>${this.title}</h1>`;
+  }
+
+  private renderFilters() {
+    return repeat(
+      this.filters,
+      (filter) => html`
+        ${filter.name}
+      `
+    );
+  }
+
   render() {
     return html`
-      <div>
-        ${this.renderActions()}
-      </div>
+      ${this.renderActions()}
+      ${this.renderTitle()}
+      ${this.renderFilters()}
     `;
   }
 }

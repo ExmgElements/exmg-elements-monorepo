@@ -1,5 +1,5 @@
 import {LitElement, html, customElement} from 'lit-element';
-import {Action} from '../exmg-grid-toolbar-types';
+import {Action, Filter} from '../src/table/exmg-grid-toolbar-types';
 
 @customElement('exmg-grid-toolbar-demo')
 export class ExmgGridToolbarDemo extends LitElement {
@@ -18,14 +18,21 @@ export class ExmgGridToolbarDemo extends LitElement {
     },
   ];
 
-  constructor() {
-    super();
-  }
+  private tableTitle: string = 'Table 1';
+
+  private filters: Filter[] = [
+    {
+      id: 'filter1',
+      name: 'Filter 1',
+    },
+  ];
 
   render() {
     return html`
         <exmg-grid-toolbar
             .actions="${this.actions}"
+            title="${this.tableTitle}"
+            .filters="${this.filters}"
         ></exmg-grid-toolbar>
     `;
   }
