@@ -1,31 +1,56 @@
 import {LitElement, html, customElement} from 'lit-element';
-import {Action, Filter} from '../src/table/exmg-grid-toolbar-types';
+import {Action, Filter, FilterType, SingleSelectFilterExtraOptions} from '../src/table/exmg-grid-toolbar-types';
 
 @customElement('exmg-grid-toolbar-demo')
 export class ExmgGridToolbarDemo extends LitElement {
   private actions: Action[] = [
     {
       id: 'export',
-      label: '',
-      title: 'Export',
-      icon: 'cloud_download',
+      text: '',
+      tooltip: 'Export',
+      icon: 'get_app',
     },
     {
       id: 'delete',
-      label: '',
-      title: 'Delete',
+      text: '',
+      tooltip: 'Delete',
       icon: 'delete',
     },
   ];
 
   private tableTitle: string = 'Table 1';
 
-  private filters: Filter[] = [
+  private filters: Filter<SingleSelectFilterExtraOptions>[] = [
     {
-      id: 'filter1',
-      name: 'Filter 1',
+      id: 'status',
+      type: FilterType.SingleSelect,
+      name: 'Status',
+      extraOptions: {
+        data: [
+          {
+            id: 'active',
+            title: 'Active',
+          },
+          {
+            id: 'inactive',
+            title: 'Inactive',
+          },
+          {
+            id: 'archived',
+            title: 'Archived',
+          },
+        ],
+      },
     },
   ];
+
+  private onActionExecuted(e: CustomEvent) {
+    console.log('onActionExecuted', e.detail);
+  }
+
+  private onFilterChanged(e: CustomEvent) {
+    console.log('onFilterChanged', e.detail);
+  }
 
   render() {
     return html`
@@ -33,6 +58,8 @@ export class ExmgGridToolbarDemo extends LitElement {
             .actions="${this.actions}"
             title="${this.tableTitle}"
             .filters="${this.filters}"
+            @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
+            @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
         ></exmg-grid-toolbar>
     `;
   }
