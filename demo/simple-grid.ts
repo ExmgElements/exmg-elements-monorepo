@@ -1,7 +1,7 @@
 import {LitElement, html, customElement, TemplateResult, property} from 'lit-element';
-import '../src/table/exmg-grid-table';
+import '../src/table/exmg-grid';
 import '../src/table/exmg-grid-paging';
-import {style as tableStyles} from '../src/table/exmg-grid-table-styles';
+import {style as tableStyles} from '../src/table/exmg-grid-styles';
 
 type Income = {
   month: string;
@@ -23,7 +23,7 @@ const generateRows = (): Income[] => {
   return rows;
 };
 
-@customElement('demo-simple-grid-table')
+@customElement('demo-simple-grid')
 export class DemoSimpleGridTable extends LitElement {
   static styles = [tableStyles];
 
@@ -42,7 +42,7 @@ export class DemoSimpleGridTable extends LitElement {
 
   protected render(): TemplateResult | void {
     return html`
-      <exmg-grid-table>
+      <exmg-grid>
         <table role="grid" aria-labelledby="grid1Label" class="data">
           <thead>
            <tr>
@@ -86,7 +86,7 @@ export class DemoSimpleGridTable extends LitElement {
            </tr>
           </tfoot>
         </table>
-      </exmg-grid-table>
+      </exmg-grid>
 `;
       }
 }

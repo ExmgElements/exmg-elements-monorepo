@@ -2,7 +2,7 @@
   "name": "@exmg/exmg-grid",
   "flat": true,
   "version": "1.0.0",
-  "description": "Paper style radio group element",
+  "description": "exmg grid element",
   "contributors": [
     "Ex Machina"
   ],
@@ -28,6 +28,7 @@
     "lit-element": "^2.0.1"
   },
   "devDependencies": {
+    "@exmg/exmg-cli": "^1.0.0",
     "@polymer/iron-component-page": "^4.0.1",
     "@polymer/iron-demo-helpers": "^3.1.0",
     "@polymer/test-fixture": "^4.0.2",
@@ -37,17 +38,10 @@
     "@types/polymer": "^1.2.7",
     "@webcomponents/webcomponentsjs": "^2.2.7",
     "chai": "^4.2.0",
-    "command-line-args": "^5.0.2",
-    "command-line-usage": "^5.0.5",
-    "glob": "^7.1.3",
     "gulp": "^4.0.0",
     "gulp-rename": "^1.4.0",
     "gulp-replace": "^1.0.0",
-    "gulp-watch": "^5.0.1",
     "mocha": "^5.2.0",
-    "node-sass-import": "^2.0.1",
-    "replace": "^1.1.0",
-    "sass": "^1.17.2",
     "tslint": "^5.14.0",
     "tslint-config-exmg": "^1.0.2",
     "typedoc": "^0.14.2",
@@ -56,7 +50,8 @@
     "web-animations-js": "^2.3.1"
   },
   "scripts": {
-    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ src/**/*.ts",
+    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ src/**/*.ts && npm run fix-gen-docs",
+    "fix-gen-docs": "node ./node_modules/@exmg/exmg-cli/src/gen-docs/bin/gen-docs.js ./ -d ./docs -a",
     "build": "npm run build:styles && npm run lint && npm run tsc",
     "build:styles": "gulp render-styles",
     "tsc": "tsc -b ./tsconfig.json",
