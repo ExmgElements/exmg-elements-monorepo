@@ -69,9 +69,24 @@ export class ExmgGridToolbarDemo extends LitElement {
 
   render() {
     return html`
+        <style>
+          :host {
+            --mdc-theme-primary: rgb(0,255,0);
+            --mdc-theme-on-surface: #777;
+          }
+        </style>
+        <h1>With actions</h1>
         <exmg-grid-smart-toolbar
             amount-of-selected-items="1"
             .actions="${this.actions}"
+            description="${this.description}"
+            .filters="${this.filters}"
+            @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
+            @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
+        ></exmg-grid-smart-toolbar>
+        <h1>Without actions</h1>
+        <exmg-grid-smart-toolbar
+            amount-of-selected-items="1"
             description="${this.description}"
             .filters="${this.filters}"
             @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"

@@ -72,7 +72,6 @@ export class ExmgRadioGroup extends LitElement {
       this.actions,
       (action) => html`
         <mwc-button
-          class="light"
           label="${action.text}"
           icon="${action.icon}"
           title="${action.tooltip}"
@@ -123,7 +122,7 @@ export class ExmgRadioGroup extends LitElement {
       <div class="actions">
         ${this.renderActions()}
       </div>
-      <div class="description">
+      <div class="description mdc-theme--on-surface mdc-typography--headline6">
         ${this.renderDescription()}
       </div>
       <div class="filters">

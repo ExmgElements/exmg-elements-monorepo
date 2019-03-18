@@ -1,3 +1,6 @@
+@import "../../node_modules/@material/theme/mdc-theme";
+@import "../../node_modules/@material/typography/mdc-typography";
+
 :host {
   font-family: Roboto;
   display: flex;
@@ -11,6 +14,7 @@
 }
 
 .description {
+  padding-left: 10px;
 }
 
 .filters {
