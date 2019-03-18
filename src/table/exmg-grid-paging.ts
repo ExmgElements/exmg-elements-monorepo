@@ -9,7 +9,7 @@ export class ExmgGridPaging extends LitElement {
     style,
   ];
 
-  @property({type: Array, attribute: 'page-size-options'})
+  @property({type: Array, attribute: 'page-size-config'})
   private pageSizeOptions: number[] = [10, 20, 30];
 
   @property({type: Number, attribute: 'page-index'})

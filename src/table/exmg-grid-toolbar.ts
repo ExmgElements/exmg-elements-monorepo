@@ -2,7 +2,13 @@ import {customElement, html, LitElement, property} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 import '@material/mwc-button';
 import {style as exmgGridToolbarStyles} from './exmg-grid-toolbar-styles';
-import {Action, Filter, FilterType, FilterSingleSelectExtraOptions} from './exmg-grid-toolbar-types';
+import {
+  Action,
+  BaseFilterConfig,
+  Filter,
+  FilterConfigType,
+  FilterSingleSelectConfig
+} from './exmg-grid-toolbar-types';
 
 @customElement('exmg-grid-toolbar')
 export class ExmgRadioGroup extends LitElement {
@@ -13,7 +19,7 @@ export class ExmgRadioGroup extends LitElement {
   actions: Action[] = [];
 
   @property({type: Object})
-  filters: Filter<any>[] = [];
+  filters: Filter[] = [];
 
   static styles = [
     exmgGridToolbarStyles,
@@ -43,7 +49,7 @@ export class ExmgRadioGroup extends LitElement {
     };
   }
 
-  private emitFilterChangedEvent(filter: Filter<any>) {
+  private emitFilterChangedEvent(filter: Filter) {
     return (event: Event) => {
       this.dispatchEvent(
         new CustomEvent(
@@ -87,18 +93,23 @@ export class ExmgRadioGroup extends LitElement {
     );
   }
 
-  private renderFilter(filter: Filter<any>) {
-    switch (filter.type) {
-      case FilterType.SingleSelect:
-        return this.renderSingleSelectFilter(filter);
+  private renderFilter(filter: Filter) {
+    if (this.isFilterSingleSelectConfig(filter)) {
+      return this.renderSingleSelectFilter(filter);
     }
+
+    return undefined;
   }
 
-  private renderSingleSelectFilter(filter: Filter<FilterSingleSelectExtraOptions>) {
+  private isFilterSingleSelectConfig(filter: Filter<BaseFilterConfig>): filter is Filter<FilterSingleSelectConfig> {
+    return filter.config.type === FilterConfigType.SingleSelect;
+  }
+
+  private renderSingleSelectFilter(filter: Filter<FilterSingleSelectConfig>) {
     return html`
       <select name="${filter.id}" @change="${this.emitFilterChangedEvent(filter)}">
         ${repeat(
-          filter.extraOptions.data,
+          filter.config.data,
           (item) => {
             return html`<option value="${item.id}">${filter.name}: ${item.title}</option>`;
           }

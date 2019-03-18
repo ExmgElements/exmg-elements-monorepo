@@ -1,6 +1,10 @@
-import {LitElement, html, customElement} from 'lit-element';
-import {Filter, FilterType, FilterSingleSelectExtraOptions} from '../src/table/exmg-grid-toolbar-types';
-import {ActionAmountSelectedItemsCondition, ActionWithCondition} from '../src/table/exmg-grid-smart-toolbar-types';
+import {customElement, html, LitElement} from 'lit-element';
+import {Filter, FilterSingleSelectConfig, FilterConfigType} from '../src/table/exmg-grid-toolbar-types';
+import {
+  ActionAmountSelectedItemsCondition,
+  ActionWithCondition,
+  ActionConditionType
+} from '../src/table/exmg-grid-smart-toolbar-types';
 
 @customElement('exmg-grid-toolbar-demo')
 export class ExmgGridToolbarDemo extends LitElement {
@@ -17,6 +21,7 @@ export class ExmgGridToolbarDemo extends LitElement {
       tooltip: 'Merge',
       icon: 'merge_type',
       condition: {
+        type: ActionConditionType.AmountOfSelectedItemsRange,
         min: 2,
       },
     },
@@ -30,12 +35,12 @@ export class ExmgGridToolbarDemo extends LitElement {
 
   private description: string = 'Table 1';
 
-  private filters: Filter<FilterSingleSelectExtraOptions>[] = [
+  private filters: Filter<FilterSingleSelectConfig>[] = [
     {
       id: 'status',
-      type: FilterType.SingleSelect,
       name: 'Status',
-      extraOptions: {
+      config: {
+        type: FilterConfigType.SingleSelect,
         data: [
           {
             id: 'active',

@@ -5,17 +5,20 @@ export type Action = {
   tooltip?: string;
 };
 
-export type Filter<TExtraOptions> = {
+export type Filter<TConfig extends BaseFilterConfig = BaseFilterConfig> = {
   id: string;
-  type: FilterType;
   name: string;
-  extraOptions: TExtraOptions;
+  config: TConfig;
 };
 
-export enum FilterType {
+export enum FilterConfigType {
   SingleSelect = 'single_select',
 }
 
-export type FilterSingleSelectExtraOptions = {
+export interface BaseFilterConfig {
+  type?: FilterConfigType;
+}
+
+export interface FilterSingleSelectConfig extends BaseFilterConfig {
   data: { id: string; title: string }[];
-};
+}
