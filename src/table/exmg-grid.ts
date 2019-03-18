@@ -1,8 +1,8 @@
 import {property, customElement, html, LitElement} from 'lit-element';
 // import {repeat} from 'lit-html/directives/repeat';
-import {style as exmgGridTableStyles} from './exmg-grid-table-styles';
+import {style as exmgGridTableStyles} from './exmg-grid-styles';
 
-@customElement('exmg-grid-table')
+@customElement('exmg-grid')
 export class ExmgRadioGroup extends LitElement {
   static styles = [
     exmgGridTableStyles,
