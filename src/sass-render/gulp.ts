@@ -1,9 +1,10 @@
-const gulp = require('gulp');
+// const gulp = require('gulp');
 const watch = require('gulp-watch');
 const glob = require('glob');
 const {exec} = require('child_process');
 
 import * as File from 'vinyl';
+import * as GulpClient from 'gulp';
 
 /**
  * Render single file
@@ -33,12 +34,16 @@ function renderSass(
  * Register gulp tasks
  * - render-styles - Find by files and render them - this command may be used in npm run build "gulp render-styles"
  * - watch-styles - watch files and render
+ * @param {GulpClient.Gulp} gulp
  * @param {string} filesPattern - src/**\/*.{scss,css}
  * @param {string} template - path to template
  * @param {string} newFileSuffix - .css or .scss files will be replaced with given suffix default is .ts
  */
 exports.registerTasks = (
-  filesPattern: string, template: string  = './node_modules/@exmg/exmg-cli/sass-render/sass-template.tpl', newFileSuffix = '.ts'
+  gulp: GulpClient.Gulp,
+  filesPattern: string,
+  template: string  = './node_modules/@exmg/exmg-cli/sass-render/sass-template.tpl',
+  newFileSuffix = '.ts'
 ) => {
 
   gulp.task('render-styles', (done: Function) => {
