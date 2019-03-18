@@ -1,13 +1,18 @@
 @import "../../node_modules/@material/theme/mdc-theme";
 @import "../../node_modules/@material/typography/mdc-typography";
+@import "./variables.scss";
 
-:host {
-  font-family: Roboto;
+.wrapper {
   display: flex;
+  flex: 1;
   flex-direction: row;
   align-items: center;
 
   border: 1px solid dodgerblue;
+
+  &.active {
+    background-color: $exmg-grid-active-color;
+  }
 }
 
 .actions {

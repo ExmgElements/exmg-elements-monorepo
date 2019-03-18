@@ -1,4 +1,5 @@
 import {customElement, html, LitElement, property} from 'lit-element';
+import {observer} from '@material/mwc-base/form-element.js';
 import {repeat} from 'lit-html/directives/repeat';
 import '@material/mwc-button';
 import {style as exmgGridToolbarStyles} from './exmg-grid-toolbar-styles';
@@ -11,15 +12,21 @@ import {
 } from './exmg-grid-toolbar-types';
 
 @customElement('exmg-grid-toolbar')
-export class ExmgRadioGroup extends LitElement {
+export class ExmgGridToolbar extends LitElement {
   @property({type: String})
   description: string = '';
 
   @property({type: Object})
+  @observer(function (this: ExmgGridToolbar) {
+    this.active = this.actions.length > 0;
+  })
   actions: Action[] = [];
 
   @property({type: Object})
   filters: Filter[] = [];
+
+  @property({type: Boolean})
+  private active: boolean = false;
 
   static styles = [
     exmgGridToolbarStyles,
@@ -118,15 +125,18 @@ export class ExmgRadioGroup extends LitElement {
   }
 
   render() {
+    console.log(this.active);
     return html`
-      <div class="actions">
-        ${this.renderActions()}
-      </div>
-      <div class="description mdc-theme--on-surface mdc-typography--headline6">
-        ${this.renderDescription()}
-      </div>
-      <div class="filters">
-        ${this.renderFilters()}
+      <div class="wrapper ${this.active ? 'active' : ''} mdc-typography">
+        <div class="actions">
+          ${this.renderActions()}
+        </div>
+        <div class="description mdc-theme--on-surface mdc-typography--headline6">
+          ${this.renderDescription()}
+        </div>
+        <div class="filters">
+          ${this.renderFilters()}
+        </div>
       </div>
     `;
   }

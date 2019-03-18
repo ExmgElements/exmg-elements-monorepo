@@ -9,7 +9,7 @@ import {
 } from './exmg-grid-smart-toolbar-types';
 
 @customElement('exmg-grid-smart-toolbar')
-export class ExmgRadioGroup extends LitElement {
+export class ExmgGridSmartToolbar extends LitElement {
   @property({type: String})
   description: string = '';
 
