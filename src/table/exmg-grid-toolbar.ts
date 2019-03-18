@@ -1,6 +1,7 @@
 import {customElement, html, LitElement, property} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 import '@material/mwc-button';
+import '@material/mwc-icon';
 import {style as exmgGridToolbarStyles} from './exmg-grid-toolbar-styles';
 import {
   Action,
@@ -73,10 +74,12 @@ export class ExmgGridToolbar extends LitElement {
       (action) => html`
         <mwc-button
           label="${action.text}"
-          icon="${action.icon}"
           title="${action.tooltip}"
           @click="${this.emitActionExecutedEvent(action)}"
-        ></mwc-button>
+        >
+            <mwc-icon>${action.icon}</mwc-icon>
+            ${action.text}
+        </mwc-button>
       `
     );
   }
