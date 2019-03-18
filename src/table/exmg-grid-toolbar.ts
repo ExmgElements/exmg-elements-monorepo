@@ -1,5 +1,4 @@
 import {customElement, html, LitElement, property} from 'lit-element';
-import {observer} from '@material/mwc-base/form-element.js';
 import {repeat} from 'lit-html/directives/repeat';
 import '@material/mwc-button';
 import {style as exmgGridToolbarStyles} from './exmg-grid-toolbar-styles';
@@ -17,16 +16,10 @@ export class ExmgGridToolbar extends LitElement {
   description: string = '';
 
   @property({type: Object})
-  @observer(function (this: ExmgGridToolbar) {
-    this.active = this.actions.length > 0;
-  })
   actions: Action[] = [];
 
   @property({type: Object})
   filters: Filter[] = [];
-
-  @property({type: Boolean})
-  private active: boolean = false;
 
   static styles = [
     exmgGridToolbarStyles,
@@ -125,12 +118,16 @@ export class ExmgGridToolbar extends LitElement {
   }
 
   render() {
-    console.log(this.active);
     return html`
-      <div class="wrapper ${this.active ? 'active' : ''} mdc-typography">
-        <div class="actions">
-          ${this.renderActions()}
-        </div>
+      <div class="wrapper ${this.actions.length > 0 ? 'active' : ''} mdc-typography">
+        ${this.actions.length > 0 ?
+            html`
+              <div class="actions">
+                ${this.renderActions()}
+              </div>
+            ` :
+            ''
+        }
         <div class="description mdc-theme--on-surface mdc-typography--headline6">
           ${this.renderDescription()}
         </div>
