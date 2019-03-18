@@ -11,7 +11,7 @@
   border: 1px solid dodgerblue;
 
   &.active {
-    background-color: $exmg-grid-active-color;
+    background-color: var(--exmg-grid-active-color, $exmg-grid-active-color);
   }
 }
 
