@@ -73,6 +73,7 @@ export class ExmgGridToolbar extends LitElement {
       this.actions,
       (action) => html`
         <mwc-button
+          class="action"
           label="${action.text}"
           title="${action.tooltip}"
           @click="${this.emitActionExecutedEvent(action)}"
@@ -109,7 +110,7 @@ export class ExmgGridToolbar extends LitElement {
 
   private renderSingleSelectFilter(filter: Filter<FilterSingleSelectConfig>) {
     return html`
-      <select name="${filter.id}" @change="${this.emitFilterChangedEvent(filter)}">
+      <select name="${filter.id}" @change="${this.emitFilterChangedEvent(filter)}" class="filter">
         ${repeat(
           filter.config.data,
           (item) => {
