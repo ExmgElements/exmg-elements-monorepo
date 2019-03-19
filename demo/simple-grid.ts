@@ -76,10 +76,9 @@ export class DemoSimpleGridTable extends LitElement {
            <tr>
              <td colspan=”2”>
                <exmg-grid-pagination
-                 align-right
                  page-index=${this.pageIndex}
                  page-size=${this.pageSize}
-                 total-pages="${10}"
+                 item-count="${10}"
                >
                </exmg-grid-pagination>
              </td>

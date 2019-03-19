@@ -9,27 +9,33 @@ export class ExmgGridPagination extends LitElement {
     style,
   ];
 
-  @property({type: Array, attribute: 'page-size-config'})
-  private pageSizeOptions: number[] = [10, 20, 30];
+  @property({type: Array, attribute: 'page-size-options'})
+  pageSizeOptions: number[] = [10, 20, 30];
 
   @property({type: Number, attribute: 'page-index'})
-  private pageIndex: number = 0;
+  pageIndex: number = 0;
 
   @property({type: Number, attribute: 'page-size'})
-  private pageSize: number = this.pageSizeOptions[0];
+  pageSize: number = this.pageSizeOptions[0];
 
-  @property({type: Number, attribute: 'total-pages'})
-  private totalPages?: number;
+  @property({type: Number, attribute: 'item-count'})
+  itemCount: number = 0;
 
   private renderPageIndicator() {
-    if (this.totalPages) {
+    if (this.itemCount > 0) {
+      /**
+       * @todo handle scenario when last page has less items than page size
+       */
       return html`
-        <span>Page ${this.pageIndex + 1} of ${this.totalPages}</span>
+        <span>
+          ${this.pageIndex * this.pageSize + 1}-
+          ${Math.min((this.pageIndex + 1) * this.pageSize, this.itemCount)} of ${this.itemCount}
+        </span>
       `;
     }
 
     return html`
-        <span>Page ${this.pageIndex + 1}</span>
+        <span>${this.pageIndex * this.pageSize + 1}-${(this.pageIndex + 1) * this.pageSize}</span>
       `;
   }
 
@@ -62,7 +68,7 @@ export class ExmgGridPagination extends LitElement {
   }
 
   private renderNextPage() {
-    if (this.totalPages && this.totalPages > this.pageIndex + 1) {
+    if (this.itemCount && this.itemCount > (this.pageIndex + 1) * this.pageSize) {
       return html`<a href="#" @click="${this.handleOnClickNext}">Next<a>`;
     }
 
