@@ -1,9 +1,9 @@
 import {LitElement, html, customElement, TemplateResult, property} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
-import {style} from './exmg-grid-paging-styles';
+import {style} from './exmg-grid-pagination-styles';
 
-@customElement('exmg-grid-paging')
-export class ExmgGridPaging extends LitElement {
+@customElement('exmg-grid-pagination')
+export class ExmgGridPagination extends LitElement {
 
   static styles = [
     style,
@@ -88,7 +88,7 @@ export class ExmgGridPaging extends LitElement {
 
   protected render(): TemplateResult | void {
     return html`
-      <div>
+      <div class="wrapper">
         ${this.renderPageIndicator()}
         ${this.renderPrevPage()}
         ${this.renderNextPage()}

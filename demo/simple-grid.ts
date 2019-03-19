@@ -1,6 +1,6 @@
 import {LitElement, html, customElement, TemplateResult, property} from 'lit-element';
 import '../src/table/exmg-grid';
-import '../src/table/exmg-grid-paging';
+import '../src/table/exmg-grid-pagination';
 import {style as tableStyles} from '../src/table/exmg-grid-styles';
 
 type Income = {
@@ -75,13 +75,13 @@ export class DemoSimpleGridTable extends LitElement {
           <tfoot>
            <tr>
              <td colspan=”2”>
-               <exmg-grid-paging
+               <exmg-grid-pagination
                  align-right
                  page-index=${this.pageIndex}
                  page-size=${this.pageSize}
                  total-pages="${10}"
                >
-               </exmg-grid-paging>
+               </exmg-grid-pagination>
              </td>
            </tr>
           </tfoot>

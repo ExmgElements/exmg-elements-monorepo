@@ -6,8 +6,8 @@ import {
   ActionConditionType
 } from '../src/table/exmg-grid-smart-toolbar-types';
 
-@customElement('exmg-grid-toolbar-demo')
-export class ExmgGridToolbarDemo extends LitElement {
+@customElement('exmg-grid-smart-toolbar-demo')
+export class ExmgGridSmartToolbarDemo extends LitElement {
   private actions: ActionWithCondition<ActionAmountSelectedItemsCondition>[] = [
     {
       id: 'export',
