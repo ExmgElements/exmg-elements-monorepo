@@ -133,9 +133,9 @@ export class ExmgGridPagination extends LitElement {
 
   protected render(): TemplateResult | void {
     return html`
-      <div class="wrapper mdc-typography">
+      <div class="wrapper">
         <div class="page-size">
-            <div class="page-size-label mdc-typography--body2">
+            <div class="page-size-label">
                 ${this.renderPageSizeLabel()}
             </div>
             <div class="page-size-options">
@@ -143,7 +143,7 @@ export class ExmgGridPagination extends LitElement {
             </div>
         </div>
         <div class="page-range">
-            <div class="page-range-label mdc-typography--body2">
+            <div class="page-range-label">
                 ${this.renderPageRangeLabel()}
             </div>
             <div class="page-range-actions">

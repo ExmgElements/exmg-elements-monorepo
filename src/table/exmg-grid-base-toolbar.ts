@@ -34,11 +34,11 @@ export class ExmgGridBaseToolbar extends LitElement {
 
   render() {
     return html`
-      <div class="wrapper ${this.actionsCount > 0 ? 'active' : ''} mdc-typography">
+      <div class="wrapper ${this.actionsCount > 0 ? 'active' : ''}">
         <div class="actions">
           <slot name="actions"></slot>
         </div>
-        <div class="description mdc-theme--on-surface mdc-typography--headline5">
+        <div class="description">
           <slot name="description"></slot>
         </div>
         <div class="filters">

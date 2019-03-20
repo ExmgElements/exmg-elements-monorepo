@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: flex-end;
   padding: 10px 10px;
+  @include mdc-typography-base;
 
   .page-size {
     display: flex;
@@ -18,6 +19,7 @@
 
     .page-size-label {
       margin-right: 10px;
+      @include mdc-typography('body2');
     }
   }
 
@@ -28,6 +30,7 @@
 
     .page-range-label {
       margin-right: 44px;
+      @include mdc-typography('body2');
     }
 
     .page-range-actions {
