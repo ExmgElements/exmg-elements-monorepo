@@ -2,7 +2,7 @@ import {customElement, html, LitElement, property} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 import '@material/mwc-button';
 import '@material/mwc-icon';
-import {style as exmgGridToolbarStyles} from './exmg-grid-toolbar-styles';
+import {style} from './exmg-grid-toolbar-styles';
 import {
   Action,
   BaseFilterConfig,
@@ -23,7 +23,7 @@ export class ExmgGridToolbar extends LitElement {
   filters: Filter[] = [];
 
   static styles = [
-    exmgGridToolbarStyles,
+    style,
   ];
 
   private getValueFromEvent(e: Event): string|undefined {

@@ -1,3 +1,7 @@
+@import "../../node_modules/@material/theme/mdc-theme";
+@import "../../node_modules/@material/typography/mdc-typography";
+@import "./_variables.scss";
+
 .wrapper {
   display: flex;
   flex: 1;
@@ -9,11 +13,22 @@
   .page-size {
     display: flex;
     flex-direction: row;
+    margin-right: 26px;
+    align-items: center;
+
+    .page-size-label {
+      margin-right: 10px;
+    }
   }
 
   .page-range {
     display: flex;
     flex-direction: row;
+    align-items: center;
+
+    .page-range-label {
+      margin-right: 44px;
+    }
   }
 }
 
