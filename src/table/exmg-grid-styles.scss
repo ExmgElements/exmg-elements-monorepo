@@ -2,7 +2,7 @@
   font-family: Roboto;
 }
 
-th[sort] {
+th[data-sort] {
   padding-right: 25px;
   color: green;
 }
@@ -10,10 +10,10 @@ th[data-sort-direction="ASC"] {
   color: red;
 }
 th[data-sort-direction="DESC"] {
-  color: red;
+  color: blue;
 }
 
-th[sort]::after {
+th[data-sort]::after {
   content: ' DESC';
   opacity: 0;
 }
@@ -31,3 +31,11 @@ tr[data-selected] {
   background-color: purple;
 }
 
+input.selection-checkbox {
+  margin: 0;
+  float: left;
+}
+
+td.selectable-cell, th.selectable-cell {
+  width: 15px;
+}
