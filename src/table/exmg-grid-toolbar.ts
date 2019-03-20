@@ -2,7 +2,8 @@ import {customElement, html, LitElement, property} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 import '@material/mwc-button';
 import '@material/mwc-icon';
-import {style} from './exmg-grid-toolbar-styles';
+import './exmg-grid-base-toolbar';
+
 import {
   Action,
   BaseFilterConfig,
@@ -21,10 +22,6 @@ export class ExmgGridToolbar extends LitElement {
 
   @property({type: Object})
   filters: Filter[] = [];
-
-  static styles = [
-    style,
-  ];
 
   private getValueFromEvent(e: Event): string|undefined {
     e.preventDefault();
@@ -77,8 +74,8 @@ export class ExmgGridToolbar extends LitElement {
           title="${action.tooltip}"
           @click="${this.emitActionExecutedEvent(action)}"
         >
-            <mwc-icon>${action.icon}</mwc-icon>
-            ${action.text}
+          <mwc-icon>${action.icon}</mwc-icon>
+          ${action.text}
         </mwc-button>
       `
     );
@@ -122,22 +119,17 @@ export class ExmgGridToolbar extends LitElement {
 
   render() {
     return html`
-      <div class="wrapper ${this.actions.length > 0 ? 'active' : ''} mdc-typography">
-        ${this.actions.length > 0 ?
-            html`
-              <div class="actions">
-                ${this.renderActions()}
-              </div>
-            ` :
-            ''
-        }
-        <div class="description mdc-theme--on-surface mdc-typography--headline5">
+      <exmg-grid-base-toolbar>
+        <div slot="actions">
+          ${this.renderActions()}
+        </div>
+        <div slot="description">
           ${this.renderDescription()}
         </div>
-        <div class="filters">
+        <div slot="filters">
           ${this.renderFilters()}
         </div>
-      </div>
+      </exmg-grid-base-toolbar>
     `;
   }
 }
