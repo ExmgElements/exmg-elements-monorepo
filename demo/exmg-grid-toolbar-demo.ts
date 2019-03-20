@@ -67,7 +67,7 @@ export class ExmgGridToolbarDemo extends LitElement {
             --exmg-grid-active-color: #e2f1fe;
           }
         </style>
-        <hr>
+        <h1>With actions</h1>
         <exmg-grid-toolbar
             .actions="${this.actions}"
             description="${this.description}"
