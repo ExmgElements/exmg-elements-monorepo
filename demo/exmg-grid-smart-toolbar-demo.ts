@@ -1,4 +1,4 @@
-import {customElement, html, LitElement} from 'lit-element';
+import {customElement, html, LitElement, property} from 'lit-element';
 import {Filter, FilterSingleSelectConfig, FilterConfigType} from '../src/table/exmg-grid-toolbar-types';
 import {
   ActionAmountSelectedItemsCondition,
@@ -59,12 +59,19 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
     },
   ];
 
+  @property({type: Number})
+  private amountOfSelectedItems: number = 2;
+
   private onActionExecuted(e: CustomEvent) {
     console.log('onActionExecuted', e.detail);
   }
 
   private onFilterChanged(e: CustomEvent) {
     console.log('onFilterChanged', e.detail);
+  }
+
+  private updateSelectedItems() {
+    this.amountOfSelectedItems = parseInt(this.shadowRoot!.querySelector<HTMLInputElement>('#amount-of-selected-items')!.value, 10);
   }
 
   render() {
@@ -77,8 +84,11 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
           }
         </style>
         <h1>With actions</h1>
+        <input id="amount-of-selected-items" value="${this.amountOfSelectedItems}">
+        <button @click="${this.updateSelectedItems}">Update selected items</button>
+        <hr>
         <exmg-grid-smart-toolbar
-            amount-of-selected-items="1"
+            amount-of-selected-items="${this.amountOfSelectedItems}"
             .actions="${this.actions}"
             description="${this.description}"
             .filters="${this.filters}"
