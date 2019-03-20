@@ -14,6 +14,10 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
       text: '',
       tooltip: 'Export',
       icon: 'get_app',
+      condition: {
+        type: ActionConditionType.AmountOfSelectedItemsRange,
+        min: 1,
+      },
     },
     {
       id: 'merge',
@@ -30,6 +34,10 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
       text: '',
       tooltip: 'Delete',
       icon: 'delete',
+      condition: {
+        type: ActionConditionType.AmountOfSelectedItemsRange,
+        min: 3,
+      },
     },
   ];
 
