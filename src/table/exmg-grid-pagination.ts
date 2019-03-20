@@ -9,6 +9,9 @@ export class ExmgGridPagination extends LitElement {
     style,
   ];
 
+  @property({type: String, attribute: 'page-size-label'})
+  pageSizeLabel: string = 'Rows per page:';
+
   @property({type: Array, attribute: 'page-size-options'})
   pageSizeOptions: number[] = [10, 20, 30];
 
@@ -21,11 +24,24 @@ export class ExmgGridPagination extends LitElement {
   @property({type: Number, attribute: 'item-count'})
   itemCount: number = 0;
 
-  private renderPageIndicator() {
+  private renderPageSizeLabel() {
+    return html`${this.pageSizeLabel}`;
+  }
+
+  private renderPageSizeOptions() {
+    return html`
+        <select @change="${this.handleOnPageSizeChanged}">
+          ${repeat(
+            this.pageSizeOptions,
+            (it) => it,
+            it => html`<option ?selected="${it === this.pageSize}" value="${it}">${it}</option>`
+          )}
+        </select>
+    `;
+  }
+
+  private renderPageRangeLabel() {
     if (this.itemCount > 0) {
-      /**
-       * @todo handle scenario when last page has less items than page size
-       */
       return html`
         <span>
           ${this.pageIndex * this.pageSize + 1}-
@@ -37,6 +53,29 @@ export class ExmgGridPagination extends LitElement {
     return html`
         <span>${this.pageIndex * this.pageSize + 1}-${(this.pageIndex + 1) * this.pageSize}</span>
       `;
+  }
+
+  private renderPageRangeActions() {
+    return html`
+      ${this.renderPrevPage()}
+      ${this.renderNextPage()}
+    `;
+  }
+
+  private renderPrevPage() {
+    if (this.pageIndex > 0) {
+      return html`<a href="" @click="${this.handleOnClickPrev}">Prev<a>`;
+    }
+
+    return html`<a disabled href="#" @click="javascript:void(0)" >Prev<a>`;
+  }
+
+  private renderNextPage() {
+    if (this.itemCount && this.itemCount > (this.pageIndex + 1) * this.pageSize) {
+      return html`<a href="#" @click="${this.handleOnClickNext}">Next<a>`;
+    }
+
+    return html`<a disabled href="#" @click="javascript:void(0)" >Next<a>`;
   }
 
   private fireEventPageChanged(page: number) {
@@ -59,22 +98,6 @@ export class ExmgGridPagination extends LitElement {
     return false;
   }
 
-  private renderPrevPage() {
-    if (this.pageIndex > 0) {
-      return html`<a href="" @click="${this.handleOnClickPrev}">Prev<a>`;
-    }
-
-    return html`<a disabled href="#" @click="javascript:void(0)" >Prev<a>`;
-  }
-
-  private renderNextPage() {
-    if (this.itemCount && this.itemCount > (this.pageIndex + 1) * this.pageSize) {
-      return html`<a href="#" @click="${this.handleOnClickNext}">Next<a>`;
-    }
-
-    return html`<a disabled href="#" @click="javascript:void(0)" >Next<a>`;
-  }
-
   private handleOnPageSizeChanged(e: Event) {
     e.preventDefault();
     const paths = e.composedPath();
@@ -95,16 +118,22 @@ export class ExmgGridPagination extends LitElement {
   protected render(): TemplateResult | void {
     return html`
       <div class="wrapper">
-        ${this.renderPageIndicator()}
-        ${this.renderPrevPage()}
-        ${this.renderNextPage()}
-        <select @change="${this.handleOnPageSizeChanged}">
-          ${repeat(
-            this.pageSizeOptions,
-            (it) => it,
-            it => html`<option ?selected="${it === this.pageSize}" value="${it}">${it}</option>`
-          )}
-        </select>
+        <div class="page-size">
+            <div class="page-size-label">
+                ${this.renderPageSizeLabel()}
+            </div>
+            <div class="page-size-options">
+                ${this.renderPageSizeOptions()}
+            </div>
+        </div>
+        <div class="page-range">
+            <div class="page-range-label">
+                ${this.renderPageRangeLabel()}
+            </div>
+            <div class="page-range-actions">
+                ${this.renderPageRangeActions()}
+            </div>
+        </div>
       <div>
     `;
   }
