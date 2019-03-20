@@ -74,7 +74,6 @@ export class ExmgGridToolbar extends LitElement {
       (action) => html`
         <mwc-button
           class="action"
-          label="${action.text}"
           title="${action.tooltip}"
           @click="${this.emitActionExecutedEvent(action)}"
         >
