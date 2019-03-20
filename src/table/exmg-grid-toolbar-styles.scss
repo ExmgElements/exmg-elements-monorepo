@@ -15,8 +15,8 @@
 }
 
 .actions {
-  border-right: 1px solid var(--mdc-theme-on-surface, #000);
-  padding-right: 10px;
+  border-right: 1px solid var(--mdc-theme-on-surface, #02182b);
+  padding-right: 16px;
 
   mwc-icon {
     --mdc-icon-size: 30px;
@@ -24,7 +24,7 @@
 }
 
 .description {
-  padding-left: 15px;
+  padding-left: 16px;
 }
 
 .filters {

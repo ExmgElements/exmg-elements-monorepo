@@ -132,7 +132,7 @@ export class ExmgGridToolbar extends LitElement {
             ` :
             ''
         }
-        <div class="description mdc-theme--on-surface mdc-typography--headline6">
+        <div class="description mdc-theme--on-surface mdc-typography--headline5">
           ${this.renderDescription()}
         </div>
         <div class="filters">
