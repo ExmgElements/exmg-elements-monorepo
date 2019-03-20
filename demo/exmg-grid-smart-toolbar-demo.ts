@@ -86,9 +86,9 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
     return html`
         <style>
           :host {
-            --mdc-theme-primary: #0070db;
+            --mdc-theme-primary: #0071dc;
             --mdc-theme-on-surface: #02182B;
-            --exmg-grid-active-color: #e1f0fe;
+            --exmg-grid-active-color: #e2f1fe;
           }
         </style>
         <h1>With actions</h1>
