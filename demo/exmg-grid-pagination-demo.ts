@@ -11,6 +11,14 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
   @property({type: Number})
   private itemCount: number = 50;
 
+  private onGridPageSizeChanged(e: CustomEvent) {
+    console.log('onGridPageSizeChanged', e.detail);
+  }
+
+  private onGridPageChanged(e: CustomEvent) {
+    console.log('onGridPageChanged', e.detail);
+  }
+
   render() {
     return html`
         <style>
@@ -24,6 +32,8 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
           page-index=${this.pageIndex}
           page-size=${this.pageSize}
           item-count="${this.itemCount}"
+          @exmg-grid-page-size-changed="${this.onGridPageSizeChanged}"
+          @exmg-grid-page-changed="${this.onGridPageChanged}"
         >
         </exmg-grid-pagination>
     `;

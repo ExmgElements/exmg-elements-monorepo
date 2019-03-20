@@ -83,7 +83,7 @@ export class ExmgGridPagination extends LitElement {
   }
 
   private handleOnClickPrev(e: Event): boolean {
-    console.log('prev clicked');
+
     e.preventDefault();
     this.pageIndex = this.pageIndex - 1;
     this.fireEventPageChanged(this.pageIndex);
@@ -94,7 +94,7 @@ export class ExmgGridPagination extends LitElement {
     e.preventDefault();
     this.pageIndex = this.pageIndex + 1;
     this.fireEventPageChanged(this.pageIndex);
-    console.log('next clicked');
+
     return false;
   }
 
@@ -105,7 +105,7 @@ export class ExmgGridPagination extends LitElement {
     if (typeof value !== 'undefined') {
       this.pageSize = parseInt(value, 10);
       this.pageIndex = 0;
-      console.log('page size is', this.pageSize);
+
       this.dispatchEvent(
         new CustomEvent(
           'exmg-grid-page-size-changed',
