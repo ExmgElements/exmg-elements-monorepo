@@ -1,13 +1,13 @@
 @import "../../node_modules/@material/theme/mdc-theme";
 @import "../../node_modules/@material/typography/mdc-typography";
-@import "./variables.scss";
+@import "./_variables.scss";
 
 .wrapper {
   display: flex;
   flex: 1;
   flex-direction: row;
   align-items: center;
-  padding: 5px;
+  padding: 10px 10px;
 
   &.active {
     background-color: var(--exmg-grid-active-color, $exmg-grid-active-color);
@@ -15,10 +15,16 @@
 }
 
 .actions {
+  border-right: 1px solid var(--mdc-theme-on-surface, #000);
+  padding-right: 10px;
+
+  mwc-icon {
+    --mdc-icon-size: 30px;
+  }
 }
 
 .description {
-  padding-left: 10px;
+  padding-left: 15px;
 }
 
 .filters {
@@ -28,3 +34,6 @@
   justify-content: flex-end;
 }
 
+.mdc-button__icon {
+  font-size: 28px;
+}

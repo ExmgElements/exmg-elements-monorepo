@@ -1,7 +1,7 @@
 import {customElement, html, LitElement, property} from 'lit-element';
-import {observer} from '@material/mwc-base/form-element.js';
 import {repeat} from 'lit-html/directives/repeat';
 import '@material/mwc-button';
+import '@material/mwc-icon';
 import {style as exmgGridToolbarStyles} from './exmg-grid-toolbar-styles';
 import {
   Action,
@@ -17,16 +17,10 @@ export class ExmgGridToolbar extends LitElement {
   description: string = '';
 
   @property({type: Object})
-  @observer(function (this: ExmgGridToolbar) {
-    this.active = this.actions.length > 0;
-  })
   actions: Action[] = [];
 
   @property({type: Object})
   filters: Filter[] = [];
-
-  @property({type: Boolean})
-  private active: boolean = false;
 
   static styles = [
     exmgGridToolbarStyles,
@@ -79,11 +73,14 @@ export class ExmgGridToolbar extends LitElement {
       this.actions,
       (action) => html`
         <mwc-button
+          class="action"
           label="${action.text}"
-          icon="${action.icon}"
           title="${action.tooltip}"
           @click="${this.emitActionExecutedEvent(action)}"
-        ></mwc-button>
+        >
+            <mwc-icon>${action.icon}</mwc-icon>
+            ${action.text}
+        </mwc-button>
       `
     );
   }
@@ -113,7 +110,7 @@ export class ExmgGridToolbar extends LitElement {
 
   private renderSingleSelectFilter(filter: Filter<FilterSingleSelectConfig>) {
     return html`
-      <select name="${filter.id}" @change="${this.emitFilterChangedEvent(filter)}">
+      <select name="${filter.id}" @change="${this.emitFilterChangedEvent(filter)}" class="filter">
         ${repeat(
           filter.config.data,
           (item) => {
@@ -125,12 +122,16 @@ export class ExmgGridToolbar extends LitElement {
   }
 
   render() {
-    console.log(this.active);
     return html`
-      <div class="wrapper ${this.active ? 'active' : ''} mdc-typography">
-        <div class="actions">
-          ${this.renderActions()}
-        </div>
+      <div class="wrapper ${this.actions.length > 0 ? 'active' : ''} mdc-typography">
+        ${this.actions.length > 0 ?
+            html`
+              <div class="actions">
+                ${this.renderActions()}
+              </div>
+            ` :
+            ''
+        }
         <div class="description mdc-theme--on-surface mdc-typography--headline6">
           ${this.renderDescription()}
         </div>
