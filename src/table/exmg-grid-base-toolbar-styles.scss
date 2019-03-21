@@ -16,7 +16,6 @@
 }
 
 .actions {
-  border-right: 1px solid var(--mdc-theme-on-surface, $exmg-grid-text-color);
   padding: 0 16px;
 }
 
@@ -25,6 +24,10 @@
   @include mdc-theme-prop(color, on-surface);
 
   padding: 0 16px;
+}
+
+.with-action-separator {
+  border-left: 1px solid var(--mdc-theme-on-surface, $exmg-grid-text-color);
 }
 
 .filters {
