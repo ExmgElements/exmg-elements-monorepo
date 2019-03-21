@@ -36,8 +36,8 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
           page-index=${this.pageIndex}
           page-size=${this.pageSize}
           item-count="${this.itemCount}"
-          @exmg-grid-page-size-changed="${this.onGridPageSizeChanged}"
-          @exmg-grid-page-changed="${this.onGridPageChanged}"
+          @exmg-grid-pagination-page-size-changed="${this.onGridPageSizeChanged}"
+          @exmg-grid-pagination-page-changed="${this.onGridPageChanged}"
         >
         </exmg-grid-pagination>
     `;
