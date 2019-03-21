@@ -35,9 +35,15 @@ export class ExmgGridBaseToolbar extends LitElement {
   render() {
     return html`
       <div class="wrapper ${this.actionsCount > 0 ? 'active' : ''}">
-        <div class="actions">
-          <slot name="actions"></slot>
-        </div>
+        ${
+          this.actionsCount > 0 ?
+            html`
+              <div class="actions">
+                <slot name="actions"></slot>
+              </div>
+            ` :
+            ``
+        }
         <div class="description">
           <slot name="description"></slot>
         </div>

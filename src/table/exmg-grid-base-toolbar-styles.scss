@@ -7,7 +7,7 @@
   flex: 1;
   flex-direction: row;
   align-items: center;
-  padding: 10px 10px;
+  padding: 10px 0px;
   @include mdc-typography-base;
 
   &.active {
@@ -17,14 +17,14 @@
 
 .actions {
   border-right: 1px solid var(--mdc-theme-on-surface, $exmg-grid-text-color);
-  padding-right: 16px;
+  padding: 0 16px;
 }
 
 .description {
   @include mdc-typography('headline5');
   @include mdc-theme-prop(color, on-surface);
 
-  padding-left: 16px;
+  padding: 0 16px;
 }
 
 .filters {
@@ -32,4 +32,6 @@
   flex-direction: row;
   flex: 1;
   justify-content: flex-end;
+
+  padding: 0 16px;
 }
