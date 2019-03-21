@@ -24,8 +24,12 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
         <style>
           :host {
             --mdc-theme-primary: #0070db;
+            --mdc-theme-surface: #fff;
             --mdc-theme-on-surface: #091e2e;
-            --exmg-grid-active-color: #e1f0fe;
+
+            padding: 10px;
+            display: block;
+            background-color: #ddd;
           }
         </style>
         <exmg-grid-pagination
