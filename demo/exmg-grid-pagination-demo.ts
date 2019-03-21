@@ -29,7 +29,7 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
 
             padding: 10px;
             display: block;
-            background-color: #ddd;
+            background-color: #f6f6f6;
           }
         </style>
         <exmg-grid-pagination
