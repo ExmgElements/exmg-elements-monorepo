@@ -8,6 +8,15 @@ type Props = Exclude<keyof ExmgGrid, number | Symbol>;
 
 type SmartPropertyValue = GenericPropertyValues<Props>;
 
+export type EventDetailSortChange = {
+  column: string;
+  sortDirection?: string;
+};
+
+export type EventDetailSelectedRowsChange = {
+  rows: HTMLTableRowElement[];
+};
+
 const checkCheckbox = (checkboxElement: HTMLInputElement) => {
     checkboxElement.setAttribute('checked', 'checked');
     checkboxElement.checked = true;
@@ -19,6 +28,8 @@ const uncheckCheckbox = (checkboxElement: HTMLInputElement) => {
 };
 
 /**
+ * @exmg-grid-sort-change
+ * @exmg-grid-selected-rows-change
  * Questions:
  * - shall we keep selected items on page changed ?
  * - shall we keep selected items on filter changed ? probably not
@@ -40,7 +51,7 @@ const uncheckCheckbox = (checkboxElement: HTMLInputElement) => {
  *  [F] ExpandedRow: Must have class ".row-detail"
  *  [F] Row sortable
  *  - hast to handle event @exmg-grid-update-items - event return updated order of items - consumer needs to reiterate tbody
- *  - handler element should has class `row-sortable-handler`
+ *  - handler element should has class `row-drag-handler`
  *  - element should use repeat function - it matter in terms of performance and will persist node's state properly like selected row
  */
 @customElement('exmg-grid')
@@ -139,15 +150,44 @@ export class ExmgGrid extends LitElement {
 
   private turnOnSortable(): void {
     this.getColumns('th[data-sort]').forEach((column  => {
-      const columnId = column.getAttribute('data-sort') || column.getAttribute('data-column-key');
+      const columnId = column.getAttribute('data-sort') || column.getAttribute('data-column-key')!;
       column.addEventListener('click', () => {
         const columnSortDirection = column.getAttribute('data-sort-direction');
         const nextSortDirection = columnSortDirection === 'ASC' ? 'DESC' : columnSortDirection === 'DESC' ? '' : 'ASC';
         column.setAttribute('data-sort-direction', nextSortDirection);
         console.log('sortable clicked', columnId, nextSortDirection);
-        // fire event!
+        this.fireSortChanged(columnId, nextSortDirection);
       });
     }));
+  }
+
+  private fireSortChanged(columnId: string, sortDirection: string): void {
+    console.log('dispatch exmg-grid-selected-rows-change', this.selectedRows);
+    this.dispatchEvent(new CustomEvent<EventDetailSortChange>(
+      'exmg-grid-sort-change',
+      {
+        bubbles: true,
+        composed: true,
+        detail: {
+          column: columnId,
+          sortDirection: !sortDirection ? sortDirection : undefined,
+        },
+      }
+    ));
+  }
+
+  private fireSelectableRows() {
+    console.log('dispatch exmg-grid-selected-rows-change', this.selectedRows);
+    this.dispatchEvent(new CustomEvent<EventDetailSelectedRowsChange>(
+      'exmg-grid-selected-rows-change',
+      {
+        bubbles: true,
+        composed: true,
+        detail: {
+          rows: [...this.selectedRows],
+        },
+      }
+    ));
   }
 
   private turnOnSelectable(): void {
@@ -161,7 +201,7 @@ export class ExmgGrid extends LitElement {
       this.allCheckbox = th.querySelector<HTMLInputElement>('.selection-checkbox')!;
       this.allCheckbox.addEventListener('change', () => {
         if (this.allCheckbox!.checked) {
-          this.getTableBody().querySelectorAll<HTMLTableRowElement>('tr:not(.row-details)').forEach(row => {
+          this.getTableBody().querySelectorAll<HTMLTableRowElement>('tr:not(.row-detail)').forEach(row => {
             row.setAttribute('data-selected', '');
             this.selectedRows.push(row);
           });
@@ -177,10 +217,11 @@ export class ExmgGrid extends LitElement {
             uncheckCheckbox(checkbox);
           });
         }
+        this.fireSelectableRows();
       });
     }
 
-    this.getTableBody().querySelectorAll<HTMLTableRowElement>('tr:not([data-is-selectable])')!.forEach((row => {
+    this.getTableBody().querySelectorAll<HTMLTableRowElement>('tr:not(.row-detail):not([data-is-selectable])')!.forEach((row => {
       const td = document.createElement('td');
       td.setAttribute('class', 'selectable-cell');
       td.innerHTML = checkboxTemplate.getHTML();
@@ -209,6 +250,7 @@ export class ExmgGrid extends LitElement {
 
         this.updateSelectAllCheckbox();
         console.log('row clicked', isRowAlreadySelected, this.selectedRows);
+        this.fireSelectableRows();
       });
     }));
   }
@@ -266,7 +308,7 @@ export class ExmgGrid extends LitElement {
         <exmg-sortable
           orientation="${'vertical'}"
           item-selector="tbody.data tr:not(.row-detail)"
-          handle-selector=".row-sortable-handler"
+          handle-selector=".row-drag-handler"
           .sortableHostNode="${this.tableBody}"
           @dom-order-change="${this.orderChange}"
         >

@@ -1,34 +1,46 @@
 :host {
   font-family: Roboto;
+  --exmg-arrow-upward-url: url('/assets/arrow-upward.svg');
+  --exmg-seleced-row-color: #f5f5f5;
+  --exmg-hover-row-color: #f5f5f5;
 }
 
 th[data-sort] {
   padding-right: 25px;
-  color: green;
-}
-th[data-sort-direction="ASC"] {
-  color: red;
-}
-th[data-sort-direction="DESC"] {
-  color: blue;
 }
 
 th[data-sort]::after {
-  content: ' DESC';
+  display: inline-block;
+  content: '';
+  background-image: var(--exmg-arrow-upward-url);
+  background-size: 12px 12px;
+  height: 12px;
+  width: 12px;
+  margin: 0 0 0 4px;
   opacity: 0;
 }
 th[data-sort-direction=ASC]::after {
-  content: ' ASC';
   opacity: 1;
+  transition: transform .1s linear;
+  transform: rotate(0deg);
 }
 
 th[data-sort-direction=DESC]::after {
-  content: ' DESC';
-  opacity: 1
+  opacity: 1;
+  transition: transform .1s linear;
+  transform: rotate(180deg);
+}
+
+tbody > tr:not(.row-detail):hover {
+  background-color: var(--exmg-hover-row-color);
 }
 
 tr[data-selected] {
-  background-color: purple;
+  background-color: var(--exmg-seleced-row-color);
+}
+
+tr.row-detail {
+  display: none;
 }
 
 input.selection-checkbox {
