@@ -1,43 +1,26 @@
-import {customElement, html, LitElement, property} from 'lit-element';
-import {Filter, FilterSingleSelectConfig, FilterConfigType} from '../src/table/exmg-grid-toolbar-types';
-import {
-  ActionAmountSelectedItemsCondition,
-  ActionWithCondition,
-  ActionConditionType
-} from '../src/table/exmg-grid-smart-toolbar-types';
+import {customElement, html, LitElement} from 'lit-element';
+import {Action, Filter, FilterSingleSelectConfig, FilterConfigType} from '../src/table/exmg-grid-toolbar-types';
 
-@customElement('exmg-grid-smart-toolbar-demo')
-export class ExmgGridSmartToolbarDemo extends LitElement {
-  private actions: ActionWithCondition<ActionAmountSelectedItemsCondition>[] = [
+@customElement('exmg-grid-toolbar-demo')
+export class ExmgGridToolbarDemo extends LitElement {
+  private actions: Action[] = [
     {
       id: 'export',
       text: '',
       tooltip: 'Export',
       icon: 'get_app',
-      condition: {
-        type: ActionConditionType.AmountOfSelectedItemsRange,
-        min: 1,
-      },
     },
     {
       id: 'merge',
       text: '',
       tooltip: 'Merge',
       icon: 'merge_type',
-      condition: {
-        type: ActionConditionType.AmountOfSelectedItemsRange,
-        min: 2,
-      },
     },
     {
       id: 'delete',
       text: '',
       tooltip: 'Delete',
       icon: 'delete',
-      condition: {
-        type: ActionConditionType.AmountOfSelectedItemsRange,
-        min: 3,
-      },
     },
   ];
 
@@ -67,19 +50,12 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
     },
   ];
 
-  @property({type: Number})
-  private amountOfSelectedItems: number = 2;
-
   private onActionExecuted(e: CustomEvent) {
     console.log('onActionExecuted', e.detail);
   }
 
   private onFilterChanged(e: CustomEvent) {
     console.log('onFilterChanged', e.detail);
-  }
-
-  private updateSelectedItems() {
-    this.amountOfSelectedItems = parseInt(this.shadowRoot!.querySelector<HTMLInputElement>('#amount-of-selected-items')!.value, 10);
   }
 
   render() {
@@ -92,25 +68,20 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
           }
         </style>
         <h1>With actions</h1>
-        <input id="amount-of-selected-items" value="${this.amountOfSelectedItems}">
-        <button @click="${this.updateSelectedItems}">Update selected items</button>
-        <hr>
-        <exmg-grid-smart-toolbar
-            amount-of-selected-items="${this.amountOfSelectedItems}"
+        <exmg-grid-toolbar
             .actions="${this.actions}"
             description="${this.description}"
             .filters="${this.filters}"
             @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
             @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
-        ></exmg-grid-smart-toolbar>
+        ></exmg-grid-toolbar>
         <h1>Without actions</h1>
-        <exmg-grid-smart-toolbar
-            amount-of-selected-items="1"
+        <exmg-grid-toolbar
             description="${this.description}"
             .filters="${this.filters}"
             @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
             @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
-        ></exmg-grid-smart-toolbar>
+        ></exmg-grid-toolbar>
     `;
   }
 }

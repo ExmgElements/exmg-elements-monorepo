@@ -8,6 +8,7 @@
   flex-direction: row;
   align-items: center;
   padding: 10px 10px;
+  @include mdc-typography-base;
 
   &.active {
     background-color: var(--exmg-grid-active-color, $exmg-grid-active-color);
@@ -15,16 +16,15 @@
 }
 
 .actions {
-  border-right: 1px solid var(--mdc-theme-on-surface, #000);
-  padding-right: 10px;
-
-  mwc-icon {
-    --mdc-icon-size: 30px;
-  }
+  border-right: 1px solid var(--mdc-theme-on-surface, $exmg-grid-text-color);
+  padding-right: 16px;
 }
 
 .description {
-  padding-left: 15px;
+  @include mdc-typography('headline5');
+  @include mdc-theme-prop(color, on-surface);
+
+  padding-left: 16px;
 }
 
 .filters {
@@ -32,8 +32,4 @@
   flex-direction: row;
   flex: 1;
   justify-content: flex-end;
-}
-
-.mdc-button__icon {
-  font-size: 28px;
 }

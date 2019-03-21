@@ -1,5 +1,7 @@
 import {LitElement, html, customElement, TemplateResult, property} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
+import '@material/mwc-button';
+import '@material/mwc-icon';
 import {style} from './exmg-grid-pagination-styles';
 
 @customElement('exmg-grid-pagination')
@@ -15,11 +17,11 @@ export class ExmgGridPagination extends LitElement {
   @property({type: Array, attribute: 'page-size-options'})
   pageSizeOptions: number[] = [10, 20, 30];
 
-  @property({type: Number, attribute: 'page-index'})
-  pageIndex: number = 0;
-
   @property({type: Number, attribute: 'page-size'})
   pageSize: number = this.pageSizeOptions[0];
+
+  @property({type: Number, attribute: 'page-index'})
+  pageIndex: number = 0;
 
   @property({type: Number, attribute: 'item-count'})
   itemCount: number = 0;
@@ -63,19 +65,33 @@ export class ExmgGridPagination extends LitElement {
   }
 
   private renderPrevPage() {
-    if (this.pageIndex > 0) {
-      return html`<a href="" @click="${this.handleOnClickPrev}">Prev<a>`;
-    }
+    const enabled = this.pageIndex > 0;
 
-    return html`<a disabled href="#" @click="javascript:void(0)" >Prev<a>`;
+    return html`
+        <mwc-button
+          ?disabled="${!enabled}"
+          class="action"
+          title="Previous page"
+          @click="${enabled ? this.handleOnClickPrev : undefined}"
+        >
+            <mwc-icon>navigate_before</mwc-icon>
+        </mwc-button>
+    `;
   }
 
   private renderNextPage() {
-    if (this.itemCount && this.itemCount > (this.pageIndex + 1) * this.pageSize) {
-      return html`<a href="#" @click="${this.handleOnClickNext}">Next<a>`;
-    }
+    const enabled = this.itemCount && this.itemCount > (this.pageIndex + 1) * this.pageSize;
 
-    return html`<a disabled href="#" @click="javascript:void(0)" >Next<a>`;
+    return html`
+        <mwc-button
+          ?disabled="${!enabled}"
+          class="action"
+          title="Next page"
+          @click="${enabled ? this.handleOnClickNext : undefined}"
+        >
+            <mwc-icon>navigate_next</mwc-icon>
+        </mwc-button>
+    `;
   }
 
   private fireEventPageChanged(page: number) {
