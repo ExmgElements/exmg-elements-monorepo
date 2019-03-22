@@ -14,8 +14,8 @@ export class ExmgGridBaseToolbar extends LitElement {
 
   private observer?: MutationObserver;
 
-  constructor() {
-    super();
+  connectedCallback(): void {
+    super.connectedCallback();
 
     this.observer = new MutationObserver((mutationsList) => {
       for (const mutation of mutationsList) {
@@ -25,6 +25,7 @@ export class ExmgGridBaseToolbar extends LitElement {
       }
     });
 
+    this.actionsCount = this.querySelector('div[slot=actions]')!.childElementCount;
     this.observer!.observe(this, {attributes: false, childList: true, subtree: true});
   }
 
@@ -35,10 +36,16 @@ export class ExmgGridBaseToolbar extends LitElement {
   render() {
     return html`
       <div class="wrapper ${this.actionsCount > 0 ? 'active' : ''}">
-        <div class="actions">
-          <slot name="actions"></slot>
-        </div>
-        <div class="description">
+        ${
+          this.actionsCount > 0 ?
+            html`
+              <div class="actions">
+                <slot name="actions"></slot>
+              </div>
+            ` :
+            ``
+        }
+        <div class="description ${this.actionsCount > 0 ? 'with-action-separator' : ''}">
           <slot name="description"></slot>
         </div>
         <div class="filters">

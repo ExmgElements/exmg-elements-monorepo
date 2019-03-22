@@ -20,12 +20,12 @@ suite('<exmg-grid-toolbar>', function () {
       assert.instanceOf(element, ExmgGridToolbar);
     });
 
-    test('item description works properly', async () => {
+    test('item description set properly', async () => {
       element.description = 'new description';
 
       await flushCompleted();
 
-      const descriptionElem = element.shadowRoot!.querySelector<HTMLElement>('.description');
+      const descriptionElem = element.shadowRoot!.querySelector<HTMLElement>('div[slot=description]');
 
       assert.equal(descriptionElem!.innerText, 'new description');
     });

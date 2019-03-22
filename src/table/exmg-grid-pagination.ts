@@ -32,7 +32,7 @@ export class ExmgGridPagination extends LitElement {
 
   private renderPageSizeOptions() {
     return html`
-        <select @change="${this.handleOnPageSizeChanged}">
+        <select @change="${this.handleOnPageSizeChanged}" id="pageSizeOptions">
           ${repeat(
             this.pageSizeOptions,
             (it) => it,
@@ -69,6 +69,7 @@ export class ExmgGridPagination extends LitElement {
 
     return html`
         <mwc-button
+          id="prevPageBtn"
           ?disabled="${!enabled}"
           class="action"
           title="Previous page"
@@ -84,6 +85,7 @@ export class ExmgGridPagination extends LitElement {
 
     return html`
         <mwc-button
+          id="nextPageBtn"
           ?disabled="${!enabled}"
           class="action"
           title="Next page"
@@ -95,7 +97,7 @@ export class ExmgGridPagination extends LitElement {
   }
 
   private fireEventPageChanged(page: number) {
-    this.dispatchEvent(new CustomEvent('exmg-grid-page-changed', {bubbles: true, composed: true, detail: {page}}));
+    this.dispatchEvent(new CustomEvent('exmg-grid-pagination-page-changed', {bubbles: true, composed: true, detail: {page}}));
   }
 
   private handleOnClickPrev(e: Event): boolean {
@@ -124,7 +126,7 @@ export class ExmgGridPagination extends LitElement {
 
       this.dispatchEvent(
         new CustomEvent(
-          'exmg-grid-page-size-changed',
+          'exmg-grid-pagination-page-size-changed',
           {bubbles: true, composed: true, detail: {pageSize: this.pageSize, page: this.pageIndex}}
         )
       );

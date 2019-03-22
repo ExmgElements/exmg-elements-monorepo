@@ -24,16 +24,20 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
         <style>
           :host {
             --mdc-theme-primary: #0070db;
+            --mdc-theme-surface: #fff;
             --mdc-theme-on-surface: #091e2e;
-            --exmg-grid-active-color: #e1f0fe;
+
+            padding: 10px;
+            display: block;
+            background-color: #f6f6f6;
           }
         </style>
         <exmg-grid-pagination
           page-index=${this.pageIndex}
           page-size=${this.pageSize}
           item-count="${this.itemCount}"
-          @exmg-grid-page-size-changed="${this.onGridPageSizeChanged}"
-          @exmg-grid-page-changed="${this.onGridPageChanged}"
+          @exmg-grid-pagination-page-size-changed="${this.onGridPageSizeChanged}"
+          @exmg-grid-pagination-page-changed="${this.onGridPageChanged}"
         >
         </exmg-grid-pagination>
     `;
