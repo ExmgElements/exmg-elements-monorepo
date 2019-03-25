@@ -1,6 +1,6 @@
-import {html} from '@polymer/polymer/polymer-element.js';
+import {css} from 'lit-element';
 
-export const sharedButtonStyles = html`
+export const sharedButtonStyles = css`
   <style>
     paper-button.primary {
       background: var(--primary-color);

@@ -3,7 +3,7 @@ import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@polymer/paper-styles/typography.js';
 import '@polymer/paper-styles/color.js';
 import '@polymer/paper-styles/shadow.js';
-import {sharedButtonStyles} from './exmg-cms-button-styles.js';
+import {sharedButtonStyles} from './exmg-button-styles.js/index.js';
 
 export const sharedPageStyles = html`
     ${sharedButtonStyles}
