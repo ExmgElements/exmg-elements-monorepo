@@ -102,7 +102,7 @@ export class ExmgGridToolbar extends LitElement {
   private renderSingleSelectFilter(filter: Filter<FilterSingleSelectConfig>) {
     return html`
       <exmg-paper-combobox
-        id="pageSizeOptions"
+        class="filter"
         attr-for-selected="data-id"
         ?always-float-label="${false}"
         @exmg-combobox-select="${this.emitFilterChangedEvent(filter)}"
