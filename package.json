@@ -1,6 +1,6 @@
 {
   "name": "@exmg/exmg-cms-dialogs",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "main": "exmg-form-dialog.js",
   "files": [
     "exmg-*.js",
