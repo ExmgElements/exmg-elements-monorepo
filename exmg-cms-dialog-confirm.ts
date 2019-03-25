@@ -3,7 +3,6 @@ import '@polymer/paper-dialog';
 import '@polymer/paper-button';
 import '@polymer/paper-progress';
 import '@polymer/iron-form';
-import '@polymer/paper-icon-button';
 import {exmgDialogStyles} from './exmg-cms-dialog-styles';
 
 @customElement('exmg-cms-dialog-confirm')
@@ -34,13 +33,6 @@ export class ExmgConfirmDialog extends LitElement {
   private submitting: boolean = false;
 
   /**
-   * Close icon. Default the close icon from the exmg-icons set. Set this property
-   * if you want to use a different icon set
-   */
-  @property({type: String, attribute: 'close-icon'})
-  private closeIcon: string = 'exmg-icons:close';
-
-  /**
    * When set this will be shown in the error section of the dialog
    */
   @property({type: String, attribute: 'error-message'})
@@ -51,6 +43,10 @@ export class ExmgConfirmDialog extends LitElement {
 
   @query('#submitBtn')
   private submitBtnNode?: HTMLElement | any;
+
+  static styles = [
+    exmgDialogStyles,
+  ];
 
   constructor() {
     super();
@@ -122,11 +118,9 @@ export class ExmgConfirmDialog extends LitElement {
 
   protected render() {
     return html`
-      ${exmgDialogStyles}
       <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click @iron-overlay-closed="${this.onCloseDialog}">
         <header>
           <h2 class="title">${this.title}</h2>
-          <paper-icon-button icon="${this.closeIcon}" dialog-dismiss></paper-icon-button>
         </header>
         <div class="body">
           <div class="error ${ !!this.errorMessage ? 'show' : '' }">

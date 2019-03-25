@@ -4,7 +4,6 @@ import '@polymer/paper-dialog-scrollable';
 import '@polymer/paper-button';
 import '@polymer/paper-progress';
 import '@polymer/iron-form';
-import '@polymer/paper-icon-button';
 import {exmgDialogStyles} from './exmg-cms-dialog-styles';
 
 @customElement('exmg-cms-dialog-form')
@@ -43,9 +42,12 @@ export class ExmgFormDialog extends LitElement {
   @query('#submitBtn')
   private submitBtnNode?: HTMLElement | any;
 
+  static styles = [
+    exmgDialogStyles,
+  ];
+  
   constructor() {
     super();
-
     this.onCloseDialog = this.onCloseDialog.bind(this);
     this.submit = this.submit.bind(this);
   }
@@ -125,20 +127,16 @@ export class ExmgFormDialog extends LitElement {
 
   protected render() {
     return html`
-      ${exmgDialogStyles}
       <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click @iron-overlay-closed="${this.onCloseDialog}">
         <header>
           <h2 class="title">${this.title}</h2>
-          <paper-icon-button icon="exmg-icons:close" dialog-dismiss></paper-icon-button>
         </header>
         <paper-dialog-scrollable>
           <div class="body">
             <div class="error ${ !!this.errorMessage ? 'show' : '' }">
               <span class="body">
-                <span>
-                  <iron-icon icon="exmg-icons:warning"></iron-icon>
-                  <span class="msg">${this.errorMessage}</span>
-                </span>
+                <svg height="24" viewBox="0 0 24 24" width="24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+                <span class="msg">${this.errorMessage}</span>
               </span>
             </div>
             <iron-form id="form">
@@ -154,6 +152,6 @@ export class ExmgFormDialog extends LitElement {
         </div>
         ${this.submitting ? html`<paper-progress indeterminate></paper-progress>` : ''}
       </paper-dialog>
-`;
+    `;
   }
 }
