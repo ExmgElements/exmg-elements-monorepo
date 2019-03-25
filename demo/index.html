@@ -46,6 +46,9 @@
       exmg-cms-breadcrumbs.hasCustomOpacityInactiveLinks {
         --breadcrumbs-item-link-inactive-opacity: 0.9;
       }
+      :root {
+        --breadcrumbs-item-separator-background-url: url('/demo/custom-separator.svg');
+      }
     </style>
 
     <script type="text/javascript">
@@ -135,7 +138,7 @@
       <h3>Custom icon separator exmg-cms-breadcrumbs</h3>
       <demo-snippet>
         <template>
-          <exmg-cms-breadcrumbs separator-icon="exmg-cms-breadcrumbs-icons:arrow-separator"></exmg-cms-breadcrumbs>
+          <exmg-cms-breadcrumbs has-custom-separator></exmg-cms-breadcrumbs>
         </template>
       </demo-snippet>
     </div>

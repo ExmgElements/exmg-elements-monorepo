@@ -132,6 +132,11 @@
 								<td>Breadcrumb separator size (width, height)</td>
 								<td><code>24px</code></td>
 							</tr>
+							<tr>
+								<td><code>--breadcrumbs-item-separator-background-url</code></td>
+								<td>Breadcrumb separator background url url(&#39;path/to/asset&#39;). To be this var applied attribute has-custom-separator must be set &lt;exmg-cms-breadcrumbs has-custom-separator>&lt;/exmg-cms-breadcrumbs></td>
+								<td><code>unset</code></td>
+							</tr>
 					</tbody></table>
 				</div>
 			</section>
@@ -200,6 +205,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_exmg_cms_breadcrumbs_.breadcrumbselement.html#draggable" class="tsd-kind-icon">draggable</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_exmg_cms_breadcrumbs_.breadcrumbselement.html#firstchild" class="tsd-kind-icon">first<wbr>Child</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_exmg_cms_breadcrumbs_.breadcrumbselement.html#firstelementchild" class="tsd-kind-icon">first<wbr>Element<wbr>Child</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_exmg_cms_breadcrumbs_.breadcrumbselement.html#hascustomseparator" class="tsd-kind-icon">has<wbr>Custom<wbr>Separator</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_exmg_cms_breadcrumbs_.breadcrumbselement.html#hidden" class="tsd-kind-icon">hidden</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_exmg_cms_breadcrumbs_.breadcrumbselement.html#id" class="tsd-kind-icon">id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_exmg_cms_breadcrumbs_.breadcrumbselement.html#innerhtml" class="tsd-kind-icon">innerHTML</a></li>
@@ -325,7 +331,6 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_exmg_cms_breadcrumbs_.breadcrumbselement.html#scrollleft" class="tsd-kind-icon">scroll<wbr>Left</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_exmg_cms_breadcrumbs_.breadcrumbselement.html#scrolltop" class="tsd-kind-icon">scroll<wbr>Top</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_exmg_cms_breadcrumbs_.breadcrumbselement.html#scrollwidth" class="tsd-kind-icon">scroll<wbr>Width</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_exmg_cms_breadcrumbs_.breadcrumbselement.html#separatoricon" class="tsd-kind-icon">separator<wbr>Icon</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_exmg_cms_breadcrumbs_.breadcrumbselement.html#separatortext" class="tsd-kind-icon">separator<wbr>Text</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="_exmg_cms_breadcrumbs_.breadcrumbselement.html#shadowroot" class="tsd-kind-icon">shadow<wbr>Root</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_exmg_cms_breadcrumbs_.breadcrumbselement.html#slot" class="tsd-kind-icon">slot</a></li>
@@ -915,6 +920,22 @@
 						</div>
 					</div>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="hascustomseparator" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> has<wbr>Custom<wbr>Separator</h3>
+					<div class="tsd-signature tsd-kind-icon">has<wbr>Custom<wbr>Separator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in exmg-cms-breadcrumbs.ts:61</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If true then css var <code>--breadcrumbs-item-separator-background-url</code> should be provided. It will be set as
+							background image of separator.</p>
+						</div>
+					</div>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="hidden" class="tsd-anchor"></a>
 					<h3>hidden</h3>
@@ -1009,7 +1030,7 @@
 					<div class="tsd-signature tsd-kind-icon">items<span class="tsd-signature-symbol">:</span> <a href="../modules/_exmg_cms_breadcrumbs_.html#breadcrumbitem" class="tsd-signature-type">BreadcrumbItem</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-cms-breadcrumbs.ts:52</li>
+							<li>Defined in exmg-cms-breadcrumbs.ts:51</li>
 						</ul>
 					</aside>
 				</section>
@@ -1062,7 +1083,7 @@
 					<div class="tsd-signature tsd-kind-icon">limit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-cms-breadcrumbs.ts:55</li>
+							<li>Defined in exmg-cms-breadcrumbs.ts:54</li>
 						</ul>
 					</aside>
 				</section>
@@ -2838,22 +2859,12 @@
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="separatoricon" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> separator<wbr>Icon</h3>
-					<div class="tsd-signature tsd-kind-icon">separator<wbr>Icon<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in exmg-cms-breadcrumbs.ts:58</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="separatortext" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> separator<wbr>Text</h3>
 					<div class="tsd-signature tsd-kind-icon">separator<wbr>Text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-cms-breadcrumbs.ts:61</li>
+							<li>Defined in exmg-cms-breadcrumbs.ts:64</li>
 						</ul>
 					</aside>
 				</section>
@@ -3102,7 +3113,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides LitElement.styles</p>
 						<ul>
-							<li>Defined in exmg-cms-breadcrumbs.ts:65</li>
+							<li>Defined in exmg-cms-breadcrumbs.ts:68</li>
 						</ul>
 					</aside>
 				</section>
@@ -5682,6 +5693,9 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="_exmg_cms_breadcrumbs_.breadcrumbselement.html#firstelementchild" class="tsd-kind-icon">first<wbr>Element<wbr>Child</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_exmg_cms_breadcrumbs_.breadcrumbselement.html#hascustomseparator" class="tsd-kind-icon">has<wbr>Custom<wbr>Separator</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="_exmg_cms_breadcrumbs_.breadcrumbselement.html#hidden" class="tsd-kind-icon">hidden</a>
 							</li>
@@ -6056,9 +6070,6 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="_exmg_cms_breadcrumbs_.breadcrumbselement.html#scrollwidth" class="tsd-kind-icon">scroll<wbr>Width</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_exmg_cms_breadcrumbs_.breadcrumbselement.html#separatoricon" class="tsd-kind-icon">separator<wbr>Icon</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_exmg_cms_breadcrumbs_.breadcrumbselement.html#separatortext" class="tsd-kind-icon">separator<wbr>Text</a>

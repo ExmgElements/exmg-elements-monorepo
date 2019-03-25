@@ -10,6 +10,7 @@ const styles = css`
     --breadcrumbs-container-padding-left: 10px;
     --breadcrumbs-item-separator-padding: 0;
     --breadcrumbs-item-separator-size: 24px;
+    --breadcrumbs-item-separator-background-url: unset;
     --breadcrumbs-item-link-height: 24px;
     --breadcrumbs-item-link-inactive-opacity: 0.5;
     font-family: Roboto;
@@ -50,10 +51,21 @@ const styles = css`
     width: var(--breadcrumbs-item-separator-size);
     min-height: var(--breadcrumbs-item-separator-size);
     min-width: var(--breadcrumbs-item-separator-size);
+    vertical-align: middle;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     padding: 0 var(--breadcrumbs-item-separator-padding);
+  }
+  :host([has-custom-separator]) .breadcrumb-item > .separator {
+    -webkit-mask-image: var(--breadcrumbs-item-separator-background-url);
+    mask-image: var(--breadcrumbs-item-separator-background-url);
+    background-color: var(--breadcrumbs-text-color, currentColor);
+  }
+  .breadcrumb-item > .separator svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--breadcrumbs-text-color, currentColor);
   }
   a[disabled] {
     cursor: not-allowed;

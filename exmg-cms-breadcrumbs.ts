@@ -1,8 +1,7 @@
 import {LitElement, html, property, customElement, TemplateResult} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 
-import '@polymer/iron-icon/iron-icon.js';
-import './exmg-cms-breadcrumbs-icons';
+import {arrowSeparator} from './exmg-cms-breadcrumbs-icons';
 import exmgCmsBreadcrumbsStyles from './exmg-cms-breadcrumbs-styles';
 
 type GenericPropertyValues<T, V = unknown> = Map<T, V>;
@@ -44,6 +43,7 @@ export type BreadcrumbItem = {
  * `--breadcrumbs-item-link-height` | Breadcrumb link height | `24px`
  * `--breadcrumbs-item-link-inactive-opacity` | Breadcrumb inactive link opacity | `0.5`
  * `--breadcrumbs-item-separator-size` | Breadcrumb separator size (width, height) | `24px`
+ * `--breadcrumbs-item-separator-background-url` | Breadcrumb separator background url url('path/to/asset'). To be this var applied attribute has-custom-separator must be set <exmg-cms-breadcrumbs has-custom-separator\></exmg-cms-breadcrumbs\>| `unset`
  */
 @customElement('exmg-cms-breadcrumbs')
 export class BreadcrumbsElement extends LitElement {
@@ -53,8 +53,12 @@ export class BreadcrumbsElement extends LitElement {
   @property({type: Number})
   limit?: number;
 
-  @property({type: String, attribute: 'separator-icon'})
-  separatorIcon?: string;
+  /**
+   * If true then css var `--breadcrumbs-item-separator-background-url` should be provided. It will be set as
+   * background image of separator.
+   */
+  @property({type: Boolean, attribute: 'has-custom-separator', reflect: true})
+  hasCustomSeparator?: boolean;
 
   @property({type: String, attribute: 'separator-text'})
   separatorText?: string;
@@ -70,11 +74,11 @@ export class BreadcrumbsElement extends LitElement {
       return null;
     }
 
-    if (this.separatorText) {
-      return html`<span class="separator">${this.separatorText}</span>`;
+    if (this.hasCustomSeparator) {
+      return html`<span class="separator"></span>`;
     }
 
-    return html` <iron-icon class="separator" icon="${this.separatorIcon || 'exmg-cms-breadcrumbs-icons:arrow-separator'}"></iron-icon>`;
+    return html`<span class="separator">${this.separatorText || arrowSeparator}</span>`;
   }
 
   private renderItems() {
