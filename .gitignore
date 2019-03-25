@@ -6,4 +6,4 @@ node_modules/
 !gulpfile.js
 *.log
 .DS_Store
-!typings/*
+!scripts/gen-docs/*.js

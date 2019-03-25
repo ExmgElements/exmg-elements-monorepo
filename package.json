@@ -3,7 +3,7 @@
   "flat": true,
   "version": "1.0.0",
   "description": "Element to display breadcrumbs navigation",
-  "main": "index.js",
+  "main": "index.html",
   "contributors": [
     "Ex Machina Group"
   ],
@@ -21,11 +21,8 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/exmachina/exmg-cms-breadcrumbs",
   "files": [
-    "typings/*.d.ts",
-    "src/**/*.js",
-    "src/**/*.d.ts",
-    "index.js",
-    "index.d.ts"
+    "exmg-*.js",
+    "exmg-*.d.ts"
   ],
   "dependencies": {
     "lit-element": "^2.0.1"
@@ -51,7 +48,7 @@
     "wct-mocha": "^1.0.0"
   },
   "scripts": {
-    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ **/*.ts",
+    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts",
     "build": "npm run lint && npm run tsc",
     "tsc": "tsc -b ./tsconfig.json",
     "prepublishOnly": "npm run build",
