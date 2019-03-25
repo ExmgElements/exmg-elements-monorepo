@@ -20,14 +20,13 @@ export class ExmgRowSelectable {
     private querySelectors: ExmgQuerySelectors,
     private dispatchEvent: (event: Event) => boolean,
     private selectableCheckboxSelector?: string,
-  ) {
-  }
+  ) {}
 
   initFeature(bodyRows: NodeListOf<HTMLTableRowElement>): void {
     const fireEvent = this.initAllCheckboxes();
-    const fireEvent2 = this.initBodyCheckboxes();
+    const rowsSelectionSyncShouldTriggerEvent = this.syncRowSelectionWithBodyCheckboxes();
     this.updateBodyRowsListeners(bodyRows);
-    if (fireEvent || fireEvent2) {
+    if (fireEvent || rowsSelectionSyncShouldTriggerEvent) {
       this.fireSelectableRows();
     }
   }
@@ -35,6 +34,10 @@ export class ExmgRowSelectable {
   updateFeature(bodyRows: NodeListOf<HTMLTableRowElement>): void {
     this.updateBodyRowsListeners(bodyRows);
     this.updateSelectAllCheckbox();
+    const rowsSelectionSyncShouldTriggerEvent = this.syncRowSelectionWithBodyCheckboxes();
+    if (rowsSelectionSyncShouldTriggerEvent) {
+      this.fireSelectableRows();
+    }
   }
 
   private updateBodyRowsListeners(bodyRows: NodeListOf<HTMLTableRowElement>): void {
@@ -91,28 +94,38 @@ export class ExmgRowSelectable {
     return fireEvent;
   }
 
-  private initBodyCheckboxes(): boolean {
+  private syncRowSelectionWithBodyCheckboxes(): boolean {
     let fireEvent = false;
 
-    if (this.selectableCheckboxSelector && !(this.allCheckbox && this.allCheckbox.checked)) {
-      this.selectedRows = [];
-      const checkedCheckboxes = this.querySelectors.getTableBody()
-        .querySelectorAll(`${this.selectableCheckboxSelector}[checked]`);
-      checkedCheckboxes.forEach(checkedCheckbox => {
-        const row = checkedCheckbox.closest('tr');
-        if (row) {
-          console.log(row);
-          this.selectedRows.push(row);
-          row.setAttribute('data-selected', '');
-          fireEvent = true;
-        }
-      });
+    if (this.selectableCheckboxSelector) {
+      // remove row attribute data-selected if checkbox not selected
+      this.querySelectors.getTableBody()
+        .querySelectorAll(`tr[data-selected] ${this.selectableCheckboxSelector}:not([checked])`)
+        .forEach(uncheckedCheckbox => {
+          const row = uncheckedCheckbox.closest('tr');
+          if (row) {
+            row.removeAttribute('data-selected');
+            fireEvent = true;
+          }
+        });
+
+      // add row attribute data-selected if checkbox is selected
+      this.querySelectors.getTableBody()
+        .querySelectorAll(`tr:not([data-selected]) ${this.selectableCheckboxSelector}[checked]`)
+        .forEach(checkedCheckbox => {
+          const row = checkedCheckbox.closest('tr');
+          if (row) {
+            row.setAttribute('data-selected', '');
+            fireEvent = true;
+          }
+        });
+
+      this.selectedRows = Array.from(
+        this.querySelectors.getTableBody().querySelectorAll(`tr[data-selected]`)
+      );
 
       if (this.allCheckbox && !this.allCheckbox.checked) {
-        const bodyRows = this.querySelectors.getTableBody()
-          .querySelectorAll<HTMLTableRowElement>('tr:not(.grid-row-detail):not([data-is-selectable])');
-
-        if (bodyRows.length === checkedCheckboxes.length && bodyRows.length) {
+        if (this.selectedRows.length && this.selectedRows.length === this.querySelectors.getBodyRows().length) {
           checkCheckbox(this.allCheckbox);
         }
       }

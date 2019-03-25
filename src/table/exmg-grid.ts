@@ -218,7 +218,7 @@ export class ExmgGrid extends LitElement {
     if (changedProps.has('selectedRowIds')) {
       Object.entries(this.selectedRowIds).forEach(([rowId, nextSelectionState]) => {
         const row = this.getTableBody()
-          .querySelector<HTMLElement>(this.getBodyRowSelector(`[data-row-key="${rowId}"]`));
+          .querySelector<HTMLTableRowElement>(this.getBodyRowSelector(`[data-row-key="${rowId}"]`));
 
         if (row) {
           const isSelected = row.hasAttribute('data-selected');

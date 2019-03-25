@@ -41,7 +41,7 @@ const generateRows = (length: number = 50, startId: number = 1): Income[] => {
   return rows.slice(0, length);
 };
 
-const allItems: Income[] = generateRows(4);
+const allItems: Income[] = generateRows(100);
 
 const DEFAULT_SORT_COLUMN = 'amount';
 const DEFAULT_SORT_DIRECTION = 'ASC';
@@ -240,7 +240,7 @@ export class DemoSimpleGridTable extends LitElement {
       (i) => {
         return html`
           <tr data-row-key="${i.id}">
-            <td><input class="selectable-checkbox" type="checkbox" checked="checked"/></td>
+            <td><input class="selectable-checkbox" type="checkbox" /></td>
             ${sortableRow ? html`<td class="handle"><span class="row-drag-handler">${dragIcon}</span></td>` : html`<td></td>`}
             <td>${i.id}</td>
             <td>${i.month}</td>
@@ -275,7 +275,7 @@ export class DemoSimpleGridTable extends LitElement {
         <button @click="${this.expandFirstRows}">Expand first Rows</button>
         <button @click="${this.collapseFirstRows}">Collapse first Rows</button>
         <button @click="${this.selectFirstRows}">Select first rows</button>
-        <button @click="${this.unSelectFirstRows}">Select first rows</button>
+        <button @click="${this.unSelectFirstRows}">Unselect first rows</button>
       </div>
       <h1>Sortable rows table</h1>
       <exmg-grid
@@ -326,8 +326,8 @@ export class DemoSimpleGridTable extends LitElement {
                  page-index=${this.pageIndex}
                  page-size=${this.pageSize}
                  item-count="${allItems.length}"
-                 @exmg-grid-page-changed="${this.onPageChange}"
-                 @exmg-grid-page-size-changed="${this.onPageSizeChange}"
+                 @exmg-grid-pagination-page-changed="${this.onPageChange}"
+                 @exmg-grid-pagination-page-size-changed="${this.onPageSizeChange}"
                >
                </exmg-grid-pagination>
              </td>
@@ -366,8 +366,8 @@ export class DemoSimpleGridTable extends LitElement {
                  page-index=${this.pageIndex}
                  page-size=${this.pageSize}
                  item-count="${allItems.length}"
-                 @exmg-grid-page-changed="${this.onPageChange}"
-                 @exmg-grid-page-size-changed="${this.onPageSizeChange}"
+                 @exmg-grid-pagination-page-changed="${this.onPageChange}"
+                 @exmg-grid-pagination-page-size-changed="${this.onPageSizeChange}"
                >
                </exmg-grid-pagination>
              </td>
