@@ -1,5 +1,7 @@
 import {customElement, html, LitElement, property} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
+import '@exmg/exmg-paper-combobox';
+import '@polymer/paper-item';
 
 @customElement('exmg-grid-base-toolbar-demo')
 export class ExmgGridBaseToolbarDemo extends LitElement {
@@ -47,6 +49,7 @@ export class ExmgGridBaseToolbarDemo extends LitElement {
           },
         ],
       },
+      selected: 'active',
     },
   ];
 
@@ -114,14 +117,18 @@ export class ExmgGridBaseToolbarDemo extends LitElement {
               this.filters,
                 (filter) => {
                 return html`
-                  <select @change="${this.onFilterChanged(filter)}">
+                  <exmg-paper-combobox
+                    id="pageSizeOptions"
+                    attr-for-selected="data-id"
+                    selected="${filter.selected}"
+                    @exmg-combobox-select="${this.onFilterChanged(filter)}"
+                  >
                     ${repeat(
                       filter.config.data,
-                        (item: any) => {
-                        return html`<option value="${item.id}">${filter.name}: ${item.title}</option>`;
-                      }
+                      (item: any) => item,
+                  item => html`<paper-item data-id="${item.id}">${filter.name}: ${item.title}</paper-item>`
                     )}
-                  </select>
+                  </exmg-paper-combobox>
                 `;
               }
             )}

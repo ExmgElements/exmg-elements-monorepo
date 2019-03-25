@@ -43,8 +43,8 @@ export class ExmgGridPagination extends LitElement {
       >
         ${repeat(
           this.pageSizeOptions,
-          (it) => it,
-          it => html`<paper-item data-id="${it}">${it}</paper-item>`
+          (item) => item,
+        item => html`<paper-item data-id="${item}">${item}</paper-item>`
         )}
       </exmg-paper-combobox>
     `;
