@@ -23,24 +23,21 @@ export class ExmgRowSelectable {
   ) {
   }
 
-  initFeature(): void {
+  initFeature(bodyRows: NodeListOf<HTMLTableRowElement>): void {
     const fireEvent = this.initAllCheckboxes();
     const fireEvent2 = this.initBodyCheckboxes();
-    this.updateBodyRowsListeners();
+    this.updateBodyRowsListeners(bodyRows);
     if (fireEvent || fireEvent2) {
       this.fireSelectableRows();
     }
   }
 
-  updateFeature(): void {
-    this.updateBodyRowsListeners();
+  updateFeature(bodyRows: NodeListOf<HTMLTableRowElement>): void {
+    this.updateBodyRowsListeners(bodyRows);
     this.updateSelectAllCheckbox();
   }
 
-  private updateBodyRowsListeners(): void {
-    const bodyRows = this.querySelectors.getTableBody()
-      .querySelectorAll<HTMLTableRowElement>('tr:not(.grid-row-detail):not([data-is-selectable])');
-
+  private updateBodyRowsListeners(bodyRows: NodeListOf<HTMLTableRowElement>): void {
     bodyRows.forEach((row => {
       row.setAttribute('data-is-selectable', '');
 

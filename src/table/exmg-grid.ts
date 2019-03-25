@@ -4,6 +4,9 @@ import '@exmg/exmg-sortable';
 import {style as exmgGridTableStyles} from './exmg-grid-styles';
 import {ExmgRowSelectable} from './featrues/exmg-row-selectable';
 import {ExmgQuerySelectors} from './exmg-query-selectors';
+import {ExmgRowExpandable} from './featrues/exmg-row-expandable';
+import {ExmgColumnSortable} from './featrues/exmg-column-sortable';
+import {ExmgRowSortable} from './featrues/exmg-row-sortable';
 
 type GenericPropertyValues<T, V = unknown> = Map<T, V>;
 type Props = Exclude<keyof ExmgGrid, number | Symbol>;
@@ -67,7 +70,7 @@ export class ExmgGrid extends LitElement {
   defaultSortColumn?: string;
 
   @property({type: String, attribute: 'default-sort-direction'})
-  defaultSortDirection?: string;
+  defaultSortDirection?: SORT_DIRECTION;
 
   /**
    * Feature that turn on selectable rows
@@ -75,15 +78,25 @@ export class ExmgGrid extends LitElement {
   @property({type: Boolean, reflect: true})
   selectable: boolean = false;
 
-  @property({type: String, attribute: 'selectable-checkbox-selector'})
-  selectableCheckboxSelector?: string;
-
   /**
    * Feature that allow sort rows
    * If table table has turn on feature `selectable` then it takes precedence and `rowSelectable` will be ignored
    */
   @property({type: Boolean, reflect: true, attribute: 'rows-sortable'})
+  rowsSortable: boolean = false;
+
+  /**
+   * Feature that allow select rows
+   */
+  @property({type: Boolean, attribute: 'rows-selectable'})
   rowsSelectable: boolean = false;
+
+  /**
+   * If rows are selectable you can also pass selector to checkboxes.
+   * We can have checkboxes in thead or / and tbody.
+   */
+  @property({type: String, attribute: 'selectable-checkbox-selector'})
+  selectableCheckboxSelector?: string;
 
   /**
    * Map of column names that should be hidden
@@ -103,7 +116,13 @@ export class ExmgGrid extends LitElement {
   @property({type: Object})
   private querySelectors?: ExmgQuerySelectors;
 
-  private selectableFeature?: ExmgRowSelectable;
+  private rowSelectableFeature?: ExmgRowSelectable;
+
+  private rowExpandableFeature?: ExmgRowExpandable;
+
+  private rowSortableFeature?: ExmgRowSortable;
+
+  private columnSortableFeature?: ExmgColumnSortable;
 
   private componentReady: boolean = false;
 
@@ -122,6 +141,12 @@ export class ExmgGrid extends LitElement {
     return this.getQuerySelectors().getTableBody();
   }
 
+  private findTableBody(): HTMLTableSectionElement | void {
+    if (this.querySelectors) {
+      return this.getTableBody() || undefined;
+    }
+  }
+
   private getColumns(selector: string = 'th'): NodeListOf<HTMLTableHeaderCellElement> {
     return this.getQuerySelectors().getColumns(selector);
   }
@@ -131,7 +156,7 @@ export class ExmgGrid extends LitElement {
   }
 
   private canSortRows(): boolean {
-    return !this.sortable && this.rowsSelectable;
+    return !this.sortable && this.rowsSortable;
   }
 
   private orderChange(e: CustomEvent): void {
@@ -173,116 +198,7 @@ export class ExmgGrid extends LitElement {
     });
   }
 
-  private turnOnSortable(): void {
-    this.getColumns('th[data-sort]').forEach((column  => {
-      const columnId = column.getAttribute('data-sort') || column.getAttribute('data-column-key')!;
-
-      //  set default sort column if any
-      if (!!this.defaultSortColumn && !!this.defaultSortDirection && this.defaultSortColumn === columnId) {
-        column.setAttribute('data-sort-direction', this.defaultSortDirection);
-      }
-
-      column.addEventListener('click', () => {
-        const columnSortDirection = column.getAttribute('data-sort-direction');
-        const nextSortDirection = columnSortDirection === 'ASC' ? 'DESC' : columnSortDirection === 'DESC' ? undefined : 'ASC';
-        // reset previous
-        this.getColumns('th[data-sort-direction=ASC], th[data-sort-direction=DESC]')
-          .forEach(alreadySortedColumn => {
-            if (alreadySortedColumn !== column) {
-              alreadySortedColumn.removeAttribute('data-sort-direction');
-            }
-          });
-
-        column.setAttribute('data-sort-direction', nextSortDirection || '');
-        console.log('sortable clicked', columnId, nextSortDirection);
-        this.fireSortChanged(columnId, nextSortDirection);
-      });
-    }));
-  }
-
-  private fireSortChanged(columnId: string, sortDirection?: SORT_DIRECTION): void {
-    console.log('exmg-grid-sort-change', {columnId, sortDirection});
-    this.dispatchEvent(new CustomEvent<EventDetailSortChange>(
-      'exmg-grid-sort-change',
-      {
-        bubbles: true,
-        composed: true,
-        detail: {
-          column: columnId,
-          sortDirection: !!sortDirection ? sortDirection : undefined,
-        },
-      }
-    ));
-  }
-
-  private turnOnExpandable(): void {
-    this.getTableBody().querySelectorAll<HTMLElement>(`${this.expandableToggleSelector}:not([data-is-expandable])`)
-      .forEach(triggerElement => {
-        triggerElement.setAttribute('data-is-expandable', '');
-        triggerElement.addEventListener('click', (event: Event) => {
-          const parentRow = triggerElement.closest('tr');
-          const rowDetail = parentRow && parentRow.nextElementSibling as HTMLTableRowElement;
-          if (!parentRow || !rowDetail) {
-            console.error(`Cannot find parent <tr> for selector ${this.expandableToggleSelector}`);
-            return;
-          }
-          event.preventDefault();
-          event.stopPropagation();
-
-          const isExpanded = triggerElement.hasAttribute('data-is-expanded');
-          if (isExpanded) {
-            triggerElement.removeAttribute('data-is-expanded');
-            rowDetail.removeAttribute('data-is-row-expanded');
-          } else {
-            triggerElement.setAttribute('data-is-expanded', '');
-            rowDetail.setAttribute('data-is-row-expanded', '');
-          }
-        });
-      });
-  }
-
-  protected async firstUpdated(changedProps: SmartPropertyValue): Promise<void> {
-    const debug = Array.from(changedProps.keys()).map(key => ({key, oldV: changedProps.get(key), newV: this[key]}));
-    console.log('FIRST changedProps', changedProps, debug);
-    const table = this.shadowRoot!.host.querySelector<HTMLTableElement>('table')!;
-    const tableBody = table.querySelector<HTMLTableSectionElement>('tbody.grid-data')!;
-
-    this.querySelectors = new ExmgQuerySelectors(
-      table,
-      tableBody,
-    );
-
-    this.selectableFeature = new ExmgRowSelectable(
-      this.querySelectors,
-      (event: Event) => this.dispatchEvent(event),
-      this.selectableCheckboxSelector,
-    );
-
-    if (this.sortable) {
-      this.turnOnSortable();
-    }
-
-    if (this.selectable) {
-      this.selectableFeature.initFeature();
-    }
-
-    if (this.expandableToggleSelector) {
-      this.turnOnExpandable();
-    }
-
-    this.updateColumnVisibility();
-
-    await this.updateComplete;
-    this.componentReady = true;
-  }
-
-  protected updated(changedProps: SmartPropertyValue): void {
-    const debug = Array.from(changedProps.keys()).map(key => ({key, oldV: changedProps.get(key), newV: this[key]}));
-    console.log('UPDATED changedProps', changedProps, debug);
-    if (changedProps.has('hiddenColumnNames') || changedProps.has('items')) {
-      this.updateColumnVisibility(changedProps.get('hiddenColumnNames') as Record<string, string>);
-    }
-
+  private observeExpandedRowIds(changedProps: SmartPropertyValue): void {
     if (changedProps.has('expandedRowIds')) {
       Object.entries(this.expandedRowIds).forEach(([rowId, nextExpandedState]) => {
         const expendableToggle = this.getTableBody()
@@ -296,7 +212,9 @@ export class ExmgGrid extends LitElement {
         }
       });
     }
+  }
 
+  private observeSelectedRowIds(changedProps: SmartPropertyValue): void {
     if (changedProps.has('selectedRowIds')) {
       Object.entries(this.selectedRowIds).forEach(([rowId, nextSelectionState]) => {
         const row = this.getTableBody()
@@ -310,15 +228,87 @@ export class ExmgGrid extends LitElement {
         }
       });
     }
+  }
+
+  protected async firstUpdated(changedProps: SmartPropertyValue): Promise<void> {
+    const debug = Array.from(changedProps.keys()).map(key => ({key, oldV: changedProps.get(key), newV: this[key]}));
+    console.log('FIRST changedProps', changedProps, debug);
+    const table = this.shadowRoot!.host.querySelector<HTMLTableElement>('table')!;
+    const tableBody = table.querySelector<HTMLTableSectionElement>('tbody.grid-data')!;
+
+    this.querySelectors = new ExmgQuerySelectors(
+      table,
+      tableBody,
+    );
+
+    const bodyRows = this.querySelectors.getBodyRows();
+
+    if (this.sortable) {
+      this.columnSortableFeature = new ExmgColumnSortable(
+        this.querySelectors,
+        (event: Event) => this.dispatchEvent(event),
+        this.defaultSortColumn,
+        this.defaultSortDirection,
+      );
+      this.columnSortableFeature.initFeature();
+    }
+
+    if (this.canSortRows()) {
+      this.rowSortableFeature = new ExmgRowSortable(this.querySelectors);
+      this.rowSortableFeature.initFeature();
+    }
+
+    if (this.rowsSelectable) {
+      this.rowSelectableFeature = new ExmgRowSelectable(
+        this.querySelectors,
+        (event: Event) => this.dispatchEvent(event),
+        this.selectableCheckboxSelector,
+      );
+      this.rowSelectableFeature.initFeature(bodyRows);
+    }
+
+    if (this.expandableToggleSelector) {
+      this.rowExpandableFeature = new ExmgRowExpandable(
+        this.querySelectors,
+        this.expandableToggleSelector,
+      );
+      this.rowExpandableFeature.initFeature();
+    }
+
+    this.updateColumnVisibility();
+
+    bodyRows.forEach(row => row.setAttribute('data-initialized', ''));
+
+    await this.updateComplete;
+    this.componentReady = true;
+  }
+
+  protected updated(changedProps: SmartPropertyValue): void {
+    const debug = Array.from(changedProps.keys()).map(key => ({key, oldV: changedProps.get(key), newV: this[key]}));
+    console.log('UPDATED changedProps', changedProps, debug);
+    if (changedProps.has('hiddenColumnNames') || changedProps.has('items')) {
+      this.updateColumnVisibility(changedProps.get('hiddenColumnNames') as Record<string, string>);
+    }
+
+    this.observeExpandedRowIds(changedProps);
+    this.observeSelectedRowIds(changedProps);
 
     if (this.componentReady && changedProps.has('items')) {
-      if (this.selectableFeature) {
-        this.selectableFeature.updateFeature();
+      const bodyRows = this.querySelectors!.getBodyRowsNotInitialized();
+
+      if (this.rowSelectableFeature) {
+        this.rowSelectableFeature.updateFeature(bodyRows);
       }
 
-      if (!!this.expandableToggleSelector) {
-        this.turnOnExpandable();
+      if (this.rowExpandableFeature) {
+        this.rowExpandableFeature.updateFeature();
       }
+
+      if (this.rowSortableFeature) {
+        this.rowSortableFeature.updateFeature();
+      }
+
+      bodyRows.forEach(row => row.setAttribute('data-initialized', ''));
     }
   }
 
@@ -333,7 +323,7 @@ export class ExmgGrid extends LitElement {
           orientation="${'vertical'}"
           item-selector="tbody.grid-data tr:not(.grid-row-detail)"
           handle-selector=".row-drag-handler"
-          .sortableHostNode="${this.querySelectors ? this.getQuerySelectors().getTableBody() : undefined}"
+          .sortableHostNode="${this.findTableBody()}"
           @dom-order-change="${this.orderChange}"
         >
           <slot></slot>
