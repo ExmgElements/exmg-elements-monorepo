@@ -22,27 +22,34 @@
   "license": "MIT",
   "author": "Ex Machina",
   "dependencies": {
-    "@polymer/polymer": "^3.0.0",
-    "lit-element": "^2.0.0-rc.3"
+    "@polymer/polymer": "^3.2.0",
+    "lit-element": "^2.1.0"
   },
   "devDependencies": {
-    "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
-    "@polymer/iron-icons": "^3.0.0-pre.21",
-    "@polymer/iron-iconset-svg": "^3.0.0-pre.18",
-    "@polymer/paper-icon-button": "^3.0.0-pre.18",
-    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "@polymer/iron-demo-helpers": "^3.1.0",
+    "@polymer/iron-icons": "^3.0.1",
+    "@polymer/iron-iconset-svg": "^3.0.1",
+    "@polymer/paper-icon-button": "^3.0.2",
+    "@webcomponents/webcomponentsjs": "^2.2.7",
     "gulp": "^4.0.0",
-    "polymer-cli": "^1.9.5",
-    "tslint": "^5.12.1",
-    "tslint-config-airbnb": "^5.11.1",
+    "polymer-cli": "^1.9.7",
+    "tslint": "^5.14.0",
+    "tslint-config-exmg": "^1.0.2",
     "typedoc": "^0.14.2",
-    "typescript": "^3.2.4",
-    "wct-browser-legacy": "^1.0.0"
+    "typescript": "^3.3.4000",
+    "wct-browser-legacy": "^1.0.2"
   },
   "scripts": {
+    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts",
+    "build": "npm run lint && npm run tsc",
+    "tsc": "tsc -b ./tsconfig.json",
+    "prepublishOnly": "npm run build",
+    "preversion": "npm run build",
     "start": "gulp serve",
-    "tslint": "tslint -c ./tslint.json --project ./",
-    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts"
+    "lint": "tslint -c ./tslint.json --project ./",
+    "test-dev": "polymer test --npm -p",
+    "test": "polymer test --npm --expanded",
+    "test:integration": "polymer build # test that psk builds without error with the CLI"
   },
   "publishConfig": {
     "access": "public"
