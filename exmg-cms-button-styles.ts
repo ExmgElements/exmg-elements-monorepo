@@ -1,5 +1,6 @@
-import { css } from 'lit-element';
-export const sharedButtonStyles = css `
+import {css} from 'lit-element';
+
+export const sharedButtonStyles = css`
   paper-button.primary {
     background: var(--primary-color);
     color: white;
