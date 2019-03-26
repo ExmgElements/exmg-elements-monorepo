@@ -12,8 +12,8 @@
     "url": "git@bitbucket.org:ExmgElements/exmg-copy-to-clipboard.git"
   },
   "files": [
-    "**/exmg-*.js",
-    "**/exmg-*.d.ts"
+    "exmg-*.js",
+    "exmg-*.d.ts"
   ],
   "homepage": "https://github.com/ExmgElements/",
   "name": "@exmg/exmg-copy-to-clipboard",
