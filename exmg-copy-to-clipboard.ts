@@ -77,7 +77,7 @@ export class ExmgCopyToClipboard extends LitElement {
   private initSlottedElement(): void {
     this.htmlElement =
         (FlattenedNodesObserver.getFlattenedNodes(this) || [])
-            .filter((n) => n.nodeType === Node.ELEMENT_NODE)[0];
+            .filter((n: Node) => n.nodeType === Node.ELEMENT_NODE)[0];
 
     if (this.htmlElement) {
       addListener(this.htmlElement, 'tap', this.handleCopy);
@@ -106,7 +106,7 @@ export class ExmgCopyToClipboard extends LitElement {
 
     try {
       document.execCommand('copy');
-      this.dispatchEvent(new CustomEvent('copy-successful', {
+      this.dispatchEvent(new CustomEvent('exmg-copy-to-clipboard-copied', {
         detail: this.value,
         bubbles: this.bubbles,
         composed: true,
