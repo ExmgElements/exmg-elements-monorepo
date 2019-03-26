@@ -11,6 +11,14 @@ const uncheckCheckbox = (checkboxElement: HTMLInputElement) => {
   checkboxElement.checked = false;
 };
 
+const syncCheckboxAttrFromProp = (checkboxElement: HTMLInputElement): void => {
+  if (checkboxElement.checked) {
+    checkboxElement.setAttribute('checked', 'checked');
+  } else {
+    checkboxElement.removeAttribute('checked');
+  }
+};
+
 export class ExmgRowSelectable {
   allCheckbox?: HTMLInputElement;
 
@@ -33,8 +41,8 @@ export class ExmgRowSelectable {
 
   updateFeature(bodyRows: NodeListOf<HTMLTableRowElement>): void {
     this.updateBodyRowsListeners(bodyRows);
-    this.updateSelectAllCheckbox();
     const rowsSelectionSyncShouldTriggerEvent = this.syncRowSelectionWithBodyCheckboxes();
+    this.updateSelectAllCheckbox();
     if (rowsSelectionSyncShouldTriggerEvent) {
       this.fireSelectableRows();
     }
@@ -64,6 +72,8 @@ export class ExmgRowSelectable {
           } else {
             checkCheckbox(rowCheckbox);
           }
+        } else if (rowCheckbox) {
+          syncCheckboxAttrFromProp(rowCheckbox);
         }
 
         this.updateSelectAllCheckbox();
@@ -86,6 +96,7 @@ export class ExmgRowSelectable {
       }
 
       this.allCheckbox.addEventListener('change', () => {
+        syncCheckboxAttrFromProp(this.allCheckbox!);
         this.handleAllCheckboxStateChange();
         this.fireSelectableRows();
       });
