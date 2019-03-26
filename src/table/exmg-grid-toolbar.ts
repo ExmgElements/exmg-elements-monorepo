@@ -104,7 +104,8 @@ export class ExmgGridToolbar extends LitElement {
       <exmg-paper-combobox
         class="filter"
         attr-for-selected="data-id"
-        ?always-float-label="${false}"
+        no-float-label
+        label="${filter.name}"
         @exmg-combobox-select="${this.emitFilterChangedEvent(filter)}"
       >
         ${repeat(

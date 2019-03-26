@@ -23,7 +23,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@exmg/exmg-paper-combobox": "^4.3.0",
+    "@exmg/exmg-paper-combobox": "^4.4.0",
     "@exmg/exmg-sortable": "^4.0.3",
     "@material/mwc-button": "^0.4.0",
     "@polymer/paper-item": "^3.0.1",
