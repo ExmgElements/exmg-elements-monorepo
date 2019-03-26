@@ -30,14 +30,19 @@
     "@polymer/iron-icons": "^3.0.1",
     "@polymer/iron-iconset-svg": "^3.0.1",
     "@polymer/paper-icon-button": "^3.0.2",
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "@polymer/test-fixture": "^4.0.2",
     "@webcomponents/webcomponentsjs": "^2.2.7",
+    "chai": "^4.2.0",
     "gulp": "^4.0.0",
+    "mocha": "^5.2.0",
     "polymer-cli": "^1.9.7",
     "tslint": "^5.14.0",
     "tslint-config-exmg": "^1.0.2",
     "typedoc": "^0.14.2",
     "typescript": "^3.3.4000",
-    "wct-browser-legacy": "^1.0.2"
+    "wct-mocha": "^1.0.0"
   },
   "scripts": {
     "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts",
