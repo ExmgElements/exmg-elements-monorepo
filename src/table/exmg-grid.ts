@@ -48,7 +48,7 @@ export type EventDetailSelectedRowsChange = {
  *  [F] ExpandedRow: Must have class ".grid-row-detail"
  *  [F] Row sortable
  *  - hast to handle event @exmg-grid-update-items - event return updated order of items - consumer needs to reiterate tbody
- *  - handler element should has class `row-drag-handler`
+ *  - handler element should has class `grid-row-drag-handler`
  *  - element should use repeat function - it matter in terms of performance and will persist node's state properly like selected row
  */
 @customElement('exmg-grid')
@@ -321,8 +321,9 @@ export class ExmgGrid extends LitElement {
     return html`
         <exmg-sortable
           orientation="${'vertical'}"
+          animation-enabled
           item-selector="tbody.grid-data tr:not(.grid-row-detail)"
-          handle-selector=".row-drag-handler"
+          handle-selector=".grid-row-drag-handler"
           .sortableHostNode="${this.findTableBody()}"
           @dom-order-change="${this.orderChange}"
         >

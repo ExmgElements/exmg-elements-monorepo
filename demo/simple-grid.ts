@@ -1,10 +1,11 @@
 import {LitElement, html, customElement, TemplateResult, property} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
+import '@polymer/paper-checkbox';
 import '../src/table/exmg-grid.js';
 import '../src/table/exmg-grid-pagination';
 import {style as tableStyles} from '../src/table/exmg-grid-styles';
 
-import {dragIcon, arrowUpward} from './exmg-icons';
+import {dragIcon, expandIcon} from './exmg-icons';
 import '../src/table/exmg-grid-smart-toolbar';
 import {
   ActionAmountSelectedItemsCondition,
@@ -54,7 +55,9 @@ const getItemByPage = (pageIndex: number, pageSize: number): Income[] => {
 
 @customElement('demo-simple-grid')
 export class DemoSimpleGridTable extends LitElement {
-  static styles = [tableStyles];
+  static styles = [
+    tableStyles,
+  ];
 
   @property({type: Object})
   items: Income[];
@@ -240,13 +243,13 @@ export class DemoSimpleGridTable extends LitElement {
       (i) => {
         return html`
           <tr data-row-key="${i.id}">
-            <td><input class="selectable-checkbox" type="checkbox" /></td>
-            ${sortableRow ? html`<td class="handle"><span class="row-drag-handler">${dragIcon}</span></td>` : html`<td></td>`}
+            <td><paper-checkbox class="selectable-checkbox"></paper-checkbox></td>
+            ${sortableRow ? html`<td class="handle"><span class="grid-row-drag-handler">${dragIcon}</span></td>` : html`<td></td>`}
             <td>${i.id}</td>
             <td>${i.month}</td>
             <td>${i.year}</td>
             <td>${i.amount}</td>
-            <td><span class="expandable-toggle">${arrowUpward}</span></td>
+            <td class="grid-cell-visible-on-hover"><span class="expandable-toggle grid-icon-rotate">${expandIcon}</span></td>
           </tr>
           <tr class="grid-row-detail" data-row-detail-key="${i.id}">
             <td data-auto-colspan>
@@ -286,7 +289,7 @@ export class DemoSimpleGridTable extends LitElement {
         ?selectable="${true}"
         ?sortable="${false}"
         ?rows-sortable="${true}"
-        selectable-checkbox-selector="input.selectable-checkbox"
+        selectable-checkbox-selector=".selectable-checkbox"
         ?rows-selectable="${true}"
         expandable-toggle-selector=".expandable-toggle"
         @exmg-grid-update-items="${this.updateItems}"
@@ -307,8 +310,8 @@ export class DemoSimpleGridTable extends LitElement {
              </th>
            </tr>
            <tr class="grid-columns">
-             <th><input class="selectable-checkbox" type="checkbox" /></th>
-             <th></th>
+             <th width="5%"><paper-checkbox class="selectable-checkbox"></paper-checkbox></th>
+             <th width="5%"></th>
              <th>ID</th>
              <th data-column-key="month" data-sort="month">Month</th>
              <th data-column-key="year" data-sort>Year</th>
@@ -321,7 +324,7 @@ export class DemoSimpleGridTable extends LitElement {
           </tbody>
           <tfoot>
            <tr>
-             <td colspan="6">
+             <td data-auto-colspan>
                <exmg-grid-pagination
                  page-index=${this.pageIndex}
                  page-size=${this.pageSize}

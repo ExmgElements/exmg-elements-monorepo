@@ -5,7 +5,7 @@ export class ExmgRowSortable {
 
   initFeature(): void {
     this.querySelectors.getTableBody()
-      .querySelectorAll<HTMLElement>('tr:not([data-initialized]) .row-drag-handler')
+      .querySelectorAll<HTMLElement>('tr:not([data-initialized]) .grid-row-drag-handler')
       .forEach((element: HTMLElement) => {
         this.registerMouseListenersHideDetailOnStartDragging(element);
       });
