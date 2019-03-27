@@ -2,6 +2,8 @@ import {LitElement, html, customElement, TemplateResult, property} from 'lit-ele
 import {repeat} from 'lit-html/directives/repeat';
 import '@material/mwc-button';
 import '@material/mwc-icon';
+import '@exmg/exmg-paper-combobox';
+import '@polymer/paper-item';
 import {style} from './exmg-grid-pagination-styles';
 
 @customElement('exmg-grid-pagination')
@@ -32,13 +34,19 @@ export class ExmgGridPagination extends LitElement {
 
   private renderPageSizeOptions() {
     return html`
-        <select @change="${this.handleOnPageSizeChanged}" id="pageSizeOptions">
-          ${repeat(
-            this.pageSizeOptions,
-            (it) => it,
-            it => html`<option ?selected="${it === this.pageSize}" value="${it}">${it}</option>`
-          )}
-        </select>
+      <exmg-paper-combobox
+        id="pageSizeOptions"
+        attr-for-selected="data-id"
+        selected="${this.pageSize}"
+        @exmg-combobox-select="${this.handleOnPageSizeChanged}"
+        style="display: inline-block;min-width: 0;"
+      >
+        ${repeat(
+          this.pageSizeOptions,
+          (item) => item,
+        item => html`<paper-item data-id="${item}">${item}</paper-item>`
+        )}
+      </exmg-paper-combobox>
     `;
   }
 
@@ -116,10 +124,9 @@ export class ExmgGridPagination extends LitElement {
     return false;
   }
 
-  private handleOnPageSizeChanged(e: Event) {
-    e.preventDefault();
-    const paths = e.composedPath();
-    const value = paths.length ? (<HTMLSelectElement>paths[0]).value : undefined;
+  private handleOnPageSizeChanged(e: CustomEvent) {
+    const {value} = e.detail;
+
     if (typeof value !== 'undefined') {
       this.pageSize = parseInt(value, 10);
       this.pageIndex = 0;

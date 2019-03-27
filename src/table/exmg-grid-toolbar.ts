@@ -2,6 +2,8 @@ import {customElement, html, LitElement, property} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 import '@material/mwc-button';
 import '@material/mwc-icon';
+import '@exmg/exmg-paper-combobox';
+import '@polymer/paper-item';
 import './exmg-grid-base-toolbar';
 
 import {
@@ -23,13 +25,6 @@ export class ExmgGridToolbar extends LitElement {
   @property({type: Object})
   filters: Filter[] = [];
 
-  private getValueFromEvent(e: Event): string|undefined {
-    e.preventDefault();
-    const paths = e.composedPath();
-
-    return paths.length ? (<HTMLSelectElement>paths[0]).value : undefined;
-  }
-
   private emitActionExecutedEvent(action: Action) {
     return () => {
       this.dispatchEvent(
@@ -48,14 +43,14 @@ export class ExmgGridToolbar extends LitElement {
   }
 
   private emitFilterChangedEvent(filter: Filter) {
-    return (event: Event) => {
+    return (event: CustomEvent) => {
       this.dispatchEvent(
         new CustomEvent(
           'exmg-grid-toolbar-filter-changed',
           {
             detail: {
               id: filter.id,
-              value: this.getValueFromEvent(event),
+              value: event.detail.value,
             },
             composed: true,
             bubbles: true,
@@ -106,14 +101,19 @@ export class ExmgGridToolbar extends LitElement {
 
   private renderSingleSelectFilter(filter: Filter<FilterSingleSelectConfig>) {
     return html`
-      <select name="${filter.id}" @change="${this.emitFilterChangedEvent(filter)}" class="filter">
+      <exmg-paper-combobox
+        class="filter"
+        attr-for-selected="data-id"
+        no-float-label
+        label="${filter.name}"
+        @exmg-combobox-select="${this.emitFilterChangedEvent(filter)}"
+      >
         ${repeat(
           filter.config.data,
-          (item) => {
-            return html`<option value="${item.id}">${filter.name}: ${item.title}</option>`;
-          }
+          (item: any) => item,
+      item => html`<paper-item data-id="${item.id}">${filter.name}: ${item.title}</paper-item>`
         )}
-      </select>
+      </exmg-paper-combobox>
     `;
   }
 

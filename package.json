@@ -23,10 +23,12 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@exmg/exmg-paper-combobox": "^4.4.0",
     "@exmg/exmg-sortable": "^4.0.3",
     "@material/mwc-button": "^0.4.0",
-    "@polymer/polymer": "^3.1.0",
-    "lit-element": "^2.0.1"
+    "@polymer/paper-item": "^3.0.1",
+    "@polymer/polymer": "^3.2.0",
+    "lit-element": "^2.1.0"
   },
   "devDependencies": {
     "@exmg/exmg-cli": "^1.0.0",
@@ -47,7 +49,7 @@
     "tslint": "^5.14.0",
     "tslint-config-exmg": "^1.0.2",
     "typedoc": "^0.14.2",
-    "typescript": "^3.3.3333",
+    "typescript": "^3.3.4000",
     "wct-mocha": "^1.0.0",
     "web-animations-js": "^2.3.1"
   },
