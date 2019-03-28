@@ -142,6 +142,17 @@ export class ExmgGridPagination extends LitElement {
 
   protected render(): TemplateResult | void {
     return html`
+      <style>
+        :host {
+          --paper-item-focused: {
+            background-color: var(--exmg-filter-background-color);
+          };
+          --paper-item-selected: {
+            background-color: var(--exmg-filter-background-color);
+          }
+          --paper-button-ink-color: var(--exmg-filter-background-color);
+        }
+      </style>
       <div class="wrapper">
         <div class="page-size">
             <div class="page-size-label">

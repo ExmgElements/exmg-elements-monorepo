@@ -1,0 +1,294 @@
+import {LitElement, property} from 'lit-element';
+import '@polymer/paper-checkbox';
+import '../src/table/exmg-grid.js';
+import '../src/table/exmg-grid-pagination';
+
+import '../src/table/exmg-grid-smart-toolbar';
+import {
+  ActionAmountSelectedItemsCondition,
+  ActionConditionType,
+  ActionWithCondition
+} from '../src/table/exmg-grid-smart-toolbar-types';
+import {Filter, FilterConfigType, FilterSingleSelectConfig} from '../src/table/exmg-grid-toolbar-types';
+import {EventDetailSelectedRowsChange, EventDetailSortChange} from '../src/table/exmg-grid';
+
+export type Income = {
+  id: number;
+  month: string;
+  amount: number;
+  year: number;
+};
+
+const generateRows = (length: number = 50, startId: number = 1): Income[] => {
+  const randomAmount = () => Number.parseFloat((Math.random() * 1000).toFixed(2));
+  const source: Income[] = [
+    {id: 1, month: 'January', amount: randomAmount(), year: 2000},
+    {id: 2, month: 'February', amount: randomAmount(), year: 2000},
+    {id: 3, month: 'March', amount: randomAmount(), year: 2000},
+  ];
+
+  const rows: Income[] = [];
+  let id: number = startId - 1;
+  while (rows.length < length) {
+    const items = source.map(it => {
+      id = id + 1;
+      return {...it, id, amount: randomAmount()};
+    });
+    rows.push(...items);
+  }
+
+  return rows.slice(0, length);
+};
+
+let allItems: Income[] = generateRows(1000);
+let filteredItems: Income[] = [...allItems];
+
+export const DEFAULT_SORT_COLUMN = 'amount';
+export const DEFAULT_SORT_DIRECTION = 'ASC';
+
+const getItemByPage = (pageIndex: number, pageSize: number): Income[] => {
+  const startIndex: number = pageIndex * pageSize;
+  const endIndex: number = Math.min(startIndex + pageSize, filteredItems.length);
+  return filteredItems.slice(startIndex, endIndex);
+};
+
+export abstract class ExmgBaseGridDemo extends LitElement {
+  @property({type: Object})
+  items: Income[];
+
+  @property({type: Number})
+  protected pageIndex: number = 0;
+
+  @property({type: Number})
+  protected pageSize: number = 10;
+
+  @property({type: Object})
+  protected hiddenColumns: Record<string, string> = {};
+
+  @property({type: Array})
+  protected selectedRows: HTMLTableRowElement[] = [];
+
+  @property({type: Object})
+  protected expandedRowIds: Record<string, boolean> = {};
+
+  @property({type: Object})
+  protected selectedRowIds: Record<string, boolean> = {};
+
+  constructor() {
+    super();
+    this.sortItems(DEFAULT_SORT_COLUMN, DEFAULT_SORT_DIRECTION);
+    this.items = getItemByPage(this.pageIndex, this.pageSize);
+  }
+
+  protected actions: ActionWithCondition<ActionAmountSelectedItemsCondition>[] = [
+    {
+      id: 'export',
+      text: '',
+      tooltip: 'Export',
+      icon: 'get_app',
+    },
+    {
+      id: 'merge',
+      text: '',
+      tooltip: 'Merge',
+      icon: 'merge_type',
+      condition: {
+        type: ActionConditionType.AmountOfSelectedItemsRange,
+        min: 2,
+      },
+    },
+    {
+      id: 'delete',
+      text: '',
+      tooltip: 'Delete',
+      icon: 'delete',
+      condition: {
+        type: ActionConditionType.AmountOfSelectedItemsRange,
+        min: 1,
+        max: 10,
+      },
+    },
+  ];
+
+  protected filters: Filter<FilterSingleSelectConfig>[] = [
+    {
+      id: 'month',
+      name: 'Month',
+      config: {
+        type: FilterConfigType.SingleSelect,
+        data: [
+          {
+            id: 'all',
+            title: 'All',
+          },
+          {
+            id: 'january',
+            title: 'January',
+          },
+          {
+            id: 'february',
+            title: 'February',
+          },
+          {
+            id: 'march',
+            title: 'March',
+          },
+        ],
+      },
+    },
+  ];
+
+  protected onActionExecuted(e: CustomEvent<{id: string}>) {
+    console.log('onActionExecuted', e.detail);
+    switch (e.detail.id) {
+      case 'delete': {
+        const rowIds = this.selectedRows.map(row => row.getAttribute('data-row-key'));
+        allItems = allItems.filter(({id}) => !rowIds.includes(id.toString()));
+        filteredItems = filteredItems.filter(({id}) => !rowIds.includes(id.toString()));
+        console.log(rowIds);
+        this.selectedRows = [];
+        this.items = getItemByPage(this.pageIndex, this.pageSize);
+        break;
+      }
+      case 'merge': {
+        const rowIds = this.selectedRows.map(row => row.getAttribute('data-row-key'));
+        const [idToReplace, ...idsToRemove] = rowIds;
+        const mergedRow = <Income>allItems
+          .filter(({id}) => rowIds.includes(id.toString()))
+          .reduce((acc: Income | void, item) => {
+            if (acc) {
+              return {...acc, amount: acc.amount + item.amount};
+            }
+
+            return {...item};
+          }, undefined)!;
+
+        allItems = allItems
+          .filter(({id}) => !idsToRemove.includes(id.toString()))
+          .map(it => {
+            if (it.id .toString() === idToReplace) {
+              return {...mergedRow};
+            }
+            return it;
+          });
+
+        filteredItems = filteredItems
+          .filter(({id}) => !idsToRemove.includes(id.toString()))
+          .map(it => {
+            if (it.id.toString() === idToReplace) {
+              return {...mergedRow};
+            }
+            return it;
+          });
+        this.items = getItemByPage(this.pageIndex, this.pageSize);
+        break;
+      }
+    }
+  }
+
+  protected onFilterChanged(e: CustomEvent<{id: string; value: string}>) {
+    console.log('onFilterChanged', e.detail);
+    const filterId = e.detail.value !== 'all' ? e.detail.id : null;
+    switch (filterId) {
+      case 'month':
+        filteredItems = allItems.filter(({month}) => month.toLowerCase() === e.detail.value);
+        break;
+      default:
+        filteredItems = [...allItems];
+    }
+    this.pageIndex = 0;
+    this.items = getItemByPage(this.pageIndex, this.pageSize);
+  }
+
+  protected toggleMonthColumn(event: Event) {
+    event.preventDefault();
+    const {month, ...rest} = this.hiddenColumns;
+    this.hiddenColumns = month ? {...rest} : {...rest, month: 'month'};
+  }
+
+  protected toggleYearColumn(event: Event) {
+    event.preventDefault();
+    const {year, ...rest} = this.hiddenColumns;
+    this.hiddenColumns = year ? {...rest} : {...rest, year: 'year'};
+  }
+
+  protected refreshTable() {
+    const copy = [...this.items];
+    this.items = [];
+    setTimeout(() => {
+      console.log('refreshing table');
+      this.items = copy;
+    });
+  }
+
+  private createRowIdToStateMap(state: boolean, start: number = 0, end: number = 3): Record<string, boolean> {
+    return this.items.slice(start, end).reduce((acc, it) => ({...acc, [it.id.toString()]: state}), {});
+  }
+
+  protected collapseRow(rowId: string) {
+    this.expandedRowIds = {[rowId]: false};
+  }
+
+  protected expandFirstRows() {
+    this.expandedRowIds = this.createRowIdToStateMap(true);
+  }
+
+  protected collapseFirstRows() {
+    this.expandedRowIds = this.createRowIdToStateMap(false);
+  }
+
+  protected selectFirstRows() {
+    this.selectedRowIds = this.createRowIdToStateMap(true);
+  }
+
+  protected unSelectFirstRows() {
+    this.selectedRowIds = this.createRowIdToStateMap(false);
+  }
+
+  protected updateItems(event: CustomEvent): void {
+    console.log('on update items', event);
+    this.items = [...event.detail.items];
+  }
+
+  protected onSelectedRowsChange(event: CustomEvent<EventDetailSelectedRowsChange>) {
+    console.log('rows selected', event);
+    this.selectedRows = event.detail.rows;
+  }
+
+  protected sortItems(column: string, sortDirection?: 'ASC' | 'DESC'): void {
+    if (!sortDirection) {
+      // reset - sort by ID
+      filteredItems.sort(({id: xId}, {id: yId}) => xId > yId ? 1 : xId < yId ? -1 : 0);
+    } else {
+      const comparisonValue = sortDirection === 'ASC' ? 1 : -1;
+      filteredItems.sort((x: Record<string, any>, y: Record<string, any>) => {
+        const xValue = x[column];
+        const yValue = y[column];
+        return xValue > yValue ? comparisonValue : xValue < yValue ? (comparisonValue * -1) : 0;
+      });
+    }
+  }
+
+  protected onSortChange(event: CustomEvent<EventDetailSortChange>): void {
+    console.log('onSortChange', event);
+    const {column, sortDirection} = event.detail;
+    this.sortItems(column, sortDirection);
+    this.pageIndex = 0;
+    this.items = getItemByPage(this.pageIndex, this.pageSize);
+  }
+
+  protected onPageChange(event: CustomEvent) {
+    this.pageIndex = event.detail.page;
+    this.items = getItemByPage(this.pageIndex, this.pageSize);
+  }
+
+  protected onPageSizeChange(event: CustomEvent) {
+    this.pageIndex = 0;
+    this.pageSize = event.detail.pageSize;
+    this.items = getItemByPage(this.pageIndex, this.pageSize);
+  }
+
+  protected getTotalCount(): number {
+    return filteredItems.length;
+  }
+}

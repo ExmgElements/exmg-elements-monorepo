@@ -119,6 +119,17 @@ export class ExmgGridToolbar extends LitElement {
 
   render() {
     return html`
+      <style>
+        :host {
+          --paper-item-focused: {
+            background-color: var(--exmg-filter-background-color);
+          };
+          --paper-item-selected: {
+            background-color: var(--exmg-filter-background-color);
+          }
+          --paper-button-ink-color: var(--exmg-filter-background-color);
+        }
+      </style>
       <exmg-grid-base-toolbar>
         <div slot="actions">
           ${this.renderActions()}

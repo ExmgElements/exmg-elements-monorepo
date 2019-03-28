@@ -48,6 +48,26 @@ export class ExmgRowSelectable {
     }
   }
 
+  syncSelectedItems() {
+    if (this.syncRowSelectionWithBodyCheckboxes()) {
+      this.fireSelectableRows();
+    }
+  }
+
+  private fireSelectableRows() {
+    console.log('dispatch exmg-grid-selected-rows-change', this.selectedRows);
+    this.dispatchEvent(new CustomEvent<EventDetailSelectedRowsChange>(
+      'exmg-grid-selected-rows-change',
+      {
+        bubbles: true,
+        composed: true,
+        detail: {
+          rows: [...this.selectedRows],
+        },
+      }
+    ));
+  }
+
   private updateBodyRowsListeners(bodyRows: NodeListOf<HTMLTableRowElement>): void {
     bodyRows.forEach((row => {
       row.setAttribute('data-is-selectable', '');
@@ -131,9 +151,13 @@ export class ExmgRowSelectable {
           }
         });
 
+      const prevSelectedRowsCount = this.selectedRows.length;
       this.selectedRows = Array.from(
         this.querySelectors.getTableBody().querySelectorAll(`tr[data-selected]`)
       );
+      if (prevSelectedRowsCount !== this.selectedRows.length) {
+        fireEvent = true;
+      }
 
       if (this.allCheckbox && !this.allCheckbox.checked) {
         if (this.selectedRows.length && this.selectedRows.length === this.querySelectors.getBodyRows().length) {
@@ -170,20 +194,6 @@ export class ExmgRowSelectable {
         uncheckCheckbox(checkbox);
       });
     }
-  }
-
-  private fireSelectableRows() {
-    console.log('dispatch exmg-grid-selected-rows-change', this.selectedRows);
-    this.dispatchEvent(new CustomEvent<EventDetailSelectedRowsChange>(
-      'exmg-grid-selected-rows-change',
-      {
-        bubbles: true,
-        composed: true,
-        detail: {
-          rows: [...this.selectedRows],
-        },
-      }
-    ));
   }
 
   private updateSelectAllCheckbox(): void {

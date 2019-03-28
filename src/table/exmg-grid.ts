@@ -73,12 +73,6 @@ export class ExmgGrid extends LitElement {
   defaultSortDirection?: SORT_DIRECTION;
 
   /**
-   * Feature that turn on selectable rows
-   */
-  @property({type: Boolean, reflect: true})
-  selectable: boolean = false;
-
-  /**
    * Feature that allow sort rows
    * If table table has turn on feature `selectable` then it takes precedence and `rowSelectable` will be ignored
    */
@@ -207,7 +201,7 @@ export class ExmgGrid extends LitElement {
         if (expendableToggle) {
           const isExpanded = expendableToggle.hasAttribute('data-is-expanded');
           if (isExpanded !== nextExpandedState) {
-            expendableToggle.click();
+            expendableToggle.dispatchEvent(new MouseEvent('click'));
           }
         }
       });
@@ -223,10 +217,16 @@ export class ExmgGrid extends LitElement {
         if (row) {
           const isSelected = row.hasAttribute('data-selected');
           if (isSelected !== nextSelectionState) {
-            row.click();
+            row.dispatchEvent(new MouseEvent('click'));
           }
         }
       });
+    }
+  }
+
+  private observeItems(changedProps: SmartPropertyValue): void {
+    if (changedProps.has('items') && this.rowSelectableFeature) {
+      this.rowSelectableFeature.syncSelectedItems();
     }
   }
 
@@ -290,6 +290,7 @@ export class ExmgGrid extends LitElement {
       this.updateColumnVisibility(changedProps.get('hiddenColumnNames') as Record<string, string>);
     }
 
+    this.observeItems(changedProps);
     this.observeExpandedRowIds(changedProps);
     this.observeSelectedRowIds(changedProps);
 
