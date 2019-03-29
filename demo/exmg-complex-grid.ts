@@ -1,12 +1,13 @@
 import {html, customElement, TemplateResult, css} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 import '@polymer/paper-checkbox';
+
 import '../src/table/exmg-grid.js';
 import '../src/table/exmg-grid-pagination';
 import {style as tableStyles} from '../src/table/exmg-grid-styles';
+import '../src/table/exmg-grid-smart-toolbar';
 
 import {createIcon} from './exmg-icons';
-import '../src/table/exmg-grid-smart-toolbar';
 import {DEFAULT_SORT_COLUMN, DEFAULT_SORT_DIRECTION, ExmgBaseGridDemo} from './exmg-base-grid-demo';
 
 @customElement('demo-complex-grid')

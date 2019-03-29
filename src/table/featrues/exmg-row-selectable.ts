@@ -1,5 +1,5 @@
-import {ExmgQuerySelectors} from '../exmg-query-selectors';
-import {EventDetailSelectedRowsChange} from '../exmg-grid';
+import {ExmgQuerySelectors} from '../utils/exmg-query-selectors';
+import {EventDetailSelectedRowsChange} from '../types/exmg-grid-types';
 
 const checkCheckbox = (checkboxElement: HTMLInputElement) => {
   checkboxElement.setAttribute('checked', 'checked');

@@ -1,5 +1,5 @@
-import {ExmgQuerySelectors} from '../exmg-query-selectors';
-import {EventDetailSortChange, SORT_DIRECTION} from '../exmg-grid';
+import {ExmgQuerySelectors} from '../utils/exmg-query-selectors';
+import {EventDetailSortChange, SORT_DIRECTION} from '../types/exmg-grid-types';
 
 export class ExmgColumnSortable {
   constructor(

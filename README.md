@@ -3,6 +3,49 @@
 
 ## Features
 
+### Column sortable
+
+* You should add attribute `sortable` attribute on `exmg-grid`
+
+* You have also defined columns and on `th` element you should add `data-sort` attribute with unique name of column.
+You can also omit name in `data-sort` attribute but then you should setup `data-column-key`
+bot configuration are fine
+```html
+<th data-column-key="month" data-sort>Month</th>
+<th data-column-key="year" data-sort="year-column">Year</th>
+```
+
+* To handle sort changing you should add listener `@exmg-grid-sort-change` on `exmg-grid`. You will receive `CustomEvent<EventDetailSortChange>`
+```typescript
+export type EventDetailSortChange = {
+  column: string;
+  sortDirection?: 'ASC' | 'DESC';
+};
+```
+
+* To setup default sorting you should setup attributes `default-sort-column` and `default-sort-direction` on `exmg-grid`
+
+Example:
+___
+
+```html
+      <exmg-grid
+        default-sort-column="year-column"
+        default-sort-direction="DESC"
+        ?sortable="${true}"
+        @exmg-grid-sort-change="${this.onSortChange}"
+      >
+        <table>
+          <thead>
+           <tr class="grid-columns">
+             <th data-column-key="month" data-sort>Month</th>
+             <th data-column-key="year" data-sort="year-column">Year</th>
+           </tr>
+          </thead>
+        </table>
+      </exmg-grid>
+```
+
 ### Expandable rows
 
 * You should pass attribute `expandable-toggle-selector` to `<exmg-grid />`

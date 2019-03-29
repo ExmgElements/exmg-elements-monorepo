@@ -3,26 +3,16 @@ import {cache} from 'lit-html/directives/cache';
 import '@exmg/exmg-sortable';
 import {style as exmgGridTableStyles} from './exmg-grid-styles';
 import {ExmgRowSelectable} from './featrues/exmg-row-selectable';
-import {ExmgQuerySelectors} from './exmg-query-selectors';
+import {ExmgQuerySelectors} from './utils/exmg-query-selectors';
 import {ExmgRowExpandable} from './featrues/exmg-row-expandable';
 import {ExmgColumnSortable} from './featrues/exmg-column-sortable';
 import {ExmgRowSortable} from './featrues/exmg-row-sortable';
+import {SORT_DIRECTION} from './types/exmg-grid-types';
 
 type GenericPropertyValues<T, V = unknown> = Map<T, V>;
 type Props = Exclude<keyof ExmgGrid, number | Symbol>;
 
 type SmartPropertyValue = GenericPropertyValues<Props>;
-
-export type SORT_DIRECTION = 'ASC' | 'DESC';
-
-export type EventDetailSortChange = {
-  column: string;
-  sortDirection?: SORT_DIRECTION;
-};
-
-export type EventDetailSelectedRowsChange = {
-  rows: HTMLTableRowElement[];
-};
 
 /**
  * @exmg-grid-sort-change

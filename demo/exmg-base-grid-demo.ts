@@ -10,7 +10,7 @@ import {
   ActionWithCondition
 } from '../src/table/exmg-grid-smart-toolbar-types';
 import {Filter, FilterConfigType, FilterSingleSelectConfig} from '../src/table/exmg-grid-toolbar-types';
-import {EventDetailSelectedRowsChange, EventDetailSortChange} from '../src/table/exmg-grid';
+import {EventDetailSelectedRowsChange, EventDetailSortChange} from '../src/table/types/exmg-grid-types';
 
 export type Income = {
   id: number;
@@ -40,7 +40,7 @@ const generateRows = (length: number = 50, startId: number = 1): Income[] => {
   return rows.slice(0, length);
 };
 
-let allItems: Income[] = generateRows(1000);
+let allItems: Income[] = generateRows(10000);
 let filteredItems: Income[] = [...allItems];
 
 export const DEFAULT_SORT_COLUMN = 'amount';
