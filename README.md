@@ -1,5 +1,59 @@
 # \<exmg-grid\>
 
+## Requirements
+
+* Columns has be added to `table > thead > tr.grid.columns`
+
+* Body has to be added to `table > tbody.grid-data`
+
+* You should use `import {repeat} from 'lit-html/directives/repeat';` function to map you items to rows.
+
+* Each row inside `tbody.grid-data` should have attribute `data-row-key` with unique value
+
+* If table is expandable then for each row you have to add related row `table > tbody.grid-data tr.grid-row-detail`
+This row must have attribute `data-row-detail-key` with same value as its relative row
+
+* Element `exmg-grid` require property `.itesm` - needed to detect any changes
+ 
+ ## Optional
+ 
+ * toolbar should be placed in `table > thead > tr.grid-toolbar`
+ 
+ * when amount of columns may change you cans use attribute `data-auto-colspan` on both `th and td` elements 
+ 
+ * if cell should be visible only on hover then you can use class `grid-cell-visible-on-hover`
+ 
+ * if icon which trigger expanding / collapsing row-detail has to rotate then add class `grid-icon-rotate` 
+ 
+Example hwo should looks most minimal markup to meet with requirements:
+ 
+ ```html
+<exmg-grid .itmes="${items}">
+  <table>
+    <thead>
+     <tr class="grid-columns">
+       <th>Col1</th>
+       <th>Col2</th>
+     </tr>
+    </thead>
+    <tbody class="grid-data">
+      ${repeat(
+            this.items,
+            ({id}) => id,
+            (i) => {
+              return html`
+                <tr data-row-key="${i.id}">
+                  <td>#${i.id}</td>
+                  <td>${i.value}</td>
+                </tr>
+              `;
+            }
+          );
+          }
+    </tbody>
+  </table>
+</exmg-grid>
+```
 
 ## Features
 
@@ -57,15 +111,15 @@ ___
         items,
         item => items.id,
         item => html`
-          <tr>
+          <tr data-row-key="${i.id}">
             <td>First</td>
             <td>Second</td>
-            <td>
-              <span class="expandable-trigger">${}</span>
+            <td class="grid-cell-visible-on-hover">
+              <span class="expandable-trigger grid-icon-rotate">${arrowIcon}</span>
             </td>
           </tr>
-          <tr class="grid-row-detail">
-            <td colspan="2">Here goes row detail...</td>
+          <tr class="grid-row-detail" data-row-detail-key="${i.id}">
+            <td data-auto-colspan>Here goes row detail...</td>
           </tr>
         `
       )
@@ -73,6 +127,19 @@ ___
   </tbody>
 </exmg-grid>
 ```
+
+* If you want to programmatically expand / collapse row with detail you can pass property `.expandedRowIds` to `exmg-grid` element
+WHere type of `expandedRowIds` looks
+```typescript
+const expandedRowIds: Record<string, boolean> = {
+  '1': true,
+  '2': false,
+};
+```
+Key i just id which you pass by attributes `data-row-key` and `data-row-detail-key` and value is just flag what will expand when true otherwise collapse
+
+* When row detail is being expanded then to element which trigger action will be added attribute `data-is-expanded`
+To row detail is added attribute `data-is-row-expanded`. When collapsed both attributes are removed. 
 
 ### Selectable rows
 
