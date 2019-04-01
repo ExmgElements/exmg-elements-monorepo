@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>exmg-form-drawer demo</title>
+
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/@webcomponents/shadycss/apply-shim.min.js"></script>
+
+    <!-- Ensure Web Animations polyfill is loaded -->
+    <script src="../node_modules/web-animations-js/web-animations-next-lite.min.js"></script>
+  </head>
+  <body style="margin: 0">
+    <div class="vertical-section-container centered">
+      <script type="module">
+
+        window.customElements.define('exmg-form-drawer-demo', ExmgFormDrawerDemo);
+      </script>
+      <exmg-form-drawer-demo></exmg-form-drawer-demo>
+    </div>
+  </body>
+</html>
