@@ -8,3 +8,7 @@ export type EventDetailSortChange = {
 export type EventDetailSelectedRowsChange = {
   rows: HTMLTableRowElement[];
 };
+
+export type EventDetailRowsOrderChanged<T extends object = any> = {
+  items: T[];
+};

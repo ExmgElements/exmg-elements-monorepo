@@ -10,7 +10,11 @@ import {
   ActionWithCondition
 } from '../src/table/exmg-grid-smart-toolbar-types';
 import {Filter, FilterConfigType, FilterSingleSelectConfig} from '../src/table/exmg-grid-toolbar-types';
-import {EventDetailSelectedRowsChange, EventDetailSortChange} from '../src/table/types/exmg-grid-types';
+import {
+  EventDetailRowsOrderChanged,
+  EventDetailSelectedRowsChange,
+  EventDetailSortChange
+} from '../src/table/types/exmg-grid-types';
 
 export type Income = {
   id: number;
@@ -245,7 +249,7 @@ export abstract class ExmgBaseGridDemo extends LitElement {
     this.selectedRowIds = this.createRowIdToStateMap(false);
   }
 
-  protected updateItems(event: CustomEvent): void {
+  protected onRowsOrderChanged(event: CustomEvent<EventDetailRowsOrderChanged>): void {
     console.log('on update items', event);
     this.items = [...event.detail.items];
   }

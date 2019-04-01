@@ -13,19 +13,19 @@
 * If table is expandable then for each row you have to add related row `table > tbody.grid-data tr.grid-row-detail`
 This row must have attribute `data-row-detail-key` with same value as its relative row
 
-* Element `exmg-grid` require property `.itesm` - needed to detect any changes
+* Element `exmg-grid` require property `.items` - needed to detect any changes on data
  
  ## Optional
  
  * toolbar should be placed in `table > thead > tr.grid-toolbar`
  
- * when amount of columns may change you cans use attribute `data-auto-colspan` on both `th and td` elements 
+ * when amount of columns may change you may use attribute `data-auto-colspan` on both `th and td` elements 
  
  * if cell should be visible only on hover then you can use class `grid-cell-visible-on-hover`
  
  * if icon which trigger expanding / collapsing row-detail has to rotate then add class `grid-icon-rotate` 
  
-Example hwo should looks most minimal markup to meet with requirements:
+Example how should looks most minimal markup to meet with requirements:
  
  ```html
 <exmg-grid .itmes="${items}">
@@ -61,9 +61,9 @@ Example hwo should looks most minimal markup to meet with requirements:
 
 * You should add attribute `sortable` attribute on `exmg-grid`
 
-* You have also defined columns and on `th` element you should add `data-sort` attribute with unique name of column.
+* You must have defined columns and on `th` element you should add `data-sort` attribute with unique name of column.
 You can also omit name in `data-sort` attribute but then you should setup `data-column-key`
-bot configuration are fine
+both configuration are fine
 ```html
 <th data-column-key="month" data-sort>Month</th>
 <th data-column-key="year" data-sort="year-column">Year</th>
@@ -84,6 +84,7 @@ ___
 
 ```html
       <exmg-grid
+        .items=${this.items}
         default-sort-column="year-column"
         default-sort-direction="DESC"
         ?sortable="${true}"
@@ -102,9 +103,9 @@ ___
 
 ### Expandable rows
 
-* You should pass attribute `expandable-toggle-selector` to `<exmg-grid />`
+* You should pass attribute `expandable-toggle-selector` to `exmg-grid`
 ```html
-<exmg-grid expandable-toggle-selector="expandable-trigger">
+<exmg-grid .items=${this.items} expandable-toggle-selector=".expandable-trigger">
   <tbody class="grid-data">
     ${
       repeat(
@@ -129,14 +130,14 @@ ___
 ```
 
 * If you want to programmatically expand / collapse row with detail you can pass property `.expandedRowIds` to `exmg-grid` element
-WHere type of `expandedRowIds` looks
+Where type of `expandedRowIds` looks
 ```typescript
 const expandedRowIds: Record<string, boolean> = {
   '1': true,
   '2': false,
 };
 ```
-Key i just id which you pass by attributes `data-row-key` and `data-row-detail-key` and value is just flag what will expand when true otherwise collapse
+Key is just id which you pass by attributes `data-row-key` and `data-row-detail-key` and value is just flag what will expand when true otherwise collapse
 
 * When row detail is being expanded then to element which trigger action will be added attribute `data-is-expanded`
 To row detail is added attribute `data-is-row-expanded`. When collapsed both attributes are removed. 
@@ -144,6 +145,19 @@ To row detail is added attribute `data-is-row-expanded`. When collapsed both att
 ### Selectable rows
 
 To turn on this feature attribute `rows-selectable` has to be set on `exmg-grid` element
+
+* If you want to programmatically select / unselect row you may pass property `.selectedRowIds` to `exmg-grid` element
+Where type of `selectedRowIds` looks
+
+```typescript
+const selectedRowIds: Record<string, boolean> = {
+  '1': true,
+  '2': false,
+};
+```
+
+Key is just id which you pass by attributes `data-row-key` and `data-row-detail-key` and value is just flag perhaps makr row as selected when true otherwise unselect
+
 
 #### Checkboxes
 
@@ -156,7 +170,7 @@ row selection:
 `v0.4.0` doesnt support `change` event and can't be used with gird
 
 ```html
-<exmg-grid selectable-checkbox-selector=".selectable-checkbox" ?rows-selectable="${true}">
+<exmg-grid .items=${this.items} selectable-checkbox-selector=".selectable-checkbox" ?rows-selectable="${true}">
   <table>
     <thead>
      <tr class="grid-columns">
@@ -171,3 +185,50 @@ row selection:
   </table>
 </exmg-grid>
 ```
+
+### Rows sortable
+
+To turn on this feature attribute `rows-sortable` has to be set on `exmg-grid`. Element `tr` or any descend `tr` element
+must have class `grid-row-drag-handler`. 
+
+Each time order will be changed event `exmg-grid-rows-order-changed` is triggered and has o be handled.
+Handling this event `must to trigger` update property `items` otherwise it won't take effect.
+ 
+Event details of `CustomEvent<EventDetailRowsOrderChanged>` has such structure: 
+
+````typescript
+export type EventDetailRowsOrderChanged<T extends object = any> = {
+  items: T[];
+};
+````
+
+`Items are sorted as it is done in UI.`
+
+```
+  onRowsOrderChanged(event: CustomEvent<EventDetailRowsOrderChanged>): void {
+    // store current order and update items
+    this.items = [...event.detail.items];
+  }
+```
+
+
+```html
+<exmg-grid .items=${this.items} ?rows-sortable="${true}" @@exmg-grid-rows-order-changed="${this.onRowsOrderChanged}">
+  <table>
+    <thead>
+     <tr class="grid-columns">
+       <th></th>
+       <th>ID</th>
+     </tr>
+    </thead>
+    <tbody class="grid-data">
+      <tr>
+        <td><span class="grid-row-drag-handler">${dragIcon}</span></td>
+        <td>1</td>
+      </tr>
+    </tbody>
+  </table>
+</exmg-grid>
+```
+
+

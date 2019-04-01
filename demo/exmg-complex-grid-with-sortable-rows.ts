@@ -36,7 +36,7 @@ export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
         return html`
           <tr data-row-key="${i.id}">
             <td><paper-checkbox class="selectable-checkbox"></paper-checkbox></td>
-            <td class="handle"><span class="grid-row-drag-handler">${dragIcon}</span></td>
+            <td><span class="grid-row-drag-handler">${dragIcon}</span></td>
             <td>#${i.id}</td>
             <td>${i.month}</td>
             <td>${i.year}</td>
@@ -75,7 +75,7 @@ export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
         selectable-checkbox-selector=".selectable-checkbox"
         ?rows-selectable="${true}"
         expandable-toggle-selector=".expandable-toggle"
-        @exmg-grid-update-items="${this.updateItems}"
+        @exmg-grid-rows-order-changed="${this.onRowsOrderChanged}"
         @exmg-grid-selected-rows-change="${this.onSelectedRowsChange}"
       >
         <table>

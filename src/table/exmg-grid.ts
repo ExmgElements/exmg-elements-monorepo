@@ -7,46 +7,23 @@ import {ExmgQuerySelectors} from './utils/exmg-query-selectors';
 import {ExmgRowExpandable} from './featrues/exmg-row-expandable';
 import {ExmgColumnSortable} from './featrues/exmg-column-sortable';
 import {ExmgRowSortable} from './featrues/exmg-row-sortable';
-import {SORT_DIRECTION} from './types/exmg-grid-types';
+import {EventDetailRowsOrderChanged, SORT_DIRECTION} from './types/exmg-grid-types';
 
 type GenericPropertyValues<T, V = unknown> = Map<T, V>;
 type Props = Exclude<keyof ExmgGrid, number | Symbol>;
 
 type SmartPropertyValue = GenericPropertyValues<Props>;
 
-/**
- * @exmg-grid-sort-change
- * @exmg-grid-selected-rows-change
- * Questions:
- * - shall we keep selected items on page changed ?
- * - shall we keep selected items on filter changed ? probably not
- * Required
- * <table>
- *     <thead>
- *         <tr class="grid-columns"><th /><tr/>
- *     </thead>
- *     <tbody class="grid-data"><tbody>
- * </table>
 
- * TR -> TH - must have class ".grid-columns"
- * TH:
- * [F] column manager
- * - data-column-key
- * [F]sortable:
- *  - data-sort
- *  - data-sort-direction?
- *  [F] ExpandedRow: Must have class ".grid-row-detail"
- *  [F] Row sortable
- *  - hast to handle event @exmg-grid-update-items - event return updated order of items - consumer needs to reiterate tbody
- *  - handler element should has class `grid-row-drag-handler`
- *  - element should use repeat function - it matter in terms of performance and will persist node's state properly like selected row
- */
 @customElement('exmg-grid')
 export class ExmgGrid extends LitElement {
   static styles = [
     exmgGridTableStyles,
   ];
 
+  /**
+   * Array of data which mapped to rows
+   */
   @property({type: Object})
   items: object[] = [];
 
@@ -56,9 +33,15 @@ export class ExmgGrid extends LitElement {
   @property({type: Boolean, reflect: true})
   sortable: boolean = false;
 
+  /**
+   * Name of sort column which should be sorted by default
+   */
   @property({type: String, attribute: 'default-sort-column'})
   defaultSortColumn?: string;
 
+  /**
+   * Default sort direction
+   */
   @property({type: String, attribute: 'default-sort-direction'})
   defaultSortDirection?: SORT_DIRECTION;
 
@@ -88,9 +71,17 @@ export class ExmgGrid extends LitElement {
   @property({type: Object})
   hiddenColumnNames: Record<string, string> = {};
 
+  /**
+   * Map of row id and selection state
+   * Useful for default setup default selection or manipulating programmatically
+   */
   @property({type: Object})
   selectedRowIds: Record<string, boolean> = {};
 
+  /**
+   * Map of row id and expandable row state
+   * Useful for default setup default selection or manipulating programmatically
+   */
   @property({type: Object})
   expandedRowIds: Record<string, boolean> = {};
 
@@ -143,7 +134,7 @@ export class ExmgGrid extends LitElement {
     return !this.sortable && this.rowsSortable;
   }
 
-  private orderChange(e: CustomEvent): void {
+  private rowsOrderChange(e: CustomEvent): void {
     console.log('order change', e.detail);
     setTimeout(() => {
       console.log('order change', e.detail);
@@ -154,7 +145,12 @@ export class ExmgGrid extends LitElement {
       items.splice(sourceIndex, 1);
       items.splice(targetIndex, 0, movedElement);
 
-      this.dispatchEvent(new CustomEvent('exmg-grid-update-items', {composed: true, bubbles: true, detail: {items}}));
+      this.dispatchEvent(
+        new CustomEvent<EventDetailRowsOrderChanged<object>>(
+          'exmg-grid-rows-order-changed',
+          {composed: true, bubbles: true, detail: {items}}
+          )
+      );
     }, 0);
   }
 
@@ -316,7 +312,7 @@ export class ExmgGrid extends LitElement {
           item-selector="tbody.grid-data tr:not(.grid-row-detail)"
           handle-selector=".grid-row-drag-handler"
           .sortableHostNode="${this.findTableBody()}"
-          @dom-order-change="${this.orderChange}"
+          @dom-order-change="${this.rowsOrderChange}"
         >
           <slot></slot>
         </exmg-sortable>
