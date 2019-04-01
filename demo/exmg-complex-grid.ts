@@ -6,6 +6,7 @@ import '../src/table/exmg-grid.js';
 import '../src/table/exmg-grid-pagination';
 import {style as tableStyles} from '../src/table/exmg-grid-styles';
 import '../src/table/exmg-grid-smart-toolbar';
+import {demoStyles} from './demo-styles';
 
 import {createIcon} from './exmg-icons';
 import {DEFAULT_SORT_COLUMN, DEFAULT_SORT_DIRECTION, ExmgBaseGridDemo} from './exmg-base-grid-demo';
@@ -14,6 +15,7 @@ import {DEFAULT_SORT_COLUMN, DEFAULT_SORT_DIRECTION, ExmgBaseGridDemo} from './e
 export class ExmgComplexGrid extends ExmgBaseGridDemo {
   static styles = [
     tableStyles,
+    demoStyles,
     // language=CSS
     css`
       :host {
@@ -52,7 +54,7 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
           <tr class="grid-row-detail" data-row-detail-key="${i.id}">
             <td data-auto-colspan>
               <p>Here is expanded content for row id <b>${i.id}</b></p>
-              <button @click="${() => this.collapseRow(i.id.toString())}">Done</button>
+              <button class="demo-button" @click="${() => this.collapseRow(i.id.toString())}">Done</button>
             </td>
           </tr>
         `;
@@ -63,13 +65,13 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
   protected render(): TemplateResult | void {
     return html`
       <div>
-        <button @click="${this.toggleMonthColumn}">Hide Month</button>
-        <button @click="${this.toggleYearColumn}">Hide Year</button>
-        <button @click="${this.refreshTable}">Refresh Table</button>
-        <button @click="${this.expandFirstRows}">Expand first Rows</button>
-        <button @click="${this.collapseFirstRows}">Collapse first Rows</button>
-        <button @click="${this.selectFirstRows}">Select first rows</button>
-        <button @click="${this.unSelectFirstRows}">Unselect first rows</button>
+        <button class="demo-button" @click="${this.toggleMonthColumn}">Toggle Month</button>
+        <button class="demo-button" @click="${this.toggleYearColumn}">Toggle Year</button>
+        <button class="demo-button" @click="${this.refreshTable}">Refresh Table</button>
+        <button class="demo-button" @click="${this.expandFirstRows}">Expand first Rows</button>
+        <button class="demo-button" @click="${this.collapseFirstRows}">Collapse first Rows</button>
+        <button class="demo-button" @click="${this.selectFirstRows}">Select first rows</button>
+        <button class="demo-button" @click="${this.unSelectFirstRows}">Unselect first rows</button>
       </div>
       <h1>Complex table with sortable columns</h1>
       <ul>
@@ -78,7 +80,7 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
         <li>expanded rows</li>
       </ul>
       <exmg-grid
-        .items=${this.items}
+        .items="${this.items}"
         .hiddenColumnNames="${this.hiddenColumns}"
         .expandedRowIds="${this.expandedRowIds}"
         .selectedRowIds="${this.selectedRowIds}"

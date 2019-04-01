@@ -84,7 +84,7 @@ ___
 
 ```html
       <exmg-grid
-        .items=${this.items}
+        .items="${this.items}"
         default-sort-column="year-column"
         default-sort-direction="DESC"
         ?sortable="${true}"
@@ -105,7 +105,7 @@ ___
 
 * You should pass attribute `expandable-toggle-selector` to `exmg-grid`
 ```html
-<exmg-grid .items=${this.items} expandable-toggle-selector=".expandable-trigger">
+<exmg-grid .items="${this.items}" expandable-toggle-selector=".expandable-trigger">
   <tbody class="grid-data">
     ${
       repeat(
@@ -170,7 +170,7 @@ row selection:
 `v0.4.0` doesnt support `change` event and can't be used with gird
 
 ```html
-<exmg-grid .items=${this.items} selectable-checkbox-selector=".selectable-checkbox" ?rows-selectable="${true}">
+<exmg-grid .items="${this.items}" selectable-checkbox-selector=".selectable-checkbox" ?rows-selectable="${true}">
   <table>
     <thead>
      <tr class="grid-columns">
@@ -213,7 +213,7 @@ export type EventDetailRowsOrderChanged<T extends object = any> = {
 
 
 ```html
-<exmg-grid .items=${this.items} ?rows-sortable="${true}" @@exmg-grid-rows-order-changed="${this.onRowsOrderChanged}">
+<exmg-grid .items="${this.items}" ?rows-sortable="${true}" @exmg-grid-rows-order-changed="${this.onRowsOrderChanged}">
   <table>
     <thead>
      <tr class="grid-columns">
@@ -231,4 +231,15 @@ export type EventDetailRowsOrderChanged<T extends object = any> = {
 </exmg-grid>
 ```
 
+### Columns visibility management
 
+To hide / show columns you can use property `hiddenColumnNames` of `exmg-grid`
+
+```typescript
+const hiddenColumnNames: Record<string, string> = {};
+```
+whenever you want to change column visibility update property `hiddenColumnNames`
+
+```html
+<exmg-grid .items="${this.items}" .hiddenColumnNames="${{col1: 'col1', col2: 'col2'}}"></exmg-grid>
+```

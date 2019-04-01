@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>Unit tests of exmg-grid</title>
+    <title>Tests of exmg-grid features</title>
 
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
     <script src="../node_modules/@polymer/test-fixture/test-fixture.js"></script>
@@ -13,12 +13,6 @@
     <script src="../node_modules/wct-mocha/wct-mocha.js"></script>
   </head>
   <body>
-    <test-fixture id="ConnectedElementFixture">
-      <template>
-        <connected-element></connected-element>
-      </template>
-    </test-fixture>
-
     <test-fixture id="TableFixture">
       <template>
         <table>
@@ -60,8 +54,8 @@
       </template>
     </test-fixture>
 
-    <!--<script type="module" src="./unit/features/exmg-column-sortable.spec.js"></script>-->
-    <!--<script type="module" src="unit/features/exmg-row-expandable.spec.js"></script>-->
-    <script type="module" src="unit/features/exmg-row-selectable.spec.js"></script>
+    <script type="module" src="table/features/exmg-column-sortable.spec.js"></script>
+    <script type="module" src="table/features/exmg-row-expandable.spec.js"></script>
+    <script type="module" src="table/features/exmg-row-selectable.spec.js"></script>
   </body>
 </html>

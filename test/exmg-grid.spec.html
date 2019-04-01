@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>Exmg-grid tests</title>
+
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/@polymer/test-fixture/test-fixture.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script src="../node_modules/wct-mocha/wct-mocha.js"></script>
+  </head>
+  <body>
+    <test-fixture id="SimpleGridFixture">
+      <template>
+        <exmg-grid>
+          <table>
+            <thead>
+              <tr class="grid-columns">
+                <th width="5%"><input type="checkbox" class="checkbox-class"/></th>
+                <th>ID</th>
+                <th data-column-key="month" data-sort>Month</th>
+                <th data-column-key="year" data-sort>Year</th>
+                <th data-column-key="amount" data-sort="">Income</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody class="grid-data">
+              <tr data-row-key="1">
+                <td><input type="checkbox" class="checkbox-class"/></td>
+                <td>1</td>
+                <td>January</td>
+                <td>2000</td>
+                <td>1</td>
+                <td><span class="expand-trigger">Expand / collapse</span></td>
+              </tr>
+              <tr class="grid-row-detail" data-row-detail-key="1">
+                <td colspan="6">Content 1</td>
+              </tr>
+              <tr data-row-key="2">
+                <td><input type="checkbox" class="checkbox-class"/></td>
+                <td>2</td>
+                <td>January</td>
+                <td>2000</td>
+                <td>2</td>
+                <td><span class="expand-trigger">Expand / collapse</span></td>
+              </tr>
+              <tr class="grid-row-detail" data-row-detail-key="2">
+                <td colspan="6">Content 2</td>
+              </tr>
+            </tbody>
+          </table>
+        </exmg-grid>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="ComplexGridFixture">
+      <template>
+        <exmg-grid
+          sortable
+          default-sort-column="month"
+          default-sort-direction="ASC"
+          rows-selectable
+          selectable-checkbox-selector=".selectable-checkbox"
+          expandable-toggle-selector=".expandable-toggle"
+        >
+          <table>
+            <thead>
+            <tr class="grid-columns">
+              <th width="5%"><input type="checkbox" class="checkbox-class"/></th>
+              <th>ID</th>
+              <th data-column-key="month" data-sort>Month</th>
+              <th data-column-key="year" data-sort>Year</th>
+              <th data-column-key="amount" data-sort="">Income</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody class="grid-data">
+            <tr data-row-key="1">
+              <td><input type="checkbox" class="checkbox-class"/></td>
+              <td>1</td>
+              <td>January</td>
+              <td>2000</td>
+              <td>1</td>
+              <td><span class="expand-trigger">Expand / collapse</span></td>
+            </tr>
+            <tr class="grid-row-detail" data-row-detail-key="1">
+              <td colspan="6">Content 1</td>
+            </tr>
+            <tr data-row-key="2">
+              <td><input type="checkbox" class="checkbox-class"/></td>
+              <td>2</td>
+              <td>January</td>
+              <td>2000</td>
+              <td>2</td>
+              <td><span class="expand-trigger">Expand / collapse</span></td>
+            </tr>
+            <tr class="grid-row-detail" data-row-detail-key="2">
+              <td colspan="6">Content 2</td>
+            </tr>
+            </tbody>
+          </table>
+        </exmg-grid>
+      </template>
+    </test-fixture>
+
+    <script type="module" src="table/exmg-grid.spec.js"></script>
+  </body>
+</html>

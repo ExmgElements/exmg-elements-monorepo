@@ -42,7 +42,7 @@ export class DemoSimpleGridTable extends ExmgBaseGridDemo {
     return html`
       <h1>Sortable rows table</h1>
       <exmg-grid
-        .items=${this.items}
+        .items="${this.items}"
       >
         <table>
           <thead>
