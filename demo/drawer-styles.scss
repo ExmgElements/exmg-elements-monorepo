@@ -1,0 +1,11 @@
+$mdc-list-divider-color-on-light-bg: rgba(255, 255, 255, 0.12) !default;
+
+@import "@material/list/mdc-list";
+
+.mdc-list {
+  font-family: 'Roboto', 'Noto', sans-serif;
+}
+
+.mdc-list-item__text {
+  color: rgba(255, 255, 255, 0.6);
+}

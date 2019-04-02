@@ -5,13 +5,21 @@ import '../exmg-form-drawer';
 import {MDCList} from '@material/list';
 import {style} from './drawer-styles';
 
-@customElement('exmg-form-drawer-demo-always-open')
-export class DrawerAlwaysOpen extends LitElement {
-  @property({type: Boolean}) open: boolean = true;
+@customElement('exmg-form-drawer-demo-modal')
+export class DrawerModal extends LitElement {
+  @property({type: Boolean}) open: boolean = false;
 
   firstUpdated(_changedProperties: any) {
     super.firstUpdated(_changedProperties);
     new MDCList(this.shadowRoot!.querySelector('.mdc-list')!);
+  }
+
+  onDrawerClosed() {
+    this.open = false;
+  }
+
+  openDrawer() {
+    this.open = true;
   }
 
   static styles = style;
@@ -19,7 +27,7 @@ export class DrawerAlwaysOpen extends LitElement {
   render () {
     //language=html
     return html`
-      <exmg-form-drawer hasheader="" ?open="${this.open}">
+      <exmg-form-drawer hasheader="" type="modal" ?open="${this.open}" @MDCDrawer:closed="${this.onDrawerClosed}">
         <span slot="title">Drawer Title</span>
         <span slot="subtitle">subtitle</span>
         <div class="drawer-content">
@@ -69,6 +77,7 @@ export class DrawerAlwaysOpen extends LitElement {
           </div>
         </div>
         <div slot="appContent">
+          <input type="button" @click="${this.openDrawer}" value="Open drawer">
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>

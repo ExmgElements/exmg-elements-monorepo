@@ -42,6 +42,15 @@ gulp.task('watch-styles', () => {
       });
 });
 
+gulp.task('watch-styles-demo', () => {
+  return watch(
+      'demo/*.{scss,css}',
+      {read: false, events: ['add', 'change'], ignoreInitial: false},
+      (vinyl) => {
+        renderSass(vinyl.path, false);
+      });
+});
+
 /**
  * Gulp task to run `tsc --watch` and `polymer serve` in parallel.
  */
@@ -52,7 +61,7 @@ gulp.task('serve', () => {
     shell: true,
     stdio: 'inherit'
   };
-  spawn('gulp', ['watch-styles'], spawnOptions);
+  spawn('gulp', ['watch-styles', 'watch-styles-demo'], spawnOptions);
   spawn('tsc', ['--watch'], spawnOptions);
   spawn('polymer', ['serve'], spawnOptions);
 });
