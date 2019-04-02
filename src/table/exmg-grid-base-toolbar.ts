@@ -1,6 +1,4 @@
 import {customElement, html, LitElement, property} from 'lit-element';
-import '@material/mwc-button';
-import '@material/mwc-icon';
 import {style} from './exmg-grid-base-toolbar-styles';
 
 @customElement('exmg-grid-base-toolbar')

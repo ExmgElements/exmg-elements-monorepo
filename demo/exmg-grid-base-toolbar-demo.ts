@@ -2,6 +2,8 @@ import {customElement, html, LitElement, property} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 import '@exmg/exmg-paper-combobox';
 import '@polymer/paper-item';
+import '@material/mwc-button';
+import '@material/mwc-icon';
 
 @customElement('exmg-grid-base-toolbar-demo')
 export class ExmgGridBaseToolbarDemo extends LitElement {
@@ -53,10 +55,6 @@ export class ExmgGridBaseToolbarDemo extends LitElement {
     },
   ];
 
-  private onToolbarActionExecuted(e: CustomEvent) {
-    console.log('onToolbarActionExecuted', e.detail);
-  }
-
   private onActionExecuted(action: any) {
     return (event: Event) => {
       console.log('onActionExecuted', action, event);
@@ -90,9 +88,7 @@ export class ExmgGridBaseToolbarDemo extends LitElement {
         <h1>With actions</h1>
         <button @click="${this.removeOneAction}">Remove one action</button>
         <hr>
-        <exmg-grid-base-toolbar
-            @exmg-grid-base-toolbar-action-executed="${this.onToolbarActionExecuted}"
-        >
+        <exmg-grid-base-toolbar>
           <div slot="actions">
             ${repeat(
               this.actions,

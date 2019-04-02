@@ -15,6 +15,7 @@ import {
   EventDetailSelectedRowsChange,
   EventDetailSortChange
 } from '../src/table/types/exmg-grid-types';
+import {EventSelectPayload} from '@exmg/exmg-paper-combobox/exmg-custom-types';
 
 export type Income = {
   id: number;
@@ -90,6 +91,10 @@ export abstract class ExmgBaseGridDemo extends LitElement {
       text: '',
       tooltip: 'Export',
       icon: 'get_app',
+      condition: {
+        type: ActionConditionType.AmountOfSelectedItemsRange,
+        min: 1,
+      },
     },
     {
       id: 'merge',
@@ -144,7 +149,15 @@ export abstract class ExmgBaseGridDemo extends LitElement {
 
   protected onActionExecuted(e: CustomEvent<{id: string}>) {
     console.log('onActionExecuted', e.detail);
-    switch (e.detail.id) {
+    this.handleAction(e.detail.id);
+  }
+
+  protected onActionDelegate(actionId: string): Function {
+    return () => this.handleAction(actionId);
+  }
+
+  private handleAction(actionId: string): void {
+    switch (actionId) {
       case 'delete': {
         const rowIds = this.selectedRows.map(row => row.getAttribute('data-row-key'));
         allItems = allItems.filter(({id}) => !rowIds.includes(id.toString()));
@@ -191,10 +204,22 @@ export abstract class ExmgBaseGridDemo extends LitElement {
 
   protected onFilterChanged(e: CustomEvent<{id: string; value: string}>) {
     console.log('onFilterChanged', e.detail);
-    const filterId = e.detail.value !== 'all' ? e.detail.id : null;
+    const {id, value} = e.detail;
+    this.handleFilterChanged(id, value);
+  }
+
+  protected onFilterChangedComboboxDelegate(filterId: string): Function {
+    return (e: CustomEvent<EventSelectPayload>) => {
+      const filterValue = e.detail.value as string;
+      this.handleFilterChanged(filterId, filterValue);
+    };
+  }
+
+  private handleFilterChanged(id: string, value: string): void {
+    const filterId = value !== 'all' ? id : null;
     switch (filterId) {
       case 'month':
-        filteredItems = allItems.filter(({month}) => month.toLowerCase() === e.detail.value);
+        filteredItems = allItems.filter(({month}) => month.toLowerCase() === value);
         break;
       default:
         filteredItems = [...allItems];
