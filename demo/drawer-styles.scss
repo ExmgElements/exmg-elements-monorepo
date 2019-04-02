@@ -3,8 +3,10 @@ $mdc-list-divider-color-on-light-bg: rgba(255, 255, 255, 0.12) !default;
 @import "@material/typography/mdc-typography";
 @import "@material/list/mdc-list";
 
+$activeColor: #21a1ff;
+
 :host {
-  --mdc-theme-primary: #21a1ff;
+  --mdc-theme-primary: $activeColor;
 }
 
 .mdc-list {
@@ -31,10 +33,10 @@ $mdc-list-divider-color-on-light-bg: rgba(255, 255, 255, 0.12) !default;
 
 .mdc-list-item--activated {
   .mdc-list-item__text {
-    color: #21a1ff;
+    color: $activeColor;
   }
 
   .mdc-list-item__graphic {
-    color: #21a1ff;
+    color: $activeColor;
   }
 }
