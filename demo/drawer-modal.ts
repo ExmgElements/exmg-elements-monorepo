@@ -32,6 +32,8 @@ export class DrawerModal extends LitElement {
         <span slot="subtitle">subtitle</span>
         <div class="drawer-content">
           <div class="mdc-list">
+            <hr class="mdc-list-divider">
+            <h6 class="mdc-list-group__subheader">Broadcast</h6>
             <a class="mdc-list-item mdc-list-item--activated" href="#" aria-current="page">
               <mwc-icon class="mdc-list-item__graphic">library_books</mwc-icon>
               <span class="mdc-list-item__text">Broadcast Overview</span>

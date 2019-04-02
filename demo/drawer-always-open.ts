@@ -1,4 +1,4 @@
-import {LitElement, html, customElement, property} from 'lit-element';
+import {LitElement, html, customElement} from 'lit-element';
 import '@polymer/iron-demo-helpers/demo-snippet';
 import '@material/mwc-icon';
 import '../exmg-form-drawer';
@@ -7,8 +7,6 @@ import {style} from './drawer-styles';
 
 @customElement('exmg-form-drawer-demo-always-open')
 export class DrawerAlwaysOpen extends LitElement {
-  @property({type: Boolean}) open: boolean = true;
-
   firstUpdated(_changedProperties: any) {
     super.firstUpdated(_changedProperties);
     new MDCList(this.shadowRoot!.querySelector('.mdc-list')!);
@@ -19,11 +17,13 @@ export class DrawerAlwaysOpen extends LitElement {
   render () {
     //language=html
     return html`
-      <exmg-form-drawer hasheader="" ?open="${this.open}">
+      <exmg-form-drawer hasheader="" ?open="${true}" style="height: 100vh">
         <span slot="title">Drawer Title</span>
         <span slot="subtitle">subtitle</span>
         <div class="drawer-content">
           <div class="mdc-list">
+            <hr class="mdc-list-divider">
+            <h6 class="mdc-list-group__subheader">Broadcast</h6>
             <a class="mdc-list-item mdc-list-item--activated" href="#" aria-current="page">
               <mwc-icon class="mdc-list-item__graphic">library_books</mwc-icon>
               <span class="mdc-list-item__text">Broadcast Overview</span>
