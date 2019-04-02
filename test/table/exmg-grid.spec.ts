@@ -57,7 +57,7 @@ suite('exmg-grid', () => {
     });
   });
 
-  suite.only('complex-grid', () => {
+  suite('complex-grid', () => {
     setup(() => {
       element = fixture('ComplexGridFixture');
       table = element.querySelector('table')!;
@@ -90,7 +90,7 @@ suite('exmg-grid', () => {
       assert.isTrue(firstRow.hasAttribute('data-selected'), 'Row should be selected');
     });
 
-    test('gird has selected given rows', async () => {
+    test('selected rows can be changed programmatically', async () => {
       const firstRow = table.querySelector<HTMLTableRowElement>('tbody tr')!;
       const secondRow = table.querySelector<HTMLTableRowElement>('tbody tr[data-row-key="2"]')!;
 
@@ -121,6 +121,53 @@ suite('exmg-grid', () => {
       assert.isTrue(rows2.length > 0, 'Still has selected rows');
       assert.isFalse(rows2.includes(firstRow), 'First rows has is not selected');
       assert.isTrue(rows2.includes(secondRow), 'Second row is selected');
+    });
+
+    test('gird is expandable', async () => {
+      await flushCompleted();
+
+      assert.isNotEmpty(element.expandableToggleSelector, 'Has set expandable trigger selector');
+
+      const firstRow = table.querySelector<HTMLTableRowElement>(`tr[data-row-key="1"]`)!;
+      const firstRowExpandableTrigger = firstRow.querySelector<HTMLElement>(`${element.expandableToggleSelector}`)!;
+      const firstRowDetail = table.querySelector<HTMLTableRowElement>(`tr[data-row-detail-key="1"]`)!;
+
+      assert.isTrue(firstRowExpandableTrigger.hasAttribute('data-is-expandable'), 'Trigger should be initialized');
+      assert.isFalse(firstRowExpandableTrigger.hasAttribute('data-is-expanded'), 'Row detail is not triggered to be expanded');
+      assert.isFalse(firstRowDetail.hasAttribute('data-is-row-expanded'), 'Row detail is not expanded');
+
+      firstRowExpandableTrigger.click();
+
+      assert.isTrue(firstRowExpandableTrigger.hasAttribute('data-is-expanded'), 'Row detail is triggered to be expanded');
+      assert.isTrue(firstRowDetail.hasAttribute('data-is-row-expanded'), 'Row detail is expanded');
+
+      firstRowExpandableTrigger.click();
+
+      assert.isFalse(firstRowExpandableTrigger.hasAttribute('data-is-expanded'), 'Row detail is not triggered to be expanded');
+      assert.isFalse(firstRowDetail.hasAttribute('data-is-row-expanded'), 'Row detail is not expanded');
+    });
+
+    test.only('expanded rows can be changed programmatically', async () => {
+      const firstRowDetail = table.querySelector<HTMLTableRowElement>('tbody tr[data-row-detail-key="1"]')!;
+      const secondRowDetail = table.querySelector<HTMLTableRowElement>('tbody tr[data-row-detail-key="2"]')!;
+
+      element.expandedRowIds = {
+        [firstRowDetail.getAttribute('data-row-detail-key')!]: true,
+      };
+      await flushCompleted();
+
+      assert.isTrue(firstRowDetail.hasAttribute('data-is-row-expanded'), 'First Row detail is expanded');
+      assert.isFalse(secondRowDetail.hasAttribute('data-is-row-expanded'), 'Second Row detail is not expanded');
+
+      element.expandedRowIds = {
+        [firstRowDetail.getAttribute('data-row-detail-key')!]: false,
+        [secondRowDetail.getAttribute('data-row-detail-key')!]: true,
+      };
+
+      await flushCompleted();
+
+      assert.isFalse(firstRowDetail.hasAttribute('data-is-row-expanded'), 'First Row detail is not expanded');
+      assert.isTrue(secondRowDetail.hasAttribute('data-is-row-expanded'), 'Second Row detail is expanded');
     });
   });
 });
