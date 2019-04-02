@@ -1,11 +1,11 @@
+$mdc-drawer-title-ink-color: #ffffff;
+$mdc-drawer-subtitle-ink-color: #ffffff;
+$mdc-drawer-divider-color: #ffffff;
+$mdc-drawer-surface-fill-color: #142b42;
+$mdc-drawer-item-inactive-ink-color: #ffffff;
+$mdc-drawer-item-activated-ink-color: #ffffff;
+
 @import '@material/drawer/mdc-drawer.scss';
-@import 'node_modules/@material/drawer/_mixins.scss';
-
-$color: #142b42;
-
-.mdc-drawer {
-  @include mdc-drawer-surface-fill-color($color);
-}
 
 .mdc-drawer-app-content {
   overflow: auto;
