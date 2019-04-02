@@ -7,11 +7,11 @@
   --exmg-table-background-color: #ffffff;
   --exmg-table-border-color: #f6f6f6;
   --exmg-table-row-separator-color: #dbdbdb;
-  --exmg-table-row-seleced-color: #02182b;
-  --exmg-table-row-seleced-backround-color: #e2f1fe; /*#f5f5f5;*/
+  --exmg-table-row-selected-color: #02182b;
+  --exmg-table-row-selected-background-color: #e2f1fe;
   --exmg-table-row-hover-color: #02182b;
   --exmg-table-row-hover-background-color: #f1f1f1;
-  --exmg-table-row-draged-background-color: #f1f1f1;
+  --exmg-table-row-dragged-background-color: #f1f1f1;
   --exmg-table-th-color: #0071dc;
   --exmg-table-columns-background-color: #ffffff;
   --exmg-table-th-hover-color: #02182b;
@@ -137,8 +137,8 @@ tbody > tr:not(.grid-row-detail):hover {
 }
 
 tr[data-selected] {
-  color: var(--exmg-table-row-seleced-color);
-  background-color: var(--exmg-table-row-seleced-backround-color);
+  color: var(--exmg-table-row-selected-color);
+  background-color: var(--exmg-table-row-selected-background-color);
 }
 /**** END SELECTABLE  ROW *********/
 
@@ -173,13 +173,13 @@ tr .grid-icon-rotate[data-is-expandable]:not([data-is-expanded]) > * {
 }
 tr {
   &.dragged {
-    background: var(--exmg-table-row-draged-background-color);
+    background: var(--exmg-table-row-dragged-background-color);
     opacity: 0.25;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5) inset;
   }
 
   &.cloned {
-    background-color: var(--exmg-table-row-draged-background-color);
+    background-color: var(--exmg-table-row-dragged-background-color);
     width: 100%;
     box-sizing: border-box;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);

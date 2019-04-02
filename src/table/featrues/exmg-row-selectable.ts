@@ -55,7 +55,6 @@ export class ExmgRowSelectable {
   }
 
   private fireSelectableRows() {
-    console.log('dispatch exmg-grid-selected-rows-change', this.selectedRows);
     this.dispatchEvent(new CustomEvent<EventDetailSelectedRowsChange>(
       'exmg-grid-selected-rows-change',
       {
@@ -75,8 +74,6 @@ export class ExmgRowSelectable {
       row.addEventListener('click', (e: Event) => {
         const index = this.selectedRows.indexOf(row);
         const isRowAlreadySelected = index > -1;
-        const tmpRow = isRowAlreadySelected ? this.selectedRows[index] : undefined;
-        console.log('really clicked', {index, isRowAlreadySelected, tmpRow, selectedRows: [...this.selectedRows]});
         if (isRowAlreadySelected) {
           row.removeAttribute('data-selected');
           this.selectedRows.splice(index, 1);
@@ -97,7 +94,6 @@ export class ExmgRowSelectable {
         }
 
         this.updateSelectAllCheckbox();
-        console.log('row clicked', isRowAlreadySelected, this.selectedRows);
         this.fireSelectableRows();
       });
     }));

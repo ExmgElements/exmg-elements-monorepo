@@ -149,7 +149,6 @@ export abstract class ExmgBaseGridDemo extends LitElement {
         const rowIds = this.selectedRows.map(row => row.getAttribute('data-row-key'));
         allItems = allItems.filter(({id}) => !rowIds.includes(id.toString()));
         filteredItems = filteredItems.filter(({id}) => !rowIds.includes(id.toString()));
-        console.log(rowIds);
         this.selectedRows = [];
         this.items = getItemByPage(this.pageIndex, this.pageSize);
         break;
@@ -220,7 +219,6 @@ export abstract class ExmgBaseGridDemo extends LitElement {
     const copy = [...this.items];
     this.items = [];
     setTimeout(() => {
-      console.log('refreshing table');
       this.items = copy;
     });
   }
@@ -250,12 +248,10 @@ export abstract class ExmgBaseGridDemo extends LitElement {
   }
 
   protected onRowsOrderChanged(event: CustomEvent<EventDetailRowsOrderChanged>): void {
-    console.log('on update items', event);
     this.items = [...event.detail.items];
   }
 
   protected onSelectedRowsChange(event: CustomEvent<EventDetailSelectedRowsChange>) {
-    console.log('rows selected', event);
     this.selectedRows = event.detail.rows;
   }
 

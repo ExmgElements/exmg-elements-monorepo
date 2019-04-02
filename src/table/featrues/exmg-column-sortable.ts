@@ -35,13 +35,11 @@ export class ExmgColumnSortable {
         });
 
       column.setAttribute('data-sort-direction', nextSortDirection || '');
-      console.log('sortable clicked', columnId, nextSortDirection);
       this.fireSortChanged(columnId, nextSortDirection);
     });
   }
 
   private fireSortChanged(columnId: string, sortDirection?: SORT_DIRECTION): void {
-    console.log('exmg-grid-sort-change', {columnId, sortDirection});
     this.dispatchEvent(new CustomEvent<EventDetailSortChange>(
       'exmg-grid-sort-change',
       {

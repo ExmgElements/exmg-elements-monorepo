@@ -14,7 +14,42 @@ type Props = Exclude<keyof ExmgGrid, number | Symbol>;
 
 type SmartPropertyValue = GenericPropertyValues<Props>;
 
-
+/**
+ * ### Styling
+ * The following custom properties and mixins are available for styling:
+ *
+ * Custom property | Description | Default
+ * ----------------|-------------|----------
+ * `--exmg-arrow-upward-url` | Url to icon that is used for soring direction indicator | `url('/assets/arrow-upward.svg');`
+ * `--exmg-table-width` | table width | `100%;`
+ * `--exmg-table-margin-bottom` | table bottom margin  | `5px;`
+ * `--exmg-table-color` | table text color | `#02182b;`
+ * `--exmg-table-background-color` | table background color | `#ffffff;`
+ * `--exmg-table-border-color` | table border color | `#f6f6f6;`
+ * `--exmg-table-row-separator-color` | table rows separator color | `#dbdbdb;`
+ * `--exmg-table-row-selected-color` | selected row text color | `#02182b;`
+ * `--exmg-table-row-selected-background-color` | selected row background color | `#e2f1fe;`
+ * `--exmg-table-row-hover-color` | row hover text color | `#02182b;`
+ * `--exmg-table-row-hover-background-color` | row hover background color | `#f1f1f1;`
+ * `--exmg-table-row-dragged-background-color` | sortable row background color when dragged | `#f1f1f1;`
+ * `--exmg-table-th-color` | header text color | `#0071dc;`
+ * `--exmg-table-columns-background-color` | header background color | `#ffffff;`
+ * `--exmg-table-th-hover-color` | header hover text color | `#02182b;`
+ * `--exmg-table-th-height` | header height | `48px;`
+ * `--exmg-table-th-font-size` | header font size | `16px;`
+ * `--exmg-table-th-sort-margin-left` | header margin after text but before icon | `4px;`
+ * `--exmg-table-td-height` | row cell height | `48px;`
+ * `--exmg-table-td-font-size` | row cell font size | `16px;`
+ *
+ * ### Overridden vars for paper-checkbox
+ *
+ * Custom property | Description | Default
+ * `--paper-checkbox-unchecked-color` | | `#97aac4;`
+ * `--paper-checkbox-checked-color` | | `#1274d9;`
+ * `--paper-checkbox-size` | | `24px;`
+ * `--paper-checkbox-unchecked-ink-color` | | `#0070db;`
+ * `--paper-checkbox-checked-ink-color` | | `#0070db;`
+ */
 @customElement('exmg-grid')
 export class ExmgGrid extends LitElement {
   static styles = [
@@ -135,9 +170,7 @@ export class ExmgGrid extends LitElement {
   }
 
   private rowsOrderChange(e: CustomEvent): void {
-    console.log('order change', e.detail);
     setTimeout(() => {
-      console.log('order change', e.detail);
       const {sourceIndex, targetIndex} = e.detail;
       const items = [...this.items];
       const movedElement = items[sourceIndex];
@@ -216,9 +249,7 @@ export class ExmgGrid extends LitElement {
     }
   }
 
-  protected async firstUpdated(changedProps: SmartPropertyValue): Promise<void> {
-    const debug = Array.from(changedProps.keys()).map(key => ({key, oldV: changedProps.get(key), newV: this[key]}));
-    console.log('FIRST changedProps', changedProps, debug);
+  protected async firstUpdated(): Promise<void> {
     const table = this.shadowRoot!.host.querySelector<HTMLTableElement>('table')!;
     const tableBody = table.querySelector<HTMLTableSectionElement>('tbody.grid-data')!;
 
@@ -270,8 +301,6 @@ export class ExmgGrid extends LitElement {
   }
 
   protected updated(changedProps: SmartPropertyValue): void {
-    const debug = Array.from(changedProps.keys()).map(key => ({key, oldV: changedProps.get(key), newV: this[key]}));
-    console.log('UPDATED changedProps', changedProps, debug);
     if (changedProps.has('hiddenColumnNames') || changedProps.has('items')) {
       this.updateColumnVisibility(changedProps.get('hiddenColumnNames') as Record<string, string>);
     }
@@ -304,7 +333,6 @@ export class ExmgGrid extends LitElement {
   }
 
   private renderWithSortable() {
-    console.warn('sortable body', this.querySelectors ? this.getQuerySelectors().getTableBody() : undefined);
     return html`
         <exmg-sortable
           orientation="${'vertical'}"
