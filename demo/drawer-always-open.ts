@@ -25,7 +25,6 @@ export class DrawerAlwaysOpen extends LitElement {
   static styles = style;
 
   render () {
-    console.log(this.open);
     //language=html
     return html`
       <exmg-form-drawer hasheader="" type="modal" ?open="${this.open}" @MDCDrawer:closed="${this.onDrawerClosed}">

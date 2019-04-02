@@ -1,6 +1,7 @@
+@import '@material/drawer/mdc-drawer.scss';
 @import 'node_modules/@material/drawer/_mixins.scss';
 
-$color: rgb(21,111,216);
+$color: #142b42;
 
 .mdc-drawer {
   @include mdc-drawer-surface-fill-color($color);
