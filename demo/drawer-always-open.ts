@@ -18,8 +18,10 @@ export class DrawerAlwaysOpen extends LitElement {
     //language=html
     return html`
       <exmg-form-drawer hasheader="" ?open="${true}" style="height: 100vh">
-        <span slot="title">Drawer Title</span>
-        <span slot="subtitle">subtitle</span>
+        
+        <mwc-icon slot="title-icon" class="mdc-list-item__graphic">extension</mwc-icon>
+        <span slot="title">PlayTwo CMS</span>
+        
         <div class="drawer-content">
           <div class="mdc-list">
             <hr class="mdc-list-divider">

@@ -28,8 +28,9 @@ export class DrawerDismissible extends LitElement {
     //language=html
     return html`
       <exmg-form-drawer hasheader="" type="dismissible" ?open="${this.open}" @MDCDrawer:closed="${this.onDrawerClosed}">
-        <span slot="title">Drawer Title</span>
-        <span slot="subtitle">subtitle</span>
+        <mwc-icon slot="title-icon" class="mdc-list-item__graphic">extension</mwc-icon>
+        <span slot="title">PlayTwo CMS</span>
+
         <div class="drawer-content">
           <div class="mdc-list">
             <hr class="mdc-list-divider">

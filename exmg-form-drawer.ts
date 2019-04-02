@@ -109,7 +109,10 @@ export class ExmgFormDrawer extends BaseElement {
     const modal = this.type === 'modal';
     const header = this.hasHeader ? html`
       <div class="mdc-drawer__header">
-        <h3 class="mdc-drawer__title"><slot name="title"></slot></h3>
+        <h3 class="mdc-drawer__title">
+          <slot name="title-icon"></slot>
+          <slot name="title"></slot>
+        </h3>
         <h6 class="mdc-drawer__subtitle"><slot name="subtitle"></slot></h6>
         <slot name="header"></slot>
       </div>

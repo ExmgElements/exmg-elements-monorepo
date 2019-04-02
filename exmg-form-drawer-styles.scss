@@ -15,3 +15,17 @@ $mdc-drawer-item-activated-ink-color: #ffffff;
   display: flex;
   height: 100%;
 }
+
+.mdc-drawer__header {
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+}
+.mdc-drawer__title {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+}
+.mdc-drawer__subtitle {
+  display: none;
+}
