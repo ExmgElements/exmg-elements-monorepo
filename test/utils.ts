@@ -6,7 +6,7 @@ import {
 
 export const promisifyFlush = (flush: Function) => () => new Promise(resolve => flush(resolve));
 
-type OnEventType = <T extends Event = Event>(eventName: string) => (element: LitElement, shouldResolve: boolean) => Promise<T>;
+type OnEventType = <T extends Event = CustomEvent>(eventName: string) => (element: LitElement, shouldResolve: boolean) => Promise<T>;
 
 const onEvent: OnEventType =
   (eventName: string) =>
@@ -21,7 +21,7 @@ type EventListenerResult<T extends Event = Event> = {
 };
 
 const onEventListener =
-  <T extends Event = Event>(eventName: string) =>
+  <T extends Event = CustomEvent>(eventName: string) =>
     (element: LitElement): EventListenerResult<T> => {
       let results: T[] = [];
       const handler = (event: Event) => results.push(event as T);

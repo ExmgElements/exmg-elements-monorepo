@@ -14,8 +14,10 @@
   ],
   "main": "exmg-grid.js",
   "files": [
-    "exmg-*.js",
-    "exmg-*.d.ts"
+    "src/**/exmg-*.js",
+    "src/**/exmg-*.d.ts",
+    "index.js",
+    "index.d.ts"
   ],
   "repository": {
     "type": "git",
@@ -59,6 +61,7 @@
     "build": "npm run build:styles && npm run lint && npm run tsc",
     "build:styles": "gulp render-styles",
     "tsc": "tsc -b ./tsconfig.json",
+    "publishDryRun": "npm publish --dry-run",
     "prepublishOnly": "npm run build",
     "preversion": "npm run build",
     "start": "gulp serve",
