@@ -1,4 +1,10 @@
-@import '@material/drawer/mdc-drawer.scss';
+@import 'node_modules/@material/drawer/_mixins.scss';
+
+$color: rgb(21,111,216);
+
+.mdc-drawer {
+  @include mdc-drawer-surface-fill-color($color);
+}
 
 .mdc-drawer-app-content {
   overflow: auto;
