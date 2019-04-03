@@ -27,6 +27,8 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
         --mdc-theme-on-surface: #091e2e;
         --exmg-grid-active-color: #e1f0fe;
         --exmg-filter-background-color: #B8DDFE;
+        --exmg-grid-pagination-bg-color: #4A4A4A;
+        --exmg-grid-pagination-color: #ffffff;
       }
       table {
         --exmg-table-color: white;

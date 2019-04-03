@@ -2,6 +2,9 @@
 @import "../../node_modules/@material/typography/mdc-typography";
 @import "./_variables.scss";
 
+$exmg-grid-pagination-bg-color: #ffffff;
+$exmg-grid-pagination-color: #02182b;
+
 .wrapper {
   display: flex;
   flex: 1;
@@ -10,7 +13,8 @@
   justify-content: flex-end;
   padding: 8px 10px;
   @include mdc-typography-base;
-  @include mdc-theme-prop(background-color, surface);
+  background-color: var(--exmg-grid-pagination-bg-color, var(--mdc-theme-surface, $exmg-grid-pagination-bg-color));
+  color: var(--exmg-grid-pagination-color, var(--mdc-theme-on-surface, $exmg-grid-pagination-color));
 
   .page-size {
     display: flex;
