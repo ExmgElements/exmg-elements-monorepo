@@ -118,6 +118,7 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
                 <div slot="filters">
                   <exmg-paper-combobox
                     attr-for-selected="data-id"
+                    selected="all"
                     @exmg-combobox-select="${this.onFilterChangedComboboxDelegate('month')}"
                   >
                     <paper-item data-id="all">Month: All</paper-item>
@@ -126,19 +127,19 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
                     <paper-item data-id="march">Month: March</paper-item>
                   </exmg-paper-combobox>
                 </div>
-                </exmg-grid-base-toolbar>
-               </th>
-             </tr>
-             <tr class="grid-columns">
-               <th width="5%"><paper-checkbox class="selectable-checkbox"></paper-checkbox></th>
-               <th>ID</th>
-               <th data-column-key="month" data-sort>Month</th>
-               <th data-column-key="year" data-sort>Year</th>
-               <th data-column-key="amount" data-sort="">Income</th>
-               <th></th>
-             </tr>
-            </thead>
-            <tbody class="grid-data">
+              </exmg-grid-base-toolbar>
+             </th>
+           </tr>
+           <tr class="grid-columns">
+             <th width="5%"><paper-checkbox class="selectable-checkbox"></paper-checkbox></th>
+             <th>ID</th>
+             <th data-column-key="month" data-sort>Month</th>
+             <th data-column-key="year" data-sort>Year</th>
+             <th data-column-key="amount" data-sort="">Income</th>
+             <th></th>
+           </tr>
+          </thead>
+          <tbody class="grid-data">
               ${this.renderTableBody()}
           </tbody>
           <tfoot>

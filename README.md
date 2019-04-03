@@ -1,6 +1,6 @@
-# \<exmg-grid\>
+# <exmg-grid /\>
 
-## Requirements
+## Grid requirements
 
 * Columns has be added to `table > thead > tr.grid.columns`
 

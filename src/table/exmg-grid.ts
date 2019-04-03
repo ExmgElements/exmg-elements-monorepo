@@ -44,11 +44,12 @@ type SmartPropertyValue = GenericPropertyValues<Props>;
  * ### Overridden vars for paper-checkbox
  *
  * Custom property | Description | Default
- * `--paper-checkbox-unchecked-color` | | `#97aac4;`
- * `--paper-checkbox-checked-color` | | `#1274d9;`
- * `--paper-checkbox-size` | | `24px;`
- * `--paper-checkbox-unchecked-ink-color` | | `#0070db;`
- * `--paper-checkbox-checked-ink-color` | | `#0070db;`
+ * ----------------|-------------|----------
+ * `--paper-checkbox-unchecked-color` | - | `#97aac4;`
+ * `--paper-checkbox-checked-color` | - | `#1274d9;`
+ * `--paper-checkbox-size` | - | `24px;`
+ * `--paper-checkbox-unchecked-ink-color` | - | `#0070db;`
+ * `--paper-checkbox-checked-ink-color` | - | `#0070db;`
  */
 @customElement('exmg-grid')
 export class ExmgGrid extends LitElement {
@@ -82,7 +83,7 @@ export class ExmgGrid extends LitElement {
 
   /**
    * Feature that allow sort rows
-   * If table table has turn on feature `selectable` then it takes precedence and `rowSelectable` will be ignored
+   * If table has turn on feature `selectable` then it takes precedence and `rowSelectable` will be ignored
    */
   @property({type: Boolean, reflect: true, attribute: 'rows-sortable'})
   rowsSortable: boolean = false;
@@ -108,18 +109,21 @@ export class ExmgGrid extends LitElement {
 
   /**
    * Map of row id and selection state
-   * Useful for default setup default selection or manipulating programmatically
+   * Useful for setup default selection or manipulating programmatically
    */
   @property({type: Object})
   selectedRowIds: Record<string, boolean> = {};
 
   /**
    * Map of row id and expandable row state
-   * Useful for default setup default selection or manipulating programmatically
+   * Useful for setup default expanded rows or manipulating programmatically
    */
   @property({type: Object})
   expandedRowIds: Record<string, boolean> = {};
 
+  /**
+   * Selector to element inside row which will trigger expand / collapse action on related row detail
+   */
   @property({type: String, attribute: 'expandable-toggle-selector', reflect: true})
   expandableToggleSelector?: string;
 

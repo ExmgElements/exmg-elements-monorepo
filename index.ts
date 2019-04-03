@@ -7,6 +7,6 @@ export {style as gridCommonStyles} from './src/table/exmg-grid-common-styles';
 export * from './src/table/exmg-grid-pagination';
 export {style as gridPaginationStyles} from './src/table/exmg-grid-pagination-styles';
 export * from './src/table/exmg-grid-smart-toolbar';
-export * from './src/table/exmg-grid-smart-toolbar-types';
+export * from './src/table/types/exmg-grid-smart-toolbar-types';
 export * from './src/table/exmg-grid-toolbar';
-export * from './src/table/exmg-grid-toolbar-types';
+export * from './src/table/types/exmg-grid-toolbar-types';

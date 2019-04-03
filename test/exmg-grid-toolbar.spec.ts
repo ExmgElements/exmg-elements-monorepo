@@ -1,6 +1,6 @@
 import {ExmgGridToolbar} from '../src/table/exmg-grid-toolbar';
 import {promisifyFlush, onExmgGridToolbarActionExecuted, onExmgGridToolbarFilterChanged} from './utils';
-import {Filter, FilterConfigType, FilterSingleSelectConfig} from '../src/table/exmg-grid-toolbar-types';
+import {Filter, FilterConfigType, FilterSingleSelectConfig} from '../src/table/types/exmg-grid-toolbar-types';
 
 declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
 declare const flush: (cb?: Function) => void;

@@ -4,5 +4,7 @@ node_modules/
 
 *.d.ts
 *.js
+exmg-*-styles.ts
+_variables.ts
 !gulpfile.js
 !scripts/**/*.js

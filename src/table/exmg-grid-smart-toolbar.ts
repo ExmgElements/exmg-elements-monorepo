@@ -1,12 +1,12 @@
 import {customElement, html, LitElement, property} from 'lit-element';
 import './exmg-grid-toolbar';
-import {Filter} from './exmg-grid-toolbar-types';
+import {Filter} from './types/exmg-grid-toolbar-types';
 import {
   ActionAmountSelectedItemsCondition,
   ActionWithCondition,
   ActionConditionType,
   BaseActionCondition
-} from './exmg-grid-smart-toolbar-types';
+} from './types/exmg-grid-smart-toolbar-types';
 
 @customElement('exmg-grid-smart-toolbar')
 export class ExmgGridSmartToolbar extends LitElement {

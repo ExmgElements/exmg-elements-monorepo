@@ -12,7 +12,7 @@ import {
   Filter,
   FilterConfigType,
   FilterSingleSelectConfig
-} from './exmg-grid-toolbar-types';
+} from './types/exmg-grid-toolbar-types';
 
 @customElement('exmg-grid-toolbar')
 export class ExmgGridToolbar extends LitElement {

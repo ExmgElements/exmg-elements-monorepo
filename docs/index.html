@@ -1,0 +1,375 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@exmg/exmg-grid</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@exmg/exmg-grid</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> @exmg/exmg-grid</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 id="exmg-grid-">&lt;exmg-grid /></h1>
+				<h2 id="grid-requirements">Grid requirements</h2>
+				<ul>
+					<li><p>Columns has be added to <code>table &gt; thead &gt; tr.grid.columns</code></p>
+					</li>
+					<li><p>Body has to be added to <code>table &gt; tbody.grid-data</code></p>
+					</li>
+					<li><p>You should use <code>import {repeat} from &#39;lit-html/directives/repeat&#39;;</code> function to map you items to rows.</p>
+					</li>
+					<li><p>Each row inside <code>tbody.grid-data</code> should have attribute <code>data-row-key</code> with unique value</p>
+					</li>
+					<li><p>If table is expandable then for each row you have to add related row <code>table &gt; tbody.grid-data tr.grid-row-detail</code>
+						This row must have attribute <code>data-row-detail-key</code> with same value as its relative row</p>
+					</li>
+					<li><p>Element <code>exmg-grid</code> require property <code>.items</code> - needed to detect any changes on data</p>
+						<h2 id="optional">Optional</h2>
+						<ul>
+							<li><p>toolbar should be placed in <code>table &gt; thead &gt; tr.grid-toolbar</code></p>
+							</li>
+							<li><p>when amount of columns may change you may use attribute <code>data-auto-colspan</code> on both <code>th and td</code> elements </p>
+							</li>
+							<li><p>if cell should be visible only on hover then you can use class <code>grid-cell-visible-on-hover</code></p>
+							</li>
+							<li><p>if icon which trigger expanding / collapsing row-detail has to rotate then add class <code>grid-icon-rotate</code> </p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<p>Example how should looks most minimal markup to meet with requirements:</p>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid</span> <span class="hljs-attr">.itmes</span>=<span class="hljs-string">"${items}"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">thead</span>&gt;</span>
+     <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"grid-columns"</span>&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Col1<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Col2<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+     <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">thead</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">tbody</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"grid-data"</span>&gt;</span>
+      ${repeat(
+            this.items,
+            ({id}) =&gt; id,
+            (i) =&gt; {
+              return html`
+                <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">data-row-key</span>=<span class="hljs-string">"${i.id}"</span>&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>#${i.id}<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>${i.value}<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+              `;
+            }
+          );
+          }
+    <span class="hljs-tag">&lt;/<span class="hljs-name">tbody</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">exmg-grid</span>&gt;</span></code></pre>
+				<h2 id="features">Features</h2>
+				<h3 id="column-sortable">Column sortable</h3>
+				<ul>
+					<li><p>You should add attribute <code>sortable</code> attribute on <code>exmg-grid</code></p>
+					</li>
+					<li><p>You must have defined columns and on <code>th</code> element you should add <code>data-sort</code> attribute with unique name of column.
+							You can also omit name in <code>data-sort</code> attribute but then you should setup <code>data-column-key</code>
+						both configuration are fine</p>
+						<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">data-column-key</span>=<span class="hljs-string">"month"</span> <span class="hljs-attr">data-sort</span>&gt;</span>Month<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">data-column-key</span>=<span class="hljs-string">"year"</span> <span class="hljs-attr">data-sort</span>=<span class="hljs-string">"year-column"</span>&gt;</span>Year<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span></code></pre>
+					</li>
+					<li><p>To handle sort changing you should add listener <code>@exmg-grid-sort-change</code> on <code>exmg-grid</code>. You will receive <code>CustomEvent&lt;EventDetailSortChange&gt;</code></p>
+						<pre><code class="language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> EventDetailSortChange = {
+column: <span class="hljs-built_in">string</span>;
+sortDirection?: <span class="hljs-string">'ASC'</span> | <span class="hljs-string">'DESC'</span>;
+};</code></pre>
+					</li>
+					<li><p>To setup default sorting you should setup attributes <code>default-sort-column</code> and <code>default-sort-direction</code> on <code>exmg-grid</code></p>
+					</li>
+				</ul>
+				<p>Example:</p>
+				<hr>
+				<pre><code class="language-html">      <span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid</span>
+        <span class="hljs-attr">.items</span>=<span class="hljs-string">"${this.items}"</span>
+        <span class="hljs-attr">default-sort-column</span>=<span class="hljs-string">"year-column"</span>
+        <span class="hljs-attr">default-sort-direction</span>=<span class="hljs-string">"DESC"</span>
+        ?<span class="hljs-attr">sortable</span>=<span class="hljs-string">"${true}"</span>
+        @<span class="hljs-attr">exmg-grid-sort-change</span>=<span class="hljs-string">"${this.onSortChange}"</span>
+      &gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">thead</span>&gt;</span>
+           <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"grid-columns"</span>&gt;</span>
+             <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">data-column-key</span>=<span class="hljs-string">"month"</span> <span class="hljs-attr">data-sort</span>&gt;</span>Month<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+             <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">data-column-key</span>=<span class="hljs-string">"year"</span> <span class="hljs-attr">data-sort</span>=<span class="hljs-string">"year-column"</span>&gt;</span>Year<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+           <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">thead</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">exmg-grid</span>&gt;</span></code></pre>
+				<h3 id="expandable-rows">Expandable rows</h3>
+				<ul>
+					<li><p>You should pass attribute <code>expandable-toggle-selector</code> to <code>exmg-grid</code></p>
+						<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid</span> <span class="hljs-attr">.items</span>=<span class="hljs-string">"${this.items}"</span> <span class="hljs-attr">expandable-toggle-selector</span>=<span class="hljs-string">".expandable-trigger"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">tbody</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"grid-data"</span>&gt;</span>
+  ${
+    repeat(
+      items,
+      item =&gt; items.id,
+      item =&gt; html`
+        <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">data-row-key</span>=<span class="hljs-string">"${i.id}"</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>First<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Second<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"grid-cell-visible-on-hover"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"expandable-trigger grid-icon-rotate"</span>&gt;</span>${arrowIcon}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"grid-row-detail"</span> <span class="hljs-attr">data-row-detail-key</span>=<span class="hljs-string">"${i.id}"</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">data-auto-colspan</span>&gt;</span>Here goes row detail...<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+      `
+    )
+  }
+<span class="hljs-tag">&lt;/<span class="hljs-name">tbody</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">exmg-grid</span>&gt;</span></code></pre>
+					</li>
+					<li><p>If you want to programmatically expand / collapse row with detail you can pass property <code>.expandedRowIds</code> to <code>exmg-grid</code> element
+						Where type of <code>expandedRowIds</code> looks</p>
+						<pre><code class="language-typescript"><span class="hljs-keyword">const</span> expandedRowIds: Record&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">boolean</span>&gt; = {
+<span class="hljs-string">'1'</span>: <span class="hljs-literal">true</span>,
+<span class="hljs-string">'2'</span>: <span class="hljs-literal">false</span>,
+};</code></pre>
+						<p>Key is just id which you pass by attributes <code>data-row-key</code> and <code>data-row-detail-key</code> and value is just flag what will expand when true otherwise collapse</p>
+					</li>
+					<li><p>When row detail is being expanded then to element which trigger action will be added attribute <code>data-is-expanded</code>
+						To row detail is added attribute <code>data-is-row-expanded</code>. When collapsed both attributes are removed. </p>
+					</li>
+				</ul>
+				<h3 id="selectable-rows">Selectable rows</h3>
+				<p>To turn on this feature attribute <code>rows-selectable</code> has to be set on <code>exmg-grid</code> element</p>
+				<ul>
+					<li>If you want to programmatically select / unselect row you may pass property <code>.selectedRowIds</code> to <code>exmg-grid</code> element
+					Where type of <code>selectedRowIds</code> looks</li>
+				</ul>
+				<pre><code class="language-typescript"><span class="hljs-keyword">const</span> selectedRowIds: Record&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">boolean</span>&gt; = {
+  <span class="hljs-string">'1'</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-string">'2'</span>: <span class="hljs-literal">false</span>,
+};</code></pre>
+				<p>Key is just id which you pass by attributes <code>data-row-key</code> and <code>data-row-detail-key</code> and value is just flag perhaps makr row as selected when true otherwise unselect</p>
+				<h4 id="checkboxes">Checkboxes</h4>
+				<p>It is optional. You can add checkbox to header and/or rows. There is needed 2 things to do to be checkbox works with
+				row selection:</p>
+				<ul>
+					<li><p>on <code>exmg-grid</code> element set attribute<code>selectable-checkbox-selector=&quot;.selectable-checkbox&quot;</code></p>
+					</li>
+					<li><p>checkbox component needs to implement event <code>change</code> and property <code>checked</code>. For instance <code>mwc-checkbox</code> at least to version
+						<code>v0.4.0</code> doesnt support <code>change</code> event and can&#39;t be used with gird</p>
+					</li>
+				</ul>
+				<pre><code class="language-html">&lt;exmg-grid .items="${this.items}" selectable-checkbox-selector=".selectable-checkbox" ?rows-selectable="${true}"&gt;
+  &lt;table&gt;
+    &lt;thead&gt;
+     &lt;tr class="grid-columns"&gt;
+       &lt;th&gt;&lt;paper-checkbox class="selectable-checkbox"&gt;&lt;/paper-checkbox&gt;&lt;/th&gt;
+     &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody class="grid-data"&gt;
+      &lt;tr&gt;
+        &lt;td&gt;&lt;input type="checkbox" class="selection-checkbox"&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/exmg-grid&gt;</code></pre>
+				<h3 id="rows-sortable">Rows sortable</h3>
+				<p>To turn on this feature attribute <code>rows-sortable</code> has to be set on <code>exmg-grid</code>. Element <code>tr</code> or any descend <code>tr</code> element
+				must have class <code>grid-row-drag-handler</code>. </p>
+				<p>Each time order will be changed event <code>exmg-grid-rows-order-changed</code> is triggered and has o be handled.
+				Handling this event <code>must to trigger</code> update property <code>items</code> otherwise it won&#39;t take effect.</p>
+				<p>Event details of <code>CustomEvent&lt;EventDetailRowsOrderChanged&gt;</code> has such structure: </p>
+				<pre><code class="language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> EventDetailRowsOrderChanged&lt;T <span class="hljs-keyword">extends</span> object = <span class="hljs-built_in">any</span>&gt; = {
+  items: T[];
+};</code></pre>
+				<p><code>Items are sorted as it is done in UI.</code></p>
+				<pre><code>  onRowsOrderChanged(<span class="hljs-keyword">event</span>: CustomEvent&lt;EventDetailRowsOrderChanged&gt;): <span class="hljs-keyword">void</span> {
+    <span class="hljs-comment">// store current order and update items</span>
+    <span class="hljs-keyword">this</span>.items = [...<span class="hljs-keyword">event</span>.detail.items];
+  }</code></pre><pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid</span> <span class="hljs-attr">.items</span>=<span class="hljs-string">"${this.items}"</span> ?<span class="hljs-attr">rows-sortable</span>=<span class="hljs-string">"${true}"</span> @<span class="hljs-attr">exmg-grid-rows-order-changed</span>=<span class="hljs-string">"${this.onRowsOrderChanged}"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">thead</span>&gt;</span>
+     <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"grid-columns"</span>&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>ID<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+     <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">thead</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">tbody</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"grid-data"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"grid-row-drag-handler"</span>&gt;</span>${dragIcon}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">tbody</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">exmg-grid</span>&gt;</span></code></pre>
+				<h3 id="columns-visibility-management">Columns visibility management</h3>
+				<p>To hide / show columns you can use property <code>hiddenColumnNames</code> of <code>exmg-grid</code></p>
+				<pre><code class="language-typescript"><span class="hljs-keyword">const</span> hiddenColumnNames: Record&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">string</span>&gt; = {};</code></pre>
+				<p>whenever you want to change column visibility update property <code>hiddenColumnNames</code></p>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid</span> <span class="hljs-attr">.items</span>=<span class="hljs-string">"${this.items}"</span> <span class="hljs-attr">.hiddenColumnNames</span>=<span class="hljs-string">"${{col1: 'col1', col2: 'col2'}}"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">exmg-grid</span>&gt;</span></code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/__variables_.html">"_<wbr>variables"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_exmg_grid_.html">"exmg-<wbr>grid"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_exmg_grid_base_toolbar_.html">"exmg-<wbr>grid-<wbr>base-<wbr>toolbar"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_exmg_grid_base_toolbar_styles_.html">"exmg-<wbr>grid-<wbr>base-<wbr>toolbar-<wbr>styles"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_exmg_grid_common_styles_.html">"exmg-<wbr>grid-<wbr>common-<wbr>styles"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_exmg_grid_pagination_.html">"exmg-<wbr>grid-<wbr>pagination"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_exmg_grid_pagination_styles_.html">"exmg-<wbr>grid-<wbr>pagination-<wbr>styles"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_exmg_grid_smart_toolbar_.html">"exmg-<wbr>grid-<wbr>smart-<wbr>toolbar"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_exmg_grid_styles_.html">"exmg-<wbr>grid-<wbr>styles"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_exmg_grid_toolbar_.html">"exmg-<wbr>grid-<wbr>toolbar"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

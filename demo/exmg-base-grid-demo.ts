@@ -8,8 +8,8 @@ import {
   ActionAmountSelectedItemsCondition,
   ActionConditionType,
   ActionWithCondition
-} from '../src/table/exmg-grid-smart-toolbar-types';
-import {Filter, FilterConfigType, FilterSingleSelectConfig} from '../src/table/exmg-grid-toolbar-types';
+} from '../src/table/types/exmg-grid-smart-toolbar-types';
+import {Filter, FilterConfigType, FilterSingleSelectConfig} from '../src/table/types/exmg-grid-toolbar-types';
 import {
   EventDetailRowsOrderChanged,
   EventDetailSelectedRowsChange,
