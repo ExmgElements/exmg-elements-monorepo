@@ -28,6 +28,12 @@ export class ExmgRowSortable {
 
   private registerMouseListenersHideDetailOnStartDragging(element: HTMLElement): void {
     const getRowDetail = this.getRowDetailQuerySelectorFactory(element);
+
+    if (element.closest('td')) {
+      // ignore click (won't eventually select row) when trigger is element embedded in table cell
+      element.addEventListener('click', (event: Event) => event.stopPropagation());
+    }
+
     element.addEventListener('mousedown', (event: Event) => {
       event.preventDefault();
       const rowDetail = getRowDetail();

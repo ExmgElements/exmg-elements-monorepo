@@ -34,9 +34,11 @@ export class ExmgRowExpandable {
       if (isExpanded) {
         triggerElement.removeAttribute('data-is-expanded');
         rowDetail.removeAttribute('data-is-row-expanded');
+        parentRow.removeAttribute('data-has-expanded-detail');
       } else {
         triggerElement.setAttribute('data-is-expanded', '');
         rowDetail.setAttribute('data-is-row-expanded', '');
+        parentRow.setAttribute('data-has-expanded-detail', '');
       }
     });
   }

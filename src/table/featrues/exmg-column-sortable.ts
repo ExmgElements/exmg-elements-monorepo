@@ -34,7 +34,12 @@ export class ExmgColumnSortable {
           }
         });
 
-      column.setAttribute('data-sort-direction', nextSortDirection || '');
+      if (nextSortDirection) {
+        column.setAttribute('data-sort-direction', nextSortDirection);
+      } else {
+        column.removeAttribute('data-sort-direction');
+      }
+
       this.fireSortChanged(columnId, nextSortDirection);
     });
   }

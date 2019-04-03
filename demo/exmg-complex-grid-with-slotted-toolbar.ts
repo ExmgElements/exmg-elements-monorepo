@@ -34,7 +34,7 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
         --exmg-table-color: white;
         --exmg-table-background-color: #4A4A4A;
         --exmg-table-border-color: white;
-        --exmg-table-row-separator-color: white;
+        --exmg-table-row-divider-color: white;
         --exmg-table-row-selected-color: white;
         --exmg-table-row-selected-background-color: #850E13;
         --exmg-table-row-hover-color: white;
@@ -42,7 +42,7 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
         --exmg-table-row-dragged-background-color: #f1f1f1;
         --exmg-table-th-color: #0071dc;
         --exmg-table-columns-background-color: #4A4A4A;
-        --exmg-table-th-hover-color: #0092FF;
+        --exmg-table-th-sortable-hover-color: #0092FF;
       }
       table .expandable-toggle > svg {
         fill: white;

@@ -110,7 +110,7 @@
 								<td><code>#f6f6f6;</code></td>
 							</tr>
 							<tr>
-								<td><code>--exmg-table-row-separator-color</code></td>
+								<td><code>--exmg-table-row-divider-color</code></td>
 								<td>table rows separator color</td>
 								<td><code>#dbdbdb;</code></td>
 							</tr>
@@ -140,6 +140,26 @@
 								<td><code>#f1f1f1;</code></td>
 							</tr>
 							<tr>
+								<td><code>--exmg-table-rows-expanded-divider-border</code></td>
+								<td>border between row and expanded row detail</td>
+								<td><code>none;</code></td>
+							</tr>
+							<tr>
+								<td><code>--exmg-table-rows-expanded-border</code></td>
+								<td>border around row and expanded row detail</td>
+								<td><code>1px solid #dbdbdb;</code></td>
+							</tr>
+							<tr>
+								<td><code>--exmg-table-rows-expanded-background-color</code></td>
+								<td>background color of row and expanded row detail</td>
+								<td><code>#e2f1fe;</code></td>
+							</tr>
+							<tr>
+								<td><code>--exmg-table-rows-expanded-color</code></td>
+								<td>text color of row and expanded row detail</td>
+								<td><code>#02182b;</code></td>
+							</tr>
+							<tr>
 								<td><code>--exmg-table-th-color</code></td>
 								<td>header text color</td>
 								<td><code>#0071dc;</code></td>
@@ -150,8 +170,8 @@
 								<td><code>#ffffff;</code></td>
 							</tr>
 							<tr>
-								<td><code>--exmg-table-th-hover-color</code></td>
-								<td>header hover text color</td>
+								<td><code>--exmg-table-th-sortable-hover-color</code></td>
+								<td>sortable header hover text color</td>
 								<td><code>#02182b;</code></td>
 							</tr>
 							<tr>
@@ -957,7 +977,7 @@
 					<div class="tsd-signature tsd-kind-icon">default<wbr>Sort<wbr>Column<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:76</li>
+							<li>Defined in exmg-grid.ts:80</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -972,7 +992,7 @@
 					<div class="tsd-signature tsd-kind-icon">default<wbr>Sort<wbr>Direction<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SORT_DIRECTION</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:82</li>
+							<li>Defined in exmg-grid.ts:86</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1009,7 +1029,7 @@
 					<div class="tsd-signature tsd-kind-icon">expandable<wbr>Toggle<wbr>Selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:128</li>
+							<li>Defined in exmg-grid.ts:132</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1024,7 +1044,7 @@
 					<div class="tsd-signature tsd-kind-icon">expanded<wbr>Row<wbr>Ids<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:122</li>
+							<li>Defined in exmg-grid.ts:126</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1083,7 +1103,7 @@
 					<div class="tsd-signature tsd-kind-icon">hidden<wbr>Column<wbr>Names<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:108</li>
+							<li>Defined in exmg-grid.ts:112</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1175,7 +1195,7 @@
 					<div class="tsd-signature tsd-kind-icon">items<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:64</li>
+							<li>Defined in exmg-grid.ts:68</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2977,7 +2997,7 @@
 					<div class="tsd-signature tsd-kind-icon">rows<wbr>Selectable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:95</li>
+							<li>Defined in exmg-grid.ts:99</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2992,7 +3012,7 @@
 					<div class="tsd-signature tsd-kind-icon">rows<wbr>Sortable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:89</li>
+							<li>Defined in exmg-grid.ts:93</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3052,7 +3072,7 @@
 					<div class="tsd-signature tsd-kind-icon">selectable<wbr>Checkbox<wbr>Selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:102</li>
+							<li>Defined in exmg-grid.ts:106</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3068,7 +3088,7 @@
 					<div class="tsd-signature tsd-kind-icon">selected<wbr>Row<wbr>Ids<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:115</li>
+							<li>Defined in exmg-grid.ts:119</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3118,7 +3138,7 @@
 					<div class="tsd-signature tsd-kind-icon">sortable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:70</li>
+							<li>Defined in exmg-grid.ts:74</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3339,7 +3359,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides LitElement.styles</p>
 						<ul>
-							<li>Defined in exmg-grid.ts:56</li>
+							<li>Defined in exmg-grid.ts:60</li>
 						</ul>
 					</aside>
 				</section>

@@ -6,15 +6,19 @@
   --exmg-table-color: #02182b;
   --exmg-table-background-color: #ffffff;
   --exmg-table-border-color: #f6f6f6;
-  --exmg-table-row-separator-color: #dbdbdb;
+  --exmg-table-row-divider-color: #dbdbdb;
   --exmg-table-row-selected-color: #02182b;
   --exmg-table-row-selected-background-color: #e2f1fe;
   --exmg-table-row-hover-color: #02182b;
   --exmg-table-row-hover-background-color: #f1f1f1;
   --exmg-table-row-dragged-background-color: #f1f1f1;
+  --exmg-table-rows-expanded-divider-border: none;
+  --exmg-table-rows-expanded-border: 1px solid #dbdbdb;
+  --exmg-table-rows-expanded-background-color: #e2f1fe;
+  --exmg-table-rows-expanded-color: #02182b;
   --exmg-table-th-color: #0071dc;
   --exmg-table-columns-background-color: #ffffff;
-  --exmg-table-th-hover-color: #02182b;
+  --exmg-table-th-sortable-hover-color: #02182b;
   --exmg-table-th-height: 48px;
   --exmg-table-th-font-size: 16px;
   --exmg-table-th-sort-margin-left: 4px;
@@ -63,10 +67,6 @@ td {
   background-color: var(--exmg-table-columns-background-color);
   vertical-align: middle;
   text-align: left;
-
-  &:hover {
-    color: var(--exmg-table-th-hover-color);
-  }
 }
 
 .grid-columns th:first-child, tbody td:first-child {
@@ -78,8 +78,7 @@ td {
 }
 
 th, td {
-  bottom: 0;
-  border-bottom: 1px solid var(--exmg-table-row-separator-color);
+  border-bottom: 1px solid var(--exmg-table-row-divider-color);
 }
 
 tbody td {
@@ -102,6 +101,16 @@ table tr:last-child td {
 th[data-sort] {
   padding-right: 25px;
   cursor: pointer;
+
+  &:hover {
+    color: var(--exmg-table-th-sortable-hover-color);
+
+    &:not([data-sort-direction])::after {
+      opacity: 1;
+      transition: transform .1s linear;
+      transform: rotate(0deg);
+    }
+  }
 
   &::after {
     display: inline-block;
@@ -134,15 +143,43 @@ th[data-sort-direction=DESC]::after {
 tbody > tr:not(.grid-row-detail):hover {
   color: var(--exmg-table-row-hover-color);
   background-color: var(--exmg-table-row-hover-background-color);
+  svg {
+    fill: var(--exmg-table-row-hover-color);
+  }
 }
 
 tr[data-selected] {
   color: var(--exmg-table-row-selected-color);
   background-color: var(--exmg-table-row-selected-background-color);
+  svg {
+    fill: var(--exmg-table-row-selected-color);
+  }
 }
 /**** END SELECTABLE  ROW *********/
 
 /**** EXPANDABLE ROW *********/
+tbody {
+  tr[data-has-expanded-detail], tr[data-has-expanded-detail]:hover, tr[data-is-row-expanded] {
+    background-color: var(--exmg-table-rows-expanded-background-color);
+    border: var(--exmg-table-rows-expanded-border);
+
+    td {
+      color: var(--exmg-table-rows-expanded-color);
+      svg {
+        fill: var(--exmg-table-rows-expanded-color);
+      }
+    }
+  }
+
+  tr[data-is-row-expanded] td {
+    border-top: none;
+  }
+
+  tr[data-has-expanded-detail] td, tr[data-has-expanded-detail]:hover td {
+    border-bottom: var(--exmg-table-rows-expanded-divider-border);
+  }
+}
+
 tr.grid-row-detail {
   display: none;
 
@@ -193,6 +230,6 @@ tr td.grid-cell-visible-on-hover > * {
   visibility: hidden;
 }
 
-tr:hover td.grid-cell-visible-on-hover > * {
+tr:hover td.grid-cell-visible-on-hover > *, tr[data-has-expanded-detail] td.grid-cell-visible-on-hover > * {
   visibility: visible;
 }

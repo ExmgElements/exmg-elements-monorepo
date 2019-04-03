@@ -26,15 +26,19 @@ type SmartPropertyValue = GenericPropertyValues<Props>;
  * `--exmg-table-color` | table text color | `#02182b;`
  * `--exmg-table-background-color` | table background color | `#ffffff;`
  * `--exmg-table-border-color` | table border color | `#f6f6f6;`
- * `--exmg-table-row-separator-color` | table rows separator color | `#dbdbdb;`
+ * `--exmg-table-row-divider-color` | table rows separator color | `#dbdbdb;`
  * `--exmg-table-row-selected-color` | selected row text color | `#02182b;`
  * `--exmg-table-row-selected-background-color` | selected row background color | `#e2f1fe;`
  * `--exmg-table-row-hover-color` | row hover text color | `#02182b;`
  * `--exmg-table-row-hover-background-color` | row hover background color | `#f1f1f1;`
  * `--exmg-table-row-dragged-background-color` | sortable row background color when dragged | `#f1f1f1;`
+ * `--exmg-table-rows-expanded-divider-border` | border between row and expanded row detail | `none;`
+ * `--exmg-table-rows-expanded-border` | border around row and expanded row detail | `1px solid #dbdbdb;`
+ * `--exmg-table-rows-expanded-background-color` | background color of row and expanded row detail | `#e2f1fe;`
+ * `--exmg-table-rows-expanded-color` | text color of row and expanded row detail | `#02182b;`
  * `--exmg-table-th-color` | header text color | `#0071dc;`
  * `--exmg-table-columns-background-color` | header background color | `#ffffff;`
- * `--exmg-table-th-hover-color` | header hover text color | `#02182b;`
+ * `--exmg-table-th-sortable-hover-color` | sortable header hover text color | `#02182b;`
  * `--exmg-table-th-height` | header height | `48px;`
  * `--exmg-table-th-font-size` | header font size | `16px;`
  * `--exmg-table-th-sort-margin-left` | header margin after text but before icon | `4px;`

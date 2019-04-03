@@ -273,7 +273,8 @@ const expandedRowIds: Record<string, boolean> = {
 ```
 Key is just id which you pass by attributes `data-row-key` and `data-row-detail-key` and value is just flag what will expand when true otherwise collapse
 
-* When row detail is being expanded then to element which trigger action will be added attribute `data-is-expanded`
+* When row detail is being expanded then to element which trigger action will be added attribute `data-is-expanded`.
+Row with trigger will have attribute `data-has-expanded-detail`,
 To row detail is added attribute `data-is-row-expanded`. When collapsed both attributes are removed. 
 
 ### Selectable rows

@@ -61,35 +61,128 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h1 id="exmg-grid-">&lt;exmg-grid /></h1>
-				<h2 id="grid-requirements">Grid requirements</h2>
-				<ul>
-					<li><p>Columns has be added to <code>table &gt; thead &gt; tr.grid.columns</code></p>
-					</li>
-					<li><p>Body has to be added to <code>table &gt; tbody.grid-data</code></p>
-					</li>
-					<li><p>You should use <code>import {repeat} from &#39;lit-html/directives/repeat&#39;;</code> function to map you items to rows.</p>
-					</li>
-					<li><p>Each row inside <code>tbody.grid-data</code> should have attribute <code>data-row-key</code> with unique value</p>
-					</li>
-					<li><p>If table is expandable then for each row you have to add related row <code>table &gt; tbody.grid-data tr.grid-row-detail</code>
-						This row must have attribute <code>data-row-detail-key</code> with same value as its relative row</p>
-					</li>
-					<li><p>Element <code>exmg-grid</code> require property <code>.items</code> - needed to detect any changes on data</p>
-						<h2 id="optional">Optional</h2>
+				<h2 id="anatomy">Anatomy</h2>
+				<p>This library contains following components:</p>
+				<ol>
+					<li>Grid (main component)</li>
+					<li>Toolbar (optional)</li>
+					<li>Pagination (optional)</li>
+				</ol>
+				<p>Conceptual usage:</p>
+				<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid</span> <span class="hljs-attr">...params</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">thead</span>&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"grid-toolbar"</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">data-auto-colspan</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid-smart-toolbar</span> <span class="hljs-attr">...params</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">exmg-grid-smart-toolbar</span>&gt;</span>
+         <span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+       <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"grid-columns"</span>&gt;</span>
+         ...column definitions
+       <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">thead</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">tbody</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"grid-data"</span>&gt;</span>
+        ...table rows
+      <span class="hljs-tag">&lt;/<span class="hljs-name">tbody</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">tfoot</span>&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">data-auto-colspan</span>&gt;</span>
+           <span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid-pagination</span> <span class="hljs-attr">...params</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">exmg-grid-pagination</span>&gt;</span>
+         <span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+       <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">tfoot</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">exmg-grid</span>&gt;</span>
+</code></pre><h3 id="grid">Grid</h3>
+				<p><exmg-grid&gt; is main grid component. All other params/data/components should be put inside it as properties or children elements</p>
+						<h3 id="toolbars">Toolbars</h3>
+						<p>There are 3 toolbars available out of the box:</p>
+						<ol>
+							<li>exmg-grid-base-toolbar</li>
+							<li>exmg-grid-toolbar</li>
+							<li>exmg-grid-smart-toolbar</li>
+						</ol>
+						<h4 id="grid-base-toolbar">Grid base toolbar</h4>
+						<p>The most base toolbar.</p>
+						<p>Do you want to use it? <strong>Least likely</strong>.</p>
+						<p>Base toolbar is most context agnostic from toolbars available. It serves only as container for
+							various visual section (actions, description, filters) and only behavior it has - it can change its
+						background color depending on if there are any child elements in &quot;filters&quot; section.</p>
+						<pre><code>&lt;exmg-grid-base-toolbar&gt;
+  &lt;<span class="hljs-selector-tag">div</span> slot=<span class="hljs-string">"actions"</span>&gt;
+    ..<span class="hljs-selector-class">.render</span> anything here
+  &lt;/div&gt;
+  &lt;<span class="hljs-selector-tag">div</span> slot=<span class="hljs-string">"description"</span>&gt;..<span class="hljs-selector-class">.render</span> anything here (prefer plain text)&lt;/div&gt;
+  &lt;<span class="hljs-selector-tag">div</span> slot=<span class="hljs-string">"filters"</span>&gt;
+    ..<span class="hljs-selector-class">.render</span> anything here
+  &lt;/div&gt;
+&lt;/exmg-grid-base-toolbar&gt;</code></pre><h4 id="grid-toolbar">Grid toolbar</h4>
+						<p>Wraps around <strong>grid base toolbar</strong>.</p>
+						<p>Do you want to use it? <strong>Probably in some cases where you want more control than smart toolbar gives you</strong>.</p>
+						<p>This toolbar accepts actions, description and filters via props and fires events <code>exmg-grid-toolbar-action-executed</code>
+						and <code>exmg-grid-toolbar-filter-changed</code>.</p>
+						<p>Please read the docs to see how actions and filters should look like to pass them into toolbar.</p>
+						<pre><code>&lt;exmg-grid-toolbar
+    .actions=<span class="hljs-string">"<span class="hljs-subst">${<span class="hljs-keyword">this</span>.actions}</span>"</span>
+    description=<span class="hljs-string">"<span class="hljs-subst">${<span class="hljs-keyword">this</span>.description}</span>"</span>
+    .filters=<span class="hljs-string">"<span class="hljs-subst">${<span class="hljs-keyword">this</span>.filters}</span>"</span>
+    <span class="hljs-meta">@exmg</span>-grid-toolbar-action-executed=<span class="hljs-string">"<span class="hljs-subst">${<span class="hljs-keyword">this</span>.onActionExecuted}</span>"</span>
+    <span class="hljs-meta">@exmg</span>-grid-toolbar-filter-changed=<span class="hljs-string">"<span class="hljs-subst">${<span class="hljs-keyword">this</span>.onFilterChanged}</span>"</span>
+&gt;&lt;/exmg-grid-toolbar&gt;</code></pre><h4 id="grid-smart-toolbar">Grid smart toolbar</h4>
+						<p>Wraps around <strong>grid toolbar</strong>.</p>
+						<p>Do you want to use it? <strong>Most likely</strong>.</p>
+						<p><strong>In most cases you will want to use exactly grid smart toolbar.</strong> </p>
+						<p>This toolbar accepts actions, description, filters and amount-of-selected-items via props and fires events <code>exmg-grid-toolbar-action-executed</code>
+						and <code>exmg-grid-toolbar-filter-changed</code>.</p>
+						<p>This toolbar is most context dependent from toolbars available. It automates some logic, but needs additional
+							information to be passed: amount-of-selected-items. Actions passed into this toolbar should contain
+						additional information when action should be displayed.</p>
+						<p>Please read the docs to see how actions and filters should look like to pass them into toolbar.</p>
+						<pre><code>&lt;exmg-grid-smart-toolbar
+    amount-of-selected-items=<span class="hljs-string">"<span class="hljs-subst">${<span class="hljs-keyword">this</span>.amountOfSelectedItems}</span>"</span>
+    .actions=<span class="hljs-string">"<span class="hljs-subst">${<span class="hljs-keyword">this</span>.actions}</span>"</span>
+    description=<span class="hljs-string">"<span class="hljs-subst">${<span class="hljs-keyword">this</span>.description}</span>"</span>
+    .filters=<span class="hljs-string">"<span class="hljs-subst">${<span class="hljs-keyword">this</span>.filters}</span>"</span>
+    <span class="hljs-meta">@exmg</span>-grid-toolbar-action-executed=<span class="hljs-string">"<span class="hljs-subst">${<span class="hljs-keyword">this</span>.onActionExecuted}</span>"</span>
+    <span class="hljs-meta">@exmg</span>-grid-toolbar-filter-changed=<span class="hljs-string">"<span class="hljs-subst">${<span class="hljs-keyword">this</span>.onFilterChanged}</span>"</span>
+&gt;&lt;/exmg-grid-smart-toolbar&gt;</code></pre><h3 id="pagination">Pagination</h3>
+						<p>Simple pagination component that gives you all features described in material design specification.</p>
+						<pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid-pagination</span>
+  <span class="hljs-attr">page-index</span>=<span class="hljs-string">$</span></span></span><span class="hljs-template-variable">{this.pageIndex}</span><span class="xml"><span class="hljs-tag">
+  <span class="hljs-attr">page-size</span>=<span class="hljs-string">$</span></span></span><span class="hljs-template-variable">{this.pageSize}</span><span class="xml"><span class="hljs-tag">
+  <span class="hljs-attr">item-count</span>=<span class="hljs-string">$</span></span></span><span class="hljs-template-variable">{this.itemCount}</span><span class="xml"><span class="hljs-tag">
+  @<span class="hljs-attr">exmg-grid-pagination-page-size-changed</span>=<span class="hljs-string">"$</span></span></span><span class="hljs-template-variable">{this.onGridPageSizeChanged}</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>
+  @<span class="hljs-attr">exmg-grid-pagination-page-changed</span>=<span class="hljs-string">"$</span></span></span><span class="hljs-template-variable">{this.onGridPageChanged}</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>
+&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">exmg-grid-pagination</span>&gt;</span></span></code></pre><h2 id="grid-requirements">Grid requirements</h2>
 						<ul>
-							<li><p>toolbar should be placed in <code>table &gt; thead &gt; tr.grid-toolbar</code></p>
+							<li><p>Columns has be added to <code>table &gt; thead &gt; tr.grid.columns</code></p>
 							</li>
-							<li><p>when amount of columns may change you may use attribute <code>data-auto-colspan</code> on both <code>th and td</code> elements </p>
+							<li><p>Body has to be added to <code>table &gt; tbody.grid-data</code></p>
 							</li>
-							<li><p>if cell should be visible only on hover then you can use class <code>grid-cell-visible-on-hover</code></p>
+							<li><p>You should use <code>import {repeat} from &#39;lit-html/directives/repeat&#39;;</code> function to map you items to rows.</p>
 							</li>
-							<li><p>if icon which trigger expanding / collapsing row-detail has to rotate then add class <code>grid-icon-rotate</code> </p>
+							<li><p>Each row inside <code>tbody.grid-data</code> should have attribute <code>data-row-key</code> with unique value</p>
+							</li>
+							<li><p>If table is expandable then for each row you have to add related row <code>table &gt; tbody.grid-data tr.grid-row-detail</code>
+								This row must have attribute <code>data-row-detail-key</code> with same value as its relative row</p>
+							</li>
+							<li><p>Element <code>exmg-grid</code> require property <code>.items</code> - needed to detect any changes on data</p>
+								<h2 id="optional">Optional</h2>
+								<ul>
+									<li><p>toolbar should be placed in <code>table &gt; thead &gt; tr.grid-toolbar</code></p>
+									</li>
+									<li><p>when amount of columns may change you may use attribute <code>data-auto-colspan</code> on both <code>th and td</code> elements </p>
+									</li>
+									<li><p>if cell should be visible only on hover then you can use class <code>grid-cell-visible-on-hover</code></p>
+									</li>
+									<li><p>if icon which trigger expanding / collapsing row-detail has to rotate then add class <code>grid-icon-rotate</code> </p>
+									</li>
+								</ul>
 							</li>
 						</ul>
-					</li>
-				</ul>
-				<p>Example how should looks most minimal markup to meet with requirements:</p>
-				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid</span> <span class="hljs-attr">.itmes</span>=<span class="hljs-string">"${items}"</span>&gt;</span>
+						<p>Example how should looks most minimal markup to meet with requirements:</p>
+						<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid</span> <span class="hljs-attr">.itmes</span>=<span class="hljs-string">"${items}"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">thead</span>&gt;</span>
      <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"grid-columns"</span>&gt;</span>
@@ -114,29 +207,29 @@
     <span class="hljs-tag">&lt;/<span class="hljs-name">tbody</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">exmg-grid</span>&gt;</span></code></pre>
-				<h2 id="features">Features</h2>
-				<h3 id="column-sortable">Column sortable</h3>
-				<ul>
-					<li><p>You should add attribute <code>sortable</code> attribute on <code>exmg-grid</code></p>
-					</li>
-					<li><p>You must have defined columns and on <code>th</code> element you should add <code>data-sort</code> attribute with unique name of column.
-							You can also omit name in <code>data-sort</code> attribute but then you should setup <code>data-column-key</code>
-						both configuration are fine</p>
-						<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">data-column-key</span>=<span class="hljs-string">"month"</span> <span class="hljs-attr">data-sort</span>&gt;</span>Month<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+						<h2 id="features">Features</h2>
+						<h3 id="column-sortable">Column sortable</h3>
+						<ul>
+							<li><p>You should add attribute <code>sortable</code> attribute on <code>exmg-grid</code></p>
+							</li>
+							<li><p>You must have defined columns and on <code>th</code> element you should add <code>data-sort</code> attribute with unique name of column.
+									You can also omit name in <code>data-sort</code> attribute but then you should setup <code>data-column-key</code>
+								both configuration are fine</p>
+								<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">data-column-key</span>=<span class="hljs-string">"month"</span> <span class="hljs-attr">data-sort</span>&gt;</span>Month<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">data-column-key</span>=<span class="hljs-string">"year"</span> <span class="hljs-attr">data-sort</span>=<span class="hljs-string">"year-column"</span>&gt;</span>Year<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span></code></pre>
-					</li>
-					<li><p>To handle sort changing you should add listener <code>@exmg-grid-sort-change</code> on <code>exmg-grid</code>. You will receive <code>CustomEvent&lt;EventDetailSortChange&gt;</code></p>
-						<pre><code class="language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> EventDetailSortChange = {
+							</li>
+							<li><p>To handle sort changing you should add listener <code>@exmg-grid-sort-change</code> on <code>exmg-grid</code>. You will receive <code>CustomEvent&lt;EventDetailSortChange&gt;</code></p>
+								<pre><code class="language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> EventDetailSortChange = {
 column: <span class="hljs-built_in">string</span>;
 sortDirection?: <span class="hljs-string">'ASC'</span> | <span class="hljs-string">'DESC'</span>;
 };</code></pre>
-					</li>
-					<li><p>To setup default sorting you should setup attributes <code>default-sort-column</code> and <code>default-sort-direction</code> on <code>exmg-grid</code></p>
-					</li>
-				</ul>
-				<p>Example:</p>
-				<hr>
-				<pre><code class="language-html">      <span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid</span>
+							</li>
+							<li><p>To setup default sorting you should setup attributes <code>default-sort-column</code> and <code>default-sort-direction</code> on <code>exmg-grid</code></p>
+							</li>
+						</ul>
+						<p>Example:</p>
+						<hr>
+						<pre><code class="language-html">      <span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid</span>
         <span class="hljs-attr">.items</span>=<span class="hljs-string">"${this.items}"</span>
         <span class="hljs-attr">default-sort-column</span>=<span class="hljs-string">"year-column"</span>
         <span class="hljs-attr">default-sort-direction</span>=<span class="hljs-string">"DESC"</span>
@@ -152,10 +245,10 @@ sortDirection?: <span class="hljs-string">'ASC'</span> | <span class="hljs-strin
           <span class="hljs-tag">&lt;/<span class="hljs-name">thead</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">exmg-grid</span>&gt;</span></code></pre>
-				<h3 id="expandable-rows">Expandable rows</h3>
-				<ul>
-					<li><p>You should pass attribute <code>expandable-toggle-selector</code> to <code>exmg-grid</code></p>
-						<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid</span> <span class="hljs-attr">.items</span>=<span class="hljs-string">"${this.items}"</span> <span class="hljs-attr">expandable-toggle-selector</span>=<span class="hljs-string">".expandable-trigger"</span>&gt;</span>
+						<h3 id="expandable-rows">Expandable rows</h3>
+						<ul>
+							<li><p>You should pass attribute <code>expandable-toggle-selector</code> to <code>exmg-grid</code></p>
+								<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid</span> <span class="hljs-attr">.items</span>=<span class="hljs-string">"${this.items}"</span> <span class="hljs-attr">expandable-toggle-selector</span>=<span class="hljs-string">".expandable-trigger"</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">tbody</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"grid-data"</span>&gt;</span>
   ${
     repeat(
@@ -177,41 +270,42 @@ sortDirection?: <span class="hljs-string">'ASC'</span> | <span class="hljs-strin
   }
 <span class="hljs-tag">&lt;/<span class="hljs-name">tbody</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">exmg-grid</span>&gt;</span></code></pre>
-					</li>
-					<li><p>If you want to programmatically expand / collapse row with detail you can pass property <code>.expandedRowIds</code> to <code>exmg-grid</code> element
-						Where type of <code>expandedRowIds</code> looks</p>
-						<pre><code class="language-typescript"><span class="hljs-keyword">const</span> expandedRowIds: Record&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">boolean</span>&gt; = {
+							</li>
+							<li><p>If you want to programmatically expand / collapse row with detail you can pass property <code>.expandedRowIds</code> to <code>exmg-grid</code> element
+								Where type of <code>expandedRowIds</code> looks</p>
+								<pre><code class="language-typescript"><span class="hljs-keyword">const</span> expandedRowIds: Record&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">boolean</span>&gt; = {
 <span class="hljs-string">'1'</span>: <span class="hljs-literal">true</span>,
 <span class="hljs-string">'2'</span>: <span class="hljs-literal">false</span>,
 };</code></pre>
-						<p>Key is just id which you pass by attributes <code>data-row-key</code> and <code>data-row-detail-key</code> and value is just flag what will expand when true otherwise collapse</p>
-					</li>
-					<li><p>When row detail is being expanded then to element which trigger action will be added attribute <code>data-is-expanded</code>
-						To row detail is added attribute <code>data-is-row-expanded</code>. When collapsed both attributes are removed. </p>
-					</li>
-				</ul>
-				<h3 id="selectable-rows">Selectable rows</h3>
-				<p>To turn on this feature attribute <code>rows-selectable</code> has to be set on <code>exmg-grid</code> element</p>
-				<ul>
-					<li>If you want to programmatically select / unselect row you may pass property <code>.selectedRowIds</code> to <code>exmg-grid</code> element
-					Where type of <code>selectedRowIds</code> looks</li>
-				</ul>
-				<pre><code class="language-typescript"><span class="hljs-keyword">const</span> selectedRowIds: Record&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">boolean</span>&gt; = {
+								<p>Key is just id which you pass by attributes <code>data-row-key</code> and <code>data-row-detail-key</code> and value is just flag what will expand when true otherwise collapse</p>
+							</li>
+							<li><p>When row detail is being expanded then to element which trigger action will be added attribute <code>data-is-expanded</code>.
+									Row with trigger will have attribute <code>data-has-expanded-detail</code>,
+								To row detail is added attribute <code>data-is-row-expanded</code>. When collapsed both attributes are removed. </p>
+							</li>
+						</ul>
+						<h3 id="selectable-rows">Selectable rows</h3>
+						<p>To turn on this feature attribute <code>rows-selectable</code> has to be set on <code>exmg-grid</code> element</p>
+						<ul>
+							<li>If you want to programmatically select / unselect row you may pass property <code>.selectedRowIds</code> to <code>exmg-grid</code> element
+							Where type of <code>selectedRowIds</code> looks</li>
+						</ul>
+						<pre><code class="language-typescript"><span class="hljs-keyword">const</span> selectedRowIds: Record&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">boolean</span>&gt; = {
   <span class="hljs-string">'1'</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-string">'2'</span>: <span class="hljs-literal">false</span>,
 };</code></pre>
-				<p>Key is just id which you pass by attributes <code>data-row-key</code> and <code>data-row-detail-key</code> and value is just flag perhaps makr row as selected when true otherwise unselect</p>
-				<h4 id="checkboxes">Checkboxes</h4>
-				<p>It is optional. You can add checkbox to header and/or rows. There is needed 2 things to do to be checkbox works with
-				row selection:</p>
-				<ul>
-					<li><p>on <code>exmg-grid</code> element set attribute<code>selectable-checkbox-selector=&quot;.selectable-checkbox&quot;</code></p>
-					</li>
-					<li><p>checkbox component needs to implement event <code>change</code> and property <code>checked</code>. For instance <code>mwc-checkbox</code> at least to version
-						<code>v0.4.0</code> doesnt support <code>change</code> event and can&#39;t be used with gird</p>
-					</li>
-				</ul>
-				<pre><code class="language-html">&lt;exmg-grid .items="${this.items}" selectable-checkbox-selector=".selectable-checkbox" ?rows-selectable="${true}"&gt;
+						<p>Key is just id which you pass by attributes <code>data-row-key</code> and <code>data-row-detail-key</code> and value is just flag perhaps makr row as selected when true otherwise unselect</p>
+						<h4 id="checkboxes">Checkboxes</h4>
+						<p>It is optional. You can add checkbox to header and/or rows. There is needed 2 things to do to be checkbox works with
+						row selection:</p>
+						<ul>
+							<li><p>on <code>exmg-grid</code> element set attribute<code>selectable-checkbox-selector=&quot;.selectable-checkbox&quot;</code></p>
+							</li>
+							<li><p>checkbox component needs to implement event <code>change</code> and property <code>checked</code>. For instance <code>mwc-checkbox</code> at least to version
+								<code>v0.4.0</code> doesnt support <code>change</code> event and can&#39;t be used with gird</p>
+							</li>
+						</ul>
+						<pre><code class="language-html">&lt;exmg-grid .items="${this.items}" selectable-checkbox-selector=".selectable-checkbox" ?rows-selectable="${true}"&gt;
   &lt;table&gt;
     &lt;thead&gt;
      &lt;tr class="grid-columns"&gt;
@@ -225,17 +319,17 @@ sortDirection?: <span class="hljs-string">'ASC'</span> | <span class="hljs-strin
     &lt;/tbody&gt;
   &lt;/table&gt;
 &lt;/exmg-grid&gt;</code></pre>
-				<h3 id="rows-sortable">Rows sortable</h3>
-				<p>To turn on this feature attribute <code>rows-sortable</code> has to be set on <code>exmg-grid</code>. Element <code>tr</code> or any descend <code>tr</code> element
-				must have class <code>grid-row-drag-handler</code>. </p>
-				<p>Each time order will be changed event <code>exmg-grid-rows-order-changed</code> is triggered and has o be handled.
-				Handling this event <code>must to trigger</code> update property <code>items</code> otherwise it won&#39;t take effect.</p>
-				<p>Event details of <code>CustomEvent&lt;EventDetailRowsOrderChanged&gt;</code> has such structure: </p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> EventDetailRowsOrderChanged&lt;T <span class="hljs-keyword">extends</span> object = <span class="hljs-built_in">any</span>&gt; = {
+						<h3 id="rows-sortable">Rows sortable</h3>
+						<p>To turn on this feature attribute <code>rows-sortable</code> has to be set on <code>exmg-grid</code>. Element <code>tr</code> or any descend <code>tr</code> element
+						must have class <code>grid-row-drag-handler</code>. </p>
+						<p>Each time order will be changed event <code>exmg-grid-rows-order-changed</code> is triggered and has o be handled.
+						Handling this event <code>must to trigger</code> update property <code>items</code> otherwise it won&#39;t take effect.</p>
+						<p>Event details of <code>CustomEvent&lt;EventDetailRowsOrderChanged&gt;</code> has such structure: </p>
+						<pre><code class="language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> EventDetailRowsOrderChanged&lt;T <span class="hljs-keyword">extends</span> object = <span class="hljs-built_in">any</span>&gt; = {
   items: T[];
 };</code></pre>
-				<p><code>Items are sorted as it is done in UI.</code></p>
-				<pre><code>  onRowsOrderChanged(<span class="hljs-keyword">event</span>: CustomEvent&lt;EventDetailRowsOrderChanged&gt;): <span class="hljs-keyword">void</span> {
+						<p><code>Items are sorted as it is done in UI.</code></p>
+						<pre><code>  onRowsOrderChanged(<span class="hljs-keyword">event</span>: CustomEvent&lt;EventDetailRowsOrderChanged&gt;): <span class="hljs-keyword">void</span> {
     <span class="hljs-comment">// store current order and update items</span>
     <span class="hljs-keyword">this</span>.items = [...<span class="hljs-keyword">event</span>.detail.items];
   }</code></pre><pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid</span> <span class="hljs-attr">.items</span>=<span class="hljs-string">"${this.items}"</span> ?<span class="hljs-attr">rows-sortable</span>=<span class="hljs-string">"${true}"</span> @<span class="hljs-attr">exmg-grid-rows-order-changed</span>=<span class="hljs-string">"${this.onRowsOrderChanged}"</span>&gt;</span>
@@ -254,11 +348,11 @@ sortDirection?: <span class="hljs-string">'ASC'</span> | <span class="hljs-strin
     <span class="hljs-tag">&lt;/<span class="hljs-name">tbody</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">exmg-grid</span>&gt;</span></code></pre>
-				<h3 id="columns-visibility-management">Columns visibility management</h3>
-				<p>To hide / show columns you can use property <code>hiddenColumnNames</code> of <code>exmg-grid</code></p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">const</span> hiddenColumnNames: Record&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">string</span>&gt; = {};</code></pre>
-				<p>whenever you want to change column visibility update property <code>hiddenColumnNames</code></p>
-				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid</span> <span class="hljs-attr">.items</span>=<span class="hljs-string">"${this.items}"</span> <span class="hljs-attr">.hiddenColumnNames</span>=<span class="hljs-string">"${{col1: 'col1', col2: 'col2'}}"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">exmg-grid</span>&gt;</span></code></pre>
+						<h3 id="columns-visibility-management">Columns visibility management</h3>
+						<p>To hide / show columns you can use property <code>hiddenColumnNames</code> of <code>exmg-grid</code></p>
+						<pre><code class="language-typescript"><span class="hljs-keyword">const</span> hiddenColumnNames: Record&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">string</span>&gt; = {};</code></pre>
+						<p>whenever you want to change column visibility update property <code>hiddenColumnNames</code></p>
+						<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid</span> <span class="hljs-attr">.items</span>=<span class="hljs-string">"${this.items}"</span> <span class="hljs-attr">.hiddenColumnNames</span>=<span class="hljs-string">"${{col1: 'col1', col2: 'col2'}}"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">exmg-grid</span>&gt;</span></code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
