@@ -63,8 +63,6 @@ export class ExmgGridToolbarDemo extends LitElement {
         <style>
           :host {
             --mdc-theme-primary: #0071dc;
-            --mdc-theme-on-surface: #02182B;
-            --exmg-grid-active-color: #e2f1fe;
 
             padding: 10px;
             display: block;

@@ -1,6 +1,10 @@
-@import "../../node_modules/@material/theme/mdc-theme";
-@import "../../node_modules/@material/typography/mdc-typography";
-@import "./_variables.scss";
+@import "@material/theme/mixins";
+@import "@material/typography/mixins";
+@import "variables.scss";
+
+$exmg-grid-toolbar-bg-color: #ffffff;
+$exmg-grid-toolbar-active-bg-color: #e1f0fe;
+$exmg-grid-toolbar-color: #02182b;
 
 .wrapper {
   display: flex;
@@ -9,10 +13,10 @@
   align-items: center;
   padding: 10px 0px;
   @include mdc-typography-base;
-  @include mdc-theme-prop(background-color, surface);
+  background-color: var(--exmg-grid-toolbar-bg-color, var(--mdc-theme-surface, $exmg-grid-toolbar-bg-color));
 
   &.active {
-    background-color: var(--exmg-grid-active-color, $exmg-grid-active-color);
+    background-color: var(--exmg-grid-toolbar-active-bg-color, $exmg-grid-toolbar-active-bg-color);
   }
 }
 
@@ -22,13 +26,12 @@
 
 .description {
   @include mdc-typography('headline5');
-  @include mdc-theme-prop(color, on-surface);
-
+  color: var(--exmg-grid-toolbar-color, var(--mdc-theme-on-surface, $exmg-grid-toolbar-color));
   padding: 0 16px;
-}
 
-.with-action-separator {
-  border-left: 1px solid var(--mdc-theme-on-surface, $exmg-grid-text-color);
+  &.with-action-separator {
+    border-left: 1px solid var(--exmg-grid-toolbar-color, var(--mdc-theme-on-surface, $exmg-grid-toolbar-color));
+  }
 }
 
 .filters {
@@ -36,6 +39,5 @@
   flex-direction: row;
   flex: 1;
   justify-content: flex-end;
-
   padding: 0 16px;
 }
