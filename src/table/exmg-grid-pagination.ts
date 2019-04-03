@@ -151,6 +151,13 @@ export class ExmgGridPagination extends LitElement {
             background-color: var(--exmg-filter-background-color);
           }
           --paper-button-ink-color: var(--exmg-filter-background-color);
+
+          --exmg-paper-combobox-selected-item-color: var(--exmg-grid-pagination-color);
+          --exmg-paper-combobox-selected-item-bg-color: var(--exmg-grid-pagination-bg-color);
+          --exmg-paper-combobox-dropdown-button-color: var(--exmg-grid-pagination-color);
+          --exmg-paper-combobox-dropdown-button-bg-color: var(--exmg-grid-pagination-bg-color);
+          --exmg-paper-combobox-dropdown-list-color: var(--exmg-grid-pagination-color);
+          --exmg-paper-combobox-dropdown-list-bg-color: var(--exmg-grid-pagination-bg-color);
         }
       </style>
       <div class="wrapper">
