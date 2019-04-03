@@ -1,5 +1,139 @@
 # <exmg-grid /\>
 
+## Anatomy
+
+This library contains following components:
+1. Grid (main component)
+2. Toolbar (optional)
+3. Pagination (optional)
+
+Conceptual usage:
+```
+<exmg-grid ...params>
+    <table>
+      <thead>
+       <tr class="grid-toolbar">
+         <th data-auto-colspan>
+          <exmg-grid-smart-toolbar ...params></exmg-grid-smart-toolbar>
+         </th>
+       </tr>
+       <tr class="grid-columns">
+         ...column definitions
+       </tr>
+      </thead>
+      <tbody class="grid-data">
+        ...table rows
+      </tbody>
+      <tfoot>
+       <tr>
+         <td data-auto-colspan>
+           <exmg-grid-pagination ...params></exmg-grid-pagination>
+         </td>
+       </tr>
+      </tfoot>
+    </table>
+</exmg-grid>
+
+```
+
+### Grid
+
+\<exmg-grid> is main grid component. All other params/data/components should be put inside it as properties or children elements
+
+### Toolbars
+
+There are 3 toolbars available out of the box:
+1. exmg-grid-base-toolbar
+2. exmg-grid-toolbar
+3. exmg-grid-smart-toolbar
+
+#### Grid base toolbar
+
+The most base toolbar.
+
+Do you want to use it? **Least likely**.
+
+Base toolbar is most context agnostic from toolbars available. It serves only as container for
+various visual section (actions, description, filters) and only behavior it has - it can change its
+background color depending on if there are any child elements in "filters" section.
+
+```
+<exmg-grid-base-toolbar>
+  <div slot="actions">
+    ...render anything here
+  </div>
+  <div slot="description">...render anything here (prefer plain text)</div>
+  <div slot="filters">
+    ...render anything here
+  </div>
+</exmg-grid-base-toolbar>
+```
+
+#### Grid toolbar
+
+Wraps around **grid base toolbar**.
+
+Do you want to use it? **Probably in some cases where you want more control than smart toolbar gives you**.
+
+This toolbar accepts actions, description and filters via props and fires events ```exmg-grid-toolbar-action-executed```
+and ```exmg-grid-toolbar-filter-changed```.
+
+Please read the docs to see how actions and filters should look like to pass them into toolbar.
+
+```
+<exmg-grid-toolbar
+    .actions="${this.actions}"
+    description="${this.description}"
+    .filters="${this.filters}"
+    @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
+    @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
+></exmg-grid-toolbar>
+```
+
+#### Grid smart toolbar
+
+Wraps around **grid toolbar**.
+
+Do you want to use it? **Most likely**.
+
+**In most cases you will want to use exactly grid smart toolbar.** 
+
+This toolbar accepts actions, description, filters and amount-of-selected-items via props and fires events ```exmg-grid-toolbar-action-executed```
+and ```exmg-grid-toolbar-filter-changed```.
+
+This toolbar is most context dependent from toolbars available. It automates some logic, but needs additional
+information to be passed: amount-of-selected-items. Actions passed into this toolbar should contain 
+additional information when action should be displayed.
+
+Please read the docs to see how actions and filters should look like to pass them into toolbar.
+
+```
+<exmg-grid-smart-toolbar
+    amount-of-selected-items="${this.amountOfSelectedItems}"
+    .actions="${this.actions}"
+    description="${this.description}"
+    .filters="${this.filters}"
+    @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
+    @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
+></exmg-grid-smart-toolbar>
+```
+
+### Pagination
+
+Simple pagination component that gives you all features described in material design specification.
+
+```
+<exmg-grid-pagination
+  page-index=${this.pageIndex}
+  page-size=${this.pageSize}
+  item-count=${this.itemCount}
+  @exmg-grid-pagination-page-size-changed="${this.onGridPageSizeChanged}"
+  @exmg-grid-pagination-page-changed="${this.onGridPageChanged}"
+>
+</exmg-grid-pagination>
+```
+ 
+
 ## Grid requirements
 
 * Columns has be added to `table > thead > tr.grid.columns`
