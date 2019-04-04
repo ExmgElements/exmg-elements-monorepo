@@ -59,12 +59,21 @@ export class ExmgGridSmartToolbar extends LitElement {
     return true;
   }
 
+  private getFilters() {
+    return this.filters.map((filter) => {
+      return {
+        ...filter,
+        disabled: this.amountOfSelectedItems > 0,
+      };
+    });
+  }
+
   render() {
     return html`
       <exmg-grid-toolbar
         .actions="${this.getActions()}"
         description="${this.description}"
-        .filters="${this.filters}"
+        .filters="${this.getFilters()}"
       ></exmg-grid-toolbar>
     `;
   }

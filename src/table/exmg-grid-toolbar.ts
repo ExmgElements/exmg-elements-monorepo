@@ -105,6 +105,7 @@ export class ExmgGridToolbar extends LitElement {
         class="filter"
         attr-for-selected="data-id"
         no-float-label
+        ?disabled="${!!filter.disabled}"
         label="${filter.name}"
         @exmg-combobox-select="${this.emitFilterChangedEvent(filter)}"
       >

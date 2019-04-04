@@ -8,6 +8,7 @@ export type Action = {
 export type Filter<TConfig extends BaseFilterConfig = BaseFilterConfig> = {
   id: string;
   name: string;
+  disabled?: boolean;
   config: TConfig;
 };
 

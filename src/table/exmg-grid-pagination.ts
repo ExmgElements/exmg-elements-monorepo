@@ -6,6 +6,15 @@ import '@exmg/exmg-paper-combobox';
 import '@polymer/paper-item';
 import {style} from './exmg-grid-pagination-styles';
 
+/**
+ * ### Styling
+ * The following custom properties  are available for styling:
+ *
+ * Custom property | Description | Default
+ * ----------------|-------------|----------
+ * `--exmg-grid-pagination-bg-color` | pagination background color | `var(--mdc-theme-surface, #ffffff);`
+ * `--exmg-grid-pagination-color` | pagination foreground (mostly text) color | `var(--mdc-theme-on-surface, #02182b);`
+ */
 @customElement('exmg-grid-pagination')
 export class ExmgGridPagination extends LitElement {
 

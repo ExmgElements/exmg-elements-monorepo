@@ -16,7 +16,7 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
       icon: 'get_app',
       condition: {
         type: ActionConditionType.AmountOfSelectedItemsRange,
-        min: 1,
+        min: 0,
       },
     },
     {
@@ -26,7 +26,7 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
       icon: 'merge_type',
       condition: {
         type: ActionConditionType.AmountOfSelectedItemsRange,
-        min: 2,
+        min: 1,
       },
     },
     {
@@ -36,7 +36,7 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
       icon: 'delete',
       condition: {
         type: ActionConditionType.AmountOfSelectedItemsRange,
-        min: 3,
+        min: 2,
       },
     },
   ];
@@ -68,7 +68,7 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
   ];
 
   @property({type: Number})
-  private amountOfSelectedItems: number = 2;
+  private amountOfSelectedItems: number = 1;
 
   private onActionExecuted(e: CustomEvent) {
     console.log('onActionExecuted', e.detail);
@@ -107,7 +107,6 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
         ></exmg-grid-smart-toolbar>
         <h1>Without actions</h1>
         <exmg-grid-smart-toolbar
-            amount-of-selected-items="1"
             description="${this.description}"
             .filters="${this.filters}"
             @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
