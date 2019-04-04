@@ -7,21 +7,19 @@ import {style} from './drawer-styles';
 
 @customElement('exmg-form-drawer-demo-always-open')
 export class DrawerAlwaysOpen extends LitElement {
-  firstUpdated(_changedProperties: any) {
-    super.firstUpdated(_changedProperties);
+  firstUpdated(changedProperties: any) {
+    super.firstUpdated(changedProperties);
     new MDCList(this.shadowRoot!.querySelector('.mdc-list')!);
   }
 
   static styles = style;
 
   render () {
-    //language=html
+    // language=html
     return html`
       <exmg-form-drawer hasheader="" ?open="${true}" style="height: 100vh">
-        
         <mwc-icon slot="title-icon" class="mdc-list-item__graphic">extension</mwc-icon>
         <span slot="title">PlayTwo CMS</span>
-        
         <div class="drawer-content">
           <div class="mdc-list">
             <hr class="mdc-list-divider">
@@ -46,7 +44,6 @@ export class DrawerAlwaysOpen extends LitElement {
               <mwc-icon class="mdc-list-item__graphic">trending_up</mwc-icon>
               <span class="mdc-list-item__text">Broadcast Analytics</span>
             </a>
-          
             <hr class="mdc-list-divider">
             <h6 class="mdc-list-group__subheader">Users</h6>
             <a class="mdc-list-item" href="#">
@@ -61,7 +58,6 @@ export class DrawerAlwaysOpen extends LitElement {
               <mwc-icon class="mdc-list-item__graphic">security</mwc-icon>
               <span class="mdc-list-item__text">Roles and Rights</span>
             </a>
-          
             <hr class="mdc-list-divider">
             <h6 class="mdc-list-group__subheader">Gamification</h6>
             <a class="mdc-list-item" href="#">
