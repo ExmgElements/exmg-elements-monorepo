@@ -4,7 +4,7 @@ import '@polymer/neon-animation/animations/slide-from-right-animation';
 import '@polymer/neon-animation/animations/slide-right-animation';
 import '@polymer/paper-dialog/paper-dialog.js';
 
-@customElement('exmg-drawer' as any)
+@customElement('exmg-drawer')
 export class ExmgDrawer extends LitElement {
   @property({type: Boolean})
   opened: boolean = false;

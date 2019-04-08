@@ -11,12 +11,26 @@ export class ExmgFormDrawer extends LitElement {
   @property({type: Boolean})
   opened: boolean = false;
 
-  onSubmit(e: CustomEvent) {
-    console.log('onSubmit', e.detail);
+  @property({type: String, attribute: 'submit-btn-title'})
+  submitBtnTitle: string = 'Submit';
+
+  @property({type: String, attribute: 'cancel-btn-title'})
+  cancelBtnTitle: string = 'Cancel';
+
+  handleSubmitBtnClick() {
+    this.shadowRoot!.querySelector('exmg-form')!.submit();
   }
 
-  onCancel(e: CustomEvent) {
-    console.log('onCancel', e.detail);
+  handleCancelBtnClick() {
+    this.shadowRoot!.querySelector('exmg-form')!.cancel();
+  }
+
+  handleFormSubmit(e: CustomEvent) {
+    console.log('handleFormSubmit', e.detail);
+  }
+
+  handleFormCancel(e: CustomEvent) {
+    console.log('handleFormCancel', e.detail);
   }
 
   static styles = [
@@ -30,12 +44,12 @@ export class ExmgFormDrawer extends LitElement {
         <div class="header">
           <slot name="title"></slot>
           <div class="header-buttons">
-            <input type="button" value="Cancel">
-            <input type="button" value="Submit">
+            <input type="button" value="${this.cancelBtnTitle}" @click="${this.handleCancelBtnClick}">
+            <input type="button" value="${this.submitBtnTitle}" @click="${this.handleSubmitBtnClick}">
           </div>
         </div>
         <div class="form-elements">
-          <exmg-form @submit="${this.onSubmit}" @cancel="${this.onCancel}" id="form1">
+          <exmg-form @submit="${this.handleFormSubmit}" @cancel="${this.handleFormCancel}">
             <slot></slot>
           </exmg-form>
         </div>
