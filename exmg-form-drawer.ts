@@ -36,7 +36,7 @@ export class ExmgFormDrawer extends LitElement {
         </div>
         <div class="form-elements">
           <exmg-form @submit="${this.onSubmit}" @cancel="${this.onCancel}" id="form1">
-              <slot></slot>
+            <slot></slot>
           </exmg-form>
         </div>
       </exmg-drawer>
