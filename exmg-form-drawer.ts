@@ -3,56 +3,43 @@ import '@polymer/iron-demo-helpers/demo-snippet';
 import '@polymer/neon-animation/animations/slide-from-right-animation';
 import '@polymer/neon-animation/animations/slide-right-animation';
 import '@polymer/paper-dialog/paper-dialog.js';
+import './exmg-drawer';
+import {style} from './exmg-form-drawer-styles';
 
 @customElement('exmg-form-drawer' as any)
 export class ExmgFormDrawer extends LitElement {
   @property({type: Boolean})
   opened: boolean = false;
 
-  handleOpenedChanged(e: CustomEvent) {
-    this.opened = e.detail.value;
-
-    this.dispatchEvent(new CustomEvent(
-      'exmg-form-drawer-opened-changed',
-      {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: e.detail.value,
-        },
-      }
-    ));
+  onSubmit(e: CustomEvent) {
+    console.log('onSubmit', e.detail);
   }
 
-  openDialog() {
-    this.opened = true;
+  onCancel(e: CustomEvent) {
+    console.log('onCancel', e.detail);
   }
+
+  static styles = [
+    style,
+  ];
 
   render () {
     // language=html
     return html`
-      <style>
-        paper-dialog {
-          margin: 0;
-          padding: 0;
-          position: fixed;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          width: 300px;
-          overflow: auto;
-          box-shadow: none;
-        }
-      </style>
-      <paper-dialog
-        ?opened="${this.opened}"
-        @opened-changed="${this.handleOpenedChanged}"
-        entry-animation="slide-from-right-animation"
-        exit-animation="slide-right-animation"
-        with-backdrop
-      >
-        <slot></slot>
-      </paper-dialog>
+      <exmg-drawer ?opened="${this.opened}">
+        <div class="header">
+          <slot name="title"></slot>
+          <div class="header-buttons">
+            <input type="button" value="Cancel">
+            <input type="button" value="Submit">
+          </div>
+        </div>
+        <div class="form-elements">
+          <exmg-form @submit="${this.onSubmit}" @cancel="${this.onCancel}" id="form1">
+              <slot></slot>
+          </exmg-form>
+        </div>
+      </exmg-drawer>
     `;
   }
 }

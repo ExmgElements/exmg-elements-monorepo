@@ -1,0 +1,25 @@
+:host {
+  display: flex;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    height: 76px;
+    margin: 0;
+    font-family: Roboto, sans-serif;
+    border-bottom: 1px solid #333;
+
+    .header-buttons {
+      display: flex;
+      flex-direction: row;
+      flex: 1;
+      justify-content: flex-end;
+    }
+  }
+
+  .form-elements {
+    padding: 20px;
+  }
+}
