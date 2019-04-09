@@ -1,5 +1,6 @@
 import {LitElement, html, customElement, property} from 'lit-element';
 import '@polymer/paper-input/paper-input.js';
+import '@polymer/paper-spinner/paper-spinner-lite';
 import '@exmg/exmg-paper-combobox/exmg-paper-combobox.js';
 import '@exmg/exmg-form/exmg-form';
 import '../exmg-form-drawer';

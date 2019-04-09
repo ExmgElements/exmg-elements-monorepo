@@ -24,6 +24,10 @@
 
       mwc-button {
         margin-left: 20px;
+
+        paper-spinner-lite {
+          margin-left: 16px;
+        }
       }
     }
   }

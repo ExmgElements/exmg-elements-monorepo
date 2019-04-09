@@ -11,13 +11,16 @@ import '@material/mwc-button';
 @customElement('exmg-form-drawer' as any)
 export class ExmgFormDrawer extends LitElement {
   @property({type: Boolean})
-  opened: boolean = false;
+  public opened: boolean = false;
 
   @property({type: String, attribute: 'submit-btn-title'})
-  submitBtnTitle: string = 'Submit';
+  public submitBtnTitle: string = 'Submit';
 
   @property({type: String, attribute: 'cancel-btn-title'})
-  cancelBtnTitle: string = 'Cancel';
+  public cancelBtnTitle: string = 'Cancel';
+
+  @property({type: Boolean, reflect: true})
+  private submitting: boolean = false;
 
   @query('exmg-form')
   private form?: ExmgForm;
@@ -32,10 +35,12 @@ export class ExmgFormDrawer extends LitElement {
 
   handleFormSubmit(e: CustomEvent) {
     console.log('handleFormSubmit', e.detail);
+    this.submitting = true;
   }
 
   handleFormCancel(e: CustomEvent) {
     console.log('handleFormCancel', e.detail);
+    this.submitting = false;
     this.opened = false;
   }
 
@@ -58,10 +63,11 @@ export class ExmgFormDrawer extends LitElement {
             </mwc-button>
             <mwc-button
               unelevated
+              ?disabled="${this.submitting}"
               title="${this.submitBtnTitle}"
               @click="${this.handleSubmitBtnClick}"
             >
-              ${this.submitBtnTitle}
+              ${this.submitBtnTitle}${this.submitting ? html`<paper-spinner-lite active></paper-spinner-lite>` : ''}
             </mwc-button>
           </div>
         </div>
