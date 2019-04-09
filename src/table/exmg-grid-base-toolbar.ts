@@ -20,20 +20,27 @@ export class ExmgGridBaseToolbar extends LitElement {
   @property({type: Object})
   private actionsCount: number = 0;
 
+  @property({type: Boolean, reflect: true})
+  private active: boolean = false;
+
   private observer?: MutationObserver;
 
   connectedCallback(): void {
     super.connectedCallback();
 
     this.observer = new MutationObserver((mutationsList) => {
-      for (const mutation of mutationsList) {
-        if (mutation.type === 'childList') {
-          this.actionsCount = this.querySelector('div[slot=actions]')!.childElementCount;
+      setTimeout(() => {
+        for (const mutation of mutationsList) {
+          if (mutation.type === 'childList') {
+            this.actionsCount = this.querySelector('div[slot=actions]')!.childElementCount;
+            this.active = this.actionsCount > 0;
+          }
         }
-      }
+      }, 60);
     });
 
     this.actionsCount = this.querySelector('div[slot=actions]')!.childElementCount;
+    this.active = this.actionsCount > 0;
     this.observer!.observe(this, {attributes: false, childList: true, subtree: true});
   }
 
@@ -43,7 +50,7 @@ export class ExmgGridBaseToolbar extends LitElement {
 
   render() {
     return html`
-      <div class="wrapper ${this.actionsCount > 0 ? 'active' : ''}">
+      <div class="wrapper ${this.active ? 'active' : ''}">
         ${
           this.actionsCount > 0 ?
             html`

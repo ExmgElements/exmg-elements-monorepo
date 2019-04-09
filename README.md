@@ -8,15 +8,10 @@ This library contains following components:
 3. Pagination (optional)
 
 Conceptual usage:
-```
+```html
 <exmg-grid ...params>
     <table>
       <thead>
-       <tr class="grid-toolbar">
-         <th data-auto-colspan>
-          <exmg-grid-smart-toolbar ...params></exmg-grid-smart-toolbar>
-         </th>
-       </tr>
        <tr class="grid-columns">
          ...column definitions
        </tr>
@@ -24,21 +19,36 @@ Conceptual usage:
       <tbody class="grid-data">
         ...table rows
       </tbody>
-      <tfoot>
-       <tr>
-         <td data-auto-colspan>
-           <exmg-grid-pagination ...params></exmg-grid-pagination>
-         </td>
-       </tr>
-      </tfoot>
     </table>
+    <exmg-grid-smart-toolbar slot="toolbar"...params></exmg-grid-smart-toolbar>
+    <exmg-grid-pagination slot="pagination" ...params></exmg-grid-pagination>
 </exmg-grid>
 
 ```
+### Grid Card
+`<exmg-grid>` is main grid component. All other params/data/components should be put inside it as properties or children elements
+GridElement accept slots:
+* default - this jus table (required)
+* toolbar - slot for toolbar placed above table 
+* pagination - slot for pagination placed below table 
 
-### Grid
+```html
+  <div class="table-card">
+    <slot name="toolbar"></slot>
+    <div class="table-container"><slot></slot></div>
+    <slot name="pagination"></slot>
+  </div>
+```
 
-\<exmg-grid> is main grid component. All other params/data/components should be put inside it as properties or children elements
+```html
+<exmg-grid>
+  <table></table>
+  <exmg-grid-pagination slot="toolbar" ...params></exmg-grid-pagination>
+  <exmg-grid-pagination slot="pagination" ...params></exmg-grid-pagination>  
+</exmg-grid>
+```
+
+`exmg-grid-pagination` can be also embedded inside table
 
 ### Toolbars
 
@@ -154,6 +164,8 @@ This row must have attribute `data-row-detail-key` with same value as its relati
  * toolbar should be placed in `table > thead > tr.grid-toolbar`
  
  * when amount of columns may change you may use attribute `data-auto-colspan` on both `th and td` elements 
+ 
+ * if column has number values then you can use class `grid-col-number`
  
  * if cell should be visible only on hover then you can use class `grid-cell-visible-on-hover`
  
@@ -378,3 +390,78 @@ whenever you want to change column visibility update property `hiddenColumnNames
 ```html
 <exmg-grid .items="${this.items}" .hiddenColumnNames="${{col1: 'col1', col2: 'col2'}}"></exmg-grid>
 ```
+
+## Styles
+
+You should import table and theme styles
+
+```
+import {style as tableStyles} from '../src/table/exmg-grid-styles';
+import {style as exmgThemeStyles} from '../src/table/theme/exmg-theme-styles';
+
+export class DemoSimpleGridTable extends LitELement {
+  static styles = [
+    exmgThemeStyles,
+    tableStyles,
+  ];
+}
+```
+
+It is also possible to compose custom theme. You can use mixin `exmg-generate-theme-table-variables`
+
+Example of light theme:
+
+```scss
+@import "src/table/mixins";
+exmg-grid {
+  $primaryColor: #0070db;
+  $surfaceColor: #ffffff;
+  $onSurfaceColor: #02182b;
+  @include exmg-generate-theme-table-variables($primaryColor, $surfaceColor, $onSurfaceColor);
+}
+```
+Where local variables map to material design:
+
+Local sass variable | mdc variable | css variable
+----------------|-------------|------------
+  $primaryColor | $mdcThemePrimary | --mdc-theme-primary
+  $surfaceColor | $dcThemeSurface | --mdc-theme-surface
+  $onSurfaceColor | $mdcThemeOnSurface | --mdc-theme-on-surface
+
+Additionally you cna also override css variables:
+
+ Custom property | Description | Default
+ ----------------|-------------|----------
+ `--exmg-arrow-upward-url` | Url to icon that is used for soring direction indicator | `url('/assets/arrow-upward.svg');`
+ `--exmg-table-card-width` | table card width | `100%;`
+ `--exmg-table-width` | table width | `100%;`
+ `--exmg-table-card-margin-bottom` | table bottom margin  | `5px;`
+ `--exmg-table-color` | table text color | `#02182b;`
+ `--exmg-table-background-color` | table background color | `#ffffff;`
+ `--exmg-table-border-color` | table border color | `#f6f6f6;`
+ `--exmg-table-row-divider-color` | table rows separator color | `#dbdbdb;`
+ `--exmg-table-row-selected-color` | selected row text color | `#02182b;`
+ `--exmg-table-row-selected-background-color` | selected row background color | `#e2f1fe;`
+ `--exmg-table-row-hover-color` | row hover text color | `#02182b;`
+ `--exmg-table-row-hover-background-color` | row hover background color | `#f1f1f1;`
+ `--exmg-table-row-dragged-background-color` | sortable row background color when dragged | `#f1f1f1;`
+ `--exmg-table-rows-expanded-divider-border` | border between row and expanded row detail | `none;`
+ `--exmg-table-rows-expanded-border` | border around row and expanded row detail | `1px solid #dbdbdb;`
+ `--exmg-table-rows-expanded-background-color` | background color of row and expanded row detail | `#e2f1fe;`
+ `--exmg-table-rows-expanded-color` | text color of row and expanded row detail | `#02182b;`
+ `--exmg-table-th-color` | header text color | `#0071dc;`
+ `--exmg-table-columns-background-color` | header background color | `#ffffff;`
+ `--exmg-table-th-sortable-hover-color` | sortable header hover text color | `#02182b;`
+ `--exmg-table-th-height` | header height | `48px;`
+ `--exmg-table-th-sort-margin-left` | header margin after text but before icon | `4px;`
+ `--exmg-table-td-height` | row cell height | `48px;`
+ `--exmg-table-th-sort-icon-height` | sort icon height | `16px;`
+ `--exmg-table-th-sort-icon-width` | sort icon width | `16px;`
+ `--exmg-grid-toolbar-bg-color` | Toolbar background color | `$surface;`
+ `--exmg-grid-toolbar-color` | Toolbar text color | `$onSurface`
+ `--exmg-grid-toolbar-active-bg-color` | Toolbar background color when any action available | `$surface;`
+ `--exmg-grid-toolbar-active-color` | Toolbar text color when any action available | `$onSurface`
+ `--exmg-grid-pagination-bg-color` | Pagination background color | `--mdc-theme-surface`
+ `--exmg-grid-pagination-color` | Pagination text color | `--mdc-theme-on-surface`
+ `--exmg-theme-table-on-surface-disabled` | Disabled color | `--mdc-theme-on-surface with filter .38`
+ `--exmg-filter-background-color` | Background color for combobox | `--mdc-theme-surface`

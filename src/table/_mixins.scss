@@ -1,0 +1,68 @@
+@function generateColorVariants($primary, $surface, $onSurface) {
+  @return (
+    exmg-theme-table-surface: #{$surface},
+    exmg-theme-table-on-surface: #{$onSurface},
+    exmg-table-border-color: #{rgba($onSurface, .13)},
+    exmg-table-row-divider-color: #{rgba($onSurface, .13)},
+    exmg-table-row-selected-background-color: #{rgba($onSurface, .15)},
+    exmg-table-row-selected-color: #{$onSurface},
+    exmg-table-row-hover-color: #{$onSurface},
+    exmg-table-row-hover-background-color: #{rgba($onSurface, .25)},
+    exmg-table-rows-expanded-background-color: #{rgba($onSurface, .15)},
+    exmg-table-rows-expanded-color: #{$onSurface},
+    exmg-table-th-color: #{rgba($onSurface, .6)},
+    exmg-table-th-sortable-hover-color: #{rgba($onSurface, .35)},
+    mdc-theme-primary: #{$primary},
+    mdc-theme-on-surface: #{$onSurface},
+    mdc-theme-surface: #{$surface},
+    mdc-theme-disabled: red,
+    exmg-theme-table-on-surface-disabled: #{rgba($onSurface, .38)},
+    exmg-theme-table-on-surface-low: #{rgba($onSurface, .2)},
+    exmg-grid-toolbar-active-bg-color: $surface,
+    exmg-grid-toolbar-active-color: $onSurface,
+  );
+}
+
+@mixin exmg-generate-theme-table-variables($primary, $surface, $onSurface) {
+    @each $varKey, $varValue in generateColorVariants($primary, $surface, $onSurface) {
+      --#{$varKey}: #{$varValue};
+    }
+}
+
+@mixin exmg-theme() {
+  $primaryColor: #0070db;
+  $surfaceColor: #ffffff;
+  $onSurfaceColor: #02182b;
+  @include exmg-generate-theme-table-variables($primaryColor, $surfaceColor, $onSurfaceColor);
+
+  --exmg-grid-toolbar-active-bg-color: #e1f0fe;
+
+  --exmg-filter-background-color: #B8DDFE;
+
+  $exmgThemeTableSurface: $surfaceColor;
+  $exmgThemeTableOnSurface: $onSurfaceColor;
+
+  $exmgTableBorderColor: #f6f6f6;
+  $exmgTableRowDividerColor: #dbdbdb;
+  $exmgTableRowSelectedBackgroundColor: #e2f1fe;
+  $exmgTableRowHoverBackgroundColor: #f1f1f1;
+  $exmgTableRowsExpandedBackgroundColor: #e2f1fe;
+  $exmgTableThColor: #0071dc;
+
+  --exmg-table-color: #{$exmgThemeTableOnSurface};
+  --exmg-table-card-background-color: #{$exmgThemeTableSurface};
+
+  --exmg-table-border-color: #{$exmgTableBorderColor};
+  --exmg-table-row-divider-color: #{$exmgTableRowDividerColor};
+  --exmg-table-row-selected-color: #{$exmgThemeTableOnSurface};
+  --exmg-table-row-selected-background-color: #{$exmgTableRowSelectedBackgroundColor};
+  --exmg-table-row-hover-color: #{$exmgThemeTableOnSurface};
+  --exmg-table-row-hover-background-color: #{$exmgTableRowHoverBackgroundColor};
+  --exmg-table-row-dragged-background-color: #f1f1f1;
+  --exmg-table-rows-expanded-divider-border: none;
+  --exmg-table-rows-expanded-border: 1px solid #{$exmgTableRowDividerColor};
+  --exmg-table-rows-expanded-background-color: #{$exmgTableRowsExpandedBackgroundColor};
+  --exmg-table-rows-expanded-color: #{$exmgThemeTableOnSurface};
+  --exmg-table-th-color: #{$exmgTableThColor};
+  --exmg-table-columns-background-color: #{$exmgThemeTableSurface};
+}

@@ -4,6 +4,7 @@
 
 $exmg-grid-pagination-bg-color: #ffffff;
 $exmg-grid-pagination-color: #02182b;
+$exmg-grid-pagination-color-disabled: rgba($exmg-grid-pagination-color, .38);
 
 .wrapper {
   display: flex;
@@ -44,8 +45,9 @@ $exmg-grid-pagination-color: #02182b;
   }
 }
 
-a[disabled] {
-  cursor: not-allowed;
-  opacity: 0.5;
-  color: green;
+mwc-button[disabled] {
+  mwc-icon {
+    color: var(--exmg-theme-table-on-surface-disabled, var(--mdc-theme-disabled, $exmg-grid-pagination-color-disabled));
+  }
 }
+

@@ -21,8 +21,9 @@ type SmartPropertyValue = GenericPropertyValues<Props>;
  * Custom property | Description | Default
  * ----------------|-------------|----------
  * `--exmg-arrow-upward-url` | Url to icon that is used for soring direction indicator | `url('/assets/arrow-upward.svg');`
+ * `--exmg-table-card-width` | table card width | `100%;`
  * `--exmg-table-width` | table width | `100%;`
- * `--exmg-table-margin-bottom` | table bottom margin  | `5px;`
+ * `--exmg-table-card-margin-bottom` | table bottom margin  | `5px;`
  * `--exmg-table-color` | table text color | `#02182b;`
  * `--exmg-table-background-color` | table background color | `#ffffff;`
  * `--exmg-table-border-color` | table border color | `#f6f6f6;`
@@ -40,20 +41,10 @@ type SmartPropertyValue = GenericPropertyValues<Props>;
  * `--exmg-table-columns-background-color` | header background color | `#ffffff;`
  * `--exmg-table-th-sortable-hover-color` | sortable header hover text color | `#02182b;`
  * `--exmg-table-th-height` | header height | `48px;`
- * `--exmg-table-th-font-size` | header font size | `16px;`
  * `--exmg-table-th-sort-margin-left` | header margin after text but before icon | `4px;`
  * `--exmg-table-td-height` | row cell height | `48px;`
- * `--exmg-table-td-font-size` | row cell font size | `16px;`
- *
- * ### Overridden vars for paper-checkbox
- *
- * Custom property | Description | Default
- * ----------------|-------------|----------
- * `--paper-checkbox-unchecked-color` | - | `#97aac4;`
- * `--paper-checkbox-checked-color` | - | `#1274d9;`
- * `--paper-checkbox-size` | - | `24px;`
- * `--paper-checkbox-unchecked-ink-color` | - | `#0070db;`
- * `--paper-checkbox-checked-ink-color` | - | `#0070db;`
+ * `--exmg-table-th-sort-icon-height` | sort icon height | `16px;`
+ * `--exmg-table-th-sort-icon-width` | sort icon width | `16px;`
  */
 @customElement('exmg-grid')
 export class ExmgGrid extends LitElement {
@@ -357,8 +348,12 @@ export class ExmgGrid extends LitElement {
 
   protected render() {
     return html`
-      <div class="table-container">
-        ${cache(this.canSortRows() ? this.renderWithSortable() : this.renderWithoutSortable())}
+      <div class="table-card">
+        <slot name="toolbar"></slot>
+        <div class="table-container">
+          ${cache(this.canSortRows() ? this.renderWithSortable() : this.renderWithoutSortable())}
+        </div>
+        <slot name="pagination"></slot>
       </div>
     `;
   }

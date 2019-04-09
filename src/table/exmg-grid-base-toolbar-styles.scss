@@ -5,6 +5,7 @@
 $exmg-grid-toolbar-bg-color: #ffffff;
 $exmg-grid-toolbar-active-bg-color: #e1f0fe;
 $exmg-grid-toolbar-color: #02182b;
+$exmg-grid-toolbar-active-color: #000000;
 
 .wrapper {
   display: flex;
@@ -14,9 +15,18 @@ $exmg-grid-toolbar-color: #02182b;
   padding: 10px 0px;
   @include mdc-typography-base;
   background-color: var(--exmg-grid-toolbar-bg-color, var(--mdc-theme-surface, $exmg-grid-toolbar-bg-color));
+  color: var(--exmg-grid-toolbar-color, var(--mdc-theme-on-surface, $exmg-grid-toolbar-color));
 
   &.active {
     background-color: var(--exmg-grid-toolbar-active-bg-color, $exmg-grid-toolbar-active-bg-color);
+    color: var(--exmg-grid-toolbar-active-color, $exmg-grid-toolbar-active-color);
+
+    .description {
+      color: var(--exmg-grid-toolbar-active-color, $exmg-grid-toolbar-active-color);
+      &.with-action-separator {
+        border-left: 1px solid var(--exmg-grid-toolbar-active-color, $exmg-grid-toolbar-active-color);
+      }
+    }
   }
 }
 

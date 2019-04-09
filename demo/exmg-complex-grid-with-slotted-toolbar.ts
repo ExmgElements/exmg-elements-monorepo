@@ -10,7 +10,7 @@ import '../src/table/exmg-grid.js';
 import '../src/table/exmg-grid-pagination';
 import {style as tableStyles} from '../src/table/exmg-grid-styles';
 import '../src/table/exmg-grid-base-toolbar';
-import {demoStyles} from './demo-styles';
+import {style as demoStyles} from './styles/demo-styles';
 
 import {createIcon} from './exmg-icons';
 import {DEFAULT_SORT_COLUMN, DEFAULT_SORT_DIRECTION, ExmgBaseGridDemo} from './exmg-base-grid-demo';
@@ -25,14 +25,14 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
       :host {
         --mdc-theme-primary: #0070db;
         --mdc-theme-on-surface: #091e2e;
-        --exmg-grid-active-color: #e1f0fe;
+        --exmg-grid-toolbar-active-bg-color: #e1f0fe;
         --exmg-filter-background-color: #B8DDFE;
         --exmg-grid-pagination-bg-color: #4A4A4A;
         --exmg-grid-pagination-color: #ffffff;
       }
       table {
-        --exmg-table-color: white;
-        --exmg-table-background-color: #4A4A4A;
+        --exmg-table-color: #000;
+        --exmg-table-card-background-color: #4A4A4A;
         --exmg-table-border-color: white;
         --exmg-table-row-divider-color: white;
         --exmg-table-row-selected-color: white;
@@ -60,8 +60,8 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
             <td><paper-checkbox class="selectable-checkbox"></paper-checkbox></td>
             <td>#${i.id}</td>
             <td>${i.month}</td>
-            <td>${i.year}</td>
-            <td>${i.amount}</td>
+            <td class="grid-col-number">${i.year}</td>
+            <td class="grid-col-number">${i.amount}</td>
             <td class="grid-cell-visible-on-hover"><span class="expandable-toggle">${createIcon}</span></td>
           </tr>
           <tr class="grid-row-detail" data-row-detail-key="${i.id}">
@@ -87,6 +87,10 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
         <button class="demo-button" @click="${this.unSelectFirstRows}">Unselect first rows</button>
       </div>
       <h1>Complex table with slotted toolbar and custom styles</h1>
+      <ul>
+        <li>Some custom styles</li>
+        <li>Implemented toolbar with slots exmg-grid-base-toolbar</li>
+      </ul>
       <exmg-grid
         .items="${this.items}"
         .hiddenColumnNames="${this.hiddenColumns}"
@@ -101,65 +105,55 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
         ?sortable="${true}"
         @exmg-grid-sort-change="${this.onSortChange}"
       >
+        <exmg-grid-base-toolbar slot="toolbar">
+          <div slot="actions">
+            ${this.selectedRows.length ? html`<mwc-button
+              class="action"
+              title="Merge"
+              @click="${this.onActionDelegate('merge')}"
+            >
+              <mwc-icon>merge_type</mwc-icon>
+                Merge
+            </mwc-button>` : null}
+          </div>
+          <div slot="description">Income table</div>
+          <div slot="filters">
+            <exmg-paper-combobox
+              attr-for-selected="data-id"
+              selected="all"
+              @exmg-combobox-select="${this.onFilterChangedComboboxDelegate('month')}"
+            >
+              <paper-item data-id="all">Month: All</paper-item>
+              <paper-item data-id="january">Month: January</paper-item>
+              <paper-item data-id="february">Month: February</paper-item>
+              <paper-item data-id="march">Month: March</paper-item>
+            </exmg-paper-combobox>
+          </div>
+        </exmg-grid-base-toolbar>
         <table>
           <thead>
-           <tr class="grid-toolbar">
-             <th data-auto-colspan>
-              <exmg-grid-base-toolbar>
-                <div slot="actions">
-                  ${this.selectedRows.length ? html`<mwc-button
-                    class="action"
-                    title="Merge"
-                    @click="${this.onActionDelegate('merge')}"
-                  >
-                    <mwc-icon>merge_type</mwc-icon>
-                      Merge
-                  </mwc-button>` : null}
-                </div>
-                <div slot="description">Income table</div>
-                <div slot="filters">
-                  <exmg-paper-combobox
-                    attr-for-selected="data-id"
-                    selected="all"
-                    @exmg-combobox-select="${this.onFilterChangedComboboxDelegate('month')}"
-                  >
-                    <paper-item data-id="all">Month: All</paper-item>
-                    <paper-item data-id="january">Month: January</paper-item>
-                    <paper-item data-id="february">Month: February</paper-item>
-                    <paper-item data-id="march">Month: March</paper-item>
-                  </exmg-paper-combobox>
-                </div>
-              </exmg-grid-base-toolbar>
-             </th>
-           </tr>
            <tr class="grid-columns">
              <th width="5%"><paper-checkbox class="selectable-checkbox"></paper-checkbox></th>
              <th>ID</th>
              <th data-column-key="month" data-sort>Month</th>
-             <th data-column-key="year" data-sort>Year</th>
-             <th data-column-key="amount" data-sort="">Income</th>
+             <th class="grid-col-number" data-column-key="year" data-sort>Year</th>
+             <th class="grid-col-number" data-column-key="amount" data-sort="">Income</th>
              <th></th>
            </tr>
           </thead>
           <tbody class="grid-data">
               ${this.renderTableBody()}
           </tbody>
-          <tfoot>
-           <tr>
-             <td data-auto-colspan>
-               <exmg-grid-pagination
-                 page-index=${this.pageIndex}
-                 page-size=${this.pageSize}
-                 .pageSizeOptions="${[10, 20, 30, 50, 100]}"
-                 item-count="${this.getTotalCount()}"
-                 @exmg-grid-pagination-page-changed="${this.onPageChange}"
-                 @exmg-grid-pagination-page-size-changed="${this.onPageSizeChange}"
-               >
-               </exmg-grid-pagination>
-             </td>
-           </tr>
-          </tfoot>
         </table>
+       <exmg-grid-pagination
+         page-index=${this.pageIndex}
+         page-size=${this.pageSize}
+         .pageSizeOptions="${[10, 20, 30, 50, 100]}"
+         item-count="${this.getTotalCount()}"
+         @exmg-grid-pagination-page-changed="${this.onPageChange}"
+         @exmg-grid-pagination-page-size-changed="${this.onPageSizeChange}"
+       >
+       </exmg-grid-pagination>
       </exmg-grid>
 `;
   }

@@ -79,6 +79,9 @@ export abstract class ExmgBaseGridDemo extends LitElement {
   @property({type: Object})
   protected selectedRowIds: Record<string, boolean> = {};
 
+  @property({type: String})
+  protected theme: string = 'dark';
+
   constructor() {
     super();
     this.sortItems(DEFAULT_SORT_COLUMN, DEFAULT_SORT_DIRECTION);
@@ -270,6 +273,13 @@ export abstract class ExmgBaseGridDemo extends LitElement {
 
   protected unSelectFirstRows() {
     this.selectedRowIds = this.createRowIdToStateMap(false);
+  }
+
+  protected toggleTheme() {
+    const themes = ['dark', 'light', 'exmg'];
+    const index = themes.indexOf(this.theme);
+    const nextIndex = (index === -1 || index + 1 === themes.length) ? 0 : index + 1;
+    this.theme = themes[nextIndex];
   }
 
   protected onRowsOrderChanged(event: CustomEvent<EventDetailRowsOrderChanged>): void {

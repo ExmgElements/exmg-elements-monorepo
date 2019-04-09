@@ -123,12 +123,39 @@ export class ExmgGridToolbar extends LitElement {
       <style>
         :host {
           --paper-item-focused: {
-            background-color: var(--exmg-filter-background-color);
+            background-color: var(--exmg-filter-background-color, var(--exmg-theme-table-on-surface-low, var(--mdc-theme-surface)));
           };
           --paper-item-selected: {
-            background-color: var(--exmg-filter-background-color);
+            background-color: var(--exmg-filter-background-color, var(--exmg-theme-table-on-surface-low, var(--mdc-theme-surface)));
           }
-          --paper-button-ink-color: var(--exmg-filter-background-color);
+          --paper-button-ink-color: var(--exmg-filter-background-color, var(--mdc-theme-surface));
+          --paper-input-container-color: var(--exmg-grid-toolbar-color, var(--mdc-theme-on-surface));
+          --paper-input-container-focus-color: var(--exmg-grid-toolbar-color, var(--mdc-theme-primary));
+
+          --exmg-paper-combobox-selected-item-color: var(--exmg-grid-toolbar-color, var(--mdc-theme-on-surface));
+          --exmg-paper-combobox-selected-item-bg-color: var(--exmg-grid-toolbar-bg-color, transparent);
+          --exmg-paper-combobox-dropdown-button-color: var(--exmg-grid-toolbar-color, var(--mdc-theme-on-surface));
+          --exmg-paper-combobox-dropdown-button-bg-color: var(--exmg-grid-toolbar-bg-color, transparent);
+          --exmg-paper-combobox-dropdown-list-color: var(--exmg-grid-toolbar-color, var(--mdc-theme-on-surface));
+          --exmg-paper-combobox-dropdown-list-bg-color: var(--exmg-grid-toolbar-bg-color, var(--mdc-theme-surface));
+        }
+        :host exmg-grid-base-toolbar[active] {
+          --paper-item-focused: {
+            background-color: var(--exmg-filter-background-active-color, var(--mdc-theme-surface-medium, var(--mdc-theme-surface)));
+          };
+          --paper-item-selected: {
+            background-color: var(--exmg-filter-background-active-color, var(--mdc-theme-surface-medium, var(--mdc-theme-surface)));
+          }
+          --paper-button-ink-color: var(--exmg-filter-background-active-color, var(--mdc-theme-surface));
+          --paper-input-container-color: var(--exmg-grid-toolbar-active-color, var(--mdc-theme-on-surface));
+          --paper-input-container-focus-color: var(--exmg-grid-toolbar-active-color, var(--mdc-theme-primary));
+
+          --exmg-paper-combobox-selected-item-color: var(--exmg-grid-toolbar-active-color, var(--mdc-theme-on-surface));
+          --exmg-paper-combobox-selected-item-bg-color: var(--exmg-grid-toolbar-bg-active-color, transparent);
+          --exmg-paper-combobox-dropdown-button-color: var(--exmg-grid-toolbar-active-color, var(--mdc-theme-on-surface));
+          --exmg-paper-combobox-dropdown-button-bg-color: var(--exmg-grid-toolbar-bg-active-color, transparent);
+          --exmg-paper-combobox-dropdown-list-color: var(--exmg-grid-toolbar-active-color, var(--mdc-theme-on-surface));
+          --exmg-paper-combobox-dropdown-list-bg-color: var(--exmg-grid-toolbar-bg-active-color, var(--mdc-theme-surface));
         }
       </style>
       <exmg-grid-base-toolbar>
