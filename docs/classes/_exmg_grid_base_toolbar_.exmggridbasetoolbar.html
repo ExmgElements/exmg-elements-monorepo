@@ -65,6 +65,38 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<h3 id="styling">Styling</h3>
+						<p>The following custom properties  are available for styling:</p>
+					</div>
+					<table>
+						<thead>
+							<tr>
+								<th>Custom property</th>
+								<th>Description</th>
+								<th>Default</th>
+							</tr>
+						</thead>
+						<tbody><tr>
+								<td><code>--exmg-grid-toolbar-bg-color</code></td>
+								<td>toolbar background color</td>
+								<td><code>var(--mdc-theme-surface, #ffffff);</code></td>
+							</tr>
+							<tr>
+								<td><code>--exmg-grid-toolbar-active-bg-color</code></td>
+								<td>active toolbar background color (when .active class present)</td>
+								<td><code>#e1f0fe;</code></td>
+							</tr>
+							<tr>
+								<td><code>--exmg-grid-toolbar-color</code></td>
+								<td>toolbar foreground (mostly text) color</td>
+								<td><code>#02182b;</code></td>
+							</tr>
+					</tbody></table>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -3008,7 +3040,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides LitElement.styles</p>
 						<ul>
-							<li>Defined in exmg-grid-base-toolbar.ts:6</li>
+							<li>Defined in exmg-grid-base-toolbar.ts:16</li>
 						</ul>
 					</aside>
 				</section>
@@ -3493,7 +3525,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides LitElement.connectedCallback</p>
 								<ul>
-									<li>Defined in exmg-grid-base-toolbar.ts:15</li>
+									<li>Defined in exmg-grid-base-toolbar.ts:28</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -3558,7 +3590,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides UpdatingElement.disconnectedCallback</p>
 								<ul>
-									<li>Defined in exmg-grid-base-toolbar.ts:30</li>
+									<li>Defined in exmg-grid-base-toolbar.ts:47</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -4917,7 +4949,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in exmg-grid-base-toolbar.ts:34</li>
+									<li>Defined in exmg-grid-base-toolbar.ts:51</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5458,6 +5490,9 @@
 				<ul>
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/__mixins_.html">"_<wbr>mixins"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/__variables_.html">"_<wbr>variables"</a>
