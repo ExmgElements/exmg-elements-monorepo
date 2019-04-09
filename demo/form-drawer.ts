@@ -21,8 +21,12 @@ export class Drawer extends LitElement {
     // language=html
     return html`
       <input type="button" @click="${this.openDialog}" value="Open dialog">
-      <exmg-form-drawer ?opened="${this.opened}" @exmg-drawer-opened-changed="${this.handleOpenedChanged}">
-        <h1 slot="title">New event</h1>
+      <exmg-form-drawer
+        ?opened="${this.opened}"
+        @exmg-drawer-opened-changed="${this.handleOpenedChanged}"
+        submit-btn-title="Create"
+      >
+        <span slot="title">New event</span>
         <paper-input name="value1" label="text input"></paper-input>
         <paper-input name="value2" label="text input" value="pre-filled"></paper-input>
         <paper-input label="password input" type="password"></paper-input>

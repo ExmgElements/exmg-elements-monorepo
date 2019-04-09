@@ -6,6 +6,7 @@ import '@polymer/paper-dialog/paper-dialog.js';
 import './exmg-drawer';
 import {style} from './exmg-form-drawer-styles';
 import {ExmgForm} from '@exmg/exmg-form/exmg-form';
+import '@material/mwc-button';
 
 @customElement('exmg-form-drawer' as any)
 export class ExmgFormDrawer extends LitElement {
@@ -47,10 +48,21 @@ export class ExmgFormDrawer extends LitElement {
     return html`
       <exmg-drawer ?opened="${this.opened}">
         <div class="header">
-          <slot name="title"></slot>
+          <slot name="title" class="title"></slot>
           <div class="header-buttons">
-            <input type="button" value="${this.cancelBtnTitle}" @click="${this.handleCancelBtnClick}">
-            <input type="button" value="${this.submitBtnTitle}" @click="${this.handleSubmitBtnClick}">
+            <mwc-button
+              title="${this.cancelBtnTitle}"
+              @click="${this.handleCancelBtnClick}"
+            >
+              ${this.cancelBtnTitle}
+            </mwc-button>
+            <mwc-button
+              unelevated
+              title="${this.submitBtnTitle}"
+              @click="${this.handleSubmitBtnClick}"
+            >
+              ${this.submitBtnTitle}
+            </mwc-button>
           </div>
         </div>
         <div class="form-elements">

@@ -1,5 +1,6 @@
 :host {
   display: flex;
+  color: #02182b;
 
   .header {
     display: flex;
@@ -11,11 +12,19 @@
     font-family: Roboto, sans-serif;
     border-bottom: 1px solid #333;
 
+    .title {
+      font-size: 24px;
+    }
+
     .header-buttons {
       display: flex;
       flex-direction: row;
       flex: 1;
       justify-content: flex-end;
+
+      mwc-button {
+        margin-left: 20px;
+      }
     }
   }
 
