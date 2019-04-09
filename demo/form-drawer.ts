@@ -1,4 +1,5 @@
 import {LitElement, html, customElement, property} from 'lit-element';
+import '@material/mwc-button';
 import '@polymer/paper-input/paper-input.js';
 import '@polymer/paper-spinner/paper-spinner-lite';
 import '@exmg/exmg-paper-combobox/exmg-paper-combobox.js';
@@ -8,14 +9,37 @@ import '../exmg-form-drawer';
 @customElement('exmg-form-drawer-demo')
 export class Drawer extends LitElement {
   @property({type: Boolean}) opened: boolean = false;
+  @property({type: Boolean}) shouldFail: boolean = false;
+  @property({type: Boolean}) keepOpenedOnSubmitSuccess: boolean = false;
 
   handleOpenedChanged(e: CustomEvent) {
-    console.log('handleOpenedChanged');
     this.opened = e.detail.value;
   }
 
   openDialog() {
     this.opened = true;
+  }
+
+  handleShouldFailChange(e: Event) {
+    this.shouldFail = (<HTMLInputElement>e.composedPath()[0]).checked;
+  }
+
+  handleKeepOpenedOnSubmitSuccess(e: Event) {
+    this.keepOpenedOnSubmitSuccess = (<HTMLInputElement>e.composedPath()[0]).checked;
+  }
+
+  onSubmit(event: any) {
+    setTimeout(_ => {
+      if (this.shouldFail) {
+        event.path[0].error('User does not have permission to save data');
+      } else {
+        event.path[0].done();
+      }
+    }, 1000);
+  }
+
+  onCancel(event: any) {
+    console.log('cancel', event);
   }
 
   render () {
@@ -27,22 +51,40 @@ export class Drawer extends LitElement {
           }
         </style>
       <input type="button" @click="${this.openDialog}" value="Open dialog">
+      <br>
+      <label>
+        <input type="checkbox" name="shouldFail" value="${this.shouldFail}" @change="${this.handleShouldFailChange}">
+        Should Fail
+      </label>
+      <br>
+      <label>
+        <input type="checkbox" name="shouldFail" value="${this.keepOpenedOnSubmitSuccess}" @change="${this.handleKeepOpenedOnSubmitSuccess}">
+        Keep opened on submit success
+      </label>
+      <br>
       <exmg-form-drawer
         ?opened="${this.opened}"
+        ?keep-opened-on-submit-success="${this.keepOpenedOnSubmitSuccess}"
         @exmg-drawer-opened-changed="${this.handleOpenedChanged}"
         submit-btn-title="Create"
+        @submit="${this.onSubmit}"
+        @cancel="${this.onCancel}"
       >
         <span slot="title">New event</span>
-        <paper-input name="value1" label="text input"></paper-input>
-        <paper-input name="value2" label="text input" value="pre-filled"></paper-input>
-        <paper-input label="password input" type="password"></paper-input>
-        <paper-input label="disabled input" disabled value="batman"></paper-input>
-        <paper-input name="name" label="Summary" always-float-label></paper-input>
-        <paper-input name="estimate" label="Estimates" type="number" always-float-label style="max-width:180px;"></paper-input>
-        <exmg-paper-combobox label="Project" name="combobox" style="max-width:280px;" always-float-label>
-          <paper-item>PlayToTV</paper-item>
-          <paper-item>Website</paper-item>
+        <exmg-paper-combobox label="Type" name="type" selected="0" always-float-label>
+          <paper-item>Trivia</paper-item>
+          <paper-item>Other</paper-item>
         </exmg-paper-combobox>
+        <paper-input name="question" label="Question" value="Who's Dylan Hartigan's favorite artist?" required></paper-input>
+        <paper-input name="answer_a" label="Answer A" value="Beyoncé"></paper-input>
+        <paper-input name="answer_b" label="Answer B" value="Eminem"></paper-input>
+        <paper-input name="answer_c" label="Answer C" value="Ariana Grande"></paper-input>
+        <br>
+        <mwc-button
+          unelevated
+        >
+          + Add answer
+        </mwc-button>
       </exmg-form-drawer>
     `;
   }

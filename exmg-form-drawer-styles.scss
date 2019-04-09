@@ -1,6 +1,7 @@
 :host {
   display: flex;
   color: #02182b;
+  font-family: Roboto, sans-serif;
 
   .header {
     display: flex;
@@ -9,7 +10,6 @@
 
     margin: 0;
     padding: 20px;
-    font-family: Roboto, sans-serif;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
     .title {

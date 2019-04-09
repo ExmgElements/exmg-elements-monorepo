@@ -19,29 +19,64 @@ export class ExmgFormDrawer extends LitElement {
   @property({type: String, attribute: 'cancel-btn-title'})
   public cancelBtnTitle: string = 'Cancel';
 
+  @property({type: Boolean, attribute: 'keep-opened-on-submit-success'})
+  public keepOpenedOnSubmitSuccess: boolean = false;
+
   @property({type: Boolean, reflect: true})
   private submitting: boolean = false;
 
   @query('exmg-form')
   private form?: ExmgForm;
 
-  handleSubmitBtnClick() {
+  public done(): void {
+    this.submitting = false;
+
+    if (!this.keepOpenedOnSubmitSuccess) {
+      this.opened = false;
+    }
+
+    this.form!.done();
+  }
+
+  public error(errorMessage: string): void {
+    this.submitting = false;
+    this.form!.error(errorMessage);
+  }
+
+  private handleSubmitBtnClick() {
     this.form!.submit();
   }
 
-  handleCancelBtnClick() {
+  private handleCancelBtnClick() {
     this.form!.cancel();
   }
 
-  handleFormSubmit(e: CustomEvent) {
-    console.log('handleFormSubmit', e.detail);
+  private handleFormSubmit(e: CustomEvent) {
     this.submitting = true;
+    this.dispatchEvent(
+      new CustomEvent(
+        'submit',
+        {
+          bubbles: false,
+          composed: false,
+          detail: e.detail,
+        }
+      )
+    );
   }
 
-  handleFormCancel(e: CustomEvent) {
-    console.log('handleFormCancel', e.detail);
+  private handleFormCancel() {
     this.submitting = false;
     this.opened = false;
+    this.dispatchEvent(
+      new CustomEvent(
+        'cancel',
+        {
+          bubbles: false,
+          composed: false,
+        }
+      )
+    );
   }
 
   static styles = [
