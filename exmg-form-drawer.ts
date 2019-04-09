@@ -1,10 +1,11 @@
-import {LitElement, html, customElement, property} from 'lit-element';
+import {LitElement, html, customElement, property, query} from 'lit-element';
 import '@polymer/iron-demo-helpers/demo-snippet';
 import '@polymer/neon-animation/animations/slide-from-right-animation';
 import '@polymer/neon-animation/animations/slide-right-animation';
 import '@polymer/paper-dialog/paper-dialog.js';
 import './exmg-drawer';
 import {style} from './exmg-form-drawer-styles';
+import {ExmgForm} from '@exmg/exmg-form/exmg-form';
 
 @customElement('exmg-form-drawer' as any)
 export class ExmgFormDrawer extends LitElement {
@@ -17,12 +18,15 @@ export class ExmgFormDrawer extends LitElement {
   @property({type: String, attribute: 'cancel-btn-title'})
   cancelBtnTitle: string = 'Cancel';
 
+  @query('exmg-form')
+  private form?: ExmgForm;
+
   handleSubmitBtnClick() {
-    this.shadowRoot!.querySelector('exmg-form')!.submit();
+    this.form!.submit();
   }
 
   handleCancelBtnClick() {
-    this.shadowRoot!.querySelector('exmg-form')!.cancel();
+    this.form!.cancel();
   }
 
   handleFormSubmit(e: CustomEvent) {
@@ -49,7 +53,12 @@ export class ExmgFormDrawer extends LitElement {
           </div>
         </div>
         <div class="form-elements">
-          <exmg-form @submit="${this.handleFormSubmit}" @cancel="${this.handleFormCancel}">
+          <exmg-form
+            @submit="${this.handleFormSubmit}"
+            @cancel="${this.handleFormCancel}"
+            hide-submit-button
+            hide-cancel-button
+          >
             <slot></slot>
           </exmg-form>
         </div>
