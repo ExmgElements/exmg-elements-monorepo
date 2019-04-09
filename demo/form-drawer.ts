@@ -63,12 +63,12 @@ export class Drawer extends LitElement {
       </label>
       <br>
       <label>
-        <input type="checkbox" name="shouldFail" value="${this.keepOpenedOnSubmitSuccess}" @change="${this.handleKeepOpenedOnSubmitSuccess}">
+        <input type="checkbox" name="keepOpenedOnSubmitSuccess" value="${this.keepOpenedOnSubmitSuccess}" @change="${this.handleKeepOpenedOnSubmitSuccess}">
         Keep opened on submit success
       </label>
       <br>
       <label>
-        <input type="checkbox" name="shouldFail" value="${this.resetFormOnSubmitSuccess}" @change="${this.handleResetFormOnSubmitSuccess}">
+        <input type="checkbox" name="resetFormOnSubmitSuccess" value="${this.resetFormOnSubmitSuccess}" @change="${this.handleResetFormOnSubmitSuccess}">
         Reset form on submit success
       </label>
       <br>
