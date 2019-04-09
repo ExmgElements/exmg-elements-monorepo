@@ -87,6 +87,7 @@ suite('<exmg-grid-smart-toolbar>', function () {
               },
             ],
           },
+          disabled: false,
         },
       ];
 

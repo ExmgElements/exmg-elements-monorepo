@@ -43,7 +43,7 @@ suite('exmg-column-sortable', () => {
     testInstance.initFeature();
     assert.equal(amountColumn.getAttribute('data-sort-direction'), 'DESC', 'Default sort is setup');
     amountColumn.click();
-    assert.equal(amountColumn.getAttribute('data-sort-direction'), '', 'Sort direction is removed');
+    assert.equal(amountColumn.getAttribute('data-sort-direction'), null, 'Sort direction is removed');
     amountColumn.click();
     assert.equal(amountColumn.getAttribute('data-sort-direction'), 'ASC', 'Sort direction is ASC');
   });
