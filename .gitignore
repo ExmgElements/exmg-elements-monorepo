@@ -7,5 +7,6 @@ node_modules/
 exmg-*-styles.ts
 _variables.ts
 _mixins.ts
+demo/styles/*.ts
 !gulpfile.js
 !scripts/**/*.js

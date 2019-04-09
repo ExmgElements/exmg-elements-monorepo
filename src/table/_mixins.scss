@@ -15,7 +15,7 @@
     mdc-theme-primary: #{$primary},
     mdc-theme-on-surface: #{$onSurface},
     mdc-theme-surface: #{$surface},
-    mdc-theme-disabled: red,
+    mdc-theme-disabled: #{rgba($onSurface, .38)},
     exmg-theme-table-on-surface-disabled: #{rgba($onSurface, .38)},
     exmg-theme-table-on-surface-low: #{rgba($onSurface, .2)},
     exmg-grid-toolbar-active-bg-color: $surface,

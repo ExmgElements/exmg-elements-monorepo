@@ -15,6 +15,7 @@
   "main": "exmg-grid.js",
   "files": [
     "assets/*",
+    "src/**/*.scss",
     "src/**/exmg-*.js",
     "src/**/exmg-*.d.ts",
     "index.js",
