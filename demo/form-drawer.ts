@@ -20,6 +20,11 @@ export class Drawer extends LitElement {
   render () {
     // language=html
     return html`
+        <style>
+          :host {
+            --mdc-theme-primary: #0071dc;
+          }
+        </style>
       <input type="button" @click="${this.openDialog}" value="Open dialog">
       <exmg-form-drawer
         ?opened="${this.opened}"
