@@ -36,7 +36,7 @@ $exmgTableThSortableHoverColor: null !default;
   --exmg-table-rows-expanded-background-color: #{$exmgTableRowsExpandedBackgroundColor};
   --exmg-table-rows-expanded-color: var(--exmg-theme-table-surface, var(--mdc-theme-on-surface, #{$exmgThemeTableOnSurface}));
   --exmg-table-th-color: var(--exmg-theme-table-on-surface, var(--mdc-header, #{$exmgTableThColor}));
-  --exmg-table-th-sortable-hover-color: var(--aexmg-theme-table-on-surface, var(--xmdc-theme-on-surface, #{$exmgTableThSortableHoverColor}));
+  --exmg-table-th-sortable-hover-color: var(--exmg-theme-table-on-surface, var(--mdc-theme-on-surface, #{$exmgTableThSortableHoverColor}));
   --exmg-table-columns-background-color: var(--exmg-theme-table-surface, var(--mdc-theme-surface, #{$exmgThemeTableSurface}));
 
   --exmg-table-th-height: 48px;
