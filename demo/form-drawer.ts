@@ -36,7 +36,7 @@ export class Drawer extends LitElement {
   onSubmit(event: any) {
     setTimeout(_ => {
       if (this.shouldFail) {
-        event.path[0].error('User does not have permission to save data');
+        event.path[0].error('Internal error occurred');
       } else {
         event.path[0].done();
       }
