@@ -11,40 +11,25 @@
 
     <!-- Ensure Web Animations polyfill is loaded -->
     <script src="../node_modules/web-animations-js/web-animations-next-lite.min.js"></script>
+
+    <script type="module">
+      import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+      import '@polymer/iron-demo-helpers/demo-snippet';
+    </script>
+
   </head>
   <body>
     <div class="vertical-section-container centered">
-      <script type="module">
-        import {LitElement, html} from 'lit-element';
-        import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
-        import '@polymer/iron-demo-helpers/demo-snippet';
-        import './exmg-icons.js';
-
-        class ExmgGridDemo extends LitElement {
-          static get properties() {
-            return {
-              selected: { type: Boolean },
-            };
-          }
-
-          constructor() {
-            super();
-          }
-
-          render () {
-            //language=html
-            return html`
-
-            `;
-          }
-        }
-        window.customElements.define('exmg-grid-demo', ExmgGridDemo);
-      </script>
-      <demo-snippet>
-        <template>
-          <exmg-grid-demo></exmg-grid-demo>
-        </template>
-      </demo-snippet>
+      <ul>
+        <li><a href="exmg-simple-grid.html">Simple grid</a></li>
+        <li><a href="exmg-complex-grid-with-sortable-rows.html">Complex grid with sortable rows</a></li>
+        <li><a href="exmg-complex-grid.html">Complex grid with sortable columns</a></li>
+        <li><a href="exmg-complex-grid-with-slotted-toolbar.html">Complex grid with slotted toolbar and custom styles</a></li>
+        <li><a href="exmg-grid-base-toolbar-demo.html">Grid base toolbar</a></li>
+        <li><a href="exmg-grid-toolbar-demo.html">Grid toolbar</a></li>
+        <li><a href="exmg-grid-smart-toolbar-demo.html">Grid smart toolbar</a></li>
+        <li><a href="exmg-grid-pagination-demo.html">Grid pagination</a></li>
+      </ul>
     </div>
   </body>
 </html>

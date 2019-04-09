@@ -1,0 +1,53 @@
+@import "@material/theme/mixins";
+@import "@material/typography/mixins";
+@import "variables.scss";
+
+$exmg-grid-toolbar-bg-color: #ffffff;
+$exmg-grid-toolbar-active-bg-color: #e1f0fe;
+$exmg-grid-toolbar-color: #02182b;
+$exmg-grid-toolbar-active-color: #000000;
+
+.wrapper {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 0px;
+  @include mdc-typography-base;
+  background-color: var(--exmg-grid-toolbar-bg-color, var(--mdc-theme-surface, $exmg-grid-toolbar-bg-color));
+  color: var(--exmg-grid-toolbar-color, var(--mdc-theme-on-surface, $exmg-grid-toolbar-color));
+
+  &.active {
+    background-color: var(--exmg-grid-toolbar-active-bg-color, $exmg-grid-toolbar-active-bg-color);
+    color: var(--exmg-grid-toolbar-active-color, $exmg-grid-toolbar-active-color);
+
+    .description {
+      color: var(--exmg-grid-toolbar-active-color, $exmg-grid-toolbar-active-color);
+      &.with-action-separator {
+        border-left: 1px solid var(--exmg-grid-toolbar-active-color, $exmg-grid-toolbar-active-color);
+      }
+    }
+  }
+}
+
+.actions {
+  padding: 0 16px;
+}
+
+.description {
+  @include mdc-typography('headline5');
+  color: var(--exmg-grid-toolbar-color, var(--mdc-theme-on-surface, $exmg-grid-toolbar-color));
+  padding: 0 16px;
+
+  &.with-action-separator {
+    border-left: 1px solid var(--exmg-grid-toolbar-color, var(--mdc-theme-on-surface, $exmg-grid-toolbar-color));
+  }
+}
+
+.filters {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: flex-end;
+  padding: 0 16px;
+}
