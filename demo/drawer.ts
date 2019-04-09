@@ -20,7 +20,7 @@ export class Drawer extends LitElement {
     // language=html
     return html`
       <input type="button" @click="${this.openDialog}" value="Open dialog">
-      <exmg-drawer ?opened="${this.opened}" @exmg-form-drawer-opened-changed="${this.handleOpenedChanged}">
+      <exmg-drawer ?opened="${this.opened}" @exmg-drawer-opened-changed="${this.handleOpenedChanged}">
         <exmg-form id="form1">
           <paper-input name="value1" label="text input" required></paper-input>
           <paper-input name="value2" label="text input" value="pre-filled"></paper-input>
