@@ -22,6 +22,9 @@ export class ExmgFormDrawer extends LitElement {
   @property({type: Boolean, attribute: 'keep-opened-on-submit-success'})
   public keepOpenedOnSubmitSuccess: boolean = false;
 
+  @property({type: Boolean, attribute: 'reset-form-on-submit-success'})
+  public resetFormOnSubmitSuccess: boolean = false;
+
   @property({type: Boolean, reflect: true})
   private submitting: boolean = false;
 
@@ -33,6 +36,10 @@ export class ExmgFormDrawer extends LitElement {
 
     if (!this.keepOpenedOnSubmitSuccess) {
       this.opened = false;
+    }
+
+    if (this.resetFormOnSubmitSuccess) {
+      this.form!.reset();
     }
 
     this.form!.done();
