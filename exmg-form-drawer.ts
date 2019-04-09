@@ -35,6 +35,7 @@ export class ExmgFormDrawer extends LitElement {
 
   handleFormCancel(e: CustomEvent) {
     console.log('handleFormCancel', e.detail);
+    this.opened = false;
   }
 
   static styles = [
