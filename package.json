@@ -58,7 +58,8 @@
     "web-animations-js": "^2.3.1"
   },
   "peerDependencies": {
-    "web-animations-js": "^2.3.1"
+    "web-animations-js": "^2.3.1",
+    "@webcomponents/webcomponentsjs": "^2.2.7"
   },
   "scripts": {
     "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ src/**/*.ts && npm run fix-gen-docs",

@@ -1,8 +1,26 @@
 # <exmg-grid /\>
-Before start ensure that you have imported web-animation-js. It is required by @exmg/exmg-paper-combobox
+
+## Install
+```bash
+npm install @exmg/exmg-grid
+```
+
+Before start ensure that you have installed `web-animation-js`. It is required by `@exmg/exmg-paper-combobox`.
+
+```bash
+npm install web-animation-js
+```
+
+Load this script in index.html
 ```html
     <!-- Ensure Web Animations polyfill is loaded -->
     <script src="../node_modules/web-animations-js/web-animations-next-lite.min.js"></script>
+```
+
+Some dependencies `@exmg/exmg-paper-combobox, @plymer/paper-item` use `@apply` to apply css mixins.
+This require to load script in index.html
+```html
+<script src="../node_modules/@webcomponents/shadycss/apply-shim.min.js"></script>
 ```
 
 ## Anatomy
@@ -48,7 +66,7 @@ GridElement accept slots:
 ```html
 <exmg-grid>
   <table></table>
-  <exmg-grid-pagination slot="toolbar" ...params></exmg-grid-pagination>
+  <<exmg-grid-smart-toolbar slot="toolbar" ...params></<exmg-grid-smart-toolbar>
   <exmg-grid-pagination slot="pagination" ...params></exmg-grid-pagination>  
 </exmg-grid>
 ```
