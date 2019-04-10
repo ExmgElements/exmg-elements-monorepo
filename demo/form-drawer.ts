@@ -54,33 +54,34 @@ export class Drawer extends LitElement {
   render () {
     // language=html
     return html`
-        <style>
-          exmg-form-drawer {
-            --mdc-theme-primary: #0071dc;
-          }
-        </style>
-      <input type="button" @click="${this.openDialog}" value="Open dialog">
-      <br>
-      <label>
-        <input type="checkbox" name="shouldFail" value="${this.shouldFail}" @change="${this.handleShouldFailChange}">
-        Should Fail
-      </label>
-      <br>
-      <label>
-        <input type="checkbox" name="keepOpenedOnSubmitSuccess" value="${this.keepOpenedOnSubmitSuccess}" @change="${this.handleKeepOpenedOnSubmitSuccess}">
-        Keep opened on submit success
-      </label>
-      <br>
-      <label>
-        <input type="checkbox" name="resetFormOnSubmitSuccess" value="${this.resetFormOnSubmitSuccess}" @change="${this.handleResetFormOnSubmitSuccess}">
-        Reset form on submit success
-      </label>
-      <br>
-      <label>
-        <input type="checkbox" name="noCancelOnOutsideClick" value="${this.noCancelOnOutsideClick}" @change="${this.handleNoCancelOnOutsideClick}">
-        No cancel on outside click
-      </label>
-      <br>
+      <style>
+        exmg-form-drawer {
+          --mdc-theme-primary: #0071dc;
+        }
+      </style>
+      <div style="padding: 20px">
+        <input type="button" @click="${this.openDialog}" value="Open dialog">
+        <br><br>
+        <label>
+          <input type="checkbox" name="shouldFail" value="${this.shouldFail}" @change="${this.handleShouldFailChange}">
+          Should Fail
+        </label>
+        <br><br>
+        <label>
+          <input type="checkbox" name="keepOpenedOnSubmitSuccess" value="${this.keepOpenedOnSubmitSuccess}" @change="${this.handleKeepOpenedOnSubmitSuccess}">
+          Keep opened on submit success
+        </label>
+        <br><br>
+        <label>
+          <input type="checkbox" name="resetFormOnSubmitSuccess" value="${this.resetFormOnSubmitSuccess}" @change="${this.handleResetFormOnSubmitSuccess}">
+          Reset form on submit success
+        </label>
+        <br><br>
+        <label>
+          <input type="checkbox" name="noCancelOnOutsideClick" value="${this.noCancelOnOutsideClick}" @change="${this.handleNoCancelOnOutsideClick}">
+          No cancel on outside click
+        </label>
+      </div>
       <exmg-form-drawer
         ?opened="${this.opened}"
         ?keep-opened-on-submit-success="${this.keepOpenedOnSubmitSuccess}"
