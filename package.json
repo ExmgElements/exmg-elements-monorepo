@@ -70,7 +70,7 @@
     "publishDryRun": "npm publish --dry-run",
     "prepublishOnly": "npm run build",
     "preversion": "npm run build",
-    "start": "gulp serve",
+    "start": "npm run build:styles && gulp serve",
     "lint": "tslint -c ./tslint.json --project ./",
     "test-dev": "polymer test --npm -p  -l chrome",
     "test": "polymer test --npm --expanded",
