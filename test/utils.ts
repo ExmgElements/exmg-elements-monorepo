@@ -7,4 +7,4 @@ const onEvent: (eventName: string) => (element: LitElement, shouldResolve: boole
     element.addEventListener(eventName, (event: Event) => shouldResolve ? resolve(event) : reject(event));
   });
 
-export const onExmgRadioGroupChanged: (element: LitElement, shouldResolve: boolean) => Promise<any> = onEvent('exmg-form-drawer-changed');
+export const onExmgDrawerOpenedChanged: (element: LitElement, shouldResolve: boolean) => Promise<any> = onEvent('exmg-drawer-opened-changed');
