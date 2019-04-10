@@ -11,6 +11,7 @@ export class Drawer extends LitElement {
   @property({type: Boolean}) shouldFail: boolean = false;
   @property({type: Boolean}) keepOpenedOnSubmitSuccess: boolean = false;
   @property({type: Boolean}) resetFormOnSubmitSuccess: boolean = false;
+  @property({type: Boolean}) noCancelOnOutsideClick: boolean = false;
 
   handleOpenedChanged(e: CustomEvent) {
     this.opened = e.detail.value;
@@ -30,6 +31,10 @@ export class Drawer extends LitElement {
 
   handleResetFormOnSubmitSuccess(e: Event) {
     this.resetFormOnSubmitSuccess = (<HTMLInputElement>e.composedPath()[0]).checked;
+  }
+
+  handleNoCancelOnOutsideClick(e: Event) {
+    this.noCancelOnOutsideClick = (<HTMLInputElement>e.composedPath()[0]).checked;
   }
 
   onSubmit(event: any) {
@@ -71,10 +76,16 @@ export class Drawer extends LitElement {
         Reset form on submit success
       </label>
       <br>
+      <label>
+        <input type="checkbox" name="noCancelOnOutsideClick" value="${this.noCancelOnOutsideClick}" @change="${this.handleNoCancelOnOutsideClick}">
+        No cancel on outside click
+      </label>
+      <br>
       <exmg-form-drawer
         ?opened="${this.opened}"
         ?keep-opened-on-submit-success="${this.keepOpenedOnSubmitSuccess}"
         ?reset-form-on-submit-success="${this.resetFormOnSubmitSuccess}"
+        ?no-cancel-on-outside-click="${this.noCancelOnOutsideClick}"
         @exmg-drawer-opened-changed="${this.handleOpenedChanged}"
         submit-btn-title="Create"
         @submit="${this.onSubmit}"

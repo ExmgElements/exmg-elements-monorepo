@@ -34,6 +34,9 @@ export class ExmgFormDrawer extends LitElement {
   @property({type: Boolean, attribute: 'reset-form-on-submit-success'})
   public resetFormOnSubmitSuccess: boolean = false;
 
+  @property({type: Boolean, attribute: 'no-cancel-on-outside-click'})
+  noCancelOnOutsideClick: boolean = false;
+
   @property({type: Boolean, reflect: true})
   private submitting: boolean = false;
 
@@ -102,7 +105,11 @@ export class ExmgFormDrawer extends LitElement {
   render () {
     // language=html
     return html`
-      <exmg-drawer ?opened="${this.opened}" style="max-width: ${this.style.maxWidth || '547px'}">
+      <exmg-drawer
+        ?opened="${this.opened}"
+        ?no-cancel-on-outside-click="${this.noCancelOnOutsideClick}"
+        style="max-width: ${this.style.maxWidth || '547px'}"
+      >
         <div class="header">
           <slot name="title" class="title"></slot>
           <div class="header-buttons">
