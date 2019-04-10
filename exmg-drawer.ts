@@ -4,6 +4,14 @@ import '@polymer/neon-animation/animations/slide-from-right-animation';
 import '@polymer/neon-animation/animations/slide-right-animation';
 import '@polymer/paper-dialog/paper-dialog.js';
 
+/**
+ * ### Styling
+ * The following custom properties are available for styling:
+ *
+ * Custom property | Description | Default
+ * ----------------|-------------|----------
+ * `--exmg-drawer-max-width` | max width of drawer | `max width from style attribute or 547px`
+ */
 @customElement('exmg-drawer')
 export class ExmgDrawer extends LitElement {
   @property({type: Boolean})
@@ -42,7 +50,8 @@ export class ExmgDrawer extends LitElement {
           top: 0;
           right: 0;
           bottom: 0;
-          width: 547px;
+          width: 100%;
+          max-width: var(--exmg-drawer-max-width, ${this.style.maxWidth || '547px'});
           overflow: auto;
           box-shadow: none;
         }

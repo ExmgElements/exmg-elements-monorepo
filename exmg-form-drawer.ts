@@ -102,7 +102,7 @@ export class ExmgFormDrawer extends LitElement {
   render () {
     // language=html
     return html`
-      <exmg-drawer ?opened="${this.opened}">
+      <exmg-drawer ?opened="${this.opened}" style="max-width: ${this.style.maxWidth || '547px'}">
         <div class="header">
           <slot name="title" class="title"></slot>
           <div class="header-buttons">

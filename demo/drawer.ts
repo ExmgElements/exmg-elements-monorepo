@@ -19,7 +19,13 @@ export class Drawer extends LitElement {
   render () {
     // language=html
     return html`
+      <style>
+        exmg-drawer {
+          --exmg-drawer-max-width: 300px;
+        }
+      </style>
       <input type="button" @click="${this.openDialog}" value="Open dialog">
+
       <exmg-drawer ?opened="${this.opened}" @exmg-drawer-opened-changed="${this.handleOpenedChanged}">
         <exmg-form id="form1">
           <paper-input name="value1" label="text input" required></paper-input>
