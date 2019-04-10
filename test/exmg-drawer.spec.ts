@@ -22,13 +22,15 @@ suite('<exmg-drawer>', function () {
 		test('drawer sends proper event', async () => {
 			await flushCompleted();
 
-			const eventPromise = onExmgDrawerOpenedChanged(element, true);
+			let eventPromise;
 
+			eventPromise = onExmgDrawerOpenedChanged(element, true);
 			element.opened = true;
+			assert.equal((await eventPromise).detail.value, true);
 
-			const {detail} = await eventPromise;
-
-			assert.equal(detail.value, true);
+			eventPromise = onExmgDrawerOpenedChanged(element, true);
+			element.opened = false;
+			assert.equal((await eventPromise).detail.value, false);
 		});
 	});
 });
