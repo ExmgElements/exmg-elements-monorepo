@@ -32,15 +32,15 @@ suite('<exmg-form-drawer>', function () {
 		test('form drawer sends proper event', async () => {
 			await flushCompleted();
 
-			// let eventPromise;
-			//
-			// eventPromise = onExmgDrawerOpenedChanged(element, true);
-			// element.opened = true;
-			// assert.equal((await eventPromise).detail.value, true);
-			//
-			// eventPromise = onExmgDrawerOpenedChanged(element, true);
-			// element.opened = false;
-			// assert.equal((await eventPromise).detail.value, false);
+			let eventPromise;
+
+			eventPromise = onExmgDrawerOpenedChanged(element, true);
+			element.opened = true;
+			assert.equal((await eventPromise).detail.value, true);
+
+			eventPromise = onExmgDrawerOpenedChanged(element, true);
+			element.opened = false;
+			assert.equal((await eventPromise).detail.value, false);
 		});
 	});
 });
