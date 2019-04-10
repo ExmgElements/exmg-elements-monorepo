@@ -1,4 +1,9 @@
 # <exmg-grid /\>
+Before start ensure that you have imported web-animation-js. It is required by @exmg/exmg-paper-combobox
+```html
+    <!-- Ensure Web Animations polyfill is loaded -->
+    <script src="../node_modules/web-animations-js/web-animations-next-lite.min.js"></script>
+```
 
 ## Anatomy
 
@@ -432,7 +437,7 @@ Additionally you cna also override css variables:
 
  Custom property | Description | Default
  ----------------|-------------|----------
- `--exmg-arrow-upward-url` | Url to icon that is used for soring direction indicator | `url('/assets/arrow-upward.svg');`
+ `--exmg-arrow-upward-url` | Url to icon that is used for soring direction indicator | `url('/node_modules/@exmg/exmg-grid/assets/arrow-upward.svg');`
  `--exmg-table-card-width` | table card width | `100%;`
  `--exmg-table-width` | table width | `100%;`
  `--exmg-table-card-margin-bottom` | table bottom margin  | `5px;`

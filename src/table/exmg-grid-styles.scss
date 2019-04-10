@@ -16,8 +16,7 @@ $exmgTableThSortableHoverColor: null !default;
 
 :host {
   @include mdc-typography-base;
-
-  --exmg-arrow-upward-url: url('/assets/arrow-upward.svg');
+  --exmg-arrow-upward-url: url('/node_modules/@exmg/exmg-grid/assets/arrow-upward.svg');
   --exmg-table-card-width: 100%;
   --exmg-table-card-margin-bottom: 5px;
   --exmg-table-width: 100%;
@@ -105,18 +104,23 @@ td {
   text-align: left;
 }
 
-.grid-columns th {
-  height: var(--exmg-table-th-height);
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  text-transform: uppercase;
-  line-height: 1.33;
-  letter-spacing: 2px;
-  color: var(--exmg-table-th-color);
-  background-color: var(--exmg-table-columns-background-color);
-  vertical-align: middle;
-  text-align: left;
+.grid-columns {
+  th {
+    height: var(--exmg-table-th-height);
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    text-transform: uppercase;
+    line-height: 1.33;
+    letter-spacing: 2px;
+    color: var(--exmg-table-th-color);
+    background-color: var(--exmg-table-columns-background-color);
+    vertical-align: middle;
+    text-align: left;
+    svg {
+      fill: var(--exmg-table-th-color);
+    }
+  }
 }
 
 .grid-columns th:first-child, tbody td:first-child {
@@ -131,15 +135,20 @@ th, td {
   border-top: 1px solid var(--exmg-table-row-divider-color);
 }
 
-tbody td {
-  height: var(--exmg-table-td-height);
-  @include mdc-typography('body2');
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.43px;
-  letter-spacing: 0.3px;
-  color: var(--exmg-table-color);
+tbody {
+  td {
+    height: var(--exmg-table-td-height);
+    @include mdc-typography('body2');
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.43px;
+    letter-spacing: 0.3px;
+    color: var(--exmg-table-color);
+    svg {
+      fill: var(--exmg-table-color);
+    }
+  }
 }
 
 table tr:first-child th {
@@ -176,15 +185,16 @@ th[data-sort] {
   }
 }
 
-th[data-sort-direction=ASC]::after {
+th[data-sort-direction]::after {
   opacity: 1;
   transition: transform .1s linear;
+}
+
+th[data-sort-direction=ASC]::after {
   transform: rotate(0deg);
 }
 
 th[data-sort-direction=DESC]::after {
-  opacity: 1;
-  transition: transform .1s linear;
   transform: rotate(180deg);
 }
 /**** COLUMN SORT END *********/
@@ -294,7 +304,7 @@ tr:hover td.grid-cell-visible-on-hover > *, tr[data-has-expanded-detail] td.grid
   visibility: visible;
 }
 
-tr td.grid-col-number, th.grid-col-number {
+tr td.grid-col-number, tr th.grid-col-number {
   padding-right: 10px;
   text-align: right;
 }
