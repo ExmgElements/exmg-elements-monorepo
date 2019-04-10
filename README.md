@@ -1,69 +1,100 @@
-# Radio Group
+# Exmg form drawer
 
-This package provides radio group functionality.
+This package provides dialog drawer functionality.
 
 Components included:
-1. **exmg-radio-group** - parent component
-2. **exmg-radio-group-item** - each children
+1. **exmg-drawer** - basic component
+2. **exmg-form-drawer** - form drawer
 
 ## Components
-### \<exmg-radio-group>
+### \<exmg-drawer>
 
-Can contain many **exmg-radio-group-item** components as it's children. Children of other 
-types are not supported.
+It is basic component that probably should not be used directly.
+It serves only as drawer without form functionality, so it is content agnostic.
+You can pass any dom markup as children of this component.
 
 Events:
-1. **exmg-radio-group-changed** - when selected radio group item changed. 
+1. **exmg-drawer-opened-changed** - when drawer shown/hidden 
 
 Attributes:
-1. **name**
-2. **selected** - selected value. Should be value of one of **value** attributes of children nodes.
-3. **required** - boolean, used for form validation 
-4. **vertical** - boolean, if you want to have vertical layout 
+1. **opened** - whether or not drawer is visible
+2. **no-cancel-on-outside-click** - whether or not clicking outside drawer should close drawer
 
 
-### \<exmg-radio-group-item>
+### \<exmg-form-drawer>
 
-Can be used only as children of **exmg-radio-group**.
+Wraps around **exmg-drawer**.
+
+Provides form functionality to drawer:
+* submit and cancel buttons
+* title
+* material styling
  
-Attributes:
-1. **value** - value of particular item.
-2. **disabled** - boolean, should value be selectable or not (still possible 
-to select programmatically, even if disabled)
-3. **hide-radio-button** - boolean, should circle radio buttons be hidden or not
+Events:
+1. **exmg-drawer-opened-changed** - when drawer shown/hidden 
 
-Each **exmg-radio-group-item** can have defined content in one of following ways:
-1. Define slots with names "title" and "body"
-2. Just put any content without defining slot.
+Attributes:
+1. **opened** - whether or not drawer is visible
+2. **no-cancel-on-outside-click** - whether or not clicking outside drawer should close drawer
+3. **submit-btn-title** - title of submit button. Default "Submit"
+4. **cancel-btn-title** - title of cancel button. Default "Cancel"
+5. **keep-opened-on-submit-success** - whether or not drawer should be hidden after successful form submission
+6. **reset-form-on-submit-success** - whether or not drawer form should be reset after successful form submission
+
+#### Notes about drawer form
+
+All dom markup passed as children into **exmg-form-drawer** will be wrapped into **exmg-form** underhood.
+
+To properly handle form submission, you should call done() or error() on form instance after receiving **submit**
+event from **exmg-form-drawer**. Please read @exmg/exmg-form docs for more info.
+
+## Styling
+
+You can define:
+* primary color palette - for drawer buttons
+* drawer max width
+
+To define primary color palette, please define following variable: **--mdc-theme-primary**.
+Example:
+```
+exmg-form-drawer {
+  --mdc-theme-primary: #0071dc;
+}
+```
+
+To define drawer max width, you can:
+* Define variable **--exmg-drawer-max-width**
+* Pass max width directly into drawer component style attribute: ```style="max-width: 500px"``` 
 
 ## Usage
 
-### With slots
-```
-  <exmg-radio-group name="license" selected="${this.selected}" @exmg-radio-group-changed="${this.onPaperRadioGroupChanged}">
-    <exmg-radio-group-item value="option1">
-        <div slot="title">Option 1</div>
-        <div slot="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-    </exmg-radio-group-item>
-    <exmg-radio-group-item value="option2">
-        <div slot="title">Option 2</div>
-        <div slot="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-    </exmg-radio-group-item>
-    <exmg-radio-group-item value="option3" disabled>
-        <div slot="title">Option 3</div>
-        <div slot="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-    </exmg-radio-group-item>
-  </exmg-radio-group>
+### Form drawer
 
 ```
-### Without slots
-```
-  <exmg-radio-group name="license" selected="${this.selected}" @exmg-radio-group-changed="${this.onPaperRadioGroupChanged}">
-    <exmg-radio-group-item value="option1">
-        Option 1
-    </exmg-radio-group-item>
-    <exmg-radio-group-item value="option2">
-        Option 2
-    </exmg-radio-group-item>
-  </exmg-radio-group>
+  <exmg-form-drawer
+    ?opened="${this.opened}"
+    ?keep-opened-on-submit-success="${this.keepOpenedOnSubmitSuccess}"
+    ?reset-form-on-submit-success="${this.resetFormOnSubmitSuccess}"
+    ?no-cancel-on-outside-click="${this.noCancelOnOutsideClick}"
+    @exmg-drawer-opened-changed="${this.handleOpenedChanged}"
+    submit-btn-title="Create"
+    @submit="${this.onSubmit}"
+    @cancel="${this.onCancel}"
+  >
+    <span slot="title">New event</span>
+    <exmg-paper-combobox label="Type" name="type" selected="0" always-float-label>
+      <paper-item>Trivia</paper-item>
+      <paper-item>Other</paper-item>
+    </exmg-paper-combobox>
+    <paper-input name="question" label="Question" value="Who's Dylan Hartigan's favorite artist?" required></paper-input>
+    <paper-input name="answer_a" label="Answer A" value="Beyoncé"></paper-input>
+    <paper-input name="answer_b" label="Answer B" value="Eminem"></paper-input>
+    <paper-input name="answer_c" label="Answer C" value="Ariana Grande"></paper-input>
+    <br>
+    <mwc-button
+      unelevated
+    >
+      + Add answer
+    </mwc-button>
+  </exmg-form-drawer>
 ```
