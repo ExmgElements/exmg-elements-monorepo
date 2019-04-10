@@ -1,7 +1,6 @@
 import {LitElement, html, customElement, property} from 'lit-element';
 import '@material/mwc-button';
 import '@polymer/paper-input/paper-input.js';
-import '@polymer/paper-spinner/paper-spinner-lite';
 import '@exmg/exmg-paper-combobox/exmg-paper-combobox.js';
 import '@exmg/exmg-form/exmg-form';
 import '../exmg-form-drawer';
@@ -51,7 +50,7 @@ export class Drawer extends LitElement {
     // language=html
     return html`
         <style>
-          :host {
+          exmg-form-drawer {
             --mdc-theme-primary: #0071dc;
           }
         </style>

@@ -4,10 +4,19 @@ import '@polymer/neon-animation/animations/slide-from-right-animation';
 import '@polymer/neon-animation/animations/slide-right-animation';
 import '@polymer/paper-dialog/paper-dialog.js';
 import './exmg-drawer';
+import './exmg-form-drawer-button';
 import {style} from './exmg-form-drawer-styles';
 import {ExmgForm} from '@exmg/exmg-form/exmg-form';
 import '@material/mwc-button';
 
+/**
+ * ### Styling
+ * The following custom properties are available for styling:
+ *
+ * Custom property | Description | Default
+ * ----------------|-------------|----------
+ * `--mdc-theme-primary` | primary color for drawer header buttons |
+ */
 @customElement('exmg-form-drawer' as any)
 export class ExmgFormDrawer extends LitElement {
   @property({type: Boolean})
@@ -97,20 +106,21 @@ export class ExmgFormDrawer extends LitElement {
         <div class="header">
           <slot name="title" class="title"></slot>
           <div class="header-buttons">
-            <mwc-button
+            <exmg-form-drawer-button
               title="${this.cancelBtnTitle}"
               @click="${this.handleCancelBtnClick}"
             >
               ${this.cancelBtnTitle}
-            </mwc-button>
-            <mwc-button
+            </exmg-form-drawer-button>
+            <exmg-form-drawer-button
               unelevated
+              ?loading="${this.submitting}"
               ?disabled="${this.submitting}"
               title="${this.submitBtnTitle}"
               @click="${this.handleSubmitBtnClick}"
             >
-              ${this.submitBtnTitle}${this.submitting ? html`<paper-spinner-lite active></paper-spinner-lite>` : ''}
-            </mwc-button>
+              ${this.submitBtnTitle}
+            </exmg-form-drawer-button>
           </div>
         </div>
         <div class="form-elements">

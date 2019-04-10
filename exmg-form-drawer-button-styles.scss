@@ -1,0 +1,9 @@
+$mdc-theme-primary: #0071dc;
+
+@import 'node_modules/@material/mwc-button/src/mwc-button.scss';
+
+:host {
+  paper-spinner-lite {
+    margin-left: 16px;
+  }
+}
