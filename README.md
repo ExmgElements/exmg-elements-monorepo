@@ -51,8 +51,8 @@ event from **exmg-form-drawer**. Please read https://github.com/ExmgElements/exm
 ## Styling
 
 You can define:
-- primary color palette - for drawer buttons
-- drawer max width
+*  primary color palette - for drawer buttons
+*  drawer max width
 
 To define primary color palette, please define following variable: **--mdc-theme-primary**.
 Example:
