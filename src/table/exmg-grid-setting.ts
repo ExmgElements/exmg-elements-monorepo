@@ -13,9 +13,6 @@ export class ExmgGridSetting extends LitElement {
   noCancelOnOutsideClick: boolean = false;
 
   @property({type: String})
-  text: string = '';
-
-  @property({type: String})
   tooltip: string = '';
 
   @property({type: String})
@@ -52,7 +49,6 @@ export class ExmgGridSetting extends LitElement {
         @click="${this.openDialog}"
       >
         <mwc-icon>${this.icon}</mwc-icon>
-        ${this.text}
       </mwc-button>
       <paper-dialog
         ?opened="${this.opened}"

@@ -4,7 +4,9 @@ import '@polymer/paper-dialog/paper-dialog.js';
 import '@material/mwc-button';
 import '@material/mwc-icon';
 import './exmg-grid-setting';
-import {style} from './exmg-grid-setting-styles';
+import {style} from './exmg-grid-setting-selection-list-styles';
+import {MDCList} from '@material/list';
+import '@material/mwc-checkbox';
 
 @customElement('exmg-grid-setting-selection-list')
 export class ExmgGridSettingSelectionList extends LitElement {
@@ -14,8 +16,8 @@ export class ExmgGridSettingSelectionList extends LitElement {
   @property({type: Boolean, attribute: 'no-cancel-on-outside-click'})
   noCancelOnOutsideClick: boolean = false;
 
-  @property({type: String})
-  text: string = '';
+  @property({type: String, attribute: 'dialog-title'})
+  dialogTitle: string = '';
 
   @property({type: String})
   tooltip: string = '';
@@ -49,20 +51,32 @@ export class ExmgGridSettingSelectionList extends LitElement {
     style,
   ];
 
+  firstUpdated(changedProperties: any) {
+    super.firstUpdated(changedProperties);
+    new MDCList(this.shadowRoot!.querySelector('.mdc-list')!);
+  }
+
   render() {
     console.log(this.items);
     return html`
       <exmg-grid-setting
         class="setting"
-        text="${this.text}"
         tooltip="${this.tooltip}"
         icon="${this.icon}"
       >
-        ${repeat(
-        this.items,
-        (item) => item.id,
-        item => html`${item.title}<br>`
-        )}
+        <h2>${this.dialogTitle}</h2>
+        <ul class="mdc-list">
+          ${repeat(
+            this.items,
+          (item) => item.id,
+          item => html`
+            <li class="mdc-list-item">
+              <span class="mdc-list-item__text">${item.title}</span>
+              <mwc-checkbox class="mdc-list-item__meta"></mwc-checkbox>
+            </li>
+          `
+          )}
+        </ul>
       </exmg-grid-setting>
     `;
   }

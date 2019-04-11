@@ -81,7 +81,7 @@ export class ExmgGridSmartToolbar extends LitElement {
     return [
       {
         id: 'column-selector',
-        text: '',
+        dialogTitle: 'Column selection',
         tooltip: 'Select columns',
         icon: 'filter_list',
         config: {
