@@ -164,11 +164,12 @@ export class ExmgGridToolbar extends LitElement {
     return html`
         <exmg-grid-setting-selection-list
           class="setting"
+          setting-id="${setting.id}"
           dialog-title="${setting.dialogTitle}"
           tooltip="${setting.tooltip}"
           icon="${setting.icon}"
-          .items="${setting.config.data}"
-          @click="${this.emitSettingChangedEvent(setting)}"
+          .settingData="${setting.config.data}"
+          @exmg-grid-setting-changed="${this.emitSettingChangedEvent(setting)}"
         >
         </exmg-grid-setting-selection-list>
     `;

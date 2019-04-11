@@ -23,28 +23,34 @@ export class ExmgGridSettingSelectionList extends LitElement {
   tooltip: string = '';
 
   @property({type: String})
-  icon: string = 'get_app';
+  icon: string = 'filter_list';
 
   @property({type: Object})
-  items: { id: string; title: string }[] = [];
+  settingData: { id: string; title: string; selected?: boolean }[] = [];
 
   handleOpenedChanged(e: CustomEvent) {
     this.opened = e.detail.value;
-
-    this.dispatchEvent(new CustomEvent(
-      'exmg-drawer-opened-changed',
-      {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: e.detail.value,
-        },
-      }
-    ));
   }
 
   openDialog() {
     this.opened = true;
+  }
+
+  async handleListAction(e: CustomEvent) {
+    const index = e.detail.index;
+    this.settingData[index].selected = !this.settingData[index].selected;
+    await this.requestUpdate();
+
+    this.dispatchEvent(new CustomEvent(
+      'exmg-grid-setting-changed',
+      {
+        bubbles: true,
+        composed: true,
+        detail: {
+          value: this.settingData,
+        },
+      }
+    ));
   }
 
   static styles = [
@@ -57,7 +63,6 @@ export class ExmgGridSettingSelectionList extends LitElement {
   }
 
   render() {
-    console.log(this.items);
     return html`
       <exmg-grid-setting
         class="setting"
@@ -65,14 +70,14 @@ export class ExmgGridSettingSelectionList extends LitElement {
         icon="${this.icon}"
       >
         <h2>${this.dialogTitle}</h2>
-        <ul class="mdc-list">
+        <ul class="mdc-list" @MDCList:action="${this.handleListAction}">
           ${repeat(
-            this.items,
+            this.settingData,
           (item) => item.id,
           item => html`
-            <li class="mdc-list-item">
+            <li class="mdc-list-item" data-xxx="2">
               <span class="mdc-list-item__text">${item.title}</span>
-              <mwc-checkbox class="mdc-list-item__meta"></mwc-checkbox>
+              <mwc-checkbox class="mdc-list-item__meta" ?checked="${item.selected}"></mwc-checkbox>
             </li>
           `
           )}
