@@ -3,6 +3,7 @@ import '@polymer/iron-demo-helpers/demo-snippet';
 import '@polymer/neon-animation/animations/slide-from-right-animation';
 import '@polymer/neon-animation/animations/slide-right-animation';
 import '@polymer/paper-dialog/paper-dialog.js';
+import {style} from './exmg-drawer-styles';
 
 /**
  * ### Styling
@@ -11,6 +12,8 @@ import '@polymer/paper-dialog/paper-dialog.js';
  * Custom property | Description | Default
  * ----------------|-------------|----------
  * `--exmg-drawer-max-width` | max width of drawer | `max width from style attribute or 547px`
+ * `--exmg-drawer-color` | drawer text color | `var(--mdc-theme-on-surface, #02182b))`
+ * `--exmg-drawer-bg-color` | drawer background color | `var(--mdc-theme-surface, #ffffff))`
  */
 @customElement('exmg-drawer')
 export class ExmgDrawer extends LitElement {
@@ -39,21 +42,16 @@ export class ExmgDrawer extends LitElement {
     this.opened = true;
   }
 
+  static styles = [
+    style,
+  ];
+
   render () {
     // language=html
     return html`
       <style>
         paper-dialog {
-          margin: 0;
-          padding: 0;
-          position: fixed;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          width: 100%;
           max-width: var(--exmg-drawer-max-width, ${this.style.maxWidth || '547px'});
-          overflow: auto;
-          box-shadow: none;
         }
       </style>
       <paper-dialog

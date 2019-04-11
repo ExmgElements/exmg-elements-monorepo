@@ -56,7 +56,9 @@ export class Drawer extends LitElement {
     return html`
       <style>
         exmg-form-drawer {
-          --mdc-theme-primary: #0071dc;
+          --mdc-theme-primary: green;
+          --mdc-theme-surface: black;
+          --mdc-theme-on-surface: white;
         }
       </style>
       <div style="padding: 20px">

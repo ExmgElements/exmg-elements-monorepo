@@ -16,6 +16,7 @@ import '@material/mwc-button';
  * Custom property | Description | Default
  * ----------------|-------------|----------
  * `--mdc-theme-primary` | primary color for drawer header buttons |
+ * `--exmg-form-drawer-header-separator-color` | color of drawer header separator | `var(--mdc-theme-on-surface, rgba(#02182b, 0.1))`
  */
 @customElement('exmg-form-drawer' as any)
 export class ExmgFormDrawer extends LitElement {

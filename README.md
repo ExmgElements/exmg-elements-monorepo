@@ -80,10 +80,20 @@ event from **exmg-form-drawer**. Please read https://github.com/ExmgElements/exm
 
 You can define:
 
-* primary color palette - for drawer buttons
+* color palette
 * drawer max width
 
-To define primary color palette, please define following variable: **--mdc-theme-primary**.
+To define color palette you can define following variables:
+
+* --exmg-drawer-color
+* --exmg-drawer-bg-color
+* --mdc-theme-primary
+* --mdc-theme-on-surface
+* --mdc-theme-surface
+* --exmg-form-drawer-header-separator-color
+
+See .scss/.ts files for more info.
+
 Example:
 ```
 exmg-form-drawer {

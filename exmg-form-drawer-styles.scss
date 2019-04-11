@@ -1,13 +1,8 @@
 @import "@material/typography/mixins";
 
-$exmg-form-drawer-color: #02182b;
-$exmg-form-drawer-bg-color: #ffffff;
-
 :host {
   display: flex;
   @include mdc-typography-base;
-  color: var(--exmg-form-drawer-color, var(--mdc-theme-on-surface, $exmg-form-drawer-color));
-  background-color: var(--exmg-form-drawer-bg-color, var(--mdc-theme-surface, $exmg-form-drawer-bg-color));
 
   .header {
     display: flex;
@@ -16,11 +11,10 @@ $exmg-form-drawer-bg-color: #ffffff;
 
     margin: 0;
     padding: 20px;
-    border-bottom: 1px solid var(--exmg-form-drawer-color, var(--mdc-theme-on-surface, rgba($exmg-form-drawer-color, 0.1)));
+    border-bottom: 1px solid var(--exmg-form-drawer-header-separator-color, var(--mdc-theme-on-surface, rgba(#02182b, 0.1)));
 
     .title {
       @include mdc-typography('headline5');
-      color: var(--exmg-form-drawer-color, var(--mdc-theme-on-surface, $exmg-form-drawer-color));
     }
 
     .header-buttons {
