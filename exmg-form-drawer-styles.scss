@@ -1,7 +1,14 @@
+@import "@material/typography/mixins";
+
+$exmg-form-drawer-color: #02182b;
+$exmg-form-drawer-bg-color: #ffffff;
+$exmg-form-drawer-header-separator-color: #ffffff;
+
 :host {
   display: flex;
-  color: #02182b;
-  font-family: Roboto, sans-serif;
+  @include mdc-typography-base;
+  color: var(--exmg-form-drawer-color, var(--mdc-theme-on-surface, $exmg-form-drawer-color));
+  background-color: var(--exmg-form-drawer-bg-color, var(--mdc-theme-surface, $exmg-form-drawer-bg-color));
 
   .header {
     display: flex;
@@ -10,10 +17,11 @@
 
     margin: 0;
     padding: 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba($exmg-form-drawer-color, 0.1);
 
     .title {
-      font-size: 24px;
+      @include mdc-typography('headline5');
+      color: var(--exmg-form-drawer-color, var(--mdc-theme-on-surface, $exmg-form-drawer-color));
     }
 
     .header-buttons {
