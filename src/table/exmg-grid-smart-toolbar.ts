@@ -1,10 +1,10 @@
 import {customElement, html, LitElement, property} from 'lit-element';
 import './exmg-grid-toolbar';
-import {Filter, Setting} from './types/exmg-grid-toolbar-types';
+import {Filter, Setting, SettingConfigType, SettingSelectionListConfig} from './types/exmg-grid-toolbar-types';
 import {
   ActionAmountSelectedItemsCondition,
-  ActionWithCondition,
   ActionConditionType,
+  ActionWithCondition,
   BaseActionCondition
 } from './types/exmg-grid-smart-toolbar-types';
 
@@ -73,7 +73,7 @@ export class ExmgGridSmartToolbar extends LitElement {
       };
     });
   }
-  private getSettings(): Setting[] {
+  private getSettings(): Setting<SettingSelectionListConfig>[] {
     if (!this.showColumnFilter) {
       return [];
     }
@@ -84,6 +84,23 @@ export class ExmgGridSmartToolbar extends LitElement {
         text: '',
         tooltip: 'Select columns',
         icon: 'filter_list',
+        config: {
+          type: SettingConfigType.SelectionList,
+          data: [
+            {
+              id: 'col1',
+              title: 'column 1',
+            },
+            {
+              id: 'col2',
+              title: 'column 2',
+            },
+            {
+              id: 'col3',
+              title: 'column 3',
+            },
+          ],
+        },
       },
     ];
   }

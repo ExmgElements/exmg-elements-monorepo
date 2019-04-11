@@ -5,15 +5,15 @@ import '@material/mwc-icon';
 import '@exmg/exmg-paper-combobox';
 import '@polymer/paper-item';
 import './exmg-grid-base-toolbar';
-import './exmg-grid-setting';
+import './exmg-grid-setting-selection-list';
 
 import {
   Action,
-  BaseFilterConfig,
+  BaseFilterConfig, BaseSettingConfig,
   Filter,
   FilterConfigType,
   FilterSingleSelectConfig,
-  Setting,
+  Setting, SettingConfigType, SettingSelectionListConfig,
 } from './types/exmg-grid-toolbar-types';
 
 @customElement('exmg-grid-toolbar')
@@ -142,21 +142,36 @@ export class ExmgGridToolbar extends LitElement {
   }
 
   private renderSettings() {
-    console.log(this.settings);
     return repeat(
       this.settings,
-      (setting) => html`
-        <exmg-grid-setting
+      setting => this.renderSetting(setting)
+    );
+  }
+
+  private renderSetting(setting: Setting) {
+    if (this.isSettingSelectionListConfig(setting)) {
+      return this.renderSelectionListSetting(setting);
+    }
+
+    return undefined;
+  }
+
+  private isSettingSelectionListConfig(setting: Setting<BaseSettingConfig>): setting is Setting<SettingSelectionListConfig> {
+    return setting.config.type === SettingConfigType.SelectionList;
+  }
+
+  private renderSelectionListSetting(setting: Setting<SettingSelectionListConfig>) {
+    return html`
+        <exmg-grid-setting-selection-list
           class="setting"
           text="${setting.text}"
           tooltip="${setting.tooltip}"
           icon="${setting.icon}"
+          .items="${setting.config.data}"
           @click="${this.emitSettingChangedEvent(setting)}"
         >
-          zzz
-        </exmg-grid-setting>
-      `
-    );
+        </exmg-grid-setting-selection-list>
+    `;
   }
 
   render() {
