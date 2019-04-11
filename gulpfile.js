@@ -9,7 +9,7 @@ registerTasks(gulp, '{src,demo}/**/*.{scss,css}', './node_modules/@exmg/exmg-cli
  */
 gulp.task('serve', () => {
   const spawnOptions = {
-    // `shell` option for Windows compatability. See:
+    // `shell` option for Windows compatibility. See:
     // https://nodejs.org/api/child_process.html#child_process_spawning_bat_and_cmd_files_on_windows
     shell: true,
     stdio: 'inherit'
