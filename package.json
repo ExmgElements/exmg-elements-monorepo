@@ -25,7 +25,6 @@
     "@material/mwc-button": "^0.5.0",
     "@polymer/paper-dialog": "^3.0.1",
     "@polymer/paper-spinner": "^3.0.2",
-    "@polymer/polymer": "^3.2.0",
     "lit-element": "^2.1.0"
   },
   "devDependencies": {
