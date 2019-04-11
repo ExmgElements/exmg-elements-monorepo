@@ -46,13 +46,13 @@ Attributes:
 All dom markup passed as children into **exmg-form-drawer** will be wrapped into **exmg-form** underhood.
 
 To properly handle form submission, you should call done() or error() on form instance after receiving **submit**
-event from **exmg-form-drawer**. Please read @exmg/exmg-form docs for more info.
+event from **exmg-form-drawer**. Please read https://github.com/ExmgElements/exmg-form docs for more info.
 
 ## Styling
 
 You can define:
-* primary color palette - for drawer buttons
-* drawer max width
+- primary color palette - for drawer buttons
+- drawer max width
 
 To define primary color palette, please define following variable: **--mdc-theme-primary**.
 Example:
