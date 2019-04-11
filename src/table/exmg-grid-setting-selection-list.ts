@@ -4,7 +4,9 @@ import '@polymer/paper-dialog/paper-dialog.js';
 import '@material/mwc-button';
 import '@material/mwc-icon';
 import './exmg-grid-setting';
-import {style} from './exmg-grid-setting-styles';
+import {style} from './exmg-grid-setting-selection-list-styles';
+import {MDCList} from '@material/list';
+import '@material/mwc-checkbox';
 
 @customElement('exmg-grid-setting-selection-list')
 export class ExmgGridSettingSelectionList extends LitElement {
@@ -14,55 +16,72 @@ export class ExmgGridSettingSelectionList extends LitElement {
   @property({type: Boolean, attribute: 'no-cancel-on-outside-click'})
   noCancelOnOutsideClick: boolean = false;
 
-  @property({type: String})
-  text: string = '';
+  @property({type: String, attribute: 'dialog-title'})
+  dialogTitle: string = '';
 
   @property({type: String})
   tooltip: string = '';
 
   @property({type: String})
-  icon: string = 'get_app';
+  icon: string = 'filter_list';
 
   @property({type: Object})
-  items: { id: string; title: string }[] = [];
+  settingData: { id: string; title: string; selected?: boolean }[] = [];
 
   handleOpenedChanged(e: CustomEvent) {
     this.opened = e.detail.value;
-
-    this.dispatchEvent(new CustomEvent(
-      'exmg-drawer-opened-changed',
-      {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: e.detail.value,
-        },
-      }
-    ));
   }
 
   openDialog() {
     this.opened = true;
   }
 
+  async handleListAction(e: CustomEvent) {
+    const index = e.detail.index;
+    this.settingData[index].selected = !this.settingData[index].selected;
+    await this.requestUpdate();
+
+    this.dispatchEvent(new CustomEvent(
+      'exmg-grid-setting-changed',
+      {
+        bubbles: true,
+        composed: true,
+        detail: {
+          value: this.settingData,
+        },
+      }
+    ));
+  }
+
   static styles = [
     style,
   ];
 
+  firstUpdated(changedProperties: any) {
+    super.firstUpdated(changedProperties);
+    new MDCList(this.shadowRoot!.querySelector('.mdc-list')!);
+  }
+
   render() {
-    console.log(this.items);
     return html`
       <exmg-grid-setting
         class="setting"
-        text="${this.text}"
         tooltip="${this.tooltip}"
         icon="${this.icon}"
       >
-        ${repeat(
-        this.items,
-        (item) => item.id,
-        item => html`${item.title}<br>`
-        )}
+        <h2>${this.dialogTitle}</h2>
+        <ul class="mdc-list" @MDCList:action="${this.handleListAction}">
+          ${repeat(
+            this.settingData,
+          (item) => item.id,
+          item => html`
+            <li class="mdc-list-item" data-xxx="2">
+              <span class="mdc-list-item__text">${item.title}</span>
+              <mwc-checkbox class="mdc-list-item__meta" ?checked="${item.selected}"></mwc-checkbox>
+            </li>
+          `
+          )}
+        </ul>
       </exmg-grid-setting>
     `;
   }

@@ -27,7 +27,7 @@ export interface FilterSingleSelectConfig extends BaseFilterConfig {
 export type Setting<TConfig extends BaseSettingConfig = BaseSettingConfig> = {
   id: string;
   icon?: string;
-  text?: string;
+  dialogTitle?: string;
   tooltip?: string;
   config: TConfig;
 };
