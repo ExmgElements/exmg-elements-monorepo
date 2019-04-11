@@ -23,3 +23,10 @@ export interface BaseFilterConfig {
 export interface FilterSingleSelectConfig extends BaseFilterConfig {
   data: { id: string; title: string }[];
 }
+
+export type Setting = {
+  id: string;
+  icon?: string;
+  text?: string;
+  tooltip?: string;
+};

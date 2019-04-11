@@ -1,6 +1,6 @@
 import {customElement, html, LitElement, property} from 'lit-element';
 import './exmg-grid-toolbar';
-import {Filter} from './types/exmg-grid-toolbar-types';
+import {Filter, Setting} from './types/exmg-grid-toolbar-types';
 import {
   ActionAmountSelectedItemsCondition,
   ActionWithCondition,
@@ -19,8 +19,14 @@ export class ExmgGridSmartToolbar extends LitElement {
   @property({type: Object})
   filters: Filter[] = [];
 
+  @property({type: Object})
+  settings: Setting[] = [];
+
   @property({type: Number, attribute: 'amount-of-selected-items'})
   amountOfSelectedItems: number = 0;
+
+  @property({type: Boolean, attribute: 'show-column-filter'})
+  showColumnFilter: boolean = false;
 
   private getActions() {
     return this.actions.filter((action) => {
@@ -67,6 +73,20 @@ export class ExmgGridSmartToolbar extends LitElement {
       };
     });
   }
+  private getSettings(): Setting[] {
+    if (!this.showColumnFilter) {
+      return [];
+    }
+
+    return [
+      {
+        id: 'column-selector',
+        text: '',
+        tooltip: 'Select columns',
+        icon: 'filter_list',
+      },
+    ];
+  }
 
   render() {
     return html`
@@ -74,6 +94,7 @@ export class ExmgGridSmartToolbar extends LitElement {
         .actions="${this.getActions()}"
         description="${this.description}"
         .filters="${this.getFilters()}"
+        .settings="${this.getSettings()}"
       ></exmg-grid-toolbar>
     `;
   }

@@ -66,6 +66,9 @@ export class ExmgGridBaseToolbar extends LitElement {
         <div class="filters">
           <slot name="filters"></slot>
         </div>
+        <div class="settings">
+          <slot name="settings"></slot>
+        </div>
       </div>
     `;
   }

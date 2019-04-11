@@ -5,13 +5,15 @@ import '@material/mwc-icon';
 import '@exmg/exmg-paper-combobox';
 import '@polymer/paper-item';
 import './exmg-grid-base-toolbar';
+import './exmg-grid-setting';
 
 import {
   Action,
   BaseFilterConfig,
   Filter,
   FilterConfigType,
-  FilterSingleSelectConfig
+  FilterSingleSelectConfig,
+  Setting,
 } from './types/exmg-grid-toolbar-types';
 
 @customElement('exmg-grid-toolbar')
@@ -24,6 +26,9 @@ export class ExmgGridToolbar extends LitElement {
 
   @property({type: Object})
   filters: Filter[] = [];
+
+  @property({type: Object})
+  settings: Setting[] = [];
 
   private emitActionExecutedEvent(action: Action) {
     return () => {
@@ -50,6 +55,24 @@ export class ExmgGridToolbar extends LitElement {
           {
             detail: {
               id: filter.id,
+              value: event.detail.value,
+            },
+            composed: true,
+            bubbles: true,
+          }
+        )
+      );
+    };
+  }
+
+  private emitSettingChangedEvent(setting: Setting) {
+    return (event: CustomEvent) => {
+      this.dispatchEvent(
+        new CustomEvent(
+          'exmg-grid-toolbar-setting-changed',
+          {
+            detail: {
+              id: setting.id,
               value: event.detail.value,
             },
             composed: true,
@@ -118,6 +141,24 @@ export class ExmgGridToolbar extends LitElement {
     `;
   }
 
+  private renderSettings() {
+    console.log(this.settings);
+    return repeat(
+      this.settings,
+      (setting) => html`
+        <exmg-grid-setting
+          class="setting"
+          text="${setting.text}"
+          tooltip="${setting.tooltip}"
+          icon="${setting.icon}"
+          @click="${this.emitSettingChangedEvent(setting)}"
+        >
+          zzz
+        </exmg-grid-setting>
+      `
+    );
+  }
+
   render() {
     return html`
       <style>
@@ -167,6 +208,9 @@ export class ExmgGridToolbar extends LitElement {
         </div>
         <div slot="filters">
           ${this.renderFilters()}
+        </div>
+        <div slot="settings">
+          ${this.renderSettings()}
         </div>
       </exmg-grid-base-toolbar>
     `;
