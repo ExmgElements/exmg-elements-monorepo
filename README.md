@@ -7,6 +7,29 @@ Components included:
 1. **exmg-drawer** - basic component
 2. **exmg-form-drawer** - form drawer
 
+## Install
+```bash
+npm install @exmg/exmg-form-drawer
+```
+
+Before start ensure that you have installed `web-animation-js`. It is required by `@polymer/paper-dialog`.
+
+```bash
+npm install web-animation-js
+```
+
+Load this script in index.html
+```html
+    <!-- Ensure Web Animations polyfill is loaded -->
+    <script src="../node_modules/web-animations-js/web-animations-next-lite.min.js"></script>
+```
+
+Some dependencies `@exmg/exmg-paper-combobox` use `@apply` to apply css mixins.
+This require to load script in index.html
+```html
+<script src="../node_modules/@webcomponents/shadycss/apply-shim.min.js"></script>
+```
+
 ## Components
 ### \<exmg-drawer>
 
