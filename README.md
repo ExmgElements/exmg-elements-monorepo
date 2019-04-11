@@ -3,6 +3,7 @@
 This package provides dialog drawer functionality.
 
 Components included:
+
 1. **exmg-drawer** - basic component
 2. **exmg-form-drawer** - form drawer
 
@@ -14,9 +15,11 @@ It serves only as drawer without form functionality, so it is content agnostic.
 You can pass any dom markup as children of this component.
 
 Events:
+
 1. **exmg-drawer-opened-changed** - when drawer shown/hidden 
 
 Attributes:
+
 1. **opened** - whether or not drawer is visible
 2. **no-cancel-on-outside-click** - whether or not clicking outside drawer should close drawer
 
@@ -31,9 +34,11 @@ Provides form functionality to drawer:
 * material styling
  
 Events:
+
 1. **exmg-drawer-opened-changed** - when drawer shown/hidden 
 
 Attributes:
+
 1. **opened** - whether or not drawer is visible
 2. **no-cancel-on-outside-click** - whether or not clicking outside drawer should close drawer
 3. **submit-btn-title** - title of submit button. Default "Submit"
@@ -64,6 +69,7 @@ exmg-form-drawer {
 ```
 
 To define drawer max width, you can:
+
 * Define variable **--exmg-drawer-max-width**
 * Pass max width directly into drawer component style attribute: ```style="max-width: 500px"``` 
 
