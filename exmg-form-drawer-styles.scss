@@ -16,7 +16,7 @@ $exmg-form-drawer-bg-color: #ffffff;
 
     margin: 0;
     padding: 20px;
-    border-bottom: 1px solid rgba($exmg-form-drawer-color, 0.1);
+    border-bottom: 1px solid var(--exmg-form-drawer-color, var(--mdc-theme-on-surface, rgba($exmg-form-drawer-color, 0.1)));
 
     .title {
       @include mdc-typography('headline5');
