@@ -78,11 +78,31 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
     console.log('onFilterChanged', e.detail);
   }
 
+  private onSettingChanged(e: CustomEvent) {
+    console.log('onSettingChanged', e.detail);
+  }
+
   private updateSelectedItems() {
     this.amountOfSelectedItems = parseInt(this.shadowRoot!.querySelector<HTMLInputElement>('#amount-of-selected-items')!.value, 10);
   }
 
   render() {
+    const columns = [
+      {
+        id: 'col1',
+        title: 'column 1',
+      },
+      {
+        id: 'col2',
+        title: 'column 2',
+        selected: true,
+      },
+      {
+        id: 'col3',
+        title: 'column 3',
+      },
+    ];
+
     return html`
         <style>
           :host {
@@ -103,8 +123,10 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
             description="${this.description}"
             .filters="${this.filters}"
             ?show-column-filter="${true}"
+            .columns="${columns}"
             @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
             @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
+            @exmg-grid-toolbar-setting-changed="${this.onSettingChanged}"
         ></exmg-grid-smart-toolbar>
         <h1>Without actions</h1>
         <exmg-grid-smart-toolbar

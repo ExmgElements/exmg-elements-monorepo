@@ -25,6 +25,9 @@ export class ExmgGridSmartToolbar extends LitElement {
   @property({type: Number, attribute: 'amount-of-selected-items'})
   amountOfSelectedItems: number = 0;
 
+  @property({type: Object})
+  columns: { id: string; title: string; selected?: boolean }[] = [];
+
   @property({type: Boolean, attribute: 'show-column-filter'})
   showColumnFilter: boolean = false;
 
@@ -86,20 +89,7 @@ export class ExmgGridSmartToolbar extends LitElement {
         icon: 'filter_list',
         config: {
           type: SettingConfigType.SelectionList,
-          data: [
-            {
-              id: 'col1',
-              title: 'column 1',
-            },
-            {
-              id: 'col2',
-              title: 'column 2',
-            },
-            {
-              id: 'col3',
-              title: 'column 3',
-            },
-          ],
+          data: this.columns,
         },
       },
     ];
