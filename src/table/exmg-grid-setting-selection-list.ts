@@ -6,7 +6,7 @@ import '@material/mwc-icon';
 import './exmg-grid-setting';
 import {style} from './exmg-grid-setting-selection-list-styles';
 import {MDCList} from '@material/list';
-import '@material/mwc-checkbox';
+import './exmg-grid-checkbox';
 import {SettingSelectionListItem} from './types/exmg-grid-toolbar-types';
 
 @customElement('exmg-grid-setting-selection-list')
@@ -70,7 +70,7 @@ export class ExmgGridSettingSelectionList extends LitElement {
           item => html`
             <li class="mdc-list-item" data-xxx="2">
               <span class="mdc-list-item__text">${item.title}</span>
-              <mwc-checkbox class="mdc-list-item__meta" ?checked="${item.selected}"></mwc-checkbox>
+              <exmg-grid-checkbox class="mdc-list-item__meta" ?checked="${item.selected}"></exmg-grid-checkbox>
             </li>
           `
           )}

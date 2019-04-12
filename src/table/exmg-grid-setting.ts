@@ -22,7 +22,7 @@ export class ExmgGridSetting extends LitElement {
     this.opened = e.detail.value;
 
     this.dispatchEvent(new CustomEvent(
-      'exmg-drawer-opened-changed',
+      'exmg-grid-settings-changed',
       {
         bubbles: true,
         composed: true,
