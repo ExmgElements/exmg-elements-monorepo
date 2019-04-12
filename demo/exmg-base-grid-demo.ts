@@ -9,7 +9,13 @@ import {
   ActionConditionType,
   ActionWithCondition
 } from '../src/table/types/exmg-grid-smart-toolbar-types';
-import {Filter, FilterConfigType, FilterSingleSelectConfig} from '../src/table/types/exmg-grid-toolbar-types';
+import {
+  EventDetailGridToolbarSettingChanged,
+  Filter,
+  FilterConfigType,
+  FilterSingleSelectConfig, SettingConfigId,
+  SettingSelectionListItem
+} from '../src/table/types/exmg-grid-toolbar-types';
 import {
   EventDetailRowsOrderChanged,
   EventDetailSelectedRowsChange,
@@ -150,6 +156,11 @@ export abstract class ExmgBaseGridDemo extends LitElement {
     },
   ];
 
+  protected columns: SettingSelectionListItem[] = [
+    {id: 'month', title: 'Month', selected: true},
+    {id: 'year', title: 'Year', selected: true},
+  ];
+
   protected onActionExecuted(e: CustomEvent<{id: string}>) {
     console.log('onActionExecuted', e.detail);
     this.handleAction(e.detail.id);
@@ -229,6 +240,17 @@ export abstract class ExmgBaseGridDemo extends LitElement {
     }
     this.pageIndex = 0;
     this.items = getItemByPage(this.pageIndex, this.pageSize);
+  }
+
+  protected onSettingChanged(e: CustomEvent<EventDetailGridToolbarSettingChanged>) {
+    const {id, value} = e.detail;
+    if (id === SettingConfigId.ColumnSelector) {
+      this.hiddenColumns = value
+        .filter((it: SettingSelectionListItem) => !it.selected)
+        .reduce((acc: Record<string, string>, item: SettingSelectionListItem) => {
+          return {...acc, [item.id]: item.id};
+        }, {});
+    }
   }
 
   protected toggleMonthColumn(event: Event) {

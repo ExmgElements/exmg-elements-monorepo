@@ -7,6 +7,7 @@ import './exmg-grid-setting';
 import {style} from './exmg-grid-setting-selection-list-styles';
 import {MDCList} from '@material/list';
 import '@material/mwc-checkbox';
+import {SettingSelectionListItem} from './types/exmg-grid-toolbar-types';
 
 @customElement('exmg-grid-setting-selection-list')
 export class ExmgGridSettingSelectionList extends LitElement {
@@ -26,15 +27,7 @@ export class ExmgGridSettingSelectionList extends LitElement {
   icon: string = 'filter_list';
 
   @property({type: Object})
-  settingData: { id: string; title: string; selected?: boolean }[] = [];
-
-  handleOpenedChanged(e: CustomEvent) {
-    this.opened = e.detail.value;
-  }
-
-  openDialog() {
-    this.opened = true;
-  }
+  settingData: SettingSelectionListItem[] = [];
 
   async handleListAction(e: CustomEvent) {
     const index = e.detail.index;

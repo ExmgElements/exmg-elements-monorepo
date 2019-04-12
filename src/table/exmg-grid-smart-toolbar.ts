@@ -1,6 +1,12 @@
 import {customElement, html, LitElement, property} from 'lit-element';
 import './exmg-grid-toolbar';
-import {Filter, Setting, SettingConfigType, SettingSelectionListConfig} from './types/exmg-grid-toolbar-types';
+import {
+  Filter,
+  Setting, SettingConfigId,
+  SettingConfigType,
+  SettingSelectionListConfig,
+  SettingSelectionListItem
+} from './types/exmg-grid-toolbar-types';
 import {
   ActionAmountSelectedItemsCondition,
   ActionConditionType,
@@ -26,7 +32,7 @@ export class ExmgGridSmartToolbar extends LitElement {
   amountOfSelectedItems: number = 0;
 
   @property({type: Object})
-  columns: { id: string; title: string; selected?: boolean }[] = [];
+  columns: SettingSelectionListItem[] = [];
 
   @property({type: Boolean, attribute: 'show-column-filter'})
   showColumnFilter: boolean = false;
@@ -83,7 +89,7 @@ export class ExmgGridSmartToolbar extends LitElement {
 
     return [
       {
-        id: 'column-selector',
+        id: SettingConfigId.ColumnSelector,
         dialogTitle: 'Column selection',
         tooltip: 'Select columns',
         icon: 'filter_list',

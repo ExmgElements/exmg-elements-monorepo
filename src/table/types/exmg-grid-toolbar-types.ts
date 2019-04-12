@@ -36,10 +36,25 @@ export enum SettingConfigType {
   SelectionList = 'selection_list',
 }
 
+export enum SettingConfigId {
+  ColumnSelector = 'column-selector',
+}
+
 export interface BaseSettingConfig {
   type?: SettingConfigType;
 }
 
-export interface SettingSelectionListConfig extends BaseSettingConfig {
-  data: { id: string; title: string }[];
+export interface  SettingSelectionListItem {
+  id: string;
+  title: string;
+  selected?: boolean;
 }
+
+export interface SettingSelectionListConfig extends BaseSettingConfig {
+  data: SettingSelectionListItem[];
+}
+
+export type EventDetailGridToolbarSettingChanged = {
+  id: string;
+  value: SettingSelectionListItem[];
+};

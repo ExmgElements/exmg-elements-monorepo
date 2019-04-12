@@ -9,11 +9,11 @@ import './exmg-grid-setting-selection-list';
 
 import {
   Action,
-  BaseFilterConfig, BaseSettingConfig,
+  BaseFilterConfig, BaseSettingConfig, EventDetailGridToolbarSettingChanged,
   Filter,
   FilterConfigType,
   FilterSingleSelectConfig,
-  Setting, SettingConfigType, SettingSelectionListConfig,
+  Setting, SettingConfigType, SettingSelectionListConfig, SettingSelectionListItem,
 } from './types/exmg-grid-toolbar-types';
 
 @customElement('exmg-grid-toolbar')
@@ -66,9 +66,9 @@ export class ExmgGridToolbar extends LitElement {
   }
 
   private emitSettingChangedEvent(setting: Setting) {
-    return (event: CustomEvent) => {
+    return (event: CustomEvent<{value: SettingSelectionListItem[]}>) => {
       this.dispatchEvent(
-        new CustomEvent(
+        new CustomEvent<EventDetailGridToolbarSettingChanged>(
           'exmg-grid-toolbar-setting-changed',
           {
             detail: {
