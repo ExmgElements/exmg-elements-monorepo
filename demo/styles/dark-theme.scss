@@ -1,7 +1,8 @@
 @import "../../src/table/mixins";
 exmg-grid {
   $primaryColor: #0070db;
+  $secondaryColor: #0070db;
   $surfaceColor: #363640;
   $onSurfaceColor: #ffffff;
-  @include exmg-generate-theme-table-variables($primaryColor, $surfaceColor, $onSurfaceColor);
+  @include exmg-generate-theme-table-variables($primaryColor, $secondaryColor, $surfaceColor, $onSurfaceColor);
 }
