@@ -20,6 +20,9 @@ export class ExmgGridBaseToolbar extends LitElement {
   @property({type: Object})
   private actionsCount: number = 0;
 
+  @property({type: Object})
+  private settingsCount: number = 0;
+
   @property({type: Boolean, reflect: true})
   private active: boolean = false;
 
@@ -33,6 +36,7 @@ export class ExmgGridBaseToolbar extends LitElement {
         for (const mutation of mutationsList) {
           if (mutation.type === 'childList') {
             this.actionsCount = this.querySelector('div[slot=actions]')!.childElementCount;
+            this.settingsCount = this.querySelector('div[slot=settings]')!.childElementCount;
             this.active = this.actionsCount > 0;
           }
         }
@@ -40,6 +44,7 @@ export class ExmgGridBaseToolbar extends LitElement {
     });
 
     this.actionsCount = this.querySelector('div[slot=actions]')!.childElementCount;
+    this.settingsCount = this.querySelector('div[slot=settings]')!.childElementCount;
     this.active = this.actionsCount > 0;
     this.observer!.observe(this, {attributes: false, childList: true, subtree: true});
   }
@@ -49,6 +54,8 @@ export class ExmgGridBaseToolbar extends LitElement {
   }
 
   render() {
+    console.log('actionsCount', this.actionsCount);
+    console.log('settingsCount', this.settingsCount);
     return html`
       <div class="wrapper ${this.active ? 'active' : ''}">
         ${
@@ -66,7 +73,7 @@ export class ExmgGridBaseToolbar extends LitElement {
         <div class="filters">
           <slot name="filters"></slot>
         </div>
-        <div class="settings">
+        <div class="settings ${this.settingsCount > 0 ? 'has-settings' : ''}">
           <slot name="settings"></slot>
         </div>
       </div>
