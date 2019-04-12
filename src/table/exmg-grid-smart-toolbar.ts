@@ -31,11 +31,17 @@ export class ExmgGridSmartToolbar extends LitElement {
   @property({type: Number, attribute: 'amount-of-selected-items'})
   amountOfSelectedItems: number = 0;
 
-  @property({type: Object})
-  columns: SettingSelectionListItem[] = [];
-
   @property({type: Boolean, attribute: 'show-column-filter'})
   showColumnFilter: boolean = false;
+
+  @property({type: String, attribute: 'column-filter-button-tooltip'})
+  columnFilterButtonTooltip: string = 'Column selection';
+
+  @property({type: String, attribute: 'column-filter-dialog-title'})
+  columnFilterDialogTitle: string = 'Select columns';
+
+  @property({type: Object, attribute: 'column-filter-columns'})
+  columnFilterColumns: SettingSelectionListItem[] = [];
 
   private getActions() {
     return this.actions.filter((action) => {
@@ -90,12 +96,12 @@ export class ExmgGridSmartToolbar extends LitElement {
     return [
       {
         id: SettingConfigId.ColumnSelector,
-        dialogTitle: 'Column selection',
-        tooltip: 'Select columns',
+        dialogTitle: this.columnFilterDialogTitle,
+        tooltip: this.columnFilterButtonTooltip,
         icon: 'filter_list',
         config: {
           type: SettingConfigType.SelectionList,
-          data: this.columns,
+          data: this.columnFilterColumns,
         },
       },
     ];

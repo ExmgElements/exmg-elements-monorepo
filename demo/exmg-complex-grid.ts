@@ -96,7 +96,7 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
           description="Income table"
           .filters="${this.filters}"
           ?show-column-filter="${true}"
-          .columns="${this.columns}"
+          .columnFilterColumns="${this.columns}"
           @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
           @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
           @exmg-grid-toolbar-setting-changed="${this.onSettingChanged}"

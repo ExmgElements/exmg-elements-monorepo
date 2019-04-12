@@ -124,7 +124,7 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
             description="${this.description}"
             .filters="${this.filters}"
             ?show-column-filter="${true}"
-            .columns="${columns}"
+            .columnFilterColumns="${columns}"
             @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
             @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
             @exmg-grid-toolbar-setting-changed="${this.onSettingChanged}"
