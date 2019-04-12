@@ -13,18 +13,14 @@ $mdc-theme-secondary: #0071dc;
     background-color: transparent
   }
   50% {
-    border-color: $mdc-theme-secondary;
     border-color: var(--exmg-grid-setting-checkbox-color, var(--mdc-theme-secondary, $mdc-theme-secondary));
-    background-color: $mdc-theme-secondary;
     background-color: var(--exmg-grid-setting-checkbox-color, var(--mdc-theme-secondary, $mdc-theme-secondary))
   }
 }
 
 @keyframes mdc-checkbox-fade-out-background-0 {
   0%, 80% {
-    border-color: $mdc-theme-secondary;
     border-color: var(--exmg-grid-setting-checkbox-color, var(--mdc-theme-secondary, $mdc-theme-secondary));
-    background-color: $mdc-theme-secondary;
     background-color: var(--exmg-grid-setting-checkbox-color, var(--mdc-theme-secondary, $mdc-theme-secondary))
   }
   100% {
