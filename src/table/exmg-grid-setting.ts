@@ -43,20 +43,22 @@ export class ExmgGridSetting extends LitElement {
 
   render() {
     return html`
-      <mwc-button
-        class="action"
-        title="${this.tooltip}"
-        @click="${this.openDialog}"
-      >
-        <mwc-icon>${this.icon}</mwc-icon>
-      </mwc-button>
-      <paper-dialog
-        ?opened="${this.opened}"
-        ?no-cancel-on-outside-click="${this.noCancelOnOutsideClick}"
-        @opened-changed="${this.handleOpenedChanged}"
-      >
-        <slot></slot>
-      </paper-dialog>
+      <div class="dialog-container">
+        <mwc-button
+          class="action"
+          title="${this.tooltip}"
+          @click="${this.openDialog}"
+        >
+          <mwc-icon>${this.icon}</mwc-icon>
+        </mwc-button>
+        <paper-dialog
+          ?opened="${this.opened}"
+          ?no-cancel-on-outside-click="${this.noCancelOnOutsideClick}"
+          @opened-changed="${this.handleOpenedChanged}"
+        >
+          <slot></slot>
+        </paper-dialog>
+      </div>
     `;
   }
 }
