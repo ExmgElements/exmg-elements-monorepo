@@ -23,7 +23,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/ExmgElements/exmg-grid.git"
+    "url": "https://bitbucket.org/exmachina/exmg-grid.git"
   },
   "license": "MIT",
   "dependencies": {
