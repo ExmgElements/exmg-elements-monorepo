@@ -54,8 +54,6 @@ export class ExmgGridBaseToolbar extends LitElement {
   }
 
   render() {
-    console.log('actionsCount', this.actionsCount);
-    console.log('settingsCount', this.settingsCount);
     return html`
       <div class="wrapper ${this.active ? 'active' : ''}">
         ${
