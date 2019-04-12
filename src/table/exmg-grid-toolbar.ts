@@ -5,13 +5,15 @@ import '@material/mwc-icon';
 import '@exmg/exmg-paper-combobox';
 import '@polymer/paper-item';
 import './exmg-grid-base-toolbar';
+import './exmg-grid-setting-selection-list';
 
 import {
   Action,
-  BaseFilterConfig,
+  BaseFilterConfig, BaseSettingConfig, EventDetailGridToolbarSettingChanged,
   Filter,
   FilterConfigType,
-  FilterSingleSelectConfig
+  FilterSingleSelectConfig,
+  Setting, SettingConfigType, SettingSelectionListConfig, SettingSelectionListItem,
 } from './types/exmg-grid-toolbar-types';
 
 @customElement('exmg-grid-toolbar')
@@ -24,6 +26,9 @@ export class ExmgGridToolbar extends LitElement {
 
   @property({type: Object})
   filters: Filter[] = [];
+
+  @property({type: Object})
+  settings: Setting[] = [];
 
   private emitActionExecutedEvent(action: Action) {
     return () => {
@@ -50,6 +55,24 @@ export class ExmgGridToolbar extends LitElement {
           {
             detail: {
               id: filter.id,
+              value: event.detail.value,
+            },
+            composed: true,
+            bubbles: true,
+          }
+        )
+      );
+    };
+  }
+
+  private emitSettingChangedEvent(setting: Setting) {
+    return (event: CustomEvent<{value: SettingSelectionListItem[]}>) => {
+      this.dispatchEvent(
+        new CustomEvent<EventDetailGridToolbarSettingChanged>(
+          'exmg-grid-toolbar-setting-changed',
+          {
+            detail: {
+              id: setting.id,
               value: event.detail.value,
             },
             composed: true,
@@ -118,6 +141,40 @@ export class ExmgGridToolbar extends LitElement {
     `;
   }
 
+  private renderSettings() {
+    return repeat(
+      this.settings,
+      setting => this.renderSetting(setting)
+    );
+  }
+
+  private renderSetting(setting: Setting) {
+    if (this.isSettingSelectionListConfig(setting)) {
+      return this.renderSelectionListSetting(setting);
+    }
+
+    return undefined;
+  }
+
+  private isSettingSelectionListConfig(setting: Setting<BaseSettingConfig>): setting is Setting<SettingSelectionListConfig> {
+    return setting.config.type === SettingConfigType.SelectionList;
+  }
+
+  private renderSelectionListSetting(setting: Setting<SettingSelectionListConfig>) {
+    return html`
+        <exmg-grid-setting-selection-list
+          class="setting"
+          setting-id="${setting.id}"
+          dialog-title="${setting.dialogTitle}"
+          tooltip="${setting.tooltip}"
+          icon="${setting.icon}"
+          .settingData="${setting.config.data}"
+          @exmg-grid-setting-changed="${this.emitSettingChangedEvent(setting)}"
+        >
+        </exmg-grid-setting-selection-list>
+    `;
+  }
+
   render() {
     return html`
       <style>
@@ -167,6 +224,9 @@ export class ExmgGridToolbar extends LitElement {
         </div>
         <div slot="filters">
           ${this.renderFilters()}
+        </div>
+        <div slot="settings">
+          ${this.renderSettings()}
         </div>
       </exmg-grid-base-toolbar>
     `;

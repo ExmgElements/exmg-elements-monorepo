@@ -1,5 +1,10 @@
 import {customElement, html, LitElement, property} from 'lit-element';
-import {Filter, FilterSingleSelectConfig, FilterConfigType} from '../src/table/types/exmg-grid-toolbar-types';
+import {
+  Filter,
+  FilterSingleSelectConfig,
+  FilterConfigType,
+  SettingSelectionListItem
+} from '../src/table/types/exmg-grid-toolbar-types';
 import {
   ActionAmountSelectedItemsCondition,
   ActionWithCondition,
@@ -70,12 +75,32 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
   @property({type: Number})
   private amountOfSelectedItems: number = 1;
 
+  private columns: SettingSelectionListItem[] = [
+    {
+      id: 'col1',
+      title: 'column 1',
+    },
+    {
+      id: 'col2',
+      title: 'column 2',
+      selected: true,
+    },
+    {
+      id: 'col3',
+      title: 'column 3',
+    },
+  ];
+
   private onActionExecuted(e: CustomEvent) {
     console.log('onActionExecuted', e.detail);
   }
 
   private onFilterChanged(e: CustomEvent) {
     console.log('onFilterChanged', e.detail);
+  }
+
+  private onSettingChanged(e: CustomEvent) {
+    console.log('onSettingChanged', e.detail);
   }
 
   private updateSelectedItems() {
@@ -102,8 +127,11 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
             .actions="${this.actions}"
             description="${this.description}"
             .filters="${this.filters}"
+            ?show-column-filter="${true}"
+            .columnFilterColumns="${this.columns}"
             @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
             @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
+            @exmg-grid-toolbar-setting-changed="${this.onSettingChanged}"
         ></exmg-grid-smart-toolbar>
         <h1>Without actions</h1>
         <exmg-grid-smart-toolbar

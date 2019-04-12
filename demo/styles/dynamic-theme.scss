@@ -1,16 +1,18 @@
 @import "../../src/table/mixins";
 exmg-grid[data-theme="dark"] {
   $primaryColor: #0070db;
+  $secondaryColor: #0070db;
   $surfaceColor: #363640;
   $onSurfaceColor: #ffffff;
-  @include exmg-generate-theme-table-variables($primaryColor, $surfaceColor, $onSurfaceColor);
+  @include exmg-generate-theme-table-variables($primaryColor, $secondaryColor, $surfaceColor, $onSurfaceColor);
 }
 
 exmg-grid[data-theme="light"] {
   $primaryColor: #0070db;
+  $secondaryColor: #0070db;
   $surfaceColor: #ffffff;
   $onSurfaceColor: #02182b;
-  @include exmg-generate-theme-table-variables($primaryColor, $surfaceColor, $onSurfaceColor);
+  @include exmg-generate-theme-table-variables($primaryColor, $secondaryColor, $surfaceColor, $onSurfaceColor);
 }
 
 exmg-grid[data-theme="exmg"] {

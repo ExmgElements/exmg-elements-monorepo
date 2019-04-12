@@ -1,10 +1,16 @@
 import {customElement, html, LitElement, property} from 'lit-element';
 import './exmg-grid-toolbar';
-import {Filter} from './types/exmg-grid-toolbar-types';
+import {
+  Filter,
+  Setting, SettingConfigId,
+  SettingConfigType,
+  SettingSelectionListConfig,
+  SettingSelectionListItem
+} from './types/exmg-grid-toolbar-types';
 import {
   ActionAmountSelectedItemsCondition,
-  ActionWithCondition,
   ActionConditionType,
+  ActionWithCondition,
   BaseActionCondition
 } from './types/exmg-grid-smart-toolbar-types';
 
@@ -19,8 +25,23 @@ export class ExmgGridSmartToolbar extends LitElement {
   @property({type: Object})
   filters: Filter[] = [];
 
+  @property({type: Object})
+  settings: Setting[] = [];
+
   @property({type: Number, attribute: 'amount-of-selected-items'})
   amountOfSelectedItems: number = 0;
+
+  @property({type: Boolean, attribute: 'show-column-filter'})
+  showColumnFilter: boolean = false;
+
+  @property({type: String, attribute: 'column-filter-button-tooltip'})
+  columnFilterButtonTooltip: string = 'Column selection';
+
+  @property({type: String, attribute: 'column-filter-dialog-title'})
+  columnFilterDialogTitle: string = 'Select columns';
+
+  @property({type: Object, attribute: 'column-filter-columns'})
+  columnFilterColumns: SettingSelectionListItem[] = [];
 
   private getActions() {
     return this.actions.filter((action) => {
@@ -67,6 +88,24 @@ export class ExmgGridSmartToolbar extends LitElement {
       };
     });
   }
+  private getSettings(): Setting<SettingSelectionListConfig>[] {
+    if (!this.showColumnFilter) {
+      return [];
+    }
+
+    return [
+      {
+        id: SettingConfigId.ColumnSelector,
+        dialogTitle: this.columnFilterDialogTitle,
+        tooltip: this.columnFilterButtonTooltip,
+        icon: 'filter_list',
+        config: {
+          type: SettingConfigType.SelectionList,
+          data: this.columnFilterColumns,
+        },
+      },
+    ];
+  }
 
   render() {
     return html`
@@ -74,6 +113,7 @@ export class ExmgGridSmartToolbar extends LitElement {
         .actions="${this.getActions()}"
         description="${this.description}"
         .filters="${this.getFilters()}"
+        .settings="${this.getSettings()}"
       ></exmg-grid-toolbar>
     `;
   }

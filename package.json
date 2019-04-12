@@ -29,7 +29,10 @@
   "dependencies": {
     "@exmg/exmg-paper-combobox": "^4.6.0",
     "@exmg/exmg-sortable": "^4.0.3",
+    "@material/list": "^1.1.1",
     "@material/mwc-button": "^0.4.0",
+    "@material/mwc-checkbox": "^0.5.0",
+    "@polymer/paper-dialog": "^3.0.1",
     "@polymer/paper-item": "^3.0.1",
     "@polymer/polymer": "^3.2.0",
     "lit-element": "^2.1.0"

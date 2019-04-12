@@ -1,0 +1,10 @@
+.dialog-container {
+  position: relative;
+  display: inline-block;
+}
+paper-dialog {
+  padding: 20px;
+  margin: 0;
+  position: absolute;
+  right: 0;
+}
