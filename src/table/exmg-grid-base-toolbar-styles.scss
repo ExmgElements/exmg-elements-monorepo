@@ -16,6 +16,8 @@ $exmg-grid-toolbar-active-color: #000000;
   background-color: var(--exmg-grid-toolbar-bg-color, var(--mdc-theme-surface, $exmg-grid-toolbar-bg-color));
   color: var(--exmg-grid-toolbar-color, var(--mdc-theme-on-surface, $exmg-grid-toolbar-color));
 
+  white-space: nowrap;
+
   &.active {
     background-color: var(--exmg-grid-toolbar-active-bg-color, $exmg-grid-toolbar-active-bg-color);
     color: var(--exmg-grid-toolbar-active-color, $exmg-grid-toolbar-active-color);
@@ -58,5 +60,11 @@ $exmg-grid-toolbar-active-color: #000000;
 
   &.has-settings {
     padding-right: 16px;
+  }
+}
+
+@media (max-width: 500px) {
+  .wrapper .description {
+    display: none;
   }
 }

@@ -43,6 +43,8 @@ $exmgTableThSortableHoverColor: null !default;
   --exmg-table-td-height: 48px;
   --exmg-table-th-sort-icon-height: 16px;
   --exmg-table-th-sort-icon-width: 16px;
+
+  --exmg-grid-toolbar-setting-position: static;
 }
 
 ::slotted([slot="pagination"]) {
@@ -59,9 +61,11 @@ $exmgTableThSortableHoverColor: null !default;
   border-top-right-radius: 4px;
   display: block;
   border-bottom: 1px solid var(--exmg-table-row-divider-color);
+  overflow-x: auto;
 }
 
 .table-card {
+  position: relative;
   @include mdc-typography-base;
   border: none;
   box-shadow: 0 1px 4px 0 var(--exmg-table-border-color);
@@ -102,6 +106,9 @@ td {
 .grid-toolbar th {
   padding: 0;
   text-align: left;
+  > * {
+    overflow-x: auto;
+  }
 }
 
 .grid-columns {
@@ -273,6 +280,9 @@ tr .grid-icon-rotate[data-is-expandable]:not([data-is-expanded]) > * {
 .grid-row-drag-handler {
   cursor: move;
   vertical-align: middle;
+  > * {
+    vertical-align: middle;
+  }
 }
 tr {
   &.dragged {

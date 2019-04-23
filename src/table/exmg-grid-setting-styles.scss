@@ -1,5 +1,5 @@
 .dialog-container {
-  position: relative;
+  position: var(--exmg-grid-toolbar-setting-position, relative);
   display: inline-block;
 }
 paper-dialog {

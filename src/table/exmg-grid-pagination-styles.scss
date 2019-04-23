@@ -50,3 +50,25 @@ mwc-button[disabled] {
   }
 }
 
+@media (max-width: 600px) {
+  .page-size-label {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .wrapper .page-size {
+    display: none;
+  }
+}
+
+@media (max-width: 450px) {
+  .wrapper {
+    overflow-x: auto;
+    white-space: nowrap;
+    .page-range {
+      min-width: 1px;
+    }
+  }
+}
+
