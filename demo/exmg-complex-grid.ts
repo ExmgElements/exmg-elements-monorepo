@@ -1,4 +1,4 @@
-import {html, customElement, TemplateResult} from 'lit-element';
+import {html, customElement, TemplateResult, css} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 import '@polymer/paper-checkbox';
 
@@ -14,10 +14,16 @@ import {DEFAULT_SORT_COLUMN, DEFAULT_SORT_DIRECTION, ExmgBaseGridDemo} from './e
 
 @customElement('demo-complex-grid')
 export class ExmgComplexGrid extends ExmgBaseGridDemo {
+  // language=CSS
   static styles = [
     dynamicTheme,
     tableStyles,
     demoStyles,
+    css`
+      .expandable-toggle {
+        cursor: pointer;
+      }
+    `,
   ];
 
   constructor() {
@@ -37,7 +43,7 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
       (i) => {
         return html`
           <tr data-row-key="${i.id}">
-            <td><paper-checkbox class="selectable-checkbox"></paper-checkbox></td>
+            <td class="grid-checkbox-cell"><paper-checkbox class="selectable-checkbox"></paper-checkbox></td>
             <td>#${i.id}</td>
             <td>${i.month}</td>
             <td class="grid-col-number">${i.year}</td>
@@ -73,6 +79,7 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
         <li>default sort column</li>
         <li>preselected rows</li>
         <li>expanded rows</li>
+        <li>fixed table layout - squeeze content and ellipsis overflow </li>
       </ul>
       <exmg-grid
         data-theme="${this.theme}"
@@ -88,6 +95,7 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
         default-sort-direction="${DEFAULT_SORT_DIRECTION}"
         ?sortable="${true}"
         @exmg-grid-sort-change="${this.onSortChange}"
+        table-layout="fixed"
       >
         <exmg-grid-smart-toolbar
           slot="toolbar"
@@ -104,11 +112,15 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
         <table>
           <thead>
            <tr class="grid-columns">
-             <th width="5%"><paper-checkbox class="selectable-checkbox"></paper-checkbox></th>
-             <th>ID</th>
-             <th data-column-key="month" data-sort>Month</th>
-             <th class="grid-col-number" data-column-key="year" data-sort>Year</th>
-             <th class="grid-col-number" data-column-key="amount" data-sort="">Income</th>
+             <th class="grid-checkbox-cell"><paper-checkbox class="selectable-checkbox"></paper-checkbox></th>
+             <th><span>ID</span></th>
+             <th style="max-width: 100px" data-column-key="month" data-sort>
+               <span>Month with quite long name which should stay on one line</span>
+             </th>
+             <th class="grid-col-number" data-column-key="year" data-sort>
+               <span>Year with quite short name with one line inside inside span tag</span>
+             </th>
+             <th class="grid-col-number" data-column-key="amount" data-sort=""><span>Income</span></th>
              <th></th>
            </tr>
           </thead>

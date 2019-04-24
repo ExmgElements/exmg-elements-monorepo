@@ -22,7 +22,6 @@ type SmartPropertyValue = GenericPropertyValues<Props>;
  * ----------------|-------------|----------
  * `--exmg-arrow-upward-url` | Url to icon that is used for soring direction indicator | `url('/assets/arrow-upward.svg');`
  * `--exmg-table-card-width` | table card width | `100%;`
- * `--exmg-table-width` | table width | `100%;`
  * `--exmg-table-card-margin-bottom` | table bottom margin  | `5px;`
  * `--exmg-table-color` | table text color | `#02182b;`
  * `--exmg-table-background-color` | table background color | `#ffffff;`
@@ -41,10 +40,12 @@ type SmartPropertyValue = GenericPropertyValues<Props>;
  * `--exmg-table-columns-background-color` | header background color | `#ffffff;`
  * `--exmg-table-th-sortable-hover-color` | sortable header hover text color | `#02182b;`
  * `--exmg-table-th-height` | header height | `48px;`
- * `--exmg-table-th-sort-margin-left` | header margin after text but before icon | `4px;`
+ * `--exmg-table-th-sort-margin-left` | header margin after text but before icon | `0px;`
  * `--exmg-table-td-height` | row cell height | `48px;`
- * `--exmg-table-th-sort-icon-height` | sort icon height | `16px;`
- * `--exmg-table-th-sort-icon-width` | sort icon width | `16px;`
+ * `--exmg-table-th-sort-icon-height` | sort icon height | `1em;`
+ * `--exmg-table-th-sort-icon-width` | sort icon width | `1em;`
+ * `--exmg-table-col-number-padding-right` | right padding of number column | `10px;`
+ * `--exmg-table-checkbox-cell-width` | width of cell with checkbox | `24px;`
  */
 @customElement('exmg-grid')
 export class ExmgGrid extends LitElement {
@@ -121,6 +122,12 @@ export class ExmgGrid extends LitElement {
    */
   @property({type: String, attribute: 'expandable-toggle-selector', reflect: true})
   expandableToggleSelector?: string;
+
+  /**
+   * Set table layout. If fixed then text overflow will be hidden and ellipsis added.
+   */
+  @property({type: String, attribute: 'table-layout', reflect: true})
+  tableLayout: 'fixed' | 'auto' = 'auto';
 
   @property({type: Object})
   private querySelectors?: ExmgQuerySelectors;
@@ -294,6 +301,10 @@ export class ExmgGrid extends LitElement {
     this.updateColumnVisibility();
 
     bodyRows.forEach(row => row.setAttribute('data-initialized', ''));
+
+    this.querySelectors.getColumns('th:not([title])').forEach(col => col.setAttribute('title', col.innerText));
+
+    this.querySelectors.getTable().setAttribute('data-table-layout', this.tableLayout);
 
     await this.updateComplete;
     this.componentReady = true;

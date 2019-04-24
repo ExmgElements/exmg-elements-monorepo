@@ -13,13 +13,34 @@ $exmgTableRowsExpandedBackgroundColor: null !default;
 $exmgTableThColor: null !default;
 $exmgTableThSortableHoverColor: null !default;
 
+@mixin sortable-col-padding() {
+  padding-right: calc(var(--exmg-table-th-sort-icon-height) + var(--exmg-table-th-sort-margin-left));
+  &.grid-col-number {
+    padding-right: calc(var(--exmg-table-th-sort-icon-height) + var(--exmg-table-th-sort-margin-left) + var(--exmg-table-col-number-padding-right));
+  }
+}
+
+@mixin table-layout-fixed() {
+  &[data-table-layout="fixed"] {
+    table-layout: fixed;
+    td:not(.grid-checkbox-cell) {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    th, td {
+      & .grid-checkbox-cell {
+        width: var(--exmg-table-checkbox-cell-width);
+      }
+    }
+  }
+}
 
 :host {
   @include mdc-typography-base;
   --exmg-arrow-upward-url: url('/node_modules/@exmg/exmg-grid/assets/arrow-upward.svg');
   --exmg-table-card-width: 100%;
   --exmg-table-card-margin-bottom: 5px;
-  --exmg-table-width: 100%;
 
   --exmg-table-color: var(--exmg-theme-table-on-surface, var(--mdc-theme-on-surface, #{$exmgThemeTableOnSurface}));
   --exmg-table-card-background-color: var(--exmg-theme-table-surface, var(--mdc-theme-surface, #{$exmgThemeTableSurface}));
@@ -39,12 +60,15 @@ $exmgTableThSortableHoverColor: null !default;
   --exmg-table-columns-background-color: var(--exmg-theme-table-surface, var(--mdc-theme-surface, #{$exmgThemeTableSurface}));
 
   --exmg-table-th-height: 48px;
-  --exmg-table-th-sort-margin-left: 4px;
+  --exmg-table-th-sort-margin-left: 0px;
   --exmg-table-td-height: 48px;
-  --exmg-table-th-sort-icon-height: 16px;
-  --exmg-table-th-sort-icon-width: 16px;
+  --exmg-table-th-sort-icon-height: 1em;
+  --exmg-table-th-sort-icon-width: 1em;
 
-  --exmg-grid-toolbar-setting-position: static;
+  --exmg-table-col-number-padding-right: 10px;
+  --exmg-table-checkbox-cell-width: 24px;
+
+  --exmg-grid-toolbar-setting-position: sctatic;
 }
 
 ::slotted([slot="pagination"]) {
@@ -77,11 +101,11 @@ $exmgTableThSortableHoverColor: null !default;
 }
 
 .table-container {
-  width: 100%;
   overflow-x: auto;
 }
 table {
-  width: var(--exmg-table-width);
+  @include table-layout-fixed();
+  width: 100%;
   color: var(--exmg-table-color);
   border-spacing: 0;
   border: none;
@@ -124,13 +148,25 @@ td {
     background-color: var(--exmg-table-columns-background-color);
     vertical-align: middle;
     text-align: left;
+
+    user-select: none;
+    white-space: nowrap;
+
+    > span {
+      vertical-align: middle;
+      max-width: 100%;
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
     svg {
       fill: var(--exmg-table-th-color);
     }
   }
 }
 
-.grid-columns th:first-child, tbody td:first-child {
+.grid-columns th, tbody td {
   padding-left: 16px;
 }
 
@@ -164,11 +200,13 @@ table tr:first-child th {
 
 /**** COLUMN SORT *********/
 th[data-sort] {
-  padding-right: 25px;
   cursor: pointer;
 
   &:hover {
     color: var(--exmg-table-th-sortable-hover-color);
+    &:not([data-sort-direction]) {
+      @include sortable-col-padding();
+    }
 
     &:not([data-sort-direction])::after {
       opacity: 1;
@@ -190,6 +228,10 @@ th[data-sort] {
     vertical-align: middle;
     opacity: 0;
   }
+}
+
+th[data-sort-direction] {
+  @include sortable-col-padding();
 }
 
 th[data-sort-direction]::after {
@@ -315,6 +357,12 @@ tr:hover td.grid-cell-visible-on-hover > *, tr[data-has-expanded-detail] td.grid
 }
 
 tr td.grid-col-number, tr th.grid-col-number {
-  padding-right: 10px;
+  padding-right: var(--exmg-table-col-number-padding-right);
   text-align: right;
+}
+
+tr th.grid-col-number {
+  > span {
+    width: 100%;
+  }
 }

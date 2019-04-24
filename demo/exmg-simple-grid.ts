@@ -43,10 +43,10 @@ export class DemoSimpleGridTable extends ExmgBaseGridDemo {
         <table>
           <thead>
            <tr class="grid-columns">
-             <th>ID</th>
-             <th>Month</th>
-             <th class="grid-col-number">Year</th>
-             <th class="grid-col-number">Income</th>
+             <th><span>ID</span></th>
+             <th><span>Month</span></th>
+             <th class="grid-col-number"><span>Year</span></th>
+             <th class="grid-col-number"><span>Income</span></th>
            </tr>
           </thead>
           <tbody class="grid-data">

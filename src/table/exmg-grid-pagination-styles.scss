@@ -15,6 +15,8 @@ $exmg-grid-pagination-color-disabled: rgba($exmg-grid-pagination-color, .38);
   @include mdc-typography-base;
   background-color: var(--exmg-grid-pagination-bg-color, var(--mdc-theme-surface, $exmg-grid-pagination-bg-color));
   color: var(--exmg-grid-pagination-color, var(--mdc-theme-on-surface, $exmg-grid-pagination-color));
+  overflow-x: auto;
+  white-space: nowrap;
 
   .page-size {
     display: flex;

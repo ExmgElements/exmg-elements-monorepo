@@ -31,7 +31,7 @@ export class ExmgRowSelectable {
   ) {}
 
   initFeature(bodyRows: NodeListOf<HTMLTableRowElement>): void {
-    const fireEvent = this.initAllCheckboxes();
+    const fireEvent = this.initAllCheckbox();
     const rowsSelectionSyncShouldTriggerEvent = this.syncRowSelectionWithBodyCheckboxes();
     this.updateBodyRowsListeners(bodyRows);
     if (fireEvent || rowsSelectionSyncShouldTriggerEvent) {
@@ -99,7 +99,7 @@ export class ExmgRowSelectable {
     }));
   }
 
-  private initAllCheckboxes(): boolean {
+  private initAllCheckbox(): boolean {
     let fireEvent = false;
     this.allCheckbox = this.selectableCheckboxSelector ?
       this.querySelectors.getColumn<HTMLInputElement>(this.selectableCheckboxSelector) :
