@@ -61,6 +61,16 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h1 id="exmg-grid-">&lt;exmg-grid /></h1>
+				<h2 id="install">Install</h2>
+				<pre><code class="language-bash">npm install @exmg/exmg-grid</code></pre>
+				<p>Before start ensure that you have installed <code>web-animation-js</code>. It is required by <code>@exmg/exmg-paper-combobox</code>.</p>
+				<pre><code class="language-bash">npm install web-animation-js</code></pre>
+				<p>Load this script in index.html</p>
+				<pre><code class="language-html">    <span class="hljs-comment">&lt;!-- Ensure Web Animations polyfill is loaded --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"../node_modules/web-animations-js/web-animations-next-lite.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+				<p>Some dependencies <code>@exmg/exmg-paper-combobox, @plymer/paper-item</code> use <code>@apply</code> to apply css mixins.
+				This require to load script in index.html</p>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"../node_modules/@webcomponents/shadycss/apply-shim.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
 				<h2 id="anatomy">Anatomy</h2>
 				<p>This library contains following components:</p>
 				<ol>
@@ -97,11 +107,11 @@
     <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"table-container"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">slot</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"pagination"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
-				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid-pagination</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">"toolbar"</span> <span class="hljs-attr">...params</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">exmg-grid-pagination</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid-pagination</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">"pagination"</span> <span class="hljs-attr">...params</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">exmg-grid-pagination</span>&gt;</span>  
-<span class="hljs-tag">&lt;/<span class="hljs-name">exmg-grid</span>&gt;</span></code></pre>
+				<pre><code class="language-html">&lt;exmg-grid&gt;
+  &lt;table&gt;&lt;/table&gt;
+  &lt;&lt;exmg-grid-smart-toolbar slot="toolbar" ...params&gt;&lt;/&lt;exmg-grid-smart-toolbar&gt;
+  &lt;exmg-grid-pagination slot="pagination" ...params&gt;&lt;/exmg-grid-pagination&gt;  
+&lt;/exmg-grid&gt;</code></pre>
 				<p><code>exmg-grid-pagination</code> can be also embedded inside table</p>
 				<h3 id="toolbars">Toolbars</h3>
 				<p>There are 3 toolbars available out of the box:</p>
@@ -186,7 +196,9 @@
 							</li>
 							<li><p>if cell should be visible only on hover then you can use class <code>grid-cell-visible-on-hover</code></p>
 							</li>
-							<li><p>if icon which trigger expanding / collapsing row-detail has to rotate then add class <code>grid-icon-rotate</code> </p>
+							<li><p>if icon which trigger expanding / collapsing row-detail has to rotate then add class <code>grid-icon-rotate</code></p>
+							</li>
+							<li><p>if table has fixed layout then add class <code>grid-checkbox-cell</code> to <code>td and th</code> containing checkboxes </p>
 							</li>
 						</ul>
 					</li>
@@ -196,8 +208,8 @@
   <span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">thead</span>&gt;</span>
      <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"grid-columns"</span>&gt;</span>
-       <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Col1<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
-       <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Col2<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Col1<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Col2<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
      <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">thead</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">tbody</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"grid-data"</span>&gt;</span>
@@ -225,8 +237,8 @@
 					<li><p>You must have defined columns and on <code>th</code> element you should add <code>data-sort</code> attribute with unique name of column.
 							You can also omit name in <code>data-sort</code> attribute but then you should setup <code>data-column-key</code>
 						both configuration are fine</p>
-						<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">data-column-key</span>=<span class="hljs-string">"month"</span> <span class="hljs-attr">data-sort</span>&gt;</span>Month<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">data-column-key</span>=<span class="hljs-string">"year"</span> <span class="hljs-attr">data-sort</span>=<span class="hljs-string">"year-column"</span>&gt;</span>Year<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span></code></pre>
+						<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">data-column-key</span>=<span class="hljs-string">"month"</span> <span class="hljs-attr">data-sort</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Month<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">data-column-key</span>=<span class="hljs-string">"year"</span> <span class="hljs-attr">data-sort</span>=<span class="hljs-string">"year-column"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Year<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span></code></pre>
 					</li>
 					<li><p>To handle sort changing you should add listener <code>@exmg-grid-sort-change</code> on <code>exmg-grid</code>. You will receive <code>CustomEvent&lt;EventDetailSortChange&gt;</code></p>
 						<pre><code class="language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> EventDetailSortChange = {
@@ -249,8 +261,8 @@ sortDirection?: <span class="hljs-string">'ASC'</span> | <span class="hljs-strin
         <span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span>
           <span class="hljs-tag">&lt;<span class="hljs-name">thead</span>&gt;</span>
            <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"grid-columns"</span>&gt;</span>
-             <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">data-column-key</span>=<span class="hljs-string">"month"</span> <span class="hljs-attr">data-sort</span>&gt;</span>Month<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
-             <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">data-column-key</span>=<span class="hljs-string">"year"</span> <span class="hljs-attr">data-sort</span>=<span class="hljs-string">"year-column"</span>&gt;</span>Year<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+             <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">data-column-key</span>=<span class="hljs-string">"month"</span> <span class="hljs-attr">data-sort</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Month<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+             <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">data-column-key</span>=<span class="hljs-string">"year"</span> <span class="hljs-attr">data-sort</span>=<span class="hljs-string">"year-column"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Year<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
            <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">thead</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
@@ -314,17 +326,19 @@ sortDirection?: <span class="hljs-string">'ASC'</span> | <span class="hljs-strin
 					<li><p>checkbox component needs to implement event <code>change</code> and property <code>checked</code>. For instance <code>mwc-checkbox</code> at least to version
 						<code>v0.4.0</code> doesnt support <code>change</code> event and can&#39;t be used with gird</p>
 					</li>
+					<li><p>Optionally cells <code>th td</code> can have class <code>grid-checkbox-cell</code> </p>
+					</li>
 				</ul>
 				<pre><code class="language-html">&lt;exmg-grid .items="${this.items}" selectable-checkbox-selector=".selectable-checkbox" ?rows-selectable="${true}"&gt;
   &lt;table&gt;
     &lt;thead&gt;
      &lt;tr class="grid-columns"&gt;
-       &lt;th&gt;&lt;paper-checkbox class="selectable-checkbox"&gt;&lt;/paper-checkbox&gt;&lt;/th&gt;
+       &lt;th class="grid-checkbox-cell"&gt;&lt;paper-checkbox class="selectable-checkbox"&gt;&lt;/paper-checkbox&gt;&lt;/th&gt;
      &lt;/tr&gt;
     &lt;/thead&gt;
     &lt;tbody class="grid-data"&gt;
       &lt;tr&gt;
-        &lt;td&gt;&lt;input type="checkbox" class="selection-checkbox"&lt;/td&gt;
+        &lt;td class="grid-checkbox-cell"&gt;&lt;input type="checkbox" class="selection-checkbox"&lt;/td&gt;
       &lt;/tr&gt;
     &lt;/tbody&gt;
   &lt;/table&gt;
@@ -347,7 +361,7 @@ sortDirection?: <span class="hljs-string">'ASC'</span> | <span class="hljs-strin
     <span class="hljs-tag">&lt;<span class="hljs-name">thead</span>&gt;</span>
      <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"grid-columns"</span>&gt;</span>
        <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
-       <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>ID<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>ID<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
      <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">thead</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">tbody</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"grid-data"</span>&gt;</span>
@@ -378,6 +392,7 @@ export <span class="hljs-class"><span class="hljs-keyword">class</span> <span cl
 				<pre><code class="language-scss">@<span class="hljs-keyword">import</span> <span class="hljs-string">"src/table/mixins"</span>;
 exmg-grid {
   <span class="hljs-variable">$primaryColor</span>: <span class="hljs-number">#0070db</span>;
+  <span class="hljs-variable">$secondaryColor</span>: <span class="hljs-number">#0070db</span>;
   <span class="hljs-variable">$surfaceColor</span>: <span class="hljs-number">#ffffff</span>;
   <span class="hljs-variable">$onSurfaceColor</span>: <span class="hljs-number">#02182b</span>;
   @<span class="hljs-keyword">include</span> exmg-generate-theme-table-variables(<span class="hljs-variable">$primaryColor</span>, <span class="hljs-variable">$surfaceColor</span>, <span class="hljs-variable">$onSurfaceColor</span>);
@@ -395,6 +410,11 @@ exmg-grid {
 							<td>  $primaryColor</td>
 							<td>$mdcThemePrimary</td>
 							<td>--mdc-theme-primary</td>
+						</tr>
+						<tr>
+							<td>  $secondaryColor</td>
+							<td>$mdcThemeSecondary</td>
+							<td>--mdc-theme-secondary</td>
 						</tr>
 						<tr>
 							<td>  $surfaceColor</td>
@@ -419,16 +439,11 @@ exmg-grid {
 					<tbody><tr>
 							<td> <code>--exmg-arrow-upward-url</code></td>
 							<td>Url to icon that is used for soring direction indicator</td>
-							<td><code>url(&#39;/assets/arrow-upward.svg&#39;);</code></td>
+							<td><code>url(&#39;/node_modules/@exmg/exmg-grid/assets/arrow-upward.svg&#39;);</code></td>
 						</tr>
 						<tr>
 							<td> <code>--exmg-table-card-width</code></td>
 							<td>table card width</td>
-							<td><code>100%;</code></td>
-						</tr>
-						<tr>
-							<td> <code>--exmg-table-width</code></td>
-							<td>table width</td>
 							<td><code>100%;</code></td>
 						</tr>
 						<tr>
@@ -524,7 +539,7 @@ exmg-grid {
 						<tr>
 							<td> <code>--exmg-table-th-sort-margin-left</code></td>
 							<td>header margin after text but before icon</td>
-							<td><code>4px;</code></td>
+							<td><code>0px;</code></td>
 						</tr>
 						<tr>
 							<td> <code>--exmg-table-td-height</code></td>
@@ -534,12 +549,12 @@ exmg-grid {
 						<tr>
 							<td> <code>--exmg-table-th-sort-icon-height</code></td>
 							<td>sort icon height</td>
-							<td><code>16px;</code></td>
+							<td><code>1em;</code></td>
 						</tr>
 						<tr>
 							<td> <code>--exmg-table-th-sort-icon-width</code></td>
 							<td>sort icon width</td>
-							<td><code>16px;</code></td>
+							<td><code>1em;</code></td>
 						</tr>
 						<tr>
 							<td> <code>--exmg-grid-toolbar-bg-color</code></td>
@@ -582,6 +597,15 @@ exmg-grid {
 							<td><code>--mdc-theme-surface</code></td>
 						</tr>
 				</tbody></table>
+				<h2 id="responsiveness">Responsiveness</h2>
+				<p>By default grid has <code>table-layout</code> set to <code>auto</code> It can be changed to <code>fixed</code></p>
+				<pre><code class="language-html">  <span class="hljs-tag">&lt;<span class="hljs-name">exmg-grid</span> <span class="hljs-attr">.items</span>=<span class="hljs-string">"${this.items}"</span> <span class="hljs-attr">table-layout</span>=<span class="hljs-string">"fixed"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">exmg-grid</span>&gt;</span></code></pre>
+				<ul>
+					<li><p>auto - table will shrink as much as possible. If content will overflow then scroll will be added.</p>
+					</li>
+					<li><p>fixed - table has layout set to fixed. If content will overflow then ellipsis will be added to text</p>
+					</li>
+				</ul>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -594,9 +618,6 @@ exmg-grid {
 						<a href="modules/__mixins_.html">"_<wbr>mixins"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/__variables_.html">"_<wbr>variables"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="modules/_exmg_grid_.html">"exmg-<wbr>grid"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -606,6 +627,12 @@ exmg-grid {
 						<a href="modules/_exmg_grid_base_toolbar_styles_.html">"exmg-<wbr>grid-<wbr>base-<wbr>toolbar-<wbr>styles"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="modules/_exmg_grid_checkbox_.html">"exmg-<wbr>grid-<wbr>checkbox"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_exmg_grid_checkbox_styles_.html">"exmg-<wbr>grid-<wbr>checkbox-<wbr>styles"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="modules/_exmg_grid_common_styles_.html">"exmg-<wbr>grid-<wbr>common-<wbr>styles"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -613,6 +640,18 @@ exmg-grid {
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_exmg_grid_pagination_styles_.html">"exmg-<wbr>grid-<wbr>pagination-<wbr>styles"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_exmg_grid_setting_.html">"exmg-<wbr>grid-<wbr>setting"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_exmg_grid_setting_selection_list_.html">"exmg-<wbr>grid-<wbr>setting-<wbr>selection-<wbr>list"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_exmg_grid_setting_selection_list_styles_.html">"exmg-<wbr>grid-<wbr>setting-<wbr>selection-<wbr>list-<wbr>styles"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_exmg_grid_setting_styles_.html">"exmg-<wbr>grid-<wbr>setting-<wbr>styles"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_exmg_grid_smart_toolbar_.html">"exmg-<wbr>grid-<wbr>smart-<wbr>toolbar"</a>
