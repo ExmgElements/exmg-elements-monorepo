@@ -1,7 +1,7 @@
 {
   "name": "@exmg/exmg-grid",
   "flat": true,
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "exmg grid element",
   "contributors": [
     "Ex Machina"
