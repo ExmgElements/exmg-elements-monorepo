@@ -11,11 +11,12 @@ $exmg-grid-toolbar-active-color: #000000;
   flex: 1;
   flex-direction: row;
   align-items: center;
-  padding: 10px 0px;
+  padding: 10px 0;
   @include mdc-typography-base;
   background-color: var(--exmg-grid-toolbar-bg-color, var(--mdc-theme-surface, $exmg-grid-toolbar-bg-color));
   color: var(--exmg-grid-toolbar-color, var(--mdc-theme-on-surface, $exmg-grid-toolbar-color));
 
+  overflow-x: var(--exmg-grid-toolbar-overflow-x, initial);
   white-space: nowrap;
 
   &.active {
