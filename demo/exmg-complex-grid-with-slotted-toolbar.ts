@@ -57,7 +57,7 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
       (i) => {
         return html`
           <tr data-row-key="${i.id}">
-            <td><paper-checkbox class="selectable-checkbox"></paper-checkbox></td>
+            <td class="grid-checkbox-cell"><paper-checkbox class="selectable-checkbox"></paper-checkbox></td>
             <td>#${i.id}</td>
             <td>${i.month}</td>
             <td class="grid-col-number">${i.year}</td>
@@ -90,8 +90,10 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
       <ul>
         <li>Some custom styles</li>
         <li>Implemented toolbar with slots exmg-grid-base-toolbar</li>
+        <li>auto table layout</li>
       </ul>
       <exmg-grid
+        table-layout="auto"
         .items="${this.items}"
         .hiddenColumnNames="${this.hiddenColumns}"
         .expandedRowIds="${this.expandedRowIds}"
@@ -133,11 +135,11 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
         <table>
           <thead>
            <tr class="grid-columns">
-             <th width="5%"><paper-checkbox class="selectable-checkbox"></paper-checkbox></th>
-             <th>ID</th>
-             <th data-column-key="month" data-sort>Month</th>
-             <th class="grid-col-number" data-column-key="year" data-sort>Year</th>
-             <th class="grid-col-number" data-column-key="amount" data-sort="">Income</th>
+             <th class="grid-checkbox-cell"><paper-checkbox class="selectable-checkbox"></paper-checkbox></th>
+             <th><span>ID</span></th>
+             <th data-column-key="month" data-sort><span>Month</span></th>
+             <th class="grid-col-number" data-column-key="year" data-sort><span>Year</span></th>
+             <th class="grid-col-number" data-column-key="amount" data-sort=""><span>Income</span></th>
              <th></th>
            </tr>
           </thead>
@@ -146,6 +148,7 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
           </tbody>
         </table>
        <exmg-grid-pagination
+         slot="pagination"
          page-index=${this.pageIndex}
          page-size=${this.pageSize}
          .pageSizeOptions="${[10, 20, 30, 50, 100]}"

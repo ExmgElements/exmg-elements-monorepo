@@ -90,11 +90,6 @@
 								<td><code>100%;</code></td>
 							</tr>
 							<tr>
-								<td><code>--exmg-table-width</code></td>
-								<td>table width</td>
-								<td><code>100%;</code></td>
-							</tr>
-							<tr>
 								<td><code>--exmg-table-card-margin-bottom</code></td>
 								<td>table bottom margin</td>
 								<td><code>5px;</code></td>
@@ -187,7 +182,7 @@
 							<tr>
 								<td><code>--exmg-table-th-sort-margin-left</code></td>
 								<td>header margin after text but before icon</td>
-								<td><code>4px;</code></td>
+								<td><code>0px;</code></td>
 							</tr>
 							<tr>
 								<td><code>--exmg-table-td-height</code></td>
@@ -197,12 +192,22 @@
 							<tr>
 								<td><code>--exmg-table-th-sort-icon-height</code></td>
 								<td>sort icon height</td>
-								<td><code>16px;</code></td>
+								<td><code>1em;</code></td>
 							</tr>
 							<tr>
 								<td><code>--exmg-table-th-sort-icon-width</code></td>
 								<td>sort icon width</td>
-								<td><code>16px;</code></td>
+								<td><code>1em;</code></td>
+							</tr>
+							<tr>
+								<td><code>--exmg-table-col-number-padding-right</code></td>
+								<td>right padding of number column</td>
+								<td><code>10px;</code></td>
+							</tr>
+							<tr>
+								<td><code>--exmg-table-checkbox-cell-width</code></td>
+								<td>width of cell with checkbox</td>
+								<td><code>24px;</code></td>
 							</tr>
 					</tbody></table>
 				</div>
@@ -412,6 +417,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_exmg_grid_.exmggrid.html#spellcheck" class="tsd-kind-icon">spellcheck</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_exmg_grid_.exmggrid.html#style" class="tsd-kind-icon">style</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_exmg_grid_.exmggrid.html#tabindex" class="tsd-kind-icon">tab<wbr>Index</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_exmg_grid_.exmggrid.html#tablelayout" class="tsd-kind-icon">table<wbr>Layout</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_exmg_grid_.exmggrid.html#tagname" class="tsd-kind-icon">tag<wbr>Name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_exmg_grid_.exmggrid.html#textcontent" class="tsd-kind-icon">text<wbr>Content</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_exmg_grid_.exmggrid.html#title" class="tsd-kind-icon">title</a></li>
@@ -947,7 +953,7 @@
 					<div class="tsd-signature tsd-kind-icon">default<wbr>Sort<wbr>Column<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:71</li>
+							<li>Defined in exmg-grid.ts:72</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -962,7 +968,7 @@
 					<div class="tsd-signature tsd-kind-icon">default<wbr>Sort<wbr>Direction<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SORT_DIRECTION</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:77</li>
+							<li>Defined in exmg-grid.ts:78</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -999,7 +1005,7 @@
 					<div class="tsd-signature tsd-kind-icon">expandable<wbr>Toggle<wbr>Selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:123</li>
+							<li>Defined in exmg-grid.ts:124</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1014,7 +1020,7 @@
 					<div class="tsd-signature tsd-kind-icon">expanded<wbr>Row<wbr>Ids<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:117</li>
+							<li>Defined in exmg-grid.ts:118</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1073,7 +1079,7 @@
 					<div class="tsd-signature tsd-kind-icon">hidden<wbr>Column<wbr>Names<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:103</li>
+							<li>Defined in exmg-grid.ts:104</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1165,7 +1171,7 @@
 					<div class="tsd-signature tsd-kind-icon">items<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:59</li>
+							<li>Defined in exmg-grid.ts:60</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2967,7 +2973,7 @@
 					<div class="tsd-signature tsd-kind-icon">rows<wbr>Selectable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:90</li>
+							<li>Defined in exmg-grid.ts:91</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -2982,7 +2988,7 @@
 					<div class="tsd-signature tsd-kind-icon">rows<wbr>Sortable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:84</li>
+							<li>Defined in exmg-grid.ts:85</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3042,7 +3048,7 @@
 					<div class="tsd-signature tsd-kind-icon">selectable<wbr>Checkbox<wbr>Selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:97</li>
+							<li>Defined in exmg-grid.ts:98</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3058,7 +3064,7 @@
 					<div class="tsd-signature tsd-kind-icon">selected<wbr>Row<wbr>Ids<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:110</li>
+							<li>Defined in exmg-grid.ts:111</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3108,7 +3114,7 @@
 					<div class="tsd-signature tsd-kind-icon">sortable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-grid.ts:65</li>
+							<li>Defined in exmg-grid.ts:66</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -3149,6 +3155,21 @@
 							<li>Defined in node_modules/typedoc/node_modules/typescript/lib/lib.dom.d.ts:7676</li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="tablelayout" class="tsd-anchor"></a>
+					<h3>table<wbr>Layout</h3>
+					<div class="tsd-signature tsd-kind-icon">table<wbr>Layout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"fixed"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"auto"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;auto&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in exmg-grid.ts:130</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Set table layout. If fixed then text overflow will be hidden and ellipsis added.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="tagname" class="tsd-anchor"></a>
@@ -3329,7 +3350,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides LitElement.styles</p>
 						<ul>
-							<li>Defined in exmg-grid.ts:51</li>
+							<li>Defined in exmg-grid.ts:52</li>
 						</ul>
 					</aside>
 				</section>
@@ -5774,9 +5795,6 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/__mixins_.html">"_<wbr>mixins"</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/__variables_.html">"_<wbr>variables"</a>
-					</li>
 					<li class="current tsd-kind-external-module">
 						<a href="../modules/_exmg_grid_.html">"exmg-<wbr>grid"</a>
 					</li>
@@ -5787,6 +5805,12 @@
 						<a href="../modules/_exmg_grid_base_toolbar_styles_.html">"exmg-<wbr>grid-<wbr>base-<wbr>toolbar-<wbr>styles"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="../modules/_exmg_grid_checkbox_.html">"exmg-<wbr>grid-<wbr>checkbox"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_exmg_grid_checkbox_styles_.html">"exmg-<wbr>grid-<wbr>checkbox-<wbr>styles"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_exmg_grid_common_styles_.html">"exmg-<wbr>grid-<wbr>common-<wbr>styles"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -5794,6 +5818,18 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_exmg_grid_pagination_styles_.html">"exmg-<wbr>grid-<wbr>pagination-<wbr>styles"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_exmg_grid_setting_.html">"exmg-<wbr>grid-<wbr>setting"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_exmg_grid_setting_selection_list_.html">"exmg-<wbr>grid-<wbr>setting-<wbr>selection-<wbr>list"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_exmg_grid_setting_selection_list_styles_.html">"exmg-<wbr>grid-<wbr>setting-<wbr>selection-<wbr>list-<wbr>styles"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_exmg_grid_setting_styles_.html">"exmg-<wbr>grid-<wbr>setting-<wbr>styles"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_exmg_grid_smart_toolbar_.html">"exmg-<wbr>grid-<wbr>smart-<wbr>toolbar"</a>
@@ -6352,6 +6388,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="_exmg_grid_.exmggrid.html#tabindex" class="tsd-kind-icon">tab<wbr>Index</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_exmg_grid_.exmggrid.html#tablelayout" class="tsd-kind-icon">table<wbr>Layout</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="_exmg_grid_.exmggrid.html#tagname" class="tsd-kind-icon">tag<wbr>Name</a>

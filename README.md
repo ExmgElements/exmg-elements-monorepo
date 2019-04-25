@@ -66,7 +66,7 @@ GridElement accept slots:
 ```html
 <exmg-grid>
   <table></table>
-  <<exmg-grid-smart-toolbar slot="toolbar" ...params></<exmg-grid-smart-toolbar>
+  <exmg-grid-smart-toolbar slot="toolbar" ...params></exmg-grid-smart-toolbar>
   <exmg-grid-pagination slot="pagination" ...params></exmg-grid-pagination>  
 </exmg-grid>
 ```
@@ -192,7 +192,9 @@ This row must have attribute `data-row-detail-key` with same value as its relati
  
  * if cell should be visible only on hover then you can use class `grid-cell-visible-on-hover`
  
- * if icon which trigger expanding / collapsing row-detail has to rotate then add class `grid-icon-rotate` 
+ * if icon which trigger expanding / collapsing row-detail has to rotate then add class `grid-icon-rotate`
+ 
+ * if table has fixed layout then add class `grid-checkbox-cell` to `td and th` containing checkboxes 
  
 Example how should looks most minimal markup to meet with requirements:
  
@@ -201,8 +203,8 @@ Example how should looks most minimal markup to meet with requirements:
   <table>
     <thead>
      <tr class="grid-columns">
-       <th>Col1</th>
-       <th>Col2</th>
+       <th><span>Col1</span></th>
+       <th><span>Col2</span></th>
      </tr>
     </thead>
     <tbody class="grid-data">
@@ -234,8 +236,8 @@ Example how should looks most minimal markup to meet with requirements:
 You can also omit name in `data-sort` attribute but then you should setup `data-column-key`
 both configuration are fine
 ```html
-<th data-column-key="month" data-sort>Month</th>
-<th data-column-key="year" data-sort="year-column">Year</th>
+<th data-column-key="month" data-sort><span>Month</span></th>
+<th data-column-key="year" data-sort="year-column"><span>Year</span></th>
 ```
 
 * To handle sort changing you should add listener `@exmg-grid-sort-change` on `exmg-grid`. You will receive `CustomEvent<EventDetailSortChange>`
@@ -262,8 +264,8 @@ ___
         <table>
           <thead>
            <tr class="grid-columns">
-             <th data-column-key="month" data-sort>Month</th>
-             <th data-column-key="year" data-sort="year-column">Year</th>
+             <th data-column-key="month" data-sort><span>Month</span></th>
+             <th data-column-key="year" data-sort="year-column"><span>Year</span></th>
            </tr>
           </thead>
         </table>
@@ -337,19 +339,21 @@ row selection:
 * on `exmg-grid` element set attribute`selectable-checkbox-selector=".selectable-checkbox"`
 
 * checkbox component needs to implement event `change` and property `checked`. For instance `mwc-checkbox` at least to version
-`v0.4.0` doesnt support `change` event and can't be used with gird
+`v0.4.0` doesnt support `change` event and can't be used with grid
+
+* Optionally cells `th td` can have class `grid-checkbox-cell` 
 
 ```html
 <exmg-grid .items="${this.items}" selectable-checkbox-selector=".selectable-checkbox" ?rows-selectable="${true}">
   <table>
     <thead>
      <tr class="grid-columns">
-       <th><paper-checkbox class="selectable-checkbox"></paper-checkbox></th>
+       <th class="grid-checkbox-cell"><paper-checkbox class="selectable-checkbox"></paper-checkbox></th>
      </tr>
     </thead>
     <tbody class="grid-data">
       <tr>
-        <td><input type="checkbox" class="selection-checkbox"</td>
+        <td class="grid-checkbox-cell"><input type="checkbox" class="selection-checkbox"</td>
       </tr>
     </tbody>
   </table>
@@ -388,7 +392,7 @@ export type EventDetailRowsOrderChanged<T extends object = any> = {
     <thead>
      <tr class="grid-columns">
        <th></th>
-       <th>ID</th>
+       <th><span>ID</span></th>
      </tr>
     </thead>
     <tbody class="grid-data">
@@ -438,6 +442,7 @@ Example of light theme:
 @import "src/table/mixins";
 exmg-grid {
   $primaryColor: #0070db;
+  $secondaryColor: #0070db;
   $surfaceColor: #ffffff;
   $onSurfaceColor: #02182b;
   @include exmg-generate-theme-table-variables($primaryColor, $surfaceColor, $onSurfaceColor);
@@ -448,6 +453,7 @@ Where local variables map to material design:
 Local sass variable | mdc variable | css variable
 ----------------|-------------|------------
   $primaryColor | $mdcThemePrimary | --mdc-theme-primary
+  $secondaryColor | $mdcThemeSecondary | --mdc-theme-secondary
   $surfaceColor | $dcThemeSurface | --mdc-theme-surface
   $onSurfaceColor | $mdcThemeOnSurface | --mdc-theme-on-surface
 
@@ -457,7 +463,6 @@ Additionally you cna also override css variables:
  ----------------|-------------|----------
  `--exmg-arrow-upward-url` | Url to icon that is used for soring direction indicator | `url('/node_modules/@exmg/exmg-grid/assets/arrow-upward.svg');`
  `--exmg-table-card-width` | table card width | `100%;`
- `--exmg-table-width` | table width | `100%;`
  `--exmg-table-card-margin-bottom` | table bottom margin  | `5px;`
  `--exmg-table-color` | table text color | `#02182b;`
  `--exmg-table-background-color` | table background color | `#ffffff;`
@@ -476,10 +481,10 @@ Additionally you cna also override css variables:
  `--exmg-table-columns-background-color` | header background color | `#ffffff;`
  `--exmg-table-th-sortable-hover-color` | sortable header hover text color | `#02182b;`
  `--exmg-table-th-height` | header height | `48px;`
- `--exmg-table-th-sort-margin-left` | header margin after text but before icon | `4px;`
+ `--exmg-table-th-sort-margin-left` | header margin after text but before icon | `0px;`
  `--exmg-table-td-height` | row cell height | `48px;`
- `--exmg-table-th-sort-icon-height` | sort icon height | `16px;`
- `--exmg-table-th-sort-icon-width` | sort icon width | `16px;`
+ `--exmg-table-th-sort-icon-height` | sort icon height | `1em;`
+ `--exmg-table-th-sort-icon-width` | sort icon width | `1em;`
  `--exmg-grid-toolbar-bg-color` | Toolbar background color | `$surface;`
  `--exmg-grid-toolbar-color` | Toolbar text color | `$onSurface`
  `--exmg-grid-toolbar-active-bg-color` | Toolbar background color when any action available | `$surface;`
@@ -488,3 +493,16 @@ Additionally you cna also override css variables:
  `--exmg-grid-pagination-color` | Pagination text color | `--mdc-theme-on-surface`
  `--exmg-theme-table-on-surface-disabled` | Disabled color | `--mdc-theme-on-surface with filter .38`
  `--exmg-filter-background-color` | Background color for combobox | `--mdc-theme-surface`
+
+
+## Responsiveness
+
+By default grid has `table-layout` set to `auto` It can be changed to `fixed`
+
+```html
+  <exmg-grid .items="${this.items}" table-layout="fixed"></exmg-grid>
+```
+
+* auto - table will shrink as much as possible. If content will overflow then scroll will be added.
+
+* fixed - table has layout set to fixed. If content will overflow then ellipsis will be added to text

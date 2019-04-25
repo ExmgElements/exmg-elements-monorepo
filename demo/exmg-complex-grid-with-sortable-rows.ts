@@ -20,8 +20,11 @@ export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
     // language=CSS
     css`
       exmg-grid {
-        --exmg-table-card-width: 800px;
-        --exmg-table-width: 900px;
+        --exmg-table-card-width: 500px;
+      }
+
+      table th {
+        min-width: 100px;
       }
     `,
   ];
@@ -37,7 +40,7 @@ export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
       (i) => {
         return html`
           <tr data-row-key="${i.id}">
-            <td><paper-checkbox class="selectable-checkbox"></paper-checkbox></td>
+            <td class="grid-checkbox-cell"><paper-checkbox class="selectable-checkbox"></paper-checkbox></td>
             <td><span class="grid-row-drag-handler">${dragIcon}</span></td>
             <td>#${i.id}</td>
             <td>${i.month}</td>
@@ -70,6 +73,12 @@ export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
       </div>
       <h1>Complex table with sortable rows</h1>
       <h2>Current theme ${this.theme}</h2>
+      <ul>
+        <li>Sortable rows</li>
+        <li>Implemented toolbar with slots exmg-grid-smart-toolbar</li>
+        <li>auto table layout</li>
+        <li>fixed table width</li>
+      </ul>
       <exmg-grid
          data-theme="${this.theme}"
         .items="${this.items}"
@@ -80,6 +89,7 @@ export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
         selectable-checkbox-selector=".selectable-checkbox"
         ?rows-selectable="${true}"
         expandable-toggle-selector=".expandable-toggle"
+        table-layout="auto"
         @exmg-grid-rows-order-changed="${this.onRowsOrderChanged}"
         @exmg-grid-selected-rows-change="${this.onSelectedRowsChange}"
       >
@@ -97,10 +107,10 @@ export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
            <tr class="grid-columns">
              <th width="5%"><paper-checkbox class="selectable-checkbox"></paper-checkbox></th>
              <th width="5%"></th>
-             <th title="ID">ID</th>
-             <th title="Month" data-column-key="month">Month</th>
-             <th class="grid-col-number" title="Year" data-column-key="year">Year</th>
-             <th class="grid-col-number" title="Income">Income</th>
+             <th title="ID"><span>ID</span></th>
+             <th title="Month" data-column-key="month"><span>Month</span></th>
+             <th class="grid-col-number" title="Year" data-column-key="year"><span>Year</span></th>
+             <th class="grid-col-number" title="Income"><span>Income</span></th>
              <th></th>
            </tr>
           </thead>
