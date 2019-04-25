@@ -29,7 +29,7 @@ $exmgTableThSortableHoverColor: null !default;
       text-overflow: ellipsis;
     }
     th, td {
-      & .grid-checkbox-cell {
+      &.grid-checkbox-cell {
         width: var(--exmg-table-checkbox-cell-width);
       }
     }
