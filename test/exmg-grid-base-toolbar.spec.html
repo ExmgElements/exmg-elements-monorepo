@@ -32,6 +32,11 @@
       </exmg-grid-base-toolbar>
     </template>
   </test-fixture>
+  <test-fixture id="WithoutSlotsFixture">
+    <template>
+      <exmg-grid-base-toolbar></exmg-grid-base-toolbar>
+    </template>
+  </test-fixture>
   <test-fixture id="WithoutActionsTestFixture">
     <template>
       <exmg-grid-base-toolbar>
@@ -43,6 +48,17 @@
             <option value="value1">value 1</option>
             <option value="value2">value 2</option>
           </select>
+        </div>
+        <div slot="settings"></div>
+      </exmg-grid-base-toolbar>
+    </template>
+  </test-fixture>
+  <test-fixture id="SettingsTestFixture">
+    <template>
+      <exmg-grid-base-toolbar>
+        <div slot="settings">
+          <div>Setting1</div>
+          <div>Setting2</div>
         </div>
       </exmg-grid-base-toolbar>
     </template>

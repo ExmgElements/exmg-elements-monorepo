@@ -11,13 +11,13 @@ suite('exmg-grid', () => {
   let table: HTMLTableElement;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('exmg-gird-simple', () => {
+  suite('exmg-grid-simple', () => {
     setup(() => {
       element = fixture('SimpleGridFixture');
       table = element.querySelector('table')!;
     });
 
-    test('simple gird is instantiated properly', () => {
+    test('simple grid is instantiated properly', () => {
       assert.instanceOf(element, ExmgGrid);
       assert.instanceOf(table, HTMLTableElement);
     });
@@ -30,7 +30,7 @@ suite('exmg-grid', () => {
     });
 
     test('simple grid is not sortable', () => {
-      const monthColumn = table.querySelector<HTMLElement>('th[data-column-key="month"')!;
+      const monthColumn = table.querySelector<HTMLElement>('th[data-column-key="month"]')!;
       assert.isFalse(monthColumn.hasAttribute('data-sort-direction'));
       monthColumn.click();
       assert.isFalse(monthColumn.hasAttribute('data-sort-direction'));
@@ -63,8 +63,8 @@ suite('exmg-grid', () => {
       table = element.querySelector('table')!;
     });
 
-    test('gird is sortable', async () => {
-      const monthColumn = table.querySelector<HTMLElement>('th[data-column-key="month"')!;
+    test('grid is sortable', async () => {
+      const monthColumn = table.querySelector<HTMLElement>('th[data-column-key="month"]')!;
       await flushCompleted();
 
       assert.equal(monthColumn.getAttribute('data-sort-direction'), 'ASC', 'Month is sortable by default');
@@ -76,7 +76,7 @@ suite('exmg-grid', () => {
       assert.equal(sortDirection, 'DESC');
     });
 
-    test('gird is selectable', async () => {
+    test('grid is selectable', async () => {
       const firstRow = table.querySelector<HTMLTableRowElement>('tbody tr')!;
       await flushCompleted();
 
@@ -123,7 +123,7 @@ suite('exmg-grid', () => {
       assert.isTrue(rows2.includes(secondRow), 'Second row is selected');
     });
 
-    test('gird is expandable', async () => {
+    test('grid is expandable', async () => {
       await flushCompleted();
 
       assert.isNotEmpty(element.expandableToggleSelector, 'Has set expandable trigger selector');
@@ -147,7 +147,7 @@ suite('exmg-grid', () => {
       assert.isFalse(firstRowDetail.hasAttribute('data-is-row-expanded'), 'Row detail is not expanded');
     });
 
-    test.only('expanded rows can be changed programmatically', async () => {
+    test('expanded rows can be changed programmatically', async () => {
       const firstRowDetail = table.querySelector<HTMLTableRowElement>('tbody tr[data-row-detail-key="1"]')!;
       const secondRowDetail = table.querySelector<HTMLTableRowElement>('tbody tr[data-row-detail-key="2"]')!;
 

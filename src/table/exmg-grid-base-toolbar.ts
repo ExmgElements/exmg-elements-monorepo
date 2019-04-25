@@ -28,6 +28,11 @@ export class ExmgGridBaseToolbar extends LitElement {
 
   private observer?: MutationObserver;
 
+  private getChildElementCount(selector: string): number {
+    const element = this.querySelector(selector);
+    return element ? element.childElementCount : 0;
+  }
+
   connectedCallback(): void {
     super.connectedCallback();
 
@@ -35,16 +40,16 @@ export class ExmgGridBaseToolbar extends LitElement {
       setTimeout(() => {
         for (const mutation of mutationsList) {
           if (mutation.type === 'childList') {
-            this.actionsCount = this.querySelector('div[slot=actions]')!.childElementCount;
-            this.settingsCount = this.querySelector('div[slot=settings]')!.childElementCount;
+            this.actionsCount = this.getChildElementCount('div[slot=actions]');
+            this.settingsCount = this.getChildElementCount('div[slot=settings]');
             this.active = this.actionsCount > 0;
           }
         }
       }, 60);
     });
 
-    this.actionsCount = this.querySelector('div[slot=actions]')!.childElementCount;
-    this.settingsCount = this.querySelector('div[slot=settings]')!.childElementCount;
+    this.actionsCount = this.getChildElementCount('div[slot=actions]');
+    this.settingsCount = this.getChildElementCount('div[slot=settings]');
     this.active = this.actionsCount > 0;
     this.observer!.observe(this, {attributes: false, childList: true, subtree: true});
   }

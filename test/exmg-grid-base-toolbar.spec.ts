@@ -11,8 +11,9 @@ suite('<exmg-grid-base-toolbar>', function () {
   const flushCompleted = promisifyFlush(flush);
 
   suite('base usage', function () {
-    setup(() => {
+    setup(async () => {
       element = fixture('BasicTestFixture');
+      await flushCompleted();
     });
 
     test('element is upgraded', function () {
@@ -27,14 +28,52 @@ suite('<exmg-grid-base-toolbar>', function () {
       assert.exists(element.shadowRoot!.querySelector('.with-action-separator'));
     });
 
-    test('actions hidden properly', async () => {
+    test('settings is rendered properly', () => {
+      const settingsContainer = element.shadowRoot!.querySelector('.settings')!;
+      assert.exists(settingsContainer, 'Settings container is rendered');
+      assert.isFalse(settingsContainer.classList.contains('has-settings'), 'Settings container is rendered but is empty');
+    });
+  });
+
+  suite('base toolbar without actions', () => {
+    setup(async () => {
       element = fixture('WithoutActionsTestFixture');
-
       await flushCompleted();
+    });
 
+    test('actions hidden properly', () => {
       assert.notExists(element.shadowRoot!.querySelector('.active'));
       assert.notExists(element.shadowRoot!.querySelector('.actions'));
       assert.notExists(element.shadowRoot!.querySelector('.with-action-separator'));
     });
   });
+
+  suite('base toolbar without slots', () => {
+    setup(() => {
+      element = fixture('WithoutSlotsFixture');
+    });
+
+    test('is rendering', () => {
+      assert.instanceOf(element, ExmgGridBaseToolbar);
+    });
+  });
+
+  suite('base toolbar settings slot', () => {
+    setup(async () => {
+      element = fixture('SettingsTestFixture');
+      await flushCompleted();
+    });
+
+    test('is rendering', () => {
+      assert.instanceOf(element, ExmgGridBaseToolbar);
+    });
+
+    test('settings is rendered properly', () => {
+      const settingsContainer = element.shadowRoot!.querySelector('.settings')!;
+      assert.exists(settingsContainer, 'Settings container is rendered');
+      assert.isTrue(settingsContainer.classList.contains('has-settings'), 'Settings container is rendered and is not empty');
+    });
+
+  });
+
 });

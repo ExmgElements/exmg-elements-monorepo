@@ -66,7 +66,7 @@ GridElement accept slots:
 ```html
 <exmg-grid>
   <table></table>
-  <<exmg-grid-smart-toolbar slot="toolbar" ...params></<exmg-grid-smart-toolbar>
+  <exmg-grid-smart-toolbar slot="toolbar" ...params></exmg-grid-smart-toolbar>
   <exmg-grid-pagination slot="pagination" ...params></exmg-grid-pagination>  
 </exmg-grid>
 ```
@@ -339,7 +339,7 @@ row selection:
 * on `exmg-grid` element set attribute`selectable-checkbox-selector=".selectable-checkbox"`
 
 * checkbox component needs to implement event `change` and property `checked`. For instance `mwc-checkbox` at least to version
-`v0.4.0` doesnt support `change` event and can't be used with gird
+`v0.4.0` doesnt support `change` event and can't be used with grid
 
 * Optionally cells `th td` can have class `grid-checkbox-cell` 
 

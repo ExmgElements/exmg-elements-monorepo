@@ -27,7 +27,7 @@ suite('<exmg-grid-toolbar>', function () {
 
       const descriptionElem = element.shadowRoot!.querySelector<HTMLElement>('div[slot=description]');
 
-      assert.equal(descriptionElem!.innerText, 'new description');
+      assert.equal(descriptionElem!.innerText.trim(), 'new description');
     });
 
     test('item actions work properly', async () => {
