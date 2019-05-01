@@ -1,0 +1,9 @@
+node_modules/
+*.sublime*
+.idea
+
+*.d.ts
+*.js
+!gulpfile.js
+!scripts/**/*.js
+exmg-*-styles.ts
