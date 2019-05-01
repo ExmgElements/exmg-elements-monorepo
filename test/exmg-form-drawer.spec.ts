@@ -22,8 +22,8 @@ suite('<exmg-form-drawer>', function () {
 		test('form drawer has property set properties', async () => {
 			await flushCompleted();
 
-			const cancelBtnElem = element.shadowRoot!.querySelectorAll<HTMLElement>('exmg-form-drawer-button')[0];
-			const submitBtnElem = element.shadowRoot!.querySelectorAll<HTMLElement>('exmg-form-drawer-button')[1];
+			const cancelBtnElem = element.shadowRoot!.querySelectorAll<HTMLElement>('exmg-button')[0];
+			const submitBtnElem = element.shadowRoot!.querySelectorAll<HTMLElement>('exmg-button')[1];
 
 			assert.equal(cancelBtnElem!.innerText.trim(), 'Close');
 			assert.equal(submitBtnElem!.innerText.trim(), 'Create');

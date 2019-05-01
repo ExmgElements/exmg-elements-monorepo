@@ -131,10 +131,10 @@ To define drawer max width, you can:
     <paper-input name="answer_b" label="Answer B" value="Eminem"></paper-input>
     <paper-input name="answer_c" label="Answer C" value="Ariana Grande"></paper-input>
     <br>
-    <mwc-button
+    <exmg-button
       unelevated
     >
       + Add answer
-    </mwc-button>
+    </exmg-button>
   </exmg-form-drawer>
 ```

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ExmgDrawer | @exmg/exmg-radio-group</title>
+	<title>ExmgDrawer | @exmg/exmg-form-drawer</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@exmg/exmg-radio-group</a>
+					<a href="../index.html" class="title">@exmg/exmg-form-drawer</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -83,6 +83,16 @@
 								<td><code>--exmg-drawer-max-width</code></td>
 								<td>max width of drawer</td>
 								<td><code>max width from style attribute or 547px</code></td>
+							</tr>
+							<tr>
+								<td><code>--exmg-drawer-color</code></td>
+								<td>drawer text color</td>
+								<td><code>var(--mdc-theme-on-surface, #02182b))</code></td>
+							</tr>
+							<tr>
+								<td><code>--exmg-drawer-bg-color</code></td>
+								<td>drawer background color</td>
+								<td><code>var(--mdc-theme-surface, #ffffff))</code></td>
 							</tr>
 					</tbody></table>
 				</div>
@@ -291,7 +301,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="_exmg_drawer_.exmgdrawer.html#observedattributes" class="tsd-kind-icon">observed<wbr>Attributes</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="_exmg_drawer_.exmgdrawer.html#properties" class="tsd-kind-icon">properties</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="_exmg_drawer_.exmgdrawer.html#render" class="tsd-kind-icon">render</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="_exmg_drawer_.exmgdrawer.html#styles" class="tsd-kind-icon">styles</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-static"><a href="_exmg_drawer_.exmgdrawer.html#styles" class="tsd-kind-icon">styles</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -1072,7 +1082,7 @@
 					<div class="tsd-signature tsd-kind-icon">no<wbr>Cancel<wbr>OnOutside<wbr>Click<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-drawer.ts:21</li>
+							<li>Defined in exmg-drawer.ts:24</li>
 						</ul>
 					</aside>
 				</section>
@@ -2634,7 +2644,7 @@
 					<div class="tsd-signature tsd-kind-icon">opened<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in exmg-drawer.ts:18</li>
+							<li>Defined in exmg-drawer.ts:21</li>
 						</ul>
 					</aside>
 				</section>
@@ -3047,22 +3057,16 @@
 						</ul>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-static">
 					<a name="styles" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagOptional">Optional</span> styles</h3>
-					<div class="tsd-signature tsd-kind-icon">styles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CSSResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">CSSResultArray</span></div>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> styles</h3>
+					<div class="tsd-signature tsd-kind-icon">styles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CSSResult</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[style,]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from LitElement.styles</p>
+						<p>Overrides LitElement.styles</p>
 						<ul>
-							<li>Defined in node_modules/lit-element/lit-element.d.ts:47</li>
+							<li>Defined in exmg-drawer.ts:45</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Array of styles to apply to the element. The styles should be defined
-							using the <code>css</code> tag function.</p>
-						</div>
-					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -4084,7 +4088,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in exmg-drawer.ts:23</li>
+									<li>Defined in exmg-drawer.ts:26</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4556,7 +4560,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in exmg-drawer.ts:38</li>
+									<li>Defined in exmg-drawer.ts:41</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -5017,7 +5021,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in exmg-drawer.ts:42</li>
+									<li>Defined in exmg-drawer.ts:49</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
@@ -5563,13 +5567,10 @@
 						<a href="../modules/_exmg_drawer_.html">"exmg-<wbr>drawer"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="../modules/_exmg_drawer_styles_.html">"exmg-<wbr>drawer-<wbr>styles"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_exmg_form_drawer_.html">"exmg-<wbr>form-<wbr>drawer"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_exmg_form_drawer_button_.html">"exmg-<wbr>form-<wbr>drawer-<wbr>button"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_exmg_form_drawer_button_styles_.html">"exmg-<wbr>form-<wbr>drawer-<wbr>button-<wbr>styles"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_exmg_form_drawer_styles_.html">"exmg-<wbr>form-<wbr>drawer-<wbr>styles"</a>
@@ -6120,7 +6121,7 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
 								<a href="_exmg_drawer_.exmgdrawer.html#render" class="tsd-kind-icon">render</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-static">
 								<a href="_exmg_drawer_.exmgdrawer.html#styles" class="tsd-kind-icon">styles</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite tsd-is-inherited">

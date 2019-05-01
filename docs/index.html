@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@exmg/exmg-radio-group</title>
+	<title>@exmg/exmg-form-drawer</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">@exmg/exmg-radio-group</a>
+					<a href="index.html" class="title">@exmg/exmg-form-drawer</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,7 +52,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> @exmg/exmg-radio-group</h1>
+			<h1> @exmg/exmg-form-drawer</h1>
 		</div>
 	</div>
 </header>
@@ -67,6 +67,16 @@
 					<li><strong>exmg-drawer</strong> - basic component</li>
 					<li><strong>exmg-form-drawer</strong> - form drawer</li>
 				</ol>
+				<h2 id="install">Install</h2>
+				<pre><code class="language-bash">npm install @exmg/exmg-form-drawer</code></pre>
+				<p>Before start ensure that you have installed <code>web-animation-js</code>. It is required by <code>@polymer/paper-dialog</code>.</p>
+				<pre><code class="language-bash">npm install web-animation-js</code></pre>
+				<p>Load this script in index.html</p>
+				<pre><code class="language-html">    <span class="hljs-comment">&lt;!-- Ensure Web Animations polyfill is loaded --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"../node_modules/web-animations-js/web-animations-next-lite.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+				<p>Some dependencies <code>@exmg/exmg-paper-combobox</code> use <code>@apply</code> to apply css mixins.
+				This require to load script in index.html</p>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"../node_modules/@webcomponents/shadycss/apply-shim.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
 				<h2 id="components">Components</h2>
 				<h3 id="-exmg-drawer"><exmg-drawer&gt;</h3>
 						<p>It is basic component that probably should not be used directly.
@@ -105,15 +115,24 @@
 								<h4 id="notes-about-drawer-form">Notes about drawer form</h4>
 								<p>All dom markup passed as children into <strong>exmg-form-drawer</strong> will be wrapped into <strong>exmg-form</strong> underhood.</p>
 								<p>To properly handle form submission, you should call done() or error() on form instance after receiving <strong>submit</strong>
-								event from <strong>exmg-form-drawer</strong>. Please read @exmg/exmg-form docs for more info.</p>
+								event from <strong>exmg-form-drawer</strong>. Please read <a href="https://github.com/ExmgElements/exmg-form">https://github.com/ExmgElements/exmg-form</a> docs for more info.</p>
 								<h2 id="styling">Styling</h2>
 								<p>You can define:</p>
 								<ul>
-									<li>primary color palette - for drawer buttons</li>
+									<li>color palette</li>
 									<li>drawer max width</li>
 								</ul>
-								<p>To define primary color palette, please define following variable: <strong>--mdc-theme-primary</strong>.
-								Example:</p>
+								<p>To define color palette you can define following variables:</p>
+								<ul>
+									<li>--exmg-drawer-color</li>
+									<li>--exmg-drawer-bg-color</li>
+									<li>--mdc-theme-primary</li>
+									<li>--mdc-theme-on-surface</li>
+									<li>--mdc-theme-surface</li>
+									<li>--exmg-form-drawer-header-separator-color</li>
+								</ul>
+								<p>See .scss/.ts files for more info.</p>
+								<p>Example:</p>
 								<pre><code><span class="hljs-selector-tag">exmg-form-drawer</span> {
   <span class="hljs-attribute">--mdc-theme-primary</span>: <span class="hljs-number">#0071dc</span>;
 }</code></pre><p>To define drawer max width, you can:</p>
@@ -143,11 +162,11 @@
     <span class="hljs-tag">&lt;<span class="hljs-name">paper-input</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"answer_b"</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Answer B"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Eminem"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">paper-input</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">paper-input</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"answer_c"</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Answer C"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Ariana Grande"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">paper-input</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">mwc-button</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">exmg-button</span>
       <span class="hljs-attr">unelevated</span>
     &gt;</span>
       + Add answer
-    <span class="hljs-tag">&lt;/<span class="hljs-name">mwc-button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">exmg-button</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">exmg-form-drawer</span>&gt;</span></span></code></pre>
 			</div>
 		</div>
@@ -161,13 +180,10 @@
 						<a href="modules/_exmg_drawer_.html">"exmg-<wbr>drawer"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="modules/_exmg_drawer_styles_.html">"exmg-<wbr>drawer-<wbr>styles"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="modules/_exmg_form_drawer_.html">"exmg-<wbr>form-<wbr>drawer"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_exmg_form_drawer_button_.html">"exmg-<wbr>form-<wbr>drawer-<wbr>button"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_exmg_form_drawer_button_styles_.html">"exmg-<wbr>form-<wbr>drawer-<wbr>button-<wbr>styles"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_exmg_form_drawer_styles_.html">"exmg-<wbr>form-<wbr>drawer-<wbr>styles"</a>

@@ -1,5 +1,5 @@
 import {LitElement, html, customElement, property} from 'lit-element';
-import '@material/mwc-button';
+import '@exmg/exmg-button';
 import '@polymer/paper-input/paper-input.js';
 import '@exmg/exmg-paper-combobox/exmg-paper-combobox.js';
 import '@exmg/exmg-form/exmg-form';
@@ -105,11 +105,11 @@ export class Drawer extends LitElement {
         <paper-input name="answer_b" label="Answer B" value="Eminem"></paper-input>
         <paper-input name="answer_c" label="Answer C" value="Ariana Grande"></paper-input>
         <br>
-        <mwc-button
+        <exmg-button
           unelevated
         >
           + Add answer
-        </mwc-button>
+        </exmg-button>
       </exmg-form-drawer>
     `;
   }

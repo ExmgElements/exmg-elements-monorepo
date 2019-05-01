@@ -4,10 +4,9 @@ import '@polymer/neon-animation/animations/slide-from-right-animation';
 import '@polymer/neon-animation/animations/slide-right-animation';
 import '@polymer/paper-dialog/paper-dialog.js';
 import './exmg-drawer';
-import './exmg-form-drawer-button';
 import {style} from './exmg-form-drawer-styles';
 import {ExmgForm} from '@exmg/exmg-form/exmg-form';
-import '@material/mwc-button';
+import '@exmg/exmg-button';
 
 /**
  * ### Styling
@@ -114,13 +113,13 @@ export class ExmgFormDrawer extends LitElement {
         <div class="header">
           <slot name="title" class="title"></slot>
           <div class="header-buttons">
-            <exmg-form-drawer-button
+            <exmg-button
               title="${this.cancelBtnTitle}"
               @click="${this.handleCancelBtnClick}"
             >
               ${this.cancelBtnTitle}
-            </exmg-form-drawer-button>
-            <exmg-form-drawer-button
+            </exmg-button>
+            <exmg-button
               unelevated
               ?loading="${this.submitting}"
               ?disabled="${this.submitting}"
@@ -128,7 +127,7 @@ export class ExmgFormDrawer extends LitElement {
               @click="${this.handleSubmitBtnClick}"
             >
               ${this.submitBtnTitle}
-            </exmg-form-drawer-button>
+            </exmg-button>
           </div>
         </div>
         <div class="form-elements">
