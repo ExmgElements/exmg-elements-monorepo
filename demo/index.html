@@ -27,11 +27,10 @@
       import '@exmg/exmg-paper-combobox/exmg-paper-combobox.js';
       import '@exmg/exmg-paper-token-input/exmg-paper-token-input.js';
       import '@exmg/exmg-markdown-editor/exmg-markdown-editor.js';
+      import '@exmg/exmg-button';
       import '@polymer/paper-input/paper-input.js';
-      import '@polymer/paper-button/paper-button.js';
       import '@polymer/paper-item/paper-item.js';
-      import '../exmg-cms-dialog-confirm.js';
-      import '../exmg-cms-dialog-form.js';
+      import '../index';
 
       class XDemo extends LitElement {
         constructor() {
@@ -113,7 +112,7 @@
         render () {
           //language=html
           return html`
-            <paper-button @click="${this._openDialog0}">Dialog Confirm</paper-button>
+            <exmg-button @click="${this._openDialog0}">Dialog Confirm</exmg-button>
             <exmg-cms-dialog-confirm
               id="dialog0"
               title="Confirmation"
@@ -121,7 +120,7 @@
               button-copy="Delete account"
               @submit="${this._delete}"></exmg-cms-dialog-confirm>
 
-            <paper-button @click="${this._openDialog1}">Dialog Normal</paper-button>
+            <exmg-button @click="${this._openDialog1}">Dialog Normal</exmg-button>
             <exmg-cms-dialog-form
               id="dialog1"
               title="Create account"
@@ -140,7 +139,7 @@
                 <paper-input name="name" label="Name" required></paper-input>
                 <paper-input name="password" label="Password" required></paper-input>
             </exmg-cms-dialog-form>
-            <paper-button @click="${this._openDialog2}">Dialog Error</paper-button>
+            <exmg-button @click="${this._openDialog2}">Dialog Error</exmg-button>
 
             <exmg-cms-dialog-form
               id="dialog3"
@@ -175,7 +174,7 @@
                 </exmg-markdown-editor>
                 <paper-input name="test" label="Test" type="number" always-float-label></paper-input>
             </exmg-cms-dialog-form>
-            <paper-button @click="${this._openDialog3}">Dialog Large</paper-button>
+            <exmg-button @click="${this._openDialog3}">Dialog Large</exmg-button>
           `;
         }
       }

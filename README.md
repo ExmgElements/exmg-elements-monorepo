@@ -1,6 +1,4 @@
-# \<exmg-form-dialog\>
-
-
+# \<exmg-dialogs\>
 
 ## Install the Polymer-CLI
 
