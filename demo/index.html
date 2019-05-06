@@ -113,24 +113,24 @@
           //language=html
           return html`
             <exmg-button @click="${this._openDialog0}">Dialog Confirm</exmg-button>
-            <exmg-cms-dialog-confirm
+            <exmg-dialog-confirm
               id="dialog0"
               title="Confirmation"
               message="Are you sure you want to delete this item?"
               button-copy="Delete account"
-              @submit="${this._delete}"></exmg-cms-dialog-confirm>
+              @submit="${this._delete}"></exmg-dialog-confirm>
 
             <exmg-button @click="${this._openDialog1}">Dialog Normal</exmg-button>
-            <exmg-cms-dialog-form
+            <exmg-dialog-form
               id="dialog1"
               title="Create account"
               button-copy="Save"
               @submit="${this._saveData}">
                 <paper-input name="name" label="Name" required></paper-input>
                 <paper-input name="test" label="Test"></paper-input>
-            </exmg-cms-dialog-form>
+            </exmg-dialog-form>
 
-            <exmg-cms-dialog-form
+            <exmg-dialog-form
               id="dialog2"
               title="Create account"
               button-copy="Save"
@@ -138,10 +138,10 @@
                 <p>This setting either prevents or allows users to create multiple accounts using the same email address if they sign in to your app using different authentication providers.</p>
                 <paper-input name="name" label="Name" required></paper-input>
                 <paper-input name="password" label="Password" required></paper-input>
-            </exmg-cms-dialog-form>
+            </exmg-dialog-form>
             <exmg-button @click="${this._openDialog2}">Dialog Error</exmg-button>
 
-            <exmg-cms-dialog-form
+            <exmg-dialog-form
               id="dialog3"
               title="Create Ticket"
               button-copy="Create"
@@ -173,7 +173,7 @@
                   </marked-element>
                 </exmg-markdown-editor>
                 <paper-input name="test" label="Test" type="number" always-float-label></paper-input>
-            </exmg-cms-dialog-form>
+            </exmg-dialog-form>
             <exmg-button @click="${this._openDialog3}">Dialog Large</exmg-button>
           `;
         }
