@@ -5,7 +5,7 @@ import '@exmg/exmg-button';
 import '@polymer/iron-form';
 import {style} from './exmg-dialog-styles';
 
-@customElement('exmg-cms-dialog-form')
+@customElement('exmg-dialog-form')
 export class ExmgFormDialog extends LitElement {
   /**
    * Title of the dialog

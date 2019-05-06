@@ -4,28 +4,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>exmg-cms-dialog-confirm test</title>
+    <title>exmg-dialog-confirm test</title>
 
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
     <script src="../node_modules/wct-browser-legacy/browser.js"></script>
 
-    <script type="module" src="../exmg-cms-dialog-confirm.js"></script>
+    <script type="module" src="../exmg-dialog-confirm.js"></script>
   </head>
   <body>
 
     <test-fixture id="BasicTestFixture">
       <template>
-        <exmg-cms-dialog-confirm
+        <exmg-dialog-confirm
           id="dialog0"
           title="Confirmation"
           message="Are you sure you want to delete this item?"
           button-copy="Delete account"
-          @submit="_delete"></exmg-cms-dialog-confirm>
+          @submit="_delete"></exmg-dialog-confirm>
       </template>
     </test-fixture>
 
     <script type="module">
-      suite('exmg-cms-dialog-confirm', () => {
+      suite('exmg-dialog-confirm', () => {
         let element;
 
         setup((done) => {

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@exmg/exmg-cms-dialogs</title>
+	<title>@exmg/exmg-dialogs</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">@exmg/exmg-cms-dialogs</a>
+					<a href="index.html" class="title">@exmg/exmg-dialogs</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,7 +52,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> @exmg/exmg-cms-dialogs</h1>
+			<h1> @exmg/exmg-dialogs</h1>
 		</div>
 	</div>
 </header>
@@ -61,11 +61,61 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h1 id="-exmg-dialogs-"><exmg-dialogs></h1>
-				<h2 id="install-the-polymer-cli">Install the Polymer-CLI</h2>
-				<p>First, make sure you have the <a href="https://www.npmjs.com/package/polymer-cli">Polymer CLI</a> and npm (packaged with <a href="https://nodejs.org">Node.js</a>) installed. Run <code>npm install</code> to install your element&#39;s dependencies, then run <code>polymer serve</code> to serve your element locally.</p>
+				<h2 id="exmg-dialogs">Exmg Dialogs</h2>
+				<h3 id="form-dialog">Form Dialog</h3>
+				<p>Form dialogs will handle styling, validation and make form submit easier. Also a loading indicator will be shown during the submit handling.</p>
+				<p>Example of implementation in html</p>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">exmg-dialog-form</span>
+  <span class="hljs-attr">title</span>=<span class="hljs-string">"Create account"</span>
+  <span class="hljs-attr">button-copy</span>=<span class="hljs-string">"Save"</span>
+  @<span class="hljs-attr">submit</span>=<span class="hljs-string">"${this.createAccount}"</span>
+  &gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">paper-input</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"name"</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Name"</span> <span class="hljs-attr">required</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">paper-input</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">paper-input</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"password"</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Password"</span> <span class="hljs-attr">required</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">paper-input</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">exmg-dialog-form</span>&gt;</span></code></pre>
+				<p>Example of how submit could be handled</p>
+				<pre><code class="language-js">createAccount(e) {
+  <span class="hljs-keyword">const</span> {detail, target} = e;
+  <span class="hljs-keyword">const</span> {name, password} = detail;
+
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// Throw error to simulate error</span>
+    <span class="hljs-keyword">if</span>(password.length &lt; <span class="hljs-number">6</span>) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'User password to simple'</span>)
+    }
+
+    <span class="hljs-comment">// Do server call</span>
+
+    <span class="hljs-comment">// notify dialog successfull</span>
+    target.done();
+  } <span class="hljs-keyword">catch</span> (error) {
+    target.error(error);
+  }
+}</code></pre>
+				<h3 id="confirmation-dialogs">Confirmation Dialogs</h3>
+				<p>Easy way to display a pre styled confirmation dialog.</p>
+				<p>Example </p>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">exmg-dialog-confirm</span>
+  <span class="hljs-attr">title</span>=<span class="hljs-string">"Confirmation"</span>
+  <span class="hljs-attr">message</span>=<span class="hljs-string">"Are you sure you want to delete this item?"</span>
+  <span class="hljs-attr">button-copy</span>=<span class="hljs-string">"Delete account"</span>
+  @<span class="hljs-attr">submit</span>=<span class="hljs-string">"${this.deleteItem}"</span>
+  &gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">exmg-dialog-confirm</span>&gt;</span></code></pre>
+				<pre><code class="language-js">deleteItem(e) {
+  <span class="hljs-keyword">const</span> {target} = e;
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// Do server call</span>
+
+    <span class="hljs-comment">// notify dialog successfull</span>
+    target.done();
+  } <span class="hljs-keyword">catch</span> (error) {
+    target.error(error);
+  }
+}</code></pre>
 				<h2 id="viewing-your-element">Viewing Your Element</h2>
-				<pre><code><span class="hljs-variable">$ </span>polymer serve</code></pre><h2 id="running-tests">Running Tests</h2>
-				<pre><code><span class="hljs-meta">$</span><span class="bash"> polymer <span class="hljs-built_in">test</span></span></code></pre><p>Your application is already set up to be tested via <a href="https://github.com/Polymer/web-component-tester">web-component-tester</a>. Run <code>polymer test</code> to run your application&#39;s test suite locally.</p>
+				<pre><code>$ npm <span class="hljs-keyword">run</span><span class="bash"> start</span></code></pre><h2 id="running-tests">Running Tests</h2>
+				<pre><code>$ npm <span class="hljs-keyword">run</span><span class="bash"> <span class="hljs-built_in">test</span></span></code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

@@ -4,7 +4,7 @@ import '@exmg/exmg-button';
 import '@polymer/iron-form';
 import {style} from './exmg-dialog-styles';
 
-@customElement('exmg-cms-dialog-confirm')
+@customElement('exmg-dialog-confirm')
 export class ExmgConfirmDialog extends LitElement {
   /**
    * Title of the dialog
