@@ -6,4 +6,4 @@ node_modules/
 *.js
 !gulpfile.js
 !scripts/**/*.js
-exmg-*-styles.ts
+exmg-*-styles.js
