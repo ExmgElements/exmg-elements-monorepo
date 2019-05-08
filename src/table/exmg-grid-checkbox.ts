@@ -1,4 +1,4 @@
-import {customElement} from '@material/mwc-base/base-element';
+import {customElement} from 'lit-element';
 import {style} from './exmg-grid-checkbox-styles';
 import {Checkbox} from '@material/mwc-checkbox/mwc-checkbox';
 

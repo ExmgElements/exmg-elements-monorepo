@@ -1,6 +1,6 @@
 import {customElement, html, LitElement, property} from 'lit-element';
 import '@polymer/paper-dialog/paper-dialog.js';
-import '@material/mwc-button';
+import '@exmg/exmg-button';
 import '@material/mwc-icon';
 import {style} from './exmg-grid-setting-styles';
 
@@ -44,13 +44,13 @@ export class ExmgGridSetting extends LitElement {
   render() {
     return html`
       <div class="dialog-container">
-        <mwc-button
+        <exmg-button
           class="action"
           title="${this.tooltip}"
           @click="${this.openDialog}"
         >
           <mwc-icon>${this.icon}</mwc-icon>
-        </mwc-button>
+        </exmg-button>
         <paper-dialog
           ?opened="${this.opened}"
           ?no-cancel-on-outside-click="${this.noCancelOnOutsideClick}"

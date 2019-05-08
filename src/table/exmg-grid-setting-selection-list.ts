@@ -1,7 +1,6 @@
 import {customElement, html, LitElement, property} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 import '@polymer/paper-dialog/paper-dialog.js';
-import '@material/mwc-button';
 import '@material/mwc-icon';
 import './exmg-grid-setting';
 import {style} from './exmg-grid-setting-selection-list-styles';

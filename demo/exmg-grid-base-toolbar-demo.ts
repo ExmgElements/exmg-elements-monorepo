@@ -2,7 +2,7 @@ import {customElement, html, LitElement, property} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 import '@exmg/exmg-paper-combobox';
 import '@polymer/paper-item';
-import '@material/mwc-button';
+import '@exmg/exmg-button';
 import '@material/mwc-icon';
 
 @customElement('exmg-grid-base-toolbar-demo')
@@ -92,7 +92,7 @@ export class ExmgGridBaseToolbarDemo extends LitElement {
               this.actions,
                 (action) => {
                 return html`
-                  <mwc-button
+                  <exmg-button
                     class="action"
                     label="${action.text}"
                     title="${action.tooltip}"
@@ -100,7 +100,7 @@ export class ExmgGridBaseToolbarDemo extends LitElement {
                   >
                       <mwc-icon>${action.icon}</mwc-icon>
                       ${action.text}
-                  </mwc-button>
+                  </exmg-button>
                 `;
               }
             )}

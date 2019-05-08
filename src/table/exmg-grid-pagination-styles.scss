@@ -46,7 +46,7 @@ $exmg-grid-pagination-color-disabled: rgba($exmg-grid-pagination-color, .38);
   }
 }
 
-mwc-button[disabled] {
+exmg-button[disabled] {
   mwc-icon {
     color: var(--exmg-theme-table-on-surface-disabled, var(--mdc-theme-disabled, $exmg-grid-pagination-color-disabled));
   }
