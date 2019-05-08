@@ -34,7 +34,7 @@ export class ExmgButton extends Button {
           <span class="mdc-button__label">${this.label}</span>
           ${this.icon && this.trailingIcon ? mdcButtonIcon : ''}
           <slot></slot>
-        </span>${this.loading ? html`<exmg-spinner active></exmg-spinner>` : ''}
+        </span>${this.loading ? html`<exmg-button-spinner active></exmg-button-spinner>` : ''}
 			</button>`;
   }
 }

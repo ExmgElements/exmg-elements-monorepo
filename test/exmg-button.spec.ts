@@ -25,7 +25,7 @@ suite('<exmg-button>', () => {
 
       await flushCompleted();
 
-      const spinner = element.shadowRoot!.querySelectorAll<HTMLButtonElement>('exmg-spinner');
+      const spinner = element.shadowRoot!.querySelectorAll<HTMLButtonElement>('exmg-button-spinner');
 
       assert.equal(spinner.length, 1);
     });
