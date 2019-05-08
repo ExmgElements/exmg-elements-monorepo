@@ -39,6 +39,29 @@ createAccount(e) {
 }
 ```
 
+### Plain Dialog
+Plain dialogs will handle styling, and content. Will throw a `done` event once the user clicked the button.
+
+Example of implementation in html
+```html
+<exmg-plain-form
+  button-copy="Continue"
+  @done="${this.done}"
+  >
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.</p>
+</exmg-plain-form>
+```
+
+Example of how done could be handled
+```js
+done(e) {
+  const {target} = e;
+  // Closes the dialog ...
+  target.close();
+}
+```
+
 ### Confirmation Dialogs
 Easy way to display a pre styled confirmation dialog.
 
