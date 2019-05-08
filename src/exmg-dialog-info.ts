@@ -4,8 +4,8 @@ import '@exmg/exmg-button';
 import '@polymer/iron-form';
 import {style} from './exmg-dialog-styles';
 
-@customElement('exmg-dialog-plain')
-export class ExmgPlainDialog extends LitElement {
+@customElement('exmg-dialog-info')
+export class ExmgInfoDialog extends LitElement {
   /**
    * Copy for done button
    */

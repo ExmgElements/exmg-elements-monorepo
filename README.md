@@ -39,18 +39,18 @@ createAccount(e) {
 }
 ```
 
-### Plain Dialog
-Plain dialogs will handle styling, and content. Will throw a `done` event once the user clicked the button.
+### Info Dialog
+Info dialogs will handle styling, and content. Will throw a `done` event once the user clicked the button.
 
 Example of implementation in html
 ```html
-<exmg-dialog-plain
+<exmg-dialog-info
   button-copy="Continue"
   @done="${this.done}"
   >
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.</p>
-</exmg-dialog-plain>
+</exmg-dialog-info>
 ```
 
 Example of how done could be handled

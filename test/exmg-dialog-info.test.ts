@@ -1,5 +1,5 @@
 import '@polymer/test-fixture';
-import {ExmgPlainDialog} from '../src/exmg-dialog-plain';
+import {ExmgInfoDialog} from '../src/exmg-dialog-info';
 import {ExmgButton} from '@exmg/exmg-button';
 
 const {assert} = chai;
@@ -7,7 +7,7 @@ declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?:
 declare const flush: (cb?: Function) => void;
 
 suite('ExmgDialogPlain', () => {
-  let el: ExmgPlainDialog;
+  let el: ExmgInfoDialog;
 
   setup((done) => {
     el = fixture('BasicTestFixture');
@@ -16,7 +16,7 @@ suite('ExmgDialogPlain', () => {
 
   test('Dialog renders', async () => {
     assert.isNotNull(el, 'Dialog element shouldn\'t be null');
-    assert.instanceOf(el, ExmgPlainDialog);
+    assert.instanceOf(el, ExmgInfoDialog);
   });
 
   test('Instantiating the element with default properties works', (done) => {
