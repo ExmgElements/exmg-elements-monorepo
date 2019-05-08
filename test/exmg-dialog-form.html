@@ -7,9 +7,9 @@
     <title>exmg-dialog-form test</title>
 
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-    <script src="../node_modules/wct-browser-legacy/browser.js"></script>
+    <script src="../node_modules/web-component-tester/browser.js"></script>
 
-    <script type="module" src="../exmg-dialog-form.js"></script>
+    <script type="module" src="../src/exmg-dialog-form.js"></script>
   </head>
   <body>
 
@@ -25,30 +25,6 @@
         </exmg-dialog-form>
       </template>
     </test-fixture>
-
-    <script type="module">
-      suite('exmg-dialog-form', () => {
-        let element;
-
-        setup((done) => {
-          element = fixture('BasicTestFixture');
-          flush(done);
-        });
-
-        test('instantiating the element with default properties works', (done) => {
-          element.addEventListener('submit', (event) => {
-            done();
-          });
-          flush(() => {
-            assert.equal(element.title, 'Create account');
-            assert.equal(element.buttonCopy, 'Save');
-            assert.equal(element.shadowRoot.querySelector('h2').innerText, 'Create account');
-            assert.equal(element.shadowRoot.querySelector('#submitBtn').innerText, 'Save');
-            element.shadowRoot.querySelector('#submitBtn').click();
-          });
-        });
-      });
-    </script>
-
+    <script type="module" src="./exmg-dialog-form.js"></script>
   </body>
 </html>

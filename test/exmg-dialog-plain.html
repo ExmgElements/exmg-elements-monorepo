@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>exmg-dialog-form test</title>
+
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/web-component-tester/browser.js"></script>
+
+    <script type="module" src="../src/exmg-dialog-plain.js"></script>
+  </head>
+  <body>
+
+    <test-fixture id="BasicTestFixture">
+      <template>
+        <exmg-dialog-plain
+          id="dialog4"
+          button-copy="Continue"
+          @done="${this._done}">
+          <div>
+            <h1>Title</h1>  
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.</p>
+          </div>
+        </exmg-dialog-plain>
+      </template>
+    </test-fixture>
+    <script type="module" src="./exmg-dialog-plain.test.js"></script>
+  </body>
+</html>

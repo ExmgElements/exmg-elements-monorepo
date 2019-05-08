@@ -40,7 +40,9 @@
           this._openDialog1 = this._openDialog1.bind(this);
           this._openDialog2 = this._openDialog2.bind(this);
           this._openDialog3 = this._openDialog3.bind(this);
+          this._openDialog4 = this._openDialog4.bind(this);
           this._delete = this._delete.bind(this);
+          this._done = this._done.bind(this);
           this._saveData = this._saveData.bind(this);
           this._saveDataTicket = this._saveDataTicket.bind(this);
           this._saveDataError = this._saveDataError.bind(this);
@@ -61,6 +63,9 @@
         }
         _openDialog3() {
           this.getElementBySelector('#dialog3').open();
+        }
+        _openDialog4() {
+          this.getElementBySelector('#dialog4').open();
         }
         _delete(e) {
           const {target} = e;
@@ -90,6 +95,12 @@
             target.done();
           }, 1000);
         }
+
+        _done(e) {
+          console.log('Dialog closing ...');
+          e.target.close();
+        }
+
         _saveDataError(e) {
           const {detail, target} = e;
           // Save data
@@ -140,6 +151,18 @@
                 <paper-input name="password" label="Password" required></paper-input>
             </exmg-dialog-form>
             <exmg-button @click="${this._openDialog2}">Dialog Error</exmg-button>
+
+            <exmg-dialog-plain
+              id="dialog4"
+              button-copy="Continue"
+              @done="${this._done}">
+              <div>
+                <h1>Title</h1>  
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.</p>
+              </div>
+            </exmg-dialog-plain>
+            <exmg-button @click="${this._openDialog4}">Dialog Plain</exmg-button>
 
             <exmg-dialog-form
               id="dialog3"
