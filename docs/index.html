@@ -95,13 +95,13 @@
 				<h3 id="plain-dialog">Plain Dialog</h3>
 				<p>Plain dialogs will handle styling, and content. Will throw a <code>done</code> event once the user clicked the button.</p>
 				<p>Example of implementation in html</p>
-				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">exmg-plain-form</span>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">exmg-dialog-plain</span>
   <span class="hljs-attr">button-copy</span>=<span class="hljs-string">"Continue"</span>
   @<span class="hljs-attr">done</span>=<span class="hljs-string">"${this.done}"</span>
   &gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">exmg-plain-form</span>&gt;</span></code></pre>
+<span class="hljs-tag">&lt;/<span class="hljs-name">exmg-dialog-plain</span>&gt;</span></code></pre>
 				<p>Example of how done could be handled</p>
 				<pre><code class="language-js">done(e) {
   <span class="hljs-keyword">const</span> {target} = e;

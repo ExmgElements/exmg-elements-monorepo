@@ -44,13 +44,13 @@ Plain dialogs will handle styling, and content. Will throw a `done` event once t
 
 Example of implementation in html
 ```html
-<exmg-plain-form
+<exmg-dialog-plain
   button-copy="Continue"
   @done="${this.done}"
   >
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.</p>
-</exmg-plain-form>
+</exmg-dialog-plain>
 ```
 
 Example of how done could be handled
