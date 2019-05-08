@@ -28,11 +28,16 @@
   .exmg-loading{
     visibility: hidden;
   }
+  .exmg-button-content {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
   exmg-spinner{
     margin: 3px 0;
-    position: fixed; 
-    bottom: 5px; 
-    left: 50%; 
+    position: fixed;
+    bottom: 5px;
+    left: 50%;
     transform: translateX(-50%);
     --exmg-spinner-size: 20px;
   }

@@ -21,6 +21,7 @@ export class ExmgButton extends Button {
     };
     const loadingClass = {
       'exmg-loading': this.loading,
+      'exmg-button-content': true,
     };
     const mdcButtonIcon = html`<span class="material-icons mdc-button__icon">${this.icon}</span>`;
     return html`

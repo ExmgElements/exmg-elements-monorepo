@@ -1,5 +1,7 @@
 import {LitElement, html, customElement, property} from 'lit-element';
 import '@material/mwc-checkbox';
+import '@material/mwc-icon/mwc-icon';
+import '@material/mwc-icon/mwc-icon-font';
 import {style} from './button-demo-styles';
 import '../';
 
@@ -24,6 +26,7 @@ export class ButtonDemo extends LitElement {
         <exmg-button ?loading="${this.loading}">Test 1</exmg-button>
         <exmg-button class="dark" unelevated ?loading="${this.loading}">Test 2</exmg-button>
         <exmg-button class="dark" unelevated ?loading="${this.loading}" disabled>Test 3</exmg-button>
+        <exmg-button class="dark" unelevated ?loading="${this.loading}"><mwc-icon>merge_type</mwc-icon>Test 4</exmg-button>
       </div>
     `;
   }

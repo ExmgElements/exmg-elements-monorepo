@@ -27,6 +27,7 @@
   "devDependencies": {
     "@exmg/exmg-cli": "^1.0.0",
     "@material/mwc-checkbox": "^0.5.0",
+    "@material/mwc-icon": "^0.5.0",
     "@polymer/iron-component-page": "^4.0.1",
     "@polymer/iron-demo-helpers": "^3.1.0",
     "@polymer/test-fixture": "^4.0.2",
