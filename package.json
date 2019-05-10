@@ -15,13 +15,14 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@exmg/exmg-button": "^0.0.1",
     "@polymer/iron-flex-layout": "^3.0.0",
     "@polymer/iron-form": "^3.0.0",
     "@polymer/paper-dialog": "^3.0.0",
     "@polymer/paper-dialog-scrollable": "^3.0.0",
     "@polymer/polymer": "^3.0.0",
     "lit-element": "^2.1.0",
-    "@exmg/exmg-button": "^0.0.1"
+    "web-component-tester": "^6.9.2"
   },
   "devDependencies": {
     "@exmg/exmg-markdown-editor": "^3.0.0",
@@ -38,7 +39,7 @@
     "@webcomponents/webcomponentsjs": "^2.2.8",
     "chai": "^4.2.0",
     "codemirror": "^5.37.0",
-    "gulp": "^4.0.0",
+    "gulp": "^4.0.2",
     "gulp-watch": "^5.0.1",
     "mocha": "^5.2.0",
     "tslint": "^5.15.0",

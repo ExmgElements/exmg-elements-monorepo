@@ -92,6 +92,22 @@
     target.error(error);
   }
 }</code></pre>
+				<h3 id="info-dialog">Info Dialog</h3>
+				<p>Info dialogs will handle styling, and content. Will throw a <code>done</code> event once the user clicked the button.</p>
+				<p>Example of implementation in html</p>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">exmg-dialog-info</span>
+  <span class="hljs-attr">button-copy</span>=<span class="hljs-string">"Continue"</span>
+  @<span class="hljs-attr">done</span>=<span class="hljs-string">"${this.done}"</span>
+  &gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">exmg-dialog-info</span>&gt;</span></code></pre>
+				<p>Example of how done could be handled</p>
+				<pre><code class="language-js">done(e) {
+  <span class="hljs-keyword">const</span> {target} = e;
+  <span class="hljs-comment">// Closes the dialog ...</span>
+  target.close();
+}</code></pre>
 				<h3 id="confirmation-dialogs">Confirmation Dialogs</h3>
 				<p>Easy way to display a pre styled confirmation dialog.</p>
 				<p>Example </p>
