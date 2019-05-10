@@ -1,6 +1,6 @@
 {
   "name": "@exmg/exmg-dialogs",
-  "version": "4.1.1",
+  "version": "4.1.2",
   "main": "exmg-form-dialog.js",
   "files": [
     "src/**/*.scss",
@@ -15,7 +15,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@exmg/exmg-button": "^0.0.1",
+    "@exmg/exmg-button": "0.0.3",
     "@polymer/iron-flex-layout": "^3.0.0",
     "@polymer/iron-form": "^3.0.0",
     "@polymer/paper-dialog": "^3.0.0",
