@@ -36,11 +36,11 @@
         constructor() {
           super();
 
-          this._openDialog0 = this._openDialog0.bind(this);
-          this._openDialog1 = this._openDialog1.bind(this);
-          this._openDialog2 = this._openDialog2.bind(this);
-          this._openDialog3 = this._openDialog3.bind(this);
-          this._openDialog4 = this._openDialog4.bind(this);
+          this._openDialogConfirmation = this._openDialogConfirmation.bind(this);
+          this._openDialogForm = this._openDialogForm.bind(this);
+          this._openDialogFormError = this._openDialogFormError.bind(this);
+          this._openDialogFormLarge = this._openDialogFormLarge.bind(this);
+          this._openDialogInfo = this._openDialogInfo.bind(this);
           this._delete = this._delete.bind(this);
           this._done = this._done.bind(this);
           this._saveData = this._saveData.bind(this);
@@ -52,19 +52,19 @@
           return this.shadowRoot ? this.shadowRoot.querySelector(selector) : null;
         }
 
-        _openDialog0() {
+        _openDialogConfirmation() {
           this.getElementBySelector('#dialog0').open();
         }
-        _openDialog1() {
+        _openDialogForm() {
           this.getElementBySelector('#dialog1').open();
         }
-        _openDialog2() {
+        _openDialogFormError() {
           this.getElementBySelector('#dialog2').open();
         }
-        _openDialog3() {
+        _openDialogFormLarge() {
           this.getElementBySelector('#dialog3').open();
         }
-        _openDialog4() {
+        _openDialogInfo() {
           this.getElementBySelector('#dialog4').open();
         }
         _delete(e) {
@@ -123,7 +123,7 @@
         render () {
           //language=html
           return html`
-            <exmg-button @click="${this._openDialog0}">Dialog Confirm</exmg-button>
+            <exmg-button @click="${this._openDialogConfirmation}">Dialog Confirm</exmg-button>
             <exmg-dialog-confirm
               id="dialog0"
               title="Confirmation"
@@ -131,7 +131,7 @@
               button-copy="Delete account"
               @submit="${this._delete}"></exmg-dialog-confirm>
 
-            <exmg-button @click="${this._openDialog1}">Dialog Normal</exmg-button>
+            <exmg-button @click="${this._openDialogForm}">Dialog Normal</exmg-button>
             <exmg-dialog-form
               id="dialog1"
               title="Create account"
@@ -150,7 +150,7 @@
                 <paper-input name="name" label="Name" required></paper-input>
                 <paper-input name="password" label="Password" required></paper-input>
             </exmg-dialog-form>
-            <exmg-button @click="${this._openDialog2}">Dialog Error</exmg-button>
+            <exmg-button @click="${this._openDialogFormError}">Dialog Error</exmg-button>
 
             <exmg-dialog-info
               id="dialog4"
@@ -162,7 +162,7 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.</p>
               </div>
             </exmg-dialog-info>
-            <exmg-button @click="${this._openDialog4}">Dialog Info</exmg-button>
+            <exmg-button @click="${this._openDialogInfo}">Dialog Info</exmg-button>
 
             <exmg-dialog-form
               id="dialog3"
@@ -197,7 +197,7 @@
                 </exmg-markdown-editor>
                 <paper-input name="test" label="Test" type="number" always-float-label></paper-input>
             </exmg-dialog-form>
-            <exmg-button @click="${this._openDialog3}">Dialog Large</exmg-button>
+            <exmg-button @click="${this._openDialogFormLarge}">Dialog Large</exmg-button>
           `;
         }
       }
