@@ -12,6 +12,12 @@ export class ExmgInfoDialog extends LitElement {
   @property({type: String, attribute: 'button-copy'})
   private buttonCopy: string = '';
 
+  /**
+   * Secondary attribute propagation
+   */
+  @property({type: Boolean, attribute: 'button-secondary'})
+  private buttonSecondary?: boolean = false;
+
   @query('#dialog')
   private dialogNode?: HTMLElement | any;
 
@@ -45,7 +51,7 @@ export class ExmgInfoDialog extends LitElement {
       <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click>
         <slot></slot>
         <div class="actions">
-          <exmg-button id="doneBtn" @click="${this.done}" unelevated>${this.buttonCopy}</exmg-button>
+          <exmg-button id="doneBtn" ?secondary=${this.buttonSecondary} @click="${this.done}" unelevated>${this.buttonCopy}</exmg-button>
         </div>
       </paper-dialog>
     `;
