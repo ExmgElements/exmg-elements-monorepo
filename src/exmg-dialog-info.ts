@@ -51,7 +51,7 @@ export class ExmgInfoDialog extends LitElement {
       <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click>
         <slot></slot>
         <div class="actions">
-          <exmg-button id="doneBtn" ?secondary=${this.buttonSecondary} @click="${this.done}" unelevated>${this.buttonCopy}</exmg-button>
+          <exmg-button id="doneBtn" @click="${this.done}" ?unelevated=${!this.buttonSecondary}>${this.buttonCopy}</exmg-button>
         </div>
       </paper-dialog>
     `;
