@@ -30,7 +30,7 @@
     "@exmg/exmg-button": "^0.0.3",
     "@exmg/exmg-paper-combobox": "^4.6.0",
     "@exmg/exmg-sortable": "^4.0.3",
-    "@material/list": "^1.1.1",
+    "@material/list": "^2.1.1",
     "@material/theme": "^1.1.0",
     "@material/typography": "^1.0.0",
     "@material/mwc-base": "^0.5.0",

@@ -493,7 +493,8 @@ Additionally you cna also override css variables:
  `--exmg-grid-pagination-color` | Pagination text color | `--mdc-theme-on-surface`
  `--exmg-theme-table-on-surface-disabled` | Disabled color | `--mdc-theme-on-surface with filter .38`
  `--exmg-filter-background-color` | Background color for combobox | `--mdc-theme-surface`
-
+ `--exmg-grid-setting-checkbox-color` | Background color of setting checkbox | `$mdcThemeSecondary`
+ `--exmg-grid-setting-list-item-active-bg-color` | Background color of active list item color | `$mdcThemeSecondary`
 
 ## Responsiveness
 
