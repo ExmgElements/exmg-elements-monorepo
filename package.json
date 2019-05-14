@@ -1,7 +1,7 @@
 {
   "name": "@exmg/exmg-form-drawer",
   "flat": true,
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Form drawer element",
   "contributors": [
     "Ex Machina"
