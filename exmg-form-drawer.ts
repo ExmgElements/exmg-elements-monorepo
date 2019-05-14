@@ -1,5 +1,4 @@
 import {LitElement, html, customElement, property, query} from 'lit-element';
-import '@polymer/iron-demo-helpers/demo-snippet';
 import '@polymer/neon-animation/animations/slide-from-right-animation';
 import '@polymer/neon-animation/animations/slide-right-animation';
 import '@polymer/paper-dialog/paper-dialog.js';
