@@ -7,43 +7,51 @@ $exmg-grid-toolbar-color: #02182b;
 $exmg-grid-toolbar-active-color: #000000;
 
 .wrapper {
+  --toolbar-bg-color: var(--exmg-grid-toolbar-bg-color, var(--mdc-theme-background, #{$exmg-grid-toolbar-bg-color}));
+  --toolbar-color: var(--exmg-grid-toolbar-color, var(--mdc-theme-on-background, #{$exmg-grid-toolbar-color}));
+
   display: flex;
   flex: 1;
   flex-direction: row;
   align-items: center;
   padding: 10px 0;
   @include mdc-typography-base;
-  background-color: var(--exmg-grid-toolbar-bg-color, var(--mdc-theme-surface, $exmg-grid-toolbar-bg-color));
-  color: var(--exmg-grid-toolbar-color, var(--mdc-theme-on-surface, $exmg-grid-toolbar-color));
+
+  background-color: var(--toolbar-bg-color);
+  color: var(--toolbar-color);
+  border-radius: var(--exmg-grid-toolbar-border-top-radius, 0) var(--exmg-grid-toolbar-border-top-radius, 0)  var(--exmg-grid-toolbar-border-bottom-radius, 0)  var(--exmg-grid-toolbar-border-bottom-radius, 0);
 
   overflow-x: var(--exmg-grid-toolbar-overflow-x, initial);
   white-space: nowrap;
 
   &.active {
-    background-color: var(--exmg-grid-toolbar-active-bg-color, $exmg-grid-toolbar-active-bg-color);
-    color: var(--exmg-grid-toolbar-active-color, $exmg-grid-toolbar-active-color);
+    --active-toolbar-bg-color: var(--exmg-grid-toolbar-active-bg-color, var(--exmg-grid-toolbar-bg-color, var(--mdc-theme-background, #{$exmg-grid-toolbar-active-bg-color})));
+    --active-toolbar-color: var(--exmg-grid-toolbar-active-color, var(--exmg-grid-toolbar-color ,var(--mdc-theme-on-background, #{$exmg-grid-toolbar-active-color})));
+
+    background-color: var(--active-toolbar-bg-color);
+    color: var(--active-toolbar-color);
 
     .description {
-      color: var(--exmg-grid-toolbar-active-color, $exmg-grid-toolbar-active-color);
+      color: var(--active-toolbar-color);
       &.with-action-separator {
-        border-left: 1px solid var(--exmg-grid-toolbar-active-color, $exmg-grid-toolbar-active-color);
+        border-left: 1px solid var(--active-toolbar-color);
       }
+    }
+  }
+
+  .description {
+    @include mdc-typography('headline5');
+    color: var(--toolbar-color);
+    padding: 0 16px;
+
+    &.with-action-separator {
+      border-left: 1px solid var(--toolbar-color);
     }
   }
 }
 
 .actions {
   padding: 0 16px;
-}
-
-.description {
-  @include mdc-typography('headline5');
-  color: var(--exmg-grid-toolbar-color, var(--mdc-theme-on-surface, $exmg-grid-toolbar-color));
-  padding: 0 16px;
-
-  &.with-action-separator {
-    border-left: 1px solid var(--exmg-grid-toolbar-color, var(--mdc-theme-on-surface, $exmg-grid-toolbar-color));
-  }
 }
 
 .filters {

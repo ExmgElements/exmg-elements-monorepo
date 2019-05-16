@@ -1,12 +1,10 @@
 import {html, customElement, TemplateResult} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
-import '@polymer/paper-checkbox';
-import '../src/table/exmg-grid.js';
+import '../src/table/exmg-grid';
 import '../src/table/exmg-grid-pagination';
 import {style as tableStyles} from '../src/table/exmg-grid-styles';
 import {style as exmgThemeStyles} from '../src/table/theme/exmg-theme-styles';
 
-import '../src/table/exmg-grid-smart-toolbar';
 import {ExmgBaseGridDemo} from './exmg-base-grid-demo';
 
 @customElement('demo-simple-grid')

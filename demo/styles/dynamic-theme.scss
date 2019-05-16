@@ -4,7 +4,9 @@ exmg-grid[data-theme="dark"] {
   $secondaryColor: #0070db;
   $surfaceColor: #363640;
   $onSurfaceColor: #ffffff;
-  @include exmg-generate-theme-table-variables($primaryColor, $secondaryColor, $surfaceColor, $onSurfaceColor);
+  $backgroundColor: #363640;
+  $onBackgroundColor: #ffffff;
+  @include exmg-generate-theme-table-variables($primaryColor, $secondaryColor, $surfaceColor, $onSurfaceColor, $backgroundColor, $onBackgroundColor);
 }
 
 exmg-grid[data-theme="light"] {
@@ -12,7 +14,9 @@ exmg-grid[data-theme="light"] {
   $secondaryColor: #0070db;
   $surfaceColor: #ffffff;
   $onSurfaceColor: #02182b;
-  @include exmg-generate-theme-table-variables($primaryColor, $secondaryColor, $surfaceColor, $onSurfaceColor);
+  $backgroundColor: #ffffff;
+  $onBackgroundColor: #02182b;
+  @include exmg-generate-theme-table-variables($primaryColor, $secondaryColor, $surfaceColor, $onSurfaceColor, $backgroundColor, $onBackgroundColor);
 }
 
 exmg-grid[data-theme="exmg"] {

@@ -159,6 +159,7 @@ export abstract class ExmgBaseGridDemo extends LitElement {
   protected columns: SettingSelectionListItem[] = [
     {id: 'month', title: 'Month', selected: true},
     {id: 'year', title: 'Year', selected: true},
+    {id: 'amount', title: 'Amount', selected: true},
   ];
 
   protected onActionExecuted(e: CustomEvent<{id: string}>) {

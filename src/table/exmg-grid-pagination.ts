@@ -150,16 +150,17 @@ export class ExmgGridPagination extends LitElement {
   }
 
   protected render(): TemplateResult | void {
+    // tslint:disable:max-line-length
     return html`
       <style>
         :host {
           --paper-item-focused: {
-            background-color: var(--exmg-filter-background-color, var(--exmg-theme-table-on-surface-low, var(--mdc-theme-surface)));
+            background-color: var(--exmg-grid-toolbar-filter-item-active-bg-color, var(--exmg-theme-table-on-surface-low, var(--mdc-theme-surface)));
           };
           --paper-item-selected: {
-            background-color: var(--exmg-filter-background-color, var(--exmg-theme-table-on-surface-low, var(--mdc-theme-surface)));
+            background-color: var(--exmg-grid-toolbar-filter-item-active-bg-color, var(--exmg-theme-table-on-surface-low, var(--mdc-theme-surface)));
           }
-          --paper-button-ink-color: var(--exmg-filter-background-color, var(--mdc-theme-surface));
+          --paper-button-ink-color: var(--exmg-grid-toolbar-filter-item-active-bg-color, var(--mdc-theme-surface));
 
           --exmg-paper-combobox-selected-item-color: var(--exmg-grid-pagination-color, var(--mdc-theme-on-surface));
           --exmg-paper-combobox-selected-item-bg-color: var(--exmg-grid-pagination-bg-color, transparent);
@@ -188,5 +189,6 @@ export class ExmgGridPagination extends LitElement {
         </div>
       <div>
     `;
+    // tslint:enable:max-line-length
   }
 }

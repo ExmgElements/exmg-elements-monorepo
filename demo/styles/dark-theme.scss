@@ -4,5 +4,7 @@ exmg-grid {
   $secondaryColor: #0070db;
   $surfaceColor: #363640;
   $onSurfaceColor: #ffffff;
-  @include exmg-generate-theme-table-variables($primaryColor, $secondaryColor, $surfaceColor, $onSurfaceColor);
+  $backgroundColor: #363640;
+  $onBackgroundColor: #ffffff;
+  @include exmg-generate-theme-table-variables($primaryColor, $secondaryColor, $surfaceColor, $onSurfaceColor, $backgroundColor, $onBackgroundColor);
 }

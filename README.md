@@ -445,7 +445,9 @@ exmg-grid {
   $secondaryColor: #0070db;
   $surfaceColor: #ffffff;
   $onSurfaceColor: #02182b;
-  @include exmg-generate-theme-table-variables($primaryColor, $surfaceColor, $onSurfaceColor);
+  $backgroundColor: #ffffff;
+  $onBackgroundColor: #02182b;
+  @include exmg-generate-theme-table-variables($primaryColor, $secondaryColor, $surfaceColor, $onSurfaceColor, $backgroundColor, $onBackgroundColor);
 }
 ```
 Where local variables map to material design:
@@ -456,6 +458,8 @@ Local sass variable | mdc variable | css variable
   $secondaryColor | $mdcThemeSecondary | --mdc-theme-secondary
   $surfaceColor | $dcThemeSurface | --mdc-theme-surface
   $onSurfaceColor | $mdcThemeOnSurface | --mdc-theme-on-surface
+  $background | $mdcThemeBackground | --mdc-theme-background
+  $onBackground | $mdcThemeOnBackground | --mdc-theme-on-background
 
 Additionally you cna also override css variables:
 
@@ -485,16 +489,16 @@ Additionally you cna also override css variables:
  `--exmg-table-td-height` | row cell height | `48px;`
  `--exmg-table-th-sort-icon-height` | sort icon height | `1em;`
  `--exmg-table-th-sort-icon-width` | sort icon width | `1em;`
- `--exmg-grid-toolbar-bg-color` | Toolbar background color | `$surface;`
- `--exmg-grid-toolbar-color` | Toolbar text color | `$onSurface`
- `--exmg-grid-toolbar-active-bg-color` | Toolbar background color when any action available | `$surface;`
- `--exmg-grid-toolbar-active-color` | Toolbar text color when any action available | `$onSurface`
+ `--exmg-grid-toolbar-bg-color` | Toolbar background color | `$background;`
+ `--exmg-grid-toolbar-color` | Toolbar text color | `$onBackground`
+ `--exmg-grid-toolbar-active-bg-color` | Toolbar background color when any action available | `$background;`
+ `--exmg-grid-toolbar-active-color` | Toolbar text color when any action available | `$onBackground`
  `--exmg-grid-pagination-bg-color` | Pagination background color | `--mdc-theme-surface`
  `--exmg-grid-pagination-color` | Pagination text color | `--mdc-theme-on-surface`
  `--exmg-theme-table-on-surface-disabled` | Disabled color | `--mdc-theme-on-surface with filter .38`
- `--exmg-filter-background-color` | Background color for combobox | `--mdc-theme-surface`
- `--exmg-grid-setting-checkbox-color` | Background color of setting checkbox | `$mdcThemeSecondary`
- `--exmg-grid-setting-list-item-active-bg-color` | Background color of active list item color | `$mdcThemeSecondary`
+ `--exmg-grid-toolbar-filter-item-active-bg-color` | Background color for combobox | `--mdc-theme-surface`
+ `--exmg-grid-setting-checkbox-bg-color` | Background color of setting checkbox | `$mdcThemeSecondary`
+ `--exmg-grid-toolbar-setting-list-item-active-bg-color` | Background color of active list item color | `$mdcThemeSecondary`
 
 ## Responsiveness
 

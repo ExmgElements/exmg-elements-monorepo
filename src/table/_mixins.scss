@@ -1,4 +1,4 @@
-@function generateColorVariants($primary, $secondary, $surface, $onSurface) {
+@function generateColorVariants($primary, $secondary, $surface, $onSurface, $background, $onBackground) {
   @return (
     exmg-theme-table-surface: #{$surface},
     exmg-theme-table-on-surface: #{$onSurface},
@@ -12,38 +12,47 @@
     exmg-table-rows-expanded-color: #{$onSurface},
     exmg-table-th-color: #{rgba($onSurface, .6)},
     exmg-table-th-sortable-hover-color: #{rgba($onSurface, .35)},
-    mdc-theme-primary: #{$primary},
-    mdc-theme-on-surface: #{$onSurface},
-    mdc-theme-surface: #{$surface},
-    mdc-theme-disabled: #{rgba($onSurface, .38)},
     exmg-theme-table-on-surface-disabled: #{rgba($onSurface, .38)},
     exmg-theme-table-on-surface-low: #{rgba($onSurface, .2)},
-    exmg-grid-toolbar-active-bg-color: $surface,
-    exmg-grid-toolbar-active-color: $onSurface,
-    exmg-grid-setting-checkbox-color: $secondary,
-    exmg-grid-setting-list-item-active-bg-color: $secondary,
+
+    mdc-theme-primary: #{$primary},
+    exmg-theme-primary: #{$primary},
+    mdc-theme-secondary: #{$secondary},
+    exmg-theme-secondary: #{$secondary},
+    mdc-theme-on-surface: #{$onSurface},
+    exmg-theme-on-surface: #{$onSurface},
+    mdc-theme-surface: #{$surface},
+    exmg-theme-surface: #{$surface},
+    mdc-theme-background: #{$background},
+    exmg-theme-background: #{$background},
+    mdc-theme-on-background: #{$onBackground},
+    exmg-theme-on-background: #{$onBackground},
+    mdc-theme-disabled: #{rgba($onSurface, .38)},
+    exmg-theme-disabled: #{rgba($onSurface, .38)},
   );
 }
 
-@mixin exmg-generate-theme-table-variables($primary, $secondary, $surface, $onSurface) {
-    @each $varKey, $varValue in generateColorVariants($primary, $secondary, $surface, $onSurface) {
+@mixin exmg-generate-theme-table-variables($primary, $secondary, $surface, $onSurface, $background, $onBackground) {
+    @each $varKey, $varValue in generateColorVariants($primary, $secondary, $surface, $onSurface, $background, $onBackground) {
       --#{$varKey}: #{$varValue};
     }
 }
 
 @mixin exmg-theme() {
-  $primaryColor: #0070db;
-  $secondaryColor: #0070db;
-  $surfaceColor: #ffffff;
-  $onSurfaceColor: #02182b;
-  @include exmg-generate-theme-table-variables($primaryColor, $secondaryColor, $surfaceColor, $onSurfaceColor);
+  $exmgPrimaryColor: #0070db !default;
+  $exmgSecondaryColor: #0070db !default;
+  $exmgSurfaceColor: #ffffff !default;
+  $exmgOnSurfaceColor: #02182b !default;
+  $exmgBackground: transparent !default;
+  $exmgOnBackground: #02182b !default;
 
-  --exmg-grid-toolbar-active-bg-color: #e1f0fe;
+  @include exmg-generate-theme-table-variables($exmgPrimaryColor, $exmgSecondaryColor, $exmgSurfaceColor, $exmgOnSurfaceColor, $exmgBackground, $exmgOnBackground);
 
-  --exmg-filter-background-color: #B8DDFE;
+  --exmg-grid-toolbar-setting-list-item-active-bg-color: #B8DDFE;
+  --exmg-grid-toolbar-filter-item-active-bg-color: #B8DDFE;
 
-  $exmgThemeTableSurface: $surfaceColor;
-  $exmgThemeTableOnSurface: $onSurfaceColor;
+  $exmgThemeTableSurface: $exmgSurfaceColor;
+  $exmgThemeTableOnSurface: $exmgOnSurfaceColor;
 
   $exmgTableBorderColor: #f6f6f6;
   $exmgTableRowDividerColor: #dbdbdb;
