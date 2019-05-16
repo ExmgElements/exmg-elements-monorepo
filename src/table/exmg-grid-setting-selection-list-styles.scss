@@ -19,12 +19,17 @@ mwc-checkbox {
 
 .mdc-menu-surface--anchor {
   position: var(--exmg-grid-toolbar-setting-position, relative);
+  top: 45px;
+  right: 15px;
   display: inline-block;
 }
 
 .mdc-menu.mdc-menu-surface {
-  margin: var(--exmg-grid-toolbar-setting-list-menu-margin, 15px 0 0 0);
   position: absolute;
+  // mdc-menu use calculate left dynamically and set it as inline style, to override !important is needed
+  top: 0 !important;
+  left: unset !important;
+  right: 0;
   .mdc-list {
     color: var(--mdc-theme-on-surface, var(--mdc-theme-text-primary-on-background));
   }
