@@ -440,7 +440,7 @@ Example of light theme:
 
 ```scss
 @import "src/table/mixins";
-:host {
+exmg-grid {
   $primaryColor: #0070db;
   $secondaryColor: #0070db;
   $surfaceColor: #ffffff;
