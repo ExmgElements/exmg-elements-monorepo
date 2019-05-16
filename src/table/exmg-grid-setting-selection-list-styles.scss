@@ -10,11 +10,11 @@
 }
 
 :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item::before, :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item::after {
-  background-color: var(--exmg-grid-setting-list-item-active-bg-color, #{$mdc-theme-secondary});
+  background-color: var(--exmg-grid-toolbar-setting-list-item-active-bg-color, var(--exmg-theme-table-on-surface-low, var(--mdc-theme-secondary)));
 }
 
 mwc-checkbox {
-  --mdc-theme-secondary: var(--exmg-grid-setting-checkbox-color, #{$mdc-theme-secondary});
+  --mdc-theme-secondary: var(--exmg-grid-setting-checkbox-bg-color, var(--exmg-theme-secondary));
 }
 
 .mdc-menu-surface--anchor {

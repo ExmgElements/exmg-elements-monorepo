@@ -132,6 +132,9 @@ export class ExmgGrid extends LitElement {
   @property({type: Object})
   private querySelectors?: ExmgQuerySelectors;
 
+  @property({type: Boolean, reflect: true, attribute: 'data-with-toolbar'})
+  private withToolbar: boolean = false;
+
   private rowSelectableFeature?: ExmgRowSelectable;
 
   private rowExpandableFeature?: ExmgRowExpandable;
@@ -255,6 +258,15 @@ export class ExmgGrid extends LitElement {
     }
   }
 
+  private async initGridAttributes(): Promise<void> {
+    await this.updateComplete;
+    const toolbarSlot = this.shadowRoot!.querySelector<HTMLSlotElement>('slot[name="toolbar"]');
+    if (toolbarSlot && toolbarSlot.assignedNodes && toolbarSlot.assignedNodes().length) {
+      // make TS happy - this.withToolbar is declared but never read
+      this.withToolbar = this.withToolbar || true;
+    }
+  }
+
   protected async firstUpdated(): Promise<void> {
     const table = this.shadowRoot!.host.querySelector<HTMLTableElement>('table')!;
     const tableBody = table.querySelector<HTMLTableSectionElement>('tbody.grid-data')!;
@@ -263,6 +275,8 @@ export class ExmgGrid extends LitElement {
       table,
       tableBody,
     );
+
+    this.initGridAttributes();
 
     const bodyRows = this.querySelectors.getBodyRows();
 
@@ -358,13 +372,15 @@ export class ExmgGrid extends LitElement {
   }
 
   protected render() {
-    return html`
-      <div class="table-card">
+      return html`
+      <div class="table-card-container">
         <slot name="toolbar"></slot>
-        <div class="table-container">
-          ${cache(this.canSortRows() ? this.renderWithSortable() : this.renderWithoutSortable())}
+        <div class="table-card">
+          <div class="table-container">
+            ${cache(this.canSortRows() ? this.renderWithSortable() : this.renderWithoutSortable())}
+          </div>
+          <slot name="pagination"></slot>
         </div>
-        <slot name="pagination"></slot>
       </div>
     `;
   }
