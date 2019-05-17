@@ -46,6 +46,12 @@
       exmg-cms-breadcrumbs.hasCustomOpacityInactiveLinks {
         --breadcrumbs-item-link-inactive-opacity: 0.9;
       }
+
+      #breadcrumbsWithMaterialDesignTheme {
+        --mdc-theme-primary: purple;
+        --mdc-theme-on-primary: #fff;
+      }
+
       :root {
         --breadcrumbs-item-separator-background-url: url('/demo/custom-separator.svg');
       }
@@ -118,6 +124,13 @@
       <demo-snippet>
         <template>
           <exmg-cms-breadcrumbs id="breadcrumbsWithTheme"></exmg-cms-breadcrumbs>
+        </template>
+      </demo-snippet>
+
+      <h3>Use material design colors</h3>
+      <demo-snippet>
+        <template>
+          <exmg-cms-breadcrumbs id="breadcrumbsWithMaterialDesignTheme"></exmg-cms-breadcrumbs>
         </template>
       </demo-snippet>
 

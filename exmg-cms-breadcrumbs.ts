@@ -2,7 +2,7 @@ import {LitElement, html, property, customElement, TemplateResult} from 'lit-ele
 import {repeat} from 'lit-html/directives/repeat';
 
 import {arrowSeparator} from './exmg-cms-breadcrumbs-icons';
-import exmgCmsBreadcrumbsStyles from './exmg-cms-breadcrumbs-styles';
+import {style as exmgCmsBreadcrumbsStyles} from './styles/exmg-cms-breadcrumbs-styles';
 
 type GenericPropertyValues<T, V = unknown> = Map<T, V>;
 type Props = Exclude<keyof BreadcrumbsElement, number | Symbol>;
@@ -34,8 +34,8 @@ export type BreadcrumbItem = {
  *
  * Custom property | Description | Default
  * ----------------|-------------|----------
- * `--breadcrumbs-text-color` | Link and separator foreground color | `#ffffff`
- * `--breadcrumbs-background-color` | Breadcrumb container background color | `#0071dc`
+ * `--breadcrumbs-text-color` | Link and separator foreground color | --mdc-theme-on-primary or `#ffffff`
+ * `--breadcrumbs-background-color` | Breadcrumb container background color | --mdc-theme-primary or `#0071dc`
  * `--breadcrumbs-container-height` | Breadcrumb container height | `56px`
  * `--breadcrumbs-container-width` | Breadcrumb container width | `100%`
  * `--breadcrumbs-container-padding-left` | Breadcrumb container padding-left | `10px`
