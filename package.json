@@ -1,7 +1,7 @@
 {
   "name": "@exmg/exmg-cms-breadcrumbs",
   "flat": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Element to display breadcrumbs navigation",
   "main": "index.html",
   "contributors": [
