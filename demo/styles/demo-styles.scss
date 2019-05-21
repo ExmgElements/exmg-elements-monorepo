@@ -18,10 +18,10 @@
 
 paper-checkbox {
   --paper-checkbox-unchecked-color: #97aac4;
-  --paper-checkbox-checked-color: #1274d9;
+  --paper-checkbox-checked-color: var(--mdc-theme-primary, #1274d9);
   --paper-checkbox-size: 24px;
-  --paper-checkbox-unchecked-ink-color: #0070db;
-  --paper-checkbox-checked-ink-color: #0070db;
+  --paper-checkbox-unchecked-ink-color: var(--mdc-theme-primary, #0070db);
+  --paper-checkbox-checked-ink-color: var(--mdc-theme-primary, #0070db);
 }
 
 exmg-grid {

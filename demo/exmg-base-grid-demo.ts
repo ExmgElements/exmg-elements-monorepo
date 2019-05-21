@@ -299,7 +299,7 @@ export abstract class ExmgBaseGridDemo extends LitElement {
   }
 
   protected toggleTheme() {
-    const themes = ['dark', 'light', 'exmg'];
+    const themes = ['dark', 'light', 'exmg', 'mdc'];
     const index = themes.indexOf(this.theme);
     const nextIndex = (index === -1 || index + 1 === themes.length) ? 0 : index + 1;
     this.theme = themes[nextIndex];

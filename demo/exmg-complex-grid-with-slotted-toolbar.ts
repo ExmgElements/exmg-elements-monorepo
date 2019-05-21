@@ -33,7 +33,6 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
       table {
         --exmg-table-color: #000;
         --exmg-table-card-background-color: #4A4A4A;
-        --exmg-table-border-color: white;
         --exmg-table-row-divider-color: white;
         --exmg-table-row-selected-color: white;
         --exmg-table-row-selected-background-color: #850E13;
