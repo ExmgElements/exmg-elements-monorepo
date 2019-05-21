@@ -1,5 +1,6 @@
 @import "@material/theme/variables";
 @import "../../src/table/mixins";
+
 exmg-grid[data-theme="dark"] {
   $primaryColor: #0070db;
   $secondaryColor: #0070db;
