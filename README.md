@@ -470,7 +470,7 @@ Additionally you cna also override css variables:
  `--exmg-table-card-margin-bottom` | table bottom margin  | `5px;`
  `--exmg-table-color` | table text color | `#02182b;`
  `--exmg-table-background-color` | table background color | `#ffffff;`
- `--exmg-table-border-color` | table border color | `#f6f6f6;`
+ `--exmg-table-box-shadow` | table box shadow | `#{0px 1px 5px 0px rgba($onSurface, .2), 0px 2px 2px 0px rgba($onSurface, .14), 0px 3px 1px -2px rgba($onSurface, .12)},`
  `--exmg-table-row-divider-color` | table rows separator color | `#dbdbdb;`
  `--exmg-table-row-selected-color` | selected row text color | `#02182b;`
  `--exmg-table-row-selected-background-color` | selected row background color | `#e2f1fe;`

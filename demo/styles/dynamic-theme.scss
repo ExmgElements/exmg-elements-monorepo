@@ -1,3 +1,4 @@
+@import "@material/theme/variables";
 @import "../../src/table/mixins";
 exmg-grid[data-theme="dark"] {
   $primaryColor: #0070db;
@@ -21,4 +22,8 @@ exmg-grid[data-theme="light"] {
 
 exmg-grid[data-theme="exmg"] {
   @include exmg-theme();
+}
+
+exmg-grid[data-theme="mdc"] {
+  @include mdc-theme();
 }

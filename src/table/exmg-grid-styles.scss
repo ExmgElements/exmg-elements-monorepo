@@ -5,7 +5,6 @@ $exmgThemeTableSurface: null !default;
 $exmgThemeTableOnSurface: null !default;
 
 // color variants
-$exmgTableBorderColor: null !default;
 $exmgTableRowDividerColor: null !default;
 $exmgTableRowSelectedBackgroundColor: null !default;
 $exmgTableRowHoverBackgroundColor: null !default;
@@ -44,7 +43,6 @@ $exmgTableThSortableHoverColor: null !default;
 
   --exmg-table-color: var(--exmg-theme-table-on-surface, var(--mdc-theme-on-surface, #{$exmgThemeTableOnSurface}));
   --exmg-table-card-background-color: var(--exmg-theme-table-surface, var(--mdc-theme-surface, #{$exmgThemeTableSurface}));
-  --exmg-table-border-color: #{$exmgTableBorderColor};
   --exmg-table-row-divider-color: #{$exmgTableRowDividerColor};
   --exmg-table-row-selected-color: var(--exmg-theme-table-surface, var(--mdc-theme-on-surface, #{$exmgThemeTableOnSurface}));
   --exmg-table-row-selected-background-color: #{$exmgTableRowSelectedBackgroundColor};
@@ -98,6 +96,7 @@ $exmgTableThSortableHoverColor: null !default;
   width: var(--exmg-table-card-width);
   margin: 0;
   padding: 0;
+  box-shadow: var(--exmg-table-box-shadow, none);
 }
 :host([with-toolbar]) {
   .table-card {
