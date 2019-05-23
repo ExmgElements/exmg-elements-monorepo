@@ -1,0 +1,42 @@
+{
+  "name": "@exmg/exmg-paper-stepper",
+  "version": "3.0.0",
+  "flat": true,
+  "description": "Material design horizontal stepper",
+  "keywords": [
+    "Exmg",
+    "ExmgElements",
+    "exmg-paper-stepper",
+    "stepper"
+  ],
+  "homepage": "https://github.com/ExmgElements/",
+  "main": "exmg-paper-stepper.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ExmgElements/exmg-paper-stepper.git"
+  },
+  "author": "Ex Machina",
+  "devDependencies": {
+    "@polymer/iron-component-page": "^3.0.0-pre.18",
+    "@polymer/iron-demo-helpers": "^3.0.0-pre.18",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "eslint": "^4.19.1",
+    "eslint-config-exmg": "latest",
+    "eslint-plugin-html": "^3.0.0",
+    "wct-browser-legacy": "^1.0.0"
+  },
+  "scripts": {
+    "lint": "polymer lint --rules polymer-3 --input *.html",
+    "eslint": "eslint . --ext js,html --ignore-path .gitignore",
+    "analyze": "polymer analyze --input exmg-paper-stepper.html exmg-paper-step.html > analysis.json"
+  },
+  "dependencies": {
+    "@polymer/iron-flex-layout": "^3.0.0-pre.18",
+    "@polymer/iron-icon": "^3.0.0-pre.18",
+    "@polymer/iron-iconset-svg": "^3.0.0-pre.18",
+    "@polymer/iron-selector": "^3.0.0-pre.18",
+    "@polymer/paper-ripple": "^3.0.0-pre.18",
+    "@polymer/paper-styles": "^3.0.0-pre.18",
+    "@polymer/polymer": "^3.0.0"
+  }
+}
