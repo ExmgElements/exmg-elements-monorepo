@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>exmg-paper-datatable Simple Demo</title>
+
+    <script type="module" src="../exmg-paper-datatable.js"></script>
+    <script type="module" src="../exmg-paper-thead.js"></script>
+    <script type="module" src="../exmg-paper-tbody.js"></script>
+    <script type="module" src="../exmg-paper-data-helper.js"></script>
+    <script type="module" src="../exmg-paper-icons.js"></script>
+  </head>
+
+  <body>
+    <script type="module">
+      import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
+      import '@polymer/iron-demo-helpers/demo-pages-shared-styles.js'
+      import '@polymer/iron-demo-helpers/demo-snippet.js';
+      import '@polymer/iron-flex-layout/iron-flex-layout.js';
+      import '@polymer/paper-card/paper-card.js';
+      import '@polymer/paper-slider/paper-slider.js';
+      import '@polymer/paper-button/paper-button.js';
+      import '@polymer/paper-icon-button/paper-icon-button.js';
+      import '@polymer/paper-input/paper-input.js';
+      import '@polymer/paper-checkbox/paper-checkbox.js';
+      import '@polymer/iron-ajax/iron-ajax.js';
+      import '@webcomponents/webcomponentsjs/webcomponents-loader.js'; 
+        
+      class XTable extends PolymerElement {
+        static get is() {
+          return 'x-table';
+        }
+        static get properties() {
+          return {
+            pageIndex: {
+              type: Number,
+              value: 0,
+            },
+            pageSize: {
+              type: Number,
+              value: 10,
+            },
+            sorted: {
+              type: String,
+              value: 'name',
+            },
+            sortDirection: {
+              type: String,
+              value: 'ASC',
+            },
+          };
+        }
+        static get template() {
+          return html`<style>
+            :host {
+              display: block;
+              --exmg-paper-tbody-tr-selected: {
+                background-color: #dbdbdb;
+              };
+            }
+            paper-card {
+              display: block;
+              max-width: 936px;
+              margin: auto;
+              width: 100%;
+              --paper-card-background-color: white;
+            }
+            h2,
+            .buttons {
+              max-width: 936px;
+              width: 100%;
+              margin: 20px auto;
+            }
+          </style>
+
+          <h2>Simple Table</h2>
+
+          <paper-card elevation="1">
+            <!-- DataTable -->
+            <exmg-paper-datatable>
+              <!-- THead -->
+              <exmg-paper-thead sorted="{{sorted}}" sort-direction="{{sortDirection}}">
+                <template>
+                  <div class="tr">
+                    <div class="th flex-none flex-right" sortable="index" style="width: 70px;">
+                      <span>Index</span>
+                    </div>
+                    <div class="th flex" sortable="name">
+                      <span>Name</span>
+                    </div>
+                    <div class="th flex" sortable="email" style="min-width: 30%">
+                      <span>Email</span>
+                    </div>
+                    <div class="th flex collapsable" sortable="city">
+                      <span>City</span>
+                    </div>
+                    <div class="th flex collapsable" sortable="country">
+                      <span>Country</span>
+                    </div>
+                  </div>
+                </template>
+              </exmg-paper-thead>
+              <!-- TBody -->
+              <exmg-paper-tbody items="[[items]]" selection-enabled="">
+                <template>
+                  <div class$="[[_computedClass(selected)]]">
+                    <div class="td flex-none flex-right" style="width: 70px;">
+                      <span>[[item.index]]</span>
+                    </div>
+                    <div class="td flex">
+                      <span>[[item.name]]</span>
+                    </div>
+                    <div class="td flex" style="min-width: 30%">
+                      <span>[[item.email]]</span>
+                    </div>
+                    <div class="td flex collapsable">
+                      <span>[[item.city]]</span>
+                    </div>
+                    <div class="td flex collapsable">
+                      <span>[[item.country]]</span>
+                    </div>
+                  </div>
+                </template>
+              </exmg-paper-tbody>
+            </exmg-paper-datatable>
+            <!-- Table Paging -->
+          </paper-card>
+
+          <!-- Load contacts from json file  -->
+          <iron-ajax url="data/contacts.json" last-response="{{rawItems}}" auto=""></iron-ajax>
+
+          <!-- Manage sorting and paging  -->
+          <exmg-paper-data-helper raw-items="[[rawItems]]" items="{{items}}" page-index="[[pageIndex]]" sorted="[[sorted]]" sort-direction="[[sortDirection]]" page-size="[[pageSize]]"></exmg-paper-data-helper>
+          `;
+        }
+        _computedClass(isSelected) {
+          let classes = 'tr ';
+          if (isSelected) {
+            classes += ' selected';
+          }
+          return classes;
+        }
+      }
+      window.customElements.define(XTable.is, XTable);
+
+    </script>
+    <x-table></x-table>
+  </body>
+</html>

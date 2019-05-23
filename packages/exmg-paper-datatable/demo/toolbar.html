@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>exmg-paper-datatable demo</title>
+
+   
+    <script type="module" src="../exmg-paper-toolbar.js"></script>
+    <script type="module" src="../exmg-paper-icons.js"></script>
+
+  </head>
+  <body>
+  <script type="module">
+      import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
+      import '@polymer/iron-demo-helpers/demo-pages-shared-styles.js'
+      import '@polymer/iron-demo-helpers/demo-snippet.js';
+      import '@polymer/iron-flex-layout/iron-flex-layout.js';
+      import '@polymer/paper-card/paper-card.js';
+      import '@polymer/paper-slider/paper-slider.js';
+      import '@polymer/paper-button/paper-button.js';
+      import '@polymer/paper-icon-button/paper-icon-button.js';
+      import '@polymer/paper-input/paper-input.js';
+      import '@polymer/paper-checkbox/paper-checkbox.js';
+      import '@polymer/iron-ajax/iron-ajax.js';
+      import '@webcomponents/webcomponentsjs/webcomponents-loader.js'; 
+      import '@exmg/exmg-paper-tooltip/exmg-paper-tooltip.js';
+
+    class XTable extends PolymerElement {
+      static get is() {
+        return 'x-table';
+      }
+      static get properties() {
+        return {
+          nrSelectedItems: {
+            type: Number,
+            value: 0,
+          },
+          selectedItems: {
+            type: Array,
+          },
+        };
+      }
+      static get template() {
+        return html`
+        <style>
+          :host {
+            display: block;
+          }
+          h2,
+          .buttons,
+          paper-card  {
+            width: 800px;
+            margin: 20px auto;
+          }
+          paper-card {
+            display: block;
+            --paper-card-background-color: white;
+          }
+          .flex{
+            @apply --layout-flex;
+          }
+          exmg-paper-toolbar paper-button {
+            color: var(--text-primary-color);
+            background-color: var(--primary-color);
+            margin: 12px 0px;
+            height: 32px;
+          }
+        </style>
+  
+        <paper-card elevation="1">
+          <!-- Table Toolbar -->
+          <exmg-paper-toolbar selected-items="[[selectedItems]]">
+            <div slot="default">
+              <div class="title-container flex">
+                <span>Admin Users</span>
+              </div>
+              <div class="button-container">
+                <paper-icon-button icon="exmg-paper-icons:add"></paper-icon-button>
+              </div>
+            </div>
+            <div slot="selected">
+              <span class="flex"></span>
+              <div class="button-container">
+                <paper-icon-button icon="exmg-paper-icons:delete"></paper-icon-button>
+              </div>
+            </div>
+          </exmg-paper-toolbar>
+        </paper-card>
+  
+        <br><br>
+  
+        <paper-card elevation="1">
+          <exmg-paper-toolbar selected-items="[[selectedItems]]">
+            <div slot="default">
+              <span class="flex"></span>
+              <paper-icon-button icon="exmg-paper-icons:filter-list"></paper-icon-button>
+              <paper-icon-button icon="exmg-paper-icons:more-vert"></paper-icon-button>
+            </div>
+            <div slot="selected">
+              <span class="flex"></span>
+              <paper-icon-button icon="exmg-paper-icons:filter-list"></paper-icon-button>
+              <paper-icon-button icon="exmg-paper-icons:more-vert"></paper-icon-button>
+            </div>
+          </exmg-paper-toolbar>
+        </paper-card>
+  
+        <br><br>
+  
+        <paper-card elevation="1">
+          <exmg-paper-toolbar selected-items="[[selectedItems]]">
+            <div slot="default">
+              <span class="flex"></span>
+              <paper-button>Add User</paper-button>
+            </div>
+          </exmg-paper-toolbar>
+        </paper-card>
+  
+        <div class="buttons"><paper-slider id="slider" min="0" max="10" value="{{nrSelectedItems}}"></paper-slider></div>    
+        `;
+      }
+      static get observers() {
+        return [
+          '_observeSelectedChange(nrSelectedItems)',
+        ];
+      }
+      _observeSelectedChange(nrSelectedItems) {
+        this.set('selectedItems', []);
+        for (var i = 0; i < nrSelectedItems; i++) {
+          this.push('selectedItems', {});
+        }
+      }
+    }
+    window.customElements.define(XTable.is, XTable);
+  </script>
+
+  <x-table></x-table>
+
+  </body>
+</html>
