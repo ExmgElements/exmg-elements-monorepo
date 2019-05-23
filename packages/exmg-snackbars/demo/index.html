@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>exmg-snackbars demo</title>
+
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/@webcomponents/shadycss/apply-shim.min.js"></script>
+
+    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
+    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
+    <script type="module" src="../node_modules/@polymer/paper-item/paper-item.js"></script>
+    <script type="module" src="../node_modules/@polymer/paper-item/paper-item-body.js"></script>
+    <script type="module" src="../node_modules/@polymer/paper-item/paper-icon-item.js"></script>
+
+    <!-- Ensure Web Animations polyfill is loaded -->
+    <script src="../node_modules/web-animations-js/web-animations-next-lite.min.js"></script>
+
+    <script type="module" src="../exmg-snackbars.js"></script>
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles"></style>
+    </custom-style>
+
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic exmg-snackbars demo</h3>
+      <script type="module">
+        import {LitElement, html, customElement} from 'lit-element';
+        import {showSnackBar} from '../exmg-snackbars';
+        class Demo extends LitElement{
+          _showSnackbar() {
+            showSnackBar('Some error occurred!')
+          }
+
+          _showSnackbar2() {
+            showSnackBar('User was successfully updated!', { duration: 0, showCloseButton: true })
+          }
+
+          render() {
+            return html`
+              <button @click="${this._showSnackbar}">Show snack</button>
+              <button @click="${this._showSnackbar2}">Show snack2</button>
+            `;
+          }
+        }
+        customElement('exmg-snackbars-demo')(Demo);
+      </script>
+      <demo-snippet>
+        <template>
+          <exmg-snackbars-demo></exmg-snackbars-demo>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>
