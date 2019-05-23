@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>test-el test</title>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../node_modules/wct-browser-legacy/browser.js"></script>
+
+    <script type="module" src="../exmg-paper-sidemenu.js"></script>
+  </head>
+  <body>
+
+    <test-fixture id="BasicTestFixture">
+      <template>
+        <exmg-paper-sidemenu menu='[]'></exmg-paper-sidemenu>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="BasicTestFixtureMenu">
+      <template>
+        <exmg-paper-sidemenu></exmg-paper-sidemenu>
+      </template>
+    </test-fixture>
+
+    <script type="module">
+        import { menu } from './menu-example.js';
+        var sideMenu;
+        suite('exmg-paper-sidemenu', () => {
+
+          setup(() => {
+            sideMenu = fixture('BasicTestFixtureMenu');
+          });
+
+          test('instantiating the element with default properties', () => {
+            const element = fixture('BasicTestFixture');
+            assert.equal(element.menu.length, 0);
+          });
+  
+          test('check if menu items rendered matches the amount of items in menu config file', (done) => {
+            sideMenu.menu = menu;
+            flush(() => {
+              var menuItems = sideMenu.shadowRoot.querySelectorAll('paper-item');
+              assert.equal(4, menuItems.length);
+              done();
+            });
+          });
+
+          test('check if selected state reflects to dom', (done) => {
+            sideMenu.menu = menu;
+            sideMenu.selected = 'rewardmodels/';
+            flush(() => {
+              var selectedItems = sideMenu.shadowRoot.querySelectorAll('a[aria-selected]');
+              assert.equal(1, selectedItems.length);
+              done();
+            });
+          });
+
+        });
+      </script>
+  </body>
+</html>

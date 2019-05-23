@@ -1,0 +1,61 @@
+{
+  "name": "@exmg/exmg-paper-sidemenu",
+  "flat": true,
+  "version": "4.0.2",
+  "description": "Paper style collapsible sidemenu",
+  "contributors": [
+    "Ex Machina Group"
+  ],
+  "keywords": [
+    "web-components",
+    "polymer",
+    "sidemenu"
+  ],
+  "files": [
+    "!gulpfile.js",
+    "**/*.js",
+    "**/*.d.ts"
+  ],
+  "main": "exmg-paper-sidemenu.js",
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:ExmgElements/exmg-paper-sidemenu.git"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/ExmgElements/exmg-paper-sidemenu",
+  "dependencies": {
+    "@exmg/exmg-paper-tooltip": "^3.0.0",
+    "@polymer/paper-item": "^3.0.0-pre.25",
+    "@polymer/paper-listbox": "^3.0.0-pre.25",
+    "lit-element": "^2.0.1"
+  },
+  "devDependencies": {
+    "@polymer/iron-ajax": "^3.0.0-pre.25",
+    "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
+    "@polymer/iron-input": "^3.0.0-pre.25",
+    "@polymer/iron-media-query": "^3.0.0-pre.25",
+    "@polymer/paper-styles": "^3.0.0-pre.25",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "eslint": "^4.11.0",
+    "eslint-config-exmg": "latest",
+    "eslint-plugin-html": "^3.0.0",
+    "typedoc": "^0.14.2",
+    "gulp": "^4.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-replace": "^1.0.0",
+    "typescript": "^3.2.2",
+    "wct-browser-legacy": "^1.0.0"
+  },
+  "scripts": {
+    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts",
+    "build": "tsc",
+    "prepare": "npm run build",
+    "start": "gulp serve",
+    "lint": "polymer lint --rules polymer-3 --input *.js",
+    "eslint": "eslint . --ext js,html --ignore-path .gitignore",
+    "analyze": "polymer analyze --input exmg-paper-sidemenu.js exmg-paper-sidemenu-header.js > analysis.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
