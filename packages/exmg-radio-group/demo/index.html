@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>exmg-radio-group demo</title>
+
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/@webcomponents/shadycss/apply-shim.min.js"></script>
+
+    <!-- Ensure Web Animations polyfill is loaded -->
+    <script src="../node_modules/web-animations-js/web-animations-next-lite.min.js"></script>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <script type="module">
+        import {LitElement, html} from 'lit-element';
+        import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+        import '@polymer/iron-demo-helpers/demo-snippet';
+        import './exmg-icons.js';
+        import '../exmg-radio-group';
+        import '../exmg-radio-group-item';
+
+        class ExmgRadioGroupDemo extends LitElement {
+          static get properties() {
+            return {
+              selected: { type: Boolean },
+            };
+          }
+
+          constructor() {
+            super();
+            this.selected = 'option2';
+          }
+
+          onPaperRadioGroupChanged(event) {
+            console.log('onPaperRadioGroupChanged', event.detail);
+            this.selected = event.detail.selected;
+          }
+
+          render () {
+            //language=html
+            return html`
+              <style>
+              .custom-style {
+              --mdc-theme-secondary: rgb(255,0,0);
+              --mdc-theme-secondary-box-shadow: rgba(255,0,0, 0.5);
+              }
+              </style>
+              <h1>Horizontal radio group with blocks</h1>
+              <exmg-radio-group name="license" selected="${this.selected}" @exmg-radio-group-changed="${this.onPaperRadioGroupChanged}">
+                <exmg-radio-group-item value="option1">
+                    <div slot="title">Option 1</div>
+                    <div slot="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                </exmg-radio-group-item>
+                <exmg-radio-group-item value="option2">
+                    <div slot="title">Option 2</div>
+                    <div slot="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                </exmg-radio-group-item>
+                <exmg-radio-group-item value="option3" disabled>
+                    <div slot="title">Option 3</div>
+                    <div slot="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                </exmg-radio-group-item>
+              </exmg-radio-group>
+
+              <h1>Vertical radio group with blocks and hidden radio buttons and custom style</h1>
+              <exmg-radio-group class="custom-style" name="license" selected="${this.selected}" @exmg-radio-group-changed="${this.onPaperRadioGroupChanged}" vertical>
+                <exmg-radio-group-item value="option1" hide-radio-button>
+                    <div slot="title">Option 1</div>
+                    <div slot="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                </exmg-radio-group-item>
+                <exmg-radio-group-item value="option2" hide-radio-button>
+                    <div slot="title">Option 2</div>
+                    <div slot="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                </exmg-radio-group-item>
+              </exmg-radio-group>
+              <h1>Horizontal radio group with simple buttons</h1>
+              <exmg-radio-group name="license" selected="${this.selected}" @exmg-radio-group-changed="${this.onPaperRadioGroupChanged}">
+                <exmg-radio-group-item value="option1">
+                    Option 1
+                </exmg-radio-group-item>
+                <exmg-radio-group-item value="option2">
+                    Option 2
+                </exmg-radio-group-item>
+              </exmg-radio-group>
+            `;
+          }
+        }
+        window.customElements.define('exmg-radio-group-demo', ExmgRadioGroupDemo);
+      </script>
+      <demo-snippet>
+        <template>
+          <exmg-radio-group-demo></exmg-radio-group-demo>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>
