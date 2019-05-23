@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <script>
+      window.WCT = {
+        environmentScripts: [
+          'stacky/browser.js',
+          'async/dist/async.js',
+          'wct-browser-legacy/node_modules/lodash/index.js',
+          'mocha/mocha.js',
+          'chai/chai.js',
+          '@polymer/sinonjs/sinon.js',
+          'sinon-chai/lib/sinon-chai.js',
+          'accessibility-developer-tools/dist/js/axs_testing.js',
+          '@polymer/test-fixture/test-fixture.js'
+        ]
+      };
+    </script>
+    <script src="../node_modules/web-component-tester/browser.js"></script>
+  </head>
+  <body>
+    <script>
+      // Load and run all tests (.html, .js):
+      WCT.loadSuites([
+        'exmg-dialog-form.html',
+        'exmg-dialog-confirm.html',
+        'exmg-dialog-info.html'
+      ]);
+    </script>
+  </body>
+</html>

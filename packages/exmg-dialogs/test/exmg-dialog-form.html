@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>exmg-dialog-form test</title>
+
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/web-component-tester/browser.js"></script>
+
+    <script type="module" src="../src/exmg-dialog-form.js"></script>
+  </head>
+  <body>
+
+    <test-fixture id="BasicTestFixture">
+      <template>
+        <exmg-dialog-form
+          id="dialog1"
+          title="Create account"
+          button-copy="Save"
+          @submit="_saveData">
+            <paper-input name="name" label="Name" required></paper-input>
+            <paper-input name="test" label="Test"></paper-input>
+        </exmg-dialog-form>
+      </template>
+    </test-fixture>
+    <script type="module" src="./exmg-dialog-form.js"></script>
+  </body>
+</html>
