@@ -1,4 +1,4 @@
-import { LitElement, html, customElement } from 'lit-element';
+import {LitElement, html, customElement} from 'lit-element';
 import {sharedPageStyles} from '../exmg-cms-page-styles';
 
 @customElement('card-demo')
@@ -20,7 +20,6 @@ export class CardDemo extends LitElement {
           </div>
         </div>
       </div>
-      
     `;
   }
 }

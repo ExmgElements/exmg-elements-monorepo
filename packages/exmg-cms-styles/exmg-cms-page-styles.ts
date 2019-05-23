@@ -1,4 +1,4 @@
-import { css } from 'lit-element';
+import {css} from 'lit-element';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@polymer/paper-styles/typography.js';
 import '@polymer/paper-styles/color.js';
@@ -197,6 +197,6 @@ export const sharedPageStyles = css`
     padding: 0 8px 0 26px;
   }
   app-toolbar.page a{
-    color: white;   
+    color: white;
   }
 `;

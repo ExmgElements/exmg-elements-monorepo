@@ -11,17 +11,16 @@ let CardDemo = class CardDemo extends LitElement {
         return html `
       <div class="page-container">
         <div class="page-content">
-          <div row>
-            <h2 col>Active Users</h2>
+          <div>
+            <h2>Active Users</h2>
           </div>
-          <div row>
-            <div col>
+          <div>
+            <div>
             Test card
             </div>
           </div>
         </div>
       </div>
-      
     `;
     }
 };

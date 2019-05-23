@@ -196,6 +196,6 @@ export const sharedPageStyles = css `
     padding: 0 8px 0 26px;
   }
   app-toolbar.page a{
-    color: white;   
+    color: white;
   }
 `;

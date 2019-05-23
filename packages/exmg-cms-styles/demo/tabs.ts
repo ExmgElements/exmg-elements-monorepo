@@ -1,4 +1,4 @@
-import { LitElement, html, customElement } from 'lit-element';
+import {LitElement, html, customElement} from 'lit-element';
 import '@exmg/exmg-paper-card/exmg-paper-card.js';
 import '@polymer/paper-tabs/paper-tabs';
 import '@polymer/paper-tabs/paper-tab';
