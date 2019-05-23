@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>exmg-paper-tooltip test</title>
+
+    <script src="@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="web-component-tester/browser.js"></script>
+    <script src="@polymer/test-fixture/test-fixture-mocha.js"></script>
+
+    <script type="module" src="@polymer/test-fixture/test-fixture.js"></script>
+    <script type="module" src="../exmg-paper-tooltip.js"></script>
+  </head>
+  <body>
+
+    <test-fixture id="basic">
+      <template>
+        <exmg-paper-tooltip></exmg-paper-tooltip>
+      </template>
+    </test-fixture>
+
+    <script type="module">
+import '@polymer/test-fixture/test-fixture.js';
+import '../exmg-paper-tooltip.js';
+suite('basic', function() {
+  let el;
+  setup(function() {
+    el = fixture('basic');
+  });
+  test('element is upgraded', function() {
+    assert.equal(el.constructor.is, 'exmg-paper-tooltip');
+  });
+});
+</script>
+
+  </body>
+</html>
