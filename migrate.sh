@@ -4,7 +4,7 @@ my_repos="exmg-paper-token-input exmg-dialogs exmg-button exmg-paper-combobox"
 src_dir=packages
 git checkout -b monorepo-migration
 for repo in $(echo $my_repos); do
-  mkdir $src_dir/$repo
+  #mkdir $src_dir/$repo
   git subtree add -P  $src_dir/$repo git@github.com:$github_org/$repo.git master
 #  git remote add $repo git@github.com:$github_org/$repo.git
 #  git fetch $repo
