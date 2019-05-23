@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>exmg-long-ago</title>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../node_modules/wct-browser-legacy/browser.js"></script>
+
+    <script type="module" src="../exmg-long-ago.js"></script>
+  </head>
+  <body>
+    <test-fixture id="BasicElement">
+      <template>
+        <exmg-long-ago
+          timestamp="1518535307240"
+        ></exmg-long-ago>
+      </template>
+    </test-fixture>
+
+    <script type="module">
+
+      suite('<exmg-long-ago>', _ => {
+        let el;
+
+        setup(() => {
+          el = fixture('BasicElement');
+        });
+
+        suite('instantiating the element with default properties works', _ => {
+          test('element is upgraded', () => {
+            expect(el).to.equal.is;
+          });
+          test('timestamp is a present', () => {
+            expect(el).to.have.property('timestamp');
+          });
+          test('timestamp is a number', () => {
+            expect(el.timestamp).to.be.an('number');
+          });
+        });
+
+        suite('testing output of element', _ => {
+          test('setting value to 12 hours ago', function() {
+            el.timestamp = new Date().getTime() - ((1000 * 60) * 60) * 12;
+            expect(el._formattedValue).to.have.string('12 hours ago');
+          });
+          test('setting value to 5 days ago', function() {
+            el.timestamp = new Date().getTime() - ((1000 * 60) * 60) * 128;
+            expect(el._formattedValue).to.have.string('5 days ago');
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
