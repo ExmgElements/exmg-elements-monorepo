@@ -56,7 +56,8 @@
     "lint": "tslint -c ./tslint.json --project ./",
     "test-dev": "polymer test --npm -p",
     "test": "polymer test --npm --expanded",
-    "test:integration": "polymer build # test that psk builds without error with the CLI"
+    "test:integration": "polymer build # test that psk builds without error with the CLI",
+    "bootstrap": "npm install"
   },
   "publishConfig": {
     "access": "public"

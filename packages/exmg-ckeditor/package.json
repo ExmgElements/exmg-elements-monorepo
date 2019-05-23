@@ -20,6 +20,7 @@
   "scripts": {
     "lint": "polymer lint --rules polymer-2 --input *.html",
     "eslint": "eslint . --ext js,html --ignore-path .gitignore",
-    "analyze": "polymer analyze --input exmg-ckeditor.html > analysis.json"
+    "analyze": "polymer analyze --input exmg-ckeditor.html > analysis.json",
+    "bootstrap": "npm install"
   }
 }

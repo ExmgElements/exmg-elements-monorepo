@@ -70,6 +70,7 @@
     "lint": "npm run lint-src && npm run lint-test",
     "test-dev": "polymer test --npm -l chrome -p",
     "test": "polymer test --npm --expanded",
-    "test:integration": "polymer build # test that psk builds without error with the CLI"
+    "test:integration": "polymer build # test that psk builds without error with the CLI",
+    "bootstrap": "npm install"
   }
 }

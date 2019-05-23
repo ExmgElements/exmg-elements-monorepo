@@ -28,7 +28,8 @@
   "scripts": {
     "lint": "polymer lint --rules polymer-3 --input *.html",
     "eslint": "eslint . --ext js,html --ignore-path .gitignore",
-    "analyze": "polymer analyze --input exmg-paper-stepper.html exmg-paper-step.html > analysis.json"
+    "analyze": "polymer analyze --input exmg-paper-stepper.html exmg-paper-step.html > analysis.json",
+    "bootstrap": "npm install"
   },
   "dependencies": {
     "@polymer/iron-flex-layout": "^3.0.0-pre.18",

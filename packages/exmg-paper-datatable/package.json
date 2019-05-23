@@ -31,21 +31,22 @@
   "devDependencies": {
     "@exmg/exmg-paper-tooltip": "^3.0.0",
     "@polymer/iron-component-page": "^3.0.0-pre.21",
+    "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
     "@polymer/iron-iconset-svg": "^3.0.0-pre.25",
     "@polymer/paper-button": "^3.0.0-pre.25",
     "@polymer/paper-card": "^3.0.0-pre.25",
     "@polymer/paper-checkbox": "^3.0.0-pre.25",
     "@polymer/paper-slider": "^3.0.0-pre.25",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
     "eslint": "^4.11.0",
     "eslint-config-exmg": "latest",
     "eslint-plugin-html": "^3.0.0",
-    "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
-    "@webcomponents/webcomponentsjs": "^2.0.0",
     "wct-browser-legacy": "^1.0.0"
   },
   "scripts": {
     "lint": "polymer lint --rules polymer-3 --input *.js",
     "eslint": "eslint . --ext js,html --ignore-path .gitignore",
-    "analyze": "polymer analyze --input exmg-paper-datatable.js exmg-paper-toolbar.js exmg-paper-thead.js exmg-paper-tbody.js exmg-paper-data-helper.js exmg-data-filter.js exmg-paper-paging.js > analysis.json"
+    "analyze": "polymer analyze --input exmg-paper-datatable.js exmg-paper-toolbar.js exmg-paper-thead.js exmg-paper-tbody.js exmg-paper-data-helper.js exmg-data-filter.js exmg-paper-paging.js > analysis.json",
+    "bootstrap": "npm install"
   }
 }

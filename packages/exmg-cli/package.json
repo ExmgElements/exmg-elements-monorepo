@@ -54,7 +54,8 @@
     "prepublishOnly": "npm run build",
     "publishDryRun": "npm publish --dry-run",
     "preversion": "npm run build",
-    "lint": "tslint -c ./tslint.json --project ./"
+    "lint": "tslint -c ./tslint.json --project ./",
+    "bootstrap": "npm install"
   },
   "publishConfig": {
     "access": "public"

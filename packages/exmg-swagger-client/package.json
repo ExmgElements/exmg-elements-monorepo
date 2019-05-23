@@ -43,6 +43,7 @@
   "scripts": {
     "lint": "polymer lint --rules polymer-3 --input *.js",
     "eslint": "eslint . --ext js,html --ignore-path .gitignore",
-    "analyze": "polymer analyze --input exmg-swagger-client.js exmg-swagger-config.js exmg-swagger-common.js > analysis.json"
+    "analyze": "polymer analyze --input exmg-swagger-client.js exmg-swagger-config.js exmg-swagger-common.js > analysis.json",
+    "bootstrap": "npm install"
   }
 }

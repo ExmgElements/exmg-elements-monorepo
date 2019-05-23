@@ -19,12 +19,11 @@
     "tslint": "^5.12.1",
     "tslint-config-exmg": "^1.0.2",
     "typedoc": "^0.14.2",
-    "typescript": "^3.3.3",
+    "typescript": "^3.4.5",
     "wct-mocha": "^1.0.0",
     "web-animations-js": "^2.3.1"
   },
-  "dependencies": {
-    "@exmg/exmg-paper-combobox": "file:packages/exmg-paper-combobox",
-    "@exmg/exmg-paper-token-input": "file:packages/exmg-paper-token-input"
+  "scripts": {
+    "install:all": "lerna run bootstrap --parallel --no-bail"
   }
 }
