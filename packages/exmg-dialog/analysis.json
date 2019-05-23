@@ -1,0 +1,288 @@
+{
+  "schema_version": "1.0.0",
+  "namespaces": [
+    {
+      "name": "Exmg",
+      "description": "",
+      "summary": "",
+      "sourceRange": {
+        "file": "exmg-dialog.html",
+        "start": {
+          "line": 198,
+          "column": 2
+        },
+        "end": {
+          "line": 198,
+          "column": 34
+        }
+      },
+      "elements": [
+        {
+          "description": "The `<exmg-dialog>' component extends IronOverlay (see https://github.com/PolymerLabs/iron-overlay/) and\nfurther simplifies UI dialog flow by providing some common features, hooks and convenience methods to show, hide\nand react to actions from within dialogs.",
+          "summary": "",
+          "path": "exmg-dialog.html",
+          "properties": [
+            {
+              "name": "closingReason",
+              "type": "Object",
+              "description": "Contains the reason(s) this overlay was last closed. Provides the `canceled` and `confirmed` reasons.",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 41,
+                  "column": 8
+                },
+                "end": {
+                  "line": 50,
+                  "column": 9
+                }
+              },
+              "metadata": {
+                "polymer": {
+                  "readOnly": true
+                }
+              }
+            }
+          ],
+          "methods": [
+            {
+              "name": "_toggle",
+              "description": "Toggles the `opened` state and may optionally set the `closingReason`'s `canceled` and `confirmed` booleans as\npassed to the details object of the `exmg-dialog-closed` event.",
+              "privacy": "protected",
+              "sourceRange": {
+                "start": {
+                  "line": 62,
+                  "column": 4
+                },
+                "end": {
+                  "line": 67,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "opened",
+                  "type": "boolean"
+                },
+                {
+                  "name": "canceled",
+                  "type": "boolean"
+                },
+                {
+                  "name": "confirmed",
+                  "type": "boolean"
+                }
+              ]
+            },
+            {
+              "name": "_cancel",
+              "description": "Overruled IronOverlay's _cancel to route it through public `cancel` and `_toggle` for consistency.",
+              "privacy": "protected",
+              "sourceRange": {
+                "start": {
+                  "line": 74,
+                  "column": 4
+                },
+                "end": {
+                  "line": 76,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "event",
+                  "type": "Event"
+                }
+              ]
+            },
+            {
+              "name": "cancel",
+              "description": "Closes this dialog with closingReason.canceled set to true. Automatically called for buttons in this dialog\nthat have a `dialog-cancel` attribute. This functions fires an `iron-overlay-canceled` event which may be\nprevented to keep the dialog from closing.",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 83,
+                  "column": 4
+                },
+                "end": {
+                  "line": 90,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "event = {}"
+                }
+              ]
+            },
+            {
+              "name": "close",
+              "description": "Closes this dialog without an explicit cancel or confirm. Automatically called for buttons in this dialog\nthat have a `dialog-close` attribute.",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 96,
+                  "column": 4
+                },
+                "end": {
+                  "line": 98,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": []
+            },
+            {
+              "name": "confirm",
+              "description": "Closes this dialog with closingReason.confirmed set to true. Automatically called for buttons in this dialog\nthat have a `dialog-confirm` attribute. This function fires an `iron-overlay-confirmed` event which may be\nprevented to keep the dialog from closing.",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 105,
+                  "column": 4
+                },
+                "end": {
+                  "line": 112,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "event = {}"
+                }
+              ]
+            },
+            {
+              "name": "_hasAction",
+              "description": "Returns a boolean indicating whether the node defines a known `DialogElement.actions` attribute value.",
+              "privacy": "protected",
+              "sourceRange": {
+                "start": {
+                  "line": 120,
+                  "column": 4
+                },
+                "end": {
+                  "line": 123,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "node",
+                  "type": "Node"
+                }
+              ],
+              "return": {
+                "type": "boolean",
+                "desc": "hasAction"
+              }
+            },
+            {
+              "name": "_getAction",
+              "description": "Returns the action name of this node based on the presence of a known action attribute.",
+              "privacy": "protected",
+              "sourceRange": {
+                "start": {
+                  "line": 131,
+                  "column": 4
+                },
+                "end": {
+                  "line": 134,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "node",
+                  "type": "Node"
+                }
+              ],
+              "return": {
+                "type": "String",
+                "desc": "actionKey"
+              }
+            },
+            {
+              "name": "_onTap",
+              "description": "Routes taps inside the dialog to the known action methods `cancel`, `close` and `confirm` if an element was\nclicked with known `dialog-[type]` value. Returns a boolean whether the event was handled.",
+              "privacy": "protected",
+              "sourceRange": {
+                "start": {
+                  "line": 143,
+                  "column": 4
+                },
+                "end": {
+                  "line": 153,
+                  "column": 5
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "event",
+                  "type": "Event"
+                }
+              ],
+              "return": {
+                "type": "boolean",
+                "desc": "handled"
+              }
+            }
+          ],
+          "staticMethods": [],
+          "demos": [
+            {
+              "url": "demo/index.html",
+              "description": ""
+            }
+          ],
+          "metadata": {},
+          "sourceRange": {
+            "start": {
+              "line": 14,
+              "column": 2
+            },
+            "end": {
+              "line": 155,
+              "column": 3
+            }
+          },
+          "privacy": "public",
+          "superclass": "HTMLElement",
+          "name": "Exmg.DialogElement",
+          "attributes": [
+            {
+              "name": "closing-reason",
+              "description": "Contains the reason(s) this overlay was last closed. Provides the `canceled` and `confirmed` reasons.",
+              "sourceRange": {
+                "start": {
+                  "line": 41,
+                  "column": 8
+                },
+                "end": {
+                  "line": 50,
+                  "column": 9
+                }
+              },
+              "metadata": {},
+              "type": "Object"
+            }
+          ],
+          "events": [],
+          "styling": {
+            "cssVariables": [],
+            "selectors": []
+          },
+          "slots": [],
+          "tagname": "exmg-dialog"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>exmg-dialog demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../iron-overlay/iron-overlay-container.html">
+    <link rel="import" href="../../paper-button/paper-button.html">
+    <link rel="import" href="../exmg-dialog.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      .box {
+        padding: 20px 20px 5px;
+        background: white;
+        max-width: 480px;
+      }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic dialog example</h3>
+      <demo-snippet>
+        <template>
+
+          <exmg-dialog id="exmgDialog" animated with-backdrop>
+            <template>
+              <div class="box">
+                <p>
+                  A dialog with three close buttons. Canceling a dialog will fire an `iron-overlay-canceled` event
+                  which may be prevented to stop the overlay from closing. Similarly, confirm will fire a preventable
+                  `iron-overlay-confirmed` event.
+                </p>
+                <p>
+                  Regardless of the button pressed, an `iron-overlay-closed` event is fired when a dialog is fully
+                  closed (including animations) with the event's details property containing `canceled` and `confirmed`
+                  booleans to indicate the user's intent.
+                <p>
+                <p>
+                  <paper-button raised dialog-cancel>cancel</paper-button>
+                  <paper-button raised dialog-close>close</paper-button>
+                  <paper-button raised dialog-confirm>confirm</paper-button>
+                </p>
+              </div>
+            </template>
+          </exmg-dialog>
+
+          <p>
+            <a href="#" onclick="exmgDialog.open();">Click to open this dialog</a>
+          </p>
+
+          <!--
+            exmg-dialog elements are rendered in an iron-overlay-container. Include it in the body or your main app
+            node to ensure overlays and dialogs overlay any other content.
+          -->
+          <iron-overlay-container></iron-overlay-container>
+
+        </template>
+      </demo-snippet>
+
+      <h3>Form validation example</h3>
+      <demo-snippet>
+        <template>
+
+          <exmg-dialog id="formDialog" animated with-backdrop>
+            <template>
+              <div class="box">
+                <form id="demoForm">
+                  <p>
+                    The form input in this dialog MUST be valid before the dialog is allowed to close. To accomplish
+                    this, the form's `submit` event is monitored, and the dialog is only closed (with a manual
+                     `.confirm()` call) if the form validates.
+                  </p>
+                  <p>
+                    <label>Required input: </label>
+                    <input type="text" required placeholder="Enter a value">
+                  </p>
+                  <p>
+                    <paper-button raised dialog-cancel>cancel</paper-button>
+                    <paper-button raised submit>submit</paper-button>
+                  </p>
+                </form>
+              </div>
+
+              <script>
+              // set up some basic demo-grade event handling.
+              let dialog = document.querySelector('#formDialog');
+              let frm = document.querySelector('#demoForm');
+              let btn = frm.querySelector('[submit]');
+
+              function handleSubmit(e) {
+                e.preventDefault();
+                if (!frm.checkValidity()) {
+                  frm.reportValidity();
+                } else {
+                  // submit the form ...
+                  dialog.confirm();
+                }
+              }
+
+              // polymer event attributes don't work in a demo-snippet, bind ye olde way.
+              btn.addEventListener('click', e => handleSubmit(e));
+              frm.addEventListener('submit', e => handleSubmit(e));
+              </script>
+            </template>
+          </exmg-dialog>
+
+          <p>
+            <a href="#" onclick="formDialog.open();">Click to open this dialog</a>
+          </p>
+
+          <iron-overlay-container></iron-overlay-container>
+        </template>
+      </demo-snippet>
+
+      <h3>Conditional confirm example</h3>
+      <demo-snippet>
+        <template>
+
+          <exmg-dialog id="conditionalDialog" animated with-backdrop>
+            <template>
+              <div class="box">
+                  <p>
+                    <label>Allow this dialog to close: </label>
+                    <input type="checkbox" id="allowCheck">
+                  </p>
+                  <p>
+                    <paper-button raised dialog-confirm>close</paper-button>
+                  </p>
+              </div>
+
+              <script>
+              let conditional = document.querySelector('#conditionalDialog');
+              conditional.addEventListener('iron-overlay-confirmed', e => {
+                let check = document.querySelector('#allowCheck');
+                if (!check.checked) {
+                  e.preventDefault();
+                }
+              });
+              </script>
+            </template>
+          </exmg-dialog>
+
+          <p>
+            <a href="#" onclick="conditionalDialog.open();">Click to open this dialog</a>
+          </p>
+
+          <iron-overlay-container></iron-overlay-container>
+        </template>
+      </demo-snippet>
+
+      </script>
+
+
+    </div>
+  </body>
+</html>

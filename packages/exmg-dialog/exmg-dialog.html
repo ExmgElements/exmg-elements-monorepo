@@ -1,0 +1,204 @@
+<link rel="import" href="../iron-overlay/iron-overlay.html">
+<script>
+'use strict';
+{
+  /**
+   * The `<exmg-dialog>' component extends IronOverlay (see https://github.com/PolymerLabs/iron-overlay/) and
+   * further simplifies UI dialog flow by providing some common features, hooks and convenience methods to show, hide
+   * and react to actions from within dialogs.
+   *
+   * @customElement
+   * @polymer
+   * @memberof Exmg
+   * @demo demo/index.html
+   */
+  class DialogElement extends Polymer.IronOverlay {
+    constructor() {
+      super();
+
+      this.__actions = Object.values(DialogElement.actions);
+      this.__actionKeys = Object.keys(DialogElement.actions);
+    }
+
+    static get is() {
+      return 'exmg-dialog';
+    }
+
+    /**
+     * Actions known to this dialog class. The key must be implemented as a function. The value may be used as an
+     * action attribute on buttons, which will then automatically call the associated action function when clicked.
+     */
+    static get actions() {
+      return {
+        cancel: 'dialog-cancel',
+        close: 'dialog-close',
+        confirm: 'dialog-confirm'
+      };
+    }
+
+    static get properties() {
+      return {
+        /**
+         * Contains the reason(s) this overlay was last closed. Provides the `canceled` and `confirmed` reasons.
+         */
+        closingReason: {
+          type: Object,
+          readOnly: true,
+          value: () => {
+            return {
+              canceled: false,
+              confirmed: false
+            };
+          }
+        }
+      };
+    }
+
+    /**
+     * Toggles the `opened` state and may optionally set the `closingReason`'s `canceled` and `confirmed` booleans as
+     * passed to the details object of the `exmg-dialog-closed` event.
+     *
+     * @param {boolean} opened
+     * @param {boolean} canceled
+     * @param {boolean} confirmed
+     */
+    _toggle(opened, canceled, confirmed) {
+      this.opened = opened;
+      const reason = this.closingReason;
+      reason.canceled = Boolean(canceled);
+      reason.confirmed = Boolean(confirmed);
+    }
+
+    /**
+     * Overruled IronOverlay's _cancel to route it through public `cancel` and `_toggle` for consistency.
+     *
+     * @param {Event} event
+     */
+    _cancel(event) {
+      this.cancel(event);
+    }
+
+    /**
+     * Closes this dialog with closingReason.canceled set to true. Automatically called for buttons in this dialog
+     * that have a `dialog-cancel` attribute. This functions fires an `iron-overlay-canceled` event which may be
+     * prevented to keep the dialog from closing.
+     */
+    cancel(event = {}) {
+      const cancelEvent = this._fire('iron-overlay-canceled', event, {
+        cancelable: true
+      });
+      if (!cancelEvent.defaultPrevented) {
+        this._toggle(false, true, false);
+      }
+    }
+
+    /**
+     * Closes this dialog without an explicit cancel or confirm. Automatically called for buttons in this dialog
+     * that have a `dialog-close` attribute.
+     */
+    close() {
+      this._toggle(false);
+    }
+
+    /**
+     * Closes this dialog with closingReason.confirmed set to true. Automatically called for buttons in this dialog
+     * that have a `dialog-confirm` attribute. This function fires an `iron-overlay-confirmed` event which may be
+     * prevented to keep the dialog from closing.
+     */
+    confirm(event = {}) {
+      const confirmEvent = this._fire('iron-overlay-confirmed', event, {
+        cancelable: true
+      });
+      if (!confirmEvent.defaultPrevented) {
+        this._toggle(false, false, true);
+      }
+    }
+
+    /**
+     * Returns a boolean indicating whether the node defines a known `DialogElement.actions` attribute value.
+     *
+     * @param {Node} node
+     * @return {boolean} hasAction
+     */
+    _hasAction(node) {
+      return node.hasAttribute &&
+        this.__actions.some(attr => node.hasAttribute(attr));
+    }
+
+    /**
+     * Returns the action name of this node based on the presence of a known action attribute.
+     *
+     * @param {Node} node
+     * @return {String} actionKey
+     */
+    _getAction(node) {
+      return this.__actionKeys.find(key =>
+        node.hasAttribute(DialogElement.actions[key]));
+    }
+
+    /**
+     * Routes taps inside the dialog to the known action methods `cancel`, `close` and `confirm` if an element was
+     * clicked with known `dialog-[type]` value. Returns a boolean whether the event was handled.
+     *
+     * @param {Event} event
+     * @return {boolean} handled
+     */
+    _onTap(event) {
+      if (!this._isTapOutside(event)) {
+        const node = event.composedPath().find(item => this._hasAction(item));
+        const action = node ? this._getAction(node) : false;
+        if (action && (typeof this[action] === 'function')) {
+          this[action].call(this, event);
+        }
+      }
+
+      return super._onTap(event);
+    }
+
+  }
+
+  window.customElements.define(DialogElement.is, DialogElement);
+
+  /**
+   * Fired when the dialog should be attached to the document. Prevent to perform a custom insert of the dialog.
+   * @event iron-overlay-attach
+   * @param {Event} event
+   */
+
+  /**
+   * Fired immediately before the dialog is detached from the document.
+   * @event iron-overlay-detach
+   * @param {Event} event
+   */
+
+  /**
+   * Fired when the dialog is canceled, but before it is closed. Prevent to prevent the dialog from closing.
+   * @event iron-overlay-canceled
+   * @param {Event} event
+   */
+
+  /**
+   * Fired when the dialog is confirmed, but before it is closed. Prevent to prevent the dialog from closing.
+   * @event iron-overlay-confirmed
+   * @param {Event} event
+   */
+
+  /**
+   * Fired after the dialog has been fully opened, including any transitions.
+   * @event iron-overlay-opened
+   */
+
+  /**
+   * Fired after the dialog has been fully closed, including transitions. The event's `detail` is the `closingReason`
+   * property, and states whether the dialog has been canceled or confirmed.
+   * @event iron-overlay-closed
+   * @param {Event} event
+   */
+
+  /**
+   * @namespace Exmg
+   */
+  window.Exmg = window.Exmg || {};
+  Exmg.DialogElement = DialogElement;
+}
+</script>
