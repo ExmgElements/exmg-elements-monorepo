@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+  <title>exmg-form test</title>
+
+  <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <script src="../node_modules/@polymer/test-fixture/test-fixture.js"></script>
+  <script src="../node_modules/web-animations-js/web-animations-next-lite.min.js"></script>
+  <script src="../node_modules/mocha/mocha.js"></script>
+  <script src="../node_modules/chai/chai.js"></script>
+  <script src="../node_modules/wct-mocha/wct-mocha.js"></script>
+
+  <script type="module" src="../exmg-form.js"></script>
+</head>
+<body>
+  <script type="module">
+    import '@polymer/paper-input/paper-input.js';
+  </script>
+  <test-fixture id="ExmgFormBasicElement">
+    <template>
+      <exmg-form>
+        <paper-input name="field1" value="" required></paper-input>
+        <paper-input name="field2" value="test2"></paper-input>
+      </exmg-form>
+    </template>
+  </test-fixture>
+  <script type="module" src="exmg-form.spec.js"></script>
+</body>
+</html>
