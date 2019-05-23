@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>exmg-paper-card demo</title>
+
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
+    <script type="module" src="../node_modules/@polymer/iron-flex-layout/iron-flex-layout.js"></script>
+    <script type="module" src="../node_modules/@polymer/paper-button/paper-button.js"></script>
+    <script type="module" src="../node_modules/@polymer/paper-icon-button/paper-icon-button.js"></script>
+    <script type="module" src="../node_modules/@polymer/paper-styles/paper-styles.js"></script>
+
+    <script type="module" src="../node_modules/@exmg/exmg-paper-datatable/exmg-paper-datatable.js"></script>
+    <script type="module" src="../node_modules/@exmg/exmg-paper-datatable/exmg-paper-thead.js"></script>
+    <script type="module" src="../node_modules/@exmg/exmg-paper-datatable/exmg-paper-tbody.js"></script>
+    <script type="module" src="../node_modules/@exmg/exmg-paper-datatable/exmg-paper-icons.js"></script>
+    import {sharedButtonStyles} from '@exmg/exmg-cms-styles/exmg-cms-button-styles.js';
+
+    <script type="module" src="../exmg-paper-card.js"></script>
+    <script type="module" src="../exmg-paper-search-header.js"></script>
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+        :host {
+          @apply --paper-font-common-base;
+          font-size: 14px;
+        }
+        .centered {
+          max-width: 900px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .flex {
+          @apply --layout-flex;
+        }
+        .header paper-button {
+          color: var(--text-primary-color);
+          background-color: var(--primary-color);
+          padding: 8px 20px;
+        }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+   <div class="vertical-section-container centered">
+      <h3>Basic</h3>
+      <demo-snippet>
+        <template>
+          <exmg-paper-card>
+            <div class="body">Lorem ipsum dolor sit amet, dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</div>
+          </exmg-paper-card>
+        </template>
+      </demo-snippet>
+
+      <h3>Header</h3>
+      <demo-snippet>
+        <template>
+          <exmg-paper-card>
+            <div class="header">
+              <span class="flex"></span>
+              <paper-button raised="">Action</paper-button>
+            </div>
+            <div class="body">Lorem ipsum dolor sit amet, dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. <a href="#" target="_blank">More information</a></div>
+          </exmg-paper-card>
+        </template>
+      </demo-snippet>
+
+      <h3>Table</h3>
+      <demo-snippet>
+        <template>
+          <exmg-paper-card>
+            <exmg-paper-datatable>
+              <!-- THead -->
+              <exmg-paper-thead>
+                <template>
+                  <div class="tr">
+                    <div class="th flex"><span>Name</span></div>
+                    <div class="th flex"><span>Email</span></div>
+                    <div class="th flex"><span>Country</span></div>
+                    <div class="th flex-right flex-none" style="width: 120px"><span></span></div>
+                  </div>
+                </template>
+              </exmg-paper-thead>
+              <!-- TBody -->
+              <exmg-paper-tbody items="[{&quot;name&quot;: &quot;Mark&quot;, &quot;email&quot;: &quot;mark@test.com&quot;,&quot;country&quot;: &quot;Netherlands&quot;}, {&quot;name&quot;: &quot;Jesse&quot;, &quot;email&quot;: &quot;jesse@test.com&quot;,&quot;country&quot;: &quot;Netherlands&quot;}]">
+                <template>
+                  <div class="tr">
+                    <div class="td flex"><span>[[item.name]]</span></div>
+                    <div class="td flex"><span>[[item.email]]</span></div>
+                    <div class="td flex"><span>[[item.country]]</span></div>
+                    <div class="td flex-right flex-none" style="width: 120px">
+                      <span>
+                        <span><paper-icon-button icon="exmg-paper-icons:content-copy" on-tap="_stopTap"></paper-icon-button></span>
+                        <span><paper-icon-button icon="exmg-paper-icons:more-vert" on-tap="_stopTap"></paper-icon-button></span>
+                      </span>
+                    </div>
+                  </div>
+                </template>
+              </exmg-paper-tbody>
+            </exmg-paper-datatable>
+          </exmg-paper-card>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>
