@@ -1,7 +1,7 @@
 {
   "name": "@exmg/exmg-paper-datatable",
   "flat": true,
-  "version": "3.0.5",
+  "version": "3.0.6-test241.0",
   "description": "Material design data table (Polymer 3.0)",
   "contributors": [
     "Ex Machina Group"

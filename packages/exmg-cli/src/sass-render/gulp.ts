@@ -43,7 +43,7 @@ exports.registerTasks = (
   gulp: GulpClient.Gulp,
   filesPattern: string,
   template: string  = './node_modules/@exmg/exmg-cli/sass-render/sass-template.tpl',
-  newFileSuffix = '.ts'
+  newFileSuffix: string = '.ts'
 ) => {
 
   gulp.task('render-styles', (done: Function) => {
