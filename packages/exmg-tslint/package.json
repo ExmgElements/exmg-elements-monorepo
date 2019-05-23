@@ -1,0 +1,24 @@
+{
+  "name": "tslint-config-exmg",
+  "version": "1.0.2",
+  "description": "TSLint shareable config for the Exmg Projects",
+  "license": "Apache-2.0",
+  "homepage": "https://git@github.com/ExmgElements/exmg-tslint.git/#readme",
+  "keywords": [
+    "exmg",
+    "tslint",
+    "typescript"
+  ],
+  "main": "tslint.js",
+  "dependencies": {
+    "tslint-config-airbnb": "^5.11.1"
+  },
+  "peerDependencies": {
+    "tslint": "^5.12.1",
+    "typescript": "^3.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ExmgElements/exmg-tslint.git"
+  }
+}
