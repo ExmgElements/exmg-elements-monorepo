@@ -1,0 +1,79 @@
+{
+  "name": "@exmg/exmg-markdown-editor",
+  "flat": true,
+  "version": "4.5.0",
+  "description": "Element that wrap-around marked-element to make the markdown editable",
+  "main": "exmg-markdown-editor.js",
+  "contributors": [
+    "Ex Machina Group"
+  ],
+  "keywords": [
+    "web-components",
+    "polymer",
+    "typescript",
+    "lit-elemnt",
+    "markdown",
+    "editor",
+    "wysiwyg"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:ExmgElements/exmg-markdown-editor.git"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/ExmgElements/exmg-markdown-editor",
+  "files": [
+    "exmg-*.js",
+    "exmg-*.d.ts"
+  ],
+  "dependencies": {
+    "@polymer/iron-flex-layout": "^3.0.1",
+    "@polymer/iron-icon": "^3.0.1",
+    "@polymer/iron-iconset-svg": "^3.0.1",
+    "@polymer/polymer": "^3.2.0",
+    "codemirror": "5.45.0",
+    "lit-element": "^2.1.0",
+    "@polymer/marked-element": "^3.0.1"
+  },
+  "devDependencies": {
+    "@polymer/iron-demo-helpers": "^3.1.0",
+    "@polymer/paper-styles": "^3.0.1",
+    "@polymer/test-fixture": "^4.0.2",
+    "@types/chai": "^4.1.7",
+    "@types/codemirror": "^0.0.72",
+    "@types/mocha": "^5.2.6",
+    "@types/polymer": "^1.2.7",
+    "@webcomponents/webcomponentsjs": "^2.2.7",
+    "chai": "^4.2.0",
+    "github-markdown-css": "^3.0.1",
+    "gulp": "^4.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-replace": "^1.0.0",
+    "mocha": "^5.2.0",
+    "tslint": "^5.14.0",
+    "tslint-config-exmg": "^1.0.2",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.3.4000",
+    "wct-mocha": "^1.0.0"
+  },
+  "resolutions": {
+    "@polymer/polymer": "3.1.0"
+  },
+  "scripts": {
+    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts",
+    "build": "npm run lint && npm run tsc",
+    "tsc": "tsc -b ./tsconfig.json",
+    "prepublishOnly": "npm run build",
+    "preversion": "npm run build",
+    "start": "gulp serve",
+    "lint-src": "tslint -c ./tslint.json --project ./",
+    "lint-test": "tslint -c ./test/tslint.json --project ./",
+    "lint": "npm run lint-src && npm run lint-test",
+    "test-dev": "polymer test --npm -l chrome -p",
+    "test": "polymer test --npm --expanded",
+    "test:integration": "polymer build # test that psk builds without error with the CLI"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
