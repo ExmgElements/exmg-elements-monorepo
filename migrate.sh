@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 github_org=ExmgElements
-my_repos="exmg-paper-token-input exmg-dialogs exmg-button exmg-paper-combobox"
+#my_repos="exmg-paper-token-input exmg-dialogs exmg-button exmg-paper-combobox"
+my_repos="exmg-form exmg-copy-to-clipboard exmg-cms-styles exmg-markdown-editor exmg-radio-group exmg-sortable exmg-cli exmg-paper-sidemenu exmg-swagger-client exmg-snackbars exmg-tslint exmg-date-format exmg-paper-datatable exmg-paper-stepper exmg-long-ago exmg-paper-card exmg-web-socket exmg-paper-tooltip exmg-ckeditor exmg-dialog"
 src_dir=packages
 git checkout -b monorepo-migration
 for repo in $(echo $my_repos); do
