@@ -1,0 +1,48 @@
+{
+  "name": "@exmg/exmg-swagger-client",
+  "flat": true,
+  "version": "3.0.2",
+  "description": "Element for using Swagger 2.0 generated API",
+  "contributors": [
+    "Ex Machina Group"
+  ],
+  "keywords": [
+    "web-components",
+    "polymer",
+    "swagger",
+    "swagger-client"
+  ],
+  "main": "exmg-swagger-client.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ExmgElements/exmg-swagger-client.git"
+  },
+  "license": "MIT",
+  "homepage": "http://exmg.github.io/ExmgElements/exmg-swagger-client/",
+  "dependencies": {
+    "@polymer/polymer": "^3.0.5"
+  },
+  "devDependencies": {
+    "@polymer/iron-ajax": "^3.0.0-pre.26",
+    "@polymer/iron-component-page": "^3.0.0-pre.21",
+    "@polymer/iron-demo-helpers": "^3.0.1",
+    "@polymer/iron-flex-layout": "^3.0.0-pre.26",
+    "@polymer/iron-form": "^3.0.0-pre.26",
+    "@polymer/iron-input": "^3.0.0-pre.26",
+    "@polymer/iron-pages": "^3.0.0-pre.26",
+    "@polymer/paper-card": "^3.0.0-pre.26",
+    "@polymer/paper-styles": "^3.0.0-pre.26",
+    "@polymer/paper-tabs": "^3.0.0-pre.26",
+    "@webcomponents/webcomponentsjs": "^2.1.1",
+    "eslint": "^4.11.0",
+    "eslint-config-exmg": "latest",
+    "eslint-plugin-html": "^3.0.0",
+    "fetch-mock": "^5.13.1",
+    "wct-browser-legacy": "^1.0.1"
+  },
+  "scripts": {
+    "lint": "polymer lint --rules polymer-3 --input *.js",
+    "eslint": "eslint . --ext js,html --ignore-path .gitignore",
+    "analyze": "polymer analyze --input exmg-swagger-client.js exmg-swagger-config.js exmg-swagger-common.js > analysis.json"
+  }
+}
