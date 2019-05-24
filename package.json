@@ -24,6 +24,8 @@
     "web-animations-js": "^2.3.1"
   },
   "scripts": {
-    "install:all": "lerna run bootstrap --parallel --no-bail"
+    "install:all": "lerna run bootstrap --parallel --no-bail",
+    "lerna:clean:bootstrap": "node ./scripts/pre-bootstrap-packages.js && lerna bootstrap",
+    "lerna:bootstrap": "lerna bootstrap"
   }
 }
