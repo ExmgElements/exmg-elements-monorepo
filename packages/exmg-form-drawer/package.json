@@ -24,6 +24,7 @@
   "dependencies": {
     "@exmg/exmg-button": "0.0.3",
     "@polymer/paper-dialog": "^3.0.1",
+    "@material/typography": "^2.3.0",
     "lit-element": "^2.1.0"
   },
   "devDependencies": {
