@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>exmg-cms-breadcrumbs demo</title>
+
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/@webcomponents/shadycss/apply-shim.min.js"></script>
+
+    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
+
+
+    <script type="module" src="../exmg-cms-breadcrumbs.js"></script>
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles"></style>
+    </custom-style>
+
+    <style>
+      button {
+        background-color: #008CBA;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+      }
+
+      demo-snippet {
+        width: 900px;
+      }
+
+      exmg-cms-breadcrumbs.hasCustomColours {
+        background-color: blueviolet;
+        color: bisque;
+      }
+      exmg-cms-breadcrumbs.hasCustomSeparatorSize {
+        --breadcrumbs-item-separator-size: 48px;
+        height: 100px;
+      }
+      exmg-cms-breadcrumbs.hasCustomOpacityInactiveLinks {
+        --breadcrumbs-item-link-inactive-opacity: 0.9;
+      }
+
+      #breadcrumbsWithMaterialDesignTheme {
+        --mdc-theme-primary: purple;
+        --mdc-theme-on-primary: #fff;
+      }
+
+      :root {
+        --breadcrumbs-item-separator-background-url: url('/demo/custom-separator.svg');
+      }
+    </style>
+
+    <script type="text/javascript">
+      function reset() {
+        const values = Array.from(document.querySelectorAll('#themeControls input[type="checkbox"]'))
+          .map(element => element.name);
+
+        const element = document.querySelector('#breadcrumbsWithTheme');
+        element.classList.remove(...values);
+
+        Array.from(document.querySelectorAll('#themeControls input[type="checkbox"]')).forEach(checkbox => checkbox.checked = false);
+      }
+
+      function onThemeControlUpdated() {
+        const values = Array.from(document.querySelectorAll('#themeControls input[type="checkbox"]'));
+        const valuesToAdd = values
+          .filter(element => element.checked)
+          .map(element => element.name);
+        const valuesToRemove = values
+          .filter(element => !element.checked)
+          .map(element => element.name);
+
+        const element = document.querySelector('#breadcrumbsWithTheme');
+        element.classList.remove(...valuesToRemove);
+        element.classList.add(...valuesToAdd);
+      }
+
+      window.addEventListener('load', () => {
+        Array.from(document.querySelectorAll('exmg-cms-breadcrumbs')).forEach(element => {
+          element.items = [
+            {href: '#', content: 'First Item', selected: false},
+            {href: 'https://google.com', content: 'Second (disabled) Item', selected: false, disabled: true},
+            {href: '#', content: 'Third Item', selected: false},
+            {href: '#', content: 'Fourth Item', selected: false},
+            {href: '#', content: 'Fifth Item', selected: true},
+          ];
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic exmg-cms-breadcrumbs</h3>
+      <demo-snippet>
+        <template>
+          <exmg-cms-breadcrumbs></exmg-cms-breadcrumbs>
+        </template>
+      </demo-snippet>
+
+      <h3>Inline styled exmg-cms-breadcrumbs</h3>
+      <demo-snippet>
+        <template>
+          <exmg-cms-breadcrumbs
+            style="height: 100px; color: black; background-color: burlywood;"
+          ></exmg-cms-breadcrumbs>
+        </template>
+      </demo-snippet>
+
+      <h3>Theme exmg-cms-breadcrumbs</h3>
+      <div id="themeControls" style="margin-bottom: 10px;">
+        <h2>Change breadcrumbs theme</h2>
+        <p>Custom colors: <input type="checkbox" name="hasCustomColours" onchange="onThemeControlUpdated()"/></p>
+        <p>Custom separator size: <input type="checkbox" name="hasCustomSeparatorSize" onchange="onThemeControlUpdated()"/></p>
+        <p>Custom opacity: <input type="checkbox" name="hasCustomOpacityInactiveLinks" onchange="onThemeControlUpdated()"/></p>
+        <button onclick="reset()" >Reset</button>
+      </div>
+      <demo-snippet>
+        <template>
+          <exmg-cms-breadcrumbs id="breadcrumbsWithTheme"></exmg-cms-breadcrumbs>
+        </template>
+      </demo-snippet>
+
+      <h3>Use material design colors</h3>
+      <demo-snippet>
+        <template>
+          <exmg-cms-breadcrumbs id="breadcrumbsWithMaterialDesignTheme"></exmg-cms-breadcrumbs>
+        </template>
+      </demo-snippet>
+
+      <h3>Limited exmg-cms-breadcrumbs</h3>
+      <demo-snippet>
+        <template>
+          <exmg-cms-breadcrumbs limit="3"></exmg-cms-breadcrumbs>
+        </template>
+      </demo-snippet>
+
+      <h3>Custom text separator exmg-cms-breadcrumbs</h3>
+      <demo-snippet>
+        <template>
+          <exmg-cms-breadcrumbs separator-text="/"></exmg-cms-breadcrumbs>
+        </template>
+      </demo-snippet>
+
+      <h3>Custom icon separator exmg-cms-breadcrumbs</h3>
+      <demo-snippet>
+        <template>
+          <exmg-cms-breadcrumbs has-custom-separator></exmg-cms-breadcrumbs>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>
