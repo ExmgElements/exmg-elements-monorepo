@@ -6,7 +6,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "declaration": true,
-    "lib": ["es2017", "DOM"],
+    "lib": ["es2017", "dom"],
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
