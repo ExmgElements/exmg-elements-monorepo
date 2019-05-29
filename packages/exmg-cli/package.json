@@ -13,10 +13,14 @@
     "cli"
   ],
   "main": "src/sass-render/index.js",
+  "bin": {
+    "exmg-cli-sass-render": "./bin/exmg-cli-sass-render"
+  },
   "files": [
     "src/**/*.js",
     "src/**/*.d.ts",
-    "src/**/*.tpl"
+    "src/**/*.tpl",
+    "bin"
   ],
   "repository": {
     "type": "git",
