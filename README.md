@@ -10,7 +10,11 @@ npm i -g lerna
 
 ## this command remove node_modules and package-lock.json from packages/* and do execute lerna bootstrap
 npm run lerna:clean:bootstrap
+
+## Run a individual package including stream option for output
+lerna run start --scope  @exmg/exmg-dialogs --stream 
 ```
+
 ## COMMANDS
 ### NPM
 - `npm run lerna:clean:bootstrap` - remove node_modules and package-lock.json from packages/*
