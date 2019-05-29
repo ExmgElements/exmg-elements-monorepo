@@ -1,0 +1,89 @@
+{
+  "name": "@exmg/exmg-grid",
+  "flat": true,
+  "version": "0.0.16",
+  "description": "exmg grid element",
+  "contributors": [
+    "Ex Machina"
+  ],
+  "keywords": [
+    "web-components",
+    "polymer",
+    "lit-element",
+    "grid"
+  ],
+  "main": "exmg-grid.js",
+  "files": [
+    "assets/*",
+    "src/**/*.scss",
+    "src/**/exmg-*.js",
+    "src/**/exmg-*.d.ts",
+    "index.js",
+    "index.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/exmachina/exmg-grid.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@exmg/exmg-button": "^0.0.3",
+    "@exmg/exmg-paper-combobox": "^4.6.0",
+    "@exmg/exmg-sortable": "^4.0.3",
+    "@material/list": "^2.1.1",
+    "@material/theme": "^1.1.0",
+    "@material/typography": "^1.0.0",
+    "@material/menu": "^2.2.0",
+    "@material/mwc-base": "^0.5.0",
+    "@material/mwc-icon": "^0.5.0",
+    "@material/mwc-checkbox": "^0.5.0",
+    "@polymer/paper-item": "^3.0.1",
+    "@polymer/polymer": "^3.2.0",
+    "lit-element": "^2.1.0"
+  },
+  "devDependencies": {
+    "@exmg/exmg-cli": "^1.0.0",
+    "@polymer/iron-component-page": "^4.0.1",
+    "@polymer/iron-demo-helpers": "^3.1.0",
+    "@polymer/test-fixture": "^4.0.2",
+    "@polymer/paper-checkbox": "^3.1.0",
+    "@types/chai": "^4.1.7",
+    "@types/material-components-web": "^0.43.1",
+    "@types/mocha": "^5.2.6",
+    "@types/polymer": "^1.2.7",
+    "@webcomponents/webcomponentsjs": "^2.2.7",
+    "chai": "^4.2.0",
+    "gulp": "^4.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-replace": "^1.0.0",
+    "mocha": "^5.2.0",
+    "tslint": "^5.14.0",
+    "tslint-config-exmg": "^1.0.2",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.3.4000",
+    "wct-mocha": "^1.0.0",
+    "web-animations-js": "^2.3.1"
+  },
+  "peerDependencies": {
+    "web-animations-js": "^2.3.1",
+    "@webcomponents/webcomponentsjs": "^2.2.7"
+  },
+  "scripts": {
+    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ src/**/*.ts && npm run fix-gen-docs",
+    "fix-gen-docs": "node ./node_modules/@exmg/exmg-cli/src/gen-docs/bin/gen-docs.js ./ -d ./docs -a",
+    "build": "npm run build:styles && npm run lint && npm run tsc",
+    "build:styles": "gulp render-styles",
+    "tsc": "tsc -b ./tsconfig.json",
+    "publishDryRun": "npm publish --dry-run",
+    "prepublishOnly": "npm run build",
+    "preversion": "npm run build",
+    "start": "npm run build:styles && gulp serve",
+    "lint": "tslint -c ./tslint.json --project ./",
+    "test-dev": "polymer test --npm -p  -l chrome",
+    "test": "polymer test --npm --expanded",
+    "test:integration": "polymer build # test that psk builds without error with the CLI"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
