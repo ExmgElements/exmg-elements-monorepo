@@ -14,7 +14,6 @@ import {
   EmptyToolBartConfigItem, isToolBartConfigItem
 } from './exmg-custom-types';
 
-import * as CodeMirror from 'codemirror';
 import Editor = CodeMirror.Editor;
 
 type PrivateProps = 'toolbarButtonsConfig';
