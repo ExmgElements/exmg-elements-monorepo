@@ -19,6 +19,7 @@
 
 const commandLineArgs = require('command-line-args');
 const commandLineUsage = require('command-line-usage');
+const path = require('path');
 const {sassRender: sassRenderCommand} = require('../index.js');
 
 const options = [
@@ -51,6 +52,7 @@ const options = [
 ];
 
 const {source, output, template, help} = commandLineArgs(options);
+const templateOrDefault = template || path.join(__dirname, '../sass-template.tpl');
 
 function printUsage() {
   const sections = [
@@ -71,13 +73,13 @@ if (help) {
   process.exit(0);
 }
 
-if (!(source && template && output)) {
-  console.error('Must provide a source, template, and output file!');
+if (!(source && output)) {
+  console.error('Must provide a source and output file!');
   printUsage();
   process.exit(-1);
 }
 
-sassRenderCommand(source, template, output).catch((err: any) => {
+sassRenderCommand(source, templateOrDefault, output).catch((err: any) => {
   console.error(err);
   process.exit(-1);
 });

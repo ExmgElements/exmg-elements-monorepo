@@ -135,7 +135,8 @@ const gulp = require('gulp');
 const {spawn} = require('child_process');
 const {registerTasks} = require('./node_modules/@exmg/exmg-cli/src/sass-render/gulp');
 
-registerTasks(gulp, 'src/**/*.{scss,css}', './node_modules/@exmg/exmg-cli/src/sass-render/sass-template.tpl', '.ts');
+// template = null will take default value './node_modules/@exmg/exmg-cli/src/sass-render/sass-template.tpl'
+registerTasks(gulp, 'src/**/*.{scss,css}', null, '.ts');
 
 
 gulp.task('serve', () => {
