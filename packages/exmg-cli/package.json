@@ -1,7 +1,7 @@
 {
   "name": "@exmg/exmg-cli",
   "flat": true,
-  "version": "1.0.1-test2411.0",
+  "version": "1.0.0",
   "description": "CLI - scripts used to process and build polymer /  lit-element packages",
   "contributors": [
     "Ex Machina"
