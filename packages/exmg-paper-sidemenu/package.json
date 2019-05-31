@@ -53,8 +53,7 @@
     "start": "gulp serve",
     "lint": "polymer lint --rules polymer-3 --input *.js",
     "eslint": "eslint . --ext js,html --ignore-path .gitignore",
-    "analyze": "polymer analyze --input exmg-paper-sidemenu.js exmg-paper-sidemenu-header.js > analysis.json",
-    "bootstrap": "npm install"
+    "analyze": "polymer analyze --input exmg-paper-sidemenu.js exmg-paper-sidemenu-header.js > analysis.json"
   },
   "publishConfig": {
     "access": "public"

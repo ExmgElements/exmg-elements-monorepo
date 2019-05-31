@@ -9,7 +9,6 @@
     "rimraf": "^2.6.3"
   },
   "scripts": {
-    "install:all": "lerna run bootstrap --parallel --no-bail",
     "lerna:clean:bootstrap": "lerna exec rimraf package-lock.json && lerna clean && lerna bootstrap",
     "clean": "lerna clean",
     "bootstrap": "lerna bootstrap",
