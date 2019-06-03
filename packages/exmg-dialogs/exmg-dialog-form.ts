@@ -1,11 +1,12 @@
 import {customElement, html, LitElement, property, query} from 'lit-element';
 import '@polymer/paper-dialog';
+import '@polymer/paper-dialog-scrollable';
 import '@exmg/exmg-button';
 import '@polymer/iron-form';
-import {style} from './exmg-dialog-styles';
+import {style} from './styles/exmg-dialog-styles';
 
-@customElement('exmg-dialog-confirm')
-export class ExmgConfirmDialog extends LitElement {
+@customElement('exmg-dialog-form')
+export class ExmgFormDialog extends LitElement {
   /**
    * Title of the dialog
    */
@@ -13,16 +14,10 @@ export class ExmgConfirmDialog extends LitElement {
   public title: string = '';
 
   /**
-   * Dialog message to display as confirmation question
-   */
-  @property({type: String})
-  private message: string = '';
-
-  /**
    * Copy for submit button
    */
   @property({type: String, attribute: 'button-copy'})
-  private buttonCopy: string = '';
+  public buttonCopy: string = '';
 
   /**
    * Indicator if submit is in progress This boolean will display the progress
@@ -40,6 +35,9 @@ export class ExmgConfirmDialog extends LitElement {
   @query('#dialog')
   private dialogNode?: HTMLElement | any;
 
+  @query('#form')
+  private formNode?: HTMLElement | any;
+
   @query('#submitBtn')
   private submitBtnNode?: HTMLElement | any;
 
@@ -49,13 +47,15 @@ export class ExmgConfirmDialog extends LitElement {
 
   constructor() {
     super();
-
     this.onCloseDialog = this.onCloseDialog.bind(this);
     this.submit = this.submit.bind(this);
   }
 
-  private onCloseDialog() {
-    this.reset();
+  private onCloseDialog(e: any) {
+    /* only reset form if close event originates from dialog */
+    if (e.path[0].tagName === 'PAPER-DIALOG') {
+      this.reset();
+    }
   }
 
   public open() {
@@ -65,7 +65,7 @@ export class ExmgConfirmDialog extends LitElement {
   }
 
   public close() {
-    if (this.dialogNode) {
+   if (this.dialogNode) {
       this.dialogNode.close();
     }
   }
@@ -76,6 +76,10 @@ export class ExmgConfirmDialog extends LitElement {
 
     if (this.submitBtnNode) {
       this.submitBtnNode.removeAttribute('disabled');
+    }
+
+    if (this.formNode) {
+      this.formNode.reset();
     }
   }
 
@@ -100,9 +104,14 @@ export class ExmgConfirmDialog extends LitElement {
     this.close();
   }
 
-  private submit() {
+  submit() {
     // reset error message on new submit
     this.errorMessage = undefined;
+
+    // Validate form elements
+    if (!this.formNode.validate()) {
+      return;
+    }
 
     // Disabled submit button + display progress bar
     this.submitting = true;
@@ -111,8 +120,8 @@ export class ExmgConfirmDialog extends LitElement {
       this.submitBtnNode.setAttribute('disabled', 'disabled');
     }
 
-    // dispatch event
-    this.dispatchEvent(new CustomEvent('submit', {bubbles: false, composed: true}));
+    // dispatch event containing the serialized form data
+    this.dispatchEvent(new CustomEvent('submit', {bubbles: false, composed: true, detail: this.formNode.serializeForm()}));
   }
 
   protected render() {
@@ -121,17 +130,21 @@ export class ExmgConfirmDialog extends LitElement {
         <header>
           <h2 class="title">${this.title}</h2>
         </header>
-        <div class="body">
-          <div class="error ${ !!this.errorMessage ? 'show' : '' }">
-            <span class="body">
-              <span>
-                <iron-icon icon="exmg-icons:warning"></iron-icon>
+        <paper-dialog-scrollable>
+          <div class="body">
+            <div class="error ${ !!this.errorMessage ? 'show' : '' }">
+              <span class="body">
+                <svg height="24" viewBox="0 0 24 24" width="24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
                 <span class="msg">${this.errorMessage}</span>
               </span>
-            </span>
+            </div>
+            <iron-form id="form">
+              <form>
+                <slot></slot>
+              </form>
+            </iron-form>
           </div>
-          <p>${this.message}</p>
-        </div>
+        </paper-dialog-scrollable>
         <div class="actions">
           <exmg-button dialog-dismiss>Cancel</exmg-button>
           <exmg-button id="submitBtn" @click="${this.submit}" ?loading="${this.submitting}" unelevated>${this.buttonCopy}</exmg-button>

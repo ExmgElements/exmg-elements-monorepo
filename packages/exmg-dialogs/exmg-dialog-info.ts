@@ -2,7 +2,7 @@ import {customElement, html, LitElement, property, query} from 'lit-element';
 import '@polymer/paper-dialog';
 import '@exmg/exmg-button';
 import '@polymer/iron-form';
-import {style} from './exmg-dialog-styles';
+import {style} from './styles/exmg-dialog-styles';
 
 @customElement('exmg-dialog-info')
 export class ExmgInfoDialog extends LitElement {

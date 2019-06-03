@@ -3,9 +3,9 @@
   "version": "4.1.3",
   "main": "index.js",
   "files": [
-    "src/**/*.scss",
-    "src/**/exmg-*.js",
-    "src/**/exmg-*.d.ts",
+    "styles/**/*.scss",
+    "exmg-*.js",
+    "exmg-*.d.ts",
     "index.js",
     "index.d.ts"
   ],

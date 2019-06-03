@@ -1,5 +1,5 @@
 import '@polymer/test-fixture';
-import {ExmgFormDialog} from '../src/exmg-dialog-form';
+import {ExmgFormDialog} from '../exmg-dialog-form';
 import {ExmgButton} from '@exmg/exmg-button';
 
 const {assert} = chai;

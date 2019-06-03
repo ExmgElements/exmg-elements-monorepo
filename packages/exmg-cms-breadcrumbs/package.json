@@ -20,9 +20,11 @@
   },
   "license": "MIT",
   "files": [
-    "styles/*.scss",
+    "styles/**/*.scss",
     "exmg-*.js",
-    "exmg-*.d.ts"
+    "exmg-*.d.ts",
+    "index.js",
+    "index.d.ts"
   ],
   "dependencies": {
     "lit-element": "^2.0.1"
