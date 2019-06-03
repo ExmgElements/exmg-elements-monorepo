@@ -10,7 +10,7 @@ export class ExmgButton extends Button {
   @property({type: Boolean})
   loading = false;
 
-  static styles: any = [ExmgButton.styles, style];
+  static styles: any = [Button.styles, style];
 
   render() {
     const classes = {

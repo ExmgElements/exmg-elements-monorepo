@@ -2,7 +2,7 @@ const gulp = require('gulp');
 const {spawn} = require('child_process');
 const {registerTasks} = require('@exmg/exmg-cli/src/sass-render/gulp');
 
-registerTasks(gulp, '{src,demo}/**/*.{scss,css}', null, '.ts');
+registerTasks(gulp, '{src,demo}/**/*.{scss,css}', './node_modules/@exmg/exmg-cli/src/sass-render/sass-template.tpl', '.ts');
 
 /**
  * Gulp task to run `tsc --watch` and `polymer serve` in parallel.

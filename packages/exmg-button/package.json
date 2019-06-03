@@ -47,16 +47,15 @@
   },
   "scripts": {
     "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts",
-    "build": "npm run build:styles && npm run lint && npm run tsc",
-    "build:styles": "gulp render-styles",
     "tsc": "tsc -b ./tsconfig.json",
+    "lint": "tslint -c ./tslint.json --project ./",
+    "build:styles": "gulp render-styles",
+    "build": "npm run build:styles && lint && tsc",
     "prepublishOnly": "npm run build",
     "preversion": "npm run build",
     "start": "npm run build:styles && gulp serve",
-    "lint": "tslint -c ./tslint.json --project ./",
     "test-dev": "polymer test --npm -p",
-    "test": "polymer test --npm --expanded",
-    "test:integration": "polymer build # test that psk builds without error with the CLI"
+    "test": "polymer test --npm --expanded"
   },
   "publishConfig": {
     "access": "public"
