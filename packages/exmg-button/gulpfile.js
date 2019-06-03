@@ -1,5 +1,5 @@
 const gulp = require('gulp');
-const spawn = require('child_process').spawn;
+const {spawn} = require('child_process');
 const {registerTasks} = require('@exmg/exmg-cli/src/sass-render/gulp');
 
 registerTasks(gulp, '{src,demo}/**/*.{scss,css}', './node_modules/@exmg/exmg-cli/src/sass-render/sass-template.tpl', '.ts');
