@@ -6,8 +6,8 @@ import '@polymer/paper-item/paper-item.js';
 import '@exmg/exmg-paper-combobox/exmg-paper-combobox';
 import '@exmg/exmg-paper-token-input/exmg-paper-token-input';
 import '@exmg/exmg-markdown-editor/exmg-markdown-editor';
-import '../src/exmg-form';
-import {ExmgForm} from '../src/exmg-form';
+import '../exmg-form';
+import {ExmgForm} from '../styles/exmg-form';
 
 @customElement('form-demo')
 export class FormDemo extends LitElement {

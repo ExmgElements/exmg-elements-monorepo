@@ -1,7 +1,7 @@
 import {customElement, html, LitElement, property, PropertyValues, query} from 'lit-element';
 import '@polymer/iron-form';
 import '@exmg/exmg-button';
-import {style} from './exmg-form-styles';
+import {style} from './styles/exmg-form-styles';
 import {IronFormElement} from '@polymer/iron-form/iron-form';
 
 const ENTER_KEY_CODE = 13;

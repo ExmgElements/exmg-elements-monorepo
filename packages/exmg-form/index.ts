@@ -1,2 +1,2 @@
-export * from './src/exmg-form';
-export {style as exmgFormStyles} from './src/exmg-form-styles';
+export * from './exmg-form';
+export {style as exmgFormStyles} from './styles/exmg-form-styles';
