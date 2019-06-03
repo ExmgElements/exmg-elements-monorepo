@@ -1,4 +1,4 @@
-import {ExmgButton} from '../src/exmg-button';
+import {ExmgButton} from '../exmg-button';
 import {promisifyFlush} from './util';
 
 declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;

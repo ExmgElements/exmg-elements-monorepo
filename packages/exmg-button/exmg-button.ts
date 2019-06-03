@@ -1,6 +1,6 @@
 import {html, property, customElement, classMap} from '@material/mwc-base/base-element';
 import {Button} from '@material/mwc-button';
-import {style} from './exmg-button-styles';
+import {style} from './styles/exmg-button-styles';
 import {ripple} from '@material/mwc-ripple/ripple-directive.js';
 import './exmg-spinner';
 

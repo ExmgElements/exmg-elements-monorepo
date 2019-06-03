@@ -1,5 +1,5 @@
 import {html, property, customElement, classMap, LitElement, observer} from '@material/mwc-base/base-element';
-import {style} from './exmg-spinner-styles';
+import {style} from './styles/exmg-spinner-styles';
 
 @customElement('exmg-button-spinner')
 export class ExmgSpinner extends LitElement {
