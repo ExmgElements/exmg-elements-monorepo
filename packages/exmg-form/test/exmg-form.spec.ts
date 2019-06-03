@@ -1,4 +1,4 @@
-import {ExmgForm} from '../exmg-form';
+import {ExmgForm} from '../';
 import {promisifyFlush, onExmgFormCancel, onExmgFormSubmit} from './utils';
 
 declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
