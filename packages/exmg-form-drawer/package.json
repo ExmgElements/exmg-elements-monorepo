@@ -11,14 +11,17 @@
     "polymer",
     "form-drawer"
   ],
-  "main": "exmg-form-drawer.js",
+  "main": "index.js",
   "files": [
+    "styles/**/*.scss",
     "exmg-*.js",
-    "exmg-*.d.ts"
+    "exmg-*.d.ts",
+    "index.js",
+    "index.d.ts"
   ],
   "repository": {
     "type": "git",
-    "url": "git://bitbucket.org:exmachina/exmg-form-drawer.git"
+    "url": "git@github.com:ExmgElements/exmg-elements-monorepo.git"
   },
   "license": "MIT",
   "dependencies": {
@@ -51,24 +54,20 @@
     "wct-mocha": "^1.0.0",
     "web-animations-js": "^2.3.1"
   },
-  "peerDependencies": {
-    "web-animations-js": "^2.3.1",
-    "@webcomponents/webcomponentsjs": "^2.2.8"
-  },
   "scripts": {
     "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts",
-    "build": "npm run build:styles && npm run lint && npm run tsc",
-    "build:styles": "gulp render-styles",
     "tsc": "tsc -b ./tsconfig.json",
+    "lint": "tslint -c ./tslint.json --project ./",
+    "build:styles": "gulp render-styles",
+    "build": "npm run build:styles && npm run lint && npm run tsc",
     "prepublishOnly": "npm run build",
     "preversion": "npm run build",
+    "publishDryRun": "npm publish --dry-run",
     "start": "npm run build:styles && gulp serve",
-    "lint": "tslint -c ./tslint.json --project ./",
     "test-dev": "polymer test --npm -p",
-    "test": "polymer test --npm --expanded",
-    "test:integration": "polymer build # test that psk builds without error with the CLI"
+    "test": "polymer test --npm --expanded"
   },
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   }
 }

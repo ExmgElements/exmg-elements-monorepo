@@ -2,7 +2,7 @@ import {LitElement, html, customElement, property} from 'lit-element';
 import '@polymer/neon-animation/animations/slide-from-right-animation';
 import '@polymer/neon-animation/animations/slide-right-animation';
 import '@polymer/paper-dialog/paper-dialog.js';
-import {style} from './exmg-drawer-styles';
+import {style} from './styles/exmg-drawer-styles';
 
 /**
  * ### Styling
