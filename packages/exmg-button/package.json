@@ -21,7 +21,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/exmachina/exmg-button.git"
+    "url": "git@github.com:ExmgElements/exmg-elements-monorepo.git"
   },
   "license": "MIT",
   "devDependencies": {
@@ -50,9 +50,10 @@
     "tsc": "tsc -b ./tsconfig.json",
     "lint": "tslint -c ./tslint.json --project ./",
     "build:styles": "gulp render-styles",
-    "build": "npm run build:styles && lint && tsc",
+    "build": "npm run build:styles && npm run lint && npm run tsc",
     "prepublishOnly": "npm run build",
     "preversion": "npm run build",
+    "publishDryRun": "npm publish --dry-run",
     "start": "npm run build:styles && gulp serve",
     "test-dev": "polymer test --npm -p",
     "test": "polymer test --npm --expanded"

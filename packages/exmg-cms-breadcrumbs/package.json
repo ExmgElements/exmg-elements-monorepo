@@ -16,10 +16,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:exmachina/exmg-cms-breadcrumbs.git"
+    "url": "git@github.com:ExmgElements/exmg-elements-monorepo.git"
   },
   "license": "MIT",
-  "homepage": "https://bitbucket.org/exmachina/exmg-cms-breadcrumbs",
   "files": [
     "styles/*.scss",
     "exmg-*.js",
@@ -51,18 +50,20 @@
   },
   "scripts": {
     "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts",
-    "build": "npm run build:styles && npm run lint && npm run tsc",
-    "build:styles": "gulp render-styles",
     "tsc": "tsc -b ./tsconfig.json",
+    "lint-src": "tslint -c ./tslint.json --project ./",
+    "lint-test": "tslint -c ./test/tslint.json --project ./",
+    "lint": "npm run lint-src && npm run lint-test",
+    "build:styles": "gulp render-styles",
+    "build": "npm run build:styles && npm run lint && npm run tsc",
     "prepublishOnly": "npm run build",
     "preversion": "npm run build",
     "publishDryRun": "npm publish --dry-run",
     "start": "npm run build:styles && gulp serve",
-    "lint-src": "tslint -c ./tslint.json --project ./",
-    "lint-test": "tslint -c ./test/tslint.json --project ./",
-    "lint": "npm run lint-src && npm run lint-test",
-    "test-dev": "polymer test --npm -l chrome -p",
-    "test": "polymer test --npm --expanded",
-    "test:integration": "polymer build # test that psk builds without error with the CLI"
+    "test-dev": "polymer test --npm -p",
+    "test": "polymer test --npm --expanded"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
