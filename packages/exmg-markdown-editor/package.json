@@ -3,7 +3,7 @@
   "flat": true,
   "version": "4.5.0",
   "description": "Element that wrap-around marked-element to make the markdown editable",
-  "main": "exmg-markdown-editor.js",
+  "main": "index.js",
   "contributors": [
     "Ex Machina Group"
   ],

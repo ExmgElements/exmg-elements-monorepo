@@ -15,14 +15,16 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:ExmgElements/exmg-paper-combobox.git"
+    "url": "git@github.com:ExmgElements/exmg-elements-monorepo.git"
   },
   "license": "MIT",
   "main": "exmg-paper-combobox.js",
   "files": [
     "typings/*",
     "exmg-*.js",
-    "exmg-*.d.ts"
+    "exmg-*.d.ts",
+    "index.js",
+    "index.d.ts"
   ],
   "dependencies": {
     "@polymer/iron-flex-layout": "^3.0.1",
@@ -64,6 +66,7 @@
     "tsc": "tsc -b ./tsconfig.json",
     "prepublishOnly": "npm run build",
     "preversion": "npm run build",
+    "publishDryRun": "npm publish --dry-run",
     "start": "gulp serve",
     "lint-src": "tslint -c ./tslint.json --project ./",
     "lint-test": "tslint -c ./test/tslint.json --project ./",
