@@ -1,6 +1,6 @@
 import {property, customElement, html, LitElement} from 'lit-element';
 import {observer} from '@material/mwc-base/form-element.js';
-import {exmgRadioGroupStyles} from './exmg-radio-group-styles';
+import {style as exmgRadioGroupStyles} from './styles/exmg-radio-group-styles';
 import {ExmgRadioGroupItem} from './exmg-radio-group-item';
 
 @customElement('exmg-radio-group')

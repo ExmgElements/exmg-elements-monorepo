@@ -13,7 +13,7 @@ import {style} from '@material/mwc-radio/mwc-radio-css';
 import {ripple} from '@material/mwc-ripple/ripple-directive';
 import foundation from '@material/radio/foundation';
 import {SelectionController} from './exmg-selection-controller';
-import {style as exmgRadioGroupItemStyles} from './exmg-radio-group-item-styles';
+import {style as exmgRadioGroupItemStyles} from './styles/exmg-radio-group-item-styles';
 
 export interface RadioFoundation extends Foundation {
   setDisabled(disabled: boolean): void;
