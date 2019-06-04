@@ -12,7 +12,7 @@
     "lit-element",
     "grid"
   ],
-  "main": "exmg-grid.js",
+  "main": "index.js",
   "files": [
     "assets/*",
     "src/**/*.scss",
@@ -23,7 +23,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/exmachina/exmg-grid.git"
+    "url": "git@github.com:ExmgElements/exmg-elements-monorepo.git"
   },
   "license": "MIT",
   "dependencies": {
@@ -64,24 +64,19 @@
     "wct-mocha": "^1.0.0",
     "web-animations-js": "^2.3.1"
   },
-  "peerDependencies": {
-    "web-animations-js": "^2.3.1",
-    "@webcomponents/webcomponentsjs": "^2.2.7"
-  },
   "scripts": {
-    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ src/**/*.ts && npm run fix-gen-docs",
     "fix-gen-docs": "node ./node_modules/@exmg/exmg-cli/src/gen-docs/bin/gen-docs.js ./ -d ./docs -a",
-    "build": "npm run build:styles && npm run lint && npm run tsc",
-    "build:styles": "gulp render-styles",
+    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ src/**/*.ts && npm run fix-gen-docs",
     "tsc": "tsc -b ./tsconfig.json",
-    "publishDryRun": "npm publish --dry-run",
+    "lint": "tslint -c ./tslint.json --project ./",
+    "build:styles": "gulp render-styles",
+    "build": "npm run build:styles && npm run lint && npm run tsc",
     "prepublishOnly": "npm run build",
     "preversion": "npm run build",
+    "publishDryRun": "npm publish --dry-run",
     "start": "npm run build:styles && gulp serve",
-    "lint": "tslint -c ./tslint.json --project ./",
-    "test-dev": "polymer test --npm -p  -l chrome",
-    "test": "polymer test --npm --expanded",
-    "test:integration": "polymer build # test that psk builds without error with the CLI"
+    "test-dev": "polymer test --npm -p",
+    "test": "polymer test --npm --expanded"
   },
   "publishConfig": {
     "access": "public"
