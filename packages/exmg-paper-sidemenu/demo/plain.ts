@@ -1,6 +1,6 @@
-import { LitElement, html, css, property, customElement } from 'lit-element';
+import {LitElement, html, css, property, customElement} from 'lit-element';
 import '../exmg-paper-sidemenu.js';
-import { menu } from './menu.js';
+import {menu} from './menu.js';
 
 @customElement('x-demo')
 export class XDemo extends LitElement {

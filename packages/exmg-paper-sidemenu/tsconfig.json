@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./",
     "target": "es2017",
     "module": "esnext",
     "moduleResolution": "node",
@@ -18,5 +20,5 @@
   ],
   "exclude": [
     "node_modules"
-  ],
+  ]
 }
