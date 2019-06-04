@@ -67,11 +67,11 @@
     "tsc": "tsc -b ./tsconfig.json",
     "prepublishOnly": "npm run build",
     "preversion": "npm run build",
+    "publishDryRun": "npm publish --dry-run",
     "start": "gulp serve",
     "lint": "tslint -c ./tslint.json --project ./",
     "test-dev": "polymer test --npm -p",
-    "test": "polymer test --npm --expanded",
-    "test:integration": "polymer build # test that psk builds without error with the CLI"
+    "test": "polymer test --npm --expanded"
   },
   "publishConfig": {
     "access": "public"
