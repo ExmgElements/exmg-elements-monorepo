@@ -1,7 +1,3 @@
-import {html} from 'lit-element';
-
-const codeMirrorStylesDefinition = `
-<style>
   /* BASICS */
   .CodeMirror {
     /* Set height, width, borders, and global font properties here */
@@ -307,11 +303,3 @@ const codeMirrorStylesDefinition = `
   .cm-tab-wrap-hack:after { content: ''; }
   /* Help users use markselection to safely style text background */
   span.CodeMirror-selectedtext { background: none; }
-</style>
-  `;
-
-export const codeMirrorStylesText = codeMirrorStylesDefinition
-  .replace('<style>', '')
-  .replace('</style>', '');
-
-export const codeMirrorStyles = html`${codeMirrorStylesDefinition}`;
