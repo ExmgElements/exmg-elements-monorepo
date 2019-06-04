@@ -269,15 +269,15 @@ Recommended to use dynamic import(&#39;package.js&#39;)</code></pre>
   },
 };</code></pre>
 				<h2 id="pages">Pages</h2>
-				<p>Generally element class should inherit form <code>PageLitElement</code>.
-					That base page class is already connected with store.
-				You can override hook methods:</p>
+				<p>Generally classes which are designed to be a pages in application should inherit form <code>PageLitElement</code>.
+				That base class <code>PageLitElement</code> is already connected with store and provide some hook methods.</p>
+				<p>You can override hook methods:</p>
 				<ul>
 					<li>routeChanged(state: StateWithRouter, prevState: StateWithRouter): void</li>
 				</ul>
 				<p>It is triggered whenever reducer router is updated.</p>
 				<ul>
-					<li>stateChanged*state: StateWithRouter): void</li>
+					<li>stateChanged(state: StateWithRouter): void</li>
 				</ul>
 				<p>It is triggered whenever any reducer update state</p>
 				<p>There is one exception when both hooks will be omitted:
@@ -317,10 +317,10 @@ Recommended to use dynamic import(&#39;package.js&#39;)</code></pre>
 				<h2 id="components-elements">Components/Elements</h2>
 				<p>Next to the Pages we can distinguish components/elements which are not coupled with router directly but needs to be
 					connected with store. In that case you should inherit from <code>ConnectedLitElement</code>.
-					This component inherit from <code>PageLitElement</code>. There is only small difference perhaps hooks <code>routerChanged, stateChanged</code>
+					This component is base class for <code>PageLitElement</code>. There is only small difference perhaps hooks <code>routerChanged, stateChanged</code>
 				should be triggered or not.</p>
 				<ul>
-					<li>stateChanged*state: StateWithRouter): void</li>
+					<li>stateChanged(state: StateWithRouter): void</li>
 				</ul>
 				<p>It is triggered whenever any reducer update state. It is also triggered when routerChanged</p>
 				<ul>

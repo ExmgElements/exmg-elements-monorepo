@@ -18,10 +18,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:exmachina/exmg-lit-router.git"
+    "url": "git@github.com:ExmgElements/exmg-elements-monorepo.git"
   },
   "license": "MIT",
-  "homepage": "https://bitbucket.org/exmachina/exmg-lit-router",
   "files": [
     "typings/*.d.ts",
     "scripts/**/*.js",
@@ -66,7 +65,7 @@
     "wct-mocha": "^1.0.0"
   },
   "scripts": {
-    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ src/**/*.ts && node ./scripts/gen-docs/index.js",
+    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ src/**/*.ts",
     "build": "npm run lint && npm run tsc",
     "tsc": "tsc -b ./tsconfig.json",
     "prepublishOnly": "npm run build",
