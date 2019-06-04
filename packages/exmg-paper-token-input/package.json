@@ -15,12 +15,15 @@
   ],
   "main": "exmg-paper-token-input.js",
   "files": [
+    "styles/**/*.scss",
     "exmg-*.js",
-    "exmg-*.d.ts"
+    "exmg-*.d.ts",
+    "index.js",
+    "index.d.ts"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/ExmgElements/exmg-paper-token-input.git"
+    "url": "git@github.com:ExmgElements/exmg-elements-monorepo.git"
   },
   "license": "MIT",
   "dependencies": {
@@ -38,6 +41,7 @@
     "lit-element": "^2.1.0"
   },
   "devDependencies": {
+    "@exmg/exmg-cli": "^1.0.0",
     "@polymer/iron-component-page": "^4.0.1",
     "@polymer/iron-demo-helpers": "^3.1.0",
     "@polymer/paper-item": "^3.0.1",
@@ -58,23 +62,18 @@
     "wct-mocha": "^1.0.0",
     "web-animations-js": "^2.3.1"
   },
-  "resolutions": {
-    "type-detect": "1.0.0",
-    "supports-color": "3.1.2",
-    "inherits": "2.0.3",
-    "samsam": "1.1.2"
-  },
   "scripts": {
     "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts",
-    "build": "npm run lint && npm run tsc",
     "tsc": "tsc -b ./tsconfig.json",
+    "lint": "tslint -c ./tslint.json --project ./",
+    "build:styles": "gulp render-styles",
+    "build": "npm run build:styles && npm run lint && npm run tsc",
     "prepublishOnly": "npm run build",
     "preversion": "npm run build",
-    "start": "gulp serve",
-    "lint": "tslint -c ./tslint.json --project ./",
-    "test-dev": "polymer test --npm -l chrome -p",
-    "test": "polymer test --npm -l chrome --expanded",
-    "test:integration": "polymer build # test that psk builds without error with the CLI"
+    "publishDryRun": "npm publish --dry-run",
+    "start": "npm run build:styles && gulp serve",
+    "test-dev": "polymer test --npm -p  -l chrome",
+    "test": "polymer test --npm -p  -l chrome"
   },
   "publishConfig": {
     "access": "public"
