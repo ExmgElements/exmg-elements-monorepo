@@ -11,9 +11,6 @@ npm i -g lerna
 ## this command remove node_modules and package-lock.json from packages/* and do execute lerna bootstrap
 npm run lerna:clean:bootstrap
 
-## make sure to build all styles before using
-lerna run build-styles
-
 ## Run a individual package including stream option for output
 lerna run start --scope  @exmg/exmg-dialogs --stream 
 ```

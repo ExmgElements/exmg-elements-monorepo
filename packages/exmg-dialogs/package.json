@@ -34,6 +34,7 @@
     "@polymer/marked-element": "^3.0.0",
     "@polymer/paper-input": "^3.0.0",
     "@polymer/paper-item": "^3.0.0",
+    "@polymer/test-fixture": "^4.0.2",
     "@types/chai": "^4.1.7",
     "@types/material-components-web": "^0.43.1",
     "@types/mocha": "^5.2.6",
