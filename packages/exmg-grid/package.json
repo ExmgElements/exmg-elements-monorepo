@@ -65,6 +65,7 @@
     "web-animations-js": "^2.3.1"
   },
   "scripts": {
+    "package-install": "npm i",
     "fix-gen-docs": "node ./node_modules/@exmg/exmg-cli/src/gen-docs/bin/gen-docs.js ./ -d ./docs -a",
     "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ src/**/*.ts && npm run fix-gen-docs",
     "tsc": "tsc -b ./tsconfig.json",

@@ -53,6 +53,7 @@
     "wct-browser-legacy": "^1.0.0"
   },
   "scripts": {
+    "package-install": "npm i",
     "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts",
     "tsc": "tsc -b ./tsconfig.json",
     "lint": "tslint -c ./tslint.json --project ./",

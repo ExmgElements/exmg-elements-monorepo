@@ -9,7 +9,7 @@
     "rimraf": "^2.6.3"
   },
   "scripts": {
-    "lerna:clean:bootstrap": "lerna exec rimraf package-lock.json && lerna clean && lerna bootstrap",
+    "lerna:clean": "lerna exec rimraf package-lock.json && lerna clean",
     "clean": "lerna clean",
     "bootstrap": "lerna bootstrap",
     "ls": "lerna ls -l"

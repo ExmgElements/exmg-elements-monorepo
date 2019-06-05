@@ -65,6 +65,7 @@
     "wct-mocha": "^1.0.0"
   },
   "scripts": {
+    "package-install": "npm i",
     "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ src/**/*.ts",
     "build": "npm run lint && npm run tsc",
     "tsc": "tsc -b ./tsconfig.json",

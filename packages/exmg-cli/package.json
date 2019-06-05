@@ -52,6 +52,7 @@
     "typescript": "^3.3.3333"
   },
   "scripts": {
+    "package-install": "npm i",
     "start": "gulp serve",
     "build": "npm run lint && npm run tsc",
     "tsc": "tsc -b ./tsconfig.json",
