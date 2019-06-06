@@ -13,6 +13,12 @@ export class ExmgInfoDialog extends LitElement {
   private buttonCopy: string = '';
 
   /**
+   * With close button ?
+   */
+  @property({type: Boolean, attribute: 'with-close-button'})
+  private withCloseButton: boolean = false;
+
+  /**
    * Secondary attribute propagation
    */
   @property({type: Boolean, attribute: 'button-secondary'})
@@ -49,6 +55,7 @@ export class ExmgInfoDialog extends LitElement {
   protected render() {
     return html`
       <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click>
+        ${this.withCloseButton ? html`<span @click=${this.close} class="close-button">✕</span>` : ''}
         <slot></slot>
         <div class="actions">
           <exmg-button id="doneBtn" @click="${this.done}" ?unelevated=${!this.buttonSecondary}>${this.buttonCopy}</exmg-button>

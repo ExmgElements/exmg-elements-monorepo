@@ -83,6 +83,17 @@ p,
 paper-dialog > .actions {
   margin: 18px 0 18px;
 }
+paper-dialog > .close-button {
+  position: absolute;
+  top: -.8rem;
+  right: -.4rem;
+  font-size: 1rem;
+  color: var(--mdc-theme-primary);
+}
+paper-dialog > .close-button:hover {
+  cursor: pointer;
+  color: var(--secondary-text-color);
+}
 :host([submitting]) paper-dialog > .actions {
   margin: 18px 0 14px;
 }

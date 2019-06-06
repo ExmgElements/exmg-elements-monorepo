@@ -20,6 +20,12 @@ export class ExmgFormDialog extends LitElement {
   public buttonCopy: string = '';
 
   /**
+   * With close button ?
+   */
+  @property({type: Boolean, attribute: 'with-close-button'})
+  private withCloseButton: boolean = false;
+
+  /**
    * Indicator if submit is in progress This boolean will display the progress
    * bar at the bottom of the dialog
    */
@@ -127,6 +133,7 @@ export class ExmgFormDialog extends LitElement {
   protected render() {
     return html`
       <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click @iron-overlay-closed="${this.onCloseDialog}">
+        ${this.withCloseButton ? html`<span @click=${this.close} class="close-button">✕</span>` : ''}
         <header>
           <h2 class="title">${this.title}</h2>
         </header>

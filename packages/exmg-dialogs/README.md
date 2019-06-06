@@ -53,6 +53,18 @@ Example of implementation in html
 </exmg-dialog-info>
 ```
 
+Example of implementation in html with close button option
+```html
+<exmg-dialog-info
+  button-copy="Continue"
+  with-close-button
+  @done="${this.done}"
+  >
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.</p>
+</exmg-dialog-info>
+```
+
 Example of how done could be handled
 ```js
 done(e) {
