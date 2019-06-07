@@ -8,7 +8,7 @@ import '@polymer/marked-element/marked-element';
 import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
 
 import './exmg-markdown-editor-icons';
-import {codeMirrorStylesText} from './exmg-markdown-codemirror-styles';
+import {style as codeMirrorStylesText} from './styles/exmg-markdown-codemirror-styles';
 import {
   GenericPropertyValues, ToolBarOption, ToolBarConfigItem,
   EmptyToolBartConfigItem, isToolBartConfigItem

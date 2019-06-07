@@ -1,7 +1,7 @@
 import {customElement, html, LitElement, property, PropertyValues, query} from 'lit-element';
 import '@polymer/iron-form';
 import '@exmg/exmg-button';
-import {exmgFormStyles} from './exmg-form-styles';
+import {style} from './styles/exmg-form-styles';
 import {IronFormElement} from '@polymer/iron-form/iron-form';
 
 const ENTER_KEY_CODE = 13;
@@ -10,6 +10,11 @@ const warningIcon = html`<svg height="24" viewBox="0 0 24 24" width="24"><path d
 
 @customElement('exmg-form')
 export class ExmgForm extends LitElement {
+
+  static styles = [
+    style,
+  ];
+
   @property({type: Boolean, attribute: 'hide-submit-button'})
   public hideSubmitButton: boolean = false;
 
@@ -139,10 +144,6 @@ export class ExmgForm extends LitElement {
       });
     }
   }
-
-  static styles = [
-    exmgFormStyles,
-  ];
 
   private renderCancelButton() {
     return !this.hideCancelButton ?

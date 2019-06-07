@@ -1,0 +1,74 @@
+{
+  "name": "@exmg/exmg-form-drawer",
+  "flat": true,
+  "version": "1.0.4",
+  "description": "Form drawer element",
+  "contributors": [
+    "Ex Machina"
+  ],
+  "keywords": [
+    "web-components",
+    "polymer",
+    "form-drawer"
+  ],
+  "main": "index.js",
+  "files": [
+    "styles/**/*.scss",
+    "exmg-*.js",
+    "exmg-*.d.ts",
+    "index.js",
+    "index.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ExmgElements/exmg-elements-monorepo.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@exmg/exmg-button": "0.0.3",
+    "@polymer/paper-dialog": "^3.0.1",
+    "@material/typography": "^2.3.0",
+    "lit-element": "^2.1.0"
+  },
+  "devDependencies": {
+    "@exmg/exmg-cli": "^1.0.0",
+    "@exmg/exmg-form": "^1.6.2",
+    "@exmg/exmg-paper-combobox": "^4.6.0",
+    "@polymer/iron-component-page": "^4.0.1",
+    "@polymer/iron-demo-helpers": "^3.1.0",
+    "@polymer/paper-input": "^3.0.2",
+    "@polymer/test-fixture": "^4.0.2",
+    "@types/chai": "^4.1.7",
+    "@types/material-components-web": "^0.43.1",
+    "@types/mocha": "^5.2.6",
+    "@types/polymer": "^1.2.7",
+    "@webcomponents/webcomponentsjs": "^2.2.8",
+    "chai": "^4.2.0",
+    "gulp": "^4.0.0",
+    "gulp-watch": "^5.0.1",
+    "mocha": "^5.2.0",
+    "tslint": "^5.15.0",
+    "tslint-config-exmg": "^1.0.2",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.4.3",
+    "wct-mocha": "^1.0.0",
+    "web-animations-js": "^2.3.1"
+  },
+  "scripts": {
+    "package-install": "npm i",
+    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts",
+    "tsc": "tsc -b ./tsconfig.json",
+    "lint": "tslint -c ./tslint.json --project ./",
+    "build:styles": "gulp render-styles",
+    "build": "npm run build:styles && npm run lint && npm run tsc",
+    "prepublishOnly": "npm run build",
+    "preversion": "npm run build",
+    "publishDryRun": "npm publish --dry-run",
+    "start": "npm run build:styles && gulp serve",
+    "test-dev": "polymer test --npm -p",
+    "test": "polymer test --npm --expanded"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

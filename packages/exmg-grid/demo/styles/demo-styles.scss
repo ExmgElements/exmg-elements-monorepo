@@ -1,0 +1,29 @@
+.demo-button {
+  background-color: #4CAF50; /* Green */
+  border: 1px solid white;
+  color: white;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.demo-button:focus {
+  outline: none;
+  background-color: #0070db;
+}
+
+paper-checkbox {
+  --paper-checkbox-unchecked-color: #97aac4;
+  --paper-checkbox-checked-color: var(--mdc-theme-primary, #1274d9);
+  --paper-checkbox-size: 24px;
+  --paper-checkbox-unchecked-ink-color: var(--mdc-theme-primary, #0070db);
+  --paper-checkbox-checked-ink-color: var(--mdc-theme-primary, #0070db);
+}
+
+exmg-grid {
+  --exmg-arrow-upward-url: url('/assets/arrow-upward.svg');
+}

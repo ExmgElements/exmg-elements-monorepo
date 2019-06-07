@@ -1,39 +1,8 @@
 const gulp = require('gulp');
-const watch = require('gulp-watch');
-const glob = require('glob');
-const {spawn, exec} = require('child_process');
+const {spawn} = require('child_process');
+const {registerTasks} = require('@exmg/exmg-cli/src/sass-render/gulp');
 
-function renderSass (pathWithFileName, stopOnError = false) {
-  console.log(`-- sass render ${pathWithFileName} --- `);
-
-  const output = pathWithFileName.replace(/\.(s)?css$/, '.ts');
-  const cmd = `node ./scripts/sass-render/bin/sass-render.js -s ${pathWithFileName} -t ./scripts/sass-render/sass-template.tpl -o ${output}`;
-
-  exec(cmd, (err, stdout, stderr) => {
-    !!err && console.error('Error', err);
-    !!stderr && console.error('StdErr', stderr);
-    !!stdout && console.log(stdout);
-    if (stopOnError && (!!err || !!stderr)) {
-      process.exit(1);
-    }
-  });
-}
-
-gulp.task('render-styles', (done) => {
-  glob.sync('*.{scss,css}', {absolute: true})
-      .forEach(path => renderSass(path, true));
-
-  done();
-});
-
-gulp.task('watch-styles', () => {
-  return watch(
-      '*.{scss,css}',
-      {read: false, events: ['add', 'change'], ignoreInitial: false},
-      (vinyl) => {
-        renderSass(vinyl.path, false);
-      });
-});
+registerTasks(gulp, '{styles,demo}/**/*.{scss,css}', './node_modules/@exmg/exmg-cli/src/sass-render/sass-template.tpl', '.ts');
 
 /**
  * Gulp task to run `tsc --watch` and `polymer serve` in parallel.

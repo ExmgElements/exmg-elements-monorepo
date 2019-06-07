@@ -1,0 +1,10 @@
+node_modules/
+*.sublime*
+.idea/
+*.d.ts
+*.js
+styles/*.ts
+!gulpfile.js
+*.log
+.DS_Store
+!scripts/gen-docs/*.js

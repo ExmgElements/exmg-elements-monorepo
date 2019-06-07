@@ -1,4 +1,4 @@
-export * from './src/exmg-dialog-confirm';
-export * from './src/exmg-dialog-form';
-export * from './src/exmg-dialog-info';
-export {style as dialogStyles} from './src/exmg-dialog-styles';
+export * from './exmg-dialog-confirm';
+export * from './exmg-dialog-form';
+export * from './exmg-dialog-info';
+export {style as dialogStyles} from './styles/exmg-dialog-styles';

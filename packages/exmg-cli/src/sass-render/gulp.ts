@@ -1,4 +1,3 @@
-// const gulp = require('gulp');
 const watch = require('gulp-watch');
 const glob = require('glob');
 const {exec} = require('child_process');
@@ -12,13 +11,13 @@ import * as GulpClient from 'gulp';
 function renderSass(
   pathWithFileName: string,
   stopOnError: boolean,
-  template: string  = './node_modules/@exmg/exmg-cli/sass-render/sass-template.tpl',
+  template: string | null,
   newFileSuffix = '.ts'
 ) {
   console.log(`-- sass render ${pathWithFileName} --- `);
 
   const output = pathWithFileName.replace(/\.(s)?css$/, newFileSuffix);
-  const cmd = `node ./node_modules/@exmg/exmg-cli/src/sass-render/bin/sass-render.js -s ${pathWithFileName} -t ${template} -o ${output}`;
+  const cmd = `exmg-cli-sass-render -s ${pathWithFileName || ''} -t ${template || ''} -o ${output || ''}`;
 
   exec(cmd, (err: any, stdout: any, stderr: any) => {
     !!err && console.error('Error', err);
@@ -42,7 +41,7 @@ function renderSass(
 exports.registerTasks = (
   gulp: GulpClient.Gulp,
   filesPattern: string,
-  template: string  = './node_modules/@exmg/exmg-cli/sass-render/sass-template.tpl',
+  template: string | null,
   newFileSuffix: string = '.ts'
 ) => {
 

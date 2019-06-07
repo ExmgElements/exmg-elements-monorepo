@@ -1,4 +1,4 @@
-export * from './src/exmg-spinner';
-export {style as spinnerStyles} from './src/exmg-spinner-styles';
-export * from './src/exmg-button';
-export {style as buttonStyles} from './src/exmg-button-styles';
+export * from './exmg-spinner';
+export {style as spinnerStyles} from './styles/exmg-spinner-styles';
+export * from './exmg-button';
+export {style as buttonStyles} from './styles/exmg-button-styles';

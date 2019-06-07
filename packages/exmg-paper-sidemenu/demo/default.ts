@@ -1,7 +1,7 @@
-import { LitElement, html, css, property, customElement } from 'lit-element';
+import {LitElement, html, css, property, customElement} from 'lit-element';
 import '../exmg-paper-sidemenu.js';
 import '../exmg-paper-sidemenu-header.js';
-import { menu } from './menu.js';
+import {menu} from './menu.js';
 
 @customElement('x-demo')
 export class XDemo extends LitElement {
@@ -35,10 +35,17 @@ export class XDemo extends LitElement {
 
   render() {
     return html`
-      <exmg-paper-sidemenu .menu=${menu} selected=${this.selected} 
-        @selected-change=${(e:CustomEvent) => this.selected = e.detail} 
+      <exmg-paper-sidemenu .menu=${menu} selected=${this.selected}
+        @selected-change=${(e:CustomEvent) => this.selected = e.detail}
         @collapsed=${(e:CustomEvent) => this.collapsed = e.detail} debug>
-        <exmg-paper-sidemenu-header slot="header" .collapsed=${this.collapsed} selected=${this.selected} @selected-change=${(e:CustomEvent) => this.selected = e.detail} debug></exmg-paper-sidemenu-header>
+        <exmg-paper-sidemenu-header
+          slot="header"
+          .collapsed=${this.collapsed}
+          selected=${this.selected}
+          @selected-change=${(e:CustomEvent) => this.selected = e.detail}
+          debug
+          >
+        </exmg-paper-sidemenu-header>
       </exmg-paper-sidemenu>
     `;
   }

@@ -1,17 +1,17 @@
 {
   "name": "@exmg/exmg-dialogs",
   "version": "4.1.3",
-  "main": "exmg-form-dialog.js",
+  "main": "index.js",
   "files": [
-    "src/**/*.scss",
-    "src/**/exmg-*.js",
-    "src/**/exmg-*.d.ts",
+    "styles/**/*.scss",
+    "exmg-*.js",
+    "exmg-*.d.ts",
     "index.js",
     "index.d.ts"
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:ExmgElements/exmg-dialogs.git"
+    "url": "git@github.com:ExmgElements/exmg-elements-monorepo.git"
   },
   "license": "MIT",
   "dependencies": {
@@ -25,6 +25,7 @@
     "web-component-tester": "^6.9.2"
   },
   "devDependencies": {
+    "@exmg/exmg-cli": "^1.0.0",
     "@exmg/exmg-markdown-editor": "^3.0.0",
     "@exmg/exmg-paper-combobox": "^3.0.2",
     "@exmg/exmg-paper-token-input": "^3.0.0",
@@ -33,6 +34,7 @@
     "@polymer/marked-element": "^3.0.0",
     "@polymer/paper-input": "^3.0.0",
     "@polymer/paper-item": "^3.0.0",
+    "@polymer/test-fixture": "^4.0.2",
     "@types/chai": "^4.1.7",
     "@types/material-components-web": "^0.43.1",
     "@types/mocha": "^5.2.6",
@@ -50,17 +52,18 @@
     "web-animations-js": "^2.3.1"
   },
   "scripts": {
+    "package-install": "npm i",
     "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts",
-    "build": "npm run lint && npm run tsc",
     "tsc": "tsc -b ./tsconfig.json",
+    "lint": "tslint -c ./tslint.json --project ./",
+    "build:styles": "gulp render-styles",
+    "build": "npm run build:styles && npm run lint && npm run tsc",
     "prepublishOnly": "npm run build",
     "preversion": "npm run build",
-    "start": "gulp serve",
-    "lint": "tslint -c ./tslint.json --project ./",
+    "publishDryRun": "npm publish --dry-run",
+    "start": "npm run build:styles && gulp serve",
     "test-dev": "polymer test --npm -p",
-    "test": "polymer test --npm --expanded",
-    "test:integration": "polymer build # test that psk builds without error with the CLI",
-    "bootstrap": "npm install"
+    "test": "polymer test --npm --expanded"
   },
   "publishConfig": {
     "access": "public"

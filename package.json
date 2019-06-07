@@ -1,5 +1,5 @@
 {
-  "name": "root",
+  "name": "exmg-elements-monorepo",
   "private": true,
   "devDependencies": {
     "lerna": "^3.11.1",
@@ -9,8 +9,7 @@
     "rimraf": "^2.6.3"
   },
   "scripts": {
-    "install:all": "lerna run bootstrap --parallel --no-bail",
-    "lerna:clean:bootstrap": "lerna exec rimraf package-lock.json && lerna clean && lerna bootstrap",
+    "lerna:clean": "lerna exec rimraf package-lock.json && lerna clean",
     "clean": "lerna clean",
     "bootstrap": "lerna bootstrap",
     "ls": "lerna ls -l"

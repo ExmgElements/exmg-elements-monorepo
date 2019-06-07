@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./",
     "target": "es2017",
     "module": "esnext",
     "moduleResolution": "node",
@@ -10,12 +12,13 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "skipLibCheck": true
   },
   "include": [
     "**/*.ts"
   ],
   "exclude": [
     "node_modules"
-  ],
+  ]
 }

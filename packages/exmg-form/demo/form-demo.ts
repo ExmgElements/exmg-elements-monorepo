@@ -3,19 +3,18 @@ import '@polymer/paper-input/paper-input.js';
 import '@polymer/paper-input/paper-textarea';
 import '@polymer/paper-button/paper-button.js';
 import '@polymer/paper-item/paper-item.js';
-import '@exmg/exmg-paper-combobox/exmg-paper-combobox.js';
+import '@exmg/exmg-paper-combobox/exmg-paper-combobox';
 import '@exmg/exmg-paper-token-input/exmg-paper-token-input';
-import '@exmg/exmg-markdown-editor/exmg-markdown-editor.js';
-import '@exmg/exmg-radio-group/exmg-radio-group';
-import '@exmg/exmg-radio-group/exmg-radio-group-item';
+import '@exmg/exmg-markdown-editor/exmg-markdown-editor';
 import '../exmg-form';
-import {ExmgForm} from 'exmg-form';
+import {ExmgForm} from '../styles/exmg-form';
 
 @customElement('form-demo')
 export class FormDemo extends LitElement {
 
   render () {
     return html`
+    <exmg-test></exmg-test>
       <h1>Basic form</h1>
 
       <h2>Actions on form via javascript</h2>
@@ -46,18 +45,6 @@ export class FormDemo extends LitElement {
           <paper-item>javascript</paper-item>
           <paper-item>css</paper-item>
         </exmg-paper-token-input>
-        <exmg-radio-group name="license" selected="option2">
-          <exmg-radio-group-item value="option1">
-              <div slot="title">Option 1</div>
-              <div slot="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua.</div>
-          </exmg-radio-group-item>
-          <exmg-radio-group-item value="option2">
-              <div slot="title">Option 2</div>
-              <div slot="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua.</div>
-          </exmg-radio-group-item>
-        </exmg-radio-group>
         <p class="help">Start typing to get a list of possible matches or press down to select.</p>
         <p class="help">Estimated time needed to resolve this issue in hours.</p>
         <label>Message</label>

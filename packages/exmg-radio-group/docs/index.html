@@ -68,36 +68,37 @@
 					<li><strong>exmg-radio-group-item</strong> - each children</li>
 				</ol>
 				<h2 id="components">Components</h2>
-				<h3 id="-exmg-radio-group-"><exmg-radio-group></h3>
-				<p>Can contain many <strong>exmg-radio-group-item</strong> components as it&#39;s children. Children of other
-				types are not supported.</p>
-				<p>Events:</p>
-				<ol>
-					<li><strong>exmg-radio-group-changed</strong> - when selected radio group item changed. </li>
-				</ol>
-				<p>Attributes:</p>
-				<ol>
-					<li><strong>name</strong></li>
-					<li><strong>selected</strong> - selected value. Should be value of one of <strong>value</strong> attributes of children nodes.</li>
-					<li><strong>required</strong> - boolean, used for form validation </li>
-					<li><strong>vertical</strong> - boolean, if you want to have vertical layout </li>
-				</ol>
-				<h3 id="-exmg-radio-group-item-"><exmg-radio-group-item></h3>
-				<p>Can be used only as children of <strong>exmg-radio-group</strong>.</p>
-				<p>Attributes:</p>
-				<ol>
-					<li><strong>value</strong> - value of particular item.</li>
-					<li><strong>disabled</strong> - boolean, should value be selectable or not (still possible
-					to select programmatically, even if disabled)</li>
-				</ol>
-				<p>Each <strong>exmg-radio-group-item</strong> can have defined content in one of following ways:</p>
-				<ol>
-					<li>Define slots with names &quot;title&quot; and &quot;body&quot;</li>
-					<li>Just put any content without defining slot.</li>
-				</ol>
-				<h2 id="usage">Usage</h2>
-				<h3 id="with-slots">With slots</h3>
-				<pre><code>  &lt;exmg-radio-group name=<span class="hljs-string">"license"</span> selected=<span class="hljs-string">"${this.selected}"</span> @exmg-radio-group-changed=<span class="hljs-string">"${this.onPaperRadioGroupChanged}"</span>&gt;
+				<h3 id="-exmg-radio-group"><exmg-radio-group&gt;</h3>
+						<p>Can contain many <strong>exmg-radio-group-item</strong> components as it&#39;s children. Children of other
+						types are not supported.</p>
+						<p>Events:</p>
+						<ol>
+							<li><strong>exmg-radio-group-changed</strong> - when selected radio group item changed. </li>
+						</ol>
+						<p>Attributes:</p>
+						<ol>
+							<li><strong>name</strong></li>
+							<li><strong>selected</strong> - selected value. Should be value of one of <strong>value</strong> attributes of children nodes.</li>
+							<li><strong>required</strong> - boolean, used for form validation </li>
+							<li><strong>vertical</strong> - boolean, if you want to have vertical layout </li>
+						</ol>
+						<h3 id="-exmg-radio-group-item"><exmg-radio-group-item&gt;</h3>
+								<p>Can be used only as children of <strong>exmg-radio-group</strong>.</p>
+								<p>Attributes:</p>
+								<ol>
+									<li><strong>value</strong> - value of particular item.</li>
+									<li><strong>disabled</strong> - boolean, should value be selectable or not (still possible
+									to select programmatically, even if disabled)</li>
+									<li><strong>hide-radio-button</strong> - boolean, should circle radio buttons be hidden or not</li>
+								</ol>
+								<p>Each <strong>exmg-radio-group-item</strong> can have defined content in one of following ways:</p>
+								<ol>
+									<li>Define slots with names &quot;title&quot; and &quot;body&quot;</li>
+									<li>Just put any content without defining slot.</li>
+								</ol>
+								<h2 id="usage">Usage</h2>
+								<h3 id="with-slots">With slots</h3>
+								<pre><code>  &lt;exmg-radio-group name=<span class="hljs-string">"license"</span> selected=<span class="hljs-string">"${this.selected}"</span> @exmg-radio-group-changed=<span class="hljs-string">"${this.onPaperRadioGroupChanged}"</span>&gt;
     &lt;exmg-radio-group-<span class="hljs-keyword">item</span> <span class="hljs-built_in">value</span>=<span class="hljs-string">"option1"</span>&gt;
         &lt;<span class="hljs-keyword">div</span> slot=<span class="hljs-string">"title"</span>&gt;Option <span class="hljs-number">1</span>&lt;/<span class="hljs-keyword">div</span>&gt;
         &lt;<span class="hljs-keyword">div</span> slot=<span class="hljs-string">"body"</span>&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed <span class="hljs-built_in">do</span> eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/<span class="hljs-keyword">div</span>&gt;
@@ -112,7 +113,7 @@
     &lt;/exmg-radio-group-<span class="hljs-keyword">item</span>&gt;
   &lt;/exmg-radio-group&gt;
 </code></pre><h3 id="without-slots">Without slots</h3>
-				<pre><code>  &lt;exmg-radio-<span class="hljs-keyword">group</span> <span class="hljs-type">name</span>="license" selected="${this.selected}" @exmg-radio-<span class="hljs-keyword">group</span>-changed="${this.onPaperRadioGroupChanged}"&gt;
+								<pre><code>  &lt;exmg-radio-<span class="hljs-keyword">group</span> <span class="hljs-type">name</span>="license" selected="${this.selected}" @exmg-radio-<span class="hljs-keyword">group</span>-changed="${this.onPaperRadioGroupChanged}"&gt;
     &lt;exmg-radio-<span class="hljs-keyword">group</span>-item <span class="hljs-keyword">value</span>="option1"&gt;
         <span class="hljs-keyword">Option</span> <span class="hljs-number">1</span>
     &lt;/exmg-radio-<span class="hljs-keyword">group</span>-item&gt;
@@ -135,13 +136,10 @@
 						<a href="modules/_exmg_radio_group_item_.html">"exmg-<wbr>radio-<wbr>group-<wbr>item"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_exmg_radio_group_item_styles_.html">"exmg-<wbr>radio-<wbr>group-<wbr>item-<wbr>styles"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_exmg_radio_group_styles_.html">"exmg-<wbr>radio-<wbr>group-<wbr>styles"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="modules/_exmg_selection_controller_.html">"exmg-<wbr>selection-<wbr>controller"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_index_.html">"index"</a>
 					</li>
 				</ul>
 			</nav>

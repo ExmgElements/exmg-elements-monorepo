@@ -8,17 +8,22 @@ npm install
 ## lerna might be also installed globally
 npm i -g lerna
 
-## this command remove node_modules and package-lock.json from packages/* and do execute lerna bootstrap
-npm run lerna:clean:bootstrap
+## this command remove node_modules and package-lock.json from packages/*
+npm run lerna:clean
+
+## run npm install on all packages
+lerna run package-install
+
+## Run a individual package including stream option for output (off course you can also just go to the folder and use the short commands like "npm start")
+lerna run package-install --scope  @exmg/exmg-dialogs --stream 
+lerna run start --scope  @exmg/exmg-dialogs --stream 
 ```
+
 ## COMMANDS
 ### NPM
-- `npm run lerna:clean:bootstrap` - remove node_modules and package-lock.json from packages/*
-and install dependencies of all packages
+- `npm run lerna:clean` - remove node_modules and package-lock.json from packages/*
 
 - `npm run clean` - remove node_modules from packages/*
-
-- `npm run bootstrap` - install package/* dependencies and linking packages
 
 - `npm run ls` - show list of your packages
 

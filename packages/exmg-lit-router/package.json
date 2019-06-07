@@ -1,0 +1,83 @@
+{
+  "name": "@exmg/exmg-lit-router",
+  "flat": true,
+  "version": "1.0.3",
+  "description": "Element that brings router to lit-html powered by vaadin/router, pwa-helpers, redux and lit-element",
+  "main": "index.js",
+  "contributors": [
+    "Ex Machina Group"
+  ],
+  "keywords": [
+    "web-components",
+    "polymer",
+    "typescript",
+    "lit-elemnt",
+    "router",
+    "redux",
+    "vaadin/router"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ExmgElements/exmg-elements-monorepo.git"
+  },
+  "license": "MIT",
+  "files": [
+    "typings/*.d.ts",
+    "scripts/**/*.js",
+    "src/**/*.js",
+    "src/**/*.d.ts",
+    "index.js",
+    "index.d.ts",
+    "index-router.js",
+    "index-router.d.ts"
+  ],
+  "dependencies": {
+    "@vaadin/router": "^1.2.0",
+    "lit-element": "^2.0.1",
+    "pwa-helpers": "^0.9.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "@polymer/app-layout": "^3.0.2",
+    "@polymer/iron-demo-helpers": "^3.0.2",
+    "@polymer/paper-styles": "^3.0.1",
+    "@polymer/polymer": "^3.1.0",
+    "@polymer/test-fixture": "^4.0.2",
+    "@types/chai": "^4.1.7",
+    "@types/sinon": "^7.0.6",
+    "@types/codemirror": "^0.0.71",
+    "@types/mocha": "^5.2.5",
+    "@types/polymer": "^1.2.6",
+    "@webcomponents/webcomponentsjs": "^2.2.4",
+    "chai": "^4.2.0",
+    "sinon": "^7.2.4",
+    "gulp": "^4.0.0",
+    "gulp-rename": "^1.3.0",
+    "gulp-replace": "^1.0.0",
+    "mocha": "^5.2.0",
+    "replace": "^1.1.0",
+    "reselect": "^4.0.0",
+    "tslint": "^5.12.1",
+    "tslint-config-exmg": "^1.0.2",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.2.4",
+    "wct-mocha": "^1.0.0"
+  },
+  "scripts": {
+    "package-install": "npm i",
+    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ src/**/*.ts",
+    "build": "npm run lint && npm run tsc",
+    "tsc": "tsc -b ./tsconfig.json",
+    "prepublishOnly": "npm run build",
+    "preversion": "npm run build",
+    "publish-dry-run": "npm publish --dry-run",
+    "start": "gulp serve",
+    "lint-src": "tslint -c ./tslint.json --project ./",
+    "lint-test": "tslint -c ./test/tslint.json --project ./",
+    "lint": "npm run lint-src && npm run lint-test",
+    "test-dev": "polymer test --npm -l chrome -p",
+    "test": "polymer test --npm --expanded",
+    "test:integration": "polymer build # test that psk builds without error with the CLI"
+  }
+}

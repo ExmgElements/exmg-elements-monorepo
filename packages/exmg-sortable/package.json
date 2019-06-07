@@ -10,16 +10,17 @@
     "polymer",
     "sortable"
   ],
-  "main": "exmg-sortable.js",
+  "main": "index.js",
   "files": [
     "exmg-*.js",
-    "exmg-*.d.ts"
+    "exmg-*.d.ts",
+    "index.js",
+    "index.d.ts"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com:ExmgElements/exmg-sortable.git"
+    "url": "git@github.com:ExmgElements/exmg-elements-monorepo.git"
   },
-  "homepage": "https://github.com/ExmgElements/exmg-sortable",
   "dependencies": {
     "@polymer/polymer": "^3.1.0",
     "lit-element": "^2.0.1"
@@ -45,19 +46,19 @@
     "web-animations-js": "^2.3.1"
   },
   "scripts": {
+    "package-install": "npm i",
     "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts",
     "build": "npm run lint && npm run tsc",
     "tsc": "tsc -b ./tsconfig.json",
-    "prepublishOnly": "npm run build",
-    "preversion": "npm run build",
-    "start": "gulp serve",
     "lint-src": "tslint -c ./tslint.json --project ./",
     "lint-test": "tslint -c ./test/tslint.json --project ./",
     "lint": "npm run lint-src && npm run lint-test",
+    "prepublishOnly": "npm run build",
+    "preversion": "npm run build",
+    "publishDryRun": "npm publish --dry-run",
+    "start": "gulp serve",
     "test-dev": "polymer test --npm -l chrome -p",
-    "test": "polymer test --npm --expanded",
-    "test:integration": "polymer build # test that psk builds without error with the CLI",
-    "bootstrap": "npm install"
+    "test": "polymer test --npm --expanded"
   },
   "publishConfig": {
     "access": "public"

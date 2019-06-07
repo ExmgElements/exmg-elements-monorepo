@@ -2,8 +2,5 @@
   "packages": [
     "packages/*"
   ],
-  "bootstrap": {
-    "hoist": false
-  },
   "version": "independent"
 }

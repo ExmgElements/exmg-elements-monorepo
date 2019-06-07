@@ -1,7 +1,7 @@
 {
   "name": "@exmg/exmg-cli",
   "flat": true,
-  "version": "1.0.1-test2411.0",
+  "version": "1.0.0",
   "description": "CLI - scripts used to process and build polymer /  lit-element packages",
   "contributors": [
     "Ex Machina"
@@ -13,10 +13,14 @@
     "cli"
   ],
   "main": "src/sass-render/index.js",
+  "bin": {
+    "exmg-cli-sass-render": "./bin/exmg-cli-sass-render"
+  },
   "files": [
     "src/**/*.js",
     "src/**/*.d.ts",
-    "src/**/*.tpl"
+    "src/**/*.tpl",
+    "bin"
   ],
   "repository": {
     "type": "git",
@@ -48,14 +52,14 @@
     "typescript": "^3.3.3333"
   },
   "scripts": {
+    "package-install": "npm i",
     "start": "gulp serve",
     "build": "npm run lint && npm run tsc",
     "tsc": "tsc -b ./tsconfig.json",
     "prepublishOnly": "npm run build",
     "publishDryRun": "npm publish --dry-run",
     "preversion": "npm run build",
-    "lint": "tslint -c ./tslint.json --project ./",
-    "bootstrap": "npm install"
+    "lint": "tslint -c ./tslint.json --project ./"
   },
   "publishConfig": {
     "access": "public"

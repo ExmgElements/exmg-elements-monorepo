@@ -1,6 +1,6 @@
 {
   "name": "tslint-config-exmg",
-  "version": "1.0.3-test24.0",
+  "version": "1.0.2",
   "description": "TSLint shareable config for the Exmg Projects",
   "license": "Apache-2.0",
   "homepage": "https://git@github.com/ExmgElements/exmg-tslint.git/#readme",

@@ -1,0 +1,9 @@
+{
+  "files.autoGuessEncoding": true,
+  "files.exclude": {
+    "**/*.js": { "when": "$(basename).ts"},
+    "**/*.d.ts": { "when": "$(basename).ts"},
+    "**/*.ts": { "when": "$(basename).scss"},
+    "**/*.js.map": true
+  }
+}

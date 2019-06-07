@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+  <title>exmg-grid-base-toolbar test</title>
+
+  <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <script src="../node_modules/@polymer/test-fixture/test-fixture.js"></script>
+  <script src="../node_modules/mocha/mocha.js"></script>
+  <script src="../node_modules/chai/chai.js"></script>
+  <script src="../node_modules/wct-mocha/wct-mocha.js"></script>
+
+  <script type="module" src="../src/table/exmg-grid-base-toolbar.js"></script>
+</head>
+<body>
+  <test-fixture id="BasicTestFixture">
+    <template>
+      <exmg-grid-base-toolbar>
+        <div slot="actions">
+          <input type="button" name="action1" value="action1">
+          <input type="button" name="action2" value="action2">
+        </div>
+        <div slot="description">new description</div>
+        <div slot="filters">
+          <select name="filter1">
+            <option value="value1">value 1</option>
+            <option value="value2">value 2</option>
+          </select>
+        </div>
+      </exmg-grid-base-toolbar>
+    </template>
+  </test-fixture>
+  <test-fixture id="WithoutSlotsFixture">
+    <template>
+      <exmg-grid-base-toolbar></exmg-grid-base-toolbar>
+    </template>
+  </test-fixture>
+  <test-fixture id="WithoutActionsTestFixture">
+    <template>
+      <exmg-grid-base-toolbar>
+        <div slot="actions">
+        </div>
+        <div slot="description">new description</div>
+        <div slot="filters">
+          <select name="filter1">
+            <option value="value1">value 1</option>
+            <option value="value2">value 2</option>
+          </select>
+        </div>
+        <div slot="settings"></div>
+      </exmg-grid-base-toolbar>
+    </template>
+  </test-fixture>
+  <test-fixture id="SettingsTestFixture">
+    <template>
+      <exmg-grid-base-toolbar>
+        <div slot="settings">
+          <div>Setting1</div>
+          <div>Setting2</div>
+        </div>
+      </exmg-grid-base-toolbar>
+    </template>
+  </test-fixture>
+  <script type="module" src="exmg-grid-base-toolbar.spec.js"></script>
+</body>
+</html>

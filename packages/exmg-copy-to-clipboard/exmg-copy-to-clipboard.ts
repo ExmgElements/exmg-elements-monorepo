@@ -101,8 +101,8 @@ export class ExmgCopyToClipboard extends LitElement {
 
     range.selectNodeContents(clipboardNode);
 
-    selection.removeAllRanges();
-    selection.addRange(range);
+    selection!.removeAllRanges();
+    selection!.addRange(range);
 
     try {
       document.execCommand('copy');
@@ -115,7 +115,7 @@ export class ExmgCopyToClipboard extends LitElement {
       console.error('copy to clipboard failed', err);
     }
 
-    selection.removeAllRanges();
+    selection!.removeAllRanges();
     clipboardNode.style.display = 'none';
   }
 

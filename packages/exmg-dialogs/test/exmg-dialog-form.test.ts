@@ -1,5 +1,5 @@
 import '@polymer/test-fixture';
-import {ExmgFormDialog} from '../src/exmg-dialog-form';
+import {ExmgFormDialog} from '../exmg-dialog-form';
 import {ExmgButton} from '@exmg/exmg-button';
 
 const {assert} = chai;
@@ -23,7 +23,7 @@ suite('exmg-dialog-form', () => {
       assert.equal(element.title, 'Create account');
       assert.equal(element.buttonCopy, 'Save');
       assert.equal(element.shadowRoot!.querySelector('h2')!.innerText, 'Create account');
-      const submitButton = element.shadowRoot!.querySelector('#doneBtn')! as ExmgButton;
+      const submitButton = element.shadowRoot!.querySelector('#submitBtn')! as ExmgButton;
       assert.equal(submitButton.innerText, 'Save');
       submitButton.click();
     });
