@@ -19,7 +19,7 @@ export class ExmgConfirmDialog extends LitElement {
   private message: string = '';
 
   /**
-   * With close button ?
+   * Hide close button ?
    */
   @property({type: Boolean, attribute: 'hide-close-button'})
   private hideCloseButton: boolean = false;

@@ -13,7 +13,7 @@ export class ExmgInfoDialog extends LitElement {
   private buttonCopy: string = '';
 
   /**
-   * With close button ?
+   * Hide close button ?
    */
   @property({type: Boolean, attribute: 'hide-close-button'})
   private hideCloseButton: boolean = false;
