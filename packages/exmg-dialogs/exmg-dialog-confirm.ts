@@ -19,6 +19,12 @@ export class ExmgConfirmDialog extends LitElement {
   private message: string = '';
 
   /**
+   * Hide close button ?
+   */
+  @property({type: Boolean, attribute: 'hide-close-button'})
+  private hideCloseButton: boolean = false;
+
+  /**
    * Copy for submit button
    */
   @property({type: String, attribute: 'button-copy'})
@@ -118,6 +124,7 @@ export class ExmgConfirmDialog extends LitElement {
   protected render() {
     return html`
       <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click @iron-overlay-closed="${this.onCloseDialog}">
+        ${this.hideCloseButton ? '' : html`<span @click=${this.close} class="close-button">✕</span>` }
         <header>
           <h2 class="title">${this.title}</h2>
         </header>
