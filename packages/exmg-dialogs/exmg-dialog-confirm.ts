@@ -21,8 +21,8 @@ export class ExmgConfirmDialog extends LitElement {
   /**
    * With close button ?
    */
-  @property({type: Boolean, attribute: 'with-close-button'})
-  private withCloseButton: boolean = false;
+  @property({type: Boolean, attribute: 'hide-close-button'})
+  private hideCloseButton: boolean = false;
 
   /**
    * Copy for submit button
@@ -124,7 +124,7 @@ export class ExmgConfirmDialog extends LitElement {
   protected render() {
     return html`
       <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click @iron-overlay-closed="${this.onCloseDialog}">
-        ${this.withCloseButton ? html`<span @click=${this.close} class="close-button">✕</span>` : ''}
+        ${this.hideCloseButton ? '' : html`<span @click=${this.close} class="close-button">✕</span>` }
         <header>
           <h2 class="title">${this.title}</h2>
         </header>

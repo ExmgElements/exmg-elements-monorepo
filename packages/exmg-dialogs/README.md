@@ -53,11 +53,11 @@ Example of implementation in html
 </exmg-dialog-info>
 ```
 
-Example of implementation in html with close button option
+Example of implementation in html without close button option
 ```html
 <exmg-dialog-info
   button-copy="Continue"
-  with-close-button
+  hide-close-button
   @done="${this.done}"
   >
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.</p>
