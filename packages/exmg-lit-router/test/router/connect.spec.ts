@@ -11,7 +11,7 @@ suite('router/connect', () => {
     connectStore(store);
 
     window.customElements.define('connected-element', ConnectedLitElement);
-    const element: ConnectedLitElement = <ConnectedLitElement>fixture('ConnectedElementFixture');
+    const element: ConnectedLitElement = fixture('ConnectedElementFixture') as ConnectedLitElement;
     assert.instanceOf(
       element,
       ConnectedLitElement,
@@ -24,7 +24,7 @@ suite('router/connect', () => {
     connectStore(store);
 
     window.customElements.define('page-element', PageLitElement);
-    const element: PageLitElement = <PageLitElement>fixture('PageElementFixture');
+    const element: PageLitElement = fixture('PageElementFixture') as PageLitElement;
     assert.instanceOf(
       element,
       PageLitElement,

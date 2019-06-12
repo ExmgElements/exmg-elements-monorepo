@@ -15,7 +15,7 @@ suite('<exmg-sortable>', function() {
       element = fixture('ExmgSortableList');
 
       element.addEventListener('dom-order-change', (event: Event) => {
-        const detail = (<CustomEvent>event).detail;
+        const detail = (event as CustomEvent).detail;
         assert.equal(detail.sourceIndex, 0, 'Source index should be 0');
         assert.equal(detail.targetIndex, 1, 'Target index should be 1');
         done();
@@ -58,7 +58,7 @@ suite('<exmg-sortable>', function() {
       element = fixture('ExmgSortableListWithCustomHandle');
 
       element.addEventListener('dom-order-change', (event: Event) => {
-        const detail = (<CustomEvent>event).detail;
+        const detail = (event as CustomEvent).detail;
         assert.equal(detail.sourceIndex, 0, 'Source index should be 0');
         assert.equal(detail.targetIndex, 1, 'Target index should be 1');
         done();
@@ -111,7 +111,7 @@ suite('<exmg-sortable>', function() {
       });
 
       element.addEventListener('dom-order-change', async (event: Event) => {
-        const detail = (<CustomEvent>event).detail;
+        const detail = (event as CustomEvent).detail;
         assert.equal(detail.sourceIndex, 0, 'Source index should be 0');
         assert.equal(detail.targetIndex, 1, 'Target index should be 1');
         done();

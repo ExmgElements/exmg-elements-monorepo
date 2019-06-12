@@ -6,7 +6,7 @@ import {
   UPDATE_QUERY_PARAMS,
   RouterActionUpdateQueryParams,
   ROUTER_CHANGED,
-  RouterActionRouterChanged
+  RouterActionRouterChanged,
 } from '../../src/actions/router';
 
 import {Router} from '@vaadin/router';

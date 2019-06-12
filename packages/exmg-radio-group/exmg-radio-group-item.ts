@@ -2,26 +2,25 @@ import {
   FormElement,
   query,
   customElement,
-  Foundation,
-  Adapter,
   property,
   html,
   observer,
   HTMLElementWithRipple,
 } from '@material/mwc-base/form-element.js';
+import {MDCFoundation} from '@material/base';
 import {style} from '@material/mwc-radio/mwc-radio-css';
 import {ripple} from '@material/mwc-ripple/ripple-directive';
 import foundation from '@material/radio/foundation';
 import {SelectionController} from './exmg-selection-controller';
 import {style as exmgRadioGroupItemStyles} from './styles/exmg-radio-group-item-styles';
 
-export interface RadioFoundation extends Foundation {
+export interface RadioFoundation extends MDCFoundation {
   setDisabled(disabled: boolean): void;
 }
 
 export declare var RadioFoundation: {
   prototype: RadioFoundation;
-  new (adapter: Adapter): RadioFoundation;
+  new (adapter: Record<string, any>): RadioFoundation;
 };
 
 @customElement('exmg-radio-group-item')
@@ -93,9 +92,8 @@ export class ExmgRadioGroupItem extends FormElement {
     return this.mdcRoot.ripple;
   }
 
-  protected createAdapter(): Adapter {
+  protected createAdapter(): Record<string, any> {
     return {
-      ...super.createAdapter(),
       setNativeControlDisabled: (disabled: boolean) => {
         this.formElement.disabled = disabled;
       },

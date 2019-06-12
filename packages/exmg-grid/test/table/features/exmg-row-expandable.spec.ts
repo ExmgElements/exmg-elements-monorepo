@@ -10,7 +10,7 @@ suite('exmg-row-expandable', () => {
   let querySelectors: ExmgQuerySelectors;
   let testInstance: ExmgRowExpandable;
   setup(() => {
-    element = <HTMLTableElement>fixture('TableFixture');
+    element = fixture('TableFixture') as HTMLTableElement;
     const tableBody: HTMLTableSectionElement = element.querySelector('tbody')!;
     querySelectors = new ExmgQuerySelectors(element, tableBody);
     testInstance = new ExmgRowExpandable(querySelectors, '.expand-trigger');
@@ -23,7 +23,7 @@ suite('exmg-row-expandable', () => {
     testInstance.initFeature();
     assert.isTrue(expandableTrigger.hasAttribute('data-is-expandable'), 'Expandable trigger is not registered');
 
-    const amountOfRegisteredTriggers = element.querySelectorAll(`.expand-trigger[data-is-expandable]`).length;
+    const amountOfRegisteredTriggers = element.querySelectorAll('.expand-trigger[data-is-expandable]').length;
     assert.equal(amountOfRegisteredTriggers, 2, 'There are 2 rows all of them should have expandable trigger');
   });
 

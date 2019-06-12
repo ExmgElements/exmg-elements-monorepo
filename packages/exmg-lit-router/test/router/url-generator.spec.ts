@@ -2,7 +2,7 @@ import {
   connectUrlGeneratorWithRouter,
   generateUrlByNameOrComponentName,
   generateUrlByPath,
-  generateUrl
+  generateUrl,
 } from '../../src/router/url-generator';
 import {Router} from '@vaadin/router';
 // @ts-ignore

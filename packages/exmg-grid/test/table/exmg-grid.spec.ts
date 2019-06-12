@@ -1,5 +1,10 @@
 import {ExmgGrid} from '../../src/table/exmg-grid';
-import {promisifyFlush, onExmgGridSortChange, onExmgGridSelectedRowsChange, onEventListenerExmgGridSelectedRowsChange} from '../utils';
+import {
+  promisifyFlush,
+  onExmgGridSortChange,
+  onExmgGridSelectedRowsChange,
+  onEventListenerExmgGridSelectedRowsChange,
+} from '../utils';
 
 declare const flush: (cb?: Function) => void;
 declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
@@ -39,11 +44,11 @@ suite('exmg-grid', () => {
     test('toggle column visibility', async () => {
       const areAllMonthRowsVisible = (): boolean =>
         Array.from<HTMLElement>(table.querySelectorAll('tr:not(.grid-row-detail) td:nth-child(3)')).every(
-        row => row.style.display !== 'none'
-      );
+          row => row.style.display !== 'none',
+        );
       const isAnyMonthRowsVisible = (): boolean =>
         Array.from<HTMLElement>(table.querySelectorAll('tr:not(.grid-row-detail) td:nth-child(3)')).some(
-          row => row.style.display !== 'none'
+          row => row.style.display !== 'none',
         );
 
       assert.isTrue(areAllMonthRowsVisible());
@@ -71,7 +76,9 @@ suite('exmg-grid', () => {
 
       const eventListener = onExmgGridSortChange(element, true);
       monthColumn.click();
-      const {detail: {column, sortDirection}} = await eventListener;
+      const {
+        detail: {column, sortDirection},
+      } = await eventListener;
       assert.equal(column, 'month');
       assert.equal(sortDirection, 'DESC');
     });
@@ -84,7 +91,9 @@ suite('exmg-grid', () => {
 
       const eventListener = onExmgGridSelectedRowsChange(element, true);
       firstRow.click();
-      const {detail: {rows}} = await eventListener;
+      const {
+        detail: {rows},
+      } = await eventListener;
       assert.isArray(rows);
       assert.isTrue(rows.includes(firstRow));
       assert.isTrue(firstRow.hasAttribute('data-selected'), 'Row should be selected');
@@ -101,7 +110,9 @@ suite('exmg-grid', () => {
       await flushCompleted();
 
       assert.isTrue(firstRow.hasAttribute('data-selected'), 'By default row is selected');
-      const {detail: {rows}} = flushEvents().pop()!;
+      const {
+        detail: {rows},
+      } = flushEvents().pop()!;
       assert.isArray(rows, 'Receive event with selected rows');
       assert.isTrue(rows.includes(firstRow));
 
@@ -116,7 +127,9 @@ suite('exmg-grid', () => {
       assert.equal(events.length, 2, 'There should be 2 events');
       const lastEvent = events.pop()!;
 
-      const {detail: {rows: rows2}} = lastEvent;
+      const {
+        detail: {rows: rows2},
+      } = lastEvent;
       assert.isArray(rows2, 'Receive event with selected rows');
       assert.isTrue(rows2.length > 0, 'Still has selected rows');
       assert.isFalse(rows2.includes(firstRow), 'First rows has is not selected');
@@ -128,22 +141,31 @@ suite('exmg-grid', () => {
 
       assert.isNotEmpty(element.expandableToggleSelector, 'Has set expandable trigger selector');
 
-      const firstRow = table.querySelector<HTMLTableRowElement>(`tr[data-row-key="1"]`)!;
+      const firstRow = table.querySelector<HTMLTableRowElement>('tr[data-row-key="1"]')!;
       const firstRowExpandableTrigger = firstRow.querySelector<HTMLElement>(`${element.expandableToggleSelector}`)!;
-      const firstRowDetail = table.querySelector<HTMLTableRowElement>(`tr[data-row-detail-key="1"]`)!;
+      const firstRowDetail = table.querySelector<HTMLTableRowElement>('tr[data-row-detail-key="1"]')!;
 
       assert.isTrue(firstRowExpandableTrigger.hasAttribute('data-is-expandable'), 'Trigger should be initialized');
-      assert.isFalse(firstRowExpandableTrigger.hasAttribute('data-is-expanded'), 'Row detail is not triggered to be expanded');
+      assert.isFalse(
+        firstRowExpandableTrigger.hasAttribute('data-is-expanded'),
+        'Row detail is not triggered to be expanded',
+      );
       assert.isFalse(firstRowDetail.hasAttribute('data-is-row-expanded'), 'Row detail is not expanded');
 
       firstRowExpandableTrigger.click();
 
-      assert.isTrue(firstRowExpandableTrigger.hasAttribute('data-is-expanded'), 'Row detail is triggered to be expanded');
+      assert.isTrue(
+        firstRowExpandableTrigger.hasAttribute('data-is-expanded'),
+        'Row detail is triggered to be expanded',
+      );
       assert.isTrue(firstRowDetail.hasAttribute('data-is-row-expanded'), 'Row detail is expanded');
 
       firstRowExpandableTrigger.click();
 
-      assert.isFalse(firstRowExpandableTrigger.hasAttribute('data-is-expanded'), 'Row detail is not triggered to be expanded');
+      assert.isFalse(
+        firstRowExpandableTrigger.hasAttribute('data-is-expanded'),
+        'Row detail is not triggered to be expanded',
+      );
       assert.isFalse(firstRowDetail.hasAttribute('data-is-row-expanded'), 'Row detail is not expanded');
     });
 

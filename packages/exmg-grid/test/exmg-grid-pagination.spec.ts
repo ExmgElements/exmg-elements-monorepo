@@ -7,16 +7,16 @@ declare const flush: (cb?: Function) => void;
 
 const {assert} = chai;
 
-suite('<exmg-grid-pagination>', function () {
+suite('<exmg-grid-pagination>', function() {
   let element: ExmgGridPagination;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('base usage', function () {
+  suite('base usage', function() {
     setup(() => {
       element = fixture('BasicTestFixture');
     });
 
-    test('element is upgraded', function () {
+    test('element is upgraded', function() {
       assert.instanceOf(element, ExmgGridPagination);
     });
 
@@ -48,7 +48,7 @@ suite('<exmg-grid-pagination>', function () {
       pageChangedPromise = onExmgGridPaginationPageChanged(element, false);
       nextPageBtn.click();
 
-      timeoutPromise = new Promise((resolve) => {
+      timeoutPromise = new Promise(resolve => {
         setTimeout(() => {
           resolve();
         }, 500);
@@ -66,7 +66,7 @@ suite('<exmg-grid-pagination>', function () {
       pageChangedPromise = onExmgGridPaginationPageChanged(element, false);
       prevPageBtn.click();
 
-      timeoutPromise = new Promise((resolve) => {
+      timeoutPromise = new Promise(resolve => {
         setTimeout(() => {
           resolve();
         }, 500);
@@ -89,9 +89,7 @@ suite('<exmg-grid-pagination>', function () {
 
       pageSizeChangedPromise = onExmgGridPaginationPageSizeChanged(element, true);
       pageSizeOptionsElem.dispatchEvent(
-        new CustomEvent('exmg-combobox-select',
-        {bubbles: true, composed: true, detail: {value: 30}}
-        )
+        new CustomEvent('exmg-combobox-select', {bubbles: true, composed: true, detail: {value: 30}}),
       );
       assert.deepEqual((await pageSizeChangedPromise).detail, {pageSize: 30, page: 0});
 
@@ -108,7 +106,7 @@ suite('<exmg-grid-pagination>', function () {
       pageChangedPromise = onExmgGridPaginationPageChanged(element, false);
       nextPageBtn.click();
 
-      timeoutPromise = new Promise((resolve) => {
+      timeoutPromise = new Promise(resolve => {
         setTimeout(() => {
           resolve();
         }, 500);

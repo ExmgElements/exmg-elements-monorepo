@@ -211,8 +211,8 @@ suite('<exmg-paper-token-input>', function() {
         await flushCompleted();
 
         const elementShadowRoot = element.shadowRoot!;
-        const paperContainer = <HTMLInputElement>elementShadowRoot.querySelector('#inputValue')!;
-        const menuContainer = <HTMLInputElement>elementShadowRoot.querySelector('#menu')!;
+        const paperContainer = elementShadowRoot.querySelector('#inputValue')! as HTMLInputElement;
+        const menuContainer = elementShadowRoot.querySelector('#menu')! as HTMLInputElement;
         chai.assert.isTrue(element.disabled, 'Should be true');
         chai.assert.isTrue(paperContainer.disabled, 'Should be true');
         chai.assert.isTrue(menuContainer.disabled, 'Should be true');

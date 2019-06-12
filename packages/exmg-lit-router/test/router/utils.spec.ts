@@ -1,7 +1,7 @@
 import {
   convertSearchQueryToQueryParams,
   replaceParamsPlaceholders,
-  extractBreadcrumbsFromLocation
+  extractBreadcrumbsFromLocation,
 } from '../../src/router/utils';
 import {mockLocation} from '../utils';
 import {connectUrlGeneratorWithRouter} from '../../src/router/url-generator';

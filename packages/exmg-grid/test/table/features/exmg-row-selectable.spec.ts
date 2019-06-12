@@ -20,14 +20,13 @@ suite('exmg-row-selectable', () => {
     });
 
   setup(() => {
-    element = <HTMLTableElement>fixture('TableFixture');
+    element = fixture('TableFixture') as HTMLTableElement;
     const tableBody: HTMLTableSectionElement = element.querySelector('tbody')!;
     querySelectors = new ExmgQuerySelectors(element, tableBody);
     testInstance = new ExmgRowSelectable(querySelectors, dispatchEvent(element), checkboxSelector);
   });
 
   suite('without selectable checkbox selector', () => {
-
     test('row and checkbox is not syncing', () => {
       testInstance = new ExmgRowSelectable(querySelectors, dispatchEvent(element));
       const checkbox = element.querySelector<HTMLInputElement>('tbody input[type="checkbox"]')!;
@@ -52,7 +51,6 @@ suite('exmg-row-selectable', () => {
       assert.isTrue(checkbox.checked);
       assert.equal(testInstance.selectedRows.length, 0, 'Checked header selector does not select rows');
     });
-
   });
 
   suite('with selectable checkbox selector', () => {
@@ -150,9 +148,7 @@ suite('exmg-row-selectable', () => {
       addedRow.setAttribute('data-row-key', '3');
       querySelectors.getTableBody().appendChild(addedRow);
 
-      testInstance.updateFeature(
-        querySelectors.getBodyRows(),
-      );
+      testInstance.updateFeature(querySelectors.getBodyRows());
 
       assert.equal(querySelectors.getBodyRows().length, 3, 'New row has been added');
       assert.isFalse(addedRow.hasAttribute('data-selected'), 'Added row is not selected');

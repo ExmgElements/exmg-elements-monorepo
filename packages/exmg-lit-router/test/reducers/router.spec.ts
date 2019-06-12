@@ -3,7 +3,7 @@ import {createInitialRouterState} from '../utils';
 import {
   RouterActionNavigateToPath,
   RouterActionRouterChanged,
-  RouterActionUpdateQueryParams
+  RouterActionUpdateQueryParams,
 } from '../../src/actions/router';
 
 const {assert} = chai;

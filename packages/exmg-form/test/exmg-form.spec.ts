@@ -6,16 +6,16 @@ declare const flush: (cb?: Function) => void;
 
 const {assert} = chai;
 
-suite('<exmg-form>', function () {
+suite('<exmg-form>', function() {
   let element: ExmgForm;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('base usage', function () {
+  suite('base usage', function() {
     setup(() => {
       element = fixture('ExmgFormBasicElement');
     });
 
-    test('element is upgraded', function () {
+    test('element is upgraded', function() {
       assert.instanceOf(element, ExmgForm);
     });
 
@@ -23,7 +23,7 @@ suite('<exmg-form>', function () {
       await flushCompleted();
 
       const field1Input = element.querySelector<HTMLInputElement>('paper-input[name=field1]')!;
-      const submitBtn = <HTMLElement>element.shadowRoot!.querySelector('exmg-button[unelevated]');
+      const submitBtn = element.shadowRoot!.querySelector('exmg-button[unelevated]') as HTMLElement;
 
       const eventPromise = onExmgFormSubmit(element, true);
 
@@ -38,13 +38,13 @@ suite('<exmg-form>', function () {
 
     test('form with missing required fields should not submit data', async () => {
       await flushCompleted();
-      const submitBtn = <HTMLElement>element.shadowRoot!.querySelector('exmg-button[unelevated]');
+      const submitBtn = element.shadowRoot!.querySelector('exmg-button[unelevated]') as HTMLElement;
 
       const eventPromise = onExmgFormSubmit(element, false);
 
       submitBtn.click();
 
-      const timeoutPromise = new Promise((resolve) => {
+      const timeoutPromise = new Promise(resolve => {
         setTimeout(() => {
           resolve();
         }, 1000);
@@ -59,7 +59,7 @@ suite('<exmg-form>', function () {
 
     test('form should throw cancel event', async () => {
       await flushCompleted();
-      const cancelBtn = <HTMLElement>element.shadowRoot!.querySelector('exmg-button.cancel');
+      const cancelBtn = element.shadowRoot!.querySelector('exmg-button.cancel') as HTMLElement;
 
       const eventPromise = onExmgFormCancel(element, true);
 
