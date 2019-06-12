@@ -2,7 +2,7 @@
   "name": "@exmg/exmg-button",
   "version": "0.0.3",
   "dependencies": {
-    "@material/mwc-button": "^0.5.0",
+    "@material/mwc-button": "^0.6.0",
     "lit-element": "^2.1.0"
   },
   "keywords": [
@@ -26,8 +26,8 @@
   "license": "MIT",
   "devDependencies": {
     "@exmg/exmg-cli": "^1.0.0",
-    "@material/mwc-checkbox": "^0.5.0",
-    "@material/mwc-icon": "^0.5.0",
+    "@material/mwc-checkbox": "^0.6.0",
+    "@material/mwc-icon": "^0.6.0",
     "@polymer/iron-component-page": "^4.0.1",
     "@polymer/iron-demo-helpers": "^3.1.0",
     "@polymer/test-fixture": "^4.0.2",
