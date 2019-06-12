@@ -7,26 +7,28 @@ import {convertSearchQueryToQueryParams, replaceParamsPlaceholders, extractBread
 import {connectUrlGeneratorWithRouter} from './url-generator';
 
 const onRouteChanged = (store: Store<any, any>) => (event: Event) => {
-    const {location, router}: {location: VaadinLocation; router: RouteItem} = (<CustomEvent>event).detail;
-    const {params, pathname, baseUrl, route} = location;
-    const {component} = router;
+  const {location, router}: {location: VaadinLocation; router: RouteItem} = (event as CustomEvent).detail;
+  const {params, pathname, baseUrl, route} = location;
+  const {component} = router;
 
-    store.dispatch(routerChanged({
-        baseUrl,
-        params,
-        pathname,
-        component,
-        breadcrumbs: extractBreadcrumbsFromLocation(location),
-        title: route && route.title ? replaceParamsPlaceholders(route.title, params) : undefined,
-        data: route && route.data && typeof route.data === 'object' ? route.data : {},
-        queryParams: convertSearchQueryToQueryParams(window.location.search),
-    }));
+  store.dispatch(
+    routerChanged({
+      baseUrl,
+      params,
+      pathname,
+      component,
+      breadcrumbs: extractBreadcrumbsFromLocation(location),
+      title: route && route.title ? replaceParamsPlaceholders(route.title, params) : undefined,
+      data: route && route.data && typeof route.data === 'object' ? route.data : {},
+      queryParams: convertSearchQueryToQueryParams(window.location.search),
+    }),
+  );
 };
 
-export type InstallationResult = {
+export interface InstallationResult {
   unsubscribe: Function;
   router: Router;
-};
+}
 
 export type LocationUpdatedCallback = (location: Location) => void;
 
@@ -37,42 +39,50 @@ const beforeInstall = (routes: RouteItem[]): void => {
   }
 };
 
-export type Installer = (locationUpdatedCallback: (location: Location, e: Event|null) => void) => void;
+export type Installer = (locationUpdatedCallback: (location: Location, e: Event | null) => void) => void;
 
-export const locationUpdatedHandler = (locationUpdatedCallback?: LocationUpdatedCallback) => (location: Location, e: Event | null) => {
+export const locationUpdatedHandler = (locationUpdatedCallback?: LocationUpdatedCallback) => (
+  location: Location,
+  e: Event | null,
+) => {
   if (Router.go(location.pathname.toLowerCase())) {
     locationUpdatedCallback && locationUpdatedCallback(location);
   }
 };
 
-export const createInstallRouter = (installer: Installer) =>
-  (
-    store: Store<any, AnyAction>, outlet: HTMLElement, routes: RouteItem[], locationUpdatedCallback?: LocationUpdatedCallback
-  ): InstallationResult => {
-    beforeInstall(routes);
+export const createInstallRouter = (installer: Installer) => (
+  store: Store<any, AnyAction>,
+  outlet: HTMLElement,
+  routes: RouteItem[],
+  locationUpdatedCallback?: LocationUpdatedCallback,
+): InstallationResult => {
+  beforeInstall(routes);
 
-    // install pwa-helpers/route - this will catch link click and dispatch window history update
-    installer(locationUpdatedHandler(locationUpdatedCallback));
+  // install pwa-helpers/route - this will catch link click and dispatch window history update
+  installer(locationUpdatedHandler(locationUpdatedCallback));
 
-    // listen to route change - this will dispatch action to router reducer
-    const routerChangedHandler = onRouteChanged(store);
-    window.addEventListener('vaadin-router-location-changed', routerChangedHandler);
+  // listen to route change - this will dispatch action to router reducer
+  const routerChangedHandler = onRouteChanged(store);
+  window.addEventListener('vaadin-router-location-changed', routerChangedHandler);
 
-    // create vaadin router
-    const router = new Router(outlet);
-    router.setRoutes(routes);
+  // create vaadin router
+  const router = new Router(outlet);
+  router.setRoutes(routes);
 
-    // connect helpers with router
-    connectUrlGeneratorWithRouter(router);
+  // connect helpers with router
+  connectUrlGeneratorWithRouter(router);
 
-    return {
-      router,
-      unsubscribe: () => {
-        window.removeEventListener('vaadin-router-location-changed', routerChangedHandler);
-      },
-    };
+  return {
+    router,
+    unsubscribe: () => {
+      window.removeEventListener('vaadin-router-location-changed', routerChangedHandler);
+    },
+  };
 };
 
 export const installRouter: (
-  store: Store<any, AnyAction>, outlet: HTMLElement, routes: RouteItem[], locationUpdatedCallback?: LocationUpdatedCallback
-) => InstallationResult =  createInstallRouter(installRouteHelper);
+  store: Store<any, AnyAction>,
+  outlet: HTMLElement,
+  routes: RouteItem[],
+  locationUpdatedCallback?: LocationUpdatedCallback,
+) => InstallationResult = createInstallRouter(installRouteHelper);

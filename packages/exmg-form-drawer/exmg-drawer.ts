@@ -25,27 +25,24 @@ export class ExmgDrawer extends LitElement {
   handleOpenedChanged(e: CustomEvent) {
     this.opened = e.detail.value;
 
-    this.dispatchEvent(new CustomEvent(
-      'exmg-drawer-opened-changed',
-      {
+    this.dispatchEvent(
+      new CustomEvent('exmg-drawer-opened-changed', {
         bubbles: true,
         composed: true,
         detail: {
           value: e.detail.value,
         },
-      }
-    ));
+      }),
+    );
   }
 
   openDialog() {
     this.opened = true;
   }
 
-  static styles = [
-    style,
-  ];
+  static styles = [style];
 
-  render () {
+  render() {
     // language=html
     return html`
       <style>

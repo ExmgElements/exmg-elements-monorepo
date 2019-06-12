@@ -1,11 +1,18 @@
 import {ExmgQuerySelectors} from '../utils/exmg-query-selectors';
 
 export class ExmgRowSortable {
-  constructor(private querySelectors: ExmgQuerySelectors) {}
+  private querySelectors: ExmgQuerySelectors;
+
+  constructor(qs: ExmgQuerySelectors) {
+    this.querySelectors = qs;
+  }
 
   initFeature(): void {
-    this.querySelectors.getTableBody()
-      .querySelectorAll<HTMLElement>('tr:not([data-initialized]) .grid-row-drag-handler, tr:not([data-initialized]).grid-row-drag-handler')
+    this.querySelectors
+      .getTableBody()
+      .querySelectorAll<HTMLElement>(
+        'tr:not([data-initialized]) .grid-row-drag-handler, tr:not([data-initialized]).grid-row-drag-handler',
+      )
       .forEach((element: HTMLElement) => {
         this.registerMouseListenersHideDetailOnStartDragging(element);
       });
@@ -19,8 +26,9 @@ export class ExmgRowSortable {
     const row = element.closest('tr');
     const rowId = row && row.getAttribute('data-row-key');
     if (rowId) {
-      return () => this.querySelectors!.getTableBody()
-        .querySelector<HTMLTableRowElement>(`tr[data-row-detail-key="${rowId}"]`) || undefined;
+      return () =>
+        this.querySelectors!.getTableBody().querySelector<HTMLTableRowElement>(`tr[data-row-detail-key="${rowId}"]`) ||
+        undefined;
     }
 
     return () => undefined;

@@ -5,16 +5,16 @@ import {arrowSeparator} from './exmg-cms-breadcrumbs-icons';
 import {style as exmgCmsBreadcrumbsStyles} from './styles/exmg-cms-breadcrumbs-styles';
 
 type GenericPropertyValues<T, V = unknown> = Map<T, V>;
-type Props = Exclude<keyof BreadcrumbsElement, number | Symbol>;
+type Props = Exclude<keyof BreadcrumbsElement, number | symbol>;
 
 type SmartPropertyValue = GenericPropertyValues<Props>;
 
-export type BreadcrumbItem = {
+export interface BreadcrumbItem {
   href: string;
   content: string;
   selected?: boolean;
   disabled?: boolean;
-};
+}
 
 /**
  * `exmg-cms-breadcrumbs` is component to visualize router  tree state"
@@ -65,9 +65,7 @@ export class BreadcrumbsElement extends LitElement {
 
   private preparedItems: BreadcrumbItem[] = [];
 
-  static styles = [
-    exmgCmsBreadcrumbsStyles,
-  ];
+  static styles = [exmgCmsBreadcrumbsStyles];
 
   private renderSeparator(currentIndex: number, lastIndex: number) {
     if (currentIndex === lastIndex) {
@@ -75,10 +73,14 @@ export class BreadcrumbsElement extends LitElement {
     }
 
     if (this.hasCustomSeparator) {
-      return html`<span class="separator"></span>`;
+      return html`
+        <span class="separator"></span>
+      `;
     }
 
-    return html`<span class="separator">${this.separatorText || arrowSeparator}</span>`;
+    return html`
+      <span class="separator">${this.separatorText || arrowSeparator}</span>
+    `;
   }
 
   private renderItems() {
@@ -92,22 +94,21 @@ export class BreadcrumbsElement extends LitElement {
             <a href=${href} ?inactive="${!selected}" ?disabled="${disabled}">${content}</a>
             ${this.renderSeparator(index, lastIndex)}
           </div>
-      `;
-      }
-      );
+        `;
+      },
+    );
   }
 
   private prepareItems(): void {
-    let preparedItems = this.items
-      .map(item => {
-        const {href, disabled} = item;
-        const isDisabled = !href || !!disabled;
+    let preparedItems = this.items.map(item => {
+      const {href, disabled} = item;
+      const isDisabled = !href || !!disabled;
 
-        return {
-          ...item,
-          href: isDisabled ? 'javascript:void(0);' : href,
-          disabled: isDisabled,
-        };
+      return {
+        ...item,
+        href: isDisabled ? 'javascript:void(0);' : href,
+        disabled: isDisabled,
+      };
     });
 
     if (this.limit && this.limit < preparedItems.length) {

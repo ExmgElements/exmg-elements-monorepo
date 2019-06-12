@@ -1,5 +1,6 @@
 import '@polymer/paper-toast';
 import {closeIcon} from './exmg-snackbars-icons';
+import {PaperToastElement} from '@polymer/paper-toast';
 
 export interface ExmgSnackbarsOptionsInterface {
   showCloseButton?: boolean;
@@ -26,7 +27,7 @@ const getToastContainerNode = (originalOptions?: ExmgSnackbarsOptionsInterface):
   return toastContainerNode;
 };
 
-const getToastCloseBtnNode = () => {
+const getToastCloseBtnNode = (): HTMLDivElement => {
   const node = document.createElement('div');
 
   node.className = 'close-btn';
@@ -42,15 +43,15 @@ const getToastCloseBtnNode = () => {
 
   node.innerHTML = closeIcon;
 
-  node.onclick = function () {
-    const that = <HTMLElement>this;
-    (<any>that.parentElement).toggle();
+  node.onclick = function() {
+    const that = this as HTMLElement;
+    (that.parentElement as any).toggle();
   };
 
   return node;
 };
 
-const getToastNode = (message: string, originalOptions?: ExmgSnackbarsOptionsInterface) => {
+const getToastNode = (message: string, originalOptions?: ExmgSnackbarsOptionsInterface): PaperToastElement => {
   const node = document.createElement('paper-toast');
   const options = {
     showCloseButton: false,
@@ -68,7 +69,7 @@ const getToastNode = (message: string, originalOptions?: ExmgSnackbarsOptionsInt
   return node;
 };
 
-export const showSnackBar = (message: string, originalOptions?: ExmgSnackbarsOptionsInterface) => {
+export const showSnackBar = (message: string, originalOptions?: ExmgSnackbarsOptionsInterface): void => {
   const toastContainerNode = getToastContainerNode(originalOptions);
   const toastNode = getToastNode(message, originalOptions);
 

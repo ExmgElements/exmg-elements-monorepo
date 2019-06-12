@@ -9,23 +9,28 @@ import './exmg-grid-setting-selection-list';
 
 import {
   Action,
-  BaseFilterConfig, BaseSettingConfig, EventDetailGridToolbarSettingChanged,
+  BaseFilterConfig,
+  BaseSettingConfig,
+  EventDetailGridToolbarSettingChanged,
   Filter,
   FilterConfigType,
   FilterSingleSelectConfig,
-  Setting, SettingConfigType, SettingSelectionListConfig, SettingSelectionListItem,
+  Setting,
+  SettingConfigType,
+  SettingSelectionListConfig,
+  SettingSelectionListItem,
 } from './types/exmg-grid-toolbar-types';
 
 @customElement('exmg-grid-toolbar')
 export class ExmgGridToolbar extends LitElement {
   static styles = [
     css`
-    exmg-paper-combobox {
-      background-color: var(--mdc-theme-surface);
-      padding-left: 10px;
-      border-radius: 4px;
-       --paper-icon-button-ink-color: var(--mdc-theme-primary);
-    }
+      exmg-paper-combobox {
+        background-color: var(--mdc-theme-surface);
+        padding-left: 10px;
+        border-radius: 4px;
+        --paper-icon-button-ink-color: var(--mdc-theme-primary);
+      }
     `,
   ];
   @property({type: String})
@@ -43,16 +48,13 @@ export class ExmgGridToolbar extends LitElement {
   private emitActionExecutedEvent(action: Action) {
     return () => {
       this.dispatchEvent(
-        new CustomEvent(
-          'exmg-grid-toolbar-action-executed',
-          {
-            detail: {
-              id: action.id,
-            },
-            composed: true,
-            bubbles: true,
-          }
-        )
+        new CustomEvent('exmg-grid-toolbar-action-executed', {
+          detail: {
+            id: action.id,
+          },
+          composed: true,
+          bubbles: true,
+        }),
       );
     };
   }
@@ -60,17 +62,14 @@ export class ExmgGridToolbar extends LitElement {
   private emitFilterChangedEvent(filter: Filter) {
     return (event: CustomEvent) => {
       this.dispatchEvent(
-        new CustomEvent(
-          'exmg-grid-toolbar-filter-changed',
-          {
-            detail: {
-              id: filter.id,
-              value: event.detail.value,
-            },
-            composed: true,
-            bubbles: true,
-          }
-        )
+        new CustomEvent('exmg-grid-toolbar-filter-changed', {
+          detail: {
+            id: filter.id,
+            value: event.detail.value,
+          },
+          composed: true,
+          bubbles: true,
+        }),
       );
     };
   }
@@ -78,17 +77,14 @@ export class ExmgGridToolbar extends LitElement {
   private emitSettingChangedEvent(setting: Setting) {
     return (event: CustomEvent<{value: SettingSelectionListItem[]}>) => {
       this.dispatchEvent(
-        new CustomEvent<EventDetailGridToolbarSettingChanged>(
-          'exmg-grid-toolbar-setting-changed',
-          {
-            detail: {
-              id: setting.id,
-              value: event.detail.value,
-            },
-            composed: true,
-            bubbles: true,
-          }
-        )
+        new CustomEvent<EventDetailGridToolbarSettingChanged>('exmg-grid-toolbar-setting-changed', {
+          detail: {
+            id: setting.id,
+            value: event.detail.value,
+          },
+          composed: true,
+          bubbles: true,
+        }),
       );
     };
   }
@@ -96,28 +92,23 @@ export class ExmgGridToolbar extends LitElement {
   private renderActions() {
     return repeat(
       this.actions,
-      (action) => html`
-        <exmg-button
-          class="action"
-          title="${action.tooltip}"
-          @click="${this.emitActionExecutedEvent(action)}"
-        >
+      action => html`
+        <exmg-button class="action" title="${action.tooltip}" @click="${this.emitActionExecutedEvent(action)}">
           <mwc-icon>${action.icon}</mwc-icon>
           ${action.text}
         </exmg-button>
-      `
+      `,
     );
   }
 
   private renderDescription() {
-    return html`${this.description}`;
+    return html`
+      ${this.description}
+    `;
   }
 
   private renderFilters() {
-    return repeat(
-      this.filters,
-      filter => this.renderFilter(filter)
-    );
+    return repeat(this.filters, filter => this.renderFilter(filter));
   }
 
   private renderFilter(filter: Filter) {
@@ -145,17 +136,17 @@ export class ExmgGridToolbar extends LitElement {
         ${repeat(
           filter.config.data,
           (item: any) => item,
-      item => html`<paper-item data-id="${item.id}">${filter.name}: ${item.title}</paper-item>`
+          item =>
+            html`
+              <paper-item data-id="${item.id}">${filter.name}: ${item.title}</paper-item>
+            `,
         )}
       </exmg-paper-combobox>
     `;
   }
 
   private renderSettings() {
-    return repeat(
-      this.settings,
-      setting => this.renderSetting(setting)
-    );
+    return repeat(this.settings, setting => this.renderSetting(setting));
   }
 
   private renderSetting(setting: Setting) {
@@ -166,22 +157,24 @@ export class ExmgGridToolbar extends LitElement {
     return undefined;
   }
 
-  private isSettingSelectionListConfig(setting: Setting<BaseSettingConfig>): setting is Setting<SettingSelectionListConfig> {
+  private isSettingSelectionListConfig(
+    setting: Setting<BaseSettingConfig>,
+  ): setting is Setting<SettingSelectionListConfig> {
     return setting.config.type === SettingConfigType.SelectionList;
   }
 
   private renderSelectionListSetting(setting: Setting<SettingSelectionListConfig>) {
     return html`
-        <exmg-grid-setting-selection-list
-          class="setting"
-          setting-id="${setting.id}"
-          dialog-title="${setting.dialogTitle}"
-          tooltip="${setting.tooltip}"
-          icon="${setting.icon}"
-          .settingData="${setting.config.data}"
-          @exmg-grid-setting-changed="${this.emitSettingChangedEvent(setting)}"
-        >
-        </exmg-grid-setting-selection-list>
+      <exmg-grid-setting-selection-list
+        class="setting"
+        setting-id="${setting.id}"
+        dialog-title="${setting.dialogTitle}"
+        tooltip="${setting.tooltip}"
+        icon="${setting.icon}"
+        .settingData="${setting.config.data}"
+        @exmg-grid-setting-changed="${this.emitSettingChangedEvent(setting)}"
+      >
+      </exmg-grid-setting-selection-list>
     `;
   }
 
@@ -191,39 +184,78 @@ export class ExmgGridToolbar extends LitElement {
       <style>
         :host {
           --paper-item-focused: {
-            background-color: var(--exmg-grid-toolbar-filter-item-active-bg-color, var(--exmg-theme-table-on-surface-low, var(--mdc-theme-secondary)));
-          };
+            background-color: var(
+              --exmg-grid-toolbar-filter-item-active-bg-color,
+              var(--exmg-theme-table-on-surface-low, var(--mdc-theme-secondary))
+            );
+          }
           --paper-item-selected: {
-            background-color: var(--exmg-grid-toolbar-filter-item-active-bg-color, var(--exmg-theme-table-on-surface-low, var(--mdc-theme-secondary)));
+            background-color: var(
+              --exmg-grid-toolbar-filter-item-active-bg-color,
+              var(--exmg-theme-table-on-surface-low, var(--mdc-theme-secondary))
+            );
           }
           --paper-button-ink-color: var(--exmg-grid-toolbar-filter-item-active-bg-color, var(--mdc-theme-surface));
           --paper-input-container-color: var(--exmg-grid-toolbar-on-surface-color, var(--mdc-theme-on-surface));
           --paper-input-container-focus-color: var(--exmg-grid-toolbar-on-surface-color, var(--mdc-theme-primary));
 
-          --exmg-paper-combobox-selected-item-color: var(--exmg-grid-toolbar-on-surface-color, var(--mdc-theme-on-surface));
+          --exmg-paper-combobox-selected-item-color: var(
+            --exmg-grid-toolbar-on-surface-color,
+            var(--mdc-theme-on-surface)
+          );
           --exmg-paper-combobox-selected-item-bg-color: var(--exmg-grid-toolbar-surface-color, transparent);
-          --exmg-paper-combobox-dropdown-button-color: var(--exmg-grid-toolbar-on-surface-color, var(--mdc-theme-on-surface));
+          --exmg-paper-combobox-dropdown-button-color: var(
+            --exmg-grid-toolbar-on-surface-color,
+            var(--mdc-theme-on-surface)
+          );
           --exmg-paper-combobox-dropdown-button-bg-color: var(--exmg-grid-toolbar-surface-color, transparent);
-          --exmg-paper-combobox-dropdown-list-color: var(--exmg-grid-toolbar-on-surface-color, var(--mdc-theme-on-surface));
-          --exmg-paper-combobox-dropdown-list-bg-color: var(--exmg-grid-toolbar-surface-color, var(--mdc-theme-surface));
+          --exmg-paper-combobox-dropdown-list-color: var(
+            --exmg-grid-toolbar-on-surface-color,
+            var(--mdc-theme-on-surface)
+          );
+          --exmg-paper-combobox-dropdown-list-bg-color: var(
+            --exmg-grid-toolbar-surface-color,
+            var(--mdc-theme-surface)
+          );
         }
         :host exmg-grid-base-toolbar[active] {
           --paper-item-focused: {
-            background-color: var(--exmg-grid-toolbar-filter-item-active-bg-color, var(--exmg-theme-table-on-surface-low, var(--mdc-theme-secondary)));
-          };
+            background-color: var(
+              --exmg-grid-toolbar-filter-item-active-bg-color,
+              var(--exmg-theme-table-on-surface-low, var(--mdc-theme-secondary))
+            );
+          }
           --paper-item-selected: {
-            background-color: var(--exmg-grid-toolbar-filter-item-active-bg-color, var(--exmg-theme-table-on-surface-low, var(--mdc-theme-secondary)));
+            background-color: var(
+              --exmg-grid-toolbar-filter-item-active-bg-color,
+              var(--exmg-theme-table-on-surface-low, var(--mdc-theme-secondary))
+            );
           }
           --paper-button-ink-color: var(--exmg-grid-toolbar-filter-item-active-bg-color, var(--mdc-theme-secondary));
           --paper-input-container-color: var(--exmg-grid-toolbar-active-on-surface-color, var(--mdc-theme-on-surface));
-          --paper-input-container-focus-color: var(--exmg-grid-toolbar-active-on-surface-color, var(--mdc-theme-primary));
+          --paper-input-container-focus-color: var(
+            --exmg-grid-toolbar-active-on-surface-color,
+            var(--mdc-theme-primary)
+          );
 
-          --exmg-paper-combobox-selected-item-color: var(--exmg-grid-toolbar-active-on-surface-color, var(--mdc-theme-on-surface));
+          --exmg-paper-combobox-selected-item-color: var(
+            --exmg-grid-toolbar-active-on-surface-color,
+            var(--mdc-theme-on-surface)
+          );
           --exmg-paper-combobox-selected-item-bg-color: var(--exmg-grid-toolbar-bg-active-surface-color, transparent);
-          --exmg-paper-combobox-dropdown-button-color: var(--exmg-grid-toolbar-active-on-surface-color, var(--mdc-theme-on-surface));
+          --exmg-paper-combobox-dropdown-button-color: var(
+            --exmg-grid-toolbar-active-on-surface-color,
+            var(--mdc-theme-on-surface)
+          );
           --exmg-paper-combobox-dropdown-button-bg-color: var(--exmg-grid-toolbar-bg-active-surface-color, transparent);
-          --exmg-paper-combobox-dropdown-list-color: var(--exmg-grid-toolbar-active-on-surface-color, var(--mdc-theme-on-surface));
-          --exmg-paper-combobox-dropdown-list-bg-color: var(--exmg-grid-toolbar-bg-active-surface-color, var(--mdc-theme-surface));
+          --exmg-paper-combobox-dropdown-list-color: var(
+            --exmg-grid-toolbar-active-on-surface-color,
+            var(--mdc-theme-on-surface)
+          );
+          --exmg-paper-combobox-dropdown-list-bg-color: var(
+            --exmg-grid-toolbar-bg-active-surface-color,
+            var(--mdc-theme-surface)
+          );
         }
       </style>
       <exmg-grid-base-toolbar>

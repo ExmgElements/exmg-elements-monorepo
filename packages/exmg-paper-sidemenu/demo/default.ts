@@ -5,7 +5,6 @@ import {menu} from './menu.js';
 
 @customElement('x-demo')
 export class XDemo extends LitElement {
-
   @property({type: Array})
   menu: [] | undefined;
 
@@ -35,16 +34,20 @@ export class XDemo extends LitElement {
 
   render() {
     return html`
-      <exmg-paper-sidemenu .menu=${menu} selected=${this.selected}
-        @selected-change=${(e:CustomEvent) => this.selected = e.detail}
-        @collapsed=${(e:CustomEvent) => this.collapsed = e.detail} debug>
+      <exmg-paper-sidemenu
+        .menu=${menu}
+        selected=${this.selected}
+        @selected-change=${(e: CustomEvent) => (this.selected = e.detail)}
+        @collapsed=${(e: CustomEvent) => (this.collapsed = e.detail)}
+        debug
+      >
         <exmg-paper-sidemenu-header
           slot="header"
           .collapsed=${this.collapsed}
           selected=${this.selected}
-          @selected-change=${(e:CustomEvent) => this.selected = e.detail}
+          @selected-change=${(e: CustomEvent) => (this.selected = e.detail)}
           debug
-          >
+        >
         </exmg-paper-sidemenu-header>
       </exmg-paper-sidemenu>
     `;

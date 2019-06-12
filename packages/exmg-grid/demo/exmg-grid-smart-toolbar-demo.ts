@@ -3,12 +3,12 @@ import {
   Filter,
   FilterSingleSelectConfig,
   FilterConfigType,
-  SettingSelectionListItem
+  SettingSelectionListItem,
 } from '../src/table/types/exmg-grid-toolbar-types';
 import {
   ActionAmountSelectedItemsCondition,
   ActionWithCondition,
-  ActionConditionType
+  ActionConditionType,
 } from '../src/table/types/exmg-grid-smart-toolbar-types';
 
 @customElement('exmg-grid-smart-toolbar-demo')
@@ -104,45 +104,48 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
   }
 
   private updateSelectedItems() {
-    this.amountOfSelectedItems = parseInt(this.shadowRoot!.querySelector<HTMLInputElement>('#amount-of-selected-items')!.value, 10);
+    this.amountOfSelectedItems = parseInt(
+      this.shadowRoot!.querySelector<HTMLInputElement>('#amount-of-selected-items')!.value,
+      10,
+    );
   }
 
   render() {
     return html`
-        <style>
-          :host {
-            --mdc-theme-primary: #0071dc;
-            --exmg-grid-setting-checkbox-bg-color: #0071dc;
-            --exmg-grid-toolbar-setting-list-item-active-bg-color: #0071dc;
-            --exmg-grid-toolbar-filter-item-active-bg-color: rgba(0,113,220,0.44);
+      <style>
+        :host {
+          --mdc-theme-primary: #0071dc;
+          --exmg-grid-setting-checkbox-bg-color: #0071dc;
+          --exmg-grid-toolbar-setting-list-item-active-bg-color: #0071dc;
+          --exmg-grid-toolbar-filter-item-active-bg-color: rgba(0, 113, 220, 0.44);
 
-            padding: 10px;
-            display: block;
-            background-color: #f6f6f6;
-          }
-        </style>
-        <h1>With actions</h1>
-        <input id="amount-of-selected-items" value="${this.amountOfSelectedItems}">
-        <button @click="${this.updateSelectedItems}">Update selected items</button>
-        <hr>
-        <exmg-grid-smart-toolbar
-            amount-of-selected-items="${this.amountOfSelectedItems}"
-            .actions="${this.actions}"
-            description="${this.description}"
-            .filters="${this.filters}"
-            ?show-column-filter="${true}"
-            .columnFilterColumns="${this.columns}"
-            @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
-            @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
-            @exmg-grid-toolbar-setting-changed="${this.onSettingChanged}"
-        ></exmg-grid-smart-toolbar>
-        <h1>Without actions</h1>
-        <exmg-grid-smart-toolbar
-            description="${this.description}"
-            .filters="${this.filters}"
-            @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
-            @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
-        ></exmg-grid-smart-toolbar>
+          padding: 10px;
+          display: block;
+          background-color: #f6f6f6;
+        }
+      </style>
+      <h1>With actions</h1>
+      <input id="amount-of-selected-items" value="${this.amountOfSelectedItems}" />
+      <button @click="${this.updateSelectedItems}">Update selected items</button>
+      <hr />
+      <exmg-grid-smart-toolbar
+        amount-of-selected-items="${this.amountOfSelectedItems}"
+        .actions="${this.actions}"
+        description="${this.description}"
+        .filters="${this.filters}"
+        ?show-column-filter="${true}"
+        .columnFilterColumns="${this.columns}"
+        @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
+        @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
+        @exmg-grid-toolbar-setting-changed="${this.onSettingChanged}"
+      ></exmg-grid-smart-toolbar>
+      <h1>Without actions</h1>
+      <exmg-grid-smart-toolbar
+        description="${this.description}"
+        .filters="${this.filters}"
+        @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
+        @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
+      ></exmg-grid-smart-toolbar>
     `;
   }
 }

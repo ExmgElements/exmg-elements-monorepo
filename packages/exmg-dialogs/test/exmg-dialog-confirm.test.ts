@@ -9,13 +9,13 @@ declare const flush: (cb?: Function) => void;
 suite('exmg-dialog-confirm', () => {
   let element: ExmgConfirmDialog;
 
-  setup((done) => {
+  setup(done => {
     element = fixture('BasicTestFixture');
     flush(done);
   });
 
-  test('instantiating the element with default properties works', (done) => {
-    element.addEventListener('submit', (event) => {
+  test('instantiating the element with default properties works', done => {
+    element.addEventListener('submit', event => {
       assert.isNotNull(event, 'Submit event is thrown');
       done();
     });

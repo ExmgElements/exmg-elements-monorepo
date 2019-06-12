@@ -16,26 +16,23 @@ import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
 
 import {EventSelectPayload, GenericPropertyValues, isEventWithPath, Token} from './exmg-custom-types';
 import {PaperMenuButton} from '@polymer/paper-menu-button/paper-menu-button';
-import  {PaperListboxElement} from '@polymer/paper-listbox/paper-listbox';
+import {PaperListboxElement} from '@polymer/paper-listbox/paper-listbox';
 
 type PrivateProps = 'inputValue' | 'selectedValue';
-type Props = Exclude<keyof PaperComboboxElement, number | Symbol> | PrivateProps;
+type Props = Exclude<keyof PaperComboboxElement, number | symbol> | PrivateProps;
 
 type ChangedProps = GenericPropertyValues<Props>;
 
-const copyElementStyle = (source: HTMLElement, target: HTMLElement): void  => {
+const copyElementStyle = (source: HTMLElement, target: HTMLElement): void => {
   const computedStyle = window.getComputedStyle(source, null);
-  Array.from(computedStyle)
-      .forEach(key => target.style.setProperty(
-          key,
-          computedStyle.getPropertyValue(key),
-          computedStyle.getPropertyPriority(key)
-      ));
+  Array.from(computedStyle).forEach(key =>
+    target.style.setProperty(key, computedStyle.getPropertyValue(key), computedStyle.getPropertyPriority(key)),
+  );
 };
 
 /**
-* @namespace Exmg
-*/
+ * @namespace Exmg
+ */
 (window as any).Exmg = (window as any).Exmg || {};
 
 const BACKSPACE = 8;
@@ -43,7 +40,7 @@ const ARROW_DOWN = 40;
 const DELETE = 127;
 const ESC = 27;
 
-const debounce  = (time: number) => {
+const debounce = (time: number) => {
   let timer: number;
 
   return (cb?: Function): void => {
@@ -55,35 +52,35 @@ const debounce  = (time: number) => {
 };
 
 /**
-* `exmg-paper-combobox` is an wrapper element to make list data selectable.
-* The Element comes with options to make the list required, disabled and/or auto-validate.
-* Lists should consist of id's and names and can have images.
-* ```
-* <exmg-paper-combobox label="Creatives" selected="1" required>
-*   <paper-item>Rubin</paper-item>
-*   <paper-item>Gennie</paper-item>
-*   <paper-item>Ronna</paper-item>
-*   <paper-item>Jacquie</paper-item>
-*   <paper-item>Norene</paper-item>
-*   <paper-item>Beatris</paper-item>
-*   <paper-item>Ginny</paper-item>
-*   <paper-item>Tiesha</paper-item>
-*   <paper-item>Leonore</paper-item>
-*   <paper-item>Evonne</paper-item>
-* </exmg-paper-combobox>
-* ```
-*
-* @customElement
-* @polymer
-* @group Exmg Elements
-* @element exmg-paper-combobox
-* @demo demo/index.html
-* @memberof Exmg
-* @extends LitElement
-* @summary Paper Combobox Element
-* @eventType exmg-combobox-select - detail is type EventSelectPayload
-* @eventType exmg-combobox-deselect - detail undefined
-*/
+ * `exmg-paper-combobox` is an wrapper element to make list data selectable.
+ * The Element comes with options to make the list required, disabled and/or auto-validate.
+ * Lists should consist of id's and names and can have images.
+ * ```
+ * <exmg-paper-combobox label="Creatives" selected="1" required>
+ *   <paper-item>Rubin</paper-item>
+ *   <paper-item>Gennie</paper-item>
+ *   <paper-item>Ronna</paper-item>
+ *   <paper-item>Jacquie</paper-item>
+ *   <paper-item>Norene</paper-item>
+ *   <paper-item>Beatris</paper-item>
+ *   <paper-item>Ginny</paper-item>
+ *   <paper-item>Tiesha</paper-item>
+ *   <paper-item>Leonore</paper-item>
+ *   <paper-item>Evonne</paper-item>
+ * </exmg-paper-combobox>
+ * ```
+ *
+ * @customElement
+ * @polymer
+ * @group Exmg Elements
+ * @element exmg-paper-combobox
+ * @demo demo/index.html
+ * @memberof Exmg
+ * @extends LitElement
+ * @summary Paper Combobox Element
+ * @eventType exmg-combobox-select - detail is type EventSelectPayload
+ * @eventType exmg-combobox-deselect - detail undefined
+ */
 @customElement('exmg-paper-combobox')
 export class PaperComboboxElement extends LitElement {
   /**
@@ -207,7 +204,7 @@ export class PaperComboboxElement extends LitElement {
 
   private readonly keyDownBackspaceDebounce: (cb?: Function) => void = debounce(200);
 
-  private readonly inputChangeDebounce: (cb?: Function) => void  = debounce(300);
+  private readonly inputChangeDebounce: (cb?: Function) => void = debounce(300);
 
   constructor() {
     super();
@@ -240,7 +237,7 @@ export class PaperComboboxElement extends LitElement {
 
   private executeObservers(changedProperties: ChangedProps): void {
     Object.entries(this.observers).forEach(([key, cb]) => {
-      if (cb && changedProperties.has(<Props>key)) {
+      if (cb && changedProperties.has(key as Props)) {
         cb(changedProperties);
       }
     });
@@ -248,7 +245,7 @@ export class PaperComboboxElement extends LitElement {
 
   private observeInputChange() {
     if (this.inputElement && this.inputWidthHelperElement) {
-      this.inputElement.style.width = `${(this.inputWidthHelperElement.offsetWidth + 10)}px`;
+      this.inputElement.style.width = `${this.inputWidthHelperElement.offsetWidth + 10}px`;
     }
 
     if (!this.isElementInitialized) {
@@ -266,7 +263,6 @@ export class PaperComboboxElement extends LitElement {
         } else if (this.menuElement!.opened && !this.isAnyItemActive) {
           this.menuElement!.close();
         }
-
       });
     }
   }
@@ -297,9 +293,9 @@ export class PaperComboboxElement extends LitElement {
       return;
     }
 
-    const content: Element | null = this.selectedItemSelector ?
-        this.selectedItem.querySelector(this.selectedItemSelector) :
-        this.selectedItem;
+    const content: Element | null = this.selectedItemSelector
+      ? this.selectedItem.querySelector(this.selectedItemSelector)
+      : this.selectedItem;
 
     const text = (content && content.textContent) || '';
 
@@ -313,7 +309,7 @@ export class PaperComboboxElement extends LitElement {
     let isAnyItemActive = false;
 
     items.forEach(item => {
-      if (hasFilterPhrase && item.textContent &&  item.textContent.toLowerCase().indexOf(phrase) === -1) {
+      if (hasFilterPhrase && item.textContent && item.textContent.toLowerCase().indexOf(phrase) === -1) {
         item.setAttribute('hidden', '');
       } else {
         isAnyItemActive = true;
@@ -330,7 +326,7 @@ export class PaperComboboxElement extends LitElement {
 
   private getSelectedItemKey(selectedItem: Element): number | string | undefined {
     if (!!this.attrForSelected) {
-      return  selectedItem.getAttribute(this.attrForSelected) || undefined;
+      return selectedItem.getAttribute(this.attrForSelected) || undefined;
     }
 
     const index = this.indexOf(selectedItem);
@@ -343,15 +339,15 @@ export class PaperComboboxElement extends LitElement {
   }
 
   /**
-    * this method can be used to set the focus of the element
-    */
+   * this method can be used to set the focus of the element
+   */
   focus() {
     this.inputElement!.focus();
   }
 
   /**
-    * This method will automatically set the label float.
-    */
+   * This method will automatically set the label float.
+   */
   private computeAlwaysFloatLabel(): boolean {
     if (this.alwaysFloatLabel) {
       return true;
@@ -422,10 +418,12 @@ export class PaperComboboxElement extends LitElement {
   }
 
   private onClick(e: Event): void {
-    const inside: boolean = isEventWithPath(e) ? !!e.path && !!e.composedPath().find((path) => path === this) : e.target === this;
+    const inside: boolean = isEventWithPath(e)
+      ? !!e.path && !!e.composedPath().find(path => path === this)
+      : e.target === this;
 
     // Detect outside element click for auto validate input
-    if (this.autoValidate && (this.previousInsideClick && !inside) || this.token) {
+    if ((this.autoValidate && (this.previousInsideClick && !inside)) || this.token) {
       this.validate();
     }
 
@@ -474,7 +472,7 @@ export class PaperComboboxElement extends LitElement {
   }
 
   private onInputValueChange(e: Event): void {
-    this.inputValue = (<HTMLInputElement>e.target).value;
+    this.inputValue = (e.target as HTMLInputElement).value;
   }
 
   private onInputFocusChanged(event: CustomEvent): void {
@@ -487,8 +485,8 @@ export class PaperComboboxElement extends LitElement {
 
   private initializeElement() {
     /* Initialize the input helper span element for determining the actual width of the input
-    * text. This width will be used to create a dynamic width on the input field
-    */
+     * text. This width will be used to create a dynamic width on the input field
+     */
     if (this.inputWidthHelperElement) {
       copyElementStyle(this.inputElement!, this.inputWidthHelperElement);
       this.inputWidthHelperElement.style.position = 'absolute';
@@ -516,15 +514,15 @@ export class PaperComboboxElement extends LitElement {
 
     const {left: elementLeft} = element.getBoundingClientRect();
     const {scrollWidth: elementScrollWidth} = element;
-    const getGreater = (...values: number[]): number  => Math.max(...values);
-    const getLower = (...values: number[]): number  => Math.min(...values);
+    const getGreater = (...values: number[]): number => Math.max(...values);
+    const getLower = (...values: number[]): number => Math.min(...values);
 
     if (elementScrollWidth > 0 && elementScrollWidth < this.maxWidthMenuList) {
       const elementMaximumWidthFromRight = document.documentElement!.clientWidth - elementLeft;
       element.style.maxWidth = `${getLower(getGreater(elementMaximumWidthFromRight, 100), this.maxWidthMenuList)}px`;
     }
 
-    const {top:  elementTop} = element.getBoundingClientRect();
+    const {top: elementTop} = element.getBoundingClientRect();
     const {scrollHeight: elementScrollHeight} = element;
     if (elementScrollHeight > 0) {
       const elementMaximumHeightToBottom = document.documentElement!.clientHeight - elementTop;
@@ -534,14 +532,15 @@ export class PaperComboboxElement extends LitElement {
 
   private shouldFireEvent(changedProperties: GenericPropertyValues<keyof this | PrivateProps>): boolean {
     const props: (keyof this | PrivateProps)[] = ['selected', 'selectedItem'];
-    const anyPropChanged = props.some((it: keyof this | PrivateProps) =>
-      // @ts-ignore
-      changedProperties.has(it) && changedProperties.get(it) !== this[it]
+    const anyPropChanged = props.some(
+      (it: keyof this | PrivateProps) =>
+        // @ts-ignore
+        changedProperties.has(it) && changedProperties.get(it) !== this[it],
     );
 
     const {id = undefined} = this.token || {};
 
-    return (anyPropChanged && id === this.selected);
+    return anyPropChanged && id === this.selected;
   }
 
   /*****  LIT ELEMENT HOOKS ******/
@@ -684,7 +683,13 @@ export class PaperComboboxElement extends LitElement {
           ?invalid="${this.invalid}"
           id="paperInputContainer"
         >
-          ${ !this.selected || !this.noFloatLabel ? html`<label slot="label" ?hidden="${!this.label}" aria-hidden="true">${this.label}</label>` : '' }
+          ${
+            !this.selected || !this.noFloatLabel
+              ? html`
+                  <label slot="label" ?hidden="${!this.label}" aria-hidden="true">${this.label}</label>
+                `
+              : ''
+          }
           <iron-input bind-value="${this.inputValue}" slot="input">
             <span class="${classMap({tokens: true, selected: !!this.token})}">
               ${this.renderTokenButton()}
@@ -707,7 +712,9 @@ export class PaperComboboxElement extends LitElement {
           @paper-dropdown-open="${this.onMenuButtonOpen}"
           @paper-dropdown-close="${this.onMenuButtonClose}"
           close-on-activate vertical-offset="40" horizontal-align="right">
-          <paper-icon-button icon="exmg-paper-combobox-icons:arrow-drop-down" ?data-opened="${this.opened}" slot="dropdown-trigger">
+          <paper-icon-button icon="exmg-paper-combobox-icons:arrow-drop-down" ?data-opened="${
+            this.opened
+          }" slot="dropdown-trigger">
           </paper-icon-button>
           <paper-listbox
             id="listbox"
@@ -731,7 +738,9 @@ export class PaperComboboxElement extends LitElement {
       return null;
     }
 
-    return html`<paper-button tabindex="-1" @click="${this.onTokenClick}"><span>${this.token!.text}</span></paper-button>`;
+    return html`
+      <paper-button tabindex="-1" @click="${this.onTokenClick}"><span>${this.token!.text}</span></paper-button>
+    `;
   }
 }
 

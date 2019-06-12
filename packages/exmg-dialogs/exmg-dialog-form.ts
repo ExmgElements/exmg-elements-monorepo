@@ -47,9 +47,7 @@ export class ExmgFormDialog extends LitElement {
   @query('#submitBtn')
   private submitBtnNode?: HTMLElement | any;
 
-  static styles = [
-    style,
-  ];
+  static styles = [style];
 
   constructor() {
     super();
@@ -71,7 +69,7 @@ export class ExmgFormDialog extends LitElement {
   }
 
   public close() {
-   if (this.dialogNode) {
+    if (this.dialogNode) {
       this.dialogNode.close();
     }
   }
@@ -127,21 +125,29 @@ export class ExmgFormDialog extends LitElement {
     }
 
     // dispatch event containing the serialized form data
-    this.dispatchEvent(new CustomEvent('submit', {bubbles: false, composed: true, detail: this.formNode.serializeForm()}));
+    this.dispatchEvent(
+      new CustomEvent('submit', {bubbles: false, composed: true, detail: this.formNode.serializeForm()}),
+    );
   }
 
   protected render() {
     return html`
       <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click @iron-overlay-closed="${this.onCloseDialog}">
-        ${this.hideCloseButton ? '' : html`<span @click=${this.close} class="close-button">✕</span>`}
+        ${this.hideCloseButton
+          ? ''
+          : html`
+              <span @click=${this.close} class="close-button">✕</span>
+            `}
         <header>
           <h2 class="title">${this.title}</h2>
         </header>
         <paper-dialog-scrollable>
           <div class="body">
-            <div class="error ${ !!this.errorMessage ? 'show' : '' }">
+            <div class="error ${!!this.errorMessage ? 'show' : ''}">
               <span class="body">
-                <svg height="24" viewBox="0 0 24 24" width="24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+                <svg height="24" viewBox="0 0 24 24" width="24">
+                  <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" />
+                </svg>
                 <span class="msg">${this.errorMessage}</span>
               </span>
             </div>
@@ -154,7 +160,9 @@ export class ExmgFormDialog extends LitElement {
         </paper-dialog-scrollable>
         <div class="actions">
           <exmg-button dialog-dismiss>Cancel</exmg-button>
-          <exmg-button id="submitBtn" @click="${this.submit}" ?loading="${this.submitting}" unelevated>${this.buttonCopy}</exmg-button>
+          <exmg-button id="submitBtn" @click="${this.submit}" ?loading="${this.submitting}" unelevated
+            >${this.buttonCopy}</exmg-button
+          >
         </div>
       </paper-dialog>
     `;

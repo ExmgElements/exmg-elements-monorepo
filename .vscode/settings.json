@@ -1,9 +1,29 @@
 {
   "files.autoGuessEncoding": true,
   "files.exclude": {
-    "**/*.js": { "when": "$(basename).ts"},
-    "**/*.d.ts": { "when": "$(basename).ts"},
-    "**/*.ts": { "when": "$(basename).scss"},
+    "**/*.js": {"when": "$(basename).ts"},
+    "**/*.d.ts": {"when": "$(basename).ts"},
+    "**/*.ts": {"when": "$(basename).scss"},
     "**/*.js.map": true
+  },
+  "eslint.enable": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.options": {
+    "configFile": "./eslintrc.json"
+  },
+  "eslint.validate": ["typescript"],
+  "prettier.eslintIntegration": true,
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "[javascriptreact]": {
+    "editor.formatOnSave": false
+  },
+  "[typescript]": {
+    "editor.formatOnSave": true
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": false
   }
 }

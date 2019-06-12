@@ -22,19 +22,19 @@ export class Drawer extends LitElement {
   }
 
   handleShouldFailChange(e: Event) {
-    this.shouldFail = (<HTMLInputElement>e.composedPath()[0]).checked;
+    this.shouldFail = (e.composedPath()[0] as HTMLInputElement).checked;
   }
 
   handleKeepOpenedOnSubmitSuccess(e: Event) {
-    this.keepOpenedOnSubmitSuccess = (<HTMLInputElement>e.composedPath()[0]).checked;
+    this.keepOpenedOnSubmitSuccess = (e.composedPath()[0] as HTMLInputElement).checked;
   }
 
   handleResetFormOnSubmitSuccess(e: Event) {
-    this.resetFormOnSubmitSuccess = (<HTMLInputElement>e.composedPath()[0]).checked;
+    this.resetFormOnSubmitSuccess = (e.composedPath()[0] as HTMLInputElement).checked;
   }
 
   handleNoCancelOnOutsideClick(e: Event) {
-    this.noCancelOnOutsideClick = (<HTMLInputElement>e.composedPath()[0]).checked;
+    this.noCancelOnOutsideClick = (e.composedPath()[0] as HTMLInputElement).checked;
   }
 
   onSubmit(event: any) {
@@ -51,7 +51,7 @@ export class Drawer extends LitElement {
     console.log('cancel', event);
   }
 
-  render () {
+  render() {
     // language=html
     return html`
       <style>
@@ -60,28 +60,45 @@ export class Drawer extends LitElement {
         }
       </style>
       <div style="padding: 20px">
-        <input type="button" @click="${this.openDialog}" value="Open dialog">
-        <br><br>
+        <input type="button" @click="${this.openDialog}" value="Open dialog" />
+        <br /><br />
         <label>
-          <input type="checkbox" name="shouldFail" value="${this.shouldFail}" @change="${this.handleShouldFailChange}">
+          <input
+            type="checkbox"
+            name="shouldFail"
+            value="${this.shouldFail}"
+            @change="${this.handleShouldFailChange}"
+          />
           Should Fail
         </label>
-        <br><br>
+        <br /><br />
         <label>
-          <input type="checkbox" name="keepOpenedOnSubmitSuccess"
-          value="${this.keepOpenedOnSubmitSuccess}" @change="${this.handleKeepOpenedOnSubmitSuccess}">
+          <input
+            type="checkbox"
+            name="keepOpenedOnSubmitSuccess"
+            value="${this.keepOpenedOnSubmitSuccess}"
+            @change="${this.handleKeepOpenedOnSubmitSuccess}"
+          />
           Keep opened on submit success
         </label>
-        <br><br>
+        <br /><br />
         <label>
-          <input type="checkbox" name="resetFormOnSubmitSuccess"
-          value="${this.resetFormOnSubmitSuccess}" @change="${this.handleResetFormOnSubmitSuccess}">
+          <input
+            type="checkbox"
+            name="resetFormOnSubmitSuccess"
+            value="${this.resetFormOnSubmitSuccess}"
+            @change="${this.handleResetFormOnSubmitSuccess}"
+          />
           Reset form on submit success
         </label>
-        <br><br>
+        <br /><br />
         <label>
-          <input type="checkbox" name="noCancelOnOutsideClick"
-          value="${this.noCancelOnOutsideClick}" @change="${this.handleNoCancelOnOutsideClick}">
+          <input
+            type="checkbox"
+            name="noCancelOnOutsideClick"
+            value="${this.noCancelOnOutsideClick}"
+            @change="${this.handleNoCancelOnOutsideClick}"
+          />
           No cancel on outside click
         </label>
       </div>
@@ -100,14 +117,17 @@ export class Drawer extends LitElement {
           <paper-item>Trivia</paper-item>
           <paper-item>Other</paper-item>
         </exmg-paper-combobox>
-        <paper-input name="question" label="Question" value="Who's Dylan Hartigan's favorite artist?" required></paper-input>
+        <paper-input
+          name="question"
+          label="Question"
+          value="Who's Dylan Hartigan's favorite artist?"
+          required
+        ></paper-input>
         <paper-input name="answer_a" label="Answer A" value="Beyoncé"></paper-input>
         <paper-input name="answer_b" label="Answer B" value="Eminem"></paper-input>
         <paper-input name="answer_c" label="Answer C" value="Ariana Grande"></paper-input>
-        <br>
-        <exmg-button
-          unelevated
-        >
+        <br />
+        <exmg-button unelevated>
           + Add answer
         </exmg-button>
       </exmg-form-drawer>

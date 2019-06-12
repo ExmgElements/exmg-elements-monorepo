@@ -6,16 +6,16 @@ declare const flush: (cb?: Function) => void;
 
 const {assert} = chai;
 
-suite('<exmg-cms-breadcrumbs>', function () {
+suite('<exmg-cms-breadcrumbs>', function() {
   let element: BreadcrumbsElement;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('base usage', function () {
+  suite('base usage', function() {
     setup(() => {
       element = fixture('BreadcrumbElementBasicElement');
     });
 
-    test('element is upgraded', function () {
+    test('element is upgraded', function() {
       assert.instanceOf(element, BreadcrumbsElement);
     });
 
@@ -27,7 +27,7 @@ suite('<exmg-cms-breadcrumbs>', function () {
     });
   });
 
-  suite('element with items', function () {
+  suite('element with items', function() {
     setup(async () => {
       element = fixture('BreadcrumbElementBasicElement');
       element.items = [
@@ -56,11 +56,7 @@ suite('<exmg-cms-breadcrumbs>', function () {
       const anchors = Array.from<HTMLAnchorElement>(elementShadowRoot.querySelectorAll<HTMLAnchorElement>('a'));
       const anchorsLength = anchors.length;
       const anchorsContent = anchors.map((aElement: HTMLAnchorElement) => aElement.innerText);
-      const expectedAnchorContent = [
-        element.items[0].content,
-        element.items[3].content,
-        element.items[4].content,
-      ];
+      const expectedAnchorContent = [element.items[0].content, element.items[3].content, element.items[4].content];
 
       assert.equal(element.items.length, 5, 'There is still 5 items');
       assert.equal(anchorsLength, 3, 'But there is 3 links');
@@ -69,7 +65,9 @@ suite('<exmg-cms-breadcrumbs>', function () {
 
     test('element disabled is not clickable', async () => {
       const elementShadowRoot = element.shadowRoot!;
-      const anchors = Array.from<HTMLAnchorElement>(elementShadowRoot.querySelectorAll<HTMLAnchorElement>('a[disabled]'));
+      const anchors = Array.from<HTMLAnchorElement>(
+        elementShadowRoot.querySelectorAll<HTMLAnchorElement>('a[disabled]'),
+      );
       assert.equal(anchors.length, 1, 'There is one disabled element');
       assert.equal(anchors[0].href, 'javascript:void(0);', 'Disabled anchor should not be clickable');
     });
@@ -79,8 +77,9 @@ suite('<exmg-cms-breadcrumbs>', function () {
       element.separatorText = separator;
       await flushCompleted();
       const elementShadowRoot = element.shadowRoot!;
-      const separatorsContent = Array.from<HTMLAnchorElement>(elementShadowRoot.querySelectorAll<HTMLAnchorElement>('.separator'))
-        .map((separatorElement: HTMLElement) => separatorElement.innerText);
+      const separatorsContent = Array.from<HTMLAnchorElement>(
+        elementShadowRoot.querySelectorAll<HTMLAnchorElement>('.separator'),
+      ).map((separatorElement: HTMLElement) => separatorElement.innerText);
 
       assert.equal(separatorsContent.length, 4, 'There is 4 separators');
       assert.isTrue(separatorsContent.every(it => it === separator), 'Separator content is updated');

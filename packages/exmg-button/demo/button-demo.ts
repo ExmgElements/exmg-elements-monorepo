@@ -7,26 +7,25 @@ import '../';
 
 @customElement('exmg-button-demo')
 export class ButtonDemo extends LitElement {
-  @property({type: Boolean}) loading: boolean = false;
+  @property({type: Boolean})
+  public loading: boolean = false;
 
-  static styles = style;
+  public static styles = style;
 
-  changeHandler(e: any) {
+  public changeHandler(e: any) {
     this.loading = !e.target.checked;
   }
-  render () {
+  public render() {
     return html`
-      <style>
-
-      </style>
-      <div>
-        <mwc-checkbox .checked="${this.loading}" @click="${this.changeHandler}"></mwc-checkbox> Toggle Loading
-      </div>
+      <style></style>
+      <div><mwc-checkbox .checked="${this.loading}" @click="${this.changeHandler}"></mwc-checkbox> Toggle Loading</div>
       <div>
         <exmg-button ?loading="${this.loading}">Test 1</exmg-button>
         <exmg-button class="dark" unelevated ?loading="${this.loading}">Test 2</exmg-button>
         <exmg-button class="dark" unelevated ?loading="${this.loading}" disabled>Test 3</exmg-button>
-        <exmg-button class="dark" unelevated ?loading="${this.loading}"><mwc-icon>merge_type</mwc-icon>Test 4</exmg-button>
+        <exmg-button class="dark" unelevated ?loading="${this.loading}"
+          ><mwc-icon>merge_type</mwc-icon>Test 4</exmg-button
+        >
       </div>
     `;
   }

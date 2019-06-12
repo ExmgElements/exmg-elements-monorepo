@@ -5,7 +5,7 @@ import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
 /**
  * Orientation map to limit dragging to horizontal or vertical.
  */
-const orientationMap =  {
+const orientationMap = {
   horizontal: {x: 1, y: 0},
   vertical: {x: 0, y: 1},
 };
@@ -30,7 +30,6 @@ const orientationMap =  {
  */
 @customElement('exmg-sortable')
 export class SortableElement extends LitElement {
-
   @property({type: String, attribute: 'handle-selector'})
   public handleSelector?: string;
 
@@ -58,7 +57,7 @@ export class SortableElement extends LitElement {
   public animationTiming: any = {duration: 200, easing: 'ease-out'};
 
   @property({type: String})
-  public orientation?: 'horizontal'|'vertical';
+  public orientation?: 'horizontal' | 'vertical';
 
   private dragRequestPending: boolean = false;
   private draggedElement?: HTMLElement;
@@ -88,7 +87,7 @@ export class SortableElement extends LitElement {
   protected updated(changedProperties: PropertyValues): void {
     if (changedProperties.has('sortableHostNode')) {
       // reset listeners when sortableHostNode changed
-      removeListener(<HTMLElement>changedProperties.get('sortableHostNode') || this, 'track', this.handleTrack);
+      removeListener((changedProperties.get('sortableHostNode') as HTMLElement) || this, 'track', this.handleTrack);
       addListener(this.getSortableHost(), 'track', this.handleTrack);
 
       if (this.sortableHostNode) {
@@ -114,8 +113,8 @@ export class SortableElement extends LitElement {
    * Tracks a pointer from touchstart/mousedown to touchend/mouseup. Note that the start state is fired following
    * the first actual move event following a touchstart/mousedown.
    */
-  private handleTrack(e:Event): void {
-    switch ((<CustomEvent>e).detail.state) {
+  private handleTrack(e: Event): void {
+    switch ((e as CustomEvent).detail.state) {
       case 'start':
         if (!this.dragRequestPending) {
           this.trackStart(e);
@@ -140,10 +139,10 @@ export class SortableElement extends LitElement {
    * Initialized a drag and drop sequence if a child node was clicked that matches the itemSelector property. If a
    * handleSelector is defined, a node matching this selector must be clicked instead.
    */
-  private trackStart(e:Event): void {
+  private trackStart(e: Event): void {
     const handle = this.handleSelector;
-    const eventPath: EventTarget[] = (<any>e).path ? (<any>e).path : e.composedPath();
-    const targetElement = <HTMLElement>eventPath[0];
+    const eventPath: EventTarget[] = (e as any).path ? (e as any).path : e.composedPath();
+    const targetElement = eventPath[0] as HTMLElement;
 
     /* Look for closest handle */
     if (handle && !targetElement.closest(handle)) {
@@ -155,7 +154,7 @@ export class SortableElement extends LitElement {
     this.dragRequestPending = true;
 
     const selector = this.itemSelector;
-    const node = <HTMLElement>targetElement.closest(selector);
+    const node = targetElement.closest(selector) as HTMLElement;
 
     if (node) {
       e.preventDefault();
@@ -163,7 +162,7 @@ export class SortableElement extends LitElement {
       this.draggedElement = node;
       this.sortableNodes = Array.from(this.getSortableHost().querySelectorAll(selector)) || [];
       this.draggedElementClone = this.createClone(node);
-      this.draggedElementOrigin = <HTMLElement>node.nextSibling;
+      this.draggedElementOrigin = node.nextSibling as HTMLElement;
       this.animatedElements = [];
 
       this.draggedElement!.classList.add(this.draggedClass);
@@ -184,14 +183,16 @@ export class SortableElement extends LitElement {
     const targetIndex = updated.indexOf(this.draggedElement);
 
     if (sourceIndex !== targetIndex) {
-      this.dispatchEvent(new CustomEvent('dom-order-change', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          sourceIndex,
-          targetIndex,
-        },
-      }));
+      this.dispatchEvent(
+        new CustomEvent('dom-order-change', {
+          bubbles: true,
+          composed: true,
+          detail: {
+            sourceIndex,
+            targetIndex,
+          },
+        }),
+      );
     }
 
     this.reset();
@@ -211,7 +212,7 @@ export class SortableElement extends LitElement {
       return;
     }
 
-    let {dx, dy} = (<any>e).detail;
+    let {dx, dy} = (e as any).detail;
     const scrollTop = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
 
     if (this.orientation) {
@@ -231,7 +232,7 @@ export class SortableElement extends LitElement {
       // if clone intersects with a valid target,
       target &&
       // other than its own origin,
-      (target !== this.draggedElement) &&
+      target !== this.draggedElement &&
       // and the target isn't currently animating, which causes false hit tests,
       !this.isAnimating(target)
     ) {
@@ -239,12 +240,12 @@ export class SortableElement extends LitElement {
     }
   }
 
-  private updateUserSelectStyle(userSelect: 'text'|'none'): void {
+  private updateUserSelectStyle(userSelect: 'text' | 'none'): void {
     /**
      * Firefox bug fix: when dragging elements in firefox, closest text also getting selected
      */
     this.style.userSelect = userSelect;
-    (<any>this.style).MozUserSelect = userSelect;
+    (this.style as any).MozUserSelect = userSelect;
     this.style.msUserSelect = userSelect;
     this.style.webkitUserSelect = userSelect;
   }
@@ -257,14 +258,14 @@ export class SortableElement extends LitElement {
    * @param {Array} targets
    * @return {Array<HTMLElement>} matches
    */
-  private hitTest(node:HTMLElement, targets: HTMLElement[]): HTMLElement[] {
+  private hitTest(node: HTMLElement, targets: HTMLElement[]): HTMLElement[] {
     const {left: l, top: t, width: w, height: h} = node.getBoundingClientRect();
-    const x = l + (w / 2);
-    const y = t + (h / 2);
+    const x = l + w / 2;
+    const y = t + h / 2;
 
     return targets.filter(item => {
       const {left, right, top, bottom} = item.getBoundingClientRect();
-      return ! (x < left || x > right || y < top || y > bottom);
+      return !(x < left || x > right || y < top || y > bottom);
     });
   }
 
@@ -318,23 +319,22 @@ export class SortableElement extends LitElement {
     });
 
     // animate from dx/dy (old node position) to none (new node position)
-    this.animationPromise = new Promise((resolve) => {
-      node.animate([
-        {transform: `translate3d(${dx}px, ${dy}px, 0)`},
-        {transform: 'none'},
-      ], this.animationTiming).addEventListener('finish', () => {
-        const index = this.animatedElements.indexOf(node);
-        Object.assign(node.style, {
-          willChange: 'initial',
-        });
-        if (index !== -1) {
-          // splice out when done to unlock as a valid target
-          this.animatedElements.splice(index, 1);
-        }
+    this.animationPromise = new Promise(resolve => {
+      node
+        .animate([{transform: `translate3d(${dx}px, ${dy}px, 0)`}, {transform: 'none'}], this.animationTiming)
+        .addEventListener('finish', () => {
+          const index = this.animatedElements.indexOf(node);
+          Object.assign(node.style, {
+            willChange: 'initial',
+          });
+          if (index !== -1) {
+            // splice out when done to unlock as a valid target
+            this.animatedElements.splice(index, 1);
+          }
 
-        resolve();
-        delete this.animationPromise;
-      });
+          resolve();
+          delete this.animationPromise;
+        });
     });
   }
 
@@ -358,9 +358,7 @@ export class SortableElement extends LitElement {
 
     if (node && node.parentNode) {
       const insert =
-        (node.compareDocumentPosition(target) & this.DOCUMENT_POSITION_FOLLOWING) ?
-          target.nextSibling :
-          target;
+        node.compareDocumentPosition(target) & this.DOCUMENT_POSITION_FOLLOWING ? target.nextSibling : target;
       node.parentNode.insertBefore(node, insert);
     }
 
@@ -385,15 +383,15 @@ export class SortableElement extends LitElement {
    * @return {Node} clone
    */
   private createClone(node: HTMLElement): HTMLElement {
-    const clone = <HTMLElement>node.cloneNode(true);
+    const clone = node.cloneNode(true) as HTMLElement;
 
     /**
      * Bugfix for table row sorting.
      * During dragging table rows shrink, so we manually set them width of original node.
      */
     Array.from(clone.children).forEach((nodeChild: Element, index) => {
-      const clonedNodeChild = (<HTMLElement>nodeChild);
-      const originalNodeChild = (<HTMLElement>node.children.item(index));
+      const clonedNodeChild = nodeChild as HTMLElement;
+      const originalNodeChild = node.children.item(index) as HTMLElement;
 
       if (originalNodeChild) {
         clonedNodeChild.style.width = `${originalNodeChild.offsetWidth}px`;
@@ -404,10 +402,9 @@ export class SortableElement extends LitElement {
      * We have to copy all user defined properties manually.
      * Lit element prefixes custom properties with '__' so that's why we check for it.
      */
-    Object
-      .keys(node)
+    Object.keys(node)
       .filter(prop => prop.startsWith('__'))
-      .forEach(prop => (<any>clone)[prop] = (<any>node)[prop]);
+      .forEach(prop => ((clone as any)[prop] = (node as any)[prop]));
 
     const {offsetLeft: x, offsetTop: y} = node;
 

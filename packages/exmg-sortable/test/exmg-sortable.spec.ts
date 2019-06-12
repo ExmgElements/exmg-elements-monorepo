@@ -6,12 +6,12 @@ declare const flush: (cb?: Function) => void;
 
 const {assert} = chai;
 
-suite('<exmg-sortable>', function () {
+suite('<exmg-sortable>', function() {
   let element: SortableElement;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('element with children', function () {
-    test('default sorting works properly', (done) => {
+  suite('element with children', function() {
+    test('default sorting works properly', done => {
       element = fixture('ExmgSortableList');
 
       element.addEventListener('dom-order-change', (event: Event) => {
@@ -24,46 +24,37 @@ suite('<exmg-sortable>', function () {
       const parent = element.querySelector('ul');
       const draggedElem = element.querySelectorAll('li')[0];
 
-      const trackStartEvent = new CustomEvent(
-        'track',
-        {
-          detail: {
-            state: 'start',
-          },
-          bubbles: true,
-        }
-      );
+      const trackStartEvent = new CustomEvent('track', {
+        detail: {
+          state: 'start',
+        },
+        bubbles: true,
+      });
       draggedElem.dispatchEvent(trackStartEvent);
 
-      const trackMoveEvent = new CustomEvent(
-        'track',
-        {
-          detail: {
-            state: 'track',
-            dx: 0,
-            dy: 45,
-          },
-          bubbles: true,
-        }
-      );
+      const trackMoveEvent = new CustomEvent('track', {
+        detail: {
+          state: 'track',
+          dx: 0,
+          dy: 45,
+        },
+        bubbles: true,
+      });
       draggedElem.dispatchEvent(trackMoveEvent);
 
-      const trackEndEvent = new CustomEvent(
-        'track',
-        {
-          detail: {
-            state: 'end',
-          },
-          bubbles: true,
-        }
-      );
+      const trackEndEvent = new CustomEvent('track', {
+        detail: {
+          state: 'end',
+        },
+        bubbles: true,
+      });
       draggedElem.dispatchEvent(trackEndEvent);
 
       parent!.insertBefore(draggedElem, element.querySelectorAll('li')[2]);
       parent!.removeChild(element.querySelector('li.cloned')!);
     });
 
-    test('custom handle sorting works properly', (done) => {
+    test('custom handle sorting works properly', done => {
       element = fixture('ExmgSortableListWithCustomHandle');
 
       element.addEventListener('dom-order-change', (event: Event) => {
@@ -78,39 +69,30 @@ suite('<exmg-sortable>', function () {
       const draggedElemClosestRow = draggedElem.closest('tr');
 
       console.log('draggedElem', draggedElem);
-      const trackStartEvent = new CustomEvent(
-        'track',
-        {
-          detail: {
-            state: 'start',
-          },
-          bubbles: true,
-        }
-      );
+      const trackStartEvent = new CustomEvent('track', {
+        detail: {
+          state: 'start',
+        },
+        bubbles: true,
+      });
       draggedElem.dispatchEvent(trackStartEvent);
 
-      const trackMoveEvent = new CustomEvent(
-        'track',
-        {
-          detail: {
-            state: 'track',
-            dx: 0,
-            dy: 45,
-          },
-          bubbles: true,
-        }
-      );
+      const trackMoveEvent = new CustomEvent('track', {
+        detail: {
+          state: 'track',
+          dx: 0,
+          dy: 45,
+        },
+        bubbles: true,
+      });
       draggedElem.dispatchEvent(trackMoveEvent);
 
-      const trackEndEvent = new CustomEvent(
-        'track',
-        {
-          detail: {
-            state: 'end',
-          },
-          bubbles: true,
-        }
-      );
+      const trackEndEvent = new CustomEvent('track', {
+        detail: {
+          state: 'end',
+        },
+        bubbles: true,
+      });
       draggedElem.dispatchEvent(trackEndEvent);
 
       parent!.insertBefore(draggedElemClosestRow!, element.querySelectorAll('tr')[2]);
@@ -139,39 +121,30 @@ suite('<exmg-sortable>', function () {
       const draggedElem = hostSortableElement.querySelector('.handle span')!;
       const draggedElemClosestRow = draggedElem.closest('tr');
 
-      const trackStartEvent = new CustomEvent(
-        'track',
-        {
-          detail: {
-            state: 'start',
-          },
-          bubbles: true,
-        }
-      );
+      const trackStartEvent = new CustomEvent('track', {
+        detail: {
+          state: 'start',
+        },
+        bubbles: true,
+      });
       draggedElem.dispatchEvent(trackStartEvent);
 
-      const trackMoveEvent = new CustomEvent(
-        'track',
-        {
-          detail: {
-            state: 'track',
-            dx: 0,
-            dy: 45,
-          },
-          bubbles: true,
-        }
-      );
+      const trackMoveEvent = new CustomEvent('track', {
+        detail: {
+          state: 'track',
+          dx: 0,
+          dy: 45,
+        },
+        bubbles: true,
+      });
       draggedElem.dispatchEvent(trackMoveEvent);
 
-      const trackEndEvent = new CustomEvent(
-        'track',
-        {
-          detail: {
-            state: 'end',
-          },
-          bubbles: true,
-        }
-      );
+      const trackEndEvent = new CustomEvent('track', {
+        detail: {
+          state: 'end',
+        },
+        bubbles: true,
+      });
       draggedElem.dispatchEvent(trackEndEvent);
 
       parent!.insertBefore(draggedElemClosestRow!, hostSortableElement.querySelector('tr:nth-child(2)'));
@@ -179,5 +152,4 @@ suite('<exmg-sortable>', function () {
       await donePromise;
     });
   });
-
 });

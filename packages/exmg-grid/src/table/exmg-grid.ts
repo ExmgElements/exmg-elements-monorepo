@@ -10,7 +10,7 @@ import {ExmgRowSortable} from './featrues/exmg-row-sortable';
 import {EventDetailRowsOrderChanged, SORT_DIRECTION} from './types/exmg-grid-types';
 
 type GenericPropertyValues<T, V = unknown> = Map<T, V>;
-type Props = Exclude<keyof ExmgGrid, number | Symbol>;
+type Props = Exclude<keyof ExmgGrid, number | symbol>;
 
 type SmartPropertyValue = GenericPropertyValues<Props>;
 
@@ -49,9 +49,7 @@ type SmartPropertyValue = GenericPropertyValues<Props>;
  */
 @customElement('exmg-grid')
 export class ExmgGrid extends LitElement {
-  static styles = [
-    exmgGridTableStyles,
-  ];
+  static styles = [exmgGridTableStyles];
 
   /**
    * Array of data which mapped to rows
@@ -147,7 +145,7 @@ export class ExmgGrid extends LitElement {
 
   private getQuerySelectors(): ExmgQuerySelectors {
     if (!this.querySelectors) {
-      throw new Error(`ExmgQuerySelector not initialized yet`);
+      throw new Error('ExmgQuerySelector not initialized yet');
     }
     return this.querySelectors;
   }
@@ -188,23 +186,25 @@ export class ExmgGrid extends LitElement {
       items.splice(targetIndex, 0, movedElement);
 
       this.dispatchEvent(
-        new CustomEvent<EventDetailRowsOrderChanged<object>>(
-          'exmg-grid-rows-order-changed',
-          {composed: true, bubbles: true, detail: {items}}
-          )
+        new CustomEvent<EventDetailRowsOrderChanged<object>>('exmg-grid-rows-order-changed', {
+          composed: true,
+          bubbles: true,
+          detail: {items},
+        }),
       );
     }, 0);
   }
 
   private updateColumnVisibility(previousHiddenColumnNames: Record<string, string> = {}): void {
-    let visibleColumns: number = 0;
+    let visibleColumns = 0;
     this.getColumns().forEach((column, index) => {
       const columnKey = column.getAttribute('data-column-key');
       visibleColumns += this.hiddenColumnNames[columnKey || ''] ? 0 : 1;
       if (columnKey && previousHiddenColumnNames[columnKey] !== this.hiddenColumnNames[columnKey]) {
         const nextDisplayValue = this.hiddenColumnNames[columnKey] ? 'none' : 'table-cell';
         column.style.display = nextDisplayValue;
-        this.getTable().querySelectorAll<HTMLInputElement>(`tbody.grid-data tr:not(.grid-row-detail) td:nth-child(${index + 1})`)
+        this.getTable()
+          .querySelectorAll<HTMLInputElement>(`tbody.grid-data tr:not(.grid-row-detail) td:nth-child(${index + 1})`)
           .forEach(cell => {
             cell.style.display = nextDisplayValue;
           });
@@ -214,17 +214,20 @@ export class ExmgGrid extends LitElement {
   }
 
   private updateAutoColspan(visibleColumns: number): void {
-    this.getTable().querySelectorAll('[data-auto-colspan]').forEach(element => {
-      const offset = Number.parseInt(element.getAttribute('data-auto-span') || '0', 10);
-      element.setAttribute('colspan', (visibleColumns - offset).toString());
-    });
+    this.getTable()
+      .querySelectorAll('[data-auto-colspan]')
+      .forEach(element => {
+        const offset = Number.parseInt(element.getAttribute('data-auto-span') || '0', 10);
+        element.setAttribute('colspan', (visibleColumns - offset).toString());
+      });
   }
 
   private observeExpandedRowIds(changedProps: SmartPropertyValue): void {
     if (changedProps.has('expandedRowIds')) {
       Object.entries(this.expandedRowIds).forEach(([rowId, nextExpandedState]) => {
-        const expendableToggle = this.getTableBody()
-          .querySelector<HTMLElement>(this.getBodyRowSelector(`[data-row-key="${rowId}"] ${this.expandableToggleSelector}`));
+        const expendableToggle = this.getTableBody().querySelector<HTMLElement>(
+          this.getBodyRowSelector(`[data-row-key="${rowId}"] ${this.expandableToggleSelector}`),
+        );
 
         if (expendableToggle) {
           const isExpanded = expendableToggle.hasAttribute('data-is-expanded');
@@ -239,8 +242,9 @@ export class ExmgGrid extends LitElement {
   private observeSelectedRowIds(changedProps: SmartPropertyValue): void {
     if (changedProps.has('selectedRowIds')) {
       Object.entries(this.selectedRowIds).forEach(([rowId, nextSelectionState]) => {
-        const row = this.getTableBody()
-          .querySelector<HTMLTableRowElement>(this.getBodyRowSelector(`[data-row-key="${rowId}"]`));
+        const row = this.getTableBody().querySelector<HTMLTableRowElement>(
+          this.getBodyRowSelector(`[data-row-key="${rowId}"]`),
+        );
 
         if (row) {
           const isSelected = row.hasAttribute('data-selected');
@@ -271,10 +275,7 @@ export class ExmgGrid extends LitElement {
     const table = this.shadowRoot!.host.querySelector<HTMLTableElement>('table')!;
     const tableBody = table.querySelector<HTMLTableSectionElement>('tbody.grid-data')!;
 
-    this.querySelectors = new ExmgQuerySelectors(
-      table,
-      tableBody,
-    );
+    this.querySelectors = new ExmgQuerySelectors(table, tableBody);
 
     this.initGridAttributes();
 
@@ -305,10 +306,7 @@ export class ExmgGrid extends LitElement {
     }
 
     if (this.expandableToggleSelector) {
-      this.rowExpandableFeature = new ExmgRowExpandable(
-        this.querySelectors,
-        this.expandableToggleSelector,
-      );
+      this.rowExpandableFeature = new ExmgRowExpandable(this.querySelectors, this.expandableToggleSelector);
       this.rowExpandableFeature.initFeature();
     }
 
@@ -353,26 +351,28 @@ export class ExmgGrid extends LitElement {
   }
 
   private renderWithoutSortable() {
-    return html`<slot></slot>`;
+    return html`
+      <slot></slot>
+    `;
   }
 
   private renderWithSortable() {
     return html`
-        <exmg-sortable
-          orientation="${'vertical'}"
-          animation-enabled
-          item-selector="tbody.grid-data tr:not(.grid-row-detail)"
-          handle-selector=".grid-row-drag-handler"
-          .sortableHostNode="${this.findTableBody()}"
-          @dom-order-change="${this.rowsOrderChange}"
-        >
-          <slot></slot>
-        </exmg-sortable>
+      <exmg-sortable
+        orientation="${'vertical'}"
+        animation-enabled
+        item-selector="tbody.grid-data tr:not(.grid-row-detail)"
+        handle-selector=".grid-row-drag-handler"
+        .sortableHostNode="${this.findTableBody()}"
+        @dom-order-change="${this.rowsOrderChange}"
+      >
+        <slot></slot>
+      </exmg-sortable>
     `;
   }
 
   protected render() {
-      return html`
+    return html`
       <div class="table-card-container">
         <slot name="toolbar"></slot>
         <div class="table-card">

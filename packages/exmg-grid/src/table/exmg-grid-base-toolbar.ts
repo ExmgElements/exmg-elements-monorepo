@@ -15,9 +15,7 @@ import {style} from './exmg-grid-base-toolbar-styles';
  */
 @customElement('exmg-grid-base-toolbar')
 export class ExmgGridBaseToolbar extends LitElement {
-  static styles = [
-    style,
-  ];
+  static styles = [style];
 
   @property({type: Object})
   private actionsCount: number = 0;
@@ -38,7 +36,7 @@ export class ExmgGridBaseToolbar extends LitElement {
   connectedCallback(): void {
     super.connectedCallback();
 
-    this.observer = new MutationObserver((mutationsList) => {
+    this.observer = new MutationObserver(mutationsList => {
       setTimeout(() => {
         for (const mutation of mutationsList) {
           if (mutation.type === 'childList') {
@@ -63,15 +61,13 @@ export class ExmgGridBaseToolbar extends LitElement {
   render() {
     return html`
       <div class="wrapper ${this.active ? 'active' : ''}">
-        ${
-          this.actionsCount > 0 ?
-            html`
+        ${this.actionsCount > 0
+          ? html`
               <div class="actions">
                 <slot name="actions"></slot>
               </div>
-            ` :
-            ``
-        }
+            `
+          : ''}
         <div class="description ${this.actionsCount > 0 ? 'with-action-separator' : ''}">
           <slot name="description"></slot>
         </div>

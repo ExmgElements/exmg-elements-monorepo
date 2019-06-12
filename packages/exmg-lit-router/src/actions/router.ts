@@ -11,7 +11,7 @@ export const UPDATE_QUERY_PARAMS = 'UPDATE_QUERY_PARAMS';
 
 type ROUTER_CHANGED_TYPE = 'ROUTER_CHANGED';
 
-export interface BreadcrumbItem extends  SelectedInfo {
+export interface BreadcrumbItem extends SelectedInfo {
   href: string;
   path: string;
   label: string;
@@ -40,13 +40,16 @@ export interface RouterActionChangedPayload {
   queryParams?: Record<string, string[]>;
 }
 
-export interface RouterActionNavigateToPath extends Action<'NAVIGATE_TO_PATH'> {}
+export interface RouterActionNavigateToPath extends Action {
+  type: 'NAVIGATE_TO_PATH';
+}
 
 export interface RouterActionNavigateToPathPayload {
   path: string;
 }
 
-export interface RouterActionUpdateQueryParams extends Action<'UPDATE_QUERY_PARAMS'> {
+export interface RouterActionUpdateQueryParams extends Action {
+  type: 'UPDATE_QUERY_PARAMS';
   queryParams: Record<string, string[]>;
 }
 
@@ -58,22 +61,25 @@ export type RouterAction = RouterActionRouterChanged | RouterActionNavigateToPat
 
 type ThunkResult<R> = ThunkAction<R, StateWithRouter, undefined, RouterAction>;
 
-const hasQueryParams = (queryParams?: QueryParams): boolean =>
-    !!queryParams && Object.keys(queryParams).length > 0;
+const hasQueryParams = (queryParams?: QueryParams): boolean => !!queryParams && Object.keys(queryParams).length > 0;
 
 type RouterChangedDispatch = ThunkDispatch<StateWithRouter, undefined, RouterActionRouterChanged>;
-export const routerChanged = (payload: RouterActionChangedPayload): ThunkResult<RouterActionRouterChanged> =>
-  (dispatch: RouterChangedDispatch, getState: () => StateWithRouter): RouterActionRouterChanged => {
-    const {router: {queryParams}} = getState();
+export const routerChanged = (payload: RouterActionChangedPayload): ThunkResult<RouterActionRouterChanged> => (
+  dispatch: RouterChangedDispatch,
+  getState: () => StateWithRouter,
+): RouterActionRouterChanged => {
+  const {
+    router: {queryParams},
+  } = getState();
 
-    if (hasQueryParams(queryParams) && !hasQueryParams(payload.queryParams)) {
-      window.history.replaceState({}, '', `${window.location.origin}${window.location.pathname}`);
-    }
+  if (hasQueryParams(queryParams) && !hasQueryParams(payload.queryParams)) {
+    window.history.replaceState({}, '', `${window.location.origin}${window.location.pathname}`);
+  }
 
-    return dispatch({
-      type: <ROUTER_CHANGED_TYPE>'ROUTER_CHANGED',
-      ...payload,
-    });
+  return dispatch({
+    type: 'ROUTER_CHANGED' as ROUTER_CHANGED_TYPE,
+    ...payload,
+  });
 };
 
 export const navigateToPath = (payload: RouterActionNavigateToPathPayload): RouterActionNavigateToPath => {

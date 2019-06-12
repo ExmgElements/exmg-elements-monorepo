@@ -32,7 +32,7 @@ suite('router/install-router', () => {
 
   test('InstallRouter', () => {
     let registeredLocationUpdatedCallback = undefined;
-    const installer: Installer = (locationUpdatedCallback: (location: Location, e: Event|null) => void) => {
+    const installer: Installer = (locationUpdatedCallback: (location: Location, e: Event | null) => void) => {
       registeredLocationUpdatedCallback = locationUpdatedCallback;
     };
     const installerSpy = spy(installer);

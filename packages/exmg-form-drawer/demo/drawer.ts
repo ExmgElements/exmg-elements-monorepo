@@ -16,7 +16,7 @@ export class Drawer extends LitElement {
     this.opened = true;
   }
 
-  render () {
+  render() {
     // language=html
     return html`
       <style>
@@ -24,7 +24,7 @@ export class Drawer extends LitElement {
           --exmg-drawer-max-width: 300px;
         }
       </style>
-      <input type="button" @click="${this.openDialog}" value="Open dialog">
+      <input type="button" @click="${this.openDialog}" value="Open dialog" />
 
       <exmg-drawer ?opened="${this.opened}" @exmg-drawer-opened-changed="${this.handleOpenedChanged}">
         <exmg-form id="form1">
@@ -33,7 +33,13 @@ export class Drawer extends LitElement {
           <paper-input label="password input" type="password"></paper-input>
           <paper-input label="disabled input" disabled value="batman"></paper-input>
           <paper-input name="name" label="Summary" required always-float-label></paper-input>
-          <paper-input name="estimate" label="Estimates" type="number" always-float-label style="max-width:180px;"></paper-input>
+          <paper-input
+            name="estimate"
+            label="Estimates"
+            type="number"
+            always-float-label
+            style="max-width:180px;"
+          ></paper-input>
 
           <exmg-paper-combobox label="Project" name="combobox" style="max-width:280px;" always-float-label required>
             <paper-item>PlayToTV</paper-item>

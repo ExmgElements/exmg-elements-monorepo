@@ -9,7 +9,7 @@ export class ExmgRadioGroup extends LitElement {
   name?: string;
 
   @property({type: String, reflect: true})
-  @observer(function (this: ExmgRadioGroup) {
+  @observer(function(this: ExmgRadioGroup) {
     this.setProperSelectedItem();
   })
   selected: string = '';
@@ -34,36 +34,29 @@ export class ExmgRadioGroup extends LitElement {
   }
 
   public validate(): boolean {
-    this.invalid =
-      this.required
-      && !this.selected;
+    this.invalid = this.required && !this.selected;
 
     return !this.invalid;
   }
 
-  static styles = [
-    exmgRadioGroupStyles,
-  ];
+  static styles = [exmgRadioGroupStyles];
 
   private handleRadioGroupItemChanged(e: Event) {
-    const {detail} = <CustomEvent>e;
+    const {detail} = e as CustomEvent;
 
     this.selected = detail.value;
 
     this.dispatchEvent(
-      new CustomEvent(
-        'exmg-radio-group-changed',
-        {detail: {selected: this.selected}, composed: true, bubbles: true}
-      )
+      new CustomEvent('exmg-radio-group-changed', {detail: {selected: this.selected}, composed: true, bubbles: true}),
     );
   }
 
   private setProperSelectedItem() {
     this.querySelectorAll('exmg-radio-group-item').forEach((item: Element) => {
-      const litItem = <ExmgRadioGroupItem>item;
+      const litItem = item as ExmgRadioGroupItem;
 
       litItem.name = this.litItemName;
-      litItem.checked = (this.selected === litItem.value);
+      litItem.checked = this.selected === litItem.value;
     });
   }
 
@@ -85,10 +78,7 @@ export class ExmgRadioGroup extends LitElement {
 
   render() {
     return html`
-      <div
-        class="radio-group-container ${this.vertical ? 'vertical' : 'horizontal'}"
-        ?invalid="${this.invalid}"
-      >
+      <div class="radio-group-container ${this.vertical ? 'vertical' : 'horizontal'}" ?invalid="${this.invalid}">
         <slot></slot>
       </div>
     `;

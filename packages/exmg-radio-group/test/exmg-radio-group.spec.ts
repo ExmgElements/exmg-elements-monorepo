@@ -7,16 +7,16 @@ declare const flush: (cb?: Function) => void;
 
 const {assert} = chai;
 
-suite('<exmg-radio-group>', function () {
+suite('<exmg-radio-group>', function() {
   let element: ExmgRadioGroup;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('base usage', function () {
+  suite('base usage', function() {
     setup(() => {
       element = fixture('BasicTestFixture');
     });
 
-    test('element is upgraded', function () {
+    test('element is upgraded', function() {
       assert.instanceOf(element, ExmgRadioGroup);
     });
 
@@ -43,7 +43,7 @@ suite('<exmg-radio-group>', function () {
 
       toBeSelectedItemElem.click();
 
-      const timeoutPromise = new Promise((resolve) => {
+      const timeoutPromise = new Promise(resolve => {
         setTimeout(() => {
           resolve();
         }, 1000);

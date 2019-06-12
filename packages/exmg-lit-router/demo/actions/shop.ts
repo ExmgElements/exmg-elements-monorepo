@@ -19,23 +19,30 @@ export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const CHECKOUT_SUCCESS = 'CHECKOUT_SUCCESS';
 export const CHECKOUT_FAILURE = 'CHECKOUT_FAILURE';
 
-export interface ShopActionGetProducts extends Action<'GET_PRODUCTS'> {
+export interface ShopActionGetProducts extends Action {
+  type: 'GET_PRODUCTS';
   products: ProductsState;
 }
 
-export interface ShopActionAddToCart extends Action<'ADD_TO_CART'> {
+export interface ShopActionAddToCart extends Action {
+  type: 'ADD_TO_CART';
   productId: string;
 }
 
-export interface ShopActionRemoveFromCart extends Action<'REMOVE_FROM_CART'> {
+export interface ShopActionRemoveFromCart extends Action {
+  type: 'REMOVE_FROM_CART';
   productId: string;
 }
 
-export interface ShopActionCheckoutSuccess extends Action<'CHECKOUT_SUCCESS'> {}
+export interface ShopActionCheckoutSuccess extends Action {
+  type: 'CHECKOUT_SUCCESS';
+}
 
-export interface ShopActionCheckoutFailure extends Action<'CHECKOUT_FAILURE'> {}
+export interface ShopActionCheckoutFailure extends Action {
+  type: 'CHECKOUT_FAILURE';
+}
 export type ShopAction =
-  ShopActionGetProducts
+  | ShopActionGetProducts
   | ShopActionAddToCart
   | ShopActionRemoveFromCart
   | ShopActionCheckoutSuccess
@@ -48,19 +55,22 @@ const PRODUCT_LIST = [
   {id: 2, title: 'Cowgirl Creamery Mt. Tam Cheese', price: 29.99, inventory: 10},
   {id: 3, title: 'Tillamook Medium Cheddar Cheese', price: 8.99, inventory: 5},
   {id: 4, title: 'Point Reyes Bay Blue Cheese', price: 24.99, inventory: 7},
-  {id: 5, title: 'Shepherd\'s Halloumi Cheese', price: 11.99, inventory: 3},
+  {id: 5, title: 'Shepherds Halloumi Chees', price: 11.99, inventory: 3},
 ];
 
-export const getAllProducts: ActionCreator<ThunkResult> = () => (dispatch) => {
+export const getAllProducts: ActionCreator<ThunkResult> = () => dispatch => {
   // Here you would normally get the data from the server. We're simulating
   // that by dispatching an async action (that you would dispatch when you
   // succesfully got the data back)
 
   // You could reformat the data in the right format as well:
-  const products = PRODUCT_LIST.reduce((obj, product) => {
-    obj[product.id] = product;
-    return obj;
-  }, {} as ProductsState);
+  const products = PRODUCT_LIST.reduce(
+    (obj, product) => {
+      obj[product.id] = product;
+      return obj;
+    },
+    {} as ProductsState,
+  );
 
   dispatch({
     products,
@@ -68,7 +78,7 @@ export const getAllProducts: ActionCreator<ThunkResult> = () => (dispatch) => {
   });
 };
 
-export const checkout: ActionCreator<ThunkResult> = () => (dispatch) => {
+export const checkout: ActionCreator<ThunkResult> = () => dispatch => {
   // Here you could do things like credit card validation, etc.
   // If that fails, dispatch CHECKOUT_FAILURE. We're simulating that
   // by flipping a coin :)
@@ -84,7 +94,14 @@ export const checkout: ActionCreator<ThunkResult> = () => (dispatch) => {
   }
 };
 
-export const addToCart: ActionCreator<ThunkResult> = (productId) => (dispatch, getState) => {
+export const addToCartUnsafe: ActionCreator<ShopActionAddToCart> = productId => {
+  return {
+    productId,
+    type: ADD_TO_CART,
+  };
+};
+
+export const addToCart: ActionCreator<ThunkResult> = productId => (dispatch, getState) => {
   const state = getState();
   // Just because the UI thinks you can add this to the cart
   // doesn't mean it's in the inventory (user could've fixed it);
@@ -93,16 +110,9 @@ export const addToCart: ActionCreator<ThunkResult> = (productId) => (dispatch, g
   }
 };
 
-export const removeFromCart: ActionCreator<ShopActionRemoveFromCart> = (productId) => {
+export const removeFromCart: ActionCreator<ShopActionRemoveFromCart> = productId => {
   return {
     productId,
     type: REMOVE_FROM_CART,
-  };
-};
-
-export const addToCartUnsafe: ActionCreator<ShopActionAddToCart> = (productId) => {
-  return {
-    productId,
-    type: ADD_TO_CART,
   };
 };

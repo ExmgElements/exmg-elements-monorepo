@@ -6,14 +6,15 @@ import {IronFormElement} from '@polymer/iron-form/iron-form';
 
 const ENTER_KEY_CODE = 13;
 
-const warningIcon = html`<svg height="24" viewBox="0 0 24 24" width="24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"></path></svg>`;
+const warningIcon = html`
+  <svg height="24" viewBox="0 0 24 24" width="24">
+    <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"></path>
+  </svg>
+`;
 
 @customElement('exmg-form')
 export class ExmgForm extends LitElement {
-
-  static styles = [
-    style,
-  ];
+  static styles = [style];
 
   @property({type: Boolean, attribute: 'hide-submit-button'})
   public hideSubmitButton: boolean = false;
@@ -53,14 +54,11 @@ export class ExmgForm extends LitElement {
       this.submitting = true;
       this.errorMessage = '';
       this.dispatchEvent(
-        new CustomEvent(
-          'submit',
-          {
-            bubbles: false,
-            composed: false,
-            detail: this.ironFormElem.serializeForm(),
-          }
-        )
+        new CustomEvent('submit', {
+          bubbles: false,
+          composed: false,
+          detail: this.ironFormElem.serializeForm(),
+        }),
       );
     }
   }
@@ -69,13 +67,10 @@ export class ExmgForm extends LitElement {
     this.submitting = false;
     this.errorMessage = '';
     this.dispatchEvent(
-      new CustomEvent(
-        'cancel',
-        {
-          bubbles: false,
-          composed: false,
-        }
-      )
+      new CustomEvent('cancel', {
+        bubbles: false,
+        composed: false,
+      }),
     );
   }
 
@@ -94,7 +89,7 @@ export class ExmgForm extends LitElement {
     this.errorMessage = '';
   }
 
-  public serializeForm(): {[key: string]: any}|undefined {
+  public serializeForm(): {[key: string]: any} | undefined {
     if (this.ironFormElem) {
       return this.ironFormElem.serializeForm();
     }
@@ -136,31 +131,35 @@ export class ExmgForm extends LitElement {
   protected updated(_: PropertyValues): void {
     if (this.inline) {
       Array.from(this.children).forEach((elem: Element) => {
-        (<HTMLElement>elem).style.display = 'inline-block';
+        (elem as HTMLElement).style.display = 'inline-block';
       });
     } else {
       Array.from(this.children).forEach((elem: Element) => {
-        (<HTMLElement>elem).style.display = null;
+        (elem as HTMLElement).style.display = null;
       });
     }
   }
 
   private renderCancelButton() {
-    return !this.hideCancelButton ?
-      html`<exmg-button class="cancel" @click="${this.onCancelBtnClick}">${this.cancelButtonCopy}</exmg-button>`
+    return !this.hideCancelButton
+      ? html`
+          <exmg-button class="cancel" @click="${this.onCancelBtnClick}">${this.cancelButtonCopy}</exmg-button>
+        `
       : '';
   }
 
   private renderSubmitButton() {
-    return !this.hideSubmitButton ?
-      html`
-        <exmg-button
-          unelevated
-          @click="${this.onSubmitBtnClick}"
-          ?disabled="${this.submitting}"
-          ?loading=${this.submitting}>${this.submitButtonCopy}</exmg-button>
-      ` :
-      '';
+    return !this.hideSubmitButton
+      ? html`
+          <exmg-button
+            unelevated
+            @click="${this.onSubmitBtnClick}"
+            ?disabled="${this.submitting}"
+            ?loading=${this.submitting}
+            >${this.submitButtonCopy}</exmg-button
+          >
+        `
+      : '';
   }
 
   private renderActions() {
@@ -170,15 +169,14 @@ export class ExmgForm extends LitElement {
 
     return html`
       <div class="actions ${this.inline ? 'inline' : ''}">
-        ${this.renderCancelButton()}
-        ${this.renderSubmitButton()}
+        ${this.renderCancelButton()} ${this.renderSubmitButton()}
       </div>
     `;
   }
 
   protected render() {
     return html`
-      <div class="error ${ !!this.errorMessage ? 'show' : '' }">
+      <div class="error ${!!this.errorMessage ? 'show' : ''}">
         <span class="body">
           <span class="body-content">
             ${warningIcon}

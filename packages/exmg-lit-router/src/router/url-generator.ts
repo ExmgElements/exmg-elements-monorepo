@@ -28,6 +28,9 @@ export const generateUrlByPath = (path: string, params: Record<string, string> =
   return getRouter().urlForPath(path, params);
 };
 
-export const generateUrlByNameOrComponentName = (nameOrComponent: string, params: Record<string, string> = {}): string => {
+export const generateUrlByNameOrComponentName = (
+  nameOrComponent: string,
+  params: Record<string, string> = {},
+): string => {
   return getRouter().urlForName(nameOrComponent, params);
 };

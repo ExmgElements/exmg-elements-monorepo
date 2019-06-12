@@ -12,7 +12,11 @@ suite('router/connect', () => {
 
     window.customElements.define('connected-element', ConnectedLitElement);
     const element: ConnectedLitElement = <ConnectedLitElement>fixture('ConnectedElementFixture');
-    assert.instanceOf(element, ConnectedLitElement, `Element is instance of ${ConnectedLitElement.prototype.constructor.name} with connected store`);
+    assert.instanceOf(
+      element,
+      ConnectedLitElement,
+      `Element is instance of ${ConnectedLitElement.prototype.constructor.name} with connected store`,
+    );
   });
 
   test('Instance of PageElement with connected store should not fail', () => {
@@ -21,6 +25,10 @@ suite('router/connect', () => {
 
     window.customElements.define('page-element', PageLitElement);
     const element: PageLitElement = <PageLitElement>fixture('PageElementFixture');
-    assert.instanceOf(element, PageLitElement, `Element is instance of ${PageLitElement.prototype.constructor.name} with connected store`);
+    assert.instanceOf(
+      element,
+      PageLitElement,
+      `Element is instance of ${PageLitElement.prototype.constructor.name} with connected store`,
+    );
   });
 });

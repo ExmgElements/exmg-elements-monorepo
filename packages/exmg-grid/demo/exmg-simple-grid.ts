@@ -9,16 +9,13 @@ import {ExmgBaseGridDemo} from './exmg-base-grid-demo';
 
 @customElement('demo-simple-grid')
 export class DemoSimpleGridTable extends ExmgBaseGridDemo {
-  static styles = [
-    exmgThemeStyles,
-    tableStyles,
-  ];
+  static styles = [exmgThemeStyles, tableStyles];
 
   private renderTableBody() {
     return repeat(
       this.items,
       ({id}) => id,
-      (i) => {
+      i => {
         return html`
           <tr data-row-key="${i.id}">
             <td>#${i.id}</td>
@@ -27,7 +24,7 @@ export class DemoSimpleGridTable extends ExmgBaseGridDemo {
             <td class="grid-col-number">${i.amount}</td>
           </tr>
         `;
-      }
+      },
     );
   }
 
@@ -35,17 +32,15 @@ export class DemoSimpleGridTable extends ExmgBaseGridDemo {
     return html`
       <h1>Simple table</h1>
       <h2>Exmg Theme</h2>
-      <exmg-grid
-        .items="${this.items}"
-      >
+      <exmg-grid .items="${this.items}">
         <table>
           <thead>
-           <tr class="grid-columns">
-             <th><span>ID</span></th>
-             <th><span>Month</span></th>
-             <th class="grid-col-number"><span>Year</span></th>
-             <th class="grid-col-number"><span>Income</span></th>
-           </tr>
+            <tr class="grid-columns">
+              <th><span>ID</span></th>
+              <th><span>Month</span></th>
+              <th class="grid-col-number"><span>Year</span></th>
+              <th class="grid-col-number"><span>Income</span></th>
+            </tr>
           </thead>
           <tbody class="grid-data">
             ${this.renderTableBody()}
@@ -61,6 +56,6 @@ export class DemoSimpleGridTable extends ExmgBaseGridDemo {
         >
         </exmg-grid-pagination>
       </exmg-grid>
-`;
+    `;
   }
 }

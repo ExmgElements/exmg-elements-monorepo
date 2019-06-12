@@ -60,30 +60,30 @@ export class ExmgGridToolbarDemo extends LitElement {
 
   render() {
     return html`
-        <style>
-          :host {
-            --mdc-theme-primary: #0071dc;
+      <style>
+        :host {
+          --mdc-theme-primary: #0071dc;
 
-            padding: 10px;
-            display: block;
-            background-color: #f6f6f6;
-          }
-        </style>
-        <h1>With actions</h1>
-        <exmg-grid-toolbar
-            .actions="${this.actions}"
-            description="${this.description}"
-            .filters="${this.filters}"
-            @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
-            @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
-        ></exmg-grid-toolbar>
-        <h1>Without actions</h1>
-        <exmg-grid-toolbar
-            description="${this.description}"
-            .filters="${this.filters}"
-            @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
-            @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
-        ></exmg-grid-toolbar>
+          padding: 10px;
+          display: block;
+          background-color: #f6f6f6;
+        }
+      </style>
+      <h1>With actions</h1>
+      <exmg-grid-toolbar
+        .actions="${this.actions}"
+        description="${this.description}"
+        .filters="${this.filters}"
+        @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
+        @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
+      ></exmg-grid-toolbar>
+      <h1>Without actions</h1>
+      <exmg-grid-toolbar
+        description="${this.description}"
+        .filters="${this.filters}"
+        @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
+        @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
+      ></exmg-grid-toolbar>
     `;
   }
 }

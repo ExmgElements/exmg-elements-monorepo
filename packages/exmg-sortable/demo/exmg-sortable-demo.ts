@@ -1,4 +1,4 @@
-import {LitElement, html, customElement, property} from 'lit-element';
+import {LitElement, html, customElement, property, TemplateResult} from 'lit-element';
 import '@polymer/iron-ajax/iron-ajax.js';
 import '../exmg-sortable.js';
 
@@ -20,7 +20,7 @@ export class SortableDemo extends LitElement {
     });
   }
 
-  constructor() {
+  public constructor() {
     super();
 
     this.orderChange = this.orderChange.bind(this);
@@ -29,7 +29,7 @@ export class SortableDemo extends LitElement {
   /**
    * Simple order update: splices the data array to change physical rendering order.
    */
-  private orderChange(e: CustomEvent) {
+  private orderChange(e: CustomEvent): void {
     setTimeout(() => {
       const {sourceIndex, targetIndex} = e.detail;
       const items = [...this.users];
@@ -44,133 +44,130 @@ export class SortableDemo extends LitElement {
     }, 0);
   }
 
-  private handleIronAjaxResponse(response: CustomEvent) {
+  private handleIronAjaxResponse(response: CustomEvent): void {
     this.users = response.detail.xhr.response;
   }
 
-  render() {
+  public render(): TemplateResult {
     return html`
       <style>
-      ul, li {
-        margin-left: 0;
-        padding-left: 0;
-      }
+        ul,
+        li {
+          margin-left: 0;
+          padding-left: 0;
+        }
 
-      li {
-        display: flex;
-        padding: 10px 15px;
-        border-bottom: 1px solid silver;
-      }
+        li {
+          display: flex;
+          padding: 10px 15px;
+          border-bottom: 1px solid silver;
+        }
 
-      li.cloned {
-        background: white;
-        width: 100%;
-        box-sizing: border-box;
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-        opacity: 0.9;
-      }
+        li.cloned {
+          background: white;
+          width: 100%;
+          box-sizing: border-box;
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+          opacity: 0.9;
+        }
 
-      li.dragged {
-        background: #c0c0c0;
-        opacity: 0.25;
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.5) inset;
-      }
+        li.dragged {
+          background: #c0c0c0;
+          opacity: 0.25;
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5) inset;
+        }
 
-      li > strong {
-        flex-grow: 1;
-      }
+        li > strong {
+          flex-grow: 1;
+        }
 
-      li > span {
-        width: 30%;
-      }
+        li > span {
+          width: 30%;
+        }
 
-      table {
-        border-collapse: collapse;
-        width: 100%;
-      }
+        table {
+          border-collapse: collapse;
+          width: 100%;
+        }
 
-      td, th {
-        padding: 10px 15px;
-        border-bottom: 1px solid silver;
-      }
+        td,
+        th {
+          padding: 10px 15px;
+          border-bottom: 1px solid silver;
+        }
 
-      tr.dragged {
-        background: #c0c0c0;
-        opacity: 0.25;
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.5) inset;
-      }
+        tr.dragged {
+          background: #c0c0c0;
+          opacity: 0.25;
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5) inset;
+        }
 
-      tr.cloned {
-        background: white;
-        width: 100%;
-        box-sizing: border-box;
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-        opacity: 0.9;
-      }
+        tr.cloned {
+          background: white;
+          width: 100%;
+          box-sizing: border-box;
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+          opacity: 0.9;
+        }
 
-      td.handle {
-        padding: 0;
-        vertical-align: middle;
-      }
-      td.handle span {
-        display: block;
-        background: gray;
-        width: 20px;
-        height: 20px;
-        margin: 10px;
-      }
+        td.handle {
+          padding: 0;
+          vertical-align: middle;
+        }
+        td.handle span {
+          display: block;
+          background: gray;
+          width: 20px;
+          height: 20px;
+          margin: 10px;
+        }
 
-      .boxes {
+        .boxes {
           margin-top: 2em;
           overflow: hidden;
-      }
+        }
 
-      .box {
-        float: left;
-        width: 150px;
-        height: 150px;
-        padding: 10px;
-        margin: 20px;
-        box-sizing: border-box;
-        background: #f0f0f0;
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-      }
+        .box {
+          float: left;
+          width: 150px;
+          height: 150px;
+          padding: 10px;
+          margin: 20px;
+          box-sizing: border-box;
+          background: #f0f0f0;
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
 
-      .box.dragged {
-        opacity: 0;
-      }
-
+        .box.dragged {
+          opacity: 0;
+        }
       </style>
 
       <iron-ajax auto="" url="data/users.json" handle-as="json" @response="${this.handleIronAjaxResponse}"></iron-ajax>
 
       <h2>List</h2>
-      <exmg-sortable
-        orientation="vertical"
-        @dom-order-change="${this.orderChange}"
-      >
+      <exmg-sortable orientation="vertical" @dom-order-change="${this.orderChange}">
         <ul>
-          ${this.users.map((user) => {
+          ${this.users.map(user => {
             return html`
               <li>
-                  <strong>${user.firstName}</strong>
-                  <span>${user.lastName}</span>
-                  <span>${user.email}</span>
+                <strong>${user.firstName}</strong>
+                <span>${user.lastName}</span>
+                <span>${user.email}</span>
               </li>
             `;
           })}
         </ul>
       </exmg-sortable>
-
       <h2>Cards with animation</h2>
       <exmg-sortable
         item-selector="div.box"
         animation-enabled
-        animation-timing="{ &quot;duration&quot;: 500 }"
+        animation-timing="{ 'duration': 500 }"
         @dom-order-change="${this.orderChange}"
-      >
+      ></exmg-sortable>
         <div class="boxes">
-          ${this.users.map((user) => {
+          ${this.users.map(user => {
             return html`
               <div class="box">
                 ${user.firstName}
@@ -180,7 +177,6 @@ export class SortableDemo extends LitElement {
         </div>
       </exmg-sortable>
 
-
       <h2>Table with custom handle</h2>
       <exmg-sortable
         item-selector="tr"
@@ -189,7 +185,7 @@ export class SortableDemo extends LitElement {
         @dom-order-change="${this.orderChange}"
       >
         <table>
-          ${this.users.map((user) => {
+          ${this.users.map(user => {
             return html`
               <tr>
                 <td class="handle"><span></span></td>
@@ -204,7 +200,7 @@ export class SortableDemo extends LitElement {
 
       <h2>Table with custom handle and external sortable node host</h2>
       <table id="externalSortableHost">
-        ${this.users.map((user) => {
+        ${this.users.map(user => {
           return html`
             <tr>
               <td class="handle"><span></span></td>
@@ -212,7 +208,7 @@ export class SortableDemo extends LitElement {
               <td>${user.lastName}</td>
               <td>${user.email}</td>
             </tr>
-            `;
+          `;
         })}
       </table>
       <exmg-sortable
@@ -224,15 +220,12 @@ export class SortableDemo extends LitElement {
       ></exmg-sortable>
 
       <h2>Manipulate sorted data</h2>
-      <exmg-sortable
-        item-selector="div.box"
-        @dom-order-change="${this.orderChange}"
-      >
+      <exmg-sortable item-selector="div.box" @dom-order-change="${this.orderChange}">
         <div class="boxes">
-          ${this.users.map((user) => {
+          ${this.users.map(user => {
             return html`
               <div class="box">
-                ${user.firstName}<br>
+                ${user.firstName}<br />
                 Moves: ${user.amountOfMoves || 0}
               </div>
             `;

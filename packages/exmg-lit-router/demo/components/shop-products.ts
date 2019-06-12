@@ -42,21 +42,22 @@ class ShopProducts extends connect(store)(LitElement) {
 
   protected render() {
     return html`
-      ${Object.keys(this.products).map((key) => {
-      const item = this.products[key];
-      return html`
+      ${Object.keys(this.products).map(key => {
+        const item = this.products[key];
+        return html`
           <div>
             <shop-item name="${item.title}" amount="${item.inventory}" price="${item.price}"></shop-item>
             <button
-                .disabled="${item.inventory === 0}"
-                @click="${this.addButtonClicked}"
-                data-index="${item.id}"
-                title="${item.inventory === 0 ? 'Sold out' : 'Add to cart'}">
+              .disabled="${item.inventory === 0}"
+              @click="${this.addButtonClicked}"
+              data-index="${item.id}"
+              title="${item.inventory === 0 ? 'Sold out' : 'Add to cart'}"
+            >
               ${item.inventory === 0 ? 'Sold out' : addToCartIcon}
             </button>
           </div>
         `;
-    })}
+      })}
     `;
   }
 

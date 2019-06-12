@@ -9,11 +9,7 @@
  */
 
 import {Reducer} from 'redux';
-import {
-  OPEN_SNACKBAR,
-  CLOSE_SNACKBAR,
-  UPDATE_DRAWER_STATE
-} from '../actions/app';
+import {OPEN_SNACKBAR, CLOSE_SNACKBAR, UPDATE_DRAWER_STATE} from '../actions/app';
 import {RootAction} from '../store';
 
 export interface AppState {

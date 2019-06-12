@@ -1,3 +1,4 @@
+/* eslint(lit/no-property-change-update) 0 */
 import {customElement, html, LitElement, property, PropertyValues, query} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 import '@polymer/paper-menu-button/paper-menu-button.js';
@@ -19,12 +20,12 @@ const TAB = 9;
 const ESCAPE = 27;
 const ARROWDOWN = 40;
 
-type SelectedValue = string|number|undefined;
+type SelectedValue = string | number | undefined;
 
-type SelectedItem = {
+interface SelectedItem {
   id: SelectedValue;
   text: string;
-};
+}
 
 /**
  * `exmg-paper-token-input` is an paper style token input element"
@@ -168,16 +169,14 @@ export class PaperTokenInputElement extends LitElement {
   }
 
   private indexOfValue(value: SelectedValue): number {
-    return this.listBoxNode!.items!
-        .map((item: HTMLElement) => this.getPaperItemValue(item))
-        .indexOf(value);
+    return this.listBoxNode!.items!.map((item: HTMLElement) => this.getPaperItemValue(item)).indexOf(value);
   }
 
   private getStringSelectedValues(): string[] {
-    return this.selectedValues.map(value => (typeof value === 'number') ? value.toString() : (value || '').toString());
+    return this.selectedValues.map(value => (typeof value === 'number' ? value.toString() : (value || '').toString()));
   }
 
-  get value() {
+  get value(): SelectedValue[] {
     return [...this.selectedValues];
   }
 
@@ -188,7 +187,7 @@ export class PaperTokenInputElement extends LitElement {
   /** EVENT HANDLERS */
 
   private onWindowClick(e: MouseEvent): void {
-    const isInsideClick = !!e.composedPath().find((path) => path === this);
+    const isInsideClick = !!e.composedPath().find(path => path === this);
 
     if (this.autoValidate && !isInsideClick && this.previousClickWasInside) {
       this.validate();
@@ -228,7 +227,7 @@ export class PaperTokenInputElement extends LitElement {
   }
 
   private onIronInputValueChanged(e: Event): void {
-    this.inputValue = (<HTMLInputElement>e.target).value || '';
+    this.inputValue = (e.target as HTMLInputElement).value || '';
     this.inputValueNode!.style.width = `${this.inputWidthHelperNode!.offsetWidth + 10}px`;
     this.filterItems();
   }
@@ -286,32 +285,39 @@ export class PaperTokenInputElement extends LitElement {
   /** HELPERS */
 
   private emitItemSelectEvent(value: SelectedValue, item: HTMLElement): void {
-    this.dispatchEvent(new CustomEvent('exmg-token-input-select', {
-      detail: {
-        value,
-        item,
-      },
-      bubbles: true,
-      composed: true,
-    }));
+    this.dispatchEvent(
+      new CustomEvent('exmg-token-input-select', {
+        detail: {
+          value,
+          item,
+        },
+        bubbles: true,
+        composed: true,
+      }),
+    );
   }
 
   private emitItemDeselectEvent(value: SelectedValue, item: HTMLElement): void {
-    this.dispatchEvent(new CustomEvent('exmg-token-input-deselect', {
-      detail: {
-        value,
-        item,
-      },
-      bubbles: true,
-      composed: true,
-    }));
+    this.dispatchEvent(
+      new CustomEvent('exmg-token-input-deselect', {
+        detail: {
+          value,
+          item,
+        },
+        bubbles: true,
+        composed: true,
+      }),
+    );
   }
 
   private filterItems() {
     const items = this.querySelectorAll('paper-item');
 
     for (let i = 0; i < items.length; i = i + 1) {
-      if (this.inputValue.length > 0 && (items[i].textContent || '').toLowerCase().indexOf(this.inputValue.toLowerCase()) === -1) {
+      if (
+        this.inputValue.length > 0 &&
+        (items[i].textContent || '').toLowerCase().indexOf(this.inputValue.toLowerCase()) === -1
+      ) {
         items[i].setAttribute('hidden', '');
       } else {
         items[i].removeAttribute('hidden');
@@ -319,7 +325,7 @@ export class PaperTokenInputElement extends LitElement {
     }
   }
 
-  private getPaperItemValue(item: HTMLElement): number|string|undefined {
+  private getPaperItemValue(item: HTMLElement): number | string | undefined {
     return this.attrForSelected ? item.getAttribute(this.attrForSelected) || undefined : this.indexOfItem(item);
   }
 
@@ -332,11 +338,7 @@ export class PaperTokenInputElement extends LitElement {
       return true;
     }
 
-    return (
-        this.hasSelectedValues()
-        || this.inputValue
-        || this.inputFocused
-    );
+    return this.hasSelectedValues() || this.inputValue || this.inputFocused;
   }
 
   private resetInput(): void {
@@ -352,9 +354,7 @@ export class PaperTokenInputElement extends LitElement {
   }
 
   public validate(): boolean {
-    this.invalid =
-        this.required
-        && !this.hasSelectedValues();
+    this.invalid = this.required && !this.hasSelectedValues();
 
     return !this.invalid;
   }
@@ -366,18 +366,21 @@ export class PaperTokenInputElement extends LitElement {
   private getSelectedItems(): SelectedItem[] {
     if (!this.listBoxNode) return [];
 
-    return this.listBoxNode!.items!
-        .map((item: HTMLElement) => {
-          const id = this.getPaperItemValue(item);
+    return this.listBoxNode!.items!.map((item: HTMLElement) => {
+      const id = this.getPaperItemValue(item);
 
-          return {
-            id: this.getPaperItemValue(item),
-            text: (this.selectedItemSelector ? item.querySelector(this.selectedItemSelector)!.textContent : item.textContent) || '',
-            sortWeight: this.selectedValues.indexOf(id),
-          };
-        })
-        .filter((item: { id: SelectedValue; text: string }) => this.selectedValues.includes(item.id))
-        .sort((itemA: { sortWeight: number }, itemB: { sortWeight: number }) => { return itemA.sortWeight - itemB.sortWeight; });
+      return {
+        id: this.getPaperItemValue(item),
+        text:
+          (this.selectedItemSelector ? item.querySelector(this.selectedItemSelector)!.textContent : item.textContent) ||
+          '',
+        sortWeight: this.selectedValues.indexOf(id),
+      };
+    })
+      .filter((item: {id: SelectedValue; text: string}) => this.selectedValues.includes(item.id))
+      .sort((itemA: {sortWeight: number}, itemB: {sortWeight: number}) => {
+        return itemA.sortWeight - itemB.sortWeight;
+      });
   }
 
   /** END OF HELPERS */
@@ -396,6 +399,7 @@ export class PaperTokenInputElement extends LitElement {
 
   protected update(changedProperties: PropertyValues): void {
     if (changedProperties.has('selectedValues') && this.attrForSelected) {
+      // eslint-disable-next-line
       this.selectedValues = this.getStringSelectedValues();
     }
 
@@ -449,7 +453,7 @@ export class PaperTokenInputElement extends LitElement {
           height: 18px;
           font-size: 12px;
           min-width: initial;
-          max-width: 100%
+          max-width: 100%;
         }
 
         .tokens paper-button span {
@@ -488,7 +492,6 @@ export class PaperTokenInputElement extends LitElement {
         iron-input {
           width: 1.8rem;
         }
-
       </style>
 
       <paper-input-container
@@ -503,18 +506,16 @@ export class PaperTokenInputElement extends LitElement {
 
         <div slot="input" class="paper-input-input" bind-value="${this.inputValue}">
           <span class="tokens">
-            ${
-              repeat(
-                  this.getSelectedItems(),
-                  item => item.id,
-                  (item) => html`
-                      <paper-button tabindex="-1" @tap="${this.onInputContainerButtonTap(item.id)}">
-                        <span>${item.text}</span>
-                        <iron-icon icon="exmg-paper-token-input-icons:clear"></iron-icon>
-                      </paper-button>
-                  `
-              )
-            }
+            ${repeat(
+              this.getSelectedItems(),
+              item => item.id,
+              item => html`
+                <paper-button tabindex="-1" @tap="${this.onInputContainerButtonTap(item.id)}">
+                  <span>${item.text}</span>
+                  <iron-icon icon="exmg-paper-token-input-icons:clear"></iron-icon>
+                </paper-button>
+              `,
+            )}
 
             <iron-input bind-value="${this.inputValue}">
               <input
@@ -525,12 +526,16 @@ export class PaperTokenInputElement extends LitElement {
                 ?autofocus="${this.autofocus}"
                 autocomplete="off"
                 ?disabled="${this.disabled}"
-              >
+              />
             </iron-input>
           </span>
         </div>
 
-        ${ this.errorMessage ? html`<paper-input-error slot="add-on" aria-live="assertive">${this.errorMessage}</paper-input-error>` : '' }
+        ${this.errorMessage
+          ? html`
+              <paper-input-error slot="add-on" aria-live="assertive">${this.errorMessage}</paper-input-error>
+            `
+          : ''}
       </paper-input-container>
 
       <span id="inputWidthHelper">${this.inputValue}</span>
@@ -547,9 +552,9 @@ export class PaperTokenInputElement extends LitElement {
         ?disabled="${this.disabled}"
       >
         <paper-icon-button
-            icon="exmg-paper-token-input-icons:arrow-drop-down"
-            ?data-opened="${this.opened}"
-            slot="dropdown-trigger"
+          icon="exmg-paper-token-input-icons:arrow-drop-down"
+          ?data-opened="${this.opened}"
+          slot="dropdown-trigger"
         ></paper-icon-button>
         <paper-listbox
           id="listbox"
@@ -564,6 +569,6 @@ export class PaperTokenInputElement extends LitElement {
           <slot></slot>
         </paper-listbox>
       </paper-menu-button>
-  `;
+    `;
   }
 }

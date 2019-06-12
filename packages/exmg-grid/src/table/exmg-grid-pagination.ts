@@ -17,10 +17,7 @@ import {style} from './exmg-grid-pagination-styles';
  */
 @customElement('exmg-grid-pagination')
 export class ExmgGridPagination extends LitElement {
-
-  static styles = [
-    style,
-  ];
+  static styles = [style];
 
   @property({type: String, attribute: 'page-size-label'})
   pageSizeLabel: string = 'Rows per page:';
@@ -38,7 +35,9 @@ export class ExmgGridPagination extends LitElement {
   itemCount: number = 0;
 
   private renderPageSizeLabel() {
-    return html`${this.pageSizeLabel}`;
+    return html`
+      ${this.pageSizeLabel}
+    `;
   }
 
   private renderPageSizeOptions() {
@@ -52,8 +51,11 @@ export class ExmgGridPagination extends LitElement {
       >
         ${repeat(
           this.pageSizeOptions,
-          (item) => item,
-        item => html`<paper-item data-id="${item}">${item}</paper-item>`
+          item => item,
+          item =>
+            html`
+              <paper-item data-id="${item}">${item}</paper-item>
+            `,
         )}
       </exmg-paper-combobox>
     `;
@@ -63,21 +65,20 @@ export class ExmgGridPagination extends LitElement {
     if (this.itemCount > 0) {
       return html`
         <span>
-          ${this.pageIndex * this.pageSize + 1}-
-          ${Math.min((this.pageIndex + 1) * this.pageSize, this.itemCount)} of ${this.itemCount}
+          ${this.pageIndex * this.pageSize + 1}- ${Math.min((this.pageIndex + 1) * this.pageSize, this.itemCount)} of
+          ${this.itemCount}
         </span>
       `;
     }
 
     return html`
-        <span>${this.pageIndex * this.pageSize + 1}-${(this.pageIndex + 1) * this.pageSize}</span>
-      `;
+      <span>${this.pageIndex * this.pageSize + 1}-${(this.pageIndex + 1) * this.pageSize}</span>
+    `;
   }
 
   private renderPageRangeActions() {
     return html`
-      ${this.renderPrevPage()}
-      ${this.renderNextPage()}
+      ${this.renderPrevPage()} ${this.renderNextPage()}
     `;
   }
 
@@ -85,15 +86,15 @@ export class ExmgGridPagination extends LitElement {
     const enabled = this.pageIndex > 0;
 
     return html`
-        <exmg-button
-          id="prevPageBtn"
-          ?disabled="${!enabled}"
-          class="action"
-          title="Previous page"
-          @click="${enabled ? this.handleOnClickPrev : undefined}"
-        >
-            <mwc-icon>navigate_before</mwc-icon>
-        </exmg-button>
+      <exmg-button
+        id="prevPageBtn"
+        ?disabled="${!enabled}"
+        class="action"
+        title="Previous page"
+        @click="${enabled ? this.handleOnClickPrev : undefined}"
+      >
+        <mwc-icon>navigate_before</mwc-icon>
+      </exmg-button>
     `;
   }
 
@@ -101,24 +102,25 @@ export class ExmgGridPagination extends LitElement {
     const enabled = this.itemCount && this.itemCount > (this.pageIndex + 1) * this.pageSize;
 
     return html`
-        <exmg-button
-          id="nextPageBtn"
-          ?disabled="${!enabled}"
-          class="action"
-          title="Next page"
-          @click="${enabled ? this.handleOnClickNext : undefined}"
-        >
-            <mwc-icon>navigate_next</mwc-icon>
-        </exmg-button>
+      <exmg-button
+        id="nextPageBtn"
+        ?disabled="${!enabled}"
+        class="action"
+        title="Next page"
+        @click="${enabled ? this.handleOnClickNext : undefined}"
+      >
+        <mwc-icon>navigate_next</mwc-icon>
+      </exmg-button>
     `;
   }
 
   private fireEventPageChanged(page: number) {
-    this.dispatchEvent(new CustomEvent('exmg-grid-pagination-page-changed', {bubbles: true, composed: true, detail: {page}}));
+    this.dispatchEvent(
+      new CustomEvent('exmg-grid-pagination-page-changed', {bubbles: true, composed: true, detail: {page}}),
+    );
   }
 
   private handleOnClickPrev(e: Event): boolean {
-
     e.preventDefault();
     this.pageIndex = this.pageIndex - 1;
     this.fireEventPageChanged(this.pageIndex);
@@ -141,10 +143,11 @@ export class ExmgGridPagination extends LitElement {
       this.pageIndex = 0;
 
       this.dispatchEvent(
-        new CustomEvent(
-          'exmg-grid-pagination-page-size-changed',
-          {bubbles: true, composed: true, detail: {pageSize: this.pageSize, page: this.pageIndex}}
-        )
+        new CustomEvent('exmg-grid-pagination-page-size-changed', {
+          bubbles: true,
+          composed: true,
+          detail: {pageSize: this.pageSize, page: this.pageIndex},
+        }),
       );
     }
   }
@@ -155,10 +158,16 @@ export class ExmgGridPagination extends LitElement {
       <style>
         :host {
           --paper-item-focused: {
-            background-color: var(--exmg-grid-toolbar-filter-item-active-bg-color, var(--exmg-theme-table-on-surface-low, var(--mdc-theme-surface)));
-          };
+            background-color: var(
+              --exmg-grid-toolbar-filter-item-active-bg-color,
+              var(--exmg-theme-table-on-surface-low, var(--mdc-theme-surface))
+            );
+          }
           --paper-item-selected: {
-            background-color: var(--exmg-grid-toolbar-filter-item-active-bg-color, var(--exmg-theme-table-on-surface-low, var(--mdc-theme-surface)));
+            background-color: var(
+              --exmg-grid-toolbar-filter-item-active-bg-color,
+              var(--exmg-theme-table-on-surface-low, var(--mdc-theme-surface))
+            );
           }
           --paper-button-ink-color: var(--exmg-grid-toolbar-filter-item-active-bg-color, var(--mdc-theme-surface));
 
@@ -172,22 +181,23 @@ export class ExmgGridPagination extends LitElement {
       </style>
       <div class="wrapper">
         <div class="page-size">
-            <div class="page-size-label">
-                ${this.renderPageSizeLabel()}
-            </div>
-            <div class="page-size-options">
-                ${this.renderPageSizeOptions()}
-            </div>
+          <div class="page-size-label">
+            ${this.renderPageSizeLabel()}
+          </div>
+          <div class="page-size-options">
+            ${this.renderPageSizeOptions()}
+          </div>
         </div>
         <div class="page-range">
-            <div class="page-range-label">
-                ${this.renderPageRangeLabel()}
-            </div>
-            <div class="page-range-actions">
-                ${this.renderPageRangeActions()}
-            </div>
+          <div class="page-range-label">
+            ${this.renderPageRangeLabel()}
+          </div>
+          <div class="page-range-actions">
+            ${this.renderPageRangeActions()}
+          </div>
         </div>
-      <div>
+        <div></div>
+      </div>
     `;
     // tslint:enable:max-line-length
   }

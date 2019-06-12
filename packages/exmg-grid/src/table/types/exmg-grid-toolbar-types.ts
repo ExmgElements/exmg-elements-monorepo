@@ -1,16 +1,16 @@
-export type Action = {
+export interface Action {
   id: string;
   icon?: string;
   text?: string;
   tooltip?: string;
-};
+}
 
-export type Filter<TConfig extends BaseFilterConfig = BaseFilterConfig> = {
+export interface Filter<TConfig extends BaseFilterConfig = BaseFilterConfig> {
   id: string;
   name: string;
   disabled?: boolean;
   config: TConfig;
-};
+}
 
 export enum FilterConfigType {
   SingleSelect = 'single_select',
@@ -21,16 +21,16 @@ export interface BaseFilterConfig {
 }
 
 export interface FilterSingleSelectConfig extends BaseFilterConfig {
-  data: { id: string; title: string }[];
+  data: {id: string; title: string}[];
 }
 
-export type Setting<TConfig extends BaseSettingConfig = BaseSettingConfig> = {
+export interface Setting<TConfig extends BaseSettingConfig = BaseSettingConfig> {
   id: string;
   icon?: string;
   dialogTitle?: string;
   tooltip?: string;
   config: TConfig;
-};
+}
 
 export enum SettingConfigType {
   SelectionList = 'selection_list',
@@ -44,7 +44,7 @@ export interface BaseSettingConfig {
   type?: SettingConfigType;
 }
 
-export interface  SettingSelectionListItem {
+export interface SettingSelectionListItem {
   id: string;
   title: string;
   selected?: boolean;
@@ -54,7 +54,7 @@ export interface SettingSelectionListConfig extends BaseSettingConfig {
   data: SettingSelectionListItem[];
 }
 
-export type EventDetailGridToolbarSettingChanged = {
+export interface EventDetailGridToolbarSettingChanged {
   id: string;
   value: SettingSelectionListItem[];
-};
+}

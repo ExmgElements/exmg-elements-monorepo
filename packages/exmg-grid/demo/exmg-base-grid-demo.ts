@@ -7,28 +7,29 @@ import '../src/table/exmg-grid-smart-toolbar';
 import {
   ActionAmountSelectedItemsCondition,
   ActionConditionType,
-  ActionWithCondition
+  ActionWithCondition,
 } from '../src/table/types/exmg-grid-smart-toolbar-types';
 import {
   EventDetailGridToolbarSettingChanged,
   Filter,
   FilterConfigType,
-  FilterSingleSelectConfig, SettingConfigId,
-  SettingSelectionListItem
+  FilterSingleSelectConfig,
+  SettingConfigId,
+  SettingSelectionListItem,
 } from '../src/table/types/exmg-grid-toolbar-types';
 import {
   EventDetailRowsOrderChanged,
   EventDetailSelectedRowsChange,
-  EventDetailSortChange
+  EventDetailSortChange,
 } from '../src/table/types/exmg-grid-types';
 import {EventSelectPayload} from '@exmg/exmg-paper-combobox/exmg-custom-types';
 
-export type Income = {
+export interface Income {
   id: number;
   month: string;
   amount: number;
   year: number;
-};
+}
 
 const generateRows = (length: number = 50, startId: number = 1): Income[] => {
   const randomAmount = () => Number.parseFloat((Math.random() * 1000).toFixed(2));
@@ -184,7 +185,7 @@ export abstract class ExmgBaseGridDemo extends LitElement {
       case 'merge': {
         const rowIds = this.selectedRows.map(row => row.getAttribute('data-row-key'));
         const [idToReplace, ...idsToRemove] = rowIds;
-        const mergedRow = <Income>allItems
+        const mergedRow = allItems
           .filter(({id}) => rowIds.includes(id.toString()))
           .reduce((acc: Income | void, item) => {
             if (acc) {
@@ -192,12 +193,12 @@ export abstract class ExmgBaseGridDemo extends LitElement {
             }
 
             return {...item};
-          }, undefined)!;
+          }, undefined)! as Income;
 
         allItems = allItems
           .filter(({id}) => !idsToRemove.includes(id.toString()))
           .map(it => {
-            if (it.id .toString() === idToReplace) {
+            if (it.id.toString() === idToReplace) {
               return {...mergedRow};
             }
             return it;
@@ -301,7 +302,7 @@ export abstract class ExmgBaseGridDemo extends LitElement {
   protected toggleTheme() {
     const themes = ['dark', 'light', 'exmg', 'mdc'];
     const index = themes.indexOf(this.theme);
-    const nextIndex = (index === -1 || index + 1 === themes.length) ? 0 : index + 1;
+    const nextIndex = index === -1 || index + 1 === themes.length ? 0 : index + 1;
     this.theme = themes[nextIndex];
   }
 
@@ -316,13 +317,13 @@ export abstract class ExmgBaseGridDemo extends LitElement {
   protected sortItems(column: string, sortDirection?: 'ASC' | 'DESC'): void {
     if (!sortDirection) {
       // reset - sort by ID
-      filteredItems.sort(({id: xId}, {id: yId}) => xId > yId ? 1 : xId < yId ? -1 : 0);
+      filteredItems.sort(({id: xId}, {id: yId}) => (xId > yId ? 1 : xId < yId ? -1 : 0));
     } else {
       const comparisonValue = sortDirection === 'ASC' ? 1 : -1;
       filteredItems.sort((x: Record<string, any>, y: Record<string, any>) => {
         const xValue = x[column];
         const yValue = y[column];
-        return xValue > yValue ? comparisonValue : xValue < yValue ? (comparisonValue * -1) : 0;
+        return xValue > yValue ? comparisonValue : xValue < yValue ? comparisonValue * -1 : 0;
       });
     }
   }

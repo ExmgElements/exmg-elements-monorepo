@@ -15,7 +15,7 @@ import {
   REMOVE_FROM_CART,
   CHECKOUT_SUCCESS,
   CHECKOUT_FAILURE,
-  ShopAction
+  ShopAction,
 } from '../actions/shop';
 import {createSelector} from 'reselect';
 import {RootState, RootAction} from '../store';
@@ -54,26 +54,17 @@ const INITIAL_STATE: ShopState = {
   error: '',
 };
 
-const shop: Reducer<ShopState, RootAction> = (state = INITIAL_STATE, action) => {
+const product = (state: ProductState, action: ShopAction) => {
   switch (action.type) {
-    case GET_PRODUCTS:
-      return {
-        ...state,
-        products: action.products,
-      };
     case ADD_TO_CART:
-    case REMOVE_FROM_CART:
-    case CHECKOUT_SUCCESS:
       return {
         ...state,
-        products: products(state.products, action),
-        cart: cart(state.cart, action),
-        error: '',
+        inventory: state.inventory - 1,
       };
-    case CHECKOUT_FAILURE:
+    case REMOVE_FROM_CART:
       return {
         ...state,
-        error: 'Checkout failed. Please try again',
+        inventory: state.inventory + 1,
       };
     default:
       return state;
@@ -89,23 +80,6 @@ const products = (state: ProductsState, action: ShopAction) => {
       return {
         ...state,
         [productId]: product(state[productId], action),
-      };
-    default:
-      return state;
-  }
-};
-
-const product = (state: ProductState, action: ShopAction) => {
-  switch (action.type) {
-    case ADD_TO_CART:
-      return {
-        ...state,
-        inventory: state.inventory - 1,
-      };
-    case REMOVE_FROM_CART:
-      return {
-        ...state,
-        inventory: state.inventory + 1,
       };
     default:
       return state;
@@ -142,6 +116,32 @@ const cart = (state: CartState, action: ShopAction) => {
   }
 };
 
+const shop: Reducer<ShopState, RootAction> = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case GET_PRODUCTS:
+      return {
+        ...state,
+        products: action.products,
+      };
+    case ADD_TO_CART:
+    case REMOVE_FROM_CART:
+    case CHECKOUT_SUCCESS:
+      return {
+        ...state,
+        products: products(state.products, action),
+        cart: cart(state.cart, action),
+        error: '',
+      };
+    case CHECKOUT_FAILURE:
+      return {
+        ...state,
+        error: 'Checkout failed. Please try again',
+      };
+    default:
+      return state;
+  }
+};
+
 export default shop;
 
 // Per Redux best practices, the shop data in our store is structured
@@ -167,7 +167,7 @@ export const cartItemsSelector = createSelector(
       const item = productsState[id];
       return {id: item.id, title: item.title, amount: cartState[id], price: item.price};
     });
-  }
+  },
 );
 
 // Return the total cost of the items in the cart
@@ -181,7 +181,7 @@ export const cartTotalSelector = createSelector(
       total += item.price * cartState[id];
     });
     return Math.round(total * 100) / 100;
-  }
+  },
 );
 
 // Return the number of items in the cart
@@ -193,5 +193,5 @@ export const cartQuantitySelector = createSelector(
       num += cartState[id];
     });
     return num;
-  }
+  },
 );

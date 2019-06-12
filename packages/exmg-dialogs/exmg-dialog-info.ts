@@ -27,9 +27,7 @@ export class ExmgInfoDialog extends LitElement {
   @query('#dialog')
   private dialogNode?: HTMLElement | any;
 
-  static styles = [
-    style,
-  ];
+  static styles = [style];
 
   constructor() {
     super();
@@ -55,10 +53,16 @@ export class ExmgInfoDialog extends LitElement {
   protected render() {
     return html`
       <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click>
-        ${this.hideCloseButton ? '' : html`<span @click=${this.close} class="close-button">✕</span>`}
+        ${this.hideCloseButton
+          ? ''
+          : html`
+              <span @click=${this.close} class="close-button">✕</span>
+            `}
         <slot></slot>
         <div class="actions">
-          <exmg-button id="doneBtn" @click="${this.done}" ?unelevated=${!this.buttonSecondary}>${this.buttonCopy}</exmg-button>
+          <exmg-button id="doneBtn" @click="${this.done}" ?unelevated=${!this.buttonSecondary}
+            >${this.buttonCopy}</exmg-button
+          >
         </div>
       </paper-dialog>
     `;

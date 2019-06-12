@@ -6,11 +6,11 @@ declare const flush: (cb?: Function) => void;
 
 const {assert} = chai;
 
-suite('<exmg-copy-to-clipboard>', function () {
+suite('<exmg-copy-to-clipboard>', function() {
   let element: ExmgCopyToClipboard;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('base usage', function () {
+  suite('base usage', function() {
     setup(() => {
       element = fixture('BasicTestFixture');
     });
