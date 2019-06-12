@@ -628,6 +628,7 @@ export class PaperComboboxElement extends LitElement {
           min-height: 24px;
           position: relative;
           width: 100%;
+          white-space: nowrap;
         }
         .tokens paper-button {
           margin: 0;
