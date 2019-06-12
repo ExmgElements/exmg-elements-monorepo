@@ -13,9 +13,13 @@ import {Action, ActionCreator} from 'redux';
 export const INCREMENT = 'INCREMENT';
 export const DECREMENT = 'DECREMENT';
 
-export interface CounterActionIncrement extends Action<'INCREMENT'> {}
+export interface CounterActionIncrement extends Action {
+  type: 'INCREMENT';
+}
 
-export interface CounterActionDecrement extends Action<'DECREMENT'> {}
+export interface CounterActionDecrement extends Action {
+  type: 'DECREMENT';
+}
 export type CounterAction = CounterActionIncrement | CounterActionDecrement;
 
 export const increment: ActionCreator<CounterActionIncrement> = () => {

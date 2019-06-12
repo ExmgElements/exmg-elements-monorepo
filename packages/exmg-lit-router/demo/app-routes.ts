@@ -2,10 +2,17 @@ import {RouteItem} from '@vaadin/router';
 
 export const appRoutes: RouteItem[] = [
   {
-    path: '', breadcrumb: {label: 'HOME', href: 'view1'}, name: 'home',
+    path: '',
+    breadcrumb: {label: 'HOME', href: 'view1'},
+    name: 'home',
     children: [
       {path: '', component: 'my-view1', action: () => import('./pages/my-view1.js') as Promise<any>},
-      {path: 'view1/:user?/:name?', title: 'View 1', component: 'my-view1', action: () => import('./pages/my-view1.js') as Promise<any>},
+      {
+        path: 'view1/:user?/:name?',
+        title: 'View 1',
+        component: 'my-view1',
+        action: () => import('./pages/my-view1.js') as Promise<any>,
+      },
       /**
        * !!NOTE: Leveraging bundle.module import is not working
        * {path: 'view2/:color?', component: 'my-view2', bundle: {module: './pages/my-view2.js'}},
@@ -20,43 +27,43 @@ export const appRoutes: RouteItem[] = [
         breadcrumb: {label: 'Counter'},
       },
       {
-        path: 'view3', children: () => import('./pages/my-view3.js').then(module => module.routes),
+        path: 'view3',
+        children: () => import('./pages/my-view3.js').then(module => module.routes),
       },
       {
         path: 'users-with-predefined-router',
         breadcrumb: {label: 'Users - shared'},
-        children: () => import('./shared_pages/user/routes.js').then(module => {
-          return module.routes;
-        }),
+        children: () =>
+          import('./shared_pages/user/routes.js').then(module => {
+            return module.routes;
+          }),
       },
       {
         path: 'users-lazy',
         breadcrumb: {label: 'Users'},
         action: () => import('./shared_pages/user/routes.js') as Promise<any>,
-        children: (): RouteItem[] => (
-          [
-            {
-              path: '',
-              breadcrumb: {label: 'User List'},
-              component: 'exmg-user-list',
-              title: 'User lazy',
-              name: 'user-list-lazy',
-              data: {
-                someData: true,
-              },
+        children: (): RouteItem[] => [
+          {
+            path: '',
+            breadcrumb: {label: 'User List'},
+            component: 'exmg-user-list',
+            title: 'User lazy',
+            name: 'user-list-lazy',
+            data: {
+              someData: true,
             },
-            {
-              path: 'details/:name',
-              component: 'exmg-user-detail',
-              breadcrumb: {label: 'User {name}'},
-              name: 'exmg-user-detail',
-              title: 'User detail {name}',
-              data: {
-                userListName: 'user-list-lazy',
-              },
+          },
+          {
+            path: 'details/:name',
+            component: 'exmg-user-detail',
+            breadcrumb: {label: 'User {name}'},
+            name: 'exmg-user-detail',
+            title: 'User detail {name}',
+            data: {
+              userListName: 'user-list-lazy',
             },
-          ]
-        ),
+          },
+        ],
       },
     ],
   },

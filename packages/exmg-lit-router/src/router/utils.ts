@@ -19,11 +19,10 @@ export const replaceParamsPlaceholders = (text: string, params: Record<string, s
   let tmpText = text;
   const escapePattern = (pattern: string): string => pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-  Object.entries(params)
-    .forEach(([paramName, value]) => {
-      const pattern = escapePattern(`{${paramName}}`);
-      tmpText = tmpText.replace(RegExp(pattern, 'g'), value);
-    });
+  Object.entries(params).forEach(([paramName, value]) => {
+    const pattern = escapePattern(`{${paramName}}`);
+    tmpText = tmpText.replace(RegExp(pattern, 'g'), value);
+  });
 
   return tmpText;
 };
@@ -40,16 +39,21 @@ const preparePathFromHref = (href: string, routerParams: Record<string, string> 
   }
 };
 
-export type SelectedInfo = {
+export interface SelectedInfo {
   matchPath: boolean;
   matchFullPath: boolean;
-};
+}
 
-export const prepareSelectedInfo = (href: string, routerPathname: string, routerParams: Record<string, string> = {}): SelectedInfo => {
+export const prepareSelectedInfo = (
+  href: string,
+  routerPathname: string,
+  routerParams: Record<string, string> = {},
+): SelectedInfo => {
   const pathname = preparePathFromHref(href, routerParams);
   const isExactlySame = routerPathname === pathname;
-  const parentPathname = !pathname || pathname === '' || pathname.endsWith('/') ? pathname :`${pathname}/`;
-  const matchPathname = isExactlySame || (typeof parentPathname === 'string' && routerPathname.startsWith(parentPathname));
+  const parentPathname = !pathname || pathname === '' || pathname.endsWith('/') ? pathname : `${pathname}/`;
+  const matchPathname =
+    isExactlySame || (typeof parentPathname === 'string' && routerPathname.startsWith(parentPathname));
 
   return {
     matchPath: matchPathname,
@@ -65,7 +69,7 @@ export const extractBreadcrumbsFromLocation = (location: VaadinLocation): Breadc
     .filter(({breadcrumb}) => !!breadcrumb)
     .map(it => {
       const slash = it.path === '' || prevPath.endsWith('/') || it.path.startsWith('/') ? '' : '/';
-      const path = !!prevPath ?  `${prevPath}${slash}${it.path}` : it.path;
+      const path = !!prevPath ? `${prevPath}${slash}${it.path}` : it.path;
       const {label, href, disabled = false} = it.breadcrumb!;
       const preparedHref = typeof href === 'string' ? href : generateUrlByPath(path, params);
       const selectedInfo = prepareSelectedInfo(preparedHref, pathname, params);

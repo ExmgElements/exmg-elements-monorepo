@@ -5,7 +5,7 @@ import {ExmgGridToolbar} from '../src/table/exmg-grid-toolbar';
 import {
   ActionAmountSelectedItemsCondition,
   ActionConditionType,
-  ActionWithCondition
+  ActionWithCondition,
 } from '../src/table/types/exmg-grid-smart-toolbar-types';
 
 declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
@@ -13,16 +13,16 @@ declare const flush: (cb?: Function) => void;
 
 const {assert} = chai;
 
-suite('<exmg-grid-smart-toolbar>', function () {
+suite('<exmg-grid-smart-toolbar>', function() {
   let element: ExmgGridSmartToolbar;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('base usage', function () {
+  suite('base usage', function() {
     setup(() => {
       element = fixture('BasicTestFixture');
     });
 
-    test('element is upgraded', function () {
+    test('element is upgraded', function() {
       assert.instanceOf(element, ExmgGridSmartToolbar);
     });
 
@@ -37,6 +37,17 @@ suite('<exmg-grid-smart-toolbar>', function () {
     });
 
     test('item actions passed properly', async () => {
+      const actionWithCondition: ActionWithCondition<ActionAmountSelectedItemsCondition> = {
+        id: 'merge',
+        text: '',
+        tooltip: 'Merge',
+        icon: 'merge_type',
+        condition: {
+          type: ActionConditionType.AmountOfSelectedItemsRange,
+          min: 2,
+        },
+      };
+
       element.actions = [
         {
           id: 'export',
@@ -44,16 +55,7 @@ suite('<exmg-grid-smart-toolbar>', function () {
           tooltip: 'Export',
           icon: 'get_app',
         },
-        <ActionWithCondition<ActionAmountSelectedItemsCondition>>{
-          id: 'merge',
-          text: '',
-          tooltip: 'Merge',
-          icon: 'merge_type',
-          condition: {
-            type: ActionConditionType.AmountOfSelectedItemsRange,
-            min: 2,
-          },
-        },
+        actionWithCondition,
       ];
 
       element.amountOfSelectedItems = 1;
@@ -66,30 +68,30 @@ suite('<exmg-grid-smart-toolbar>', function () {
     });
 
     test('item filters passed properly', async () => {
-      element.filters = [
-        <Filter<FilterSingleSelectConfig>>{
-          id: 'status',
-          name: 'Status',
-          config: {
-            type: FilterConfigType.SingleSelect,
-            data: [
-              {
-                id: 'active',
-                title: 'Active',
-              },
-              {
-                id: 'inactive',
-                title: 'Inactive',
-              },
-              {
-                id: 'archived',
-                title: 'Archived',
-              },
-            ],
-          },
-          disabled: false,
+      const filter: Filter<FilterSingleSelectConfig> = {
+        id: 'status',
+        name: 'Status',
+        config: {
+          type: FilterConfigType.SingleSelect,
+          data: [
+            {
+              id: 'active',
+              title: 'Active',
+            },
+            {
+              id: 'inactive',
+              title: 'Inactive',
+            },
+            {
+              id: 'archived',
+              title: 'Archived',
+            },
+          ],
         },
-      ];
+        disabled: false,
+      };
+
+      element.filters = [filter];
 
       await flushCompleted();
 

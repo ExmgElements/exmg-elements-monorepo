@@ -5,7 +5,7 @@ import {
   RouterAction,
   RouterActionUpdateQueryParams,
   RouterActionRouterChanged,
-  BreadcrumbItem
+  BreadcrumbItem,
 } from '../actions/router';
 
 export interface RouterState {
@@ -34,13 +34,13 @@ export const routerReducer: Reducer<RouterState, RouterAction> = (state = INITIA
   switch (type) {
     case ROUTER_CHANGED:
       return {
-          ...state,
-          ...<RouterActionRouterChanged>rest,
+        ...state,
+        ...(rest as RouterActionRouterChanged),
       };
     case UPDATE_QUERY_PARAMS:
       return {
         ...state,
-        ...<RouterActionUpdateQueryParams>rest,
+        ...(rest as RouterActionUpdateQueryParams),
       };
     default:
       return state;

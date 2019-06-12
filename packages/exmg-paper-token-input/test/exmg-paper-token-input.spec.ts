@@ -6,16 +6,16 @@ declare const flush: (cb?: Function) => void;
 
 const {assert} = chai;
 
-suite('<exmg-paper-token-input>', function () {
+suite('<exmg-paper-token-input>', function() {
   let element: PaperTokenInputElement;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('base usage', function () {
+  suite('base usage', function() {
     setup(() => {
       element = fixture('ExmgPaperTokenInputBasicElement');
     });
 
-    test('element is upgraded', function () {
+    test('element is upgraded', function() {
       assert.instanceOf(element, PaperTokenInputElement);
     });
 
@@ -29,7 +29,7 @@ suite('<exmg-paper-token-input>', function () {
     });
   });
 
-  suite('element with children', function () {
+  suite('element with children', function() {
     setup(() => {
       element = fixture('ExmgPaperTokenInputList');
     });
@@ -54,7 +54,7 @@ suite('<exmg-paper-token-input>', function () {
     });
   });
 
-  suite('element with children and selection', function () {
+  suite('element with children and selection', function() {
     setup(() => {
       element = fixture('ExmgPaperTokenInputListWithSelection');
     });
@@ -69,9 +69,17 @@ suite('<exmg-paper-token-input>', function () {
       assert.isNotNull(listBox.selectedValues, 'Should be an array');
       assert.equal(listBox.selectedValues![0], expectedSelectedItemValue);
       assert.lengthOf(listBox.selectedItems!, 1);
-      assert.equal(listBox.selectedItems![0].innerText, expectedSelectedItemText, 'Selected item should match with item text');
+      assert.equal(
+        listBox.selectedItems![0].innerText,
+        expectedSelectedItemText,
+        'Selected item should match with item text',
+      );
       const paperButton = elementShadowRoot.querySelector('paper-button')!;
-      assert.equal(paperButton.innerText, expectedSelectedItemText.toUpperCase(), 'Button token should match with item text');
+      assert.equal(
+        paperButton.innerText,
+        expectedSelectedItemText.toUpperCase(),
+        'Button token should match with item text',
+      );
     });
 
     test('element should trigger event exmg-token-input-select', async () => {
@@ -88,7 +96,9 @@ suite('<exmg-paper-token-input>', function () {
       eventPromise = onExmgTokenInputSelected(element);
       listBox!.select('1212');
 
-      const {detail: {value, item}} = await eventPromise;
+      const {
+        detail: {value, item},
+      } = await eventPromise;
       assert.equal(value, '1212', 'Should be triggered event with new selection');
 
       const expectedSelectedItemText = 'Jacquie';
@@ -105,7 +115,9 @@ suite('<exmg-paper-token-input>', function () {
       const eventPromise = onExmgTokenInputDeselected(element);
       listBox!.select('9512');
 
-      const {detail: {value, item}} = await eventPromise;
+      const {
+        detail: {value, item},
+      } = await eventPromise;
       assert.equal(value, '9512', 'Should be triggered event with new selection');
 
       const expectedSelectedItemText = 'Beatris';
@@ -122,7 +134,9 @@ suite('<exmg-paper-token-input>', function () {
         const eventPromise = onExmgTokenInputDeselected(element);
         inputElement.dispatchEvent(new KeyboardEvent('keydown', {code, bubbles: true, composed: true}));
 
-        const {detail: {value, item}} = await eventPromise;
+        const {
+          detail: {value, item},
+        } = await eventPromise;
         assert.equal(value, '9512', 'Should be triggered event with new selection');
 
         const expectedSelectedItemText = 'Beatris';
@@ -133,7 +147,7 @@ suite('<exmg-paper-token-input>', function () {
     });
   });
 
-  suite('element should follow required constraint', function () {
+  suite('element should follow required constraint', function() {
     const makeElementTouched = async (targetElement: HTMLElement): Promise<void> => {
       targetElement.click();
       targetElement.parentElement!.click();
@@ -188,7 +202,7 @@ suite('<exmg-paper-token-input>', function () {
       chai.assert.equal(inputError.innerText, '', 'Error message is not visible');
     });
 
-    suite('element is disabled', function () {
+    suite('element is disabled', function() {
       setup(() => {
         element = fixture('ExmgPaperTokenInputDisabled');
       });
@@ -197,8 +211,8 @@ suite('<exmg-paper-token-input>', function () {
         await flushCompleted();
 
         const elementShadowRoot = element.shadowRoot!;
-        const paperContainer = <HTMLInputElement>elementShadowRoot.querySelector('#inputValue')!;
-        const menuContainer = <HTMLInputElement>elementShadowRoot.querySelector('#menu')!;
+        const paperContainer = elementShadowRoot.querySelector('#inputValue')! as HTMLInputElement;
+        const menuContainer = elementShadowRoot.querySelector('#menu')! as HTMLInputElement;
         chai.assert.isTrue(element.disabled, 'Should be true');
         chai.assert.isTrue(paperContainer.disabled, 'Should be true');
         chai.assert.isTrue(menuContainer.disabled, 'Should be true');

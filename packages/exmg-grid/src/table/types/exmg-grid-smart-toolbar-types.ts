@@ -1,10 +1,10 @@
-export type ActionWithCondition<TCondition extends BaseActionCondition = BaseActionCondition> = {
+export interface ActionWithCondition<TCondition extends BaseActionCondition = BaseActionCondition> {
   id: string;
   icon?: string;
   text?: string;
   tooltip?: string;
   condition?: TCondition;
-};
+}
 
 export enum ActionConditionType {
   AmountOfSelectedItemsRange = 'amount_of_items_range',

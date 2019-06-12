@@ -16,7 +16,9 @@ export class ExmgBreadcrumb extends LitElement {
   private renderBreadcrumbItem(breadcrumb: BreadcrumbItem) {
     const isLast = this.breadcrumbs[this.breadcrumbs.length - 1] === breadcrumb;
     if (isLast || breadcrumb.disabled) {
-      return html`<a href="javascript:void(0)">${breadcrumb.label}</a>`;
+      return html`
+        <a href="javascript:void(0)">${breadcrumb.label}</a>
+      `;
     }
 
     return html`
@@ -29,16 +31,14 @@ export class ExmgBreadcrumb extends LitElement {
     }
 
     return html`
-        <nav>
-          <span>Breadcrumbs: </span>
-          ${
-            repeat(
-              this.breadcrumbs,
-              breadcrumb => `${breadcrumb.href}-${breadcrumb.path}`,
-              breadcrumb => this.renderBreadcrumbItem(breadcrumb),
-            )
-          }
-        </nav>
-      `;
+      <nav>
+        <span>Breadcrumbs: </span>
+        ${repeat(
+          this.breadcrumbs,
+          breadcrumb => `${breadcrumb.href}-${breadcrumb.path}`,
+          breadcrumb => this.renderBreadcrumbItem(breadcrumb),
+        )}
+      </nav>
+    `;
   }
 }

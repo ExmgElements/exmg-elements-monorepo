@@ -33,21 +33,18 @@ export class ExmgGridSettingSelectionList extends LitElement {
     this.settingData[index].selected = !this.settingData[index].selected;
     this.settingData = [...this.settingData];
 
-    this.dispatchEvent(new CustomEvent<{value: SettingSelectionListItem[]}>(
-      'exmg-grid-setting-changed',
-      {
+    this.dispatchEvent(
+      new CustomEvent<{value: SettingSelectionListItem[]}>('exmg-grid-setting-changed', {
         bubbles: true,
         composed: true,
         detail: {
           value: [...this.settingData],
         },
-      }
-    ));
+      }),
+    );
   }
 
-  static styles = [
-    style,
-  ];
+  static styles = [style];
 
   protected async firstUpdated(): Promise<void> {
     await this.updateComplete;
@@ -58,7 +55,6 @@ export class ExmgGridSettingSelectionList extends LitElement {
       this.menu.setIsHoisted(false);
       this.menu.setAnchorCorner(Corner.BOTTOM_RIGHT);
     }
-
   }
 
   private blockEventPropagation(e: Event) {
@@ -72,7 +68,8 @@ export class ExmgGridSettingSelectionList extends LitElement {
         @click="${this.toggleMenuOpenState}"
         class="mdc-icon-button material-icons action"
         title="${this.tooltip}"
-        data-mdc-ripple-is-unbounded="true">
+        data-mdc-ripple-is-unbounded="true"
+      >
         <mwc-icon>${this.icon}</mwc-icon>
       </exmg-button>
       <div class="mdc-menu-surface--anchor">
@@ -85,13 +82,13 @@ export class ExmgGridSettingSelectionList extends LitElement {
           >
             ${repeat(
               this.settingData,
-            (item) => item.id,
-            item => html`
-              <li class="mdc-list-item">
-                <mwc-checkbox class="mdc-list-item__graphic" ?checked="${item.selected}"></mwc-checkbox>
-                <span class="mdc-list-item__text">${item.title}</span>
-              </li>
-            `
+              item => item.id,
+              item => html`
+                <li class="mdc-list-item">
+                  <mwc-checkbox class="mdc-list-item__graphic" ?checked="${item.selected}"></mwc-checkbox>
+                  <span class="mdc-list-item__text">${item.title}</span>
+                </li>
+              `,
             )}
           </ul>
         </div>

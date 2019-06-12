@@ -37,7 +37,7 @@ export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
     return repeat(
       this.items,
       ({id}) => id,
-      (i) => {
+      i => {
         return html`
           <tr data-row-key="${i.id}">
             <td class="grid-checkbox-cell"><paper-checkbox class="selectable-checkbox"></paper-checkbox></td>
@@ -46,7 +46,9 @@ export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
             <td>${i.month}</td>
             <td class="grid-col-number">${i.year}</td>
             <td class="grid-col-number">${i.amount}</td>
-            <td class="grid-cell-visible-on-hover"><span class="expandable-toggle grid-icon-rotate">${expandIcon}</span></td>
+            <td class="grid-cell-visible-on-hover">
+              <span class="expandable-toggle grid-icon-rotate">${expandIcon}</span>
+            </td>
           </tr>
           <tr class="grid-row-detail" data-row-detail-key="${i.id}">
             <td data-auto-colspan>
@@ -55,7 +57,7 @@ export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
             </td>
           </tr>
         `;
-      }
+      },
     );
   }
 
@@ -80,7 +82,7 @@ export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
         <li>fixed table width</li>
       </ul>
       <exmg-grid
-         data-theme="${this.theme}"
+        data-theme="${this.theme}"
         .items="${this.items}"
         .hiddenColumnNames="${this.hiddenColumns}"
         .expandedRowIds="${this.expandedRowIds}"
@@ -94,25 +96,25 @@ export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
         @exmg-grid-selected-rows-change="${this.onSelectedRowsChange}"
       >
         <exmg-grid-smart-toolbar
-            slot="toolbar"
-            amount-of-selected-items="${this.selectedRows.length}"
-            .actions="${this.actions}"
-            description="Income table"
-            .filters="${this.filters}"
-            @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
-            @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
+          slot="toolbar"
+          amount-of-selected-items="${this.selectedRows.length}"
+          .actions="${this.actions}"
+          description="Income table"
+          .filters="${this.filters}"
+          @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
+          @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
         ></exmg-grid-smart-toolbar>
         <table>
           <thead>
-           <tr class="grid-columns">
-             <th width="5%"><paper-checkbox class="selectable-checkbox"></paper-checkbox></th>
-             <th width="5%"></th>
-             <th title="ID"><span>ID</span></th>
-             <th title="Month" data-column-key="month"><span>Month</span></th>
-             <th class="grid-col-number" title="Year" data-column-key="year"><span>Year</span></th>
-             <th class="grid-col-number" title="Income"><span>Income</span></th>
-             <th></th>
-           </tr>
+            <tr class="grid-columns">
+              <th width="5%"><paper-checkbox class="selectable-checkbox"></paper-checkbox></th>
+              <th width="5%"></th>
+              <th title="ID"><span>ID</span></th>
+              <th title="Month" data-column-key="month"><span>Month</span></th>
+              <th class="grid-col-number" title="Year" data-column-key="year"><span>Year</span></th>
+              <th class="grid-col-number" title="Income"><span>Income</span></th>
+              <th></th>
+            </tr>
           </thead>
           <tbody class="grid-data">
             ${this.renderTableBody()}
@@ -126,8 +128,8 @@ export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
           item-count="${this.getTotalCount()}"
           @exmg-grid-pagination-page-changed="${this.onPageChange}"
           @exmg-grid-pagination-page-size-changed="${this.onPageSizeChange}"
-         ></exmg-grid-pagination>
+        ></exmg-grid-pagination>
       </exmg-grid>
-`;
+    `;
   }
 }

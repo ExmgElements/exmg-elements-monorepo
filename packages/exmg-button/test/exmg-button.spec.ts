@@ -20,7 +20,6 @@ suite('<exmg-button>', () => {
     });
 
     test('element loading state', async () => {
-
       element.setAttribute('loading', '');
 
       await flushCompleted();
@@ -29,6 +28,5 @@ suite('<exmg-button>', () => {
 
       assert.equal(spinner.length, 1);
     });
-
   });
 });

@@ -2,16 +2,17 @@ import {customElement, html, LitElement, property} from 'lit-element';
 import './exmg-grid-toolbar';
 import {
   Filter,
-  Setting, SettingConfigId,
+  Setting,
+  SettingConfigId,
   SettingConfigType,
   SettingSelectionListConfig,
-  SettingSelectionListItem
+  SettingSelectionListItem,
 } from './types/exmg-grid-toolbar-types';
 import {
   ActionAmountSelectedItemsCondition,
   ActionConditionType,
   ActionWithCondition,
-  BaseActionCondition
+  BaseActionCondition,
 } from './types/exmg-grid-smart-toolbar-types';
 
 @customElement('exmg-grid-smart-toolbar')
@@ -44,7 +45,7 @@ export class ExmgGridSmartToolbar extends LitElement {
   columnFilterColumns: SettingSelectionListItem[] = [];
 
   private getActions() {
-    return this.actions.filter((action) => {
+    return this.actions.filter(action => {
       return this.shouldActionBeVisible(action);
     });
   }
@@ -58,12 +59,14 @@ export class ExmgGridSmartToolbar extends LitElement {
   }
 
   private isActionAmountSelectedItemsCondition(
-    action: ActionWithCondition<BaseActionCondition>
+    action: ActionWithCondition<BaseActionCondition>,
   ): action is ActionWithCondition<ActionAmountSelectedItemsCondition> {
-    return !!action.condition && (action.condition!.type === ActionConditionType.AmountOfSelectedItemsRange);
+    return !!action.condition && action.condition!.type === ActionConditionType.AmountOfSelectedItemsRange;
   }
 
-  private checkAmountOfSelectedItemsRangeCondition(action: ActionWithCondition<ActionAmountSelectedItemsCondition>): boolean {
+  private checkAmountOfSelectedItemsRangeCondition(
+    action: ActionWithCondition<ActionAmountSelectedItemsCondition>,
+  ): boolean {
     const condition = action.condition;
     const min = condition!.min;
 
@@ -81,7 +84,7 @@ export class ExmgGridSmartToolbar extends LitElement {
   }
 
   private getFilters() {
-    return this.filters.map((filter) => {
+    return this.filters.map(filter => {
       return {
         ...filter,
         disabled: this.amountOfSelectedItems > 0,

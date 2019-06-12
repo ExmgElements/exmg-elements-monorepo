@@ -13,43 +13,39 @@ export class ExmgDetail extends PageLitElement<StateWithRouter> {
 
   static styles = SharedStyles;
 
-  private users: Map<string, { username: string; age: number; active: boolean }> = new Map();
+  private users: Map<string, {username: string; age: number; active: boolean}> = new Map();
 
   constructor() {
     super();
-    [
-      'Allan',
-      'Thom',
-      'John',
-      'Amy',
-      'Edd',
-    ].forEach(username => this.users.set(username.toLowerCase(), {username, age: 10 * username.length, active: true}));
+    ['Allan', 'Thom', 'John', 'Amy', 'Edd'].forEach(username =>
+      this.users.set(username.toLowerCase(), {username, age: 10 * username.length, active: true}),
+    );
     this.users.get('thom')!.active = false;
   }
 
   protected render() {
     const user = this.users.get(this.router.params!.name)!;
-    const userListRouteName = <string>this.router!.data!.userListName || 'user-list';
+    const userListRouteName = (this.router!.data!.userListName as string) || 'user-list';
     const userListUrl = generateUrlByNameOrComponentName(userListRouteName);
 
     return html`
-        <nav>
-          <a class="back" href="${userListUrl}?sort=DESC">Back to list</a>
-        </nav>
-        <section>
-          <h1>User detail:</h1>
-          <div class="user-details">
-            <dl>
-              <dt>UserName:</dt>
-              <dd>${user.username}</dd>
-            </dl>
-            <dl>
-              <dt>Age:</dt>
-              <dd>${user.age}</dd>
-            </dl>
-          </div>
-        </section>
-      `;
+      <nav>
+        <a class="back" href="${userListUrl}?sort=DESC">Back to list</a>
+      </nav>
+      <section>
+        <h1>User detail:</h1>
+        <div class="user-details">
+          <dl>
+            <dt>UserName:</dt>
+            <dd>${user.username}</dd>
+          </dl>
+          <dl>
+            <dt>Age:</dt>
+            <dd>${user.age}</dd>
+          </dl>
+        </div>
+      </section>
+    `;
   }
 
   onBeforeEnter(location: Location, command: BeforeEnterCommand, router: Router): any {

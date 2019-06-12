@@ -9,18 +9,18 @@ declare const flush: (cb?: Function) => void;
 suite('ExmgDialogPlain', () => {
   let el: ExmgInfoDialog;
 
-  setup((done) => {
+  setup(done => {
     el = fixture('BasicTestFixture');
     flush(done);
   });
 
   test('Dialog renders', async () => {
-    assert.isNotNull(el, 'Dialog element shouldn\'t be null');
+    assert.isNotNull(el, 'Dialog element shouldnt be null');
     assert.instanceOf(el, ExmgInfoDialog);
   });
 
-  test('Instantiating the element with default properties works', (done) => {
-    el.addEventListener('done', (event) => {
+  test('Instantiating the element with default properties works', done => {
+    el.addEventListener('done', event => {
       assert.isNotNull(event, 'Event "done" is thrown');
       done();
     });

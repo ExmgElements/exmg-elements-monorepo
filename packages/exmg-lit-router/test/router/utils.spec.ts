@@ -1,11 +1,15 @@
-import {convertSearchQueryToQueryParams, replaceParamsPlaceholders, extractBreadcrumbsFromLocation} from '../../src/router/utils';
+import {
+  convertSearchQueryToQueryParams,
+  replaceParamsPlaceholders,
+  extractBreadcrumbsFromLocation,
+} from '../../src/router/utils';
 import {mockLocation} from '../utils';
 import {connectUrlGeneratorWithRouter} from '../../src/router/url-generator';
 import {Router} from '@vaadin/router';
 
 const {assert} = chai;
 
-suite('router/utils', function () {
+suite('router/utils', function() {
   suite('convertSearchQueryToQueryParams', () => {
     test('Convert queryParams when passed as flat values', () => {
       const result = convertSearchQueryToQueryParams('?a=aValue&b=bValue');
@@ -23,43 +27,22 @@ suite('router/utils', function () {
     });
 
     test('Convert queryParams when passed as mixed', () => {
-      const searchQueryA
-        = 'a=aFlatValue1&a=aFlatValue2&a[]=aArrayValue1&a[]=aArrayValue2&a[key]=aObjectValue1&a[key]=aObjectValue2&a[key2]=aObjectValue1';
-      const searchQueryB
-        = 'b=bFlatValue1&b=bFlatValue2&b[]=bArrayValue1&b[]=bArrayValue2&b[key]=bObjectValue1&b[key]=bObjectValue2&b[key2]=bObjectValue1';
+      const searchQueryA =
+        'a=aFlatValue1&a=aFlatValue2&a[]=aArrayValue1&a[]=aArrayValue2&a[key]=aObjectValue1&a[key]=aObjectValue2&a[key2]=aObjectValue1';
+      const searchQueryB =
+        'b=bFlatValue1&b=bFlatValue2&b[]=bArrayValue1&b[]=bArrayValue2&b[key]=bObjectValue1&b[key]=bObjectValue2&b[key2]=bObjectValue1';
       const result = convertSearchQueryToQueryParams(`?${searchQueryA}&${searchQueryB}`);
 
-      assert.deepEqual(
-        result,
-        {
-          a: [
-            'aFlatValue1',
-            'aFlatValue2',
-          ],
-          'a[]': [
-            'aArrayValue1',
-            'aArrayValue2',
-          ],
-          'a[key]': [
-            'aObjectValue1',
-            'aObjectValue2',
-          ],
-          'a[key2]': ['aObjectValue1'],
-          b: [
-            'bFlatValue1',
-            'bFlatValue2',
-          ],
-          'b[]': [
-            'bArrayValue1',
-            'bArrayValue2',
-          ],
-          'b[key]': [
-            'bObjectValue1',
-            'bObjectValue2',
-          ],
-          'b[key2]': ['bObjectValue1'],
-        }
-      );
+      assert.deepEqual(result, {
+        a: ['aFlatValue1', 'aFlatValue2'],
+        'a[]': ['aArrayValue1', 'aArrayValue2'],
+        'a[key]': ['aObjectValue1', 'aObjectValue2'],
+        'a[key2]': ['aObjectValue1'],
+        b: ['bFlatValue1', 'bFlatValue2'],
+        'b[]': ['bArrayValue1', 'bArrayValue2'],
+        'b[key]': ['bObjectValue1', 'bObjectValue2'],
+        'b[key2]': ['bObjectValue1'],
+      });
     });
   });
 
@@ -98,40 +81,41 @@ suite('router/utils', function () {
     });
 
     test('When routes without breadcrumbs configuration then output is empty', () => {
-      const breadcrumbs = extractBreadcrumbsFromLocation(mockLocation({
-        routes: [
-          {path: '', component: 'home'},
-          {path: 'page1', component: 'page1'},
-        ],
-      }));
+      const breadcrumbs = extractBreadcrumbsFromLocation(
+        mockLocation({
+          routes: [{path: '', component: 'home'}, {path: 'page1', component: 'page1'}],
+        }),
+      );
       assert.isTrue(breadcrumbs.length === 0);
     });
 
     test('When routes provided with breadcrumbs configuration then output is not empty', () => {
       connectUrlGeneratorWithRouter(createRouter());
-      const breadcrumbs = extractBreadcrumbsFromLocation(mockLocation({
-        routes: [
-          {path: '', component: 'home', breadcrumb: {href: '', label: 'Home'}},
-          {path: 'page1', component: 'page1', breadcrumb: {href: 'page1', label: 'Page1'}},
-        ],
-      }));
+      const breadcrumbs = extractBreadcrumbsFromLocation(
+        mockLocation({
+          routes: [
+            {path: '', component: 'home', breadcrumb: {href: '', label: 'Home'}},
+            {path: 'page1', component: 'page1', breadcrumb: {href: 'page1', label: 'Page1'}},
+          ],
+        }),
+      );
 
       const expected = [
         {
-          'path': '',
-          'disabled': false,
-          'href': '',
-          'label': 'Home',
-          'matchPath': true,
-          'matchFullPath': false,
+          path: '',
+          disabled: false,
+          href: '',
+          label: 'Home',
+          matchPath: true,
+          matchFullPath: false,
         },
         {
-          'path': 'page1',
-          'disabled': false,
-          'href': 'page1',
-          'label': 'Page1',
-          'matchPath': false,
-          'matchFullPath': false,
+          path: 'page1',
+          disabled: false,
+          href: 'page1',
+          label: 'Page1',
+          matchPath: false,
+          matchFullPath: false,
         },
       ];
       assert.deepEqual(breadcrumbs, expected);
@@ -139,30 +123,32 @@ suite('router/utils', function () {
 
     test('When routes provided with breadcrumbs configuration then output is not empty and have selected info', () => {
       connectUrlGeneratorWithRouter(createRouter());
-      const breadcrumbs = extractBreadcrumbsFromLocation(mockLocation({
-        pathname: 'page1',
-        routes: [
-          {path: '', component: 'home', breadcrumb: {href: '', label: 'Home'}},
-          {path: 'page1', component: 'page1', breadcrumb: {href: 'page1', label: 'Page1'}},
-        ],
-      }));
+      const breadcrumbs = extractBreadcrumbsFromLocation(
+        mockLocation({
+          pathname: 'page1',
+          routes: [
+            {path: '', component: 'home', breadcrumb: {href: '', label: 'Home'}},
+            {path: 'page1', component: 'page1', breadcrumb: {href: 'page1', label: 'Page1'}},
+          ],
+        }),
+      );
 
       const expected = [
         {
-          'path': '',
-          'disabled': false,
-          'href': '',
-          'label': 'Home',
-          'matchPath': true,
-          'matchFullPath': false,
+          path: '',
+          disabled: false,
+          href: '',
+          label: 'Home',
+          matchPath: true,
+          matchFullPath: false,
         },
         {
-          'path': 'page1',
-          'disabled': false,
-          'href': 'page1',
-          'label': 'Page1',
-          'matchPath': true,
-          'matchFullPath': true,
+          path: 'page1',
+          disabled: false,
+          href: 'page1',
+          label: 'Page1',
+          matchPath: true,
+          matchFullPath: true,
         },
       ];
       assert.deepEqual(breadcrumbs, expected);

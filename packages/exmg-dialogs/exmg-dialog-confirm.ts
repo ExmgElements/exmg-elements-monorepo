@@ -49,9 +49,7 @@ export class ExmgConfirmDialog extends LitElement {
   @query('#submitBtn')
   private submitBtnNode?: HTMLElement | any;
 
-  static styles = [
-    style,
-  ];
+  static styles = [style];
 
   constructor() {
     super();
@@ -124,12 +122,16 @@ export class ExmgConfirmDialog extends LitElement {
   protected render() {
     return html`
       <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click @iron-overlay-closed="${this.onCloseDialog}">
-        ${this.hideCloseButton ? '' : html`<span @click=${this.close} class="close-button">✕</span>` }
+        ${this.hideCloseButton
+          ? ''
+          : html`
+              <span @click=${this.close} class="close-button">✕</span>
+            `}
         <header>
           <h2 class="title">${this.title}</h2>
         </header>
         <div class="body">
-          <div class="error ${ !!this.errorMessage ? 'show' : '' }">
+          <div class="error ${!!this.errorMessage ? 'show' : ''}">
             <span class="body">
               <span>
                 <iron-icon icon="exmg-icons:warning"></iron-icon>
@@ -141,7 +143,9 @@ export class ExmgConfirmDialog extends LitElement {
         </div>
         <div class="actions">
           <exmg-button dialog-dismiss>Cancel</exmg-button>
-          <exmg-button id="submitBtn" @click="${this.submit}" ?loading="${this.submitting}" unelevated>${this.buttonCopy}</exmg-button>
+          <exmg-button id="submitBtn" @click="${this.submit}" ?loading="${this.submitting}" unelevated
+            >${this.buttonCopy}</exmg-button
+          >
         </div>
       </paper-dialog>
     `;

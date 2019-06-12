@@ -8,12 +8,7 @@ import * as GulpClient from 'gulp';
 /**
  * Render single file
  */
-function renderSass(
-  pathWithFileName: string,
-  stopOnError: boolean,
-  template: string | null,
-  newFileSuffix = '.ts'
-) {
+function renderSass(pathWithFileName: string, stopOnError: boolean, template: string | null, newFileSuffix = '.ts') {
   console.log(`-- sass render ${pathWithFileName} --- `);
 
   const output = pathWithFileName.replace(/\.(s)?css$/, newFileSuffix);
@@ -42,22 +37,19 @@ exports.registerTasks = (
   gulp: GulpClient.Gulp,
   filesPattern: string,
   template: string | null,
-  newFileSuffix: string = '.ts'
+  newFileSuffix: string = '.ts',
 ) => {
-
   gulp.task('render-styles', (done: Function) => {
-    glob.sync(filesPattern, {absolute: true})
+    glob
+      .sync(filesPattern, {absolute: true})
       .forEach((path: string) => renderSass(path, true, template, newFileSuffix));
 
     done();
   });
 
   gulp.task('watch-styles', () => {
-    return watch(
-      filesPattern,
-      {read: false, events: ['add', 'change'], ignoreInitial: false},
-      (file: File) => {
-        renderSass(file.path, false, template, newFileSuffix);
-      });
+    return watch(filesPattern, {read: false, events: ['add', 'change'], ignoreInitial: false}, (file: File) => {
+      renderSass(file.path, false, template, newFileSuffix);
+    });
   });
 };

@@ -11,7 +11,7 @@ suite('exmg-column-sortable', () => {
   let querySelectors: ExmgQuerySelectors;
   let testInstance: ExmgColumnSortable;
   setup(() => {
-    element = <HTMLTableElement>fixture('TableFixture');
+    element = fixture('TableFixture') as HTMLTableElement;
     const tableBody: HTMLTableSectionElement = element.querySelector('tbody')!;
     querySelectors = new ExmgQuerySelectors(element, tableBody);
     const dispatchEvent = (event: Event) => element.dispatchEvent(event);
@@ -33,7 +33,10 @@ suite('exmg-column-sortable', () => {
     assert.instanceOf(amountColumn, HTMLElement);
     assert.isFalse(amountColumn.hasAttribute('data-sort-direction'), 'There is no default sort before init');
     testInstance.initFeature();
-    assert.isFalse(amountColumn.hasAttribute('data-sort-direction'), 'After init without default sorting, still no sort-direction');
+    assert.isFalse(
+      amountColumn.hasAttribute('data-sort-direction'),
+      'After init without default sorting, still no sort-direction',
+    );
   });
 
   test('click on sortable column is changing direction', async () => {
@@ -56,7 +59,10 @@ suite('exmg-column-sortable', () => {
     assert.equal(amountColumn.getAttribute('data-sort-direction'), 'DESC', 'Default sort is setup on amount column');
     assert.isFalse(yearColumn.hasAttribute('data-sort-direction'), 'Column year has not sort direction');
     yearColumn.click();
-    assert.isFalse(amountColumn.hasAttribute('data-sort-direction'), 'Sort direction on amount column has been removed');
+    assert.isFalse(
+      amountColumn.hasAttribute('data-sort-direction'),
+      'Sort direction on amount column has been removed',
+    );
     assert.equal(yearColumn.getAttribute('data-sort-direction'), 'ASC', 'Sort direction on column year is ASC');
   });
 
@@ -77,17 +83,13 @@ suite('exmg-column-sortable', () => {
       assert.deepEqual(receivedEvent.detail, expected, 'Received event with proper detail');
     };
 
-    await assertEventDetailsSortChange(
-      {
-        column: 'amount',
-        sortDirection: undefined,
-      }
-    );
-    await assertEventDetailsSortChange(
-      {
-        column: 'amount',
-        sortDirection: 'ASC',
-      }
-    );
+    await assertEventDetailsSortChange({
+      column: 'amount',
+      sortDirection: undefined,
+    });
+    await assertEventDetailsSortChange({
+      column: 'amount',
+      sortDirection: 'ASC',
+    });
   });
 });

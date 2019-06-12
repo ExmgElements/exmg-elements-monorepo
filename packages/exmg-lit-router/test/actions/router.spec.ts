@@ -3,7 +3,10 @@ import {
   navigateToPath,
   updateQueryParams,
   routerChanged,
-  UPDATE_QUERY_PARAMS, RouterActionUpdateQueryParams, ROUTER_CHANGED, RouterActionRouterChanged
+  UPDATE_QUERY_PARAMS,
+  RouterActionUpdateQueryParams,
+  ROUTER_CHANGED,
+  RouterActionRouterChanged,
 } from '../../src/actions/router';
 
 import {Router} from '@vaadin/router';
@@ -44,7 +47,11 @@ suite('actions/router', () => {
     const store = mockStore<StateWithRouter, RouterActionRouterChanged>(state);
     const replaceStateStub = stub(window.history, 'replaceState');
 
-    const actionResult: RouterActionRouterChanged = routerChanged(routerState)(store.dispatch, store.getState, undefined);
+    const actionResult: RouterActionRouterChanged = routerChanged(routerState)(
+      store.dispatch,
+      store.getState,
+      undefined,
+    );
     const expectedActionResult = {...actionResult, type: ROUTER_CHANGED};
 
     assert.deepEqual(actionResult, expectedActionResult);

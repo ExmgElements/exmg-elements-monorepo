@@ -6,31 +6,31 @@ declare const flush: (cb?: Function) => void;
 
 const {assert} = chai;
 
-suite('<exmg-drawer>', function () {
+suite('<exmg-drawer>', function() {
   let element: ExmgDrawer;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('base usage', function () {
+  suite('base usage', function() {
     setup(() => {
       element = fixture('BasicTestFixture');
     });
 
-		test('element is upgraded', function () {
-			assert.instanceOf(element, ExmgDrawer);
-		});
+    test('element is upgraded', function() {
+      assert.instanceOf(element, ExmgDrawer);
+    });
 
-		test('drawer sends proper event', async () => {
-			await flushCompleted();
+    test('drawer sends proper event', async () => {
+      await flushCompleted();
 
-			let eventPromise;
+      let eventPromise;
 
-			eventPromise = onExmgDrawerOpenedChanged(element, true);
-			element.opened = true;
-			assert.equal((await eventPromise).detail.value, true);
+      eventPromise = onExmgDrawerOpenedChanged(element, true);
+      element.opened = true;
+      assert.equal((await eventPromise).detail.value, true);
 
-			eventPromise = onExmgDrawerOpenedChanged(element, true);
-			element.opened = false;
-			assert.equal((await eventPromise).detail.value, false);
-		});
-	});
+      eventPromise = onExmgDrawerOpenedChanged(element, true);
+      element.opened = false;
+      assert.equal((await eventPromise).detail.value, false);
+    });
+  });
 });

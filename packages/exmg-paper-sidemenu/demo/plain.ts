@@ -4,12 +4,11 @@ import {menu} from './menu.js';
 
 @customElement('x-demo')
 export class XDemo extends LitElement {
-
   @property({type: Array})
   menu: [] | undefined;
 
   static styles = css`
-    :host{
+    :host {
       display: inline-block;
       height: 100%;
       overflow: auto;
@@ -26,6 +25,8 @@ export class XDemo extends LitElement {
   `;
 
   render() {
-    return html`<exmg-paper-sidemenu .menu=${menu} selected="rooms/" debug></exmg-paper-sidemenu>`;
+    return html`
+      <exmg-paper-sidemenu .menu=${menu} selected="rooms/" debug></exmg-paper-sidemenu>
+    `;
   }
 }

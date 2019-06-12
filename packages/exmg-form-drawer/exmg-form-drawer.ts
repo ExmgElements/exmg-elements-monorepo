@@ -72,14 +72,11 @@ export class ExmgFormDrawer extends LitElement {
   private handleFormSubmit(e: CustomEvent) {
     this.submitting = true;
     this.dispatchEvent(
-      new CustomEvent(
-        'submit',
-        {
-          bubbles: false,
-          composed: false,
-          detail: e.detail,
-        }
-      )
+      new CustomEvent('submit', {
+        bubbles: false,
+        composed: false,
+        detail: e.detail,
+      }),
     );
   }
 
@@ -87,21 +84,16 @@ export class ExmgFormDrawer extends LitElement {
     this.submitting = false;
     this.opened = false;
     this.dispatchEvent(
-      new CustomEvent(
-        'cancel',
-        {
-          bubbles: false,
-          composed: false,
-        }
-      )
+      new CustomEvent('cancel', {
+        bubbles: false,
+        composed: false,
+      }),
     );
   }
 
-  static styles = [
-    style,
-  ];
+  static styles = [style];
 
-  render () {
+  render() {
     // language=html
     return html`
       <exmg-drawer
@@ -112,10 +104,7 @@ export class ExmgFormDrawer extends LitElement {
         <div class="header">
           <slot name="title" class="title"></slot>
           <div class="header-buttons">
-            <exmg-button
-              title="${this.cancelBtnTitle}"
-              @click="${this.handleCancelBtnClick}"
-            >
+            <exmg-button title="${this.cancelBtnTitle}" @click="${this.handleCancelBtnClick}">
               ${this.cancelBtnTitle}
             </exmg-button>
             <exmg-button

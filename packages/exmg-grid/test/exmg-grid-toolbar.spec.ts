@@ -7,16 +7,16 @@ declare const flush: (cb?: Function) => void;
 
 const {assert} = chai;
 
-suite('<exmg-grid-toolbar>', function () {
+suite('<exmg-grid-toolbar>', function() {
   let element: ExmgGridToolbar;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('base usage', function () {
+  suite('base usage', function() {
     setup(() => {
       element = fixture('BasicTestFixture');
     });
 
-    test('element is upgraded', function () {
+    test('element is upgraded', function() {
       assert.instanceOf(element, ExmgGridToolbar);
     });
 
@@ -54,29 +54,28 @@ suite('<exmg-grid-toolbar>', function () {
     });
 
     test('item filters work properly', async () => {
-      element.filters = [
-        <Filter<FilterSingleSelectConfig>>{
-          id: 'status',
-          name: 'Status',
-          config: {
-            type: FilterConfigType.SingleSelect,
-            data: [
-              {
-                id: 'active',
-                title: 'Active',
-              },
-              {
-                id: 'inactive',
-                title: 'Inactive',
-              },
-              {
-                id: 'archived',
-                title: 'Archived',
-              },
-            ],
-          },
+      const filter: Filter<FilterSingleSelectConfig> = {
+        id: 'status',
+        name: 'Status',
+        config: {
+          type: FilterConfigType.SingleSelect,
+          data: [
+            {
+              id: 'active',
+              title: 'Active',
+            },
+            {
+              id: 'inactive',
+              title: 'Inactive',
+            },
+            {
+              id: 'archived',
+              title: 'Archived',
+            },
+          ],
         },
-      ];
+      };
+      element.filters = [filter];
 
       await flushCompleted();
 
@@ -85,9 +84,7 @@ suite('<exmg-grid-toolbar>', function () {
       const eventPromise = onExmgGridToolbarFilterChanged(element, true);
 
       filterElem.dispatchEvent(
-        new CustomEvent('exmg-combobox-select',
-          {bubbles: true, composed: true, detail: {value: 'inactive'}}
-        )
+        new CustomEvent('exmg-combobox-select', {bubbles: true, composed: true, detail: {value: 'inactive'}}),
       );
 
       const {detail} = await eventPromise;

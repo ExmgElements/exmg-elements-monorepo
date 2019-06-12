@@ -40,12 +40,16 @@ const fixGenDocs = (projectDir: string, docsDir: string, apply: boolean = false,
   });
 };
 
-const doFixGenDocs = (projectDir: string, docsDir: string, dryRun: boolean = true, verbose: boolean = false): Promise<boolean> =>
+const doFixGenDocs = (
+  projectDir: string,
+  docsDir: string,
+  dryRun: boolean = true,
+  verbose: boolean = false,
+): Promise<boolean> =>
   new Promise(resolve => {
-      fixGenDocs(projectDir, docsDir, dryRun, verbose);
-      resolve(true);
-    }
-  );
+    fixGenDocs(projectDir, docsDir, dryRun, verbose);
+    resolve(true);
+  });
 
 exports.doFixGenDocs = doFixGenDocs;
 export {};

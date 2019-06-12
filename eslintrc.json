@@ -1,0 +1,52 @@
+{
+  "plugins": ["lit", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:lit/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "quotes": ["error", "single", {"avoidEscape": true}],
+    "comma-dangle": ["error", "always-multiline"],
+    "indent": "off",
+    "max-len": [
+      "error",
+      {
+        "code": 140,
+        "ignorePattern": "`.*`",
+        "ignoreTemplateLiterals": true
+      }
+    ],
+    "object-curly-spacing": ["error", "never"],
+    "no-shadow": "error",
+    "@typescript-eslint/no-non-null-assertion": false,
+    "@typescript-eslint/explicit-member-accessibility": {
+      "accessibility": "explicit",
+      "overrides": {
+        "accessors": "off",
+        "constructors": "no-public",
+        "methods": "explicit",
+        "properties": "explicit",
+        "parameterProperties": "off"
+      }
+    },
+    "@typescript-eslint/no-object-literal-type-assertion": [
+      "error",
+      {
+        "allowAsParameter": true
+      }
+    ],
+    "@typescript-eslint/no-triple-slash-reference": false,
+    "@typescript-eslint/explicit-function-return-type": false,
+    "lit/no-invalid-html": 0
+  }
+}

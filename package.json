@@ -2,16 +2,25 @@
   "name": "exmg-elements-monorepo",
   "private": true,
   "devDependencies": {
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
     "lerna": "^3.11.1",
+    "prettier": "^1.18.2",
+    "rimraf": "^2.6.3",
     "tslint": "^5.12.1",
     "tslint-config-exmg": "^1.0.2",
-    "typescript": "^3.4.5",
-    "rimraf": "^2.6.3"
+    "typescript": "^3.4.5"
   },
   "scripts": {
     "lerna:clean": "lerna exec rimraf package-lock.json && lerna clean",
     "clean": "lerna clean",
     "bootstrap": "lerna bootstrap",
     "ls": "lerna ls -l"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.10.2",
+    "@typescript-eslint/parser": "^1.10.2",
+    "eslint": "^5.16.0",
+    "eslint-plugin-lit": "^1.0.0"
   }
 }

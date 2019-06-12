@@ -3,25 +3,24 @@ import {style} from './styles/exmg-spinner-styles';
 
 @customElement('exmg-button-spinner')
 export class ExmgSpinner extends LitElement {
-
   @property({type: Boolean})
-  coolingDown = false;
+  public coolingDown = false;
 
   @property({type: Boolean, reflect: true})
-  @observer(function (this: ExmgSpinner, value: boolean) {
+  @observer(function(this: ExmgSpinner, value: boolean) {
     this.setAriaHidden(!value);
     this.coolingDown = !value;
   })
-  active = false;
+  public active = false;
 
-  static styles = style;
+  public static styles = style;
 
-  resetAnimation() {
+  private resetAnimation() {
     this.active = false;
     this.coolingDown = false;
   }
 
-  setAriaHidden(hidden: boolean) {
+  private setAriaHidden(hidden: boolean) {
     const attr = 'aria-hidden';
     if (hidden) {
       this.setAttribute(attr, 'true');
@@ -30,17 +29,21 @@ export class ExmgSpinner extends LitElement {
     }
   }
 
-  render() {
+  public render() {
     const classes = {
       'exmg-active': this.active || this.coolingDown,
       'exmg-cooldown': this.coolingDown,
     };
     return html`
-      <div id="spinnerContainer" class="${classMap(classes)}"
+      <div
+        id="spinnerContainer"
+        class="${classMap(classes)}"
         @animationend="${() => this.resetAnimation}"
-        @webkitAnimationEnd="${() => this.resetAnimation}">
+        @webkitAnimationEnd="${() => this.resetAnimation}"
+      >
         <div class="spinner-layer">
-<div class="circle-clipper left"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div>
+          <div class="circle-clipper left"><div class="circle"></div></div>
+          <div class="circle-clipper right"><div class="circle"></div></div>
         </div>
       </div>
     `;

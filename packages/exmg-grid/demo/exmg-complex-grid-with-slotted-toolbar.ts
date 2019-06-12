@@ -26,22 +26,22 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
         --mdc-theme-primary: #0070db;
         --mdc-theme-on-surface: #091e2e;
         --exmg-grid-toolbar-active-bg-color: #e1f0fe;
-        --exmg-grid-toolbar-filter-item-active-bg-color: #B8DDFE;
-        --exmg-grid-pagination-bg-color: #4A4A4A;
+        --exmg-grid-toolbar-filter-item-active-bg-color: #b8ddfe;
+        --exmg-grid-pagination-bg-color: #4a4a4a;
         --exmg-grid-pagination-color: #ffffff;
       }
       table {
         --exmg-table-color: #000;
-        --exmg-table-card-background-color: #4A4A4A;
+        --exmg-table-card-background-color: #4a4a4a;
         --exmg-table-row-divider-color: white;
         --exmg-table-row-selected-color: white;
-        --exmg-table-row-selected-background-color: #850E13;
+        --exmg-table-row-selected-background-color: #850e13;
         --exmg-table-row-hover-color: white;
-        --exmg-table-row-hover-background-color: #B42636;
+        --exmg-table-row-hover-background-color: #b42636;
         --exmg-table-row-dragged-background-color: #f1f1f1;
         --exmg-table-th-color: #0071dc;
-        --exmg-table-columns-background-color: #4A4A4A;
-        --exmg-table-th-sortable-hover-color: #0092FF;
+        --exmg-table-columns-background-color: #4a4a4a;
+        --exmg-table-th-sortable-hover-color: #0092ff;
       }
       table .expandable-toggle > svg {
         fill: white;
@@ -53,7 +53,7 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
     return repeat(
       this.items,
       ({id}) => id,
-      (i) => {
+      i => {
         return html`
           <tr data-row-key="${i.id}">
             <td class="grid-checkbox-cell"><paper-checkbox class="selectable-checkbox"></paper-checkbox></td>
@@ -70,7 +70,7 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
             </td>
           </tr>
         `;
-      }
+      },
     );
   }
 
@@ -108,14 +108,14 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
       >
         <exmg-grid-base-toolbar slot="toolbar">
           <div slot="actions">
-            ${this.selectedRows.length ? html`<exmg-button
-              class="action"
-              title="Merge"
-              @click="${this.onActionDelegate('merge')}"
-            >
-              <mwc-icon>merge_type</mwc-icon>
-                Merge
-            </exmg-button>` : null}
+            ${this.selectedRows.length
+              ? html`
+                  <exmg-button class="action" title="Merge" @click="${this.onActionDelegate('merge')}">
+                    <mwc-icon>merge_type</mwc-icon>
+                    Merge
+                  </exmg-button>
+                `
+              : null}
           </div>
           <div slot="description">Income table</div>
           <div slot="filters">
@@ -133,30 +133,30 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
         </exmg-grid-base-toolbar>
         <table>
           <thead>
-           <tr class="grid-columns">
-             <th class="grid-checkbox-cell"><paper-checkbox class="selectable-checkbox"></paper-checkbox></th>
-             <th><span>ID</span></th>
-             <th data-column-key="month" data-sort><span>Month</span></th>
-             <th class="grid-col-number" data-column-key="year" data-sort><span>Year</span></th>
-             <th class="grid-col-number" data-column-key="amount" data-sort=""><span>Income</span></th>
-             <th></th>
-           </tr>
+            <tr class="grid-columns">
+              <th class="grid-checkbox-cell"><paper-checkbox class="selectable-checkbox"></paper-checkbox></th>
+              <th><span>ID</span></th>
+              <th data-column-key="month" data-sort><span>Month</span></th>
+              <th class="grid-col-number" data-column-key="year" data-sort><span>Year</span></th>
+              <th class="grid-col-number" data-column-key="amount" data-sort=""><span>Income</span></th>
+              <th></th>
+            </tr>
           </thead>
           <tbody class="grid-data">
-              ${this.renderTableBody()}
+            ${this.renderTableBody()}
           </tbody>
         </table>
-       <exmg-grid-pagination
-         slot="pagination"
-         page-index=${this.pageIndex}
-         page-size=${this.pageSize}
-         .pageSizeOptions="${[10, 20, 30, 50, 100]}"
-         item-count="${this.getTotalCount()}"
-         @exmg-grid-pagination-page-changed="${this.onPageChange}"
-         @exmg-grid-pagination-page-size-changed="${this.onPageSizeChange}"
-       >
-       </exmg-grid-pagination>
+        <exmg-grid-pagination
+          slot="pagination"
+          page-index=${this.pageIndex}
+          page-size=${this.pageSize}
+          .pageSizeOptions="${[10, 20, 30, 50, 100]}"
+          item-count="${this.getTotalCount()}"
+          @exmg-grid-pagination-page-changed="${this.onPageChange}"
+          @exmg-grid-pagination-page-size-changed="${this.onPageSizeChange}"
+        >
+        </exmg-grid-pagination>
       </exmg-grid>
-`;
+    `;
   }
 }

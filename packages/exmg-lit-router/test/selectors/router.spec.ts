@@ -30,7 +30,6 @@ suite('selectors/router', () => {
     const state = {router: routerState};
     const result = hasQueryParams(state, 'someKey');
     assert.isFalse(result, 'Query params not exists');
-
   });
 
   test('hasQueryParams when query params empty object should be false', () => {
@@ -59,7 +58,6 @@ suite('selectors/router', () => {
     const state = {router: routerState};
     const result = getQueryParam(state, 'someKey');
     assert.isUndefined(result, 'Query param is undefined');
-
   });
 
   test('getQueryParam when query params exists should return an array of values', () => {

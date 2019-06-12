@@ -20,7 +20,7 @@ export class SelectionController {
   private updating = false;
 
   static getController(element: Node) {
-    const root = <any>element;
+    const root = element as any;
     if (!root[selectionController]) {
       root[selectionController] = new SelectionController(root);
     }
@@ -95,11 +95,9 @@ export class SelectionController {
     const set = this.getSet(element.name);
     if (!set.ordered) {
       set.ordered = Array.from(set.set);
-      set.ordered.sort((a, b) =>
-        a.compareDocumentPosition(b) === Node.DOCUMENT_POSITION_PRECEDING ? 1 : 0
-      );
+      set.ordered.sort((a, b) => (a.compareDocumentPosition(b) === Node.DOCUMENT_POSITION_PRECEDING ? 1 : 0));
     }
-    return set.ordered.filter((item) => !item.disabled);
+    return set.ordered.filter(item => !item.disabled);
   }
 
   getSet(name: string) {
@@ -132,7 +130,7 @@ export class SelectionController {
     if (element.checked) {
       const set = this.getSet(element.name);
       for (const e of set.set) {
-        e.checked = (e === element);
+        e.checked = e === element;
       }
       set.selected = element;
     }

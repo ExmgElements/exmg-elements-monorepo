@@ -28,10 +28,12 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
 
   constructor() {
     super();
-    this.selectedRowIds = this.items.slice(0, 3)
+    this.selectedRowIds = this.items
+      .slice(0, 3)
       .map(({id}) => id.toString())
       .reduce((acc, item: string) => ({...acc, [item]: true}), {});
-    this.expandedRowIds = this.items.slice(3, 5)
+    this.expandedRowIds = this.items
+      .slice(3, 5)
       .map(({id}) => id.toString())
       .reduce((acc, item: string) => ({...acc, [item]: true}), {});
   }
@@ -40,7 +42,7 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
     return repeat(
       this.items,
       ({id}) => id,
-      (i) => {
+      i => {
         return html`
           <tr data-row-key="${i.id}">
             <td class="grid-checkbox-cell"><paper-checkbox class="selectable-checkbox"></paper-checkbox></td>
@@ -57,7 +59,7 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
             </td>
           </tr>
         `;
-      }
+      },
     );
   }
 
@@ -79,7 +81,7 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
         <li>default sort column</li>
         <li>preselected rows</li>
         <li>expanded rows</li>
-        <li>fixed table layout - squeeze content and ellipsis overflow </li>
+        <li>fixed table layout - squeeze content and ellipsis overflow</li>
       </ul>
       <exmg-grid
         data-theme="${this.theme}"
@@ -111,34 +113,34 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
         ></exmg-grid-smart-toolbar>
         <table>
           <thead>
-           <tr class="grid-columns">
-             <th class="grid-checkbox-cell"><paper-checkbox class="selectable-checkbox"></paper-checkbox></th>
-             <th><span>ID</span></th>
-             <th style="max-width: 100px" data-column-key="month" data-sort>
-               <span>Month with quite long name which should stay on one line</span>
-             </th>
-             <th class="grid-col-number" data-column-key="year" data-sort>
-               <span>Year with quite short name with one line inside inside span tag</span>
-             </th>
-             <th class="grid-col-number" data-column-key="amount" data-sort=""><span>Income</span></th>
-             <th></th>
-           </tr>
+            <tr class="grid-columns">
+              <th class="grid-checkbox-cell"><paper-checkbox class="selectable-checkbox"></paper-checkbox></th>
+              <th><span>ID</span></th>
+              <th style="max-width: 100px" data-column-key="month" data-sort>
+                <span>Month with quite long name which should stay on one line</span>
+              </th>
+              <th class="grid-col-number" data-column-key="year" data-sort>
+                <span>Year with quite short name with one line inside inside span tag</span>
+              </th>
+              <th class="grid-col-number" data-column-key="amount" data-sort=""><span>Income</span></th>
+              <th></th>
+            </tr>
           </thead>
           <tbody class="grid-data">
             ${this.renderTableBody()}
           </tbody>
         </table>
-       <exmg-grid-pagination
-         slot="pagination"
-         page-index=${this.pageIndex}
-         page-size=${this.pageSize}
-         .pageSizeOptions="${[10, 20, 30, 50, 100]}"
-         item-count="${this.getTotalCount()}"
-         @exmg-grid-pagination-page-changed="${this.onPageChange}"
-         @exmg-grid-pagination-page-size-changed="${this.onPageSizeChange}"
-       >
-       </exmg-grid-pagination>
+        <exmg-grid-pagination
+          slot="pagination"
+          page-index=${this.pageIndex}
+          page-size=${this.pageSize}
+          .pageSizeOptions="${[10, 20, 30, 50, 100]}"
+          item-count="${this.getTotalCount()}"
+          @exmg-grid-pagination-page-changed="${this.onPageChange}"
+          @exmg-grid-pagination-page-size-changed="${this.onPageSizeChange}"
+        >
+        </exmg-grid-pagination>
       </exmg-grid>
-`;
+    `;
   }
 }

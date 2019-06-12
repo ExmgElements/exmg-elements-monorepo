@@ -3,9 +3,9 @@ import {showSnackBar} from '../exmg-snackbars';
 const {assert} = chai;
 const wait = (time: number) => new Promise(resolve => setTimeout(resolve, time));
 
-suite('<exmg-snackbars>', function () {
-  suite('base usage', function () {
-    test('normal toast is displayed', async function () {
+suite('<exmg-snackbars>', function() {
+  suite('base usage', function() {
+    test('normal toast is displayed', async function() {
       showSnackBar('test message', {duration: 1000});
 
       assert.exists(document.querySelector('#paper-toast-container'), 'Toast container should exist');
@@ -16,7 +16,7 @@ suite('<exmg-snackbars>', function () {
       assert.notExists(document.querySelector('paper-toast'), 'Toast should not exist');
     });
 
-    test('normal toast with custom node id is displayed', async function () {
+    test('normal toast with custom node id is displayed', async function() {
       showSnackBar('test message', {duration: 1000, toastContainerNodeId: 'custom-id'});
 
       assert.exists(document.querySelector('#' + 'custom-id'), 'Toast container should exist');
@@ -27,7 +27,7 @@ suite('<exmg-snackbars>', function () {
       assert.notExists(document.querySelector('paper-toast'), 'Toast should not exist');
     });
 
-    test('infinite toast with close button is displayed', async function () {
+    test('infinite toast with close button is displayed', async function() {
       showSnackBar('test message', {duration: 0, showCloseButton: true});
 
       assert.exists(document.querySelector('#paper-toast-container'), 'Toast container should exist');
@@ -39,7 +39,7 @@ suite('<exmg-snackbars>', function () {
       /**
        * Testing toast close feature
        */
-      (<HTMLElement>document.querySelector('div.close-btn')).click();
+      (document.querySelector('div.close-btn') as HTMLElement).click();
 
       await wait(100);
 

@@ -6,17 +6,17 @@ declare const flush: (cb?: Function) => void;
 
 const {assert} = chai;
 
-suite('<exmg-grid-base-toolbar>', function () {
+suite('<exmg-grid-base-toolbar>', function() {
   let element: ExmgGridBaseToolbar;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('base usage', function () {
+  suite('base usage', function() {
     setup(async () => {
       element = fixture('BasicTestFixture');
       await flushCompleted();
     });
 
-    test('element is upgraded', function () {
+    test('element is upgraded', function() {
       assert.instanceOf(element, ExmgGridBaseToolbar);
     });
 
@@ -31,7 +31,10 @@ suite('<exmg-grid-base-toolbar>', function () {
     test('settings is rendered properly', () => {
       const settingsContainer = element.shadowRoot!.querySelector('.settings')!;
       assert.exists(settingsContainer, 'Settings container is rendered');
-      assert.isFalse(settingsContainer.classList.contains('has-settings'), 'Settings container is rendered but is empty');
+      assert.isFalse(
+        settingsContainer.classList.contains('has-settings'),
+        'Settings container is rendered but is empty',
+      );
     });
   });
 
@@ -71,9 +74,10 @@ suite('<exmg-grid-base-toolbar>', function () {
     test('settings is rendered properly', () => {
       const settingsContainer = element.shadowRoot!.querySelector('.settings')!;
       assert.exists(settingsContainer, 'Settings container is rendered');
-      assert.isTrue(settingsContainer.classList.contains('has-settings'), 'Settings container is rendered and is not empty');
+      assert.isTrue(
+        settingsContainer.classList.contains('has-settings'),
+        'Settings container is rendered and is not empty',
+      );
     });
-
   });
-
 });

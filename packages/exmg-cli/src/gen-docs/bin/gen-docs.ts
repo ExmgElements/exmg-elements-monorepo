@@ -11,13 +11,13 @@ interface ExtendedOptionDefinition extends OptionDefinition {
   description: string;
 }
 
-type ScriptArguments = {
+interface ScriptArguments {
   projectDir: boolean;
   docsDir: string;
   apply: boolean;
   help: boolean;
   verbose: boolean;
-};
+}
 
 const options: ExtendedOptionDefinition[] = [
   {
@@ -61,7 +61,7 @@ function printUsage() {
   const sections: Section[] = [
     {
       header: 'gen-docs',
-      content: `Replace all absolute paths from "project-dir/docs-dir/*.html"`,
+      content: 'Replace all absolute paths from "project-dir/docs-dir/*.html"',
     },
     {
       header: 'Options',
@@ -85,11 +85,7 @@ if (!(projectDir && docsDir)) {
 if (verbose || !apply) {
   console.log('ARGUMENTS:');
   const inputOptions = {projectDir, docsDir, apply, help, verbose};
-  console.log(JSON.stringify(
-    inputOptions,
-    (_, v) => typeof v === 'undefined' ? null : v,
-    2)
-  );
+  console.log(JSON.stringify(inputOptions, (_, v) => (typeof v === 'undefined' ? null : v), 2));
 }
 
 doFixGenDocs(projectDir, docsDir, apply, verbose).catch((err: any) => {

@@ -9,24 +9,21 @@ import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
 
 import './exmg-markdown-editor-icons';
 import {style as codeMirrorStylesText} from './styles/exmg-markdown-codemirror-styles';
-import {
-  GenericPropertyValues, ToolBarOption, ToolBarConfigItem,
-  EmptyToolBartConfigItem, isToolBartConfigItem
-} from './exmg-custom-types';
+import {GenericPropertyValues, ToolBarOption, ToolBarConfigItem, isToolBartConfigItem} from './exmg-custom-types';
 
 import Editor = CodeMirror.Editor;
 
 type PrivateProps = 'toolbarButtonsConfig';
 
-type Props = Exclude<keyof EditorElement, number | Symbol> | PrivateProps;
+type Props = Exclude<keyof EditorElement, number | symbol> | PrivateProps;
 
 type ChangedProps = GenericPropertyValues<Props>;
 
-type Position = {
+interface Position {
   ch: number;
   line: number;
   sticky?: string;
-};
+}
 
 interface MarkdownElement extends HTMLElement {
   markdown?: string;
@@ -43,7 +40,7 @@ const insertBlocks = {
   table: '| Column 1 | Column 2 |\n| -------- | -------- |\n| Text     | Text     |',
 };
 
-const debounce  = (time: number) => {
+const debounce = (time: number) => {
   let timer: number;
 
   return (cb?: Function): void => {
@@ -57,75 +54,75 @@ const debounce  = (time: number) => {
 const ENTER_KEY_CODE = 13;
 
 /**
-* Markdown WYSIWYG editor element.
-* This editor element is a wrapper element for the markdown-element which will enable editing
-* the markdown data. See [marked-element](https://www.webcomponents.org/element/PolymerElements/marked-element/)
-* for more details on how to use this element.
-*
-* ```
-* <exmg-markdown-editor markdown="{{markdown}}">
-*   <marked-element markdown="{{markdown}}">
-*     <div slot="markdown-html"></div>
-*     <script type="text/markdown"\>
-*     # Header
-*     ...
-*     </script\>
-*   </marked-element>
-* </exmg-markdown-editor>
-* ```
-*
-* ## Custom Toolbar
-* Add attribute toolbar-buttons to adjust the toolbar buttons. The array values should match
-* the _toolbarButtons item name values.
-*
-* ```html
-* <exmg-markdown-editor toolbar-buttons='["strong","italic","strikethrough","|","quote","hr","table"]'>
-*  ...
-* </exmg-markdown-editor>
-* ```
-*
-* ### Styling
-*
-* The preview panel markdown output can be styled from outside th element. See the demo/styling.html example
-* on how to do this. In this demo the github-markdown-css project is used for styling the html output.
-*
-* `<exmg-markdown-editor>` provides the following custom properties and mixins
-*  for styling:
-*
-*  Custom property | Description | Default
-*  ----------------|-------------|----------
-*  `--exmg-markdown-editor` | editor mixin | `{}`
-*  `--exmg-markdown-editor-border` | Border Color | `#ddd`
-*  `--exmg-markdown-editor-background-color` | Editor Background Color | `white`
-*  `--exmg-markdown-editor-fullscreen-top-offset` | Top offset in fullscreen mode | `0px`
-*  `--exmg-markdown-editor-toolbar` | editor mixin | `{}`
-*  `--exmg-markdown-editor-toolbar-background` | Toolbar background color | `#fafafa`
-*  `--exmg-markdown-editor-toolbar-color` | Toolbar text color | `87% black`
-*  `--exmg-markdown-editor-toolbar-color-disabled` | Toolbar text color disabled | `54% black`
-*  `--exmg-markdown-editor-preview` | HTML Preview mixin | `{}`
-*  `--exmg-markdown-editor-preview-background` | Preview background color | `white`
-*  `--exmg-markdown-editor-toolbar-button-icon` | Toolbar button icon mixin | `{}`
-*  `--exmg-markdown-editor-toolbar-button-hover` | Toolbar button mixin | `{}`
-*  `--exmg-markdown-editor-toolbar-button-background-hover` | Toolbar icon border color | `#fafafa`
-*  `--exmg-markdown-editor-toolbar-seperator-color` | Toolbar seperator color | `#ddd`
-*  `--exmg-markdown-editor-code` | CodeMirror root mixin | `{}`
-*  `--exmg-markdown-editor-code-hover` | Editor code part hover background color | `white`
-*  `--exmg-markdown-editor-code-focused` | CodeMirror editor focused mixin | `{}`
-*
-*  # Events:
-*  - value-change - where detail is current markdown value
-*  - exmg-markdown-editor-fullscreen where detail is boolean with current fullscreen state
-*
-* @customElement
-* @polymer
-* @litElement
-* @group Exmg Core Elements
-* @element exmg-markdown-editor
-* @demo demo/index.html
-* @memberof Exmg
-* @extends LitElement
-* @summary Markdown editor element
-*/
+ * Markdown WYSIWYG editor element.
+ * This editor element is a wrapper element for the markdown-element which will enable editing
+ * the markdown data. See [marked-element](https://www.webcomponents.org/element/PolymerElements/marked-element/)
+ * for more details on how to use this element.
+ *
+ * ```
+ * <exmg-markdown-editor markdown="{{markdown}}">
+ *   <marked-element markdown="{{markdown}}">
+ *     <div slot="markdown-html"></div>
+ *     <script type="text/markdown"\>
+ *     # Header
+ *     ...
+ *     </script\>
+ *   </marked-element>
+ * </exmg-markdown-editor>
+ * ```
+ *
+ * ## Custom Toolbar
+ * Add attribute toolbar-buttons to adjust the toolbar buttons. The array values should match
+ * the _toolbarButtons item name values.
+ *
+ * ```html
+ * <exmg-markdown-editor toolbar-buttons='["strong","italic","strikethrough","|","quote","hr","table"]'>
+ *  ...
+ * </exmg-markdown-editor>
+ * ```
+ *
+ * ### Styling
+ *
+ * The preview panel markdown output can be styled from outside th element. See the demo/styling.html example
+ * on how to do this. In this demo the github-markdown-css project is used for styling the html output.
+ *
+ * `<exmg-markdown-editor>` provides the following custom properties and mixins
+ *  for styling:
+ *
+ *  Custom property | Description | Default
+ *  ----------------|-------------|----------
+ *  `--exmg-markdown-editor` | editor mixin | `{}`
+ *  `--exmg-markdown-editor-border` | Border Color | `#ddd`
+ *  `--exmg-markdown-editor-background-color` | Editor Background Color | `white`
+ *  `--exmg-markdown-editor-fullscreen-top-offset` | Top offset in fullscreen mode | `0px`
+ *  `--exmg-markdown-editor-toolbar` | editor mixin | `{}`
+ *  `--exmg-markdown-editor-toolbar-background` | Toolbar background color | `#fafafa`
+ *  `--exmg-markdown-editor-toolbar-color` | Toolbar text color | `87% black`
+ *  `--exmg-markdown-editor-toolbar-color-disabled` | Toolbar text color disabled | `54% black`
+ *  `--exmg-markdown-editor-preview` | HTML Preview mixin | `{}`
+ *  `--exmg-markdown-editor-preview-background` | Preview background color | `white`
+ *  `--exmg-markdown-editor-toolbar-button-icon` | Toolbar button icon mixin | `{}`
+ *  `--exmg-markdown-editor-toolbar-button-hover` | Toolbar button mixin | `{}`
+ *  `--exmg-markdown-editor-toolbar-button-background-hover` | Toolbar icon border color | `#fafafa`
+ *  `--exmg-markdown-editor-toolbar-seperator-color` | Toolbar seperator color | `#ddd`
+ *  `--exmg-markdown-editor-code` | CodeMirror root mixin | `{}`
+ *  `--exmg-markdown-editor-code-hover` | Editor code part hover background color | `white`
+ *  `--exmg-markdown-editor-code-focused` | CodeMirror editor focused mixin | `{}`
+ *
+ *  # Events:
+ *  - value-change - where detail is current markdown value
+ *  - exmg-markdown-editor-fullscreen where detail is boolean with current fullscreen state
+ *
+ * @customElement
+ * @polymer
+ * @litElement
+ * @group Exmg Core Elements
+ * @element exmg-markdown-editor
+ * @demo demo/index.html
+ * @memberof Exmg
+ * @extends LitElement
+ * @summary Markdown editor element
+ */
 @customElement('exmg-markdown-editor')
 export class EditorElement extends LitElement {
   @property({type: Boolean, attribute: 'auto-focus'})
@@ -138,7 +135,7 @@ export class EditorElement extends LitElement {
   indentWithTabs: boolean = true;
 
   @property({type: String})
-  markdown? : string;
+  markdown?: string;
 
   @property({type: Boolean, reflect: true, attribute: 'split-view'})
   splitView: boolean = true;
@@ -148,9 +145,24 @@ export class EditorElement extends LitElement {
 
   @property({type: Array, attribute: 'toolbar-buttons'})
   toolbarButtons: ToolBarOption[] = [
-    'undo', 'redo', '|', 'header', 'strong', 'italic', 'strikethrough',
-    '|', 'quote', 'hr', 'table', 'code', '|', 'unordered-list',
-    'ordered-list', '|', 'fullscreen', 'split-view',
+    'undo',
+    'redo',
+    '|',
+    'header',
+    'strong',
+    'italic',
+    'strikethrough',
+    '|',
+    'quote',
+    'hr',
+    'table',
+    'code',
+    '|',
+    'unordered-list',
+    'ordered-list',
+    '|',
+    'fullscreen',
+    'split-view',
   ];
 
   @property({type: String})
@@ -177,79 +189,92 @@ export class EditorElement extends LitElement {
       action: this.undo,
       className: 'btn-undo',
       title: 'Undo',
-    }, {
+    },
+    {
       name: 'redo',
       icon: 'exmg-markdown-editor-icons:redo',
       action: this.redo,
       className: 'btn-redo',
       title: 'Redo',
-    }, {
+    },
+    {
       name: 'header',
       icon: 'exmg-markdown-editor-icons:text-fields',
       action: this.toggleHeader,
       className: 'btn-header',
       title: 'Header',
-    }, {
+    },
+    {
       name: 'strong',
       icon: 'exmg-markdown-editor-icons:format-bold',
       action: this.toggleBold,
       className: 'btn-bold',
       title: 'Bold',
-    }, {
+    },
+    {
       name: 'italic',
       icon: 'exmg-markdown-editor-icons:format-italic',
       action: this.toggleItalic,
       className: 'btn-italic',
       title: 'Italic',
-    }, {
+    },
+    {
       name: 'strikethrough',
       icon: 'exmg-markdown-editor-icons:format-strikethrough',
       action: this.toggleStrikethrough,
       className: 'btn-strikethrough',
       title: 'Strikethrough',
-    }, {
+    },
+    {
       name: 'quote',
       icon: 'exmg-markdown-editor-icons:format-quote',
       action: this.toggleBlockquote,
       className: 'btn-quote-left',
       title: 'Quote',
-    }, {
+    },
+    {
       name: 'hr',
       icon: 'exmg-markdown-editor-icons:trending-flat',
       action: this.toggleHorizontalRule,
       className: 'btn-horizontal-rule',
       title: 'Horizontal Rule',
-    }, {
+    },
+    {
       name: 'code',
       icon: 'exmg-markdown-editor-icons:code',
       action: this.toggleCode,
       className: 'btn-code',
       title: 'Code',
-    }, {
+    },
+    {
       name: 'table',
       icon: 'exmg-markdown-editor-icons:grid-on',
       action: this.insertTable,
       className: 'btn-table',
       title: 'Table',
-    }, {
+    },
+    {
       name: 'unordered-list',
       icon: 'exmg-markdown-editor-icons:format-list-bulleted',
       action: this.toggleUnorderedList,
       className: 'btn-list-ul',
       title: 'Generic List',
-    }, {
+    },
+    {
       name: 'ordered-list',
       icon: 'exmg-markdown-editor-icons:format-list-numbered',
       action: this.toggleOrderedList,
       className: 'btn-list-ol',
       title: 'Numbered List',
-    }, {
+    },
+    {
       name: 'fullscreen',
       icon: 'exmg-markdown-editor-icons:fullscreen',
       action: this.toggleFullscreen,
       className: 'btn-fullscreen',
       title: 'Fullscreen',
-    }, {
+    },
+    {
       name: 'split-view',
       icon: 'exmg-markdown-editor-icons:chrome-reader-mode',
       action: this.toggleSplitView,
@@ -264,7 +289,7 @@ export class EditorElement extends LitElement {
     redo: 'Cmd-Y',
     strong: 'Cmd-B',
     italic: 'Cmd-I',
-    quote: 'Cmd-\'',
+    quote: "Cmd-'",
     'unordered-list': 'Cmd-Alt-L',
     'ordered-list': 'Cmd-L',
     'split-view': 'F9',
@@ -324,7 +349,7 @@ export class EditorElement extends LitElement {
    * @param {Array} toolBarOptions
    * @return {Array}
    */
-  private getToolbar(toolBarOptions: ToolBarOption[] = []): (ToolBarConfigItem|EmptyToolBartConfigItem)[] {
+  private getToolbar(toolBarOptions: ToolBarOption[] = []): (ToolBarConfigItem | Record<string, any>)[] {
     return toolBarOptions.map((optionName: ToolBarOption) => {
       if (optionName === '|') {
         return {};
@@ -371,10 +396,9 @@ export class EditorElement extends LitElement {
     this.codeMirrorEditor.setOption('fullScreen', this.fullscreen);
 
     if (this.isElementInitialized) {
-      this.dispatchEvent(new CustomEvent(
-        'exmg-markdown-editor-fullscreen',
-        {detail: !!this.fullscreen, composed: true, bubbles: true}
-      ));
+      this.dispatchEvent(
+        new CustomEvent('exmg-markdown-editor-fullscreen', {detail: !!this.fullscreen, composed: true, bubbles: true}),
+      );
     }
   }
 
@@ -427,7 +451,7 @@ export class EditorElement extends LitElement {
         if (codeMirror.getOption('indentWithTabs')) {
           codeMirror.execCommand('insertTab');
         } else {
-         const spaces = Array(codeMirror.getOption('tabSize') + 1).join(' ');
+          const spaces = Array(codeMirror.getOption('tabSize') + 1).join(' ');
           codeMirror.getDoc().replaceSelection(spaces);
         }
       },
@@ -457,7 +481,7 @@ export class EditorElement extends LitElement {
     };
 
     Object.keys(this.shortcuts).forEach(shortcut => {
-      const actionBtn = this.normalizedToolBarConfig.get(<ToolBarOption>shortcut);
+      const actionBtn = this.normalizedToolBarConfig.get(shortcut as ToolBarOption);
       if (actionBtn && !!this.shortcuts[shortcut]) {
         keyMaps[convertShortcut(this.shortcuts[shortcut])] = () => actionBtn.action.bind(this)();
       }
@@ -481,11 +505,9 @@ export class EditorElement extends LitElement {
     /* Update markdown property with latest changes */
     codeMirrorEditor.on('change', (editor: Editor) => {
       this.markdown = editor.getValue();
-      this.dispatchMarkdownUpdatedDebounce(
-        () => {
-          this.dispatchEvent(new CustomEvent('value-change', {bubbles: true, composed: true, detail: editor.getValue()}));
-        }
-      );
+      this.dispatchMarkdownUpdatedDebounce(() => {
+        this.dispatchEvent(new CustomEvent('value-change', {bubbles: true, composed: true, detail: editor.getValue()}));
+      });
     });
 
     afterNextRender(this, () => this.updateDocHistory());
@@ -496,7 +518,11 @@ export class EditorElement extends LitElement {
   }
 
   private replaceRangeLine(text: string, lineNumber: number): void {
-    this.codeMirrorEditor!.getDoc().replaceRange(text, {line: lineNumber, ch: 0}, {line: lineNumber, ch: 99999999999999});
+    this.codeMirrorEditor!.getDoc().replaceRange(
+      text,
+      {line: lineNumber, ch: 0},
+      {line: lineNumber, ch: 99999999999999},
+    );
   }
 
   private insertAtCursor(text: string, selectionOffset?: number, selectionLength?: number): void {
@@ -504,21 +530,24 @@ export class EditorElement extends LitElement {
 
     const cursorStart = this.codeMirrorEditor!.getDoc().getCursor();
     cursorStart.ch += selectionOffset || 0;
-    this.codeMirrorEditor!.getDoc().setSelection(
-      cursorStart,
-      {line: cursorStart.line, ch: cursorStart.ch + (selectionLength || text.length)}
-    );
+    this.codeMirrorEditor!.getDoc().setSelection(cursorStart, {
+      line: cursorStart.line,
+      ch: cursorStart.ch + (selectionLength || text.length),
+    });
     this.codeMirrorEditor!.focus();
   }
 
   private hasType(states: string[], type: string): boolean {
-    const mappings = [{
-      key: 'code',
-      value: 'comment',
-    }, {
-      key: 'inline-code',
-      value: 'comment',
-    }];
+    const mappings = [
+      {
+        key: 'code',
+        value: 'comment',
+      },
+      {
+        key: 'inline-code',
+        value: 'comment',
+      },
+    ];
 
     if (states.includes(type)) {
       return true;
@@ -558,7 +587,9 @@ export class EditorElement extends LitElement {
         case 'strong':
         case 'italic':
         case 'strikethrough':
-          start = start.endsWith(blockStyles[type]) ? start.substring(0, start.length - blockStyles[type].length) : start;
+          start = start.endsWith(blockStyles[type])
+            ? start.substring(0, start.length - blockStyles[type].length)
+            : start;
           end = end.startsWith(blockStyles[type]) ? end.substring(blockStyles[type].length) : end;
           break;
       }
@@ -566,9 +597,12 @@ export class EditorElement extends LitElement {
       cursorStart.ch -= blockStyles[type].length;
       cursorEnd.ch -= blockStyles[type].length;
     } else {
-      const text = blockStyles[type] + (type === 'code' ? '\n' : '')
-        + (emptySelection ? `${type} text` : selectionText)
-        + (type === 'code' ? '\n' : '') + blockStyles[type];
+      const text =
+        blockStyles[type] +
+        (type === 'code' ? '\n' : '') +
+        (emptySelection ? `${type} text` : selectionText) +
+        (type === 'code' ? '\n' : '') +
+        blockStyles[type];
       codeMirror.getDoc().replaceSelection(text);
       if (newLine) {
         cursorStart.line += 1;
@@ -612,7 +646,7 @@ export class EditorElement extends LitElement {
           text = stateFound ? text.substring(2) : `${symbol} ${text}`;
           break;
         case 'ordered-list':
-          text = stateFound ? text.substring(3) : `${(lineCount + 1)}. ${text}`;
+          text = stateFound ? text.substring(3) : `${lineCount + 1}. ${text}`;
           break;
       }
       this.replaceRangeLine(text, i);
@@ -628,7 +662,7 @@ export class EditorElement extends LitElement {
     const cursorStart = codeMirror.getDoc().getCursor('start');
     const cursorEnd = codeMirror.getDoc().getCursor('end');
     const lineLength = codeMirror.getDoc().getLine(cursorStart.line).length;
-    return cursorStart.line === cursorEnd.line && (cursorEnd.ch - cursorStart.ch !== lineLength);
+    return cursorStart.line === cursorEnd.line && cursorEnd.ch - cursorStart.ch !== lineLength;
   }
 
   private getStates(position?: Position): string[] {
@@ -661,9 +695,12 @@ export class EditorElement extends LitElement {
 
     const codeMirrorEditor = this.codeMirrorEditor!;
     const cursorStart = codeMirrorEditor.getDoc().getCursor('start');
-    const lineLength = codeMirrorEditor.getDoc().getLine(cursorStart.line).trim().length;
+    const lineLength = codeMirrorEditor
+      .getDoc()
+      .getLine(cursorStart.line)
+      .trim().length;
     const newLine = cursorStart.ch === 0 && lineLength === 0;
-    const appendStr = (newLine ? '\n' : '\n\n');
+    const appendStr = newLine ? '\n' : '\n\n';
     this.insertAtCursor(appendStr + insertBlocks.hr + appendStr);
     cursorStart.line += newLine ? 1 : 2;
     codeMirrorEditor.getDoc().setSelection(cursorStart, cursorStart);
@@ -826,8 +863,7 @@ export class EditorElement extends LitElement {
     return html`
       <!--suppress CssUnresolvedCustomProperty -->
       <style>
-        ${codeMirrorStylesText}
-        :host {
+        ${codeMirrorStylesText} :host {
           display: block;
           border: 1px solid var(--exmg-markdown-editor-border, #ddd);
           overflow: hidden;
@@ -887,7 +923,7 @@ export class EditorElement extends LitElement {
           @apply --exmg-markdown-editor-code;
         }
         .CodeMirror-scroll {
-          min-height: 300px
+          min-height: 300px;
         }
         .CodeMirror:not(.CodeMirror-focused):hover {
           background: var(--exmg-markdown-editor-code-hover, white);
@@ -919,7 +955,7 @@ export class EditorElement extends LitElement {
           overflow-x: auto;
           overflow-y: hidden;
           white-space: nowrap;
-          padding: 10px 10px;;
+          padding: 10px 10px;
           position: fixed;
           top: calc(0px + var(--exmg-markdown-editor-fullscreen-top-offset, 0px));
           left: 0;
@@ -956,29 +992,26 @@ export class EditorElement extends LitElement {
       </style>
 
       <div id="toolbar" class="toolbar">
-        ${
-          repeat<ToolBarConfigItem | EmptyToolBartConfigItem>(
-            this.getToolbar(this.toolbarButtons),
-            (it, index: number) => isToolBartConfigItem(it) ? it.name : `empty_${index}`,
-            (it) => {
-              if (isToolBartConfigItem(it)) {
-                return html`
-                  <a
-                    href="#"
-                    title="${it.name}"
-                    class="${it.className}"
-                    @click="${it.action}">
-                      <iron-icon icon="${it.icon}"></iron-icon>
-                  </a>
-                `;
-              }
-              return html`<span class="seperator"></span>`;
+        ${repeat<ToolBarConfigItem | Record<string, any>>(
+          this.getToolbar(this.toolbarButtons),
+          (it, index: number) => (isToolBartConfigItem(it) ? it.name : `empty_${index}`),
+          it => {
+            if (isToolBartConfigItem(it)) {
+              return html`
+                <a href="#" title="${it.name}" class="${it.className}" @click="${it.action}">
+                  <iron-icon icon="${it.icon}"></iron-icon>
+                </a>
+              `;
             }
-      )}
+            return html`
+              <span class="seperator"></span>
+            `;
+          },
+        )}
       </div>
       <div class="container">
         <div id="editor"></div>
-          <slot></slot>
+        <slot></slot>
       </div>
     `;
   }

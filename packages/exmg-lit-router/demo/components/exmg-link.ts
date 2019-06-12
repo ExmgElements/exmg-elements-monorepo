@@ -45,8 +45,8 @@ export class ExmgLink extends ConnectedLitElement<StateWithRouter> {
 
   protected render() {
     return html`
-        <slot></slot>
-      `;
+      <slot></slot>
+    `;
   }
 
   private preparePathFromHref(href: string): string | void {
@@ -67,7 +67,7 @@ export class ExmgLink extends ConnectedLitElement<StateWithRouter> {
       return isExactlySame;
     }
 
-    const parentPathname = pathname.endsWith('/') ? pathname :`${pathname}/`;
+    const parentPathname = pathname.endsWith('/') ? pathname : `${pathname}/`;
     return isExactlySame || (this.router.pathname || '').startsWith(parentPathname);
   }
 }

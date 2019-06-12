@@ -6,13 +6,12 @@ import './exmg-spinner';
 
 @customElement('exmg-button')
 export class ExmgButton extends Button {
-
   @property({type: Boolean})
-  loading = false;
+  public loading = false;
 
-  static styles: any = [Button.styles, style];
+  public static styles: any = [Button.styles, style];
 
-  render() {
+  public render() {
     const classes = {
       'mdc-button--raised': this.raised,
       'mdc-button--unelevated': this.unelevated,
@@ -23,18 +22,28 @@ export class ExmgButton extends Button {
       'exmg-loading': this.loading,
       'exmg-button-content': true,
     };
-    const mdcButtonIcon = html`<span class="material-icons mdc-button__icon">${this.icon}</span>`;
+    const mdcButtonIcon = html`
+      <span class="material-icons mdc-button__icon">${this.icon}</span>
+    `;
     return html`
-			<button
-					.ripple="${ripple({unbounded: false})}"
-					class="mdc-button ${classMap(classes)}"
-					?disabled="${this.disabled}"
-          aria-label="${this.label || this.icon}"><span class="${classMap(loadingClass)}">
+      <button
+        .ripple="${ripple({unbounded: false})}"
+        class="mdc-button ${classMap(classes)}"
+        ?disabled="${this.disabled}"
+        aria-label="${this.label || this.icon}"
+      >
+        <span class="${classMap(loadingClass)}">
           ${this.icon && !this.trailingIcon ? mdcButtonIcon : ''}
           <span class="mdc-button__label">${this.label}</span>
           ${this.icon && this.trailingIcon ? mdcButtonIcon : ''}
           <slot></slot>
-        </span>${this.loading ? html`<exmg-button-spinner active></exmg-button-spinner>` : ''}
-			</button>`;
+        </span>
+        ${this.loading
+          ? html`
+              <exmg-button-spinner active></exmg-button-spinner>
+            `
+          : ''}
+      </button>
+    `;
   }
 }

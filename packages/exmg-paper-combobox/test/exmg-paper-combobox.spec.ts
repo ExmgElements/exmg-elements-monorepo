@@ -6,16 +6,16 @@ declare const flush: (cb?: Function) => void;
 
 const {assert} = chai;
 
-suite('<exmg-paper-combobox>', function () {
+suite('<exmg-paper-combobox>', function() {
   let element: PaperComboboxElement;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('base usage', function () {
+  suite('base usage', function() {
     setup(() => {
       element = fixture('ExmgPaperComboboxBasicElement');
     });
 
-    test('element is upgraded', function () {
+    test('element is upgraded', function() {
       assert.instanceOf(element, PaperComboboxElement);
     });
 
@@ -29,7 +29,7 @@ suite('<exmg-paper-combobox>', function () {
     });
   });
 
-  suite('element with children', function () {
+  suite('element with children', function() {
     setup(() => {
       element = fixture('ExmgPaperComboboxList');
     });
@@ -53,7 +53,7 @@ suite('<exmg-paper-combobox>', function () {
     });
   });
 
-  suite('element with children and selection', function () {
+  suite('element with children and selection', function() {
     setup(() => {
       element = fixture('ExmgPaperComboboxListWithSelection');
     });
@@ -68,9 +68,17 @@ suite('<exmg-paper-combobox>', function () {
       assert.isNotNull(listBox.selected, 'Should be an object');
       assert.equal(listBox.selected, expectedSelectedItemValue);
       assert.lengthOf(listBox.selectedItems!, 1);
-      assert.equal(listBox.selectedItems![0].innerText, expectedSelectedItemText, 'Selected item should match with item text');
+      assert.equal(
+        listBox.selectedItems![0].innerText,
+        expectedSelectedItemText,
+        'Selected item should match with item text',
+      );
       const paperButton = elementShadowRoot.querySelector('paper-button')!;
-      assert.equal(paperButton.innerText, expectedSelectedItemText.toUpperCase(), 'Button token should match with item text');
+      assert.equal(
+        paperButton.innerText,
+        expectedSelectedItemText.toUpperCase(),
+        'Button token should match with item text',
+      );
     });
 
     test('element should trigger event exmg-combobox-select', async () => {
@@ -82,7 +90,9 @@ suite('<exmg-paper-combobox>', function () {
       setTimeout(() => {
         element.selected = '1403';
       });
-      const {detail: {value, token, item}} = await onExmgComboboxSelected(element);
+      const {
+        detail: {value, token, item},
+      } = await onExmgComboboxSelected(element);
       assert.equal(value, '1403', 'Should be triggered event with new selection');
 
       const expectedSelectedItemText = 'Ronna';
@@ -90,7 +100,11 @@ suite('<exmg-paper-combobox>', function () {
       assert.equal(item.innerText, expectedSelectedItemText, 'Should match item text');
       assert.equal(item.getAttribute('data-id'), '1403');
 
-      assert.deepEqual(token, {id: '1403', text: expectedSelectedItemText}, 'Selected item token match with key and value');
+      assert.deepEqual(
+        token,
+        {id: '1403', text: expectedSelectedItemText},
+        'Selected item token match with key and value',
+      );
     });
 
     test('element should trigger event exmg-combobox-deselect', async () => {
@@ -115,7 +129,7 @@ suite('<exmg-paper-combobox>', function () {
     });
   });
 
-  suite('element should follow required constraint', function () {
+  suite('element should follow required constraint', function() {
     const makeElementTouched = async (targetElement: HTMLElement): Promise<void> => {
       targetElement.click();
       targetElement.parentElement!.click();
@@ -166,7 +180,7 @@ suite('<exmg-paper-combobox>', function () {
       chai.assert.equal(inputError.innerText, '', 'Error message is not visible');
     });
 
-    suite('element is disabled', function () {
+    suite('element is disabled', function() {
       setup(() => {
         element = fixture('ExmgPaperComboboxDisabled');
       });

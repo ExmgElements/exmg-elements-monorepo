@@ -3,25 +3,23 @@
 export type GenericPropertyValues<T extends PropertyKey, V = unknown> = Map<T, V>;
 
 export type ToolBarOption =
-  'undo' |
-  'redo' |
-  '|' |
-  'header' |
-  'strong' |
-  'italic' |
-  'strikethrough' |
-  'quote' |
-  'hr' |
-  'table' |
-  'code' |
-  'unordered-list' |
-  'ordered-list' |
-  'fullscreen' |
-  'split-view';
+  | 'undo'
+  | 'redo'
+  | '|'
+  | 'header'
+  | 'strong'
+  | 'italic'
+  | 'strikethrough'
+  | 'quote'
+  | 'hr'
+  | 'table'
+  | 'code'
+  | 'unordered-list'
+  | 'ordered-list'
+  | 'fullscreen'
+  | 'split-view';
 
-export interface EmptyToolBartConfigItem {}
-
-export interface ToolBarConfigItem extends EmptyToolBartConfigItem {
+export interface ToolBarConfigItem extends Object {
   name: ToolBarOption;
   icon: string;
   action: Function;
@@ -29,4 +27,5 @@ export interface ToolBarConfigItem extends EmptyToolBartConfigItem {
   title: string;
 }
 
-export const isToolBartConfigItem = (item: EmptyToolBartConfigItem): item is ToolBarConfigItem => item.hasOwnProperty('name');
+export const isToolBartConfigItem = (item: Record<string, any>): item is ToolBarConfigItem =>
+  item.hasOwnProperty('name');

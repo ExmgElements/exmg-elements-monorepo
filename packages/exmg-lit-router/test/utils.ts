@@ -10,7 +10,7 @@ export const mockStore = <S = any, A extends Action = AnyAction>(state: S): Stor
     },
     replaceReducer: () => {},
     subscribe: (cb: Function) => () => {},
-    dispatch: (action => action),
+    dispatch: action => action,
     addReducers: newReducers => {},
   };
 };
@@ -30,7 +30,7 @@ export const createInitialRouterState = (state: Partial<RouterState> = {}): Rout
 
 export const mockLocation = (customLocation: Partial<VaadinLocation>): VaadinLocation => {
   return {
-      ...window.location,
+    ...window.location,
     route: null,
     params: {},
     baseUrl: '',

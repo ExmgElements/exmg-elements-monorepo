@@ -7,22 +7,21 @@ import '@exmg/exmg-paper-combobox/exmg-paper-combobox';
 import '@exmg/exmg-paper-token-input/exmg-paper-token-input';
 import '@exmg/exmg-markdown-editor/exmg-markdown-editor';
 import '../exmg-form';
-import {ExmgForm} from '../styles/exmg-form';
+import {ExmgForm} from '../exmg-form';
 
 @customElement('form-demo')
 export class FormDemo extends LitElement {
-
-  render () {
+  render() {
     return html`
-    <exmg-test></exmg-test>
+      <exmg-test></exmg-test>
       <h1>Basic form</h1>
 
       <h2>Actions on form via javascript</h2>
-      <input type="button" value="submit" @click="${this.submitForm1}">
-      <input type="button" value="validate" @click="${this.validateForm1}">
-      <input type="button" value="reset" @click="${this.resetForm1}">
-      <input type="button" value="serialize" @click="${this.serializeForm1}">
-      <hr>
+      <input type="button" value="submit" @click="${this.submitForm1}" />
+      <input type="button" value="validate" @click="${this.validateForm1}" />
+      <input type="button" value="reset" @click="${this.resetForm1}" />
+      <input type="button" value="serialize" @click="${this.serializeForm1}" />
+      <hr />
 
       <exmg-form @submit="${this.onSubmit}" @cancel="${this.onCancel}" id="form1">
         <paper-input name="value1" label="text input" required></paper-input>
@@ -30,7 +29,13 @@ export class FormDemo extends LitElement {
         <paper-input label="password input" type="password"></paper-input>
         <paper-input label="disabled input" disabled value="batman"></paper-input>
         <paper-input name="name" label="Summary" required always-float-label></paper-input>
-        <paper-input name="estimate" label="Estimates" type="number" always-float-label style="max-width:180px;"></paper-input>
+        <paper-input
+          name="estimate"
+          label="Estimates"
+          type="number"
+          always-float-label
+          style="max-width:180px;"
+        ></paper-input>
 
         <paper-textarea label="autoresizing textarea input"></paper-textarea>
 
@@ -38,7 +43,9 @@ export class FormDemo extends LitElement {
           <paper-item>PlayToTV</paper-item>
           <paper-item>Website</paper-item>
         </exmg-paper-combobox>
-        <p class="help">Some issue types are unavailable due to incompatible field configuration and/or workflow associations.</p>
+        <p class="help">
+          Some issue types are unavailable due to incompatible field configuration and/or workflow associations.
+        </p>
         <hr />
         <p class="help">Start typing to get a list of possible matches.</p>
         <exmg-paper-token-input name="tokens" label="Components" always-float-label>
@@ -67,7 +74,7 @@ export class FormDemo extends LitElement {
     console.log('submit', event);
     setTimeout(_ => {
       this.resetForm1();
-    // event.path[0].error('User does not have permission to save data');
+      // event.path[0].error('User does not have permission to save data');
     }, 1500);
   }
 

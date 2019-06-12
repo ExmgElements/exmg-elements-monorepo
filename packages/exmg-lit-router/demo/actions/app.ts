@@ -16,29 +16,30 @@ export const UPDATE_DRAWER_STATE = 'UPDATE_DRAWER_STATE';
 export const OPEN_SNACKBAR = 'OPEN_SNACKBAR';
 export const CLOSE_SNACKBAR = 'CLOSE_SNACKBAR';
 
-export interface AppActionUpdateDrawerState extends Action<'UPDATE_DRAWER_STATE'> {
+export interface AppActionUpdateDrawerState extends Action {
+  type: 'UPDATE_DRAWER_STATE';
   opened: boolean;
 }
 
-export interface AppActionOpenSnackbar extends Action<'OPEN_SNACKBAR'> {}
+export interface AppActionOpenSnackbar extends Action {
+  type: 'OPEN_SNACKBAR';
+}
 
-export interface AppActionCloseSnackbar extends Action<'CLOSE_SNACKBAR'> {}
-export type AppAction =
-  AppActionUpdateDrawerState
-  | AppActionOpenSnackbar
-  | AppActionCloseSnackbar;
+export interface AppActionCloseSnackbar extends Action {
+  type: 'CLOSE_SNACKBAR';
+}
+export type AppAction = AppActionUpdateDrawerState | AppActionOpenSnackbar | AppActionCloseSnackbar;
 
 type ThunkResult = ThunkAction<void, RootState, undefined, AppAction>;
 
 let snackbarTimer: number;
 
-export const showSnackbar: ActionCreator<ThunkResult> = () => (dispatch) => {
+export const showSnackbar: ActionCreator<ThunkResult> = () => dispatch => {
   dispatch({
     type: OPEN_SNACKBAR,
   });
   window.clearTimeout(snackbarTimer);
-  snackbarTimer = window.setTimeout(() =>
-    dispatch({type: CLOSE_SNACKBAR}), 3000);
+  snackbarTimer = window.setTimeout(() => dispatch({type: CLOSE_SNACKBAR}), 3000);
 };
 
 export const updateDrawerState: ActionCreator<AppActionUpdateDrawerState> = (opened: boolean) => {

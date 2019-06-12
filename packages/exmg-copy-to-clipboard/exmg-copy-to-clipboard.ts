@@ -1,9 +1,4 @@
-import {
-  LitElement,
-  html,
-  customElement,
-  property,
-} from 'lit-element';
+import {LitElement, html, customElement, property, TemplateResult} from 'lit-element';
 
 import {FlattenedNodesObserver} from '@polymer/polymer/lib/utils/flattened-nodes-observer';
 import {addListener, removeListener} from '@polymer/polymer/lib/utils/gestures';
@@ -45,12 +40,12 @@ export class ExmgCopyToClipboard extends LitElement {
   private observer?: FlattenedNodesObserver;
   private htmlElement?: HTMLElement;
 
-  constructor() {
+  public constructor() {
     super();
     this.handleCopy = this.handleCopy.bind(this);
   }
 
-  connectedCallback(): void {
+  public connectedCallback(): void {
     super.connectedCallback();
 
     this.observer = new FlattenedNodesObserver(this, () => {
@@ -58,7 +53,7 @@ export class ExmgCopyToClipboard extends LitElement {
     });
   }
 
-  disconnectedCallback(): void {
+  public disconnectedCallback(): void {
     super.disconnectedCallback();
 
     if (this.observer) {
@@ -75,9 +70,9 @@ export class ExmgCopyToClipboard extends LitElement {
    * initializes the slotted content and adds a event listener to the html element provided
    */
   private initSlottedElement(): void {
-    this.htmlElement =
-        (FlattenedNodesObserver.getFlattenedNodes(this) || [])
-            .filter((n: Node) => n.nodeType === Node.ELEMENT_NODE)[0];
+    this.htmlElement = (FlattenedNodesObserver.getFlattenedNodes(this) || []).filter(
+      (n: Node) => n.nodeType === Node.ELEMENT_NODE,
+    )[0];
 
     if (this.htmlElement) {
       addListener(this.htmlElement, 'tap', this.handleCopy);
@@ -88,7 +83,7 @@ export class ExmgCopyToClipboard extends LitElement {
    * Copy the given value to the clipboard
    */
   private copyToClipboard(): void {
-    const clipboardNode: HTMLElement|null = this.shadowRoot ? this.shadowRoot.querySelector('#clipboard') : null;
+    const clipboardNode: HTMLElement | null = this.shadowRoot ? this.shadowRoot.querySelector('#clipboard') : null;
 
     if (!clipboardNode) {
       return;
@@ -106,11 +101,13 @@ export class ExmgCopyToClipboard extends LitElement {
 
     try {
       document.execCommand('copy');
-      this.dispatchEvent(new CustomEvent('exmg-copy-to-clipboard-copied', {
-        detail: this.value,
-        bubbles: this.bubbles,
-        composed: true,
-      }));
+      this.dispatchEvent(
+        new CustomEvent('exmg-copy-to-clipboard-copied', {
+          detail: this.value,
+          bubbles: this.bubbles,
+          composed: true,
+        }),
+      );
     } catch (err) {
       console.error('copy to clipboard failed', err);
     }
@@ -128,13 +125,13 @@ export class ExmgCopyToClipboard extends LitElement {
   }
 
   protected firstUpdated(): void {
-      if (!this.isCopySupported && this.htmlElement) {
-        this.htmlElement.style.display = 'none';
-        this.dispatchEvent(new CustomEvent('copy-not-supported', {bubbles: this.bubbles, composed: true}));
-      }
+    if (!this.isCopySupported && this.htmlElement) {
+      this.htmlElement.style.display = 'none';
+      this.dispatchEvent(new CustomEvent('copy-not-supported', {bubbles: this.bubbles, composed: true}));
+    }
   }
 
-  protected render() {
+  protected render(): TemplateResult {
     return html`
       <style>
         :host {
@@ -142,7 +139,9 @@ export class ExmgCopyToClipboard extends LitElement {
           /*noinspection CssUnresolvedCustomPropertySet*/
           @apply --exmg-copy-to-clipboard;
         }
-        #clipboard { display:none; }
+        #clipboard {
+          display: none;
+        }
       </style>
       <slot></slot>
       <span id="clipboard">${this.value}</span>
