@@ -54,6 +54,7 @@
     "package-install": "npm i",
     "start": "gulp serve",
     "build": "npm run lint && npm run tsc",
+    "lint": "echo No lint.",
     "tsc": "tsc -b ./tsconfig.json",
     "prepublishOnly": "npm run build",
     "publishDryRun": "npm publish --dry-run",
