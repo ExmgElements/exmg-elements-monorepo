@@ -13,7 +13,7 @@
   },
   "scripts": {
     "lerna:clean": "lerna exec rimraf package-lock.json && lerna clean",
-    "version": "lerna clean --yes && lerna exec npm i && git add packages/*/package-lock.json",
+    "version": "lerna clean --yes && lerna exec npm i --package-lock-only && git add packages/*/package-lock.json",
     "clean": "lerna clean",
     "bootstrap": "lerna bootstrap",
     "ls": "lerna ls -l"
