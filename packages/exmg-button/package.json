@@ -1,6 +1,6 @@
 {
   "name": "@exmg/exmg-button",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "dependencies": {
     "@material/mwc-button": "^0.6.0",
     "lit-element": "^2.1.0"
@@ -25,7 +25,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@exmg/exmg-cli": "^2.0.0",
+    "@exmg/exmg-cli": "^2.0.1",
     "@material/mwc-checkbox": "^0.6.0",
     "@material/mwc-icon": "^0.6.0",
     "@polymer/iron-component-page": "^4.0.1",
