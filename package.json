@@ -15,7 +15,6 @@
     "lerna:clean": "lerna exec rimraf package-lock.json && lerna clean",
     "install-packages": "lerna exec npm i && lerna exec npm run build",
     "install:lockfiles-only": "lerna exec npm i --ignore-scripts -- --package-lock-only --no-audit",
-    "version": "npm run install:lockfiles-only && git add packages/*/package-lock.json",
     "clean": "lerna clean --yes",
     "bootstrap": "lerna bootstrap",
     "ls": "lerna ls -l"
