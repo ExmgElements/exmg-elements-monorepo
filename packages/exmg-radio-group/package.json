@@ -1,7 +1,7 @@
 {
   "name": "@exmg/exmg-radio-group",
   "flat": true,
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Paper style radio group element",
   "contributors": [
     "Ex Machina"
@@ -33,7 +33,7 @@
     "lit-element": "^2.1.0"
   },
   "devDependencies": {
-    "@exmg/exmg-cli": "^2.0.0",
+    "@exmg/exmg-cli": "^2.0.1",
     "@polymer/iron-component-page": "^4.0.1",
     "@polymer/iron-demo-helpers": "^3.1.0",
     "@polymer/test-fixture": "^4.0.2",

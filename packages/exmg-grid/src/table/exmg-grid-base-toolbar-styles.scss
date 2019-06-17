@@ -1,5 +1,5 @@
-@import "@material/theme/mixins";
-@import "@material/typography/mixins";
+@import '@material/theme/mixins';
+@import '@material/typography/mixins';
 
 $exmg-grid-toolbar-bg-color: #ffffff;
 $exmg-grid-toolbar-active-bg-color: #e1f0fe;
@@ -19,14 +19,21 @@ $exmg-grid-toolbar-active-color: #000000;
 
   background-color: var(--toolbar-bg-color);
   color: var(--toolbar-color);
-  border-radius: var(--exmg-grid-toolbar-border-top-radius, 0) var(--exmg-grid-toolbar-border-top-radius, 0)  var(--exmg-grid-toolbar-border-bottom-radius, 0)  var(--exmg-grid-toolbar-border-bottom-radius, 0);
+  border-radius: var(--exmg-grid-toolbar-border-top-radius, 0) var(--exmg-grid-toolbar-border-top-radius, 0)
+    var(--exmg-grid-toolbar-border-bottom-radius, 0) var(--exmg-grid-toolbar-border-bottom-radius, 0);
 
   overflow-x: var(--exmg-grid-toolbar-overflow-x, initial);
   white-space: nowrap;
 
   &.active {
-    --active-toolbar-bg-color: var(--exmg-grid-toolbar-active-bg-color, var(--exmg-grid-toolbar-bg-color, var(--mdc-theme-background, #{$exmg-grid-toolbar-active-bg-color})));
-    --active-toolbar-color: var(--exmg-grid-toolbar-active-color, var(--exmg-grid-toolbar-color ,var(--mdc-theme-on-background, #{$exmg-grid-toolbar-active-color})));
+    --active-toolbar-bg-color: var(
+      --exmg-grid-toolbar-active-bg-color,
+      var(--exmg-grid-toolbar-bg-color, var(--mdc-theme-background, #{$exmg-grid-toolbar-active-bg-color}))
+    );
+    --active-toolbar-color: var(
+      --exmg-grid-toolbar-active-color,
+      var(--exmg-grid-toolbar-color, var(--mdc-theme-on-background, #{$exmg-grid-toolbar-active-color}))
+    );
 
     background-color: var(--active-toolbar-bg-color);
     color: var(--active-toolbar-color);
@@ -52,6 +59,7 @@ $exmg-grid-toolbar-active-color: #000000;
 
 .actions {
   padding: 0 16px;
+  color: var(--mdc-theme-primary);
 }
 
 .filters {

@@ -1,7 +1,6 @@
 import {css, customElement, html, LitElement, property} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
-import '@exmg/exmg-button';
-import '@material/mwc-icon';
+import '@material/mwc-icon-button';
 import '@exmg/exmg-paper-combobox';
 import '@polymer/paper-item';
 import './exmg-grid-base-toolbar';
@@ -93,10 +92,12 @@ export class ExmgGridToolbar extends LitElement {
     return repeat(
       this.actions,
       action => html`
-        <exmg-button class="action" title="${action.tooltip}" @click="${this.emitActionExecutedEvent(action)}">
-          <mwc-icon>${action.icon}</mwc-icon>
-          ${action.text}
-        </exmg-button>
+        <mwc-icon-button
+          class="action"
+          icon="${action.icon}"
+          title="${action.tooltip}"
+          @click="${this.emitActionExecutedEvent(action)}"
+        ></mwc-icon-button>
       `,
     );
   }

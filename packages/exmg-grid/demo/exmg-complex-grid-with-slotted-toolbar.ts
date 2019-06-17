@@ -3,7 +3,7 @@ import {repeat} from 'lit-html/directives/repeat';
 import '@polymer/paper-checkbox';
 import '@exmg/exmg-paper-combobox';
 import '@polymer/paper-item';
-import '@material/mwc-icon';
+import '@material/mwc-icon-button';
 import '@exmg/exmg-button';
 
 import '../src/table/exmg-grid.js';
@@ -110,10 +110,12 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
           <div slot="actions">
             ${this.selectedRows.length
               ? html`
-                  <exmg-button class="action" title="Merge" @click="${this.onActionDelegate('merge')}">
-                    <mwc-icon>merge_type</mwc-icon>
-                    Merge
-                  </exmg-button>
+                  <mwc-icon-button
+                    class="action"
+                    icon="merge_type"
+                    title="Merge"
+                    @click="${this.onActionDelegate('merge')}"
+                  ></mwc-icon-button>
                 `
               : null}
           </div>
