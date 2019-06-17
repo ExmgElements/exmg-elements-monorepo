@@ -1,8 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
 
     <title>exmg-paper-combobox demo</title>
 
@@ -27,7 +27,10 @@
     </custom-style>
     <script>
       const handlerSelected = function(event) {
-        const {value, token: {text}} = event.detail;
+        const {
+          value,
+          token: {text},
+        } = event.detail;
         document.querySelector('#selected-value').setAttribute('value', `${value} - ${text}`);
       };
 
@@ -58,7 +61,7 @@
             }
           </style>
           <h4>Selection-list</h4>
-          <div>Select value is <input id="selected-value" readonly disabled placeholder="None"/></div>
+          <div>Select value is <input id="selected-value" readonly disabled placeholder="None" /></div>
           <exmg-paper-combobox id="combobox" label="Creatives" style="display:inline-block;">
             <paper-item>Rubin</paper-item>
             <paper-item>Gennie</paper-item>
@@ -101,7 +104,10 @@
             <paper-item>Evonne</paper-item>
             <paper-item>Evonne</paper-item>
             <paper-item>Evonne</paper-item>
-            <paper-item>Evonne + Evonne + Evonne + Evonne + Evonne + Evonne + Evonne + Evonne +EvonneEvonneEvonne Evonne Evonne Evonne Evonne Evonne Evonne Evonne</paper-item>
+            <paper-item
+              >Evonne + Evonne + Evonne + Evonne + Evonne + Evonne + Evonne + Evonne +EvonneEvonneEvonne Evonne Evonne
+              Evonne Evonne Evonne Evonne Evonne</paper-item
+            >
             <paper-item>Evonne</paper-item>
             <paper-item>Evonne</paper-item>
             <paper-item>Evonne</paper-item>
@@ -168,23 +174,104 @@
         <template>
           <exmg-paper-combobox label="Creatives" selected="4309" attr-for-selected="data-id" required="">
             <paper-icon-item data-id="1001">
-              <iron-icon src="https://s3.amazonaws.com/uifaces/faces/twitter/sebasribas/73.jpg" slot="item-icon"></iron-icon>
+              <iron-icon
+                src="https://s3.amazonaws.com/uifaces/faces/twitter/sebasribas/73.jpg"
+                slot="item-icon"
+              ></iron-icon>
               <paper-item-body>
                 <div class="name">Pete</div>
               </paper-item-body>
             </paper-icon-item>
             <paper-icon-item data-id="1012">
-              <iron-icon src="https://s3.amazonaws.com/uifaces/faces/twitter/sebasribas/73.jpg" slot="item-icon"></iron-icon>
+              <iron-icon
+                src="https://s3.amazonaws.com/uifaces/faces/twitter/sebasribas/73.jpg"
+                slot="item-icon"
+              ></iron-icon>
               <paper-item-body>
                 <div class="name">Rubin</div>
               </paper-item-body>
             </paper-icon-item>
             <paper-icon-item data-id="1004">
-              <iron-icon src="https://s3.amazonaws.com/uifaces/faces/twitter/sebasribas/73.jpg" slot="item-icon"></iron-icon>
+              <iron-icon
+                src="https://s3.amazonaws.com/uifaces/faces/twitter/sebasribas/73.jpg"
+                slot="item-icon"
+              ></iron-icon>
               <paper-item-body>
                 <div class="name">Jacquie</div>
               </paper-item-body>
             </paper-icon-item>
+          </exmg-paper-combobox>
+        </template>
+      </demo-snippet>
+      <h3>With icon integration in selection</h3>
+      <demo-snippet>
+        <template>
+          <exmg-paper-combobox
+            label="Creatives"
+            selected="4309"
+            attr-for-selected="data-id"
+            icon-selection
+            icon-attr="iron-icon"
+            required=""
+          >
+            <paper-icon-item data-id="1001">
+              <iron-icon
+                src="https://s3.amazonaws.com/uifaces/faces/twitter/sebasribas/73.jpg"
+                slot="item-icon"
+              ></iron-icon>
+              <paper-item-body>
+                <div class="name">Pete</div>
+              </paper-item-body>
+            </paper-icon-item>
+            <paper-icon-item data-id="1012">
+              <iron-icon
+                src="https://s3.amazonaws.com/uifaces/faces/twitter/sebasribas/73.jpg"
+                slot="item-icon"
+              ></iron-icon>
+              <paper-item-body>
+                <div class="name">Rubin</div>
+              </paper-item-body>
+            </paper-icon-item>
+            <paper-icon-item data-id="1004">
+              <iron-icon
+                src="https://s3.amazonaws.com/uifaces/faces/twitter/sebasribas/73.jpg"
+                slot="item-icon"
+              ></iron-icon>
+              <paper-item-body>
+                <div class="name">Jacquie</div>
+              </paper-item-body>
+            </paper-icon-item>
+          </exmg-paper-combobox>
+        </template>
+      </demo-snippet>
+      <h3>With selected node to display selected item</h3>
+      <demo-snippet>
+        <template>
+          <exmg-paper-combobox
+            label="Creatives"
+            selected="4309"
+            attr-for-selected="data-id"
+            selected-item-selector="div.lastname"
+            required=""
+          >
+            <paper-item data-id="1001">
+              <paper-item-body>
+                <div class="name">Pete</div>
+                <div class="lastname">Sampras</div>
+              </paper-item-body>
+            </paper-item>
+            <paper-item data-id="1012">
+              <paper-item-body>
+                <div class="name">Rubin</div>
+                <div class="lastname">Goldmark</div>
+              </paper-item-body>
+            </paper-item>
+            <paper-item data-id="1004">
+              <paper-item-body>
+                <div class="name">Jacquie</div>
+                <div class="lastname">de Creed</div>
+              </paper-item-body>
+            </paper-item>
           </exmg-paper-combobox>
         </template>
       </demo-snippet>
