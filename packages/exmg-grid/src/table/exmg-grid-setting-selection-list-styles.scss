@@ -1,7 +1,7 @@
-@import "@material/typography/mdc-typography";
-@import "@material/list/mdc-list";
-@import "@material/menu-surface/mdc-menu-surface";
-@import "@material/menu/mdc-menu";
+@import '@material/typography/mdc-typography';
+@import '@material/list/mdc-list';
+@import '@material/menu-surface/mdc-menu-surface';
+@import '@material/menu/mdc-menu';
 
 .mdc-list {
   .mdc-list-item__graphic {
@@ -9,8 +9,16 @@
   }
 }
 
-:not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item::before, :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item::after {
-  background-color: var(--exmg-grid-toolbar-setting-list-item-active-bg-color, var(--exmg-theme-table-on-surface-low, var(--mdc-theme-secondary)));
+:not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item::before,
+:not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item::after {
+  background-color: var(
+    --exmg-grid-toolbar-setting-list-item-active-bg-color,
+    var(--exmg-theme-table-on-surface-low, var(--mdc-theme-secondary))
+  );
+}
+
+.action {
+  color: var(--mdc-theme-primary);
 }
 
 mwc-checkbox {
@@ -34,4 +42,3 @@ mwc-checkbox {
     color: var(--mdc-theme-on-surface, var(--mdc-theme-text-primary-on-background));
   }
 }
-

@@ -1,9 +1,9 @@
-@import "../../node_modules/@material/theme/mdc-theme";
-@import "../../node_modules/@material/typography/mdc-typography";
+@import '../../node_modules/@material/theme/mdc-theme';
+@import '../../node_modules/@material/typography/mdc-typography';
 
 $exmg-grid-pagination-bg-color: #ffffff;
 $exmg-grid-pagination-color: #02182b;
-$exmg-grid-pagination-color-disabled: rgba($exmg-grid-pagination-color, .38);
+$exmg-grid-pagination-color-disabled: rgba($exmg-grid-pagination-color, 0.38);
 
 .wrapper {
   display: flex;
@@ -46,10 +46,12 @@ $exmg-grid-pagination-color-disabled: rgba($exmg-grid-pagination-color, .38);
   }
 }
 
-exmg-button[disabled] {
-  mwc-icon {
-    color: var(--exmg-theme-table-on-surface-disabled, var(--mdc-theme-disabled, $exmg-grid-pagination-color-disabled));
-  }
+mwc-icon-button {
+  color: var(--mdc-theme-primary);
+}
+
+mwc-icon-button[disabled] {
+  color: var(--exmg-theme-table-on-surface-disabled, var(--mdc-theme-disabled, $exmg-grid-pagination-color-disabled));
 }
 
 @media (max-width: 600px) {
@@ -73,4 +75,3 @@ exmg-button[disabled] {
     }
   }
 }
-

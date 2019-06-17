@@ -1,7 +1,7 @@
 import {LitElement, html, customElement, TemplateResult, property} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 import '@exmg/exmg-button';
-import '@material/mwc-icon';
+import '@material/mwc-icon-button';
 import '@exmg/exmg-paper-combobox';
 import '@polymer/paper-item';
 import {style} from './exmg-grid-pagination-styles';
@@ -86,15 +86,14 @@ export class ExmgGridPagination extends LitElement {
     const enabled = this.pageIndex > 0;
 
     return html`
-      <exmg-button
+      <mwc-icon-button
+        icon="navigate_before"
         id="prevPageBtn"
         ?disabled="${!enabled}"
-        class="action"
+        class="actions"
         title="Previous page"
         @click="${enabled ? this.handleOnClickPrev : undefined}"
-      >
-        <mwc-icon>navigate_before</mwc-icon>
-      </exmg-button>
+      ></mwc-icon-button>
     `;
   }
 
@@ -102,15 +101,14 @@ export class ExmgGridPagination extends LitElement {
     const enabled = this.itemCount && this.itemCount > (this.pageIndex + 1) * this.pageSize;
 
     return html`
-      <exmg-button
+      <mwc-icon-button
+        icon="navigate_next"
         id="nextPageBtn"
         ?disabled="${!enabled}"
-        class="action"
+        class="actions"
         title="Next page"
         @click="${enabled ? this.handleOnClickNext : undefined}"
-      >
-        <mwc-icon>navigate_next</mwc-icon>
-      </exmg-button>
+      ></mwc-icon-button>
     `;
   }
 

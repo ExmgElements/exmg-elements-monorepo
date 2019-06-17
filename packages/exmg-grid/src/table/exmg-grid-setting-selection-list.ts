@@ -1,7 +1,7 @@
 import {customElement, html, LitElement, property} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 
-import '@material/mwc-icon';
+import '@material/mwc-icon-button';
 import '@material/mwc-checkbox/mwc-checkbox';
 import {MDCMenu} from '@material/menu';
 import {DefaultFocusState} from '@material/menu/constants';
@@ -64,14 +64,14 @@ export class ExmgGridSettingSelectionList extends LitElement {
 
   render() {
     return html`
-      <exmg-button
+      <mwc-icon-button
+        icon="${this.icon}"
         @click="${this.toggleMenuOpenState}"
         class="mdc-icon-button material-icons action"
         title="${this.tooltip}"
         data-mdc-ripple-is-unbounded="true"
-      >
-        <mwc-icon>${this.icon}</mwc-icon>
-      </exmg-button>
+      ></mwc-icon-button>
+
       <div class="mdc-menu-surface--anchor">
         <div class="mdc-menu mdc-menu-surface" @MDCMenu:selected="${this.blockEventPropagation}">
           <ul
