@@ -110,6 +110,18 @@ export class PaperComboboxElement extends LitElement {
   @property({type: Object, attribute: 'selected-item'}) selectedItem?: Element;
 
   /**
+   * Icon displaying with selection feault to false
+   * @type {boolean}
+   */
+  @property({type: Boolean, attribute: 'icon-selection'}) private iconSelection?: boolean = false;
+
+  /**
+   * Icon attr
+   * @type {string}
+   */
+  @property({type: String, attribute: 'icon-attr'}) private iconAttribute?: string;
+
+  /**
    * Gets or sets the selected element. The default is to use the index of the item.
    * @type {string|number}
    */
@@ -284,7 +296,6 @@ export class PaperComboboxElement extends LitElement {
       this.token = undefined;
       return;
     }
-
     const id = this.getSelectedItemKey(this.selectedItem);
     if (typeof id === 'undefined') {
       this.selectedValue = undefined;
@@ -646,6 +657,9 @@ export class PaperComboboxElement extends LitElement {
           color: transparent;
           width: 1px !important;
         }
+        .token-icon {
+          margin-right: 6px;
+        }
         #inputValue {
           font: inherit;
           outline: none;
@@ -738,9 +752,23 @@ export class PaperComboboxElement extends LitElement {
     if (!this.token) {
       return null;
     }
+    if (this.iconSelection && this.iconAttribute) {
+      const icon = this.selectedItem!.querySelector(this.iconAttribute)!;
+      const cloneIcon = icon.cloneNode(true) as Element;
+      cloneIcon.removeAttribute('slot');
+      cloneIcon.className = `${cloneIcon.className} token-icon`;
+      return html`
+        <paper-button tabindex="-1" @click="${this.onTokenClick}">
+          ${cloneIcon}
+          <span>${this.token!.text}</span>
+        </paper-button>
+      `;
+    }
 
     return html`
-      <paper-button tabindex="-1" @click="${this.onTokenClick}"><span>${this.token!.text}</span></paper-button>
+      <paper-button tabindex="-1" @click="${this.onTokenClick}">
+        <span>${this.token!.text}</span>
+      </paper-button>
     `;
   }
 }
