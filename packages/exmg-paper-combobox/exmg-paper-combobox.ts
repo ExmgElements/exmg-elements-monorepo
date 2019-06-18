@@ -110,18 +110,6 @@ export class PaperComboboxElement extends LitElement {
   @property({type: Object, attribute: 'selected-item'}) selectedItem?: Element;
 
   /**
-   * Icon displaying with selection feault to false
-   * @type {boolean}
-   */
-  @property({type: Boolean, attribute: 'icon-selection'}) private iconSelection?: boolean = false;
-
-  /**
-   * Icon attr
-   * @type {string}
-   */
-  @property({type: String, attribute: 'icon-attr'}) private iconAttribute?: string;
-
-  /**
    * Gets or sets the selected element. The default is to use the index of the item.
    * @type {string|number}
    */
@@ -598,6 +586,8 @@ export class PaperComboboxElement extends LitElement {
 
   private getTemplate() {
     // noinspection CssUnresolvedCustomPropertySet
+    const eltPrefix = this.querySelector<HTMLElement>('*[slot="prefix"]');
+    const labelPaddingLeft = eltPrefix ? eltPrefix.offsetWidth : 0;
     return html`
       <style>
         :host {
@@ -633,6 +623,9 @@ export class PaperComboboxElement extends LitElement {
         paper-input-container {
           @apply --layout-flex;
         }
+        label.with-prefix {
+          padding-left: ${labelPaddingLeft}px;
+        }
         .tokens {
           margin-right: 6px;
           min-height: 24px;
@@ -656,9 +649,6 @@ export class PaperComboboxElement extends LitElement {
         .tokens.selected input {
           color: transparent;
           width: 1px !important;
-        }
-        .token-icon {
-          margin-right: 6px;
         }
         #inputValue {
           font: inherit;
@@ -701,11 +691,12 @@ export class PaperComboboxElement extends LitElement {
           ${
             !this.selected || !this.noFloatLabel
               ? html`
-                  <label slot="label" ?hidden="${!this.label}" aria-hidden="true">${this.label}</label>
+                  <label slot="label" class="${eltPrefix ? 'with-prefix' : ''}" ?hidden="${!this.label}" aria-hidden="true">${this.label}</label>
                 `
               : ''
           }
           <iron-input bind-value="${this.inputValue}" slot="input">
+            <slot name="prefix"></slot>
             <span class="${classMap({tokens: true, selected: !!this.token})}">
               ${this.renderTokenButton()}
               <input
@@ -717,6 +708,7 @@ export class PaperComboboxElement extends LitElement {
                 autocomplete="off"
                 ?disabled="${this.disabled}">
             </span>
+            <slot name="suffix"></slot>
           </iron-input>
           <paper-input-error slot="add-on" aria-live="assertive">${this.errorMessage}</paper-input-error>
         </paper-input-container>
@@ -751,18 +743,6 @@ export class PaperComboboxElement extends LitElement {
   private renderTokenButton() {
     if (!this.token) {
       return null;
-    }
-    if (this.iconSelection && this.iconAttribute) {
-      const icon = this.selectedItem!.querySelector(this.iconAttribute)!;
-      const cloneIcon = icon.cloneNode(true) as Element;
-      cloneIcon.removeAttribute('slot');
-      cloneIcon.className = `${cloneIcon.className} token-icon`;
-      return html`
-        <paper-button tabindex="-1" @click="${this.onTokenClick}">
-          ${cloneIcon}
-          <span>${this.token!.text}</span>
-        </paper-button>
-      `;
     }
 
     return html`

@@ -203,17 +203,17 @@
           </exmg-paper-combobox>
         </template>
       </demo-snippet>
-      <h3>With icon integration in selection</h3>
+      <h3>With static prefix</h3>
       <demo-snippet>
         <template>
           <exmg-paper-combobox
             label="Creatives"
             selected="4309"
             attr-for-selected="data-id"
-            icon-selection
-            icon-attr="iron-icon"
+            input-prefix
             required=""
           >
+            <div style="display: inline;" slot="prefix">Mr. </div>
             <paper-icon-item data-id="1001">
               <iron-icon
                 src="https://s3.amazonaws.com/uifaces/faces/twitter/sebasribas/73.jpg"
