@@ -56,6 +56,13 @@ export class ExmgFormDrawer extends LitElement {
     this.form!.done();
   }
 
+  public reset(): void {
+    if (this.form) {
+      this.form.reset();
+    }
+    this.submitting = false;
+  }
+
   public error(errorMessage: string): void {
     this.submitting = false;
     this.form!.error(errorMessage);
