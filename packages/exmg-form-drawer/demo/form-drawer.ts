@@ -1,9 +1,10 @@
-import {LitElement, html, customElement, property} from 'lit-element';
+import {LitElement, html, customElement, property, query} from 'lit-element';
 import '@exmg/exmg-button';
 import '@polymer/paper-input/paper-input.js';
 import '@exmg/exmg-paper-combobox/exmg-paper-combobox.js';
 import '@exmg/exmg-form/exmg-form';
 import '../exmg-form-drawer';
+import {ExmgFormDrawer} from '../exmg-form-drawer';
 
 @customElement('exmg-drawer-demo')
 export class Drawer extends LitElement {
@@ -13,6 +14,8 @@ export class Drawer extends LitElement {
   @property({type: Boolean}) resetFormOnSubmitSuccess: boolean = false;
   @property({type: Boolean}) noCancelOnOutsideClick: boolean = false;
 
+  @query('exmg-form-drawer') form?: ExmgFormDrawer;
+
   handleOpenedChanged(e: CustomEvent) {
     this.opened = e.detail.value;
   }
@@ -21,33 +24,38 @@ export class Drawer extends LitElement {
     this.opened = true;
   }
 
-  handleShouldFailChange(e: Event) {
+  openAndResetDialog() {
+    this.form!.reset();
+    this.opened = true;
+  }
+
+  handleShouldFailChange(e: CustomEvent) {
     this.shouldFail = (e.composedPath()[0] as HTMLInputElement).checked;
   }
 
-  handleKeepOpenedOnSubmitSuccess(e: Event) {
+  handleKeepOpenedOnSubmitSuccess(e: CustomEvent) {
     this.keepOpenedOnSubmitSuccess = (e.composedPath()[0] as HTMLInputElement).checked;
   }
 
-  handleResetFormOnSubmitSuccess(e: Event) {
+  handleResetFormOnSubmitSuccess(e: CustomEvent) {
     this.resetFormOnSubmitSuccess = (e.composedPath()[0] as HTMLInputElement).checked;
   }
 
-  handleNoCancelOnOutsideClick(e: Event) {
+  handleNoCancelOnOutsideClick(e: CustomEvent) {
     this.noCancelOnOutsideClick = (e.composedPath()[0] as HTMLInputElement).checked;
   }
 
-  onSubmit(event: any) {
-    setTimeout(_ => {
+  onSubmit() {
+    setTimeout(() => {
       if (this.shouldFail) {
-        event.path[0].error('Internal error occurred');
+        this.form!.error('Internal error occurred');
       } else {
-        event.path[0].done();
+        this.form!.done();
       }
     }, 1000);
   }
 
-  onCancel(event: any) {
+  onCancel(event: CustomEvent) {
     console.log('cancel', event);
   }
 
@@ -60,7 +68,11 @@ export class Drawer extends LitElement {
         }
       </style>
       <div style="padding: 20px">
-        <input type="button" @click="${this.openDialog}" value="Open dialog" />
+        <input type="button" @click="${this.openDialog}" value="Open dialog" /><input
+          type="button"
+          @click="${this.openAndResetDialog}"
+          value="Open dialog (reset form)"
+        />
         <br /><br />
         <label>
           <input
