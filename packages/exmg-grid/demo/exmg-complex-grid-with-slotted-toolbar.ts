@@ -1,6 +1,6 @@
 import {html, customElement, TemplateResult, css} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
-import '@polymer/paper-checkbox';
+import '@material/mwc-checkbox';
 import '@exmg/exmg-paper-combobox';
 import '@polymer/paper-item';
 import '@material/mwc-icon-button';
@@ -56,7 +56,7 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
       i => {
         return html`
           <tr data-row-key="${i.id}">
-            <td class="grid-checkbox-cell"><paper-checkbox class="selectable-checkbox"></paper-checkbox></td>
+            <td class="grid-checkbox-cell"><mwc-checkbox class="selectable-checkbox"></mwc-checkbox></td>
             <td>#${i.id}</td>
             <td>${i.month}</td>
             <td class="grid-col-number">${i.year}</td>
@@ -108,16 +108,18 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
       >
         <exmg-grid-base-toolbar slot="toolbar">
           <div slot="actions">
-            ${this.selectedRows.length
-              ? html`
-                  <mwc-icon-button
-                    class="action"
-                    icon="merge_type"
-                    title="Merge"
-                    @click="${this.onActionDelegate('merge')}"
-                  ></mwc-icon-button>
-                `
-              : null}
+            ${
+              this.selectedRows.length
+                ? html`
+                    <mwc-icon-button
+                      class="action"
+                      icon="merge_type"
+                      title="Merge"
+                      @click="${this.onActionDelegate('merge')}"
+                    ></mwc-icon-button>
+                  `
+                : null
+            }
           </div>
           <div slot="description">Income table</div>
           <div slot="filters">
@@ -136,7 +138,7 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
         <table>
           <thead>
             <tr class="grid-columns">
-              <th class="grid-checkbox-cell"><paper-checkbox class="selectable-checkbox"></paper-checkbox></th>
+              <th class="grid-checkbox-cell"><mwc-checkbox class="selectable-checkbox"></mwc-checkbox></th>
               <th><span>ID</span></th>
               <th data-column-key="month" data-sort><span>Month</span></th>
               <th class="grid-col-number" data-column-key="year" data-sort><span>Year</span></th>

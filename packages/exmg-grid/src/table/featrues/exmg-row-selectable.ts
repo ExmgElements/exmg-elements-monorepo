@@ -3,12 +3,23 @@ import {EventDetailSelectedRowsChange} from '../types/exmg-grid-types';
 
 const checkCheckbox = (checkboxElement: HTMLInputElement) => {
   checkboxElement.setAttribute('checked', 'checked');
+  checkboxElement.removeAttribute('indeterminate');
   checkboxElement.checked = true;
+  console.log('Checking.');
 };
 
 const uncheckCheckbox = (checkboxElement: HTMLInputElement) => {
   checkboxElement.removeAttribute('checked');
+  checkboxElement.removeAttribute('indeterminate');
   checkboxElement.checked = false;
+  console.log('Unchecking.');
+};
+
+const indeterminateCheckbox = (checkboxElement: HTMLInputElement) => {
+  checkboxElement.removeAttribute('checked');
+  checkboxElement.setAttribute('indeterminate', 'true');
+  checkboxElement.checked = true;
+  console.log('Inderterminating.');
 };
 
 const syncCheckboxAttrFromProp = (checkboxElement: HTMLInputElement): void => {
@@ -179,6 +190,7 @@ export class ExmgRowSelectable {
 
   private handleAllCheckboxStateChange(): void {
     if (this.allCheckbox!.checked) {
+      this.allCheckbox!.removeAttribute('indeterminate');
       this.selectedRows = [];
       this.querySelectors.getBodyRows().forEach(row => {
         row.setAttribute('data-selected', '');
@@ -188,6 +200,7 @@ export class ExmgRowSelectable {
         checkCheckbox(checkbox);
       });
     } else {
+      this.allCheckbox!.removeAttribute('indeterminate');
       this.selectedRows = [];
       this.querySelectors
         .getTableBody()
@@ -206,8 +219,10 @@ export class ExmgRowSelectable {
     if (this.allCheckbox) {
       if (!this.allCheckbox.checked && selectedRowsCount === this.querySelectors.getBodyRows().length) {
         checkCheckbox(this.allCheckbox);
-      } else if (this.allCheckbox.checked && selectedRowsCount < this.querySelectors.getBodyRows().length) {
+      } else if (selectedRowsCount === 0) {
         uncheckCheckbox(this.allCheckbox);
+      } else if (selectedRowsCount < this.querySelectors.getBodyRows().length) {
+        indeterminateCheckbox(this.allCheckbox);
       }
     }
   }

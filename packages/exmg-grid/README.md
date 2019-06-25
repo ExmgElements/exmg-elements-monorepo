@@ -338,8 +338,9 @@ row selection:
 
 * on `exmg-grid` element set attribute`selectable-checkbox-selector=".selectable-checkbox"`
 
-* checkbox component needs to implement event `change` and property `checked`. For instance `mwc-checkbox` at least to version
-`v0.4.0` doesnt support `change` event and can't be used with grid
+* checkbox component needs to implement event `change` and property `checked`. 
+
+* If your checkbox component implements `indeterminate` property it will be take into account for the main checkbox selector       
 
 * Optionally cells `th td` can have class `grid-checkbox-cell` 
 
@@ -348,7 +349,7 @@ row selection:
   <table>
     <thead>
      <tr class="grid-columns">
-       <th class="grid-checkbox-cell"><paper-checkbox class="selectable-checkbox"></paper-checkbox></th>
+       <th class="grid-checkbox-cell"><mwc-checkbox class="selectable-checkbox"></mwc-checkbox></th>
      </tr>
     </thead>
     <tbody class="grid-data">
