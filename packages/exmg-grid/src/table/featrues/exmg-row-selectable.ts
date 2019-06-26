@@ -5,21 +5,18 @@ const checkCheckbox = (checkboxElement: HTMLInputElement) => {
   checkboxElement.setAttribute('checked', 'checked');
   checkboxElement.removeAttribute('indeterminate');
   checkboxElement.checked = true;
-  console.log('Checking.');
 };
 
 const uncheckCheckbox = (checkboxElement: HTMLInputElement) => {
   checkboxElement.removeAttribute('checked');
   checkboxElement.removeAttribute('indeterminate');
   checkboxElement.checked = false;
-  console.log('Unchecking.');
 };
 
 const indeterminateCheckbox = (checkboxElement: HTMLInputElement) => {
   checkboxElement.removeAttribute('checked');
   checkboxElement.setAttribute('indeterminate', 'true');
   checkboxElement.checked = true;
-  console.log('Inderterminating.');
 };
 
 const syncCheckboxAttrFromProp = (checkboxElement: HTMLInputElement): void => {

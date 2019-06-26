@@ -108,18 +108,16 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
       >
         <exmg-grid-base-toolbar slot="toolbar">
           <div slot="actions">
-            ${
-              this.selectedRows.length
-                ? html`
-                    <mwc-icon-button
-                      class="action"
-                      icon="merge_type"
-                      title="Merge"
-                      @click="${this.onActionDelegate('merge')}"
-                    ></mwc-icon-button>
-                  `
-                : null
-            }
+            ${this.selectedRows.length
+              ? html`
+                  <mwc-icon-button
+                    class="action"
+                    icon="merge_type"
+                    title="Merge"
+                    @click="${this.onActionDelegate('merge')}"
+                  ></mwc-icon-button>
+                `
+              : null}
           </div>
           <div slot="description">Income table</div>
           <div slot="filters">
