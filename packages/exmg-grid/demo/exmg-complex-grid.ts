@@ -1,6 +1,6 @@
 import {html, customElement, TemplateResult, css} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
-import '@polymer/paper-checkbox';
+import '@material/mwc-checkbox';
 
 import '../src/table/exmg-grid.js';
 import '../src/table/exmg-grid-pagination';
@@ -45,7 +45,7 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
       i => {
         return html`
           <tr data-row-key="${i.id}">
-            <td class="grid-checkbox-cell"><paper-checkbox class="selectable-checkbox"></paper-checkbox></td>
+            <td class="grid-checkbox-cell"><mwc-checkbox class="selectable-checkbox"></mwc-checkbox></td>
             <td>#${i.id}</td>
             <td>${i.month}</td>
             <td class="grid-col-number">${i.year}</td>
@@ -114,7 +114,7 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
         <table>
           <thead>
             <tr class="grid-columns">
-              <th class="grid-checkbox-cell"><paper-checkbox class="selectable-checkbox"></paper-checkbox></th>
+              <th class="grid-checkbox-cell"><mwc-checkbox class="selectable-checkbox"></mwc-checkbox></th>
               <th><span>ID</span></th>
               <th style="max-width: 100px" data-column-key="month" data-sort>
                 <span>Month with quite long name which should stay on one line</span>

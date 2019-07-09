@@ -1,6 +1,6 @@
 import {html, customElement, TemplateResult, css} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
-import '@polymer/paper-checkbox';
+import '@material/mwc-checkbox';
 import '../src/table/exmg-grid.js';
 import '../src/table/exmg-grid-pagination';
 import {style as tableStyles} from '../src/table/exmg-grid-styles';
@@ -40,7 +40,7 @@ export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
       i => {
         return html`
           <tr data-row-key="${i.id}">
-            <td class="grid-checkbox-cell"><paper-checkbox class="selectable-checkbox"></paper-checkbox></td>
+            <td class="grid-checkbox-cell"><mwc-checkbox class="selectable-checkbox"></mwc-checkbox></td>
             <td><span class="grid-row-drag-handler">${dragIcon}</span></td>
             <td>#${i.id}</td>
             <td>${i.month}</td>
@@ -107,7 +107,7 @@ export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
         <table>
           <thead>
             <tr class="grid-columns">
-              <th width="5%"><paper-checkbox class="selectable-checkbox"></paper-checkbox></th>
+              <th width="5%"><mwc-checkbox class="selectable-checkbox"></mwc-checkbox></th>
               <th width="5%"></th>
               <th title="ID"><span>ID</span></th>
               <th title="Month" data-column-key="month"><span>Month</span></th>

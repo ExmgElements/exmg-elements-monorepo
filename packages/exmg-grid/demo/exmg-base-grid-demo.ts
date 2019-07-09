@@ -1,5 +1,5 @@
 import {LitElement, property} from 'lit-element';
-import '@polymer/paper-checkbox';
+import '@material/mwc-checkbox';
 import '../src/table/exmg-grid.js';
 import '../src/table/exmg-grid-pagination';
 
