@@ -1,7 +1,7 @@
 {
   "name": "@exmg/exmg-grid",
   "flat": true,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "exmg grid element",
   "contributors": [
     "Ex Machina"
@@ -27,9 +27,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@exmg/exmg-button": "^1.0.1",
-    "@exmg/exmg-paper-combobox": "^5.0.1",
-    "@exmg/exmg-sortable": "^5.0.1",
+    "@exmg/exmg-button": "^1.0.2",
+    "@exmg/exmg-paper-combobox": "^5.0.4",
+    "@exmg/exmg-sortable": "^5.0.2",
     "@material/list": "^2.1.1",
     "@material/menu": "^2.2.0",
     "@material/mwc-base": "^0.6.0",
@@ -42,7 +42,7 @@
     "lit-element": "^2.1.0"
   },
   "devDependencies": {
-    "@exmg/exmg-cli": "^2.0.1",
+    "@exmg/exmg-cli": "^2.0.2",
     "@polymer/iron-component-page": "^4.0.1",
     "@polymer/iron-demo-helpers": "^3.1.0",
     "@polymer/test-fixture": "^4.0.2",
