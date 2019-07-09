@@ -691,7 +691,13 @@ export class PaperComboboxElement extends LitElement {
           ${
             !this.selected || !this.noFloatLabel
               ? html`
-                  <label slot="label" class="${eltPrefix ? 'with-prefix' : ''}" ?hidden="${!this.label}" aria-hidden="true">${this.label}</label>
+                  <label
+                    slot="label"
+                    class="${eltPrefix ? 'with-prefix' : ''}"
+                    ?hidden="${!this.label}"
+                    aria-hidden="true"
+                    >${this.label}</label
+                  >
                 `
               : ''
           }
