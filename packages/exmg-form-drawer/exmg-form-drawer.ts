@@ -56,6 +56,26 @@ export class ExmgFormDrawer extends LitElement {
     this.form!.done();
   }
 
+  public submit(): void {
+    if (this.form && this.form.validate()) {
+      this.form.submit();
+    }
+  }
+
+  public validate(): void {
+    if (this.form) {
+      this.form.validate();
+    }
+  }
+
+  public serializeForm(): {[key: string]: any} | undefined {
+    if (this.form) {
+      return this.form.serializeForm();
+    }
+
+    return;
+  }
+
   public reset(): void {
     if (this.form) {
       this.form.reset();
