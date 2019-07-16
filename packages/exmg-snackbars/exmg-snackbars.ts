@@ -4,6 +4,8 @@ import {PaperToastElement} from '@polymer/paper-toast';
 
 export interface ExmgSnackbarsOptionsInterface {
   showCloseButton?: boolean;
+  copyButton?: string;
+  callbackButton?: Function;
   duration?: number;
   toastContainerNodeId?: string;
 }
@@ -45,6 +47,44 @@ const getToastCloseBtnNode = (): HTMLDivElement => {
 
   node.onclick = function() {
     const that = this as HTMLElement;
+    // eslint-disable-next-line
+    (that.parentElement as any).toggle();
+  };
+
+  return node;
+};
+
+const getCustomToastNode = ({
+  copyButton,
+  callbackButton,
+}: {
+  copyButton: string;
+  callbackButton?: Function;
+}): HTMLDivElement => {
+  const node = document.createElement('div');
+
+  node.className = 'close-btn';
+  node.style.display = 'inline-block';
+  node.style.padding = '8px';
+  node.style.position = 'relative';
+  node.style.outline = 'none';
+  node.style.userSelect = 'none';
+  node.style.cursor = 'pointer';
+  node.style.zIndex = '0';
+  node.style.lineHeight = '1';
+  node.style.boxSizing = 'border-box !important';
+  node.style.color = 'var(--mdc-theme-primary, #0071dc)';
+  node.style.marginLeft = '32px';
+
+  node.innerHTML = `<a>${copyButton}</a>`;
+
+  node.onclick = function() {
+    const that = this as HTMLElement;
+    if (callbackButton) {
+      console.log('Calling-back');
+      callbackButton();
+    }
+    // eslint-disable-next-line
     (that.parentElement as any).toggle();
   };
 
@@ -55,6 +95,8 @@ const getToastNode = (message: string, originalOptions?: ExmgSnackbarsOptionsInt
   const node = document.createElement('paper-toast');
   const options = {
     showCloseButton: false,
+    copyButton: undefined,
+    callbackButton: undefined,
     duration: 3000,
     ...originalOptions,
   };
@@ -64,6 +106,9 @@ const getToastNode = (message: string, originalOptions?: ExmgSnackbarsOptionsInt
 
   if (options.showCloseButton) {
     node.appendChild(getToastCloseBtnNode());
+  }
+  if (options.copyButton) {
+    node.appendChild(getCustomToastNode({copyButton: options.copyButton, callbackButton: options.callbackButton}));
   }
 
   return node;

@@ -1,8 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
 
     <title>exmg-snackbars demo</title>
 
@@ -24,7 +24,6 @@
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles"></style>
     </custom-style>
-
   </head>
   <body>
     <div class="vertical-section-container centered">
@@ -32,19 +31,40 @@
       <script type="module">
         import {LitElement, html, customElement} from 'lit-element';
         import {showSnackBar} from '../exmg-snackbars';
-        class Demo extends LitElement{
+        class Demo extends LitElement {
           _showSnackbar() {
-            showSnackBar('Some error occurred!')
+            showSnackBar('Some error occurred!');
           }
 
           _showSnackbar2() {
-            showSnackBar('User was successfully updated!', { duration: 0, showCloseButton: true })
+            showSnackBar('User was successfully updated!', {duration: 0, showCloseButton: true});
+          }
+
+          _showSnackbar3() {
+            showSnackBar('User was successfully updated!', {
+              duration: 0,
+              copyButton: 'UNDO',
+              callbackButton: this._cancel,
+            });
+          }
+
+          _showSnackbar4() {
+            showSnackBar('User was successfully updated!', {
+              duration: 0,
+              copyButton: 'DISMISS',
+            });
+          }
+
+          _cancel() {
+            alert('DONE');
           }
 
           render() {
             return html`
               <button @click="${this._showSnackbar}">Show snack</button>
-              <button @click="${this._showSnackbar2}">Show snack2</button>
+              <button @click="${this._showSnackbar2}">Show snack with close button</button>
+              <button @click="${this._showSnackbar3}">Show snack with "UNDO" button and callback</button>
+              <button @click="${this._showSnackbar4}">Show snack with "DISMISS" button and no callback</button>
             `;
           }
         }
