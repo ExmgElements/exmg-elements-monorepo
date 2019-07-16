@@ -4,6 +4,7 @@ import '@polymer/neon-animation/animations/slide-right-animation';
 import '@polymer/paper-dialog/paper-dialog.js';
 import './exmg-drawer';
 import {style} from './styles/exmg-form-drawer-styles';
+import '@exmg/exmg-form/exmg-form';
 import {ExmgForm} from '@exmg/exmg-form/exmg-form';
 import '@exmg/exmg-button';
 
