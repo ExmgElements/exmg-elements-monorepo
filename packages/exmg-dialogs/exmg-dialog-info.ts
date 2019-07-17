@@ -60,7 +60,7 @@ export class ExmgInfoDialog extends LitElement {
             `}
         <slot></slot>
         <div class="actions">
-          <exmg-button id="doneBtn" @click="${this.done}" ?unelevated=${!this.buttonSecondary}
+          <exmg-button id="doneBtn" @click=${this.done} ?unelevated=${!this.buttonSecondary}
             >${this.buttonCopy}</exmg-button
           >
         </div>

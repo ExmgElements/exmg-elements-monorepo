@@ -105,7 +105,7 @@ export class ExmgConfirmDialog extends LitElement {
   }
 
   private cancel() {
-    this.dispatchEvent(new CustomEvent('cancel'));
+    this.dispatchEvent(new CustomEvent('cancel', {bubbles: false, composed: true}));
   }
 
   private submit() {
@@ -147,7 +147,7 @@ export class ExmgConfirmDialog extends LitElement {
         </div>
         <div class="actions">
           <exmg-button dialog-dismiss @click=${this.cancel}>Cancel</exmg-button>
-          <exmg-button id="submitBtn" @click="${this.submit}" ?loading="${this.submitting}" unelevated
+          <exmg-button id="submitBtn" @click=${this.submit} ?loading="${this.submitting}" unelevated
             >${this.buttonCopy}</exmg-button
           >
         </div>
