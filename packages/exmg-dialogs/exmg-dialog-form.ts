@@ -108,6 +108,10 @@ export class ExmgFormDialog extends LitElement {
     this.close();
   }
 
+  private cancel() {
+    this.dispatchEvent(new CustomEvent('cancel', {bubbles: false, composed: true}));
+  }
+
   submit() {
     // reset error message on new submit
     this.errorMessage = undefined;
@@ -159,8 +163,8 @@ export class ExmgFormDialog extends LitElement {
           </div>
         </paper-dialog-scrollable>
         <div class="actions">
-          <exmg-button dialog-dismiss>Cancel</exmg-button>
-          <exmg-button id="submitBtn" @click="${this.submit}" ?loading="${this.submitting}" unelevated
+          <exmg-button dialog-dismiss @click=${this.cancel}>Cancel</exmg-button>
+          <exmg-button id="submitBtn" @click=${this.submit} ?loading="${this.submitting}" unelevated
             >${this.buttonCopy}</exmg-button
           >
         </div>
