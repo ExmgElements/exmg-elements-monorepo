@@ -45,6 +45,10 @@
               duration: 0,
               copyButton: 'UNDO',
               callbackButton: this._cancel,
+              position: {
+                top: document.body.clientHeight - 80,
+                left: 50,
+              },
             });
           }
 
@@ -63,7 +67,9 @@
             return html`
               <button @click="${this._showSnackbar}">Show snack</button>
               <button @click="${this._showSnackbar2}">Show snack with close button</button>
-              <button @click="${this._showSnackbar3}">Show snack with "UNDO" button and callback</button>
+              <button @click="${this._showSnackbar3}">
+                Show snack with "UNDO" button, callback and custom position
+              </button>
               <button @click="${this._showSnackbar4}">Show snack with "DISMISS" button and no callback</button>
             `;
           }
