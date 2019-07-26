@@ -1,6 +1,6 @@
 # exmg-form
 
-This component provides basic form functionality. It is made on top of ```<iron-form>```.
+This component provides basic form functionality. It is made on top of `<iron-form>`.
 
 You can put any children elements inside of it, but only elements implementing IronFormElementBehavior will be serialized.
 Also, any element implementing IronFormElementBehavior have to implement validate() method. In other case form will not be working.
@@ -8,13 +8,17 @@ Also, any element implementing IronFormElementBehavior have to implement validat
 Read more: IronFormElementBehavior (https://github.com/PolymerElements/iron-form-element-behavior).
 
 Events:
-1. **submit** - when submit button pressed. Will contain all form serialized data. Submit event will not fire when any of required fields are not set. 
+
+1. **submit** - when submit button pressed. Will contain all form serialized data. Submit event will not fire when any of required fields are not set.
 2. **cancel** - when cancel button pressed.
+3. **dirty** - when the user edit an editable in the form. Is thrown only once.
 
 Attributes:
+
 1. **hide-cancel-button**
 2. **submit-button-copy**
 3. **inline** - whether or not try to display form in single line
+4. **isDirty** - _readOnly_ - wheter or not a value in the form has been changed
 
 ```
 <exmg-form

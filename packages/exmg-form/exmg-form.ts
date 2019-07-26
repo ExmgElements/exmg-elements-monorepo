@@ -31,6 +31,13 @@ export class ExmgForm extends LitElement {
   @property({type: Boolean})
   public inline: boolean = false;
 
+  @property({type: Boolean})
+  private dirty: boolean = false;
+
+  get isDirty(): boolean {
+    return this.dirty;
+  }
+
   @property({type: String, attribute: 'error-message'})
   private errorMessage: string = '';
 
@@ -120,6 +127,7 @@ export class ExmgForm extends LitElement {
     super.connectedCallback();
 
     this.addEventListener('keydown', this.onEnterPressed);
+    this.addEventListener('change', this.handleOnChange);
   }
 
   disconnectedCallback(): void {
@@ -138,6 +146,20 @@ export class ExmgForm extends LitElement {
         (elem as HTMLElement).style.display = null;
       });
     }
+  }
+
+  private handleOnChange(_e: Event): void {
+    if (this.dirty) {
+      return;
+    }
+    this.dirty = true;
+    this.dispatchEvent(
+      new CustomEvent('dirty', {
+        detail: {
+          dirty: true,
+        },
+      }),
+    );
   }
 
   private renderCancelButton() {

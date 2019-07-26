@@ -23,7 +23,7 @@ export class FormDemo extends LitElement {
       <input type="button" value="serialize" @click="${this.serializeForm1}" />
       <hr />
 
-      <exmg-form @submit="${this.onSubmit}" @cancel="${this.onCancel}" id="form1">
+      <exmg-form @submit="${this.onSubmit}" @cancel="${this.onCancel}" @dirty="${this.displayFormDirty}" id="form1">
         <paper-input name="value1" label="text input" required></paper-input>
         <paper-input name="value2" label="text input" value="pre-filled"></paper-input>
         <paper-input label="password input" type="password"></paper-input>
@@ -80,6 +80,11 @@ export class FormDemo extends LitElement {
 
   onCancel(event: any) {
     console.log('cancel', event);
+  }
+
+  displayFormDirty() {
+    const form = (this.shadowRoot!.querySelector('#form1') as ExmgForm)!;
+    alert(`You changed a value, form is dirty: ${form.isDirty}`);
   }
 
   submitForm1() {

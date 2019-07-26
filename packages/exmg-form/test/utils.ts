@@ -12,3 +12,5 @@ const onEvent: (eventName: string) => (element: LitElement, shouldResolve: boole
 export const onExmgFormSubmit: (element: LitElement, shouldResolve: boolean) => Promise<any> = onEvent('submit');
 
 export const onExmgFormCancel: (element: LitElement, shouldResolve: boolean) => Promise<any> = onEvent('cancel');
+
+export const onExmgFormDirty: (element: LitElement, shouldResolve: boolean) => Promise<any> = onEvent('dirty');

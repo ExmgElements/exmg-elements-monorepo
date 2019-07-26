@@ -1,5 +1,5 @@
 import {ExmgForm} from '../exmg-form';
-import {promisifyFlush, onExmgFormCancel, onExmgFormSubmit} from './utils';
+import {promisifyFlush, onExmgFormCancel, onExmgFormSubmit, onExmgFormDirty} from './utils';
 
 declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
 declare const flush: (cb?: Function) => void;
@@ -66,6 +66,21 @@ suite('<exmg-form>', function() {
       cancelBtn.click();
 
       await eventPromise;
+    });
+
+    test('Form throws dirty event', async () => {
+      await flushCompleted();
+
+      const field1Input = element.querySelector<HTMLInputElement>('paper-input[name=field1]')!;
+
+      const eventPromise = onExmgFormDirty(element, true);
+
+      field1Input.value = 'test1';
+
+      const {detail} = await eventPromise;
+
+      assert.equal(detail.dirty, true, 'Event value is correct');
+      assert.equal(element.isDirty, true, 'ExmgForm exposes isDirty prop');
     });
   });
 });
