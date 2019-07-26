@@ -48,6 +48,7 @@ export class ExmgForm extends LitElement {
   private ironFormElem?: IronFormElement;
 
   public done(): void {
+    this.dirty = false;
     this.submitting = false;
   }
 
@@ -92,6 +93,7 @@ export class ExmgForm extends LitElement {
       this.ironFormElem.reset();
     }
 
+    this.dirty = false;
     this.submitting = false;
     this.errorMessage = '';
   }
@@ -132,6 +134,7 @@ export class ExmgForm extends LitElement {
 
   disconnectedCallback(): void {
     this.removeEventListener('keydown', this.onEnterPressed);
+    this.removeEventListener('change', this.handleOnChange);
 
     super.disconnectedCallback();
   }
