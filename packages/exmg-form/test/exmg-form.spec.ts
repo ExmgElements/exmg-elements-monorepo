@@ -73,14 +73,17 @@ suite('<exmg-form>', function() {
 
       const field1Input = element.querySelector<HTMLInputElement>('paper-input[name=field1]')!;
 
-      const eventPromise = onExmgFormDirty(element, true);
+      const eventPromise = onExmgFormDirty(element, false);
 
       field1Input.value = 'test1';
 
-      const {detail} = await eventPromise;
+      const timeoutPromise = new Promise(resolve => {
+        setTimeout(() => {
+          resolve();
+        }, 1000);
+      });
 
-      assert.equal(detail.dirty, true, 'Event value is correct');
-      assert.equal(element.isDirty, true, 'ExmgForm exposes isDirty prop');
+      return await Promise.race([timeoutPromise, eventPromise]);
     });
   });
 });

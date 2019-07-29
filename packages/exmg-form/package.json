@@ -70,7 +70,7 @@
     "publishDryRun": "npm publish --dry-run",
     "start": "npm run build:styles && gulp serve",
     "test-dev": "polymer test --npm -p",
-    "test": "polymer test --npm --expanded"
+    "test": "tsc --noEmit && polymer test --npm --expanded"
   },
   "publishConfig": {
     "access": "public"
