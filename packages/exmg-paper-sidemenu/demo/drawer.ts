@@ -1,7 +1,6 @@
 import {LitElement, html, css, property, customElement} from 'lit-element';
 import {classMap} from 'lit-html/directives/class-map.js';
 import {sidemenuStyles} from '../index';
-import {style as themeStyles} from './theme-styles';
 import '../index';
 import '@material/mwc-drawer/mwc-drawer';
 import '@material/mwc-icon-button';
@@ -41,12 +40,15 @@ export class XDemo extends LitElement {
 
   static styles = [
     sidemenuStyles,
-    themeStyles,
     css`
       :host {
         display: inline-block;
         height: 100vh;
         width: 100%;
+      }
+
+      app-toolbar {
+        background: blue;
       }
 
       .main-content p {

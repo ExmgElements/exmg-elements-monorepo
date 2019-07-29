@@ -3,7 +3,7 @@ import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-item/paper-item.js';
-import '@exmg/exmg-paper-tooltip/exmg-paper-tooltip.js';
+import '@polymer/paper-tooltip/paper-tooltip.js';
 
 const dashboardIcon = html`
   <svg height="24" viewBox="0 0 24 24" width="24">

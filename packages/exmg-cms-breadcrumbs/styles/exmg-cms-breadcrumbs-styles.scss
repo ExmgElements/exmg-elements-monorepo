@@ -2,8 +2,14 @@ $mdc-theme-on-primary: #ffffff !default;
 $mdc-theme-primary: #0071dc !default;
 
 :host {
-  --default-breadcrumbs-text-color: var(--breadcrumbs-text-color, var(--mdc-theme-on-primary, #{$mdc-theme-on-primary}));
-  --default-breadcrumbs-background-color: var(--breadcrumbs-background-color, var(--mdc-theme-primary, #{$mdc-theme-primary}));
+  --default-breadcrumbs-text-color: var(
+    --breadcrumbs-text-color,
+    var(--mdc-theme-on-primary, #{$mdc-theme-on-primary})
+  );
+  --default-breadcrumbs-background-color: var(
+    --breadcrumbs-background-color,
+    var(--mdc-theme-primary, #{$mdc-theme-primary})
+  );
   --breadcrumbs-container-height: 56px;
   --breadcrumbs-container-width: 100%;
   --breadcrumbs-container-padding-left: 10px;
@@ -35,7 +41,8 @@ $mdc-theme-primary: #0071dc !default;
   width: inherit;
   background-color: inherit;
 }
-.container, .container a {
+.container,
+.container a {
   color: inherit;
 }
 .breadcrumb-item {
@@ -76,7 +83,8 @@ a[inactive] {
   .breadcrumb-item {
     display: none;
   }
-  .breadcrumb-item:first-child, .breadcrumb-item:last-child {
+  .breadcrumb-item:first-child,
+  .breadcrumb-item:last-child {
     display: initial;
   }
 }
