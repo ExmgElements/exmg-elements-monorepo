@@ -6,56 +6,35 @@
 
     <title>test-el test</title>
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-    <script src="../node_modules/wct-browser-legacy/browser.js"></script>
-
-    <script type="module" src="../exmg-paper-sidemenu.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/wct-mocha/wct-mocha.js"></script>
   </head>
   <body>
-    <test-fixture id="BasicTestFixture">
+    <test-fixture id="basic">
       <template>
-        <exmg-paper-sidemenu menu="[]"></exmg-paper-sidemenu>
+        <exmg-paper-sidemenu>
+          <a href="#" data-path="/test1" tabindex="-1" class="menu-item solo">
+            <paper-item data-path="/test1" role="menuitem">
+              <svg height="24" viewBox="0 0 24 24" width="24">
+                <path d="M7 19h10V4H7v15zm-5-2h4V6H2v11zM18 6v11h4V6h-4z"></path>
+              </svg>
+              <span class="title">Test 1</span>
+            </paper-item>
+            <paper-tooltip position="right">Test 1</paper-tooltip>
+          </a>
+          <a href="#" data-path="/test2" tabindex="-1" class="menu-item solo">
+            <paper-item data-path="/test2" role="menuitem">
+              <svg height="24" viewBox="0 0 24 24" width="24">
+                <path d="M7 19h10V4H7v15zm-5-2h4V6H2v11zM18 6v11h4V6h-4z"></path>
+              </svg>
+              <span class="title">Test 2</span>
+            </paper-item>
+            <paper-tooltip position="right">Test 2</paper-tooltip>
+          </a>
+        </exmg-paper-sidemenu>
       </template>
     </test-fixture>
-
-    <test-fixture id="BasicTestFixtureMenu">
-      <template>
-        <exmg-paper-sidemenu></exmg-paper-sidemenu>
-      </template>
-    </test-fixture>
-
-    <script type="module">
-      import {menu} from './menu-example.js';
-      var sideMenu;
-      suite('exmg-paper-sidemenu', () => {
-        setup(() => {
-          sideMenu = fixture('BasicTestFixtureMenu');
-        });
-
-        test('instantiating the element with default properties', () => {
-          const element = fixture('BasicTestFixture');
-          debugger;
-          assert.equal(element.menu.length, 0);
-        });
-
-        test('check if menu items rendered matches the amount of items in menu config file', done => {
-          sideMenu.menu = menu;
-          flush(() => {
-            var menuItems = sideMenu.shadowRoot.querySelectorAll('paper-item');
-            assert.equal(4, menuItems.length);
-            done();
-          });
-        });
-
-        test('check if selected state reflects to dom', done => {
-          sideMenu.menu = menu;
-          sideMenu.selected = 'rewardmodels/';
-          flush(() => {
-            var selectedItems = sideMenu.shadowRoot.querySelectorAll('a[aria-selected]');
-            assert.equal(1, selectedItems.length);
-            done();
-          });
-        });
-      });
-    </script>
+    <script type="module" src="exmg-paper-sidemenu.test.js"></script>
   </body>
 </html>

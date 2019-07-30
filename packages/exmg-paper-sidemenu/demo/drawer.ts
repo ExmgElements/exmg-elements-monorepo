@@ -77,9 +77,9 @@ export class XDemo extends LitElement {
       ${i.items.map(
         (subitem: MenuItem) =>
           html`
-            <a href="${this.debug ? '#' : subitem.path}" data-path="${subitem.path}" tabindex="-1" class="menu-item">
+            <a href=${this.debug ? '#' : subitem.path} data-path=${subitem.path} tabindex="-1" class="menu-item">
               <paper-item data-path="${subitem.path}" role="menuitem">
-                <svg height="24" viewBox="0 0 24 24" width="24"><path d="${subitem.iconPath}"></path></svg>
+                <svg height="24" viewBox="0 0 24 24" width="24"><path d=${subitem.iconPath}></path></svg>
                 <span class="title">
                   ${subitem.title}
                 </span>
@@ -93,9 +93,9 @@ export class XDemo extends LitElement {
 
   private renderItem(i: MenuItem) {
     return html`
-      <a href="${this.debug ? '#' : i.path}" data-path=${i.path}" tabindex="-1" class="menu-item solo">
-        <paper-item data-path="${i.path}" role="menuitem">
-          <svg height="24" viewBox="0 0 24 24" width="24"><path d="${i.iconPath}"></path></svg>
+      <a href=${this.debug ? '#' : i.path} data-path=${i.path} tabindex="-1" class="menu-item solo">
+        <paper-item data-path=${i.path} role="menuitem">
+          <svg height="24" viewBox="0 0 24 24" width="24"><path d=${i.iconPath}></path></svg>
           <span class="title">${i.title}</span>
         </paper-item>
         <paper-tooltip position="right">${i.title}</paper-tooltip>

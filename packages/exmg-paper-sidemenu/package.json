@@ -46,16 +46,20 @@
     "@polymer/paper-item": "^3.0.0-pre.25",
     "@polymer/paper-styles": "^3.0.0-pre.25",
     "@polymer/paper-tooltip": "^3.0.1",
+    "@types/mocha": "^5.2.7",
     "@webcomponents/webcomponentsjs": "^2.0.0",
+    "chai": "^4.2.0",
     "eslint": "^5.16.0",
     "eslint-config-exmg": "latest",
     "eslint-plugin-html": "^3.0.0",
     "gulp": "^4.0.0",
     "gulp-rename": "^1.4.0",
     "gulp-replace": "^1.0.0",
+    "mocha": "^6.2.0",
     "typedoc": "^0.14.2",
     "typescript": "^3.2.2",
-    "wct-browser-legacy": "^1.0.0"
+    "wct-mocha": "^1.0.1",
+    "web-animations-js": "^2.3.2"
   },
   "scripts": {
     "package-install": "npm i",
@@ -68,8 +72,8 @@
     "preversion": "npm run build",
     "publishDryRun": "npm publish --dry-run",
     "start": "npm run build:styles && gulp serve",
-    "test-dev": "polymer test --npm -p",
-    "test": "polymer test --npm --expanded"
+    "test-dev": "npm run tsc && polymer test --module-resolution=node --npm -p",
+    "test": "npm run tsc && polymer test --module-resolution=node --npm"
   },
   "publishConfig": {
     "access": "public"

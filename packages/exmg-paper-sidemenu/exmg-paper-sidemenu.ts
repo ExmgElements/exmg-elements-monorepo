@@ -56,12 +56,6 @@ export class ExmgPaperSidemenu extends LitElement {
   selected!: string;
 
   /**
-   * Indicated if page state is narrow. This is used to toggle collapsed mode when enabled.
-   */
-  @property({type: Boolean, reflect: true})
-  narrow: boolean = false;
-
-  /**
    *  Disable collapse functionailty
    */
   @property({type: Boolean, reflect: true, attribute: 'disable-collapse'})
@@ -114,13 +108,6 @@ export class ExmgPaperSidemenu extends LitElement {
    */
   _handleSelectionChange(e: CustomEvent<{value: string}>) {
     this.selected = e.detail.value;
-  }
-
-  /**
-   *  On resize of initially set collapsed state of the menu automaticly based on screen size
-   */
-  _hansleNarrowChange(narrow: boolean) {
-    this.collapsed = narrow;
   }
 
   /**
