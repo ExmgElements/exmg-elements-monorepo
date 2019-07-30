@@ -6,6 +6,7 @@ const onEvent: (eventName: string) => (element: LitElement, shouldResolve: boole
   eventName: string,
 ) => (element: LitElement, shouldResolve: boolean) =>
   new Promise((resolve, reject) => {
+    console.log('Promise');
     element.addEventListener(eventName, (event: Event) => (shouldResolve ? resolve(event) : reject(event)));
   });
 
