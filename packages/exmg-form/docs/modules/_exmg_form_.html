@@ -3,17 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@exmg/exmg-form</title>
+	<title>&quot;exmg-form&quot; | @exmg/exmg-form</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
 <body>
 <header>
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">@exmg/exmg-form</a>
+					<a href="../index.html" class="title">@exmg/exmg-form</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -49,89 +49,52 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="globals.html">Globals</a>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="_exmg_form_.html">&quot;exmg-form&quot;</a>
 				</li>
 			</ul>
-			<h1> @exmg/exmg-form</h1>
+			<h1>External module &quot;exmg-form&quot;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<h1 id="exmg-form">exmg-form</h1>
-				<p>This component provides basic form functionality. It is made on top of <code>&lt;iron-form&gt;</code>.</p>
-				<p>You can put any children elements inside of it, but only elements implementing IronFormElementBehavior will be serialized.
-				Also, any element implementing IronFormElementBehavior have to implement validate() method. In other case form will not be working.</p>
-				<p>Read more: IronFormElementBehavior (<a href="https://github.com/PolymerElements/iron-form-element-behavior)">https://github.com/PolymerElements/iron-form-element-behavior)</a>.</p>
-				<p>Events:</p>
-				<ol>
-					<li><strong>submit</strong> - when submit button pressed. Will contain all form serialized data. Submit event will not fire when any of required fields are not set.</li>
-					<li><strong>cancel</strong> - when cancel button pressed.</li>
-					<li><strong>dirty</strong> - when the user edit an editable in the form. Is thrown only once.</li>
-				</ol>
-				<p>Attributes:</p>
-				<ol>
-					<li><strong>hide-cancel-button</strong></li>
-					<li><strong>submit-button-copy</strong></li>
-					<li><strong>inline</strong> - whether or not try to display form in single line</li>
-					<li><strong>isDirty</strong> - <em>readOnly</em> - wheter or not a value in the form has been changed</li>
-				</ol>
-				<pre><code>&lt;exmg-form
-    @submit="${this.submit}"
-    @cancel="${this.cancel}"
-    ?hide-cancel-button=${<span class="hljs-keyword">false</span>}
-    submit-button-copy="Submit"
-    ?<span class="hljs-keyword">inline</span>=${<span class="hljs-keyword">false</span>}
-&gt;
-    &lt;paper-<span class="hljs-keyword">input</span> label="text input" required&gt;&lt;/paper-<span class="hljs-keyword">input</span>&gt;
-    &lt;paper-<span class="hljs-keyword">input</span> label="text input" <span class="hljs-keyword">value</span>="pre-filled"&gt;&lt;/paper-<span class="hljs-keyword">input</span>&gt;
-    &lt;paper-<span class="hljs-keyword">input</span> label="password input" <span class="hljs-keyword">type</span>="password"&gt;&lt;/paper-<span class="hljs-keyword">input</span>&gt;
-    &lt;paper-<span class="hljs-keyword">input</span> label="disabled input" disabled <span class="hljs-keyword">value</span>="batman"&gt;&lt;/paper-<span class="hljs-keyword">input</span>&gt;
-    &lt;paper-<span class="hljs-keyword">input</span> <span class="hljs-type">name</span>="name" label="Summary" required <span class="hljs-keyword">always</span>-<span class="hljs-type">float</span>-label&gt;&lt;/paper-<span class="hljs-keyword">input</span>&gt;
-    &lt;paper-<span class="hljs-keyword">input</span> <span class="hljs-type">name</span>="estimate" label="Estimates" <span class="hljs-keyword">type</span>="number" <span class="hljs-keyword">always</span>-<span class="hljs-type">float</span>-label style="max-width:180px;"&gt;&lt;/paper-<span class="hljs-keyword">input</span>&gt;
-
-    &lt;paper-textarea label="autoresizing textarea input"&gt;&lt;/paper-textarea&gt;
-
-    &lt;exmg-paper-combobox label="Project" <span class="hljs-type">name</span>="combobox" style="max-width:280px;" <span class="hljs-keyword">always</span>-<span class="hljs-type">float</span>-label required&gt;
-      &lt;paper-item&gt;PlayToTV&lt;/paper-item&gt;
-      &lt;paper-item&gt;Website&lt;/paper-item&gt;
-    &lt;/exmg-paper-combobox&gt;
-    &lt;p <span class="hljs-keyword">class</span>="help"&gt;<span class="hljs-keyword">Some</span> issue <span class="hljs-keyword">types</span> are unavailable due <span class="hljs-keyword">to</span> incompatible field <span class="hljs-keyword">configuration</span> <span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> workflow associations.&lt;/p&gt;
-    &lt;hr /&gt;
-    &lt;p <span class="hljs-keyword">class</span>="help"&gt;<span class="hljs-keyword">Start</span> typing <span class="hljs-keyword">to</span> <span class="hljs-keyword">get</span> a list <span class="hljs-keyword">of</span> possible matches.&lt;/p&gt;
-    &lt;exmg-paper-token-<span class="hljs-keyword">input</span> <span class="hljs-type">name</span>="tokens" label="Components" <span class="hljs-keyword">always</span>-<span class="hljs-type">float</span>-label&gt;
-      &lt;paper-item&gt;javascript&lt;/paper-item&gt;
-      &lt;paper-item&gt;css&lt;/paper-item&gt;
-    &lt;/exmg-paper-token-<span class="hljs-keyword">input</span>&gt;
-    &lt;p <span class="hljs-keyword">class</span>="help"&gt;<span class="hljs-keyword">Start</span> typing <span class="hljs-keyword">to</span> <span class="hljs-keyword">get</span> a list <span class="hljs-keyword">of</span> possible matches <span class="hljs-keyword">or</span> press down <span class="hljs-keyword">to</span> <span class="hljs-keyword">select</span>.&lt;/p&gt;
-    &lt;p <span class="hljs-keyword">class</span>="help"&gt;Estimated <span class="hljs-type">time</span> needed <span class="hljs-keyword">to</span> resolve this issue <span class="hljs-keyword">in</span> hours.&lt;/p&gt;
-    &lt;label&gt;Message&lt;/label&gt;
-    &lt;exmg-markdown-editor <span class="hljs-type">name</span>="markdown" required&gt;
-      &lt;marked-element markdown="# Hello Word!"&gt;
-        &lt;div slot="markdown-html"&gt;&lt;/div&gt;
-      &lt;/marked-element&gt;
-    &lt;/exmg-markdown-editor&gt;
-&lt;/exmg-form&gt;</code></pre>
-			</div>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Classes</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/_exmg_form_.exmgform.html" class="tsd-kind-icon">Exmg<wbr>Form</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="_exmg_form_.html">"exmg-<wbr>form"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_exmg_form_.html">"exmg-<wbr>form"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_index_.html">"index"</a>
+						<a href="_index_.html">"index"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="../classes/_exmg_form_.exmgform.html" class="tsd-kind-icon">Exmg<wbr>Form</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -200,7 +163,7 @@
 	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>
