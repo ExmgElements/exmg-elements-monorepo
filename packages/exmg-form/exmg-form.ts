@@ -168,6 +168,8 @@ export class ExmgForm extends LitElement {
     this.dirty = true;
     this.dispatchEvent(
       new CustomEvent('dirty', {
+        bubbles: false,
+        composed: false,
         detail: {
           dirty: true,
         },
@@ -194,6 +196,8 @@ export class ExmgForm extends LitElement {
         this.dirty = true;
         this.dispatchEvent(
           new CustomEvent('dirty', {
+            bubbles: false,
+            composed: false,
             detail: {
               dirty: true,
             },

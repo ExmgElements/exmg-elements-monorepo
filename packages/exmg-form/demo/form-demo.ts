@@ -83,7 +83,7 @@ export class FormDemo extends LitElement {
   }
 
   displayFormDirty() {
-    const form = (this.shadowRoot!.querySelector('#form1') as ExmgForm)!;
+    const form = this.shadowRoot!.querySelector<ExmgForm>('#form1')!;
     alert(`You changed a value, form is dirty: ${form.isDirty}`);
   }
 
