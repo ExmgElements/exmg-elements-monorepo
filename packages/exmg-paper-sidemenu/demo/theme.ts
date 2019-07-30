@@ -86,6 +86,7 @@ export class XDemo extends LitElement {
             </a>
           `,
       )}
+      <hr />
     `;
   }
 
@@ -98,6 +99,7 @@ export class XDemo extends LitElement {
         </paper-item>
         <paper-tooltip position="right">${i.title}</paper-tooltip>
       </a>
+      <hr />
     `;
   }
 
