@@ -31,6 +31,16 @@ export class ExmgForm extends LitElement {
   @property({type: Boolean})
   public inline: boolean = false;
 
+  @property({type: Object})
+  private baseValues?: Record<string, any> = undefined;
+
+  @property({type: Boolean})
+  private dirty: boolean = false;
+
+  get isDirty(): boolean {
+    return this.dirty;
+  }
+
   @property({type: String, attribute: 'error-message'})
   private errorMessage: string = '';
 
@@ -41,6 +51,7 @@ export class ExmgForm extends LitElement {
   private ironFormElem?: IronFormElement;
 
   public done(): void {
+    this.dirty = false;
     this.submitting = false;
   }
 
@@ -85,6 +96,7 @@ export class ExmgForm extends LitElement {
       this.ironFormElem.reset();
     }
 
+    this.dirty = false;
     this.submitting = false;
     this.errorMessage = '';
   }
@@ -120,10 +132,15 @@ export class ExmgForm extends LitElement {
     super.connectedCallback();
 
     this.addEventListener('keydown', this.onEnterPressed);
+    this.addEventListener('change', this.handleOnChange);
+    // Next line is in case of exmg-markdown-editor
+    this.addEventListener('value-change', this.handleMDEditorChange);
   }
 
   disconnectedCallback(): void {
     this.removeEventListener('keydown', this.onEnterPressed);
+    this.removeEventListener('change', this.handleOnChange);
+    this.removeEventListener('value-change', this.handleMDEditorChange);
 
     super.disconnectedCallback();
   }
@@ -137,6 +154,56 @@ export class ExmgForm extends LitElement {
       Array.from(this.children).forEach((elem: Element) => {
         (elem as HTMLElement).style.display = null;
       });
+    }
+  }
+
+  protected firstUpdated() {
+    this.baseValues = this.serializeForm();
+  }
+
+  private handleOnChange(_e: Event): void {
+    if (this.dirty) {
+      return;
+    }
+    this.dirty = true;
+    this.dispatchEvent(
+      new CustomEvent('dirty', {
+        bubbles: false,
+        composed: false,
+        detail: {
+          dirty: true,
+        },
+      }),
+    );
+  }
+
+  private handleMDEditorChange(e: Event): void {
+    if (this.dirty) {
+      return;
+    }
+    const path = e.composedPath();
+    const baseValuesPropertiesToCheck = [];
+    for (let x in path) {
+      const name = (path[x] as Node).nodeName ? (path[x] as Node).nodeName.toLowerCase() : '';
+      if (name === 'exmg-markdown-editor') {
+        baseValuesPropertiesToCheck.push((path[x] as HTMLInputElement).name);
+      }
+    }
+    const currentValues = this.serializeForm();
+    for (let y in baseValuesPropertiesToCheck) {
+      const prop = baseValuesPropertiesToCheck[y];
+      if (this.baseValues && currentValues && this.baseValues[prop] !== currentValues[prop]) {
+        this.dirty = true;
+        this.dispatchEvent(
+          new CustomEvent('dirty', {
+            bubbles: false,
+            composed: false,
+            detail: {
+              dirty: true,
+            },
+          }),
+        );
+      }
     }
   }
 

@@ -8,6 +8,10 @@ export interface ExmgSnackbarsOptionsInterface {
   callbackButton?: Function;
   duration?: number;
   toastContainerNodeId?: string;
+  position?: {
+    top: number;
+    left: number;
+  };
 }
 
 const getToastContainerNode = (originalOptions?: ExmgSnackbarsOptionsInterface): Node => {
@@ -25,7 +29,6 @@ const getToastContainerNode = (originalOptions?: ExmgSnackbarsOptionsInterface):
   const toastContainerNode = document.createElement('div');
   toastContainerNode.id = options.toastContainerNodeId;
   document.body.appendChild(toastContainerNode);
-
   return toastContainerNode;
 };
 
@@ -81,7 +84,6 @@ const getCustomToastNode = ({
   node.onclick = function() {
     const that = this as HTMLElement;
     if (callbackButton) {
-      console.log('Calling-back');
       callbackButton();
     }
     // eslint-disable-next-line
@@ -98,8 +100,16 @@ const getToastNode = (message: string, originalOptions?: ExmgSnackbarsOptionsInt
     copyButton: undefined,
     callbackButton: undefined,
     duration: 3000,
+    position: undefined,
     ...originalOptions,
   };
+
+  if (options.position) {
+    node.verticalAlign = 'top';
+    node.verticalOffset = options.position.top;
+    node.horizontalAlign = 'left';
+    node.horizontalOffset = options.position.left;
+  }
 
   node.text = message;
   node.duration = options.duration;

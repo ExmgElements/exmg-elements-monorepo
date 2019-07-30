@@ -1,7 +1,7 @@
 {
   "name": "@exmg/exmg-form",
   "flat": true,
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Form helper element",
   "contributors": [
     "Ex Machina"
@@ -70,7 +70,7 @@
     "publishDryRun": "npm publish --dry-run",
     "start": "npm run build:styles && gulp serve",
     "test-dev": "polymer test --npm -p",
-    "test": "polymer test --npm --expanded"
+    "test": "tsc --noEmit && polymer test --module-resolution=node --npm --expanded"
   },
   "publishConfig": {
     "access": "public"

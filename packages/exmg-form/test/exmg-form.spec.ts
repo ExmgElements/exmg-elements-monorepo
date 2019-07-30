@@ -11,7 +11,7 @@ suite('<exmg-form>', function() {
   const flushCompleted = promisifyFlush(flush);
 
   suite('base usage', function() {
-    setup(() => {
+    setup(async () => {
       element = fixture('ExmgFormBasicElement');
     });
 
@@ -23,7 +23,7 @@ suite('<exmg-form>', function() {
       await flushCompleted();
 
       const field1Input = element.querySelector<HTMLInputElement>('paper-input[name=field1]')!;
-      const submitBtn = element.shadowRoot!.querySelector('exmg-button[unelevated]') as HTMLElement;
+      const submitBtn = element.shadowRoot!.querySelector<HTMLElement>('exmg-button[unelevated]')!;
 
       const eventPromise = onExmgFormSubmit(element, true);
 
@@ -38,7 +38,7 @@ suite('<exmg-form>', function() {
 
     test('form with missing required fields should not submit data', async () => {
       await flushCompleted();
-      const submitBtn = element.shadowRoot!.querySelector('exmg-button[unelevated]') as HTMLElement;
+      const submitBtn = element.shadowRoot!.querySelector<HTMLElement>('exmg-button[unelevated]')!;
 
       const eventPromise = onExmgFormSubmit(element, false);
 
@@ -59,13 +59,22 @@ suite('<exmg-form>', function() {
 
     test('form should throw cancel event', async () => {
       await flushCompleted();
-      const cancelBtn = element.shadowRoot!.querySelector('exmg-button.cancel') as HTMLElement;
+      const cancelBtn = element.shadowRoot!.querySelector<HTMLElement>('exmg-button.cancel')!;
 
       const eventPromise = onExmgFormCancel(element, true);
 
       cancelBtn.click();
 
       await eventPromise;
+    });
+
+    test('Should throw event dirty', async () => {
+      const field1Input = element.querySelector<HTMLInputElement>('paper-input[name=field1]')!;
+      field1Input.value = 'test';
+      // @ts-ignore
+      field1Input.fire('change');
+
+      assert.equal(element.isDirty, true, 'Form is dirty when value has changed');
     });
   });
 });
