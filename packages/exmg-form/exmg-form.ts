@@ -159,14 +159,12 @@ export class ExmgForm extends LitElement {
 
   protected firstUpdated() {
     this.baseValues = this.serializeForm();
-    console.log('BASE VALUES:', this.baseValues);
   }
 
   private handleOnChange(_e: Event): void {
     if (this.dirty) {
       return;
     }
-    console.log('CHANGED', this.serializeForm());
     this.dirty = true;
     this.dispatchEvent(
       new CustomEvent('dirty', {
