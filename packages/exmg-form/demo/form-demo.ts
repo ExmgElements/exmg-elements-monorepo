@@ -13,7 +13,19 @@ import {ExmgForm} from '../exmg-form';
 export class FormDemo extends LitElement {
   render() {
     return html`
-      <exmg-test></exmg-test>
+      <h1>Serializing form : A Study Case.</h1>
+      <exmg-form @submit="${this.onSubmit}" @cancel="${this.onCancel}" @dirty=${this.displayFormDirty}>
+        <paper-input name="input1" label="text input" required></paper-input>
+        <paper-input name="input2" label="text input" value="pre-filled"></paper-input>
+        <p>Prefilled paper-input do not throw DIRTY event</p>
+        <exmg-markdown-editor name="markdown" required>
+          <marked-element markdown="# Hello Word!">
+            <div slot="markdown-html"></div>
+          </marked-element>
+        </exmg-markdown-editor>
+      </exmg-form>
+
+      <hr />
       <h1>Basic form</h1>
 
       <h2>Actions on form via javascript</h2>
@@ -82,9 +94,9 @@ export class FormDemo extends LitElement {
     console.log('cancel', event);
   }
 
-  displayFormDirty() {
-    const form = this.shadowRoot!.querySelector<ExmgForm>('#form1')!;
-    alert(`You changed a value, form is dirty: ${form.isDirty}`);
+  displayFormDirty(e: CustomEvent) {
+    const form = e.target as ExmgForm;
+    form.error(`You changed a value, form is dirty: ${form.isDirty}`);
   }
 
   submitForm1() {
