@@ -295,6 +295,15 @@ export class PaperTokenInputElement extends LitElement {
         composed: true,
       }),
     );
+    this.dispatchEvent(
+      new CustomEvent('change', {
+        detail: {
+          ...this.value,
+        },
+        bubbles: true,
+        composed: true,
+      }),
+    );
   }
 
   private emitItemDeselectEvent(value: SelectedValue, item: HTMLElement): void {
@@ -303,6 +312,15 @@ export class PaperTokenInputElement extends LitElement {
         detail: {
           value,
           item,
+        },
+        bubbles: true,
+        composed: true,
+      }),
+    );
+    this.dispatchEvent(
+      new CustomEvent('change', {
+        detail: {
+          ...this.value,
         },
         bubbles: true,
         composed: true,

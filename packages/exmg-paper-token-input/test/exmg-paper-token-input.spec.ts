@@ -1,5 +1,5 @@
 import {PaperTokenInputElement} from '../exmg-paper-token-input';
-import {promisifyFlush, onExmgTokenInputDeselected, onExmgTokenInputSelected} from './utils';
+import {promisifyFlush, onExmgTokenInputDeselected, onExmgTokenInputSelected, onExmgTokenInputChange} from './utils';
 
 declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
 declare const flush: (cb?: Function) => void;
@@ -143,6 +143,19 @@ suite('<exmg-paper-token-input>', function() {
         assert.instanceOf(item, HTMLElement, 'Selected item should be HTMLElement');
         assert.equal(item.innerText, expectedSelectedItemText, 'Should match item text');
         assert.equal(item.getAttribute('data-id'), '9512');
+      });
+    });
+
+    test('element should trigger event change when selecting and deselecting value', async () => {
+      await flushCompleted();
+      const inputElement = element.shadowRoot!.querySelector('input')!;
+      const keyCodes = ['Backspace', 'Esc'];
+      keyCodes.forEach(async (code: string) => {
+        const eventPromise = onExmgTokenInputChange(element);
+        inputElement.dispatchEvent(new KeyboardEvent('keydown', {code, bubbles: true, composed: true}));
+
+        const detail = await eventPromise;
+        assert.equal(detail, ['9512'], 'Should be triggered event with new selection');
       });
     });
   });
