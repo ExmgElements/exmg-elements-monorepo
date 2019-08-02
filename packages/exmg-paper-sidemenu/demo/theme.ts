@@ -52,6 +52,10 @@ export class XDemo extends LitElement {
       .main-content p {
         padding: 1rem 2rem;
       }
+
+      app-toolbar {
+        background: yellow;
+      }
     `,
   ];
 
@@ -147,6 +151,7 @@ export class XDemo extends LitElement {
           @selected-changed=${this._handleSelectedChanged}
           ?narrow=${this.narrow}
         >
+          <exmg-paper-sidemenu-header slot="header" ?collapsed=${this.collapsed}></exmg-paper-sidemenu-header>
           ${this.renderMenu()}
         </exmg-paper-sidemenu>
       </app-drawer>

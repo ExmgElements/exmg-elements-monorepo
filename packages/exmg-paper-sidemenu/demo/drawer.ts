@@ -149,6 +149,7 @@ export class XDemo extends LitElement {
           @selected-changed=${this._handleSelectedChanged}
           ?narrow=${this.narrow}
         >
+          <exmg-paper-sidemenu-header slot="header" ?collapsed=${this.collapsed}></exmg-paper-sidemenu-header>
           ${this.renderMenu()}
         </exmg-paper-sidemenu>
       </app-drawer>
