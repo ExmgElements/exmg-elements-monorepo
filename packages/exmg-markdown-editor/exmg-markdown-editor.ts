@@ -405,7 +405,7 @@ export class EditorElement extends LitElement {
   private observeMarkdownChanged(): void {
     if (this.codeMirrorEditor) {
       if (this.codeMirrorEditor.getValue() !== this.markdown) {
-        this.codeMirrorEditor.setValue(this.markdown!);
+        this.codeMirrorEditor.setValue(this.markdown || '');
       }
     }
 
@@ -504,9 +504,13 @@ export class EditorElement extends LitElement {
 
     /* Update markdown property with latest changes */
     codeMirrorEditor.on('change', (editor: Editor) => {
+      if (this.markdown === editor.getValue()) {
+        return;
+      }
       this.markdown = editor.getValue();
       this.dispatchMarkdownUpdatedDebounce(() => {
         this.dispatchEvent(new CustomEvent('value-change', {bubbles: true, composed: true, detail: editor.getValue()}));
+        this.dispatchEvent(new CustomEvent('change', {bubbles: true, composed: true, detail: editor.getValue()}));
       });
     });
 
