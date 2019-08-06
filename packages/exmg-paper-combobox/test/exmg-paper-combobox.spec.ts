@@ -1,5 +1,5 @@
 import {PaperComboboxElement} from '../exmg-paper-combobox';
-import {promisifyFlush, onExmgComboboxDeselected, onExmgComboboxSelected} from './utils';
+import {promisifyFlush, onExmgComboboxDeselected, onExmgComboboxSelected, onExmgComboboxChange} from './utils';
 
 declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
 declare const flush: (cb?: Function) => void;
@@ -93,6 +93,32 @@ suite('<exmg-paper-combobox>', function() {
       const {
         detail: {value, token, item},
       } = await onExmgComboboxSelected(element);
+      assert.equal(value, '1403', 'Should be triggered event with new selection');
+
+      const expectedSelectedItemText = 'Ronna';
+      assert.instanceOf(item, HTMLElement, 'Selected item should be HTMLElement');
+      assert.equal(item.innerText, expectedSelectedItemText, 'Should match item text');
+      assert.equal(item.getAttribute('data-id'), '1403');
+
+      assert.deepEqual(
+        token,
+        {id: '1403', text: expectedSelectedItemText},
+        'Selected item token match with key and value',
+      );
+    });
+
+    test('element should trigger event change', async () => {
+      const event = await onExmgComboboxChange(element);
+      assert.instanceOf(event, CustomEvent);
+      assert.equal(event.detail.value, '6007', 'Should be triggered event with initial value');
+
+      // select next item
+      setTimeout(() => {
+        element.selected = '1403';
+      });
+      const {
+        detail: {value, token, item},
+      } = await onExmgComboboxChange(element);
       assert.equal(value, '1403', 'Should be triggered event with new selection');
 
       const expectedSelectedItemText = 'Ronna';

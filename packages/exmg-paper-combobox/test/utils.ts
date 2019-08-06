@@ -12,3 +12,5 @@ const onEvent: (eventName: string) => (element: LitElement) => Promise<any> = (e
 export const onExmgComboboxSelected: (element: LitElement) => Promise<any> = onEvent('exmg-combobox-select');
 
 export const onExmgComboboxDeselected: (element: LitElement) => Promise<any> = onEvent('exmg-combobox-deselect');
+
+export const onExmgComboboxChange: (element: LitElement) => Promise<any> = onEvent('change');

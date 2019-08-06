@@ -561,8 +561,10 @@ export class PaperComboboxElement extends LitElement {
         };
 
         this.dispatchEvent(new CustomEvent('exmg-combobox-select', {detail: payload, composed: true, bubbles: true}));
+        this.dispatchEvent(new CustomEvent('change', {detail: payload, composed: true, bubbles: true}));
       } else {
         this.dispatchEvent(new CustomEvent('exmg-combobox-deselect', {composed: true, bubbles: true}));
+        this.dispatchEvent(new CustomEvent('change', {detail: {}, composed: true, bubbles: true}));
       }
     }
   }

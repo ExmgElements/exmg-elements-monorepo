@@ -38,10 +38,15 @@
         document.querySelector('#selected-value').removeAttribute('value');
       };
 
+      const handlerChange = function(e) {
+        console.log(e);
+      };
+
       window.addEventListener('load', () => {
         const combobox = document.querySelector('#combobox');
         combobox.addEventListener('exmg-combobox-select', handlerSelected);
         combobox.addEventListener('exmg-combobox-deselect', handlerDeselected);
+        combobox.addEventListener('change', handlerChange);
       });
     </script>
   </head>
@@ -206,14 +211,8 @@
       <h3>With static prefix</h3>
       <demo-snippet>
         <template>
-          <exmg-paper-combobox
-            label="Creatives"
-            selected="4309"
-            attr-for-selected="data-id"
-            input-prefix
-            required=""
-          >
-            <div style="display: inline;" slot="prefix">Mr. </div>
+          <exmg-paper-combobox label="Creatives" selected="4309" attr-for-selected="data-id" input-prefix required="">
+            <div style="display: inline;" slot="prefix">Mr.</div>
             <paper-icon-item data-id="1001">
               <iron-icon
                 src="https://s3.amazonaws.com/uifaces/faces/twitter/sebasribas/73.jpg"
