@@ -1,7 +1,6 @@
 import {LitElement, html, css, property, customElement} from 'lit-element';
 import {classMap} from 'lit-html/directives/class-map.js';
 import {sidemenuStyles} from '../index';
-import {style as themeStyles} from './theme-styles';
 import '../index';
 import '@material/mwc-drawer/mwc-drawer';
 import '@material/mwc-icon-button';
@@ -41,7 +40,6 @@ export class XDemo extends LitElement {
 
   static styles = [
     sidemenuStyles,
-    themeStyles,
     css`
       :host {
         display: inline-block;
@@ -49,12 +47,12 @@ export class XDemo extends LitElement {
         width: 100%;
       }
 
-      .main-content p {
-        padding: 1rem 2rem;
+      app-toolbar {
+        background: blue;
       }
 
-      app-toolbar {
-        background: yellow;
+      .main-content p {
+        padding: 1rem 2rem;
       }
     `,
   ];
@@ -79,9 +77,9 @@ export class XDemo extends LitElement {
       ${i.items.map(
         (subitem: MenuItem) =>
           html`
-            <a href="${this.debug ? '#' : subitem.path}" data-path="${subitem.path}" tabindex="-1" class="menu-item">
-              <paper-item data-path=${subitem.path} role="menuitem">
-                <svg height="24" viewBox="0 0 24 24" width="24"><path d="${subitem.iconPath}"></path></svg>
+            <a href=${this.debug ? '#' : subitem.path} data-path=${subitem.path} tabindex="-1" class="menu-item">
+              <paper-item data-path="${subitem.path}" role="menuitem">
+                <svg height="24" viewBox="0 0 24 24" width="24"><path d=${subitem.iconPath}></path></svg>
                 <span class="title">
                   ${subitem.title}
                 </span>

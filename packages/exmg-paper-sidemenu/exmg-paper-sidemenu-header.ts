@@ -1,9 +1,9 @@
-/* eslint-disable */
-import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
+import {LitElement, customElement, property, html} from '@material/mwc-base/form-element';
+import {style} from './styles/exmg-paper-sidemenu-header-styles';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-item/paper-item.js';
-import '@exmg/exmg-paper-tooltip/exmg-paper-tooltip.js';
+import '@polymer/paper-tooltip/paper-tooltip.js';
 
 const dashboardIcon = html`
   <svg height="24" viewBox="0 0 24 24" width="24">
@@ -24,12 +24,16 @@ const settingsIcon = html`
  * ### Menu data model
  * Menu items need to have the following structure:
  * ```html
- * <exmg-paper-sidemenu menu="[[menu]]" selected="[[selected]]" collapsed="{{collapsed}}">
- *   <exmg-paper-sidemenu-header
- *     slot="header"
- *     collapsed="[[collapsed]]">
- *   </exmg-paper-sidemenu-header>
- * </exmg-paper-sidemenu>
+ *  <exmg-paper-sidemenu
+ *    selected="rooms/"
+ *    ?collapsed=${this.collapsed}
+ *    @collapsed=${this._handleCollapsed}
+ *    @selected-changed=${this._handleSelectedChanged}
+ *    ?narrow=${this.narrow}
+ *     >
+ *    <exmg-paper-sidemenu-header slot="header" ?collapsed=${this.collapsed}></exmg-paper-sidemenu-header>
+ *      ${this.renderMenu()}
+ *  </exmg-paper-sidemenu>
  * ```
  *
  * Please note not to forget to bind the collpapsed attribute. Otherwise the header will
@@ -43,198 +47,57 @@ const settingsIcon = html`
  * Custom property | Description | Default
  * ----------------|-------------|----------
  * `--exmg-paper-sidemenu-group-text-color` | Item text color | `54% black`
- * `--exmg-paper-sidemenu-header-item` | Header item mixin | `{}`
  * `--exmg-paper-sidemenu-menu-header-background-color` | Header background color | `#F9FAF9`
- * `--exmg-paper-sidemenu-header-menu` | Menu header mixin | `{}`
  * `--exmg-paper-sidemenu-hover-background-color` | Item hiover background color | `--paper-grey-200`
  * `--exmg-paper-sidemenu-selected-text-color` | Selected item text color | `--primary-color`
  *
  * @customElement
  * @polymer
- *  @memberof Exmg
- * @group Exmg Paper Elements
  * @element exmg-paper-sidemenu-header
  */
-export class CmsSidemenuHeader extends PolymerElement {
-  debug!: boolean;
 
-  static get is(): string {
-    return 'exmg-paper-sidemenu-header';
-  }
-  static get properties() {
-    return {
-      /*
-       * Disables actual href links
-       */
-      debug: {
-        type: Boolean,
-        value: false,
-      },
-      /*
-       * For selection you can use the path value
-       */
-      selected: {
-        notify: true,
-        observer: '_observeSelected',
-        type: String,
-      },
-      /*
-       * Label for link to home/dashboard. Default is 'Dashboard'
-       */
-      homeLabel: {
-        type: String,
-        value: 'Dashboard',
-      },
-      /*
-       * Url to home/landings page
-       */
-      homeUrl: {
-        type: String,
-        value: '/',
-      },
-      /*
-       * Label for link to settings page. Default is 'Settings'
-       */
-      settingsLabel: {
-        type: String,
-        value: 'Settings',
-      },
-      /*
-       * Url to settings section
-       */
-      settingsUrl: {
-        type: String,
-        value: 'settings/',
-      },
+@customElement('exmg-paper-sidemenu-header')
+export class CmsSidemenuHeader extends LitElement {
+  /**
+   *  Fakes urls on debug true
+   */
+  @property({type: Boolean, reflect: true})
+  debug: boolean = false;
 
-      /*
-       * Property that determines the element display style collapsed of expanded
-       */
-      collapsed: {
-        type: Boolean,
-        reflectToAttribute: true,
-      },
-    };
-  }
-  static get template(): HTMLTemplateElement {
+  /**
+   *  Home/Hashboard label
+   */
+  @property({type: String, reflect: true})
+  homeLabel: string = 'Dashboard';
+
+  /**
+   *  Home/Dashboard url
+   */
+  @property({type: String, reflect: true})
+  homeUrl: string = '/';
+
+  /**
+   *  Settings url
+   */
+  @property({type: String, reflect: true})
+  settingsUrl: string = '/settings';
+
+  /**
+   *  Settings label
+   */
+  @property({type: String, reflect: true})
+  settingsLabel: string = 'Settings';
+
+  /**
+   *  Collapsed state
+   */
+  @property({type: Boolean, reflect: true})
+  collapsed: boolean = false;
+
+  static styles = [style];
+
+  render() {
     return html`
-      <style>
-        :host {
-          display: block;
-        }
-
-        paper-listbox {
-          padding: 0;
-        }
-
-        paper-item {
-          height: 56px;
-          box-sizing: border-box;
-          line-height: 56px;
-          padding: 0 20px;
-          font-size: 14px;
-          font-weight: 500;
-          color: var(--exmg-paper-sidemenu-group-text-color, rgba(0, 0, 0, var(--dark-secondary-opacity)));
-          cursor: pointer;
-          @apply --exmg-paper-sidemenu-header-item;
-        }
-
-        paper-item:last-child {
-          padding: 0 8px;
-        }
-
-        paper-item svg {
-          padding-right: 12px;
-          width: 24px;
-          max-width: 24px;
-          height: 20px;
-          fill: var(--exmg-paper-sidemenu-group-text-color, rgba(0, 0, 0, var(--dark-secondary-opacity)));
-        }
-
-        exmg-paper-tooltip {
-          display: none;
-          white-space: nowrap;
-        }
-
-        .menu-header {
-          @apply --layout;
-          @apply --layout-center;
-          box-sizing: border-box;
-          background: var(--exmg-paper-sidemenu-menu-header-background-color, #f9faf9);
-          min-height: 56px;
-          border-bottom: 1px solid var(--exmg-paper-sidemenu-menu-border-color, #ddd);
-          @apply --exmg-paper-sidemenu-header-menu;
-        }
-
-        .menu-header paper-listbox {
-          @apply --layout;
-          width: 100%;
-          border: none;
-          background: none;
-        }
-
-        .menu-header .menu-item:first-child {
-          border-right: 1px solid var(--exmg-paper-sidemenu-menu-border-color, #ddd);
-          @apply --layout-flex;
-          @apply --exmg-paper-sidemenu-header-dashboard;
-        }
-
-        .menu-header .menu-item:nth-child(2) svg {
-          padding-right: 0;
-        }
-
-        :host([collapsed]) .menu-header {
-          padding: 10px 0 8px;
-          @apply --layout-vertical;
-        }
-
-        :host([collapsed]) exmg-paper-tooltip {
-          display: block;
-        }
-
-        :host([collapsed]) .menu-header .menu-item:nth-child(1) svg {
-          padding-right: 0;
-        }
-
-        :host([collapsed]) .menu-header paper-listbox {
-          @apply --layout-vertical;
-          border-right: none;
-          border-bottom: none;
-          padding: 5px 0;
-        }
-
-        :host([collapsed]) paper-item {
-          min-height: 36px;
-          line-height: 36px;
-          height: initial;
-          border-right: none;
-        }
-
-        :host([collapsed]) paper-item .title {
-          opacity: 0;
-          width: 0;
-          pointer-events: none;
-        }
-
-        a:hover paper-item {
-          background: var(--exmg-paper-sidemenu-hover-background-color, var(--paper-grey-200));
-        }
-
-        a[aria-selected='true'] paper-item svg {
-          fill: var(--exmg-paper-sidemenu-selected-text-color, var(--primary-color));
-        }
-
-        a[aria-selected='true'] paper-item {
-          color: var(--exmg-paper-sidemenu-selected-text-color, var(--primary-color));
-        }
-
-        .menu-item {
-          display: block;
-          text-decoration: none;
-          outline: none;
-        }
-      </style>
-
       <paper-listbox
         class="menu-header"
         slot="header"
@@ -242,22 +105,23 @@ export class CmsSidemenuHeader extends PolymerElement {
         selected="{{selected}}"
         selectable="a"
       >
-        <a href="[[_getHref(homeUrl)]]" data-path="[[homeUrl]]" tabindex="-1" class="menu-item">
+        <a href=${this.debug ? '#' : this.homeUrl} data-path="[[homeUrl]]" tabindex="-1" class="menu-item">
           <paper-item role="menuitem">
             ${dashboardIcon}
-            <span class="title">[[homeLabel]]</span>
+            <span class="title">${this.homeLabel}</span>
           </paper-item>
-          <exmg-paper-tooltip position="right">[[homeLabel]]- [[collapsed]]</exmg-paper-tooltip>
+          <paper-tooltip position="right">${this.homeLabel}</paper-tooltip>
         </a>
-        <a href="[[_getHref(settingsUrl)]]" data-path="[[settingsUrl]]" tabindex="-1" class="menu-item">
-          <paper-item role="menuitem" aria-label$="[[settingsLabel]]">
+        <a href=${this.debug ? '#' : this.settingsUrl} tabindex="-1" class="menu-item">
+          <paper-item role="menuitem" aria-label=${this.settingsLabel}>
             ${settingsIcon}
           </paper-item>
-          <exmg-paper-tooltip position="right">[[settingsLabel]]</exmg-paper-tooltip>
+          <paper-tooltip position="right">${this.settingsLabel}</paper-tooltip>
         </a>
       </paper-listbox>
     `;
   }
+
   /*
    * Disable links in debug mode
    */
@@ -269,5 +133,3 @@ export class CmsSidemenuHeader extends PolymerElement {
     this.dispatchEvent(new CustomEvent('selected-change', {bubbles: false, composed: true, detail: selected}));
   }
 }
-
-window.customElements.define(CmsSidemenuHeader.is, CmsSidemenuHeader);
