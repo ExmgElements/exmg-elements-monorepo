@@ -148,7 +148,9 @@ export class EditorElement extends LitElement {
     'undo',
     'redo',
     '|',
-    'header',
+    'header_one',
+    'header_two',
+    'header_three',
     'strong',
     'italic',
     'strikethrough',
@@ -198,11 +200,25 @@ export class EditorElement extends LitElement {
       title: 'Redo',
     },
     {
-      name: 'header',
+      name: 'header_one',
       icon: 'exmg-markdown-editor-icons:text-fields',
-      action: this.toggleHeader,
+      action: this.toggleHeaderOne,
       className: 'btn-header',
-      title: 'Header',
+      title: 'Header 1',
+    },
+    {
+      name: 'header_two',
+      icon: 'exmg-markdown-editor-icons:text-fields',
+      action: this.toggleHeaderTwo,
+      className: 'btn-header',
+      title: 'Header 2',
+    },
+    {
+      name: 'header_three',
+      icon: 'exmg-markdown-editor-icons:text-fields',
+      action: this.toggleHeaderThree,
+      className: 'btn-header',
+      title: 'Header 3',
     },
     {
       name: 'strong',
@@ -758,7 +774,23 @@ export class EditorElement extends LitElement {
     this.processLine('ordered-list');
   }
 
-  private toggleHeader(event?: Event): void {
+  private toggleHeaderOne(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
+
+    this.processLine('header', '#');
+  }
+
+  private toggleHeaderTwo(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
+
+    this.processLine('header', '#');
+  }
+
+  private toggleHeaderThree(event?: Event): void {
     if (event) {
       event.preventDefault();
     }
