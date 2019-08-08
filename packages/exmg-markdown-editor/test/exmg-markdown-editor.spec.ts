@@ -18,7 +18,7 @@ suite('<exmg-markdown-editor>', function() {
     test('check if default toolbar is rendered correctly', async function() {
       await flushCompleted();
       const elements = element.shadowRoot!.querySelectorAll('#toolbar a');
-      assert.equal(elements.length, 14, 'By default should be 14 items in tool bar');
+      assert.equal(elements.length, 18, 'By default should be 18 items in tool bar');
     });
 
     test('check attribute split-view is reflected', async function() {
@@ -68,11 +68,6 @@ suite('<exmg-markdown-editor>', function() {
     });
 
     test('event value-change should be triggered', async function() {
-      const firstEvent = await onValueChange(element);
-      await flushCompleted();
-      assert.instanceOf(firstEvent, CustomEvent);
-      assert.include(firstEvent.detail, 'Lorem **ipsum**', 'Should be triggered initial event with markdown value');
-
       element.markdown = '__TEST__';
       const secondEvent = await onValueChange(element);
       assert.instanceOf(secondEvent, CustomEvent);

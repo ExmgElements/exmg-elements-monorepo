@@ -9,7 +9,7 @@ import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
 
 import './exmg-markdown-editor-icons';
 import {style as codeMirrorStylesText} from './styles/exmg-markdown-codemirror-styles';
-import {GenericPropertyValues, ToolBarOption, ToolBarConfigItem, isToolBartConfigItem} from './exmg-custom-types';
+import {GenericPropertyValues, ToolBarOption, ToolBarConfigItem, isToolBarConfigItem} from './exmg-custom-types';
 
 import Editor = CodeMirror.Editor;
 
@@ -137,6 +137,9 @@ export class EditorElement extends LitElement {
   @property({type: String})
   markdown?: string;
 
+  @property({type: Boolean, attribute: 'show-helper-label'})
+  showHelperLabel: boolean = false;
+
   @property({type: Boolean, reflect: true, attribute: 'split-view'})
   splitView: boolean = true;
 
@@ -148,10 +151,15 @@ export class EditorElement extends LitElement {
     'undo',
     'redo',
     '|',
-    'header',
+    'header_one',
+    'header_two',
+    'header_three',
     'strong',
     'italic',
     'strikethrough',
+    '|',
+    'link',
+    'image',
     '|',
     'quote',
     'hr',
@@ -198,11 +206,25 @@ export class EditorElement extends LitElement {
       title: 'Redo',
     },
     {
-      name: 'header',
-      icon: 'exmg-markdown-editor-icons:text-fields',
-      action: this.toggleHeader,
+      name: 'header_one',
+      icon: 'exmg-markdown-editor-icons:header-one',
+      action: this.toggleHeaderOne,
       className: 'btn-header',
-      title: 'Header',
+      title: 'Header 1',
+    },
+    {
+      name: 'header_two',
+      icon: 'exmg-markdown-editor-icons:header-two',
+      action: this.toggleHeaderTwo,
+      className: 'btn-header',
+      title: 'Header 2',
+    },
+    {
+      name: 'header_three',
+      icon: 'exmg-markdown-editor-icons:header-three',
+      action: this.toggleHeaderThree,
+      className: 'btn-header',
+      title: 'Header 3',
     },
     {
       name: 'strong',
@@ -252,6 +274,20 @@ export class EditorElement extends LitElement {
       action: this.insertTable,
       className: 'btn-table',
       title: 'Table',
+    },
+    {
+      name: 'link',
+      icon: 'exmg-markdown-editor-icons:link',
+      action: this.insertLink,
+      className: 'btn-link',
+      title: 'Link',
+    },
+    {
+      name: 'image',
+      icon: 'exmg-markdown-editor-icons:image',
+      action: this.insertImage,
+      className: 'btn-image',
+      title: 'Image',
     },
     {
       name: 'unordered-list',
@@ -758,12 +794,44 @@ export class EditorElement extends LitElement {
     this.processLine('ordered-list');
   }
 
-  private toggleHeader(event?: Event): void {
+  private toggleHeaderOne(event?: Event): void {
     if (event) {
       event.preventDefault();
     }
 
     this.processLine('header', '#');
+  }
+
+  private toggleHeaderTwo(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
+
+    this.processLine('header', '##');
+  }
+
+  private toggleHeaderThree(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
+
+    this.processLine('header', '###');
+  }
+
+  private insertLink(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
+
+    this.insertAtCursor(insertBlocks.link, 2, 8);
+  }
+
+  private insertImage(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
+
+    this.insertAtCursor(insertBlocks.image, 2, 8);
   }
 
   private insertTable(event?: Event): void {
@@ -993,14 +1061,26 @@ export class EditorElement extends LitElement {
           margin: 0 8px;
           border-left: 1px solid var(--exmg-markdown-editor-toolbar-seperator-color, #ddd);
         }
+        .label {
+          color: var(--exmg-markdown-editor-label-color, #ddd);
+          position: absolute;
+          letter-spacing: 2px;
+          font-size: 12px;
+          font-weight: 500;
+          padding: 10px 0 0 12px;
+          z-index: 10;
+        }
+        .preview {
+          left: calc(50% - 12px);
+        }
       </style>
 
       <div id="toolbar" class="toolbar">
         ${repeat<ToolBarConfigItem | Record<string, any>>(
           this.getToolbar(this.toolbarButtons),
-          (it, index: number) => (isToolBartConfigItem(it) ? it.name : `empty_${index}`),
+          (it, index: number) => (isToolBarConfigItem(it) ? it.name : `empty_${index}`),
           it => {
-            if (isToolBartConfigItem(it)) {
+            if (isToolBarConfigItem(it)) {
               return html`
                 <a href="#" title="${it.name}" class="${it.className}" @click="${it.action}">
                   <iron-icon icon="${it.icon}"></iron-icon>
@@ -1014,8 +1094,19 @@ export class EditorElement extends LitElement {
         )}
       </div>
       <div class="container">
-        <div id="editor"></div>
-        <slot></slot>
+        <div id="editor">
+          ${this.showHelperLabel
+            ? html`
+                <div class="label editor">EDITOR</div>
+              `
+            : html``}
+          ${this.showHelperLabel && this.splitView
+            ? html`
+                <div class="label preview">PREVIEW</div>
+              `
+            : html``}
+        </div>
+        <slot> </slot>
       </div>
     `;
   }

@@ -26,7 +26,7 @@ export const style = css`
     direction: ltr;
   }
   .CodeMirror-lines {
-    padding: 4px 0;
+    padding: 14px 0;
   }
   .CodeMirror pre {
     padding: 0 4px;
