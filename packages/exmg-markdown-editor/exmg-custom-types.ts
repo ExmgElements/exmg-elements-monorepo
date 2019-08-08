@@ -18,6 +18,8 @@ export type ToolBarOption =
   | 'code'
   | 'unordered-list'
   | 'ordered-list'
+  | 'link'
+  | 'image'
   | 'fullscreen'
   | 'split-view';
 
@@ -29,5 +31,5 @@ export interface ToolBarConfigItem extends Object {
   title: string;
 }
 
-export const isToolBartConfigItem = (item: Record<string, any>): item is ToolBarConfigItem =>
+export const isToolBarConfigItem = (item: Record<string, any>): item is ToolBarConfigItem =>
   item.hasOwnProperty('name');
