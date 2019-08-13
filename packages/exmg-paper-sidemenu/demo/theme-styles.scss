@@ -20,6 +20,7 @@ $mdc-theme-on-surface: #03182a;
   --app-drawer-collapsed-width: 4rem;
   --app-drawer-background-color: #162b41;
   --app-drawer-background-hover-color: #20354b;
+  --app-drawer-scrim-background: rgba(0, 0, 0, 0.6);
 
   /* Side menu */
   --exmg-paper-sidemenu-background: var(--app-drawer-background-color);
@@ -37,7 +38,4 @@ $mdc-theme-on-surface: #03182a;
   --exmg-paper-sidemenu-hover-background-color: var(--app-drawer-background-hover-color);
   --exmg-paper-sidemenu-selected-text-color: var(--mdc-theme-primary);
 
-  app-drawer {
-    background: var(--exmg-paper-sidemenu-background);
-  }
 }
