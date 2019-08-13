@@ -1,4 +1,4 @@
-import {LitElement, customElement, property, html} from '@material/mwc-base/form-element';
+import {LitElement, customElement, property, html, observer} from '@material/mwc-base/form-element';
 import {style} from './styles/exmg-paper-sidemenu-header-styles';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@polymer/paper-listbox/paper-listbox.js';
@@ -65,12 +65,6 @@ export class CmsSidemenuHeader extends LitElement {
   debug: boolean = false;
 
   /**
-   *  Home/Hashboard label
-   */
-  @property({type: String, reflect: true})
-  homeLabel: string = 'Dashboard';
-
-  /**
    *  Home/Dashboard url
    */
   @property({type: String, reflect: true})
@@ -94,6 +88,22 @@ export class CmsSidemenuHeader extends LitElement {
   @property({type: Boolean, reflect: true})
   collapsed: boolean = false;
 
+  /**
+   *  Home/Hashboard label
+   */
+  @property({type: String, reflect: true})
+  homeLabel: string = 'Dashboard';
+
+    /**
+   * Contains the path of the selected menu item
+   */
+  @property({type: String})
+  @observer(function(this: LitElement, selected: string) {
+    this.dispatchEvent(new CustomEvent('selected-changed', {bubbles: false, composed: true, detail: selected}));
+  })
+  selected!: string;
+
+
   static styles = [style];
 
   render() {
@@ -102,7 +112,7 @@ export class CmsSidemenuHeader extends LitElement {
         class="menu-header"
         slot="header"
         attr-for-selected="data-path"
-        selected="{{selected}}"
+        selected="${this.selected}"
         selectable="a"
       >
         <a href=${this.debug ? '#' : this.homeUrl} data-path="[[homeUrl]]" tabindex="-1" class="menu-item">
