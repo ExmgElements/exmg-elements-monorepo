@@ -35,8 +35,8 @@ const convertShortcut = (name: string): string => {
 };
 const insertBlocks = {
   hr: '---',
-  link: '[](#url#)',
-  image: '![](#url#)',
+  link: (text?: string) => `[${text !== '' ? text : 'Link description'}](https://www.exmachinagroup.com/)`,
+  image: '![ExMachina](https://pbs.twimg.com/profile_images/748525267153477632/5BistsD7_400x400.jpg)',
   table: '| Column 1 | Column 2 |\n| -------- | -------- |\n| Text     | Text     |',
 };
 
@@ -708,6 +708,12 @@ export class EditorElement extends LitElement {
     return cursorStart.line === cursorEnd.line && cursorEnd.ch - cursorStart.ch !== lineLength;
   }
 
+  private getSelectedText(): string {
+    const codeMirror = this.codeMirrorEditor;
+    const doc = codeMirror!.getDoc()!;
+    return doc.getSelection();
+  }
+
   private getStates(position?: Position): string[] {
     const codeMirror = this.codeMirrorEditor!;
     const pos: Position = position || {...codeMirror.getDoc().getCursor('start')};
@@ -825,8 +831,8 @@ export class EditorElement extends LitElement {
     if (event) {
       event.preventDefault();
     }
-
-    this.insertAtCursor(insertBlocks.link, 2, 8);
+    const selection = this.getSelectedText();
+    this.insertAtCursor(insertBlocks.link(selection), 2, 8);
   }
 
   private insertImage(event?: Event): void {
@@ -935,7 +941,6 @@ export class EditorElement extends LitElement {
 
   protected render() {
     // noinspection CssUnresolvedCustomPropertySet
-    console.log(`height: ${this.height && !this.fullscreen ? `${this.height}px` : 'inherit'};`);
     return html`
       <!--suppress CssUnresolvedCustomProperty -->
       <style>
