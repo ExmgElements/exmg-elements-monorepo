@@ -128,6 +128,9 @@ export class EditorElement extends LitElement {
   @property({type: Boolean, attribute: 'auto-focus'})
   autoFocus: boolean = false;
 
+  @property({type: Number, attribute: 'height'})
+  height?: number = undefined;
+
   @property({type: Boolean, attribute: 'line-numbers'})
   lineNumbers: boolean = false;
 
@@ -932,6 +935,7 @@ export class EditorElement extends LitElement {
 
   protected render() {
     // noinspection CssUnresolvedCustomPropertySet
+    console.log(`height: ${this.height && !this.fullscreen ? `${this.height}px` : 'inherit'};`);
     return html`
       <!--suppress CssUnresolvedCustomProperty -->
       <style>
@@ -950,22 +954,24 @@ export class EditorElement extends LitElement {
           border: 1px solid red;
         }
         #editor {
-          overflow: auto;
+          overflow: hidden;
         }
         ::slotted(*) {
           display: none;
           overflow: auto;
         }
+        ::slotted(marked-element) {
+          margin-top: 30px;
+        }
         :host([split-view]) ::slotted(*) {
           display: block;
           background: var(--exmg-markdown-editor-preview-background, white);
-          border-left: 1px solid var(--exmg-markdown-editor-border, #ddd);
           padding: 16px;
           @apply --exmg-markdown-editor-preview;
         }
         .container {
           box-sizing: border-box;
-          background: var(--exmg-markdown-editor-background-color, white);
+          background: var(--exmg-markdown-editor-background-color, #f1f1f1);
           @apply --layout-horizontal;
         }
         /* No importants! */
@@ -996,6 +1002,7 @@ export class EditorElement extends LitElement {
         }
         .CodeMirror-scroll {
           min-height: 300px;
+          margin-top: ${this.showHelperLabel ? '15px' : '0'};
         }
         .CodeMirror:not(.CodeMirror-focused):hover {
           background: var(--exmg-markdown-editor-code-hover, white);
@@ -1044,7 +1051,7 @@ export class EditorElement extends LitElement {
           cursor: pointer;
           @apply --exmg-markdown-editor-toolbar-button;
         }
-        .toolbar a iron-iconŪ {
+        .toolbar a iron-icon {
           margin: 4px;
           width: 22px;
           height: 22px;
@@ -1093,7 +1100,7 @@ export class EditorElement extends LitElement {
           },
         )}
       </div>
-      <div class="container">
+      <div class="container" style="height: ${this.height && !this.fullscreen ? `${this.height}px` : 'inherit'};">
         <div id="editor">
           ${this.showHelperLabel
             ? html`
