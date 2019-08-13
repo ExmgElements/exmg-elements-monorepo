@@ -94,7 +94,7 @@ export class CmsSidemenuHeader extends LitElement {
   @property({type: String, reflect: true})
   homeLabel: string = 'Dashboard';
 
-    /**
+  /**
    * Contains the path of the selected menu item
    */
   @property({type: String})
@@ -102,7 +102,6 @@ export class CmsSidemenuHeader extends LitElement {
     this.dispatchEvent(new CustomEvent('selected-changed', {bubbles: false, composed: true, detail: selected}));
   })
   selected!: string;
-
 
   static styles = [style];
 
