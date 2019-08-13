@@ -77,7 +77,7 @@ export class ExmgPaperSidemenu extends LitElement {
         <!-- Menu Items -->
         <paper-listbox
           attr-for-selected="data-path"
-          selected="{{selected}}"
+          selected="${this.selected}"
           selectable="a"
           @selected-changed=${this._handleSelectionChange}
         >
