@@ -1,9 +1,16 @@
 import {customElement, html, LitElement, property, query} from 'lit-element';
 import '@polymer/paper-dialog';
+import {PaperDialogElement} from '@polymer/paper-dialog';
 import '@polymer/paper-dialog-scrollable';
 import '@exmg/exmg-button';
 import '@polymer/iron-form';
+import {IronFormElement} from '@polymer/iron-form';
 import {style} from './styles/exmg-dialog-styles';
+import {ExmgButton} from '@exmg/exmg-button';
+
+interface ExmgCustomEvent extends CustomEvent {
+  path: HTMLElement[];
+}
 
 @customElement('exmg-dialog-form')
 export class ExmgFormDialog extends LitElement {
@@ -39,13 +46,13 @@ export class ExmgFormDialog extends LitElement {
   private errorMessage?: string;
 
   @query('#dialog')
-  private dialogNode?: HTMLElement | any;
+  private dialogNode?: PaperDialogElement;
 
   @query('#form')
-  private formNode?: HTMLElement | any;
+  private formNode?: IronFormElement;
 
   @query('#submitBtn')
-  private submitBtnNode?: HTMLElement | any;
+  private submitBtnNode?: ExmgButton;
 
   static styles = [style];
 
@@ -55,7 +62,7 @@ export class ExmgFormDialog extends LitElement {
     this.submit = this.submit.bind(this);
   }
 
-  private onCloseDialog(e: any) {
+  private onCloseDialog(e: ExmgCustomEvent) {
     /* only reset form if close event originates from dialog */
     if (e.path[0].tagName === 'PAPER-DIALOG') {
       this.reset();
@@ -117,7 +124,7 @@ export class ExmgFormDialog extends LitElement {
     this.errorMessage = undefined;
 
     // Validate form elements
-    if (!this.formNode.validate()) {
+    if (!this.formNode!.validate()) {
       return;
     }
 
@@ -130,7 +137,7 @@ export class ExmgFormDialog extends LitElement {
 
     // dispatch event containing the serialized form data
     this.dispatchEvent(
-      new CustomEvent('submit', {bubbles: false, composed: true, detail: this.formNode.serializeForm()}),
+      new CustomEvent('submit', {bubbles: false, composed: true, detail: this.formNode!.serializeForm()}),
     );
   }
 
@@ -164,7 +171,7 @@ export class ExmgFormDialog extends LitElement {
         </paper-dialog-scrollable>
         <div class="actions">
           <exmg-button dialog-dismiss @click=${this.cancel}>Cancel</exmg-button>
-          <exmg-button id="submitBtn" @click=${this.submit} ?loading="${this.submitting}" unelevated
+          <exmg-button id="submitBtn" @click=${this.submit} ?loading="${this.submitting}"
             >${this.buttonCopy}</exmg-button
           >
         </div>
