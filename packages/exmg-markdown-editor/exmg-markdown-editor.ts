@@ -602,7 +602,6 @@ export class EditorElement extends LitElement {
     const result = mappings.find(m => {
       return m.key === type;
     });
-    console.log('hasTypes results :', result);
     return result ? states.includes(result.value) : false;
   }
 
@@ -622,26 +621,19 @@ export class EditorElement extends LitElement {
     const multiLineSelection = cursorStart.line !== cursorEnd.line;
     const selectionText = codeMirror.getDoc().getSelection();
     const emptySelection = selectionText === '';
-
     if (this.hasType(states, type)) {
-      const line = codeMirror.getDoc().getLine(cursorStart.line);
-      let start = line.slice(0, cursorStart.ch);
-      let end = line.slice(cursorEnd.ch);
-      switch (type) {
-        case 'code':
-        case 'inline-code':
-        case 'strong':
-        case 'em':
-        case 'strikethrough':
-          start = start.endsWith(blockStyles[type])
-            ? start.substring(0, start.length - blockStyles[type].length)
-            : start;
-          end = end.startsWith(blockStyles[type]) ? end.substring(blockStyles[type].length) : end;
-          break;
-      }
-      this.replaceRangeLine(start + selectionText + end, cursorStart.line);
-      cursorStart.ch -= blockStyles[type].length;
-      cursorEnd.ch -= blockStyles[type].length;
+      let start = {
+        ...cursorStart,
+        ch: cursorStart.ch - blockStyles[type].length,
+      };
+      let end = {
+        ...cursorEnd,
+        ch: cursorEnd.ch + blockStyles[type].length,
+      };
+      codeMirror.getDoc().setSelection(start, end);
+      //this.replaceRangeLine(start + selectionText + end, cursorStart.line);
+      codeMirror.getDoc().replaceSelection(selectionText);
+      cursorStart.ch = start.ch;
     } else {
       const text =
         blockStyles[type] +
@@ -656,7 +648,7 @@ export class EditorElement extends LitElement {
       } else {
         cursorStart.ch += blockStyles[type].length;
         if (!multiLineSelection) {
-          cursorEnd.ch += blockStyles[type].length;
+          cursorEnd.ch += emptySelection ? `${type} text`.length + blockStyles[type].length : blockStyles[type].length;
         }
       }
     }
@@ -720,12 +712,12 @@ export class EditorElement extends LitElement {
   private getStates(position?: Position): string[] {
     const codeMirror = this.codeMirrorEditor!;
     const pos: Position = position || {...codeMirror.getDoc().getCursor('start')};
-
     if (pos.sticky === 'after') {
       pos.ch = +1;
     }
 
     const cursor = codeMirror.getTokenAt(pos);
+    cursor.string === '~' ? (cursor.type = 'strikethrough') : '';
     if (!cursor.type) {
       return [];
     }
