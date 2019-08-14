@@ -36,7 +36,10 @@ const convertShortcut = (name: string): string => {
 const insertBlocks = {
   hr: '---',
   link: (text?: string) => `[${text !== '' ? text : 'Link description'}](https://www.exmachinagroup.com/)`,
-  image: '![ExMachina](https://pbs.twimg.com/profile_images/748525267153477632/5BistsD7_400x400.jpg)',
+  image: (text?: string) =>
+    `![${
+      text !== '' ? text : 'ExMachina'
+    }](https://pbs.twimg.com/profile_images/748525267153477632/5BistsD7_400x400.jpg)`,
   table: '| Column 1 | Column 2 |\n| -------- | -------- |\n| Text     | Text     |',
 };
 
@@ -839,8 +842,8 @@ export class EditorElement extends LitElement {
     if (event) {
       event.preventDefault();
     }
-
-    this.insertAtCursor(insertBlocks.image, 2, 8);
+    const selection = this.getSelectedText();
+    this.insertAtCursor(insertBlocks.image(selection), 2, 8);
   }
 
   private insertTable(event?: Event): void {
