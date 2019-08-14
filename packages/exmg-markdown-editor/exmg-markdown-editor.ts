@@ -602,7 +602,7 @@ export class EditorElement extends LitElement {
     const result = mappings.find(m => {
       return m.key === type;
     });
-
+    console.log('hasTypes results :', result);
     return result ? states.includes(result.value) : false;
   }
 
@@ -613,7 +613,7 @@ export class EditorElement extends LitElement {
       strong: '**',
       'inline-code': '`',
       code: '```',
-      italic: '*',
+      em: '*',
       strikethrough: '~~',
     };
 
@@ -631,7 +631,7 @@ export class EditorElement extends LitElement {
         case 'code':
         case 'inline-code':
         case 'strong':
-        case 'italic':
+        case 'em':
         case 'strikethrough':
           start = start.endsWith(blockStyles[type])
             ? start.substring(0, start.length - blockStyles[type].length)
@@ -780,7 +780,7 @@ export class EditorElement extends LitElement {
       event.preventDefault();
     }
 
-    this.processBlock('italic');
+    this.processBlock('em');
   }
 
   private toggleBlockquote(event?: Event): void {
