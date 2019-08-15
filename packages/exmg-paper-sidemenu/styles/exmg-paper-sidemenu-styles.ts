@@ -440,7 +440,6 @@ export const style = css`
     margin-left: 0;
   }
   app-drawer {
-    background: #fff;
     z-index: 10;
     --app-drawer-width: 256px;
   }

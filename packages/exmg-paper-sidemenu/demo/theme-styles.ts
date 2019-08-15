@@ -28,6 +28,7 @@ export const style = css`
     --app-drawer-collapsed-width: 4rem;
     --app-drawer-background-color: #162b41;
     --app-drawer-background-hover-color: #20354b;
+    --app-drawer-scrim-background: rgba(0, 0, 0, 0.6);
     --exmg-paper-sidemenu-background: var(--app-drawer-background-color);
     --exmg-paper-sidemenu-group-text-color: rgba(255, 255, 255, 0.7);
     --exmg-paper-sidemenu-group-title: rgba(255, 255, 255, 0.7);
@@ -42,9 +43,6 @@ export const style = css`
     --exmg-paper-sidemenu-menu-header-background-color: var(--app-drawer-background-color);
     --exmg-paper-sidemenu-hover-background-color: var(--app-drawer-background-hover-color);
     --exmg-paper-sidemenu-selected-text-color: var(--mdc-theme-primary);
-  }
-  :host app-drawer {
-    background: var(--exmg-paper-sidemenu-background);
   }
 `;
 export default style;
