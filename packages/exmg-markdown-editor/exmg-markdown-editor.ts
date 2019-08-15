@@ -94,23 +94,16 @@ const ENTER_KEY_CODE = 13;
  *
  *  Custom property | Description | Default
  *  ----------------|-------------|----------
- *  `--exmg-markdown-editor` | editor mixin | `{}`
  *  `--exmg-markdown-editor-border` | Border Color | `#ddd`
  *  `--exmg-markdown-editor-background-color` | Editor Background Color | `white`
  *  `--exmg-markdown-editor-fullscreen-top-offset` | Top offset in fullscreen mode | `0px`
- *  `--exmg-markdown-editor-toolbar` | editor mixin | `{}`
  *  `--exmg-markdown-editor-toolbar-background` | Toolbar background color | `#fafafa`
  *  `--exmg-markdown-editor-toolbar-color` | Toolbar text color | `87% black`
  *  `--exmg-markdown-editor-toolbar-color-disabled` | Toolbar text color disabled | `54% black`
- *  `--exmg-markdown-editor-preview` | HTML Preview mixin | `{}`
  *  `--exmg-markdown-editor-preview-background` | Preview background color | `white`
- *  `--exmg-markdown-editor-toolbar-button-icon` | Toolbar button icon mixin | `{}`
- *  `--exmg-markdown-editor-toolbar-button-hover` | Toolbar button mixin | `{}`
  *  `--exmg-markdown-editor-toolbar-button-background-hover` | Toolbar icon border color | `#fafafa`
  *  `--exmg-markdown-editor-toolbar-seperator-color` | Toolbar seperator color | `#ddd`
- *  `--exmg-markdown-editor-code` | CodeMirror root mixin | `{}`
  *  `--exmg-markdown-editor-code-hover` | Editor code part hover background color | `white`
- *  `--exmg-markdown-editor-code-focused` | CodeMirror editor focused mixin | `{}`
  *
  *  # Events:
  *  - value-change - where detail is current markdown value
@@ -948,7 +941,6 @@ export class EditorElement extends LitElement {
           font-size: 14px;
           font-weight: 400;
           line-height: 20px;
-          @apply --exmg-markdown-editor;
         }
         :host([invalid]) {
           border: 1px solid red;
@@ -967,12 +959,16 @@ export class EditorElement extends LitElement {
           display: block;
           background: var(--exmg-markdown-editor-preview-background, white);
           padding: 16px;
-          @apply --exmg-markdown-editor-preview;
         }
         .container {
           box-sizing: border-box;
           background: var(--exmg-markdown-editor-background-color, #f1f1f1);
-          @apply --layout-horizontal;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          -ms-flex-direction: row;
+          -webkit-flex-direction: row;
+          flex-direction: row;
         }
         /* No importants! */
         :host([fullscreen]) .container {
@@ -985,7 +981,11 @@ export class EditorElement extends LitElement {
         }
         :host([split-view]) ::slotted(*),
         .container > * {
-          @apply --layout-flex;
+          -ms-flex: 1 1 0.000000001px;
+          -webkit-flex: 1;
+          flex: 1;
+          -webkit-flex-basis: 0.000000001px;
+          flex-basis: 0.000000001px;
         }
         :host([line-numbers]) .container #editor {
           padding: 0;
@@ -998,7 +998,6 @@ export class EditorElement extends LitElement {
           z-index: 1;
           padding: 16px;
           background: var(--exmg-markdown-editor-code-background, #f4f5f7);
-          @apply --exmg-markdown-editor-code;
         }
         .CodeMirror-scroll {
           min-height: 300px;
@@ -1013,7 +1012,6 @@ export class EditorElement extends LitElement {
           box-shadow: inset 0 0 0 2px -webkit-focus-ring-color;
           overflow: hidden;
           background: white;
-          @apply --exmg-markdown-editor-code-focused;
         }
         .toolbar {
           position: relative;
@@ -1025,7 +1023,6 @@ export class EditorElement extends LitElement {
           -ms-user-select: none;
           -o-user-select: none;
           user-select: none;
-          @apply --exmg-markdown-editor-toolbar;
         }
         :host([fullscreen]) .toolbar {
           width: 100%;
@@ -1049,20 +1046,17 @@ export class EditorElement extends LitElement {
           color: var(--exmg-markdown-editor-toolbar-color, rgba(0, 0, 0, 0.87));
           border: 1px solid transparent;
           cursor: pointer;
-          @apply --exmg-markdown-editor-toolbar-button;
         }
         .toolbar a iron-icon {
           margin: 4px;
           width: 22px;
           height: 22px;
-          @apply --exmg-markdown-editor-toolbar-button-icon;
         }
         .toolbar a[disabled] {
           color: var(--exmg-markdown-editor-toolbar-color-disabled, rgba(0, 0, 0, 0.54));
         }
         .toolbar a:hover {
           background: var(--exmg-markdown-editor-toolbar-button-background-hover, #fafafa);
-          @apply --exmg-markdown-editor-toolbar-button-hover;
         }
         .toolbar .seperator {
           margin: 0 8px;
