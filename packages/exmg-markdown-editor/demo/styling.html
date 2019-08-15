@@ -50,6 +50,9 @@
         marked-element {
           background-color: #f1f1f1;
         }
+        .container {
+          height: 300px;
+        }
       </style>
     </custom-style>
   </head>
@@ -57,7 +60,7 @@
     <div class="vertical-section-container centered">
       <demo-snippet>
         <template>
-          <exmg-markdown-editor split-view="" show-helper-label>
+          <exmg-markdown-editor height="400" split-view show-helper-label>
             <marked-element>
               <div slot="markdown-html" class="markdown-body"></div>
               <script type="text/markdown">

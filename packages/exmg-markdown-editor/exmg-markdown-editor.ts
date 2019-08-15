@@ -35,8 +35,11 @@ const convertShortcut = (name: string): string => {
 };
 const insertBlocks = {
   hr: '---',
-  link: '[](#url#)',
-  image: '![](#url#)',
+  link: (text?: string) => `[${text !== '' ? text : 'Link description'}](https://www.exmachinagroup.com/)`,
+  image: (text?: string) =>
+    `![${
+      text !== '' ? text : 'ExMachina'
+    }](https://pbs.twimg.com/profile_images/748525267153477632/5BistsD7_400x400.jpg)`,
   table: '| Column 1 | Column 2 |\n| -------- | -------- |\n| Text     | Text     |',
 };
 
@@ -91,23 +94,16 @@ const ENTER_KEY_CODE = 13;
  *
  *  Custom property | Description | Default
  *  ----------------|-------------|----------
- *  `--exmg-markdown-editor` | editor mixin | `{}`
  *  `--exmg-markdown-editor-border` | Border Color | `#ddd`
  *  `--exmg-markdown-editor-background-color` | Editor Background Color | `white`
  *  `--exmg-markdown-editor-fullscreen-top-offset` | Top offset in fullscreen mode | `0px`
- *  `--exmg-markdown-editor-toolbar` | editor mixin | `{}`
  *  `--exmg-markdown-editor-toolbar-background` | Toolbar background color | `#fafafa`
  *  `--exmg-markdown-editor-toolbar-color` | Toolbar text color | `87% black`
  *  `--exmg-markdown-editor-toolbar-color-disabled` | Toolbar text color disabled | `54% black`
- *  `--exmg-markdown-editor-preview` | HTML Preview mixin | `{}`
  *  `--exmg-markdown-editor-preview-background` | Preview background color | `white`
- *  `--exmg-markdown-editor-toolbar-button-icon` | Toolbar button icon mixin | `{}`
- *  `--exmg-markdown-editor-toolbar-button-hover` | Toolbar button mixin | `{}`
  *  `--exmg-markdown-editor-toolbar-button-background-hover` | Toolbar icon border color | `#fafafa`
  *  `--exmg-markdown-editor-toolbar-seperator-color` | Toolbar seperator color | `#ddd`
- *  `--exmg-markdown-editor-code` | CodeMirror root mixin | `{}`
  *  `--exmg-markdown-editor-code-hover` | Editor code part hover background color | `white`
- *  `--exmg-markdown-editor-code-focused` | CodeMirror editor focused mixin | `{}`
  *
  *  # Events:
  *  - value-change - where detail is current markdown value
@@ -127,6 +123,9 @@ const ENTER_KEY_CODE = 13;
 export class EditorElement extends LitElement {
   @property({type: Boolean, attribute: 'auto-focus'})
   autoFocus: boolean = false;
+
+  @property({type: Number, attribute: 'height'})
+  height?: number = undefined;
 
   @property({type: Boolean, attribute: 'line-numbers'})
   lineNumbers: boolean = false;
@@ -596,7 +595,6 @@ export class EditorElement extends LitElement {
     const result = mappings.find(m => {
       return m.key === type;
     });
-
     return result ? states.includes(result.value) : false;
   }
 
@@ -607,7 +605,7 @@ export class EditorElement extends LitElement {
       strong: '**',
       'inline-code': '`',
       code: '```',
-      italic: '*',
+      em: '*',
       strikethrough: '~~',
     };
 
@@ -616,26 +614,19 @@ export class EditorElement extends LitElement {
     const multiLineSelection = cursorStart.line !== cursorEnd.line;
     const selectionText = codeMirror.getDoc().getSelection();
     const emptySelection = selectionText === '';
-
     if (this.hasType(states, type)) {
-      const line = codeMirror.getDoc().getLine(cursorStart.line);
-      let start = line.slice(0, cursorStart.ch);
-      let end = line.slice(cursorEnd.ch);
-      switch (type) {
-        case 'code':
-        case 'inline-code':
-        case 'strong':
-        case 'italic':
-        case 'strikethrough':
-          start = start.endsWith(blockStyles[type])
-            ? start.substring(0, start.length - blockStyles[type].length)
-            : start;
-          end = end.startsWith(blockStyles[type]) ? end.substring(blockStyles[type].length) : end;
-          break;
-      }
-      this.replaceRangeLine(start + selectionText + end, cursorStart.line);
-      cursorStart.ch -= blockStyles[type].length;
-      cursorEnd.ch -= blockStyles[type].length;
+      let start = {
+        ...cursorStart,
+        ch: cursorStart.ch - blockStyles[type].length,
+      };
+      let end = {
+        ...cursorEnd,
+        ch: cursorEnd.ch + blockStyles[type].length,
+      };
+      codeMirror.getDoc().setSelection(start, end);
+      //this.replaceRangeLine(start + selectionText + end, cursorStart.line);
+      codeMirror.getDoc().replaceSelection(selectionText);
+      cursorStart.ch = start.ch;
     } else {
       const text =
         blockStyles[type] +
@@ -650,7 +641,7 @@ export class EditorElement extends LitElement {
       } else {
         cursorStart.ch += blockStyles[type].length;
         if (!multiLineSelection) {
-          cursorEnd.ch += blockStyles[type].length;
+          cursorEnd.ch += emptySelection ? `${type} text`.length + blockStyles[type].length : blockStyles[type].length;
         }
       }
     }
@@ -705,15 +696,21 @@ export class EditorElement extends LitElement {
     return cursorStart.line === cursorEnd.line && cursorEnd.ch - cursorStart.ch !== lineLength;
   }
 
+  private getSelectedText(): string {
+    const codeMirror = this.codeMirrorEditor;
+    const doc = codeMirror!.getDoc()!;
+    return doc.getSelection();
+  }
+
   private getStates(position?: Position): string[] {
     const codeMirror = this.codeMirrorEditor!;
     const pos: Position = position || {...codeMirror.getDoc().getCursor('start')};
-
     if (pos.sticky === 'after') {
       pos.ch = +1;
     }
 
     const cursor = codeMirror.getTokenAt(pos);
+    cursor.string === '~' ? (cursor.type = 'strikethrough') : '';
     if (!cursor.type) {
       return [];
     }
@@ -768,7 +765,7 @@ export class EditorElement extends LitElement {
       event.preventDefault();
     }
 
-    this.processBlock('italic');
+    this.processBlock('em');
   }
 
   private toggleBlockquote(event?: Event): void {
@@ -822,16 +819,16 @@ export class EditorElement extends LitElement {
     if (event) {
       event.preventDefault();
     }
-
-    this.insertAtCursor(insertBlocks.link, 2, 8);
+    const selection = this.getSelectedText();
+    this.insertAtCursor(insertBlocks.link(selection), 2, 8);
   }
 
   private insertImage(event?: Event): void {
     if (event) {
       event.preventDefault();
     }
-
-    this.insertAtCursor(insertBlocks.image, 2, 8);
+    const selection = this.getSelectedText();
+    this.insertAtCursor(insertBlocks.image(selection), 2, 8);
   }
 
   private insertTable(event?: Event): void {
@@ -944,29 +941,34 @@ export class EditorElement extends LitElement {
           font-size: 14px;
           font-weight: 400;
           line-height: 20px;
-          @apply --exmg-markdown-editor;
         }
         :host([invalid]) {
           border: 1px solid red;
         }
         #editor {
-          overflow: auto;
+          overflow: hidden;
         }
         ::slotted(*) {
           display: none;
           overflow: auto;
         }
+        ::slotted(marked-element) {
+          margin-top: ${this.showHelperLabel ? '30px' : '0'};
+        }
         :host([split-view]) ::slotted(*) {
           display: block;
           background: var(--exmg-markdown-editor-preview-background, white);
-          border-left: 1px solid var(--exmg-markdown-editor-border, #ddd);
           padding: 16px;
-          @apply --exmg-markdown-editor-preview;
         }
         .container {
           box-sizing: border-box;
-          background: var(--exmg-markdown-editor-background-color, white);
-          @apply --layout-horizontal;
+          background: var(--exmg-markdown-editor-background-color, #f1f1f1);
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          -ms-flex-direction: row;
+          -webkit-flex-direction: row;
+          flex-direction: row;
         }
         /* No importants! */
         :host([fullscreen]) .container {
@@ -979,7 +981,11 @@ export class EditorElement extends LitElement {
         }
         :host([split-view]) ::slotted(*),
         .container > * {
-          @apply --layout-flex;
+          -ms-flex: 1 1 0.000000001px;
+          -webkit-flex: 1;
+          flex: 1;
+          -webkit-flex-basis: 0.000000001px;
+          flex-basis: 0.000000001px;
         }
         :host([line-numbers]) .container #editor {
           padding: 0;
@@ -991,11 +997,12 @@ export class EditorElement extends LitElement {
           font: inherit;
           z-index: 1;
           padding: 16px;
+          padding-top: ${this.showHelperLabel ? '16px' : '0px'};
           background: var(--exmg-markdown-editor-code-background, #f4f5f7);
-          @apply --exmg-markdown-editor-code;
         }
         .CodeMirror-scroll {
           min-height: 300px;
+          margin-top: ${this.showHelperLabel ? '15px' : '0'};
         }
         .CodeMirror:not(.CodeMirror-focused):hover {
           background: var(--exmg-markdown-editor-code-hover, white);
@@ -1006,7 +1013,6 @@ export class EditorElement extends LitElement {
           box-shadow: inset 0 0 0 2px -webkit-focus-ring-color;
           overflow: hidden;
           background: white;
-          @apply --exmg-markdown-editor-code-focused;
         }
         .toolbar {
           position: relative;
@@ -1018,7 +1024,6 @@ export class EditorElement extends LitElement {
           -ms-user-select: none;
           -o-user-select: none;
           user-select: none;
-          @apply --exmg-markdown-editor-toolbar;
         }
         :host([fullscreen]) .toolbar {
           width: 100%;
@@ -1042,20 +1047,17 @@ export class EditorElement extends LitElement {
           color: var(--exmg-markdown-editor-toolbar-color, rgba(0, 0, 0, 0.87));
           border: 1px solid transparent;
           cursor: pointer;
-          @apply --exmg-markdown-editor-toolbar-button;
         }
-        .toolbar a iron-iconŪ {
+        .toolbar a iron-icon {
           margin: 4px;
           width: 22px;
           height: 22px;
-          @apply --exmg-markdown-editor-toolbar-button-icon;
         }
         .toolbar a[disabled] {
           color: var(--exmg-markdown-editor-toolbar-color-disabled, rgba(0, 0, 0, 0.54));
         }
         .toolbar a:hover {
           background: var(--exmg-markdown-editor-toolbar-button-background-hover, #fafafa);
-          @apply --exmg-markdown-editor-toolbar-button-hover;
         }
         .toolbar .seperator {
           margin: 0 8px;
@@ -1093,7 +1095,7 @@ export class EditorElement extends LitElement {
           },
         )}
       </div>
-      <div class="container">
+      <div class="container" style="height: ${this.height && !this.fullscreen ? `${this.height}px` : 'inherit'};">
         <div id="editor">
           ${this.showHelperLabel
             ? html`

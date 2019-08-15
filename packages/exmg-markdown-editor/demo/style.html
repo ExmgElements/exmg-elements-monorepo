@@ -1,8 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
 
     <title>exmg-markdown-editor demo</title>
 
@@ -15,14 +15,13 @@
     <script src="../node_modules/codemirror/mode/gfm/gfm.js"></script>
     <script src="../node_modules/codemirror/mode/xml/xml.js"></script>
 
-
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
     <script src="../node_modules/@webcomponents/shadycss/apply-shim.min.js"></script>
 
     <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
     <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
 
-    <link rel="stylesheet" href="../node_modules/github-markdown-css/github-markdown.css">
+    <link rel="stylesheet" href="../node_modules/github-markdown-css/github-markdown.css" />
     <script type="module" src="../exmg-markdown-editor.js"></script>
 
     <custom-style>
@@ -37,10 +36,10 @@
           --exmg-markdown-editor-toolbar-color-disabled: #494949;
           --exmg-markdown-editor-toolbar-button-background-hover: #666;
           --exmg-markdown-editor-toolbar-seperator-color: #b9b9b9;
-          --exmg-markdown-editor-background: #e4e4e4;
+          --exmg-markdown-editor-background-color: #fff;
           --exmg-markdown-editor-code-hover: #ebecf0;
           --exmg-markdown-editor-code: {
-            font-family: Lato, "Helvetica Neue", Helvetica, sans-serif;
+            font-family: Lato, 'Helvetica Neue', Helvetica, sans-serif;
           }
           --exmg-markdown-editor-preview {
             padding: 16px 32px;
@@ -51,7 +50,10 @@
           border-bottom: 1px solid #bbbcbe;
         }
         .markdown-body {
-          font-family: Lato, "Helvetica Neue", Helvetica, sans-serif;
+          font-family: Lato, 'Helvetica Neue', Helvetica, sans-serif;
+        }
+        marked-element {
+          scroll-margin: 15px !important;
         }
       </style>
     </custom-style>
@@ -60,42 +62,57 @@
     <div class="vertical-section-container centered">
       <demo-snippet>
         <template>
-          <exmg-markdown-editor split-view="" fullscreen="" toolbar-buttons='["header", "strong", "italic", "strikethrough","|", "quote", "hr", "table", "code", "|", "unordered-list","ordered-list", "|","split-view"]'>
+          <exmg-markdown-editor
+            split-view
+            fullscreen
+            toolbar-buttons='["header", "strong", "italic", "strikethrough","|", "quote", "hr", "table", "code", "|", "unordered-list","ordered-list", "|","split-view"]'
+          >
             <marked-element>
               <div slot="markdown-html" class="markdown-body"></div>
               <script type="text/markdown">
                 # Headers
 
                 # H1
+
                 ## H2
+
                 ### H3
+
                 #### H4
+
                 ##### H5
+
                 ###### H6
 
                 # Text
-                Lorem **ipsum** dolor sit amet, ~~consectetur adipiscing~~ elit, sed do *eiusmod* tempor incididunt
+
+                Lorem **ipsum** dolor sit amet, ~~consectetur adipiscing~~ elit, sed do _eiusmod_ tempor incididunt
                 ut labore et dolore magna aliqua.
 
                 # Table
-                | User Name | Email |
-                | -------- | -------- |
-                | Pete     | Pete@example.com     |
+
+                | User Name | Email            |
+                | --------- | ---------------- |
+                | Pete      | Pete@example.com |
 
                 # Quote
+
                 > Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
                 # Lists
 
                 ## Unordered
-                * List option 1
-                * List option 2
+
+                - List option 1
+                - List option 2
 
                 ## Ordered
+
                 1. List option 1
                 2. List option 2
 
                 # Images
+
                 ![Yes](https://www.polymer-project.org/images/logos/p-logo.png)
               </script>
             </marked-element>
