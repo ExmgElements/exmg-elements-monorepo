@@ -953,7 +953,7 @@ export class EditorElement extends LitElement {
           overflow: auto;
         }
         ::slotted(marked-element) {
-          margin-top: 30px;
+          margin-top: ${this.showHelperLabel ? '30px' : '0'};
         }
         :host([split-view]) ::slotted(*) {
           display: block;
@@ -997,6 +997,7 @@ export class EditorElement extends LitElement {
           font: inherit;
           z-index: 1;
           padding: 16px;
+          padding-top: ${this.showHelperLabel ? '16px' : '0px'};
           background: var(--exmg-markdown-editor-code-background, #f4f5f7);
         }
         .CodeMirror-scroll {
