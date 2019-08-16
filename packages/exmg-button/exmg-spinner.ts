@@ -34,6 +34,7 @@ export class ExmgSpinner extends LitElement {
       'exmg-active': this.active || this.coolingDown,
       'exmg-cooldown': this.coolingDown,
     };
+    /* eslint-disable */
     return html`
       <div
         id="spinnerContainer"
@@ -42,10 +43,10 @@ export class ExmgSpinner extends LitElement {
         @webkitAnimationEnd="${() => this.resetAnimation}"
       >
         <div class="spinner-layer">
-          <div class="circle-clipper left"><div class="circle"></div></div>
-          <div class="circle-clipper right"><div class="circle"></div></div>
+          <div class="circle-clipper left"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div>
         </div>
       </div>
     `;
+    /* eslint-enable */
   }
 }
