@@ -3,6 +3,7 @@ import '@polymer/paper-dialog';
 import '@exmg/exmg-button';
 import '@polymer/iron-form';
 import {style} from './styles/exmg-dialog-styles';
+import {PaperDialogElement} from '@polymer/paper-dialog';
 
 @customElement('exmg-dialog-info')
 export class ExmgInfoDialog extends LitElement {
@@ -25,13 +26,9 @@ export class ExmgInfoDialog extends LitElement {
   private buttonSecondary?: boolean = false;
 
   @query('#dialog')
-  private dialogNode?: HTMLElement | any;
+  private dialogNode?: PaperDialogElement;
 
   static styles = [style];
-
-  constructor() {
-    super();
-  }
 
   public open() {
     if (this.dialogNode) {

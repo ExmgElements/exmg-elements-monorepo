@@ -1,4 +1,5 @@
 import {customElement, html, LitElement, property, query} from 'lit-element';
+import {PaperDialogElement} from '@polymer/paper-dialog';
 import '@polymer/paper-dialog';
 import '@exmg/exmg-button';
 import '@polymer/iron-form';
@@ -44,10 +45,10 @@ export class ExmgConfirmDialog extends LitElement {
   private errorMessage?: string;
 
   @query('#dialog')
-  private dialogNode?: HTMLElement | any;
+  private dialogNode?: PaperDialogElement;
 
   @query('#submitBtn')
-  private submitBtnNode?: HTMLElement | any;
+  private submitBtnNode?: PaperDialogElement;
 
   static styles = [style];
 
@@ -147,7 +148,7 @@ export class ExmgConfirmDialog extends LitElement {
         </div>
         <div class="actions">
           <exmg-button dialog-dismiss @click=${this.cancel}>Cancel</exmg-button>
-          <exmg-button id="submitBtn" @click=${this.submit} ?loading="${this.submitting}" unelevated
+          <exmg-button id="submitBtn" @click=${this.submit} ?loading="${this.submitting}"
             >${this.buttonCopy}</exmg-button
           >
         </div>
