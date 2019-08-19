@@ -622,8 +622,10 @@ export class PaperComboboxElement extends LitElement {
         .container.with-label > paper-menu-button {
           margin-top: 16px;
         }
+
         paper-input-container {
           @apply --layout-flex;
+          overflow: auto;
         }
         label.with-prefix {
           padding-left: ${labelPaddingLeft}px;
