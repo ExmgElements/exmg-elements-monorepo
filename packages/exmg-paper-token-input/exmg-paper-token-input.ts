@@ -116,6 +116,12 @@ export class PaperTokenInputElement extends LitElement {
   public alwaysFloatLabel: boolean = false;
 
   /**
+   * Sets if the input must wrap all selected items into a scrollable line or display it on multiple lines.
+   */
+  @property({type: Boolean, attribute: 'allow-multiline'})
+  public allowMultiLine: boolean = false;
+
+  /**
    * Maximum number of tokens allowed in value
    */
   @property({type: Number, attribute: 'max-tokens'})
@@ -461,7 +467,7 @@ export class PaperTokenInputElement extends LitElement {
           min-height: 24px;
           position: relative;
           width: 100%;
-          white-space: nowrap;
+          white-space: ${this.allowMultiLine ? 'unset' : 'nowrap'};
         }
 
         .tokens paper-button {
