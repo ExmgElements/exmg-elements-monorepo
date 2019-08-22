@@ -116,6 +116,12 @@ export class PaperTokenInputElement extends LitElement {
   public alwaysFloatLabel: boolean = false;
 
   /**
+   * Sets if the input must wrap all selected items into a scrollable line or display it on multiple lines.
+   */
+  @property({type: Boolean, attribute: 'allow-multiline'})
+  public allowMultiLine: boolean = false;
+
+  /**
    * Maximum number of tokens allowed in value
    */
   @property({type: Number, attribute: 'max-tokens'})
@@ -332,10 +338,7 @@ export class PaperTokenInputElement extends LitElement {
     const items = this.querySelectorAll('paper-item');
 
     for (let i = 0; i < items.length; i = i + 1) {
-      if (
-        this.inputValue.length > 0 &&
-        (items[i].textContent || '').toLowerCase().indexOf(this.inputValue.toLowerCase()) === -1
-      ) {
+      if (this.inputValue.length > 0 && (items[i].textContent || '').toLowerCase().indexOf(this.inputValue.toLowerCase()) === -1) {
         items[i].setAttribute('hidden', '');
       } else {
         items[i].removeAttribute('hidden');
@@ -389,9 +392,7 @@ export class PaperTokenInputElement extends LitElement {
 
       return {
         id: this.getPaperItemValue(item),
-        text:
-          (this.selectedItemSelector ? item.querySelector(this.selectedItemSelector)!.textContent : item.textContent) ||
-          '',
+        text: (this.selectedItemSelector ? item.querySelector(this.selectedItemSelector)!.textContent : item.textContent) || '',
         sortWeight: this.selectedValues.indexOf(id),
       };
     })
@@ -443,6 +444,7 @@ export class PaperTokenInputElement extends LitElement {
   }
 
   protected render() {
+    console.log('this.', this.allowMultiLine);
     return html`
       <!--suppress CssUnresolvedCustomPropertySet, CssUnresolvedCustomProperty -->
       <style>
@@ -461,7 +463,7 @@ export class PaperTokenInputElement extends LitElement {
           min-height: 24px;
           position: relative;
           width: 100%;
-          white-space: nowrap;
+          white-space: ${this.allowMultiLine ? 'unset' : 'nowrap'};
         }
 
         .tokens paper-button {

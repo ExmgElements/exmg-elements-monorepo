@@ -69,17 +69,9 @@ suite('<exmg-paper-token-input>', function() {
       assert.isNotNull(listBox.selectedValues, 'Should be an array');
       assert.equal(listBox.selectedValues![0], expectedSelectedItemValue);
       assert.lengthOf(listBox.selectedItems!, 1);
-      assert.equal(
-        listBox.selectedItems![0].innerText,
-        expectedSelectedItemText,
-        'Selected item should match with item text',
-      );
+      assert.equal(listBox.selectedItems![0].innerText, expectedSelectedItemText, 'Selected item should match with item text');
       const paperButton = elementShadowRoot.querySelector('paper-button')!;
-      assert.equal(
-        paperButton.innerText,
-        expectedSelectedItemText.toUpperCase(),
-        'Button token should match with item text',
-      );
+      assert.equal(paperButton.innerText, expectedSelectedItemText.toUpperCase(), 'Button token should match with item text');
     });
 
     test('element should trigger event exmg-token-input-select', async () => {
