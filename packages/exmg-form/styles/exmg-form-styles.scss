@@ -3,20 +3,26 @@
   iron-form,
   form {
     height: var(--exmg-form-internal-height, auto);
+    padding-right: var(--exmg-form-internal-padding-right, 1rem);
     overflow-y: auto;
   }
 }
 .actions {
-  margin: 24px 0 0;
+  margin: 1rem 0 0;
   text-align: right;
+  padding-right: var(--exmg-form-actions-padding-right, 1rem);
+  padding-bottom: var(--exmg-form-actions-padding-bottom, 1rem);
+  .cancel {
+    margin-right: 0.5rem;
+  }
 }
 .inline {
   display: inline-block;
 }
 .error {
   display: none;
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   color: rgba(0, 0, 0, 0.54);
   -webkit-box-flex: 0 0 auto;
   -webkit-flex: 0 0 auto;
@@ -29,15 +35,15 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 0 0 0 24px;
-  margin: 0 0 12px;
-  min-height: 48px;
+  padding: 0 0 0 1.5rem;
+  margin: 0 0 0.75rem;
+  min-height: 3rem;
 }
 .error > .body > .body-content {
-  margin-right: 24px;
+  margin-right: 1.5rem;
   position: relative;
-  line-height: 20px;
-  font-size: 14px;
+  line-height: 1.5rem;
+  font-size: 0.875rem;
   white-space: normal;
   font-weight: 500;
   vertical-align: middle;
@@ -47,14 +53,14 @@
   align-items: center;
 }
 .error > .body > .body-content > svg {
-  margin-right: 12px;
+  margin-right: 0.75rem;
 }
 .error.show {
   display: block;
 }
 paper-spinner-lite {
   vertical-align: middle;
-  width: 20px;
-  height: 20px;
-  margin-left: 10px;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-left: 0.625rem;
 }
