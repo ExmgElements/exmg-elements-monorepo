@@ -26,7 +26,6 @@ export const style = css`
   :host form {
     height: var(--exmg-form-internal-height, auto);
     overflow-y: auto;
-    padding-right: 12px;
   }
   .actions {
     margin: 24px 0 0;
