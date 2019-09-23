@@ -31,9 +31,6 @@ export class ExmgForm extends LitElement {
   @property({type: Boolean})
   public inline: boolean = false;
 
-  @property({type: Object})
-  private baseValues?: Record<string, any> = undefined;
-
   @property({type: Boolean})
   private dirty: boolean = false;
 
@@ -133,14 +130,11 @@ export class ExmgForm extends LitElement {
 
     this.addEventListener('keydown', this.onEnterPressed);
     this.addEventListener('change', this.handleOnChange);
-    // Next line is in case of exmg-markdown-editor
-    this.addEventListener('value-change', this.handleMDEditorChange);
   }
 
   disconnectedCallback(): void {
     this.removeEventListener('keydown', this.onEnterPressed);
     this.removeEventListener('change', this.handleOnChange);
-    this.removeEventListener('value-change', this.handleMDEditorChange);
 
     super.disconnectedCallback();
   }
@@ -155,10 +149,6 @@ export class ExmgForm extends LitElement {
         (elem as HTMLElement).style.display = null;
       });
     }
-  }
-
-  protected firstUpdated() {
-    this.baseValues = this.serializeForm();
   }
 
   private handleOnChange(_e: Event): void {
@@ -177,36 +167,6 @@ export class ExmgForm extends LitElement {
     );
   }
 
-  private handleMDEditorChange(e: Event): void {
-    if (this.dirty) {
-      return;
-    }
-    const path = e.composedPath();
-    const baseValuesPropertiesToCheck = [];
-    for (let x in path) {
-      const name = (path[x] as Node).nodeName ? (path[x] as Node).nodeName.toLowerCase() : '';
-      if (name === 'exmg-markdown-editor') {
-        baseValuesPropertiesToCheck.push((path[x] as HTMLInputElement).name);
-      }
-    }
-    const currentValues = this.serializeForm();
-    for (let y in baseValuesPropertiesToCheck) {
-      const prop = baseValuesPropertiesToCheck[y];
-      if (this.baseValues && currentValues && this.baseValues[prop] !== currentValues[prop]) {
-        this.dirty = true;
-        this.dispatchEvent(
-          new CustomEvent('dirty', {
-            bubbles: false,
-            composed: false,
-            detail: {
-              dirty: true,
-            },
-          }),
-        );
-      }
-    }
-  }
-
   private renderCancelButton() {
     return !this.hideCancelButton
       ? html`
@@ -218,11 +178,7 @@ export class ExmgForm extends LitElement {
   private renderSubmitButton() {
     return !this.hideSubmitButton
       ? html`
-          <exmg-button
-            unelevated
-            @click="${this.onSubmitBtnClick}"
-            ?disabled="${this.submitting}"
-            ?loading=${this.submitting}
+          <exmg-button unelevated @click="${this.onSubmitBtnClick}" ?disabled="${this.submitting}" ?loading=${this.submitting}
             >${this.submitButtonCopy}</exmg-button
           >
         `
@@ -254,9 +210,9 @@ export class ExmgForm extends LitElement {
       <iron-form id="ironForm">
         <form id="form">
           <slot></slot>
-          ${this.renderActions()}
         </form>
       </iron-form>
+      ${this.renderActions()}
     `;
   }
 }

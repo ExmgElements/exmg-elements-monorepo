@@ -41,13 +41,7 @@ export class FormDemo extends LitElement {
         <paper-input label="password input" type="password"></paper-input>
         <paper-input label="disabled input" disabled value="batman"></paper-input>
         <paper-input name="name" label="Summary" required always-float-label></paper-input>
-        <paper-input
-          name="estimate"
-          label="Estimates"
-          type="number"
-          always-float-label
-          style="max-width:180px;"
-        ></paper-input>
+        <paper-input name="estimate" label="Estimates" type="number" always-float-label style="max-width:180px;"></paper-input>
 
         <paper-textarea label="autoresizing textarea input"></paper-textarea>
 
@@ -76,6 +70,15 @@ export class FormDemo extends LitElement {
 
       <h1>Inline form</h1>
       <exmg-form @submit="${this.onSubmit}" @cancel="${this.onCancel}" inline>
+        <paper-input label="text input" required></paper-input>
+        <paper-input label="text input" value="pre-filled"></paper-input>
+      </exmg-form>
+      <h1>Controlled height</h1>
+      <exmg-form style="--exmg-form-internal-height: 100px;" @submit="${this.onSubmit}" @cancel="${this.onCancel}">
+        <paper-input label="text input" required></paper-input>
+        <paper-input label="text input" value="pre-filled"></paper-input>
+        <paper-input label="text input" required></paper-input>
+        <paper-input label="text input" value="pre-filled"></paper-input>
         <paper-input label="text input" required></paper-input>
         <paper-input label="text input" value="pre-filled"></paper-input>
       </exmg-form>

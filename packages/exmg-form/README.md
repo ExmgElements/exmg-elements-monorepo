@@ -20,6 +20,10 @@ Attributes:
 3. **inline** - whether or not try to display form in single line
 4. **isDirty** - _readOnly_ - wheter or not a value in the form has been changed
 
+CSS Variables :
+
+`--exmg-form-internal-height` set the height of slot container - handy when wanting to control max-height of form.
+
 ```
 <exmg-form
     @submit="${this.submit}"
