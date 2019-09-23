@@ -23,6 +23,9 @@ Attributes:
 CSS Variables :
 
 `--exmg-form-internal-height` set the height of slot container - handy when wanting to control max-height of form.
+`--exmg-form-internal-padding-right` set the padding right for the form internal element.
+`--exmg-form-actions-padding-right` set the padding right for the actions buttons.
+`--exmg-form-actions-padding-bottom` set the padding right for the actions buttons.
 
 ```
 <exmg-form
