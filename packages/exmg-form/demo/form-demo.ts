@@ -1,4 +1,4 @@
-import {LitElement, html, customElement} from 'lit-element';
+import {LitElement, html, customElement, css} from 'lit-element';
 import '@polymer/paper-input/paper-input.js';
 import '@polymer/paper-input/paper-textarea';
 import '@polymer/paper-button/paper-button.js';
@@ -11,6 +11,14 @@ import {ExmgForm} from '../exmg-form';
 
 @customElement('form-demo')
 export class FormDemo extends LitElement {
+  static styles = [
+    css`
+      #controlledHeight {
+        --exmg-form-internal-height: 150px;
+      }
+    `,
+  ];
+
   render() {
     return html`
       <h1>Serializing form : A Study Case.</h1>
@@ -74,7 +82,7 @@ export class FormDemo extends LitElement {
         <paper-input label="text input" value="pre-filled"></paper-input>
       </exmg-form>
       <h1>Controlled height</h1>
-      <exmg-form style="--exmg-form-internal-height: 100px;" @submit="${this.onSubmit}" @cancel="${this.onCancel}">
+      <exmg-form id="controlledHeight" @submit="${this.onSubmit}" @cancel="${this.onCancel}">
         <paper-input label="text input" required></paper-input>
         <paper-input label="text input" value="pre-filled"></paper-input>
         <paper-input label="text input" required></paper-input>
