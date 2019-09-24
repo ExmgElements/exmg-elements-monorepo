@@ -968,8 +968,7 @@ export class EditorElement extends LitElement {
           font-weight: 500;
           padding-top: 8px;
           background-color: transparent;
-          position: absolute;
-          left: 50%;
+          padding-left: 12px;
           z-index: 10;
         }
         ::slotted(*) {
@@ -1032,7 +1031,6 @@ export class EditorElement extends LitElement {
           background: var(--exmg-markdown-editor-code-hover, white);
         }
         .CodeMirror-focused {
-          box-sizing: border-box;
           box-shadow: inset 0 0 0 2px Highlight;
           box-shadow: inset 0 0 0 2px -webkit-focus-ring-color;
           overflow: hidden;
