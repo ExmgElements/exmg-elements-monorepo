@@ -31,5 +31,4 @@ export interface ToolBarConfigItem extends Object {
   title: string;
 }
 
-export const isToolBarConfigItem = (item: Record<string, any>): item is ToolBarConfigItem =>
-  item.hasOwnProperty('name');
+export const isToolBarConfigItem = (item: Record<string, any>): item is ToolBarConfigItem => item.hasOwnProperty('name');

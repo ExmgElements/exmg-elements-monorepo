@@ -28,19 +28,11 @@ suite('<exmg-markdown-editor>', function() {
 
       assert.isTrue(element.hasAttribute('split-view'), 'split-view attr should be reflected by default');
       assert.isTrue(element.splitView, 'splitView prop should be turn on by default');
-      assert.equal(
-        getMarkdownElementComputedStyle().display,
-        'block',
-        'markdown preview is visible in split view mode',
-      );
+      assert.equal(getMarkdownElementComputedStyle().display, 'block', 'markdown preview is visible in split view mode');
 
       element.splitView = false;
       await flushCompleted();
-      assert.equal(
-        getMarkdownElementComputedStyle().display,
-        'none',
-        'markdown preview is not visible in split view mode',
-      );
+      assert.equal(getMarkdownElementComputedStyle().display, 'none', 'markdown preview is not visible in split view mode');
       assert.isFalse(element.hasAttribute('split-view'), 'Attribute split view is not present when turn off');
     });
 
@@ -119,11 +111,7 @@ suite('<exmg-markdown-editor>', function() {
       await flushCompleted();
 
       assert.equal(getMarkdownElementText('p strong'), 'ipsum', '**ipsum** is present as <strong>');
-      assert.equal(
-        getMarkdownElementText('p del'),
-        'consectetur adipiscing',
-        '~~consectetur adipiscing~~ is present as <del>',
-      );
+      assert.equal(getMarkdownElementText('p del'), 'consectetur adipiscing', '~~consectetur adipiscing~~ is present as <del>');
       assert.equal(getMarkdownElementText('p em'), 'eiusmod', '*eiusmod* is present as <em>');
     });
 
@@ -143,26 +131,10 @@ suite('<exmg-markdown-editor>', function() {
     test('Should parse list', async function() {
       await flushCompleted();
 
-      assert.equal(
-        getMarkdownElementText('ul li:nth-child(1)'),
-        'List option 1',
-        '* List option 1 is present as <ul><li>',
-      );
-      assert.equal(
-        getMarkdownElementText('ul li:nth-child(2)'),
-        'List option 2',
-        '* List option 2 is present as <ul><li>',
-      );
-      assert.equal(
-        getMarkdownElementText('ol li:nth-child(1)'),
-        'List option 1',
-        '1. List option 1 is present as <ol><li>',
-      );
-      assert.equal(
-        getMarkdownElementText('ol li:nth-child(2)'),
-        'List option 2',
-        '2. List option 2 is present as <ol><li>',
-      );
+      assert.equal(getMarkdownElementText('ul li:nth-child(1)'), 'List option 1', '* List option 1 is present as <ul><li>');
+      assert.equal(getMarkdownElementText('ul li:nth-child(2)'), 'List option 2', '* List option 2 is present as <ul><li>');
+      assert.equal(getMarkdownElementText('ol li:nth-child(1)'), 'List option 1', '1. List option 1 is present as <ol><li>');
+      assert.equal(getMarkdownElementText('ol li:nth-child(2)'), 'List option 2', '2. List option 2 is present as <ol><li>');
     });
 
     test('Should parse hr', async function() {
@@ -183,11 +155,7 @@ suite('<exmg-markdown-editor>', function() {
       const img = element.querySelector<HTMLImageElement>('.markdown-body img')!;
 
       assert.instanceOf(img, HTMLImageElement, 'Image is preset');
-      assert.equal(
-        img.src,
-        'https://www.polymer-project.org/images/logos/p-logo.png',
-        'Image has proper src attribute',
-      );
+      assert.equal(img.src, 'https://www.polymer-project.org/images/logos/p-logo.png', 'Image has proper src attribute');
       assert.equal(img.alt, 'Yes', 'Image has proper alt attribute');
     });
   });

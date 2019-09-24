@@ -1,5 +1,6 @@
 import {LitElement, html, customElement, query, property} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
+import {classMap} from 'lit-html/directives/class-map';
 
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@polymer/iron-icon/iron-icon.js';
@@ -37,9 +38,7 @@ const insertBlocks = {
   hr: '---',
   link: (text?: string) => `[${text !== '' ? text : 'Link description'}](https://www.exmachinagroup.com/)`,
   image: (text?: string) =>
-    `![${
-      text !== '' ? text : 'ExMachina'
-    }](https://pbs.twimg.com/profile_images/748525267153477632/5BistsD7_400x400.jpg)`,
+    `![${text !== '' ? text : 'ExMachina'}](https://pbs.twimg.com/profile_images/748525267153477632/5BistsD7_400x400.jpg)`,
   table: '| Column 1 | Column 2 |\n| -------- | -------- |\n| Text     | Text     |',
 };
 
@@ -431,9 +430,7 @@ export class EditorElement extends LitElement {
     this.codeMirrorEditor.setOption('fullScreen', this.fullscreen);
 
     if (this.isElementInitialized) {
-      this.dispatchEvent(
-        new CustomEvent('exmg-markdown-editor-fullscreen', {detail: !!this.fullscreen, composed: true, bubbles: true}),
-      );
+      this.dispatchEvent(new CustomEvent('exmg-markdown-editor-fullscreen', {detail: !!this.fullscreen, composed: true, bubbles: true}));
     }
   }
 
@@ -557,11 +554,7 @@ export class EditorElement extends LitElement {
   }
 
   private replaceRangeLine(text: string, lineNumber: number): void {
-    this.codeMirrorEditor!.getDoc().replaceRange(
-      text,
-      {line: lineNumber, ch: 0},
-      {line: lineNumber, ch: 99999999999999},
-    );
+    this.codeMirrorEditor!.getDoc().replaceRange(text, {line: lineNumber, ch: 0}, {line: lineNumber, ch: 99999999999999});
   }
 
   private insertAtCursor(text: string, selectionOffset?: number, selectionLength?: number): void {
@@ -928,6 +921,7 @@ export class EditorElement extends LitElement {
   }
 
   protected render() {
+    const classes = {labeled: this.showHelperLabel, splitted: this.splitView};
     // noinspection CssUnresolvedCustomPropertySet
     return html`
       <!--suppress CssUnresolvedCustomProperty -->
@@ -947,6 +941,36 @@ export class EditorElement extends LitElement {
         }
         #editor {
           overflow: hidden;
+        }
+        #editor.labeled::after {
+          display: block;
+          content: 'EDITOR';
+          width: 100%;
+          height: 20px;
+          color: var(--exmg-markdown-editor-label-color, #ddd);
+          font-size: 12px;
+          font-weight: 500;
+          padding-left: 12px;
+          background-color: transparent;
+          position: relative;
+          top: calc(-100% - 24px);
+          z-index: 10;
+        }
+        slot.labeled::not(.splitted)::before {
+          display: none;
+        }
+        slot.labeled.splitted::before {
+          display: block;
+          content: 'PREVIEW';
+          height: 20px;
+          color: var(--exmg-markdown-editor-label-color, #ddd);
+          font-size: 12px;
+          font-weight: 500;
+          padding-top: 8px;
+          background-color: transparent;
+          position: absolute;
+          left: 50%;
+          z-index: 10;
         }
         ::slotted(*) {
           display: none;
@@ -1065,11 +1089,8 @@ export class EditorElement extends LitElement {
         }
         .label {
           color: var(--exmg-markdown-editor-label-color, #ddd);
-          position: absolute;
-          letter-spacing: 2px;
           font-size: 12px;
           font-weight: 500;
-          padding: 10px 0 0 12px;
           z-index: 10;
         }
         .preview {
@@ -1096,19 +1117,8 @@ export class EditorElement extends LitElement {
         )}
       </div>
       <div class="container" style="height: ${this.height && !this.fullscreen ? `${this.height}px` : 'inherit'};">
-        <div id="editor">
-          ${this.showHelperLabel
-            ? html`
-                <div class="label editor">EDITOR</div>
-              `
-            : html``}
-          ${this.showHelperLabel && this.splitView
-            ? html`
-                <div class="label preview">PREVIEW</div>
-              `
-            : html``}
-        </div>
-        <slot> </slot>
+        <div id="editor" class=${classMap(classes)}></div>
+        <slot class=${classMap(classes)}> </slot>
       </div>
     `;
   }
