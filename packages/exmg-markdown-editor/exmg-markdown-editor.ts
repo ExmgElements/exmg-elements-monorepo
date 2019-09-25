@@ -921,7 +921,7 @@ export class EditorElement extends LitElement {
   }
 
   protected render() {
-    const classes = {labeled: this.showHelperLabel, splitted: this.splitView};
+    const classes = {fullscreen: this.fullscreen, labels: true};
     // noinspection CssUnresolvedCustomPropertySet
     return html`
       <!--suppress CssUnresolvedCustomProperty -->
@@ -942,34 +942,31 @@ export class EditorElement extends LitElement {
         #editor {
           overflow: hidden;
         }
-        #editor.labeled::after {
-          display: block;
-          content: 'EDITOR';
-          width: 100%;
-          height: 20px;
-          color: var(--exmg-markdown-editor-label-color, #ddd);
-          font-size: 12px;
-          font-weight: 500;
-          padding-left: 12px;
-          background-color: transparent;
+        .labels {
+          background: transparent;
           position: relative;
-          top: calc(-100% - 24px);
+          width: 100%;
           z-index: 10;
+          height: 0;
         }
-        slot.labeled::not(.splitted)::before {
-          display: none;
+        .labels.fullscreen {
+          height: 30px;
+          position: fixed;
         }
-        slot.labeled.splitted::before {
-          display: block;
-          content: 'PREVIEW';
-          height: 20px;
+        .labels > * {
+          box-sizing: border-box;
+          display: inline-block;
+          width: 49%;
+          height: 30px;
+          line-height: 30px;
           color: var(--exmg-markdown-editor-label-color, #ddd);
           font-size: 12px;
           font-weight: 500;
-          padding-top: 8px;
-          background-color: transparent;
           padding-left: 12px;
-          z-index: 10;
+          padding-top: 8px;
+        }
+        .labels > .preview {
+          padding-left: 0;
         }
         ::slotted(*) {
           display: none;
@@ -1015,12 +1012,12 @@ export class EditorElement extends LitElement {
         }
         /* No importants! */
         .CodeMirror {
-          height: 100% !important;
+          height: calc(100% - 16px) !important;
           min-height: 300px;
           font: inherit;
           z-index: 1;
           padding: 16px;
-          padding-top: ${this.showHelperLabel ? '16px' : '0px'};
+          padding-bottom: 0;
           background: var(--exmg-markdown-editor-code-background, #f4f5f7);
         }
         .CodeMirror-scroll {
@@ -1058,7 +1055,7 @@ export class EditorElement extends LitElement {
           position: fixed;
           top: calc(0px + var(--exmg-markdown-editor-fullscreen-top-offset, 0px));
           left: 0;
-          z-index: 1;
+          z-index: 12;
         }
         .toolbar a {
           display: inline-block;
@@ -1085,15 +1082,6 @@ export class EditorElement extends LitElement {
           margin: 0 8px;
           border-left: 1px solid var(--exmg-markdown-editor-toolbar-seperator-color, #ddd);
         }
-        .label {
-          color: var(--exmg-markdown-editor-label-color, #ddd);
-          font-size: 12px;
-          font-weight: 500;
-          z-index: 10;
-        }
-        .preview {
-          left: calc(50% - 12px);
-        }
       </style>
 
       <div id="toolbar" class="toolbar">
@@ -1113,10 +1101,19 @@ export class EditorElement extends LitElement {
             `;
           },
         )}
+
+        <div class=${classMap(classes)}>
+          <div>EDITOR</div>
+          ${this.splitView
+            ? html`
+                <div class="preview">PREVIEW</div>
+              `
+            : ''}
+        </div>
       </div>
       <div class="container" style="height: ${this.height && !this.fullscreen ? `${this.height}px` : 'inherit'};">
-        <div id="editor" class=${classMap(classes)}></div>
-        <slot class=${classMap(classes)}> </slot>
+        <div id="editor"></div>
+        <slot> </slot>
       </div>
     `;
   }
