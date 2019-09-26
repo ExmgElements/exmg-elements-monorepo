@@ -979,6 +979,7 @@ export class EditorElement extends LitElement {
           display: block;
           background: var(--exmg-markdown-editor-preview-background, white);
           padding: 16px;
+          padding-top: 0px;
         }
         .container {
           box-sizing: border-box;
