@@ -82,10 +82,11 @@ export class ExmgForm extends LitElement {
     );
   }
 
-  public validate(): void {
+  public validate(): boolean {
     if (this.ironFormElem) {
-      this.ironFormElem.validate();
+      return this.ironFormElem.validate();
     }
+    return false;
   }
 
   public reset(): void {
