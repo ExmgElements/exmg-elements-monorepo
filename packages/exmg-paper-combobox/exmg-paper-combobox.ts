@@ -417,9 +417,7 @@ export class PaperComboboxElement extends LitElement {
   }
 
   private onClick(e: Event): void {
-    const inside: boolean = isEventWithPath(e)
-      ? !!e.path && !!e.composedPath().find(path => path === this)
-      : e.target === this;
+    const inside: boolean = isEventWithPath(e) ? !!e.path && !!e.composedPath().find(path => path === this) : e.target === this;
 
     // Detect outside element click for auto validate input
     if ((this.autoValidate && (this.previousInsideClick && !inside)) || this.token) {
@@ -437,9 +435,19 @@ export class PaperComboboxElement extends LitElement {
 
   private onItemSelected(e: CustomEvent<{item: Element}>): void {
     e.stopPropagation();
-    this.selectedItem = e.detail.item;
-    this.selected = this.getSelectedItemKey(this.selectedItem);
-
+    if (this.selected && !this.selectedItem) {
+      this.selectedItem = e.detail.item;
+    }
+    if (this.selected !== this.getSelectedItemKey(e.detail.item)) {
+      this.selectedItem = e.detail.item;
+      this.selected = this.getSelectedItemKey(this.selectedItem);
+      const payload: EventSelectPayload = {
+        value: this.selected!,
+        item: this.selectedItem!,
+        token: this.token!,
+      };
+      this.dispatchEvent(new CustomEvent('change', {detail: payload, composed: true, bubbles: true}));
+    }
     this.resetInput();
   }
 
@@ -448,6 +456,7 @@ export class PaperComboboxElement extends LitElement {
     this.selectedItem = undefined;
     this.selected = undefined;
 
+    this.dispatchEvent(new CustomEvent('change', {detail: {}, composed: true, bubbles: true}));
     this.resetInput();
   }
 
@@ -538,7 +547,6 @@ export class PaperComboboxElement extends LitElement {
     );
 
     const {id = undefined} = this.token || {};
-
     return anyPropChanged && id === this.selected;
   }
 
@@ -561,10 +569,8 @@ export class PaperComboboxElement extends LitElement {
         };
 
         this.dispatchEvent(new CustomEvent('exmg-combobox-select', {detail: payload, composed: true, bubbles: true}));
-        this.dispatchEvent(new CustomEvent('change', {detail: payload, composed: true, bubbles: true}));
       } else {
         this.dispatchEvent(new CustomEvent('exmg-combobox-deselect', {composed: true, bubbles: true}));
-        this.dispatchEvent(new CustomEvent('change', {detail: {}, composed: true, bubbles: true}));
       }
     }
   }
@@ -695,11 +701,7 @@ export class PaperComboboxElement extends LitElement {
           ${
             !this.selected || !this.noFloatLabel
               ? html`
-                  <label
-                    slot="label"
-                    class="${eltPrefix ? 'with-prefix' : ''}"
-                    ?hidden="${!this.label}"
-                    aria-hidden="true"
+                  <label slot="label" class="${eltPrefix ? 'with-prefix' : ''}" ?hidden="${!this.label}" aria-hidden="true"
                     >${this.label}</label
                   >
                 `
@@ -729,9 +731,7 @@ export class PaperComboboxElement extends LitElement {
           @paper-dropdown-open="${this.onMenuButtonOpen}"
           @paper-dropdown-close="${this.onMenuButtonClose}"
           close-on-activate vertical-offset="40" horizontal-align="right">
-          <paper-icon-button icon="exmg-paper-combobox-icons:arrow-drop-down" ?data-opened="${
-            this.opened
-          }" slot="dropdown-trigger">
+          <paper-icon-button icon="exmg-paper-combobox-icons:arrow-drop-down" ?data-opened="${this.opened}" slot="dropdown-trigger">
           </paper-icon-button>
           <paper-listbox
             id="listbox"
