@@ -136,9 +136,7 @@ export class ExmgFormDialog extends LitElement {
     }
 
     // dispatch event containing the serialized form data
-    this.dispatchEvent(
-      new CustomEvent('submit', {bubbles: false, composed: true, detail: this.formNode!.serializeForm()}),
-    );
+    this.dispatchEvent(new CustomEvent('submit', {bubbles: false, composed: true, detail: this.formNode!.serializeForm()}));
   }
 
   protected render() {
@@ -171,9 +169,7 @@ export class ExmgFormDialog extends LitElement {
         </paper-dialog-scrollable>
         <div class="actions">
           <exmg-button dialog-dismiss @click=${this.cancel}>Cancel</exmg-button>
-          <exmg-button id="submitBtn" @click=${this.submit} ?loading="${this.submitting}"
-            >${this.buttonCopy}</exmg-button
-          >
+          <exmg-button id="submitBtn" @click=${this.submit} ?loading="${this.submitting}">${this.buttonCopy}</exmg-button>
         </div>
       </paper-dialog>
     `;

@@ -6,7 +6,7 @@ import '@exmg/exmg-button';
 import '@polymer/paper-input/paper-input.js';
 import '@polymer/paper-item/paper-item.js';
 import '../index';
-import { ExmgConfirmDialog } from '../index';
+import {ExmgConfirmDialog} from '../index';
 
 @customElement('dialog-demo')
 export class DialogDemo extends LitElement {
@@ -96,13 +96,7 @@ export class DialogDemo extends LitElement {
       </exmg-dialog-confirm>
 
       <exmg-button @click=${() => this.getElementBySelector('#dialog1')!.open()}>Dialog Normal</exmg-button>
-      <exmg-dialog-form
-        id="dialog1"
-        title="Create account"
-        button-copy="Save"
-        @cancel=${this._cancelCallback}
-        @submit="${this._saveData}"
-      >
+      <exmg-dialog-form id="dialog1" title="Create account" button-copy="Save" @cancel=${this._cancelCallback} @submit="${this._saveData}">
         <paper-input name="name" label="Name" required></paper-input>
         <paper-input name="test" label="Test"></paper-input>
       </exmg-dialog-form>
@@ -115,8 +109,8 @@ export class DialogDemo extends LitElement {
         @submit="${this._saveDataError}"
       >
         <p>
-          This setting either prevents or allows users to create multiple accounts using the same email address if
-          they sign in to your app using different authentication providers.
+          This setting either prevents or allows users to create multiple accounts using the same email address if they sign in to your app
+          using different authentication providers.
         </p>
         <paper-input name="name" label="Name" required></paper-input>
         <paper-input name="password" label="Password" required></paper-input>
@@ -127,12 +121,10 @@ export class DialogDemo extends LitElement {
         <div>
           <h1>Title</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam
-            tincidunt aliquet condimentum.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.
           </p>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam
-            tincidunt aliquet condimentum.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.
           </p>
         </div>
       </exmg-dialog-info>
@@ -166,13 +158,7 @@ export class DialogDemo extends LitElement {
           <paper-item>css</paper-item>
         </exmg-paper-token-input>
         <p class="help">Start typing to get a list of possible matches or press down to select.</p>
-        <paper-input
-          name="estimate"
-          label="Estimates"
-          type="number"
-          always-float-label
-          style="max-width:180px;"
-        ></paper-input>
+        <paper-input name="estimate" label="Estimates" type="number" always-float-label style="max-width:180px;"></paper-input>
         <p class="help">Estimated time needed to resolve this issue in hours.</p>
         <label>Message</label>
         <exmg-markdown-editor>

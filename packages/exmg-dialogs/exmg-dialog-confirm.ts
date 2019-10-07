@@ -53,7 +53,7 @@ export class ExmgConfirmDialog extends LitElement {
   @property({type: Boolean})
   private hasSlotContent: boolean = false;
 
-  private observer?: MutationObserver; 
+  private observer?: MutationObserver;
 
   static styles = [style];
 
@@ -68,11 +68,11 @@ export class ExmgConfirmDialog extends LitElement {
     super.connectedCallback();
 
     // Options for the observer (which mutations to observe)
-    const config = { attributes: false, childList: true, subtree: false };
+    const config = {attributes: false, childList: true, subtree: false};
 
     // Create an observer instance linked to the callback function
     this.observer = new MutationObserver((list: MutationRecord[]) => {
-      for(let mutation of list) {
+      for (let mutation of list) {
         if (mutation.type === 'childList') {
           console.log('A child node has been added or removed.');
           this.hasSlotContent = this.children.length > 0;
@@ -89,9 +89,9 @@ export class ExmgConfirmDialog extends LitElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    
+
     // Clean observer if needed
-    if(this.observer) {
+    if (this.observer) {
       this.observer.disconnect();
     }
   }
@@ -181,13 +181,17 @@ export class ExmgConfirmDialog extends LitElement {
               </span>
             </span>
           </div>
-          ${this.hasSlotContent ? html`<slot></slot>` : html`<p>${this.message}</p>`}
+          ${this.hasSlotContent
+            ? html`
+                <slot></slot>
+              `
+            : html`
+                <p>${this.message}</p>
+              `}
         </div>
         <div class="actions">
           <exmg-button dialog-dismiss @click=${this.cancel}>Cancel</exmg-button>
-          <exmg-button id="submitBtn" @click=${this.submit} ?loading="${this.submitting}"
-            >${this.buttonCopy}</exmg-button
-          >
+          <exmg-button id="submitBtn" @click=${this.submit} ?loading="${this.submitting}">${this.buttonCopy}</exmg-button>
         </div>
       </paper-dialog>
     `;

@@ -57,9 +57,7 @@ export class ExmgInfoDialog extends LitElement {
             `}
         <slot></slot>
         <div class="actions">
-          <exmg-button id="doneBtn" @click=${this.done} ?unelevated=${!this.buttonSecondary}
-            >${this.buttonCopy}</exmg-button
-          >
+          <exmg-button id="doneBtn" @click=${this.done} ?unelevated=${!this.buttonSecondary}>${this.buttonCopy}</exmg-button>
         </div>
       </paper-dialog>
     `;
