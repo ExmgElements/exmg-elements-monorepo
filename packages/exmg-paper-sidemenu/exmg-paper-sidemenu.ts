@@ -91,12 +91,7 @@ export class ExmgPaperSidemenu extends LitElement {
         : html`
             <!-- Sidemenu Footer -->
             <div class="menu-footer">
-              <button
-                aria-label="Collapse side menu"
-                aria-hidden="true"
-                aria-pressed="true"
-                @click=${this._handleCollapse}
-              >
+              <button aria-label="Collapse side menu" aria-hidden="true" aria-pressed="true" @click=${this._handleCollapse}>
                 ${chevronLeftIcon}
               </button>
             </div>

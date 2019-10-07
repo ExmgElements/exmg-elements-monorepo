@@ -107,13 +107,7 @@ export class CmsSidemenuHeader extends LitElement {
 
   render() {
     return html`
-      <paper-listbox
-        class="menu-header"
-        slot="header"
-        attr-for-selected="data-path"
-        selected="${this.selected}"
-        selectable="a"
-      >
+      <paper-listbox class="menu-header" slot="header" attr-for-selected="data-path" selected="${this.selected}" selectable="a">
         <a href=${this.debug ? '#' : this.homeUrl} data-path="[[homeUrl]]" tabindex="-1" class="menu-item">
           <paper-item role="menuitem">
             ${dashboardIcon}
