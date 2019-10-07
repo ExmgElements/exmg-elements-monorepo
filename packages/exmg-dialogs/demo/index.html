@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
 
-    <title>exmg-form-dialog demo</title>
+    <title>Dialog demo</title>
 
     <script src="../node_modules/codemirror/lib/codemirror.js"></script>
     <script src="../node_modules/codemirror/mode/markdown/markdown.js"></script>
@@ -18,219 +18,17 @@
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
     <script src="../node_modules/@webcomponents/shadycss/apply-shim.min.js"></script>
 
+    <!-- Load markdown dependicies -->
+    <script src="../node_modules/codemirror/lib/codemirror.js"></script>
+    <script src="../node_modules/codemirror/mode/markdown/markdown.js"></script>
+
     <!-- Ensure Web Animations polyfill is loaded -->
     <script src="../node_modules/web-animations-js/web-animations-next-lite.min.js"></script>
   </head>
   <body>
-    <script type="module">
-      import {LitElement, html} from 'lit-element';
-      import '@exmg/exmg-paper-combobox/exmg-paper-combobox.js';
-      import '@exmg/exmg-paper-token-input/exmg-paper-token-input.js';
-      import '@exmg/exmg-markdown-editor/exmg-markdown-editor.js';
-      import '@exmg/exmg-button';
-      import '@polymer/paper-input/paper-input.js';
-      import '@polymer/paper-item/paper-item.js';
-      import '../index';
-
-      class XDemo extends LitElement {
-        constructor() {
-          super();
-
-          this._openDialogConfirmation = this._openDialogConfirmation.bind(this);
-          this._openDialogForm = this._openDialogForm.bind(this);
-          this._openDialogFormError = this._openDialogFormError.bind(this);
-          this._openDialogFormLarge = this._openDialogFormLarge.bind(this);
-          this._openDialogInfo = this._openDialogInfo.bind(this);
-          this._delete = this._delete.bind(this);
-          this._done = this._done.bind(this);
-          this._saveData = this._saveData.bind(this);
-          this._saveDataTicket = this._saveDataTicket.bind(this);
-          this._saveDataError = this._saveDataError.bind(this);
-        }
-
-        getElementBySelector(selector) {
-          return this.shadowRoot ? this.shadowRoot.querySelector(selector) : null;
-        }
-
-        _openDialogConfirmation() {
-          this.getElementBySelector('#dialog0').open();
-        }
-        _openDialogForm() {
-          this.getElementBySelector('#dialog1').open();
-        }
-        _openDialogFormError() {
-          this.getElementBySelector('#dialog2').open();
-        }
-        _openDialogFormLarge() {
-          this.getElementBySelector('#dialog3').open();
-        }
-        _openDialogInfo() {
-          this.getElementBySelector('#dialog4').open();
-        }
-        _delete(e) {
-          const {target} = e;
-          // Trigger done after 1s
-          setTimeout(_ => {
-            // finished
-            target.done();
-          }, 1000);
-        }
-        _saveData(e) {
-          const {detail, target} = e;
-          // Save data
-          console.log('Data: ', e.detail);
-          // Trigger done after 1s
-          setTimeout(_ => {
-            // finished
-            target.done();
-          }, 1000);
-        }
-        _saveDataTicket(e) {
-          const {detail, target} = e;
-          // Save data
-          console.log('Data: ', e.detail);
-          // Trigger done after 1s
-          setTimeout(_ => {
-            // finished
-            target.done();
-          }, 1000);
-        }
-
-        _done(e) {
-          console.log('Dialog closing ...');
-          e.target.close();
-        }
-
-        _cancelCallback(e) {
-          console.log('Dialog cancel ...');
-          e.target.close();
-        }
-
-        _saveDataError(e) {
-          const {detail, target} = e;
-          // Save data
-          console.log('Data: ', e.detail);
-
-          // Trigger done after 1s
-          setTimeout(_ => {
-            try {
-              // Throw error to simulate error
-              if (true) {
-                throw Error('User does not have permission to save data');
-              }
-              target.done();
-            } catch (error) {
-              target.error(error);
-            }
-          }, 1000);
-        }
-
-        render() {
-          //language=html
-          return html`
-            <exmg-button @click="${this._openDialogConfirmation}">Dialog Confirm</exmg-button>
-            <exmg-dialog-confirm
-              id="dialog0"
-              title="Confirmation"
-              message="Are you sure you want to delete this item?"
-              button-copy="Delete account"
-              @cancel=${this._cancelCallback}
-              @submit="${this._delete}"
-            ></exmg-dialog-confirm>
-
-            <exmg-button @click="${this._openDialogForm}">Dialog Normal</exmg-button>
-            <exmg-dialog-form
-              id="dialog1"
-              title="Create account"
-              button-copy="Save"
-              @cancel=${this._cancelCallback}
-              @submit="${this._saveData}"
-            >
-              <paper-input name="name" label="Name" required></paper-input>
-              <paper-input name="test" label="Test"></paper-input>
-            </exmg-dialog-form>
-
-            <exmg-dialog-form
-              id="dialog2"
-              title="Create account"
-              button-copy="Save"
-              @cancel=${this._cancelCallback}
-              @submit="${this._saveDataError}"
-            >
-              <p>
-                This setting either prevents or allows users to create multiple accounts using the same email address if
-                they sign in to your app using different authentication providers.
-              </p>
-              <paper-input name="name" label="Name" required></paper-input>
-              <paper-input name="password" label="Password" required></paper-input>
-            </exmg-dialog-form>
-            <exmg-button @click="${this._openDialogFormError}">Dialog Error</exmg-button>
-
-            <exmg-dialog-info id="dialog4" hide-close-button button-copy="Continue" @done="${this._done}">
-              <div>
-                <h1>Title</h1>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam
-                  tincidunt aliquet condimentum.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam
-                  tincidunt aliquet condimentum.
-                </p>
-              </div>
-            </exmg-dialog-info>
-            <exmg-button @click="${this._openDialogInfo}">Dialog Info without close btn</exmg-button>
-
-            <exmg-dialog-form
-              id="dialog3"
-              title="Create Ticket"
-              button-copy="Create"
-              @cancel=${this._cancelCallback}
-              @submit="${this._saveDataTicket}"
-              large
-            >
-              <exmg-paper-combobox label="Project" style="max-width:280px;" always-float-label required>
-                <paper-item>PlayToTV</paper-item>
-                <paper-item>Website</paper-item>
-              </exmg-paper-combobox>
-              <exmg-paper-combobox label="Issue Type" style="max-width:280px;" always-float-label required>
-                <paper-item>Story</paper-item>
-                <paper-item>Bug</paper-item>
-              </exmg-paper-combobox>
-              <p class="help">
-                Some issue types are unavailable due to incompatible field configuration and/or workflow associations.
-              </p>
-              <hr />
-              <paper-input name="name" label="Summary" required always-float-label></paper-input>
-              <paper-input name="reporter" label="Reporter" required always-float-label></paper-input>
-              <p class="help">Start typing to get a list of possible matches.</p>
-              <exmg-paper-token-input name="components" label="Components" always-float-label>
-                <paper-item>javascript</paper-item>
-                <paper-item>css</paper-item>
-              </exmg-paper-token-input>
-              <p class="help">Start typing to get a list of possible matches or press down to select.</p>
-              <paper-input
-                name="estimate"
-                label="Estimates"
-                type="number"
-                always-float-label
-                style="max-width:180px;"
-              ></paper-input>
-              <p class="help">Estimated time needed to resolve this issue in hours.</p>
-              <label>Message</label>
-              <exmg-markdown-editor>
-                <marked-element markdown="# Hello Word!">
-                  <div slot="markdown-html"></div>
-                </marked-element>
-              </exmg-markdown-editor>
-              <paper-input name="test" label="Test" type="number" always-float-label></paper-input>
-            </exmg-dialog-form>
-            <exmg-button @click="${this._openDialogFormLarge}">Dialog Large</exmg-button>
-          `;
-        }
-      }
-      window.customElements.define('x-demo', XDemo);
-    </script>
-    <x-demo></x-demo>
+    <script type="module" src="./dialog-demo.js"></script>
+    <div class="vertical-section-container centered">
+      <dialog-demo></dialog-demo>
+    </div>
   </body>
 </html>
