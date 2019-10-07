@@ -74,6 +74,7 @@ paper-item {
 
 a svg {
   fill: var(--exmg-paper-sidemenu-icon-color, rgba(0, 0, 0, var(--dark-secondary-opacity)));
+  display: block;
 }
 
 paper-item .title {
