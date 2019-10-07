@@ -14,7 +14,7 @@ export class ExmgConfirmDialog extends LitElement {
   public title: string = '';
 
   /**
-   * Dialog message to display as confirmation question
+   * Dialog message to display as confirmation question. Alternative would be to just add a slot body including a message.
    */
   @property({type: String})
   private message: string = '';
@@ -50,6 +50,11 @@ export class ExmgConfirmDialog extends LitElement {
   @query('#submitBtn')
   private submitBtnNode?: PaperDialogElement;
 
+  @property({type: Boolean})
+  private hasSlotContent: boolean = false;
+
+  private observer?: MutationObserver; 
+
   static styles = [style];
 
   constructor() {
@@ -57,6 +62,38 @@ export class ExmgConfirmDialog extends LitElement {
 
     this.onCloseDialog = this.onCloseDialog.bind(this);
     this.submit = this.submit.bind(this);
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+
+    // Options for the observer (which mutations to observe)
+    const config = { attributes: false, childList: true, subtree: false };
+
+    // Create an observer instance linked to the callback function
+    this.observer = new MutationObserver((list: MutationRecord[]) => {
+      for(let mutation of list) {
+        if (mutation.type === 'childList') {
+          console.log('A child node has been added or removed.');
+          this.hasSlotContent = this.children.length > 0;
+        }
+      }
+    });
+
+    // Start observing the target node for configured mutations
+    this.observer.observe(this, config);
+
+    // Set initial slot state
+    this.hasSlotContent = this.children.length > 0;
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    
+    // Clean observer if needed
+    if(this.observer) {
+      this.observer.disconnect();
+    }
   }
 
   private onCloseDialog() {
@@ -144,7 +181,7 @@ export class ExmgConfirmDialog extends LitElement {
               </span>
             </span>
           </div>
-          <p>${this.message}</p>
+          ${this.hasSlotContent ? html`<slot></slot>` : html`<p>${this.message}</p>`}
         </div>
         <div class="actions">
           <exmg-button dialog-dismiss @click=${this.cancel}>Cancel</exmg-button>
