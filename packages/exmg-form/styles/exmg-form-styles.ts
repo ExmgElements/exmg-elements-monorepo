@@ -25,7 +25,7 @@ export const style = css`
   :host iron-form,
   :host form {
     height: var(--exmg-form-internal-height, auto);
-    padding-right: var(--exmg-form-internal-padding-right, 1rem);
+    padding-right: var(--exmg-form-internal-padding-right, 0rem);
     overflow-y: auto;
   }
   .actions {
