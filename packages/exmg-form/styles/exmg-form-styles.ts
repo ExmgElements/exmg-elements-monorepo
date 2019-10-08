@@ -31,8 +31,8 @@ export const style = css`
   .actions {
     margin: 1rem 0 0;
     text-align: right;
-    padding-right: var(--exmg-form-actions-padding-right, 1rem);
-    padding-bottom: var(--exmg-form-actions-padding-bottom, 1rem);
+    padding-right: var(--exmg-form-actions-padding-right, 0rem);
+    padding-bottom: var(--exmg-form-actions-padding-bottom, 0rem);
   }
   .actions .cancel {
     margin-right: 0.5rem;
