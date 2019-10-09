@@ -40,7 +40,7 @@ hr {
   border: none;
   background: var(--exmg-paper-sidemenu-menu-border-color, #ddd);
   margin: 8px 0 0;
-  height: 0;
+  height: 1px;
 }
 
 exmg-paper-sidemenu[collapsed] hr {
@@ -51,10 +51,14 @@ exmg-paper-sidemenu[collapsed] hr {
   display: block;
   text-decoration: none;
   outline: none;
+  margin: 4px 6px;
+  border-radius: 4px;
+  height: 40px;
+  overflow: hidden;
 }
 
 .menu-item.solo {
-  padding-top: 10px;
+  margin-top: 10px;
 }
 
 paper-listbox {
@@ -62,10 +66,10 @@ paper-listbox {
 }
 
 paper-item {
-  height: 32px;
+  height: 100%;
   min-height: auto;
   box-sizing: border-box;
-  padding: 0 20px;
+  padding: 0 12px;
   font-size: 14px;
   font-weight: 500;
   color: var(--exmg-paper-sidemenu-item-text-color, rgba(0, 0, 0, var(--dark-secondary-opacity)));
@@ -91,7 +95,7 @@ exmg-paper-sidemenu[collapsed] paper-item .title {
 }
 
 paper-item svg {
-  padding-right: 12px;
+  padding-right: 18px;
   width: 24px;
   max-width: 24px;
   height: 20px;
@@ -115,10 +119,6 @@ exmg-paper-sidemenu[collapsed] .menu-group-title {
   height: 0;
   padding: 0;
   margin-bottom: 10px;
-}
-
-exmg-paper-sidemenu[collapsed] paper-item {
-  height: 36px;
 }
 
 exmg-paper-sidemenu[collapsed] exmg-paper-tooltip {
@@ -157,12 +157,17 @@ a:hover paper-item {
   background: var(--exmg-paper-sidemenu-hover-background-color, var(--paper-grey-200));
 }
 
+a:active paper-item {
+  background: var(--exmg-paper-sidemenu-active-background-color, var(--paper-grey-400));
+}
+
 a[aria-selected='true'] svg {
   fill: var(--exmg-paper-sidemenu-selected-text-color, var(--primary-color));
 }
 
 a[aria-selected='true'] paper-item {
-  color: var(--exmg-paper-sidemenu-selected-text-color, var(--primary-color));
+  color: var(--exmg-paper-sidemenu-selected-text-color, var(--mdc-theme-on-primary));
+  background-color: var(--exmg-paper-sidemenu-selected-background-color, var(--primary-color));
 }
 
 *[hidden] {
