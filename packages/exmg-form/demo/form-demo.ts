@@ -2,9 +2,6 @@ import {LitElement, html, customElement, css, property} from 'lit-element';
 import '@material/mwc-tab/mwc-tab';
 import '@material/mwc-tab-bar/mwc-tab-bar';
 
-import '../exmg-form';
-import {ExmgForm} from '../exmg-form';
-
 import './tab-1';
 import './tab-2';
 import './tab-3';
@@ -15,14 +12,6 @@ export class FormDemo extends LitElement {
 
   @property({type: Number})
   private activeTabIndex:number = 0;
-
-  static styles = [
-    css`
-      #controlledHeight {
-        --exmg-form-internal-height: 150px;
-      }
-    `,
-  ];
 
   renderTab() {
     switch(this.activeTabIndex) {

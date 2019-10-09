@@ -1,4 +1,4 @@
-import {LitElement, html, customElement} from 'lit-element';
+import {LitElement, html, customElement, css} from 'lit-element';
 import '@polymer/paper-input/paper-input';
 import '@exmg/exmg-markdown-editor/exmg-markdown-editor';
 
@@ -8,10 +8,26 @@ import {ExmgForm} from '../exmg-form';
 @customElement('tab-3')
 export class Tab3El extends LitElement {
 
+  static styles = [
+    css`
+      #controlledHeight {
+        --exmg-form-internal-height: 150px;
+      }
+
+      #horizontal {
+        display: flex;
+        flex-direction: column;
+      }
+      #horizontal > * {
+        flex: 1;
+      }
+    `,
+  ];
+
   render() {
     return html`
       <h1>Inline form</h1>
-      <exmg-form @submit="${this.onSubmit}" @cancel="${this.onCancel}" inline>
+      <exmg-form id="horizontal" @submit="${this.onSubmit}" @cancel="${this.onCancel}" >
         <paper-input label="text input" required></paper-input>
         <paper-input label="text input" value="pre-filled"></paper-input>
       </exmg-form>

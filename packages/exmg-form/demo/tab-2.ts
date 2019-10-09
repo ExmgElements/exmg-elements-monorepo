@@ -46,7 +46,6 @@ export class Tab2El extends LitElement {
           </marked-element>
         </exmg-markdown-editor>
       </exmg-form>
-
     `;
   }
 
