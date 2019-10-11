@@ -26,7 +26,7 @@ export class ExmgForm extends LitElement {
   public submitButtonCopy: string = 'Submit';
 
   @property({type: String, attribute: 'cancel-button-copy'})
-  public cancelButtonCopy: string = 'Cancel';
+  public cancelButtonCopy: string = 'Reset';
 
   @property({type: Boolean})
   public inline: boolean = false;
@@ -74,6 +74,7 @@ export class ExmgForm extends LitElement {
   public cancel(): void {
     this.submitting = false;
     this.errorMessage = '';
+    this.reset();
     this.dispatchEvent(
       new CustomEvent('cancel', {
         bubbles: false,
