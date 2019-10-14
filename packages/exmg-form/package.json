@@ -27,16 +27,19 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@exmg/exmg-button": "^1.0.2",
+    "@exmg/exmg-button": "^1.0.3",
     "@polymer/iron-form": "^3.0.1",
-    "lit-element": "^2.2.1"
+    "lit-element": "^2.2.1",
+    "lit-html": "^1.1.2"
   },
   "devDependencies": {
     "@exmg/exmg-cli": "^2.0.2",
-    "@exmg/exmg-markdown-editor": "^5.0.3",
-    "@exmg/exmg-paper-combobox": "^5.0.5",
-    "@exmg/exmg-paper-token-input": "^5.0.3",
+    "@exmg/exmg-markdown-editor": "^5.0.9",
+    "@exmg/exmg-paper-combobox": "^5.0.6",
+    "@exmg/exmg-paper-token-input": "^5.0.4",
     "@exmg/exmg-radio-group": "^2.0.2",
+    "@material/mwc-tab": "^0.9.0",
+    "@material/mwc-tab-bar": "^0.9.0",
     "@polymer/iron-component-page": "^4.0.1",
     "@polymer/iron-demo-helpers": "^3.1.0",
     "@polymer/iron-flex-layout": "^3.0.1",
@@ -46,7 +49,7 @@
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.6",
     "@types/polymer": "^1.2.7",
-    "@webcomponents/webcomponentsjs": "^2.2.8",
+    "@webcomponents/webcomponentsjs": "^2.3.0",
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
     "gulp": "^4.0.0",
