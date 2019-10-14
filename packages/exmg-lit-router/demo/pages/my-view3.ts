@@ -84,13 +84,12 @@ class MyView3 extends PageLitElement<RootState> {
           <div class="circle small">${this.quantity}</div>
         </div>
         <p>
-          This is a slightly more advanced Redux example, that simulates a shopping cart: getting the products,
-          adding/removing items to the cart, and a checkout action, that can sometimes randomly fail (to simulate where
-          you would add failure handling).
+          This is a slightly more advanced Redux example, that simulates a shopping cart: getting the products, adding/removing items to the
+          cart, and a checkout action, that can sometimes randomly fail (to simulate where you would add failure handling).
         </p>
         <p>
-          This view, as well as its 2 child elements, <code>&lt;shop-products&gt;</code> and
-          <code>&lt;shop-cart&gt;</code> are connected to the Redux store.
+          This view, as well as its 2 child elements, <code>&lt;shop-products&gt;</code> and <code>&lt;shop-cart&gt;</code> are connected to
+          the Redux store.
         </p>
       </section>
       <section>

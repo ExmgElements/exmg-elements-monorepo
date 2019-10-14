@@ -47,11 +47,7 @@ suite('actions/router', () => {
     const store = mockStore<StateWithRouter, RouterActionRouterChanged>(state);
     const replaceStateStub = stub(window.history, 'replaceState');
 
-    const actionResult: RouterActionRouterChanged = routerChanged(routerState)(
-      store.dispatch,
-      store.getState,
-      undefined,
-    );
+    const actionResult: RouterActionRouterChanged = routerChanged(routerState)(store.dispatch, store.getState, undefined);
     const expectedActionResult = {...actionResult, type: ROUTER_CHANGED};
 
     assert.deepEqual(actionResult, expectedActionResult);

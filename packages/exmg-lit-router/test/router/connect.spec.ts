@@ -25,10 +25,6 @@ suite('router/connect', () => {
 
     window.customElements.define('page-element', PageLitElement);
     const element: PageLitElement = fixture('PageElementFixture') as PageLitElement;
-    assert.instanceOf(
-      element,
-      PageLitElement,
-      `Element is instance of ${PageLitElement.prototype.constructor.name} with connected store`,
-    );
+    assert.instanceOf(element, PageLitElement, `Element is instance of ${PageLitElement.prototype.constructor.name} with connected store`);
   });
 });
