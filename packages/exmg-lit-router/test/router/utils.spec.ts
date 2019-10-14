@@ -1,8 +1,4 @@
-import {
-  convertSearchQueryToQueryParams,
-  replaceParamsPlaceholders,
-  extractBreadcrumbsFromLocation,
-} from '../../src/router/utils';
+import {convertSearchQueryToQueryParams, replaceParamsPlaceholders, extractBreadcrumbsFromLocation} from '../../src/router/utils';
 import {mockLocation} from '../utils';
 import {connectUrlGeneratorWithRouter} from '../../src/router/url-generator';
 import {Router} from '@vaadin/router';

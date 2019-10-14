@@ -1,10 +1,6 @@
 import {routerReducer} from '../../src/reducers/router';
 import {createInitialRouterState} from '../utils';
-import {
-  RouterActionNavigateToPath,
-  RouterActionRouterChanged,
-  RouterActionUpdateQueryParams,
-} from '../../src/actions/router';
+import {RouterActionNavigateToPath, RouterActionRouterChanged, RouterActionUpdateQueryParams} from '../../src/actions/router';
 
 const {assert} = chai;
 

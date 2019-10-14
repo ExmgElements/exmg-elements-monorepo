@@ -50,10 +50,7 @@ const rootReducer = combineReducers<RootState>({
 
 export const store = createStore(
   rootReducer,
-  devCompose(
-    lazyReducerEnhancer(combineReducers),
-    applyMiddleware(reduxThunk as ThunkMiddleware<RootState, RootAction>),
-  ),
+  devCompose(lazyReducerEnhancer(combineReducers), applyMiddleware(reduxThunk as ThunkMiddleware<RootState, RootAction>)),
 );
 
 // Initially loaded reducers.

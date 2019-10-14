@@ -44,16 +44,11 @@ export interface SelectedInfo {
   matchFullPath: boolean;
 }
 
-export const prepareSelectedInfo = (
-  href: string,
-  routerPathname: string,
-  routerParams: Record<string, string> = {},
-): SelectedInfo => {
+export const prepareSelectedInfo = (href: string, routerPathname: string, routerParams: Record<string, string> = {}): SelectedInfo => {
   const pathname = preparePathFromHref(href, routerParams);
   const isExactlySame = routerPathname === pathname;
   const parentPathname = !pathname || pathname === '' || pathname.endsWith('/') ? pathname : `${pathname}/`;
-  const matchPathname =
-    isExactlySame || (typeof parentPathname === 'string' && routerPathname.startsWith(parentPathname));
+  const matchPathname = isExactlySame || (typeof parentPathname === 'string' && routerPathname.startsWith(parentPathname));
 
   return {
     matchPath: matchPathname,

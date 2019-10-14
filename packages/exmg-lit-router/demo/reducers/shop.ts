@@ -9,14 +9,7 @@
  */
 
 import {Reducer} from 'redux';
-import {
-  GET_PRODUCTS,
-  ADD_TO_CART,
-  REMOVE_FROM_CART,
-  CHECKOUT_SUCCESS,
-  CHECKOUT_FAILURE,
-  ShopAction,
-} from '../actions/shop';
+import {GET_PRODUCTS, ADD_TO_CART, REMOVE_FROM_CART, CHECKOUT_SUCCESS, CHECKOUT_FAILURE, ShopAction} from '../actions/shop';
 import {createSelector} from 'reselect';
 import {RootState, RootAction} from '../store';
 

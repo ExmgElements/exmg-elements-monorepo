@@ -4,6 +4,7 @@ import {Location as VaadinLocation} from '@vaadin/router';
 import {RouterState} from '../src/reducers/router';
 
 export const mockStore = <S = any, A extends Action = AnyAction>(state: S): Store<S> & LazyStore => {
+  // @ts-ignore
   return {
     getState: (): S => {
       return state;
