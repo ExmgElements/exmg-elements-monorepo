@@ -1,5 +1,8 @@
 import {RouteItem} from '@vaadin/router';
 
+import './broadcast/broadcast-page';
+import './broadcast/broadcast-detail';
+
 export const appRoutes: RouteItem[] = [
   {
     path: '',
@@ -61,6 +64,32 @@ export const appRoutes: RouteItem[] = [
             title: 'User detail {name}',
             data: {
               userListName: 'user-list-lazy',
+            },
+          },
+        ],
+      },
+      {
+        path: 'broadcast',
+        breadcrumb: {label: 'Broadcast'},
+        children: (): RouteItem[] => [
+          {
+            path: '',
+            breadcrumb: {label: 'Broadcast Page'},
+            component: 'broadcast-page',
+            title: 'Broadcast List',
+            name: 'broadcast-list-name',
+            data: {
+              someData: true,
+            },
+          },
+          {
+            path: ':name',
+            component: 'broadcast-detail',
+            breadcrumb: {label: 'Broadcast {name}'},
+            name: 'broadcast-detail',
+            title: 'User detail {name}',
+            data: {
+              broadcastListName: 'broadcast-list-name',
             },
           },
         ],

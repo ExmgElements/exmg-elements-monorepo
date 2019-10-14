@@ -41,11 +41,8 @@ const beforeInstall = (routes: RouteItem[]): void => {
 
 export type Installer = (locationUpdatedCallback: (location: Location, e: Event | null) => void) => void;
 
-export const locationUpdatedHandler = (locationUpdatedCallback?: LocationUpdatedCallback) => (
-  location: Location,
-  e: Event | null,
-) => {
-  if (Router.go(location.pathname.toLowerCase())) {
+export const locationUpdatedHandler = (locationUpdatedCallback?: LocationUpdatedCallback) => (location: Location, e: Event | null) => {
+  if (Router.go(location.pathname)) {
     locationUpdatedCallback && locationUpdatedCallback(location);
   }
 };

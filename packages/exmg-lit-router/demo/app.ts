@@ -68,6 +68,7 @@ class MyApp extends ConnectedLitElement<RootState> {
       <exmg-link> <a href="users-with-predefined-router">Users list</a></exmg-link>
       <exmg-link> <a href="users-with-predefined-router/details/john">Users John</a></exmg-link>
       <exmg-link> <a href="users-lazy">Users list - lazy</a></exmg-link>
+      <exmg-link> <a href="broadcast">Broadcast Page</a></exmg-link>
     `;
   }
 
