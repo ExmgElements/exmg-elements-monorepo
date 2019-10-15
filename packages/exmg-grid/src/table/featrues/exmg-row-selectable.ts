@@ -35,11 +35,13 @@ export class ExmgRowSelectable {
   private querySelectors: ExmgQuerySelectors;
   private dispatchEvent: (event: Event) => boolean;
   private selectableCheckboxSelector?: string;
+  private disableRowClickSelection: boolean;
 
-  constructor(qs: ExmgQuerySelectors, de: (event: Event) => boolean, scs?: string) {
+  constructor(qs: ExmgQuerySelectors, de: (event: Event) => boolean, scs?: string, drcs: booelan) {
     this.querySelectors = qs;
     this.dispatchEvent = de;
     this.selectableCheckboxSelector = scs;
+    this.disableRowClickSelection = drcs;
   }
 
   initFeature(bodyRows: NodeListOf<HTMLTableRowElement>): void {
@@ -84,10 +86,11 @@ export class ExmgRowSelectable {
 
       row.addEventListener('click', (e: Event) => {
         const target = e.target as HTMLElement;
-        // Also TR needed for initial auto check of selected rows
-        if (target.tagName !== 'TR' && target.tagName !== 'TD' && target.tagName !== 'MWC-CHECKBOX') {
+        // Also TR needed for initial auto selected rows on init / if disable row selection it is only possible to use the mwc-checkbox
+        if((this.disableRowClickSelection && target.tagName !== 'MWC-CHECKBOX' && target.tagName !== 'TR') || (target.tagName !== 'TR' && target.tagName !== 'TD' && target.tagName !== 'MWC-CHECKBOX')) {
           return;
         }
+      
         const index = this.selectedRows.indexOf(row);
         const isRowAlreadySelected = index > -1;
         if (isRowAlreadySelected) {

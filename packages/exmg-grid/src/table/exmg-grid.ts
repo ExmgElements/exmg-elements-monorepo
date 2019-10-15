@@ -89,6 +89,12 @@ export class ExmgGrid extends LitElement {
   rowsSelectable: boolean = false;
 
   /**
+   * By default a ros is also selactable by clicking anywhere inside the row when the rowSElectable option is enabled
+   */
+  @property({type: Boolean, attribute: 'disable-row-click-selection'})
+  disableRowClickSelection: boolean = false;
+
+  /**
    * If rows are selectable you can also pass selector to checkboxes.
    * We can have checkboxes in thead or / and tbody.
    */
@@ -299,6 +305,7 @@ export class ExmgGrid extends LitElement {
         this.querySelectors,
         (event: Event) => this.dispatchEvent(event),
         this.selectableCheckboxSelector,
+        this.disableRowClickSelection
       );
       this.rowSelectableFeature.initFeature(bodyRows);
     }

@@ -106,7 +106,8 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
         .expandedRowIds="${this.expandedRowIds}"
         .selectedRowIds="${this.selectedRowIds}"
         selectable-checkbox-selector=".selectable-checkbox"
-        ?rows-selectable="${true}"
+        rows-selectable
+        disable-row-click-selection
         expandable-toggle-selector=".expandable-toggle"
         @exmg-grid-selected-rows-change="${this.onSelectedRowsChange}"
         default-sort-column="${DEFAULT_SORT_COLUMN}"
