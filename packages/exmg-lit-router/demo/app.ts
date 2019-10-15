@@ -30,7 +30,8 @@ import {installRouter} from '../src/router/instal-router';
 import {ConnectedLitElement} from '../src/router/connect';
 import {appRoutes} from './app-routes';
 import './components/breadcrumb';
-import {navigateToPath} from '../src/actions/router';
+import {navigateToPath, BreadcrumbItem} from '../src/actions/router';
+import { BreadcrumbItem as CMSBreadcrumbItem } from './components/breadcrumb';
 
 class MyApp extends ConnectedLitElement<RootState> {
   static styles = css`
@@ -38,12 +39,18 @@ class MyApp extends ConnectedLitElement<RootState> {
   `;
   @property({type: String})
   appTitle = '';
+
   @property({type: Object})
   private router: Partial<RouterState> = {};
+
   @property({type: Boolean})
   private drawerOpened = false;
+
   @property({type: Boolean})
   private snackbarOpened = false;
+
+  @property({type: Object})
+  private breadcrumbs: CMSBreadcrumbItem[] = [];
 
   constructor() {
     super();
@@ -56,6 +63,14 @@ class MyApp extends ConnectedLitElement<RootState> {
     this.snackbarOpened = state.app!.snackbarOpened;
     this.drawerOpened = state.app!.drawerOpened;
     this.router = state.router;
+    this.breadcrumbs = state.router.breadcrumbs.map((item: BreadcrumbItem) => {
+      return {
+        content: item.selector ? item.selector(state) : item.label,
+        disabled: item.disabled,
+        href: item.href,
+        selected: item.matchFullPath,
+      };
+    });
   }
 
   private renderLinks() {
@@ -70,6 +85,10 @@ class MyApp extends ConnectedLitElement<RootState> {
       <exmg-link> <a href="users-lazy">Users list - lazy</a></exmg-link>
       <exmg-link> <a href="broadcast">Broadcast Page</a></exmg-link>
     `;
+  }
+
+  protected renderBreadcrumbs() {
+    
   }
 
   protected render() {
@@ -93,7 +112,7 @@ class MyApp extends ConnectedLitElement<RootState> {
         <nav class="drawer-list">${this.renderLinks()}</nav>
       </app-drawer>
 
-      <div class="breadcrumb"><exmg-breadcrumb .breadcrumbs="${this.router.breadcrumbs}"></exmg-breadcrumb></div>
+      <div class="breadcrumb"><exmg-breadcrumb .items=${this.breadcrumbs}></exmg-breadcrumb></div>
       <!-- Main content -->
       <main role="main" class="main-content"></main>
 

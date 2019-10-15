@@ -25,6 +25,7 @@ export class ExmgDetail extends PageLitElement<StateWithRouter> {
 
   protected render() {
     const user = this.users.get(this.router.params!.name)!;
+    debugger;
     const userListRouteName = (this.router!.data!.userListName as string) || 'user-list';
     const userListUrl = generateUrlByNameOrComponentName(userListRouteName);
 

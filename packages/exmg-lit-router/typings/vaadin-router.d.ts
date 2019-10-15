@@ -47,7 +47,8 @@ declare module '@vaadin/router' {
         RouteItem[];
 
     type Breadcrumb = {
-      label: string;
+      label?: string;
+      selector?: Function;
       href?: string;
       disabled?: boolean;
     };
