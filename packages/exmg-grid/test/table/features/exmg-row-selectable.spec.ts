@@ -23,12 +23,12 @@ suite('exmg-row-selectable', () => {
     element = fixture('TableFixture') as HTMLTableElement;
     const tableBody: HTMLTableSectionElement = element.querySelector('tbody')!;
     querySelectors = new ExmgQuerySelectors(element, tableBody);
-    testInstance = new ExmgRowSelectable(querySelectors, dispatchEvent(element), checkboxSelector);
+    testInstance = new ExmgRowSelectable(querySelectors, dispatchEvent(element), false, checkboxSelector);
   });
 
   suite('without selectable checkbox selector', () => {
     test('row and checkbox is not syncing', () => {
-      testInstance = new ExmgRowSelectable(querySelectors, dispatchEvent(element));
+      testInstance = new ExmgRowSelectable(querySelectors, dispatchEvent(element), false);
       const checkbox = element.querySelector<HTMLInputElement>('tbody input[type="checkbox"]')!;
       const row = checkbox.closest('tr')!;
       assert.isFalse(row.hasAttribute('data-selected'), 'Row not selected before init');
@@ -41,7 +41,7 @@ suite('exmg-row-selectable', () => {
     });
 
     test('header checkbox does not invoke selection on rows', () => {
-      testInstance = new ExmgRowSelectable(querySelectors, dispatchEvent(element));
+      testInstance = new ExmgRowSelectable(querySelectors, dispatchEvent(element), false);
       const checkbox = element.querySelector<HTMLInputElement>('th input[type="checkbox"]')!;
       assert.equal(testInstance.selectedRows.length, 0, 'Before init any row is selected');
       testInstance.initFeature(querySelectors.getBodyRows());

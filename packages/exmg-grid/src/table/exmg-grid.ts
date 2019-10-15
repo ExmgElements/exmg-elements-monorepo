@@ -304,8 +304,8 @@ export class ExmgGrid extends LitElement {
       this.rowSelectableFeature = new ExmgRowSelectable(
         this.querySelectors,
         (event: Event) => this.dispatchEvent(event),
+        this.disableRowClickSelection,
         this.selectableCheckboxSelector,
-        this.disableRowClickSelection
       );
       this.rowSelectableFeature.initFeature(bodyRows);
     }

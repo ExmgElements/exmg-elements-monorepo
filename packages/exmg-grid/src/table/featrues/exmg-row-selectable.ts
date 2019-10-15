@@ -37,7 +37,7 @@ export class ExmgRowSelectable {
   private selectableCheckboxSelector?: string;
   private disableRowClickSelection: boolean;
 
-  constructor(qs: ExmgQuerySelectors, de: (event: Event) => boolean, scs?: string, drcs: booelan) {
+  constructor(qs: ExmgQuerySelectors, de: (event: Event) => boolean, drcs: boolean, scs?: string) {
     this.querySelectors = qs;
     this.dispatchEvent = de;
     this.selectableCheckboxSelector = scs;
