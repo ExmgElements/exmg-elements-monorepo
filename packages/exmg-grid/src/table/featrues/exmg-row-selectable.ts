@@ -83,7 +83,6 @@ export class ExmgRowSelectable {
       row.setAttribute('data-is-selectable', '');
 
       row.addEventListener('click', (e: Event) => {
-        debugger;
         const index = this.selectedRows.indexOf(row);
         const isRowAlreadySelected = index > -1;
         if (isRowAlreadySelected) {
