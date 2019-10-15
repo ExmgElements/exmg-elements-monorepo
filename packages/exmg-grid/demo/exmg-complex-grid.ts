@@ -38,6 +38,20 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
       .reduce((acc, item: string) => ({...acc, [item]: true}), {});
   }
 
+
+    // get more menu items for row
+    moreMenu() {
+      return html`
+        <paper-menu-button dynamic-align>
+          <mwc-icon-button class="ignore-select" icon="more_vert" slot="dropdown-trigger"></mwc-icon-button>
+          <paper-listbox slot="dropdown-content">
+            <paper-item>Edit 1</paper-item>
+            <paper-item>Edit 2</paper-item>
+          </paper-listbox>
+        </paper-menu-button>
+      `;
+    };
+
   private renderTableBody() {
     return repeat(
       this.items,
@@ -51,6 +65,9 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
             <td class="grid-col-number">${i.year}</td>
             <td class="grid-col-number">${i.amount}</td>
             <td class="grid-cell-visible-on-hover"><span class="expandable-toggle">${createIcon}</span></td>
+            <td class="grid-col no-ellipsis">
+              ${this.moreMenu()}
+            </td>
           </tr>
           <tr class="grid-row-detail" data-row-detail-key="${i.id}">
             <td data-auto-colspan>
@@ -116,13 +133,14 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
             <tr class="grid-columns">
               <th class="grid-checkbox-cell"><mwc-checkbox class="selectable-checkbox"></mwc-checkbox></th>
               <th><span>ID</span></th>
-              <th style="max-width: 100px" data-column-key="month" data-sort>
+              <th style="width: 80%" data-column-key="month" data-sort>
                 <span>Month with quite long name which should stay on one line</span>
               </th>
               <th class="grid-col-number" data-column-key="year" data-sort>
                 <span>Year with quite short name with one line inside inside span tag</span>
               </th>
               <th class="grid-col-number" data-column-key="amount" data-sort=""><span>Income</span></th>
+              <th></th>
               <th></th>
             </tr>
           </thead>
