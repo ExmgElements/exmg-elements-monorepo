@@ -65,7 +65,7 @@ export const extractBreadcrumbsFromLocation = (location: VaadinLocation): Breadc
     .map(it => {
       const slash = it.path === '' || prevPath.endsWith('/') || it.path.startsWith('/') ? '' : '/';
       const path = !!prevPath ? `${prevPath}${slash}${it.path}` : it.path;
-      const {label, href, disabled = false} = it.breadcrumb!;
+      const {label, href, disabled = false, selector} = it.breadcrumb!;
       const preparedHref = typeof href === 'string' ? href : generateUrlByPath(path, params);
       const selectedInfo = prepareSelectedInfo(preparedHref, pathname, params);
       prevPath = path;
@@ -73,8 +73,9 @@ export const extractBreadcrumbsFromLocation = (location: VaadinLocation): Breadc
       return {
         path,
         disabled,
+        selector,
         href: preparedHref,
-        label: replaceParamsPlaceholders(label, params),
+        label: replaceParamsPlaceholders(label || '', params),
         ...selectedInfo,
       };
     });

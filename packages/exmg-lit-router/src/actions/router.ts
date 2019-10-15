@@ -14,7 +14,8 @@ type ROUTER_CHANGED_TYPE = 'ROUTER_CHANGED';
 export interface BreadcrumbItem extends SelectedInfo {
   href: string;
   path: string;
-  label: string;
+  label?: string;
+  selector?: Function;
   disabled?: boolean;
 }
 

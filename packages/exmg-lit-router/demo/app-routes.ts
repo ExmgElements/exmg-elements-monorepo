@@ -1,7 +1,18 @@
 import {RouteItem} from '@vaadin/router';
 
+// Can also be incl by lazy import
 import './broadcast/broadcast-page';
 import './broadcast/broadcast-detail';
+
+import { RootState } from './store';
+
+const activeBroadcastName = (state: RootState) => {
+  if(!state.router.params.broadcastId) {
+    return '-';
+  }
+  // lookup broadcast name in redux state bu param id
+  return 'Broadcast Ep 1';
+}
 
 export const appRoutes: RouteItem[] = [
   {
@@ -74,20 +85,18 @@ export const appRoutes: RouteItem[] = [
         children: (): RouteItem[] => [
           {
             path: '',
-            breadcrumb: {label: 'Broadcast Page'},
             component: 'broadcast-page',
             title: 'Broadcast List',
             name: 'broadcast-list-name',
-            data: {
-              someData: true,
-            },
           },
           {
-            path: ':name',
+            path: ':broadcastId',
             component: 'broadcast-detail',
-            breadcrumb: {label: 'Broadcast {name}'},
+            breadcrumb: {
+              selector: (state: any) => activeBroadcastName(state),
+            },
             name: 'broadcast-detail',
-            title: 'User detail {name}',
+            title: 'BC detail',
             data: {
               broadcastListName: 'broadcast-list-name',
             },
