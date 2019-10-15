@@ -31,6 +31,9 @@ $exmgTableThSortableHoverColor: null !default;
       &.grid-checkbox-cell {
         width: var(--exmg-table-checkbox-cell-width);
       }
+      &.no-ellipsis {
+        text-overflow: initial;
+      }
     }
   }
 }
