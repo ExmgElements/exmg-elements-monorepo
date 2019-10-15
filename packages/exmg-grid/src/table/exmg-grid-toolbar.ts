@@ -158,9 +158,7 @@ export class ExmgGridToolbar extends LitElement {
     return undefined;
   }
 
-  private isSettingSelectionListConfig(
-    setting: Setting<BaseSettingConfig>,
-  ): setting is Setting<SettingSelectionListConfig> {
+  private isSettingSelectionListConfig(setting: Setting<BaseSettingConfig>): setting is Setting<SettingSelectionListConfig> {
     return setting.config.type === SettingConfigType.SelectionList;
   }
 
@@ -200,24 +198,12 @@ export class ExmgGridToolbar extends LitElement {
           --paper-input-container-color: var(--exmg-grid-toolbar-on-surface-color, var(--mdc-theme-on-surface));
           --paper-input-container-focus-color: var(--exmg-grid-toolbar-on-surface-color, var(--mdc-theme-primary));
 
-          --exmg-paper-combobox-selected-item-color: var(
-            --exmg-grid-toolbar-on-surface-color,
-            var(--mdc-theme-on-surface)
-          );
+          --exmg-paper-combobox-selected-item-color: var(--exmg-grid-toolbar-on-surface-color, var(--mdc-theme-on-surface));
           --exmg-paper-combobox-selected-item-bg-color: var(--exmg-grid-toolbar-surface-color, transparent);
-          --exmg-paper-combobox-dropdown-button-color: var(
-            --exmg-grid-toolbar-on-surface-color,
-            var(--mdc-theme-on-surface)
-          );
+          --exmg-paper-combobox-dropdown-button-color: var(--exmg-grid-toolbar-on-surface-color, var(--mdc-theme-on-surface));
           --exmg-paper-combobox-dropdown-button-bg-color: var(--exmg-grid-toolbar-surface-color, transparent);
-          --exmg-paper-combobox-dropdown-list-color: var(
-            --exmg-grid-toolbar-on-surface-color,
-            var(--mdc-theme-on-surface)
-          );
-          --exmg-paper-combobox-dropdown-list-bg-color: var(
-            --exmg-grid-toolbar-surface-color,
-            var(--mdc-theme-surface)
-          );
+          --exmg-paper-combobox-dropdown-list-color: var(--exmg-grid-toolbar-on-surface-color, var(--mdc-theme-on-surface));
+          --exmg-paper-combobox-dropdown-list-bg-color: var(--exmg-grid-toolbar-surface-color, var(--mdc-theme-surface));
         }
         :host exmg-grid-base-toolbar[active] {
           --paper-item-focused: {
@@ -234,29 +220,14 @@ export class ExmgGridToolbar extends LitElement {
           }
           --paper-button-ink-color: var(--exmg-grid-toolbar-filter-item-active-bg-color, var(--mdc-theme-secondary));
           --paper-input-container-color: var(--exmg-grid-toolbar-active-on-surface-color, var(--mdc-theme-on-surface));
-          --paper-input-container-focus-color: var(
-            --exmg-grid-toolbar-active-on-surface-color,
-            var(--mdc-theme-primary)
-          );
+          --paper-input-container-focus-color: var(--exmg-grid-toolbar-active-on-surface-color, var(--mdc-theme-primary));
 
-          --exmg-paper-combobox-selected-item-color: var(
-            --exmg-grid-toolbar-active-on-surface-color,
-            var(--mdc-theme-on-surface)
-          );
+          --exmg-paper-combobox-selected-item-color: var(--exmg-grid-toolbar-active-on-surface-color, var(--mdc-theme-on-surface));
           --exmg-paper-combobox-selected-item-bg-color: var(--exmg-grid-toolbar-bg-active-surface-color, transparent);
-          --exmg-paper-combobox-dropdown-button-color: var(
-            --exmg-grid-toolbar-active-on-surface-color,
-            var(--mdc-theme-on-surface)
-          );
+          --exmg-paper-combobox-dropdown-button-color: var(--exmg-grid-toolbar-active-on-surface-color, var(--mdc-theme-on-surface));
           --exmg-paper-combobox-dropdown-button-bg-color: var(--exmg-grid-toolbar-bg-active-surface-color, transparent);
-          --exmg-paper-combobox-dropdown-list-color: var(
-            --exmg-grid-toolbar-active-on-surface-color,
-            var(--mdc-theme-on-surface)
-          );
-          --exmg-paper-combobox-dropdown-list-bg-color: var(
-            --exmg-grid-toolbar-bg-active-surface-color,
-            var(--mdc-theme-surface)
-          );
+          --exmg-paper-combobox-dropdown-list-color: var(--exmg-grid-toolbar-active-on-surface-color, var(--mdc-theme-on-surface));
+          --exmg-paper-combobox-dropdown-list-bg-color: var(--exmg-grid-toolbar-bg-active-surface-color, var(--mdc-theme-surface));
         }
       </style>
       <exmg-grid-base-toolbar>

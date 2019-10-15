@@ -64,9 +64,7 @@ export class ExmgGridSmartToolbar extends LitElement {
     return !!action.condition && action.condition!.type === ActionConditionType.AmountOfSelectedItemsRange;
   }
 
-  private checkAmountOfSelectedItemsRangeCondition(
-    action: ActionWithCondition<ActionAmountSelectedItemsCondition>,
-  ): boolean {
+  private checkAmountOfSelectedItemsRangeCondition(action: ActionWithCondition<ActionAmountSelectedItemsCondition>): boolean {
     const condition = action.condition;
     const min = condition!.min;
 

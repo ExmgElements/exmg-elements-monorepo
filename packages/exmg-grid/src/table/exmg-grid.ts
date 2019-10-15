@@ -242,9 +242,7 @@ export class ExmgGrid extends LitElement {
   private observeSelectedRowIds(changedProps: SmartPropertyValue): void {
     if (changedProps.has('selectedRowIds')) {
       Object.entries(this.selectedRowIds).forEach(([rowId, nextSelectionState]) => {
-        const row = this.getTableBody().querySelector<HTMLTableRowElement>(
-          this.getBodyRowSelector(`[data-row-key="${rowId}"]`),
-        );
+        const row = this.getTableBody().querySelector<HTMLTableRowElement>(this.getBodyRowSelector(`[data-row-key="${rowId}"]`));
 
         if (row) {
           const isSelected = row.hasAttribute('data-selected');

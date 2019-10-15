@@ -65,8 +65,7 @@ export class ExmgGridPagination extends LitElement {
     if (this.itemCount > 0) {
       return html`
         <span>
-          ${this.pageIndex * this.pageSize + 1}- ${Math.min((this.pageIndex + 1) * this.pageSize, this.itemCount)} of
-          ${this.itemCount}
+          ${this.pageIndex * this.pageSize + 1}- ${Math.min((this.pageIndex + 1) * this.pageSize, this.itemCount)} of ${this.itemCount}
         </span>
       `;
     }
@@ -113,9 +112,7 @@ export class ExmgGridPagination extends LitElement {
   }
 
   private fireEventPageChanged(page: number) {
-    this.dispatchEvent(
-      new CustomEvent('exmg-grid-pagination-page-changed', {bubbles: true, composed: true, detail: {page}}),
-    );
+    this.dispatchEvent(new CustomEvent('exmg-grid-pagination-page-changed', {bubbles: true, composed: true, detail: {page}}));
   }
 
   private handleOnClickPrev(e: Event): boolean {

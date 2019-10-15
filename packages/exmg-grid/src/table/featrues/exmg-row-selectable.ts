@@ -83,9 +83,9 @@ export class ExmgRowSelectable {
       row.setAttribute('data-is-selectable', '');
 
       row.addEventListener('click', (e: Event) => {
-        const target = (e.target as HTMLElement);
+        const target = e.target as HTMLElement;
         // Also TR needed for initial auto check of selected rows
-        if(target.tagName !== 'TR' && target.tagName !== 'TD' &&  target.tagName !== 'MWC-CHECKBOX') {
+        if (target.tagName !== 'TR' && target.tagName !== 'TD' && target.tagName !== 'MWC-CHECKBOX') {
           return;
         }
         const index = this.selectedRows.indexOf(row);
@@ -98,8 +98,7 @@ export class ExmgRowSelectable {
           this.selectedRows.push(row);
         }
 
-        const rowCheckbox =
-          this.selectableCheckboxSelector && row.querySelector<HTMLInputElement>(this.selectableCheckboxSelector);
+        const rowCheckbox = this.selectableCheckboxSelector && row.querySelector<HTMLInputElement>(this.selectableCheckboxSelector);
         if (rowCheckbox && rowCheckbox !== e.target) {
           if (isRowAlreadySelected) {
             uncheckCheckbox(rowCheckbox);
@@ -184,9 +183,7 @@ export class ExmgRowSelectable {
 
   private getBodyCheckboxes(): HTMLInputElement[] {
     return this.selectableCheckboxSelector
-      ? Array.from(
-          this.querySelectors.getTableBody().querySelectorAll<HTMLInputElement>(this.selectableCheckboxSelector),
-        )
+      ? Array.from(this.querySelectors.getTableBody().querySelectorAll<HTMLInputElement>(this.selectableCheckboxSelector))
       : [];
   }
 

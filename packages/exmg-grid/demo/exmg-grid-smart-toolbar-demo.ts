@@ -1,10 +1,5 @@
 import {customElement, html, LitElement, property} from 'lit-element';
-import {
-  Filter,
-  FilterSingleSelectConfig,
-  FilterConfigType,
-  SettingSelectionListItem,
-} from '../src/table/types/exmg-grid-toolbar-types';
+import {Filter, FilterSingleSelectConfig, FilterConfigType, SettingSelectionListItem} from '../src/table/types/exmg-grid-toolbar-types';
 import {
   ActionAmountSelectedItemsCondition,
   ActionWithCondition,
@@ -104,10 +99,7 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
   }
 
   private updateSelectedItems() {
-    this.amountOfSelectedItems = parseInt(
-      this.shadowRoot!.querySelector<HTMLInputElement>('#amount-of-selected-items')!.value,
-      10,
-    );
+    this.amountOfSelectedItems = parseInt(this.shadowRoot!.querySelector<HTMLInputElement>('#amount-of-selected-items')!.value, 10);
   }
 
   render() {

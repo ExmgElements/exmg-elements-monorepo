@@ -38,19 +38,18 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
       .reduce((acc, item: string) => ({...acc, [item]: true}), {});
   }
 
-
-    // get more menu items for row
-    moreMenu() {
-      return html`
-        <paper-menu-button dynamic-align>
-          <mwc-icon-button class="ignore-select" icon="more_vert" slot="dropdown-trigger"></mwc-icon-button>
-          <paper-listbox slot="dropdown-content">
-            <paper-item>Edit 1</paper-item>
-            <paper-item>Edit 2</paper-item>
-          </paper-listbox>
-        </paper-menu-button>
-      `;
-    };
+  // get more menu items for row
+  moreMenu() {
+    return html`
+      <paper-menu-button dynamic-align>
+        <mwc-icon-button class="ignore-select" icon="more_vert" slot="dropdown-trigger"></mwc-icon-button>
+        <paper-listbox slot="dropdown-content">
+          <paper-item>Edit 1</paper-item>
+          <paper-item>Edit 2</paper-item>
+        </paper-listbox>
+      </paper-menu-button>
+    `;
+  }
 
   private renderTableBody() {
     return repeat(

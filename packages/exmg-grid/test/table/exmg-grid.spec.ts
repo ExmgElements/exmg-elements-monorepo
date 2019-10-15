@@ -1,10 +1,5 @@
 import {ExmgGrid} from '../../src/table/exmg-grid';
-import {
-  promisifyFlush,
-  onExmgGridSortChange,
-  onExmgGridSelectedRowsChange,
-  onEventListenerExmgGridSelectedRowsChange,
-} from '../utils';
+import {promisifyFlush, onExmgGridSortChange, onExmgGridSelectedRowsChange, onEventListenerExmgGridSelectedRowsChange} from '../utils';
 
 declare const flush: (cb?: Function) => void;
 declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
@@ -146,26 +141,17 @@ suite('exmg-grid', () => {
       const firstRowDetail = table.querySelector<HTMLTableRowElement>('tr[data-row-detail-key="1"]')!;
 
       assert.isTrue(firstRowExpandableTrigger.hasAttribute('data-is-expandable'), 'Trigger should be initialized');
-      assert.isFalse(
-        firstRowExpandableTrigger.hasAttribute('data-is-expanded'),
-        'Row detail is not triggered to be expanded',
-      );
+      assert.isFalse(firstRowExpandableTrigger.hasAttribute('data-is-expanded'), 'Row detail is not triggered to be expanded');
       assert.isFalse(firstRowDetail.hasAttribute('data-is-row-expanded'), 'Row detail is not expanded');
 
       firstRowExpandableTrigger.click();
 
-      assert.isTrue(
-        firstRowExpandableTrigger.hasAttribute('data-is-expanded'),
-        'Row detail is triggered to be expanded',
-      );
+      assert.isTrue(firstRowExpandableTrigger.hasAttribute('data-is-expanded'), 'Row detail is triggered to be expanded');
       assert.isTrue(firstRowDetail.hasAttribute('data-is-row-expanded'), 'Row detail is expanded');
 
       firstRowExpandableTrigger.click();
 
-      assert.isFalse(
-        firstRowExpandableTrigger.hasAttribute('data-is-expanded'),
-        'Row detail is not triggered to be expanded',
-      );
+      assert.isFalse(firstRowExpandableTrigger.hasAttribute('data-is-expanded'), 'Row detail is not triggered to be expanded');
       assert.isFalse(firstRowDetail.hasAttribute('data-is-row-expanded'), 'Row detail is not expanded');
     });
 

@@ -38,8 +38,6 @@ export class ExmgQuerySelectors {
   }
 
   getBodyRowsNotInitialized(): NodeListOf<HTMLTableRowElement> {
-    return this.getTableBody().querySelectorAll<HTMLTableRowElement>(
-      this.getBodyRowSelector(':not([data-initialized])'),
-    );
+    return this.getTableBody().querySelectorAll<HTMLTableRowElement>(this.getBodyRowSelector(':not([data-initialized])'));
   }
 }

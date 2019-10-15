@@ -33,10 +33,7 @@ suite('exmg-column-sortable', () => {
     assert.instanceOf(amountColumn, HTMLElement);
     assert.isFalse(amountColumn.hasAttribute('data-sort-direction'), 'There is no default sort before init');
     testInstance.initFeature();
-    assert.isFalse(
-      amountColumn.hasAttribute('data-sort-direction'),
-      'After init without default sorting, still no sort-direction',
-    );
+    assert.isFalse(amountColumn.hasAttribute('data-sort-direction'), 'After init without default sorting, still no sort-direction');
   });
 
   test('click on sortable column is changing direction', async () => {
@@ -59,10 +56,7 @@ suite('exmg-column-sortable', () => {
     assert.equal(amountColumn.getAttribute('data-sort-direction'), 'DESC', 'Default sort is setup on amount column');
     assert.isFalse(yearColumn.hasAttribute('data-sort-direction'), 'Column year has not sort direction');
     yearColumn.click();
-    assert.isFalse(
-      amountColumn.hasAttribute('data-sort-direction'),
-      'Sort direction on amount column has been removed',
-    );
+    assert.isFalse(amountColumn.hasAttribute('data-sort-direction'), 'Sort direction on amount column has been removed');
     assert.equal(yearColumn.getAttribute('data-sort-direction'), 'ASC', 'Sort direction on column year is ASC');
   });
 

@@ -3,9 +3,7 @@ import {EventDetailSelectedRowsChange, EventDetailSortChange} from '../src/table
 
 export const promisifyFlush = (flush: Function) => () => new Promise(resolve => flush(resolve));
 
-type OnEventType = <T extends Event = CustomEvent>(
-  eventName: string,
-) => (element: LitElement, shouldResolve: boolean) => Promise<T>;
+type OnEventType = <T extends Event = CustomEvent>(eventName: string) => (element: LitElement, shouldResolve: boolean) => Promise<T>;
 
 const onEvent: OnEventType = (eventName: string) => (element: LitElement, shouldResolve: boolean) =>
   new Promise<any>((resolve, reject) => {
@@ -17,9 +15,7 @@ interface EventListenerResult<T extends Event = Event> {
   unsubscribe: () => void;
 }
 
-const onEventListener = <T extends Event = CustomEvent>(eventName: string) => (
-  element: LitElement,
-): EventListenerResult<T> => {
+const onEventListener = <T extends Event = CustomEvent>(eventName: string) => (element: LitElement): EventListenerResult<T> => {
   let results: T[] = [];
   const handler = (event: Event) => results.push(event as T);
   element.addEventListener(eventName, handler);
@@ -44,9 +40,7 @@ export const onExmgGridPaginationPageSizeChanged = onEvent('exmg-grid-pagination
 
 export const onExmgGridSortChange = onEvent<CustomEvent<EventDetailSortChange>>('exmg-grid-sort-change');
 
-export const onExmgGridSelectedRowsChange = onEvent<CustomEvent<EventDetailSelectedRowsChange>>(
-  'exmg-grid-selected-rows-change',
-);
+export const onExmgGridSelectedRowsChange = onEvent<CustomEvent<EventDetailSelectedRowsChange>>('exmg-grid-selected-rows-change');
 export const onEventListenerExmgGridSelectedRowsChange = onEventListener<CustomEvent<EventDetailSelectedRowsChange>>(
   'exmg-grid-selected-rows-change',
 );

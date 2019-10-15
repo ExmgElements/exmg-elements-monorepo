@@ -88,9 +88,7 @@ suite('<exmg-grid-pagination>', function() {
       assert.equal((await pageChangedPromise).detail.page, 1);
 
       pageSizeChangedPromise = onExmgGridPaginationPageSizeChanged(element, true);
-      pageSizeOptionsElem.dispatchEvent(
-        new CustomEvent('exmg-combobox-select', {bubbles: true, composed: true, detail: {value: 30}}),
-      );
+      pageSizeOptionsElem.dispatchEvent(new CustomEvent('exmg-combobox-select', {bubbles: true, composed: true, detail: {value: 30}}));
       assert.deepEqual((await pageSizeChangedPromise).detail, {pageSize: 30, page: 0});
 
       /**

@@ -31,10 +31,7 @@ suite('<exmg-grid-base-toolbar>', function() {
     test('settings is rendered properly', () => {
       const settingsContainer = element.shadowRoot!.querySelector('.settings')!;
       assert.exists(settingsContainer, 'Settings container is rendered');
-      assert.isFalse(
-        settingsContainer.classList.contains('has-settings'),
-        'Settings container is rendered but is empty',
-      );
+      assert.isFalse(settingsContainer.classList.contains('has-settings'), 'Settings container is rendered but is empty');
     });
   });
 
@@ -74,10 +71,7 @@ suite('<exmg-grid-base-toolbar>', function() {
     test('settings is rendered properly', () => {
       const settingsContainer = element.shadowRoot!.querySelector('.settings')!;
       assert.exists(settingsContainer, 'Settings container is rendered');
-      assert.isTrue(
-        settingsContainer.classList.contains('has-settings'),
-        'Settings container is rendered and is not empty',
-      );
+      assert.isTrue(settingsContainer.classList.contains('has-settings'), 'Settings container is rendered and is not empty');
     });
   });
 });

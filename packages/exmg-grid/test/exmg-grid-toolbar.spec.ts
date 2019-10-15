@@ -83,9 +83,7 @@ suite('<exmg-grid-toolbar>', function() {
 
       const eventPromise = onExmgGridToolbarFilterChanged(element, true);
 
-      filterElem.dispatchEvent(
-        new CustomEvent('exmg-combobox-select', {bubbles: true, composed: true, detail: {value: 'inactive'}}),
-      );
+      filterElem.dispatchEvent(new CustomEvent('exmg-combobox-select', {bubbles: true, composed: true, detail: {value: 'inactive'}}));
 
       const {detail} = await eventPromise;
 
