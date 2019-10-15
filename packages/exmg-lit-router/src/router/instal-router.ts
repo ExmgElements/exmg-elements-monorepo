@@ -10,7 +10,7 @@ const onRouteChanged = (store: Store<any, any>) => (event: Event) => {
   const {location, router}: {location: VaadinLocation; router: RouteItem} = (event as CustomEvent).detail;
   const {params, pathname, baseUrl, route} = location;
   const {component} = router;
-  console.log('onRouteChanged', location);
+
   store.dispatch(
     routerChanged({
       baseUrl,
