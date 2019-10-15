@@ -87,10 +87,13 @@ export class ExmgRowSelectable {
       row.addEventListener('click', (e: Event) => {
         const target = e.target as HTMLElement;
         // Also TR needed for initial auto selected rows on init / if disable row selection it is only possible to use the mwc-checkbox
-        if((this.disableRowClickSelection && target.tagName !== 'MWC-CHECKBOX' && target.tagName !== 'TR') || (target.tagName !== 'TR' && target.tagName !== 'TD' && target.tagName !== 'MWC-CHECKBOX')) {
+        if (
+          (this.disableRowClickSelection && target.tagName !== 'MWC-CHECKBOX' && target.tagName !== 'TR') ||
+          (target.tagName !== 'TR' && target.tagName !== 'TD' && target.tagName !== 'MWC-CHECKBOX')
+        ) {
           return;
         }
-      
+
         const index = this.selectedRows.indexOf(row);
         const isRowAlreadySelected = index > -1;
         if (isRowAlreadySelected) {
