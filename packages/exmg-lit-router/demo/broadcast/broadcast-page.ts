@@ -31,10 +31,10 @@ export class BroadcastPage extends PageLitElement<RootState> {
       <section>
         <h2>Broadcast page - list</h2>
         <p>This is a text-only page.</p>
-        <p>It doesn't do anything other than display some static text.<br><br>
-        <a href="broadcast/____7O1mdkL8JqhozkYAAA==">Go To Broadcast Ep 1 (by id)</a>
+        <p>
+          It doesn't do anything other than display some static text.<br /><br />
+          <a href="broadcast/____7O1mdkL8JqhozkYAAA==">Go To Broadcast Ep 1 (by id)</a>
         </p>
-        
       </section>
     `;
   }

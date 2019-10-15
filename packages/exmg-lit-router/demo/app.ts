@@ -31,7 +31,7 @@ import {ConnectedLitElement} from '../src/router/connect';
 import {appRoutes} from './app-routes';
 import './components/breadcrumb';
 import {navigateToPath, BreadcrumbItem} from '../src/actions/router';
-import { BreadcrumbItem as CMSBreadcrumbItem } from './components/breadcrumb';
+import {BreadcrumbItem as CMSBreadcrumbItem} from './components/breadcrumb';
 
 class MyApp extends ConnectedLitElement<RootState> {
   static styles = css`
@@ -87,9 +87,7 @@ class MyApp extends ConnectedLitElement<RootState> {
     `;
   }
 
-  protected renderBreadcrumbs() {
-    
-  }
+  protected renderBreadcrumbs() {}
 
   protected render() {
     // Anything that's related to rendering should be done in here.

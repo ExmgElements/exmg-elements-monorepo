@@ -12,7 +12,6 @@ export const arrowSeparator = html`
   </svg>
 `;
 
-
 export interface BreadcrumbItem {
   href: string;
   content: string;
@@ -42,7 +41,7 @@ export class BreadcrumbsElement extends LitElement {
 
   static styles = [
     css`
-    .container,
+      .container,
       .breadcrumb-item {
         display: flex;
         align-items: center;

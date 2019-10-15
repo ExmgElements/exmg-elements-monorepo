@@ -4,15 +4,15 @@ import {RouteItem} from '@vaadin/router';
 import './broadcast/broadcast-page';
 import './broadcast/broadcast-detail';
 
-import { RootState } from './store';
+import {RootState} from './store';
 
 const activeBroadcastName = (state: RootState) => {
-  if(!state.router.params.broadcastId) {
+  if (!state.router.params.broadcastId) {
     return '-';
   }
   // lookup broadcast name in redux state bu param id
   return 'Broadcast Ep 1';
-}
+};
 
 export const appRoutes: RouteItem[] = [
   {
