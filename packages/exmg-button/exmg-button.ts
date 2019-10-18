@@ -41,44 +41,6 @@ export class ExmgButton extends ButtonBase {
           <slot></slot>
         </span>
         ${this.loading ? html`<exmg-button-spinner active></exmg-button-spinner>`:''}
-        
       </button>`;
   }
-
-  // public render() {
-  //   const classes = {
-  //     'mdc-button--raised': this.raised,
-  //     'mdc-button--unelevated': this.unelevated,
-  //     'mdc-button--outlined': this.outlined,
-  //     'mdc-button--dense': this.dense,
-  //   };
-  //   const loadingClass = {
-  //     'exmg-loading': this.loading,
-  //     'exmg-button-content': true,
-  //   };
-  //   const mdcButtonIcon = html`
-  //     <span class="material-icons mdc-button__icon">${this.icon}</span>
-  //   `;
-  //   const buttonRipple = ripple({unbounded: false});
-  //   return html`
-  //     <button
-  //       .ripple="${buttonRipple}"
-  //       class="mdc-button ${classMap(classes)}"
-  //       ?disabled="${this.disabled}"
-  //       aria-label="${this.label || this.icon}"
-  //     >
-  //       <span class="mdc-button__ripple ${classMap(loadingClass)}">
-  //         ${this.icon && !this.trailingIcon ? mdcButtonIcon : ''}
-  //         <span class="mdc-button__label">${this.label}</span>
-  //         ${this.icon && this.trailingIcon ? mdcButtonIcon : ''}
-  //         <slot></slot>
-  //       </span>
-  //       ${this.loading
-  //         ? html`
-  //             <exmg-button-spinner active></exmg-button-spinner>
-  //           `
-  //         : ''}
-  //     </button>
-  //   `;
-  // }
 }
