@@ -1,4 +1,5 @@
 :host {
+  font-size: 0; // need to fix disallignment of divs due to next line
   display: inline-block;
   position: relative;
   width: var(--exmg-spinner-size, 28px);

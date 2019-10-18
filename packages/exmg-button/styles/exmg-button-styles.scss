@@ -33,9 +33,12 @@
     align-items: center;
     justify-content: center;
   }
+  button{
+    display: relative;
+  }
   exmg-button-spinner{
     margin: 3px 0;
-    position: fixed;
+    position: absolute;
     bottom: 5px;
     left: 50%;
     transform: translateX(-50%);

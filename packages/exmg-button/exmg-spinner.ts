@@ -1,4 +1,6 @@
-import {html, property, customElement, classMap, LitElement, observer} from '@material/mwc-base/base-element';
+import {html, property, customElement, LitElement} from 'lit-element';
+import {classMap} from 'lit-html/directives/class-map.js';
+import {observer} from '@material/mwc-base/base-element';
 import {style} from './styles/exmg-spinner-styles';
 
 @customElement('exmg-button-spinner')
@@ -34,7 +36,7 @@ export class ExmgSpinner extends LitElement {
       'exmg-active': this.active || this.coolingDown,
       'exmg-cooldown': this.coolingDown,
     };
-    /* eslint-disable */
+ 
     return html`
       <div
         id="spinnerContainer"
@@ -43,10 +45,11 @@ export class ExmgSpinner extends LitElement {
         @webkitAnimationEnd="${() => this.resetAnimation}"
       >
         <div class="spinner-layer">
-          <div class="circle-clipper left"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div>
+          <div class="circle-clipper left"><div class="circle"></div></div>
+          <div class="circle-clipper right"><div class="circle"></div></div>
         </div>
       </div>
     `;
-    /* eslint-enable */
+  
   }
 }
