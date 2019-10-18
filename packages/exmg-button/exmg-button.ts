@@ -24,15 +24,18 @@ export class ExmgButton extends ButtonBase {
       'exmg-loading': this.loading,
       'exmg-button-content': true,
     };
-    const mdcButtonIcon =
-        html`<span class="material-icons mdc-button__icon">${this.icon}</span>`;
+    const mdcButtonIcon = html`
+      <span class="material-icons mdc-button__icon">${this.icon}</span>
+    `;
     const buttonRipple = ripple({unbounded: false});
     return html`
-      <button id="button"
-              .ripple="${buttonRipple}"
-              class="mdc-button ${classMap(classes)}"
-              ?disabled="${this.disabled}"
-              aria-label="${this.label || this.icon}">
+      <button
+        id="button"
+        .ripple="${buttonRipple}"
+        class="mdc-button ${classMap(classes)}"
+        ?disabled="${this.disabled}"
+        aria-label="${this.label || this.icon}"
+      >
         <div class="mdc-button__ripple"></div>
         <span class="${classMap(loadingClass)}">
           ${this.icon && !this.trailingIcon ? mdcButtonIcon : ''}
@@ -40,7 +43,12 @@ export class ExmgButton extends ButtonBase {
           ${this.icon && this.trailingIcon ? mdcButtonIcon : ''}
           <slot></slot>
         </span>
-        ${this.loading ? html`<exmg-button-spinner active></exmg-button-spinner>`:''}
-      </button>`;
+        ${this.loading
+          ? html`
+              <exmg-button-spinner active></exmg-button-spinner>
+            `
+          : ''}
+      </button>
+    `;
   }
 }

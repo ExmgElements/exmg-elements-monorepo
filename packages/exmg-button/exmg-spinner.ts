@@ -36,7 +36,7 @@ export class ExmgSpinner extends LitElement {
       'exmg-active': this.active || this.coolingDown,
       'exmg-cooldown': this.coolingDown,
     };
- 
+
     return html`
       <div
         id="spinnerContainer"
@@ -50,6 +50,5 @@ export class ExmgSpinner extends LitElement {
         </div>
       </div>
     `;
-  
   }
 }
