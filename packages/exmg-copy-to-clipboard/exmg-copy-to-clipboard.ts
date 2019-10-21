@@ -32,10 +32,10 @@ export class ExmgCopyToClipboard extends LitElement {
   private value?: string;
 
   @property({type: Boolean})
-  private isCopySupported: boolean = !!document.queryCommandSupported('copy');
+  private isCopySupported = !!document.queryCommandSupported('copy');
 
   @property({type: Boolean})
-  private bubbles: boolean = false;
+  private bubbles = false;
 
   private observer?: FlattenedNodesObserver;
   private htmlElement?: HTMLElement;
@@ -70,9 +70,7 @@ export class ExmgCopyToClipboard extends LitElement {
    * initializes the slotted content and adds a event listener to the html element provided
    */
   private initSlottedElement(): void {
-    this.htmlElement = (FlattenedNodesObserver.getFlattenedNodes(this) || []).filter(
-      (n: Node) => n.nodeType === Node.ELEMENT_NODE,
-    )[0];
+    this.htmlElement = (FlattenedNodesObserver.getFlattenedNodes(this) || []).filter((n: Node) => n.nodeType === Node.ELEMENT_NODE)[0];
 
     if (this.htmlElement) {
       addListener(this.htmlElement, 'tap', this.handleCopy);
