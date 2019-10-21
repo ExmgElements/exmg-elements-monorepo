@@ -11,7 +11,7 @@ export interface RadioFoundation extends MDCFoundation {
   setDisabled(disabled: boolean): void;
 }
 
-export declare var RadioFoundation: {
+export declare const RadioFoundation: {
   prototype: RadioFoundation;
   new (adapter: Record<string, any>): RadioFoundation;
 };
@@ -46,7 +46,7 @@ export class ExmgRadioGroupItem extends FormElement {
   name = '';
 
   @property({type: Boolean, attribute: 'hide-radio-button'})
-  hideRadioButton: boolean = false;
+  hideRadioButton = false;
 
   protected mdcFoundationClass: typeof RadioFoundation = (foundation as unknown) as typeof RadioFoundation;
 

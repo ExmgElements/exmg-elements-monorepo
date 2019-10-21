@@ -12,18 +12,18 @@ export class ExmgRadioGroup extends LitElement {
   @observer(function(this: ExmgRadioGroup) {
     this.setProperSelectedItem();
   })
-  selected: string = '';
+  selected = '';
 
   @property({type: Boolean})
-  required: boolean = false;
+  required = false;
 
   @property({type: Boolean})
-  vertical: boolean = false;
+  vertical = false;
 
   @property({type: Boolean, reflect: true, attribute: 'invalid'})
-  private invalid: boolean = false;
+  private invalid = false;
 
-  private litItemName: string = '';
+  private litItemName = '';
 
   get value() {
     return this.selected;

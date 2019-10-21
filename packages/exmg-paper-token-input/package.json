@@ -26,7 +26,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@polymer/iron-flex-layout": "^3.0.1",
     "@polymer/iron-iconset-svg": "^3.0.1",
     "@polymer/iron-input": "^3.0.1",
     "@polymer/paper-button": "^3.0.1",
