@@ -13,7 +13,7 @@ import {menu} from './menu.js';
 import {isItemGroup, MenuItem, MenuGroupItem, MenuItemOrGroupItem} from '../exmg-paper-sidemenu-types';
 
 export const installMediaQueryWatcher = (mediaQuery: string, layoutChangedCallback: (mediaQueryMatches: boolean) => void) => {
-  let mql = window.matchMedia(mediaQuery);
+  const mql = window.matchMedia(mediaQuery);
   mql.addListener(e => layoutChangedCallback(e.matches));
   layoutChangedCallback(mql.matches);
 };
@@ -24,16 +24,16 @@ export class XDemo extends LitElement {
   menu: [] | undefined;
 
   @property({type: Boolean})
-  debug: boolean = true;
+  debug = true;
 
   @property({type: Boolean, reflect: true})
-  narrow: boolean = false;
+  narrow = false;
 
   @property({type: Boolean})
-  collapsed: boolean = false;
+  collapsed = false;
 
   @property({type: Boolean})
-  drawerOpened: boolean = true;
+  drawerOpened = true;
 
   static styles = [
     sidemenuStyles,
@@ -127,7 +127,7 @@ export class XDemo extends LitElement {
   }
 
   render() {
-    let classes = {collapsed: this.collapsed, narrow: this.narrow};
+    const classes = {collapsed: this.collapsed, narrow: this.narrow};
 
     return html`
       <app-drawer

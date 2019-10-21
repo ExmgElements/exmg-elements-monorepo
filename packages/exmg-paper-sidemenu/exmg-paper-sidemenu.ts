@@ -46,7 +46,7 @@ export class ExmgPaperSidemenu extends LitElement {
   @observer(function(this: LitElement, collapsed: boolean) {
     this.dispatchEvent(new CustomEvent('collapsed', {bubbles: false, composed: true, detail: collapsed}));
   })
-  collapsed: boolean = false;
+  collapsed = false;
 
   /**
    * Contains the path of the selected menu item
@@ -61,7 +61,7 @@ export class ExmgPaperSidemenu extends LitElement {
    *  Disable collapse functionailty
    */
   @property({type: Boolean, reflect: true, attribute: 'disable-collapse'})
-  disableCollapse: boolean = false;
+  disableCollapse = false;
 
   static styles = [style];
 
