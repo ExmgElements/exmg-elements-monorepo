@@ -1,5 +1,5 @@
 import {property, customElement, html, LitElement} from 'lit-element';
-import {observer} from '@material/mwc-base/form-element.js';
+import {observer} from '@material/mwc-base/form-element';
 import {style as exmgRadioGroupStyles} from './styles/exmg-radio-group-styles';
 import {ExmgRadioGroupItem} from './exmg-radio-group-item';
 
@@ -46,9 +46,7 @@ export class ExmgRadioGroup extends LitElement {
 
     this.selected = detail.value;
 
-    this.dispatchEvent(
-      new CustomEvent('exmg-radio-group-changed', {detail: {selected: this.selected}, composed: true, bubbles: true}),
-    );
+    this.dispatchEvent(new CustomEvent('exmg-radio-group-changed', {detail: {selected: this.selected}, composed: true, bubbles: true}));
   }
 
   private setProperSelectedItem() {

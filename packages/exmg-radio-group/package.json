@@ -1,6 +1,5 @@
 {
   "name": "@exmg/exmg-radio-group",
-  "flat": true,
   "version": "2.0.2",
   "description": "Paper style radio group element",
   "contributors": [
@@ -28,7 +27,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@material/mwc-radio": "^0.6.0",
+    "@material/mwc-radio": "^0.10.0",
     "@polymer/polymer": "^3.2.0",
     "lit-element": "^2.1.0"
   },
