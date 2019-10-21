@@ -1,4 +1,5 @@
-import {LitElement, customElement, property, html, observer} from '@material/mwc-base/form-element';
+import {observer} from '@material/mwc-base/form-element';
+import {property, customElement, html, LitElement} from 'lit-element';
 import {style} from './styles/exmg-paper-sidemenu-header-styles';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@polymer/paper-listbox/paper-listbox.js';

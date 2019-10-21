@@ -1,6 +1,5 @@
 {
   "name": "@exmg/exmg-paper-sidemenu",
-  "flat": true,
   "version": "6.0.6",
   "description": "Paper style collapsible sidemenu",
   "contributors": [
@@ -27,7 +26,7 @@
   "license": "MIT",
   "homepage": "https://github.com/ExmgElements/exmg-paper-sidemenu",
   "dependencies": {
-    "@material/mwc-base": "^0.6.0",
+    "@material/mwc-base": "^0.10.0",
     "@material/theme": "^3.1.0",
     "@material/typography": "^3.1.0",
     "@polymer/paper-item": "^3.0.1",
@@ -38,9 +37,9 @@
   },
   "devDependencies": {
     "@exmg/exmg-cli": "^2.0.2",
-    "@material/mwc-drawer": "^0.6.0",
-    "@material/mwc-icon-button": "^0.6.0",
-    "@material/mwc-top-app-bar": "^0.6.0",
+    "@material/mwc-drawer": "^0.10.0",
+    "@material/mwc-icon-button": "^0.10.0",
+    "@material/mwc-top-app-bar": "^0.10.0",
     "@polymer/app-layout": "^3.1.0",
     "@polymer/iron-ajax": "^3.0.0-pre.25",
     "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
@@ -52,16 +51,16 @@
     "@types/mocha": "^5.2.7",
     "@webcomponents/webcomponentsjs": "^2.0.0",
     "chai": "^4.2.0",
-    "eslint": "^5.16.0",
+    "eslint": "^6.5.1",
     "eslint-config-exmg": "latest",
-    "eslint-plugin-html": "^3.0.0",
+    "eslint-plugin-html": "^6.0.0",
     "eslint-plugin-lit": "^1.2.0",
     "eslint-plugin-prettier": "^3.1.1",
     "gulp": "^4.0.0",
     "gulp-rename": "^1.4.0",
     "gulp-replace": "^1.0.0",
     "mocha": "^6.2.0",
-    "typedoc": "^0.14.2",
+    "typedoc": "^0.15.0",
     "typescript": "^3.2.2",
     "wct-mocha": "^1.0.1",
     "web-animations-js": "^2.3.2"
