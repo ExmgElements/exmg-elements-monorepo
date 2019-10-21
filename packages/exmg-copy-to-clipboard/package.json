@@ -17,7 +17,7 @@
   ],
   "homepage": "https://github.com/ExmgElements/",
   "name": "@exmg/exmg-copy-to-clipboard",
-  "version": "6.0.2",
+  "version": "6.1.0",
   "main": "exmg-copy-to-clipboard.js",
   "license": "MIT",
   "author": "Ex Machina",
