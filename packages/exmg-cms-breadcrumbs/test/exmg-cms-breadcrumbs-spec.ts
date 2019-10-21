@@ -65,9 +65,7 @@ suite('<exmg-cms-breadcrumbs>', function() {
 
     test('element disabled is not clickable', async () => {
       const elementShadowRoot = element.shadowRoot!;
-      const anchors = Array.from<HTMLAnchorElement>(
-        elementShadowRoot.querySelectorAll<HTMLAnchorElement>('a[disabled]'),
-      );
+      const anchors = Array.from<HTMLAnchorElement>(elementShadowRoot.querySelectorAll<HTMLAnchorElement>('a[disabled]'));
       assert.equal(anchors.length, 1, 'There is one disabled element');
       assert.equal(anchors[0].href, 'javascript:void(0);', 'Disabled anchor should not be clickable');
     });
@@ -77,9 +75,9 @@ suite('<exmg-cms-breadcrumbs>', function() {
       element.separatorText = separator;
       await flushCompleted();
       const elementShadowRoot = element.shadowRoot!;
-      const separatorsContent = Array.from<HTMLAnchorElement>(
-        elementShadowRoot.querySelectorAll<HTMLAnchorElement>('.separator'),
-      ).map((separatorElement: HTMLElement) => separatorElement.innerText);
+      const separatorsContent = Array.from<HTMLAnchorElement>(elementShadowRoot.querySelectorAll<HTMLAnchorElement>('.separator')).map(
+        (separatorElement: HTMLElement) => separatorElement.innerText,
+      );
 
       assert.equal(separatorsContent.length, 4, 'There is 4 separators');
       assert.isTrue(separatorsContent.every(it => it === separator), 'Separator content is updated');
