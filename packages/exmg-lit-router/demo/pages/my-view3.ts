@@ -9,7 +9,7 @@
  */
 
 import {html, css, property} from 'lit-element';
-import {BeforeLeaveCommand, Location, PreventResult, RouteItem, Router} from '@vaadin/router';
+import {BeforeLeaveCommand, Location, PreventResult, RouteItem} from '@vaadin/router';
 
 // This element is connected to the Redux store.
 import {store, RootState} from '../store';
@@ -121,7 +121,7 @@ class MyView3 extends PageLitElement<RootState> {
     this.error = state.shop!.error;
   }
 
-  onBeforeLeave(location: Location, command: BeforeLeaveCommand, router: Router): PreventResult | void {
+  onBeforeLeave(location: Location, command: BeforeLeaveCommand): PreventResult | void {
     if (this.quantity > 0) {
       alert('Cart is not empty. Please checkout or empty you cart before navigate away.');
       window.history.back();

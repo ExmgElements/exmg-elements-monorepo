@@ -21,7 +21,7 @@ export class ExmgLink extends ConnectedLitElement<StateWithRouter> {
    * Perhaps if exact is true then link is selected when href is same like current router
    * otherwise if href start with current router then will be also selected
    */
-  @property({type: Boolean}) exact: boolean = false;
+  @property({type: Boolean}) exact = false;
 
   @property({type: Object}) private router: Partial<RouterState> = {};
 

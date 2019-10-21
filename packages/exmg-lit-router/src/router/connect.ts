@@ -45,6 +45,7 @@ export abstract class ConnectedLitElement<S extends StateWithRouter = StateWithR
    * Based on this flag we need to determine what hooks needs to be called
    */
   protected readonly isPage: boolean = false;
+  public routeDebug = false;
   private storeUnsubscribe?: Unsubscribe;
   private lastState?: S;
   /**
@@ -100,12 +101,20 @@ export abstract class ConnectedLitElement<S extends StateWithRouter = StateWithR
    * The `stateChanged(state)` method will be called when the state is updated.
    *
    */
-  stateChanged(state: S) {}
+  stateChanged(state: S) {
+    if (this.routeDebug) {
+      console.log('stateChanged', state);
+    }
+  }
 
   /**
    * The `routeChanged(state, prevState)` method will be called when the state.router is updated
    */
-  routeChanged(state: S, prevState?: S): void {}
+  routeChanged(state: S, prevState?: S): void {
+    if (this.routeDebug) {
+      console.log('routeChanged', state, prevState);
+    }
+  }
 
   protected getStore(): StoreWithRouter<S> {
     return getConnectedStore();
@@ -114,13 +123,29 @@ export abstract class ConnectedLitElement<S extends StateWithRouter = StateWithR
   /**** VAADIN LIFECYCLE CALLBACKS ****/
   /* @see https://vaadin.github.io/vaadin-router/vaadin-router/demo/#vaadin-router-lifecycle-callbacks-demos */
 
-  onBeforeLeave(location: Location, command: BeforeLeaveCommand, router: Router): Promise<any> | PreventResult | any {}
+  onBeforeLeave(location: Location, command: BeforeLeaveCommand, router: Router): Promise<any> | PreventResult | any {
+    if (this.routeDebug) {
+      console.log('onBeforeLeave', location, command, router);
+    }
+  }
 
-  onAfterLeave(location: Location, command: EmptyCommand, router: Router): void {}
+  onAfterLeave(location: Location, command: EmptyCommand, router: Router): void {
+    if (this.routeDebug) {
+      console.log('onAfterLeave', location, command, router);
+    }
+  }
 
-  onBeforeEnter(location: Location, command: BeforeEnterCommand, router: Router): Promise<any> | RedirectResult | PreventResult | any {}
+  onBeforeEnter(location: Location, command: BeforeEnterCommand, router: Router): Promise<any> | RedirectResult | PreventResult | any {
+    if (this.routeDebug) {
+      console.log('onBeforeEnter', location, command, router);
+    }
+  }
 
-  onAfterEnter(location: Location, command: EmptyCommand, router: Router): void {}
+  onAfterEnter(location: Location, command: EmptyCommand, router: Router): void {
+    if (this.routeDebug) {
+      console.log('onAfterEnter', location, command, router);
+    }
+  }
 }
 
 export abstract class PageLitElement<S extends StateWithRouter = StateWithRouter> extends ConnectedLitElement<S> {

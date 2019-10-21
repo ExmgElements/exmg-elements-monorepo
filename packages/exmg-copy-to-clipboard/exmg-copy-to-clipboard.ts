@@ -19,12 +19,6 @@ import {addListener, removeListener} from '@polymer/polymer/lib/utils/gestures';
  *   window.Exmg.defaultDatePattern = 'dd/MM/yy';
  * ```
  *
- * ### Styling
- *
- * Custom property | Description | Default
- * ----------------|-------------|----------
- * `--exmg-copy-to-clipboard` | Mixin applied to host element | `{}`
- *
  */
 @customElement('exmg-copy-to-clipboard')
 export class ExmgCopyToClipboard extends LitElement {
@@ -134,8 +128,6 @@ export class ExmgCopyToClipboard extends LitElement {
       <style>
         :host {
           display: inline-block;
-          /*noinspection CssUnresolvedCustomPropertySet*/
-          @apply --exmg-copy-to-clipboard;
         }
         #clipboard {
           display: none;

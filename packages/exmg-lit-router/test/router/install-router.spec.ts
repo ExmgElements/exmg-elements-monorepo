@@ -60,7 +60,7 @@ suite('router/install-router', () => {
     const locationUpdatedCallbackStub = stub();
     const goStub = stub(Router, 'go').returns(true);
 
-    locationUpdatedHandler(locationUpdatedCallbackStub)(window.location, null);
+    locationUpdatedHandler(locationUpdatedCallbackStub)(window.location);
 
     sinonAssert.callCount(locationUpdatedCallbackStub, 1);
     sinonAssert.calledWith(locationUpdatedCallbackStub, window.location);
@@ -73,7 +73,7 @@ suite('router/install-router', () => {
   test('LocationUpdatedHandler when Router.go return true and no callback provided', () => {
     const goStub = stub(Router, 'go').returns(true);
 
-    locationUpdatedHandler()(window.location, null);
+    locationUpdatedHandler()(window.location);
 
     sinonAssert.callCount(goStub, 1);
     sinonAssert.calledWith(goStub, window.location.pathname);
@@ -85,7 +85,7 @@ suite('router/install-router', () => {
     const locationUpdatedCallbackStub = stub();
     const goStub = stub(Router, 'go').returns(false);
 
-    locationUpdatedHandler(locationUpdatedCallbackStub)(window.location, null);
+    locationUpdatedHandler(locationUpdatedCallbackStub)(window.location);
 
     sinonAssert.callCount(locationUpdatedCallbackStub, 0);
     sinonAssert.callCount(goStub, 1);
