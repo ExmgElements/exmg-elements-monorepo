@@ -121,28 +121,28 @@ const ENTER_KEY_CODE = 13;
 @customElement('exmg-markdown-editor')
 export class EditorElement extends LitElement {
   @property({type: Boolean, attribute: 'auto-focus'})
-  autoFocus: boolean = false;
+  autoFocus = false;
 
   @property({type: Number, attribute: 'height'})
   height?: number = undefined;
 
   @property({type: Boolean, attribute: 'line-numbers'})
-  lineNumbers: boolean = false;
+  lineNumbers = false;
 
   @property({type: Boolean, attribute: 'indent-with-tabs'})
-  indentWithTabs: boolean = true;
+  indentWithTabs = true;
 
   @property({type: String})
   markdown?: string;
 
   @property({type: Boolean, attribute: 'show-helper-label'})
-  showHelperLabel: boolean = false;
+  showHelperLabel = false;
 
   @property({type: Boolean, reflect: true, attribute: 'split-view'})
-  splitView: boolean = true;
+  splitView = true;
 
   @property({type: Boolean, reflect: true, attribute: 'fullscreen'})
-  fullscreen: boolean = false;
+  fullscreen = false;
 
   @property({type: Array, attribute: 'toolbar-buttons'})
   toolbarButtons: ToolBarOption[] = [
@@ -175,7 +175,7 @@ export class EditorElement extends LitElement {
   public name?: string;
 
   @property({type: Boolean, attribute: 'required'})
-  public required: boolean = false;
+  public required = false;
 
   @property({type: Boolean, reflect: true, attribute: 'invalid'})
   // @ts-ignore
@@ -343,7 +343,7 @@ export class EditorElement extends LitElement {
 
   private dispatchMarkdownUpdatedDebounce: (cb?: Function) => void = debounce(300);
 
-  private isElementInitialized: boolean = false;
+  private isElementInitialized = false;
 
   get value() {
     return this.markdown;
@@ -427,6 +427,7 @@ export class EditorElement extends LitElement {
     if (!this.codeMirrorEditor) {
       return;
     }
+    // @ts-ignore
     this.codeMirrorEditor.setOption('fullScreen', this.fullscreen);
 
     if (this.isElementInitialized) {
@@ -483,7 +484,8 @@ export class EditorElement extends LitElement {
         if (codeMirror.getOption('indentWithTabs')) {
           codeMirror.execCommand('insertTab');
         } else {
-          const spaces = Array(codeMirror.getOption('tabSize') + 1).join(' ');
+          // @ts-ignore
+          const spaces = Array(codeMirror!.getOption('tabSize') + 1).join(' ');
           codeMirror.getDoc().replaceSelection(spaces);
         }
       },
@@ -493,7 +495,7 @@ export class EditorElement extends LitElement {
         const eolState = codeMirror.getStateAfter(pos.line);
         const inList = eolState.list !== false;
 
-        if (inList) {
+        if (codeMirror && inList) {
           codeMirror.execCommand('indentLess');
           return;
         }
@@ -501,12 +503,14 @@ export class EditorElement extends LitElement {
         if (codeMirror.getOption('indentWithTabs')) {
           codeMirror.execCommand('insertTab');
         } else {
+          // @ts-ignore
           const spaces = Array(codeMirror.getOption('tabSize') + 1).join(' ');
           codeMirror.getDoc().replaceSelection(spaces);
         }
       },
       Esc: (codeMirror: Editor) => {
-        if (codeMirror.getOption('fullScreen')) {
+        // @ts-ignore
+        if (codeMirror!.getOption('fullScreen')) {
           this.fullscreen = false;
         }
       },
@@ -591,7 +595,7 @@ export class EditorElement extends LitElement {
     return result ? states.includes(result.value) : false;
   }
 
-  private processBlock(type: string, newLine: boolean = false): void {
+  private processBlock(type: string, newLine = false): void {
     const codeMirror = this.codeMirrorEditor!;
     const states = this.getStates();
     const blockStyles: Record<string, string> = {
@@ -608,11 +612,11 @@ export class EditorElement extends LitElement {
     const selectionText = codeMirror.getDoc().getSelection();
     const emptySelection = selectionText === '';
     if (this.hasType(states, type)) {
-      let start = {
+      const start = {
         ...cursorStart,
         ch: cursorStart.ch - blockStyles[type].length,
       };
-      let end = {
+      const end = {
         ...cursorEnd,
         ch: cursorEnd.ch + blockStyles[type].length,
       };
