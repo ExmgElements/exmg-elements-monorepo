@@ -7,7 +7,6 @@ import {ExmgForm} from '../exmg-form';
 
 @customElement('tab-3')
 export class Tab3El extends LitElement {
-
   static styles = [
     css`
       #controlledHeight {
@@ -27,7 +26,7 @@ export class Tab3El extends LitElement {
   render() {
     return html`
       <h1>Inline form</h1>
-      <exmg-form id="horizontal" @submit="${this.onSubmit}" @cancel="${this.onCancel}" >
+      <exmg-form id="horizontal" @submit="${this.onSubmit}" @cancel="${this.onCancel}">
         <paper-input label="text input" required></paper-input>
         <paper-input label="text input" value="pre-filled"></paper-input>
       </exmg-form>
@@ -68,5 +67,4 @@ export class Tab3El extends LitElement {
   resetForm1() {
     (this.shadowRoot!.querySelector('#form1') as ExmgForm).reset();
   }
-
 }

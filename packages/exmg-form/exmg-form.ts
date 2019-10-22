@@ -17,32 +17,32 @@ export class ExmgForm extends LitElement {
   static styles = [style];
 
   @property({type: Boolean, attribute: 'hide-submit-button'})
-  public hideSubmitButton: boolean = false;
+  public hideSubmitButton = false;
 
   @property({type: Boolean, attribute: 'hide-cancel-button'})
-  public hideCancelButton: boolean = false;
+  public hideCancelButton = false;
 
   @property({type: String, attribute: 'submit-button-copy'})
-  public submitButtonCopy: string = 'Submit';
+  public submitButtonCopy = 'Submit';
 
   @property({type: String, attribute: 'cancel-button-copy'})
-  public cancelButtonCopy: string = 'Reset';
+  public cancelButtonCopy = 'Reset';
 
   @property({type: Boolean})
-  public inline: boolean = false;
+  public inline = false;
 
   @property({type: Boolean})
-  private dirty: boolean = false;
+  private dirty = false;
 
   get isDirty(): boolean {
     return this.dirty;
   }
 
   @property({type: String, attribute: 'error-message'})
-  private errorMessage: string = '';
+  private errorMessage = '';
 
   @property({type: Boolean, reflect: true})
-  private submitting: boolean = false;
+  private submitting = false;
 
   @query('#ironForm')
   private ironFormElem?: IronFormElement;

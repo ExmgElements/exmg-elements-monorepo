@@ -11,7 +11,6 @@ import {ExmgForm} from '../exmg-form';
 
 @customElement('tab-2')
 export class Tab2El extends LitElement {
-
   render() {
     return html`
       <exmg-form @submit="${this.onSubmit}" @cancel="${this.onCancel}" @dirty="${this.displayFormDirty}" id="form1">
@@ -73,5 +72,4 @@ export class Tab2El extends LitElement {
   resetForm1() {
     (this.shadowRoot!.querySelector('#form1') as ExmgForm).reset();
   }
-
 }

@@ -7,7 +7,6 @@ import {ExmgForm} from '../exmg-form';
 
 @customElement('tab-1')
 export class Tab1El extends LitElement {
-
   render() {
     return html`
       <h1>Serializing form : A Study Case.</h1>
@@ -21,7 +20,6 @@ export class Tab1El extends LitElement {
           </marked-element>
         </exmg-markdown-editor>
       </exmg-form>
-
     `;
   }
 
@@ -49,5 +47,4 @@ export class Tab1El extends LitElement {
   resetForm1() {
     (this.shadowRoot!.querySelector('#form1') as ExmgForm).reset();
   }
-
 }
