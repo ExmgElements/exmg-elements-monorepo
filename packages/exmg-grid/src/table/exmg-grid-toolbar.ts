@@ -33,7 +33,7 @@ export class ExmgGridToolbar extends LitElement {
     `,
   ];
   @property({type: String})
-  description: string = '';
+  description = '';
 
   @property({type: Object})
   actions: Action[] = [];

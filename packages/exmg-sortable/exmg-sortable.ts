@@ -34,7 +34,7 @@ export class SortableElement extends LitElement {
   public handleSelector?: string;
 
   @property({type: String, attribute: 'item-selector'})
-  public itemSelector: string = 'li';
+  public itemSelector = 'li';
 
   /**
    * Optionally is possible to pass node instance which is host of sortable elements otherwise host for sortable elements
@@ -45,13 +45,13 @@ export class SortableElement extends LitElement {
   public sortableHostNode?: HTMLElement;
 
   @property({type: Boolean, attribute: 'animation-enabled'})
-  public animationEnabled: boolean = false;
+  public animationEnabled = false;
 
   @property({type: String, attribute: 'cloned-class'})
-  public clonedClass: string = 'cloned';
+  public clonedClass = 'cloned';
 
   @property({type: String, attribute: 'dragged-class'})
-  public draggedClass: string = 'dragged';
+  public draggedClass = 'dragged';
 
   @property({type: Object, attribute: 'animation-timing'})
   public animationTiming: any = {duration: 200, easing: 'ease-out'};
@@ -59,13 +59,13 @@ export class SortableElement extends LitElement {
   @property({type: String})
   public orientation?: 'horizontal' | 'vertical';
 
-  private dragRequestPending: boolean = false;
+  private dragRequestPending = false;
   private draggedElement?: HTMLElement;
   private draggedElementClone?: HTMLElement;
   private draggedElementOrigin?: HTMLElement;
   private sortableNodes: HTMLElement[] = [];
   private animatedElements: HTMLElement[] = [];
-  private initialScrollTop: number = 0;
+  private initialScrollTop = 0;
   private animationPromise?: Promise<void>;
 
   constructor() {
@@ -357,8 +357,7 @@ export class SortableElement extends LitElement {
     }
 
     if (node && node.parentNode) {
-      const insert =
-        node.compareDocumentPosition(target) & this.DOCUMENT_POSITION_FOLLOWING ? target.nextSibling : target;
+      const insert = node.compareDocumentPosition(target) & this.DOCUMENT_POSITION_FOLLOWING ? target.nextSibling : target;
       node.parentNode.insertBefore(node, insert);
     }
 

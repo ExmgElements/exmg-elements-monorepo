@@ -24,7 +24,7 @@ export class ExmgGridToolbarDemo extends LitElement {
     },
   ];
 
-  private description: string = 'Table 1';
+  private description = 'Table 1';
 
   private filters: Filter<FilterSingleSelectConfig>[] = [
     {

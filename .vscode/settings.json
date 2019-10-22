@@ -12,7 +12,6 @@
     "configFile": "./eslintrc.json"
   },
   "eslint.validate": ["typescript"],
-  "prettier.eslintIntegration": true,
   "editor.formatOnSave": true,
   "[javascript]": {
     "editor.formatOnSave": false

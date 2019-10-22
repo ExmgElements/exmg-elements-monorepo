@@ -1,12 +1,5 @@
-import {
-  FormElement,
-  query,
-  customElement,
-  property,
-  html,
-  observer,
-  HTMLElementWithRipple,
-} from '@material/mwc-base/form-element.js';
+import {FormElement, observer, HTMLElementWithRipple} from '@material/mwc-base/form-element.js';
+import {property, customElement, html, query} from 'lit-element';
 import {MDCFoundation} from '@material/base';
 import {style} from '@material/mwc-radio/mwc-radio-css';
 import {ripple} from '@material/mwc-ripple/ripple-directive';
@@ -18,7 +11,7 @@ export interface RadioFoundation extends MDCFoundation {
   setDisabled(disabled: boolean): void;
 }
 
-export declare var RadioFoundation: {
+export declare const RadioFoundation: {
   prototype: RadioFoundation;
   new (adapter: Record<string, any>): RadioFoundation;
 };
@@ -53,7 +46,7 @@ export class ExmgRadioGroupItem extends FormElement {
   name = '';
 
   @property({type: Boolean, attribute: 'hide-radio-button'})
-  hideRadioButton: boolean = false;
+  hideRadioButton = false;
 
   protected mdcFoundationClass: typeof RadioFoundation = (foundation as unknown) as typeof RadioFoundation;
 
@@ -104,9 +97,7 @@ export class ExmgRadioGroupItem extends FormElement {
     this.checked = this.formElement.checked;
     if (this.selectionController) {
       this.selectionController.update(this);
-      this.dispatchEvent(
-        new CustomEvent('exmg-radio-group-item-changed', {detail: {value: this.value}, composed: false, bubbles: true}),
-      );
+      this.dispatchEvent(new CustomEvent('exmg-radio-group-item-changed', {detail: {value: this.value}, composed: false, bubbles: true}));
     }
   }
 

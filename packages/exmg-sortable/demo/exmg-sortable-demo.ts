@@ -5,7 +5,7 @@ import '../exmg-sortable.js';
 @customElement('exmg-sortable-demo')
 export class SortableDemo extends LitElement {
   @property({type: String})
-  public dataUrl: string = '';
+  public dataUrl = '';
 
   @property({type: Array})
   public users: any[] = [];

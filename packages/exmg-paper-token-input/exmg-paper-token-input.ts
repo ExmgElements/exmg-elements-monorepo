@@ -92,16 +92,16 @@ export class PaperTokenInputElement extends LitElement {
    * Set to true to auto-validate the input value.
    */
   @property({type: Boolean, attribute: 'auto-validate'})
-  public autoValidate: boolean = false;
+  public autoValidate = false;
 
   @property({type: Boolean})
-  public autofocus: boolean = false;
+  public autofocus = false;
 
   /**
    * Set to true to disable this input.
    */
   @property({type: Boolean})
-  public disabled: boolean = false;
+  public disabled = false;
 
   /**
    * The error message to display when the input is invalid.
@@ -113,13 +113,13 @@ export class PaperTokenInputElement extends LitElement {
    * alwaysFloatLabel
    */
   @property({type: Boolean})
-  public alwaysFloatLabel: boolean = false;
+  public alwaysFloatLabel = false;
 
   /**
    * Sets if the input must wrap all selected items into a scrollable line or display it on multiple lines.
    */
   @property({type: Boolean, attribute: 'allow-multiline'})
-  public allowMultiLine: boolean = false;
+  public allowMultiLine = false;
 
   /**
    * Maximum number of tokens allowed in value
@@ -133,22 +133,22 @@ export class PaperTokenInputElement extends LitElement {
    * the `<input is="iron-input">`'s `required` property.
    */
   @property({type: Boolean})
-  public required: boolean = false;
+  public required = false;
 
   /**
    * This field will be bind to the actual input field
    */
   @property({type: String})
-  private inputValue: string = '';
+  private inputValue = '';
 
   @property({type: Boolean})
-  public invalid: boolean = false;
+  public invalid = false;
 
   @property({type: Boolean})
-  public inputFocused: boolean = false;
+  public inputFocused = false;
 
   @property({type: Boolean})
-  private opened: boolean = false;
+  private opened = false;
 
   @query('#listbox')
   private listBoxNode?: PaperListboxElement;
@@ -162,7 +162,7 @@ export class PaperTokenInputElement extends LitElement {
   @query('#menu')
   private menuElement?: PaperMenuButton;
 
-  private previousClickWasInside: boolean = false;
+  private previousClickWasInside = false;
 
   constructor() {
     super();
@@ -227,7 +227,7 @@ export class PaperTokenInputElement extends LitElement {
         break;
       default:
         this.menuElement!.open();
-        afterNextRender(this, _ => this.focusInputValue());
+        afterNextRender(this, () => this.focusInputValue());
         break;
     }
   }
@@ -252,7 +252,7 @@ export class PaperTokenInputElement extends LitElement {
   private onInputContainerTap(e: Event): void {
     e.preventDefault();
     this.menuElement!.open();
-    afterNextRender(this, _ => this.focusInputValue());
+    afterNextRender(this, () => this.focusInputValue());
   }
 
   private onInputFocusChanged(e: CustomEvent): void {
@@ -338,10 +338,7 @@ export class PaperTokenInputElement extends LitElement {
     const items = this.querySelectorAll('paper-item');
 
     for (let i = 0; i < items.length; i = i + 1) {
-      if (
-        this.inputValue.length > 0 &&
-        (items[i].textContent || '').toLowerCase().indexOf(this.inputValue.toLowerCase()) === -1
-      ) {
+      if (this.inputValue.length > 0 && (items[i].textContent || '').toLowerCase().indexOf(this.inputValue.toLowerCase()) === -1) {
         items[i].setAttribute('hidden', '');
       } else {
         items[i].removeAttribute('hidden');
@@ -395,9 +392,7 @@ export class PaperTokenInputElement extends LitElement {
 
       return {
         id: this.getPaperItemValue(item),
-        text:
-          (this.selectedItemSelector ? item.querySelector(this.selectedItemSelector)!.textContent : item.textContent) ||
-          '',
+        text: (this.selectedItemSelector ? item.querySelector(this.selectedItemSelector)!.textContent : item.textContent) || '',
         sortWeight: this.selectedValues.indexOf(id),
       };
     })
@@ -454,11 +449,13 @@ export class PaperTokenInputElement extends LitElement {
       <style>
         :host {
           display: block;
-          @apply --layout-horizontal;
+          display: flex;
+          flex-direction: row;
         }
 
         paper-input-container {
-          @apply --layout-flex;
+          flex: 1;
+          flex-basis: 0.000000001px;
           overflow: auto;
         }
 
@@ -510,7 +507,8 @@ export class PaperTokenInputElement extends LitElement {
         }
 
         .container {
-          @apply --layout-flex;
+          flex: 1;
+          flex-basis: 0.000000001px;
         }
 
         iron-input {

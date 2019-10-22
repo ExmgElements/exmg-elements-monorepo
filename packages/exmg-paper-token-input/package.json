@@ -1,7 +1,6 @@
 {
   "name": "@exmg/exmg-paper-token-input",
-  "flat": true,
-  "version": "5.0.4",
+  "version": "5.1.0",
   "description": "Paper style token input element",
   "contributors": [
     "Ex Machina"
@@ -27,7 +26,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@polymer/iron-flex-layout": "^3.0.1",
     "@polymer/iron-iconset-svg": "^3.0.1",
     "@polymer/iron-input": "^3.0.1",
     "@polymer/paper-button": "^3.0.1",
@@ -38,7 +36,7 @@
     "@polymer/paper-menu-button": "^3.0.1",
     "@polymer/paper-styles": "^3.0.1",
     "@polymer/polymer": "^3.2.0",
-    "lit-element": "^2.1.0"
+    "lit-element": "^2.2.1"
   },
   "devDependencies": {
     "@exmg/exmg-cli": "^2.0.2",
@@ -46,18 +44,18 @@
     "@polymer/iron-demo-helpers": "^3.1.0",
     "@polymer/paper-item": "^3.0.1",
     "@polymer/test-fixture": "^4.0.2",
-    "@types/chai": "^4.1.7",
+    "@types/chai": "^4.2.3",
     "@types/mocha": "^5.2.6",
-    "@types/polymer": "^1.2.7",
-    "@webcomponents/webcomponentsjs": "^2.2.7",
+    "@types/polymer": "^1.2.8",
+    "@webcomponents/webcomponentsjs": "^2.3.0",
     "chai": "^4.2.0",
-    "eslint": "^5.16.0",
+    "eslint": "^6.5.1",
     "gulp": "^4.0.0",
     "gulp-rename": "^1.4.0",
     "gulp-replace": "^1.0.0",
-    "mocha": "^5.2.0",
-    "typedoc": "^0.14.2",
-    "typescript": "^3.3.4000",
+    "mocha": "^6.2.2",
+    "typedoc": "^0.15.0",
+    "typescript": "^3.6.4",
     "wct-mocha": "^1.0.0",
     "web-animations-js": "^2.3.1"
   },

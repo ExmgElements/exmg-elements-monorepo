@@ -7,7 +7,6 @@ import {ExmgForm} from '../exmg-form';
 
 @customElement('tab-1')
 export class Tab1El extends LitElement {
-
   render() {
     return html`
       <h1>Serializing form : A Study Case.</h1>
@@ -21,13 +20,12 @@ export class Tab1El extends LitElement {
           </marked-element>
         </exmg-markdown-editor>
       </exmg-form>
-
     `;
   }
 
   onSubmit(event: any) {
     console.log('submit', event);
-    setTimeout(_ => {
+    setTimeout(() => {
       this.resetForm1();
       // event.path[0].error('User does not have permission to save data');
     }, 1500);
@@ -49,5 +47,4 @@ export class Tab1El extends LitElement {
   resetForm1() {
     (this.shadowRoot!.querySelector('#form1') as ExmgForm).reset();
   }
-
 }

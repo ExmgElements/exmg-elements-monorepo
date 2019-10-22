@@ -11,13 +11,13 @@ export class ExmgInfoDialog extends LitElement {
    * Copy for done button
    */
   @property({type: String, attribute: 'button-copy'})
-  private buttonCopy: string = '';
+  private buttonCopy = '';
 
   /**
    * Hide close button ?
    */
   @property({type: Boolean, attribute: 'hide-close-button'})
-  private hideCloseButton: boolean = false;
+  private hideCloseButton = false;
 
   /**
    * Secondary attribute propagation

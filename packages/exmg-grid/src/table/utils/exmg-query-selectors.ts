@@ -21,11 +21,11 @@ export class ExmgQuerySelectors {
     return this.tableBody!;
   }
 
-  getColumns(selector: string = 'th'): NodeListOf<HTMLTableHeaderCellElement> {
+  getColumns(selector = 'th'): NodeListOf<HTMLTableHeaderCellElement> {
     return this.getTable().querySelectorAll<HTMLTableHeaderCellElement>(`.grid-columns ${selector}`);
   }
 
-  getColumn<T extends HTMLElement = HTMLTableHeaderCellElement>(selector: string = 'th'): T | undefined {
+  getColumn<T extends HTMLElement = HTMLTableHeaderCellElement>(selector = 'th'): T | undefined {
     return this.getTable().querySelector<T>(`.grid-columns ${selector}`) || undefined;
   }
 

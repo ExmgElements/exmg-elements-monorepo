@@ -34,6 +34,7 @@ import {navigateToPath, BreadcrumbItem} from '../src/actions/router';
 import {BreadcrumbItem as CMSBreadcrumbItem} from './components/breadcrumb';
 
 class MyApp extends ConnectedLitElement<RootState> {
+  [x: string]: any;
   static styles = css`
     ${styles}
   `;
@@ -86,8 +87,6 @@ class MyApp extends ConnectedLitElement<RootState> {
       <exmg-link> <a href="broadcast">Broadcast Page</a></exmg-link>
     `;
   }
-
-  protected renderBreadcrumbs() {}
 
   protected render() {
     // Anything that's related to rendering should be done in here.

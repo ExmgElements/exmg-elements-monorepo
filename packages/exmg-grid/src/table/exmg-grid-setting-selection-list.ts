@@ -13,10 +13,10 @@ import {style} from './exmg-grid-setting-selection-list-styles';
 @customElement('exmg-grid-setting-selection-list')
 export class ExmgGridSettingSelectionList extends LitElement {
   @property({type: String})
-  tooltip: string = '';
+  tooltip = '';
 
   @property({type: String})
-  icon: string = 'filter_list';
+  icon = 'filter_list';
 
   @property({type: Object})
   settingData: SettingSelectionListItem[] = [];

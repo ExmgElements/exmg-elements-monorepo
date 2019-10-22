@@ -11,7 +11,6 @@ import {ExmgForm} from '../exmg-form';
 
 @customElement('tab-2')
 export class Tab2El extends LitElement {
-
   render() {
     return html`
       <exmg-form @submit="${this.onSubmit}" @cancel="${this.onCancel}" @dirty="${this.displayFormDirty}" id="form1">
@@ -51,7 +50,7 @@ export class Tab2El extends LitElement {
 
   onSubmit(event: any) {
     console.log('submit', event);
-    setTimeout(_ => {
+    setTimeout(() => {
       this.resetForm1();
       // event.path[0].error('User does not have permission to save data');
     }, 1500);
@@ -73,5 +72,4 @@ export class Tab2El extends LitElement {
   resetForm1() {
     (this.shadowRoot!.querySelector('#form1') as ExmgForm).reset();
   }
-
 }

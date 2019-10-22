@@ -57,13 +57,7 @@ const getToastCloseBtnNode = (): HTMLDivElement => {
   return node;
 };
 
-const getCustomToastNode = ({
-  copyButton,
-  callbackButton,
-}: {
-  copyButton: string;
-  callbackButton?: Function;
-}): HTMLDivElement => {
+const getCustomToastNode = ({copyButton, callbackButton}: {copyButton: string; callbackButton?: Function}): HTMLDivElement => {
   const node = document.createElement('div');
 
   node.className = 'close-btn';

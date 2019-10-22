@@ -1,4 +1,5 @@
-import {LitElement, customElement, property, html, observer} from '@material/mwc-base/form-element';
+import {observer} from '@material/mwc-base/form-element';
+import {property, customElement, html, LitElement} from 'lit-element';
 import {style} from './styles/exmg-paper-sidemenu-base-styles';
 import '@polymer/paper-listbox';
 
@@ -45,7 +46,7 @@ export class ExmgPaperSidemenu extends LitElement {
   @observer(function(this: LitElement, collapsed: boolean) {
     this.dispatchEvent(new CustomEvent('collapsed', {bubbles: false, composed: true, detail: collapsed}));
   })
-  collapsed: boolean = false;
+  collapsed = false;
 
   /**
    * Contains the path of the selected menu item
@@ -60,7 +61,7 @@ export class ExmgPaperSidemenu extends LitElement {
    *  Disable collapse functionailty
    */
   @property({type: Boolean, reflect: true, attribute: 'disable-collapse'})
-  disableCollapse: boolean = false;
+  disableCollapse = false;
 
   static styles = [style];
 

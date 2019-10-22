@@ -1,4 +1,4 @@
-import {customElement, html, LitElement, property, PropertyValues, query} from 'lit-element';
+import {customElement, html, LitElement, property, query} from 'lit-element';
 import '@polymer/iron-form';
 import '@exmg/exmg-button';
 import {style} from './styles/exmg-form-styles';
@@ -17,32 +17,32 @@ export class ExmgForm extends LitElement {
   static styles = [style];
 
   @property({type: Boolean, attribute: 'hide-submit-button'})
-  public hideSubmitButton: boolean = false;
+  public hideSubmitButton = false;
 
   @property({type: Boolean, attribute: 'hide-cancel-button'})
-  public hideCancelButton: boolean = false;
+  public hideCancelButton = false;
 
   @property({type: String, attribute: 'submit-button-copy'})
-  public submitButtonCopy: string = 'Submit';
+  public submitButtonCopy = 'Submit';
 
   @property({type: String, attribute: 'cancel-button-copy'})
-  public cancelButtonCopy: string = 'Reset';
+  public cancelButtonCopy = 'Reset';
 
   @property({type: Boolean})
-  public inline: boolean = false;
+  public inline = false;
 
   @property({type: Boolean})
-  private dirty: boolean = false;
+  private dirty = false;
 
   get isDirty(): boolean {
     return this.dirty;
   }
 
   @property({type: String, attribute: 'error-message'})
-  private errorMessage: string = '';
+  private errorMessage = '';
 
   @property({type: Boolean, reflect: true})
-  private submitting: boolean = false;
+  private submitting = false;
 
   @query('#ironForm')
   private ironFormElem?: IronFormElement;
@@ -140,7 +140,7 @@ export class ExmgForm extends LitElement {
     super.disconnectedCallback();
   }
 
-  protected updated(_: PropertyValues): void {
+  protected updated(): void {
     if (this.inline) {
       Array.from(this.children).forEach((elem: Element) => {
         (elem as HTMLElement).style.display = 'inline-block';
@@ -152,7 +152,7 @@ export class ExmgForm extends LitElement {
     }
   }
 
-  private handleOnChange(_e: Event): void {
+  private handleOnChange(): void {
     if (this.dirty) {
       return;
     }

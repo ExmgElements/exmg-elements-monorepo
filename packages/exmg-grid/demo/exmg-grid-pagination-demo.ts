@@ -3,13 +3,13 @@ import {customElement, html, LitElement, property} from 'lit-element';
 @customElement('exmg-grid-pagination-demo')
 export class ExmgGridSmartToolbarDemo extends LitElement {
   @property({type: Number})
-  private pageIndex: number = 0;
+  private pageIndex = 0;
 
   @property({type: Number})
-  private pageSize: number = 20;
+  private pageSize = 20;
 
   @property({type: Number})
-  private itemCount: number = 50;
+  private itemCount = 50;
 
   private onGridPageSizeChanged(e: CustomEvent) {
     console.log('onGridPageSizeChanged', e.detail);

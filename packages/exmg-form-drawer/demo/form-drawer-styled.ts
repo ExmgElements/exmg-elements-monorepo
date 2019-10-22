@@ -7,11 +7,11 @@ import '../exmg-form-drawer';
 
 @customElement('exmg-drawer-demo')
 export class Drawer extends LitElement {
-  @property({type: Boolean}) opened: boolean = false;
-  @property({type: Boolean}) shouldFail: boolean = false;
-  @property({type: Boolean}) keepOpenedOnSubmitSuccess: boolean = false;
-  @property({type: Boolean}) resetFormOnSubmitSuccess: boolean = false;
-  @property({type: Boolean}) noCancelOnOutsideClick: boolean = false;
+  @property({type: Boolean}) opened = false;
+  @property({type: Boolean}) shouldFail = false;
+  @property({type: Boolean}) keepOpenedOnSubmitSuccess = false;
+  @property({type: Boolean}) resetFormOnSubmitSuccess = false;
+  @property({type: Boolean}) noCancelOnOutsideClick = false;
 
   handleOpenedChanged(e: CustomEvent) {
     this.opened = e.detail.value;
@@ -65,12 +65,7 @@ export class Drawer extends LitElement {
         <input type="button" @click="${this.openDialog}" value="Open dialog" />
         <br /><br />
         <label>
-          <input
-            type="checkbox"
-            name="shouldFail"
-            value="${this.shouldFail}"
-            @change="${this.handleShouldFailChange}"
-          />
+          <input type="checkbox" name="shouldFail" value="${this.shouldFail}" @change="${this.handleShouldFailChange}" />
           Should Fail
         </label>
         <br /><br />
@@ -119,12 +114,7 @@ export class Drawer extends LitElement {
           <paper-item>Trivia</paper-item>
           <paper-item>Other</paper-item>
         </exmg-paper-combobox>
-        <paper-input
-          name="question"
-          label="Question"
-          value="Who's Dylan Hartigan's favorite artist?"
-          required
-        ></paper-input>
+        <paper-input name="question" label="Question" value="Who's Dylan Hartigan's favorite artist?" required></paper-input>
         <paper-input name="answer_a" label="Answer A" value="Beyoncé"></paper-input>
         <paper-input name="answer_b" label="Answer B" value="Eminem"></paper-input>
         <paper-input name="answer_c" label="Answer C" value="Ariana Grande"></paper-input>

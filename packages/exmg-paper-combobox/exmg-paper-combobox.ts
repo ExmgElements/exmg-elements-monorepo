@@ -14,7 +14,7 @@ import '@polymer/paper-styles/paper-styles.js';
 import './exmg-paper-combobox-icons.js';
 import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
 
-import {EventSelectPayload, GenericPropertyValues, isEventWithPath, Token} from './exmg-custom-types';
+import {EventSelectPayload, GenericPropertyValues, isEventWithPath, Token, LitEvent} from './exmg-custom-types';
 import {PaperMenuButton} from '@polymer/paper-menu-button/paper-menu-button';
 import {PaperListboxElement} from '@polymer/paper-listbox/paper-listbox';
 
@@ -29,11 +29,6 @@ const copyElementStyle = (source: HTMLElement, target: HTMLElement): void => {
     target.style.setProperty(key, computedStyle.getPropertyValue(key), computedStyle.getPropertyPriority(key)),
   );
 };
-
-/**
- * @namespace Exmg
- */
-(window as any).Exmg = (window as any).Exmg || {};
 
 const BACKSPACE = 8;
 const ARROW_DOWN = 40;
@@ -93,7 +88,7 @@ export class PaperComboboxElement extends LitElement {
    * selection works in both cases. (Use `attr-or-property-name` instead of
    * `attrOrPropertyName`.)
    */
-  @property({type: String, attribute: 'attr-for-selected'}) attrForSelected: string = '';
+  @property({type: String, attribute: 'attr-for-selected'}) attrForSelected = '';
 
   /**
    * By default the textContent of the paper-item/paper-icon-item or paper-item-body
@@ -119,7 +114,7 @@ export class PaperComboboxElement extends LitElement {
    * Set custom max width of menu list with items
    * @type {number = 200}
    */
-  @property({type: Number, attribute: 'max-width-menu-list'}) maxWidthMenuList: number = 200;
+  @property({type: Number, attribute: 'max-width-menu-list'}) maxWidthMenuList = 200;
 
   @property({type: String}) private selectedValue?: string | number;
 
@@ -131,54 +126,54 @@ export class PaperComboboxElement extends LitElement {
   /**
    * Set to true to auto-validate the input value.
    */
-  @property({type: Boolean, attribute: 'auto-validate'}) autoValidate: boolean = false;
+  @property({type: Boolean, attribute: 'auto-validate'}) autoValidate = false;
 
-  @property({type: Boolean}) autofocus: boolean = false;
+  @property({type: Boolean}) autofocus = false;
 
   /**
    * Set to true to disable this input.
    */
-  @property({type: Boolean}) disabled: boolean = false;
+  @property({type: Boolean}) disabled = false;
 
   /**
    * The error message to display when the input is invalid.
    */
   @property({type: String, attribute: 'error-message'}) errorMessage?: string = '';
 
-  @property({type: Boolean, attribute: 'always-float-label'}) alwaysFloatLabel: boolean = false;
+  @property({type: Boolean, attribute: 'always-float-label'}) alwaysFloatLabel = false;
 
   /**
    * Set to true to mark the input as required. If you're using PaperInputBehavior to
    * implement your own paper-input-like element, bind this to
    * the `<input is="iron-input">`'s `required` property.
    */
-  @property({type: Boolean}) required: boolean = false;
+  @property({type: Boolean}) required = false;
 
   @property({type: String}) name?: string;
 
   /**
    * This field will be bind to the actual input field.
    */
-  @property({type: String, attribute: 'input-value'}) private inputValue: string = '';
+  @property({type: String, attribute: 'input-value'}) private inputValue = '';
 
   @property({type: Object}) private token?: Token;
 
   /**
    * Invalid is true if validation fails and is passed on.
    */
-  @property({type: Boolean}) invalid: boolean = false;
+  @property({type: Boolean}) invalid = false;
 
   /**
    * Focus input field if value has been set on element.
    */
-  @property({type: Boolean, attribute: 'input-focused'}) inputFocused: boolean = false;
+  @property({type: Boolean, attribute: 'input-focused'}) inputFocused = false;
 
-  @property({type: Boolean, attribute: 'no-float-label'}) noFloatLabel: boolean = false;
+  @property({type: Boolean, attribute: 'no-float-label'}) noFloatLabel = false;
 
   /**
    * Is menu button state open
    */
-  @property({type: Boolean}) private opened: boolean = false;
+  @property({type: Boolean}) private opened = false;
 
   @query('#listbox')
   private listBox?: PaperListboxElement;
@@ -192,13 +187,13 @@ export class PaperComboboxElement extends LitElement {
   @query('#menu')
   private menuElement?: PaperMenuButton;
 
-  private previousInsideClick: boolean = false;
+  private previousInsideClick = false;
 
-  private ignoreFocus: boolean = false;
+  private ignoreFocus = false;
 
-  private isAnyItemActive: boolean = true;
+  private isAnyItemActive = true;
 
-  private isElementInitialized: boolean = false;
+  private isElementInitialized = false;
 
   private readonly observers: {[K in Props]?: Function} = this.getObservers();
 
@@ -319,7 +314,7 @@ export class PaperComboboxElement extends LitElement {
     return isAnyItemActive;
   }
 
-  indexOf(item: any): number {
+  indexOf(item: Element): number {
     return this.listBox && this.listBox.items ? this.listBox.items.indexOf(item) : -1;
   }
 
@@ -417,7 +412,9 @@ export class PaperComboboxElement extends LitElement {
   }
 
   private onClick(e: Event): void {
-    const inside: boolean = isEventWithPath(e) ? !!e.path && !!e.composedPath().find(path => path === this) : e.target === this;
+    const inside: boolean = isEventWithPath(e)
+      ? !!(e as LitEvent).path && !!e.composedPath().find(path => path === this)
+      : e.target === this;
 
     // Detect outside element click for auto validate input
     if ((this.autoValidate && (this.previousInsideClick && !inside)) || this.token) {
@@ -435,6 +432,7 @@ export class PaperComboboxElement extends LitElement {
 
   private onItemSelected(e: CustomEvent<{item: Element}>): void {
     e.stopPropagation();
+
     if (this.selected && !this.selectedItem) {
       this.selectedItem = e.detail.item;
     }
@@ -623,14 +621,16 @@ export class PaperComboboxElement extends LitElement {
           min-width: 0;
         }
         .container {
-          @apply --layout-horizontal;
+          display: flex;
+          flex-direction: row;
         }
         .container.with-label > paper-menu-button {
           margin-top: 16px;
         }
 
         paper-input-container {
-          @apply --layout-flex;
+          flex: 1;
+          flex-basis: 0.000000001px;
           overflow: auto;
         }
         label.with-prefix {
@@ -681,7 +681,8 @@ export class PaperComboboxElement extends LitElement {
           background-color: var(--paper-button-bg-color);
         }
         .container {
-          @apply --layout-flex;
+          flex: 1;
+          flex-basis: 0.000000001px;
         }
         iron-input {
           line-height: 22px;
@@ -762,5 +763,3 @@ export class PaperComboboxElement extends LitElement {
     `;
   }
 }
-
-(window as any).Exmg.PaperComboboxElement = PaperComboboxElement;

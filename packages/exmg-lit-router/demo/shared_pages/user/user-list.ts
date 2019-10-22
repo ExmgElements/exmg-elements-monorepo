@@ -15,7 +15,7 @@ export class ExmgUserList extends PageLitElement<StateWithRouter> {
   @property({type: Array})
   inactiveUsers: string[] = ['Mia', 'Sophia', 'James', 'Jacob'];
 
-  @property({type: String}) private sort: string = 'ASC';
+  @property({type: String}) private sort = 'ASC';
 
   static styles = SharedStyles;
 

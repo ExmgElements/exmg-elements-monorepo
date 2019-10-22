@@ -1,13 +1,11 @@
-// it just create better type definition than lit-element type PropertyValues
-// now editor should show what kind of field names are allowed
 export type GenericPropertyValues<T, V = unknown> = Map<T, V>;
 
-export interface EventWithPath extends Event {
+export interface LitEvent extends Event {
   path: HTMLElement[];
 }
 
-export const isEventWithPath = (event: any): event is EventWithPath => {
-  return !!event && !!event.path && Array.isArray(event.path);
+export const isEventWithPath = (event: Event): event is LitEvent => {
+  return !!event && event.hasOwnProperty('path');
 };
 
 export interface Token {

@@ -1,4 +1,5 @@
-import {LitElement, customElement, property, html, observer} from '@material/mwc-base/form-element';
+import {observer} from '@material/mwc-base/form-element';
+import {property, customElement, html, LitElement} from 'lit-element';
 import {style} from './styles/exmg-paper-sidemenu-header-styles';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@polymer/paper-listbox/paper-listbox.js';
@@ -62,37 +63,37 @@ export class CmsSidemenuHeader extends LitElement {
    *  Fakes urls on debug true
    */
   @property({type: Boolean, reflect: true})
-  debug: boolean = false;
+  debug = false;
 
   /**
    *  Home/Dashboard url
    */
   @property({type: String, reflect: true})
-  homeUrl: string = '/';
+  homeUrl = '/';
 
   /**
    *  Settings url
    */
   @property({type: String, reflect: true})
-  settingsUrl: string = '/settings';
+  settingsUrl = '/settings';
 
   /**
    *  Settings label
    */
   @property({type: String, reflect: true})
-  settingsLabel: string = 'Settings';
+  settingsLabel = 'Settings';
 
   /**
    *  Collapsed state
    */
   @property({type: Boolean, reflect: true})
-  collapsed: boolean = false;
+  collapsed = false;
 
   /**
    *  Home/Hashboard label
    */
   @property({type: String, reflect: true})
-  homeLabel: string = 'Dashboard';
+  homeLabel = 'Dashboard';
 
   /**
    * Contains the path of the selected menu item

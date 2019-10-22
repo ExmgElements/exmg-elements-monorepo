@@ -17,10 +17,10 @@ import {style} from './styles/exmg-drawer-styles';
 @customElement('exmg-drawer')
 export class ExmgDrawer extends LitElement {
   @property({type: Boolean})
-  opened: boolean = false;
+  opened = false;
 
   @property({type: Boolean, attribute: 'no-cancel-on-outside-click'})
-  noCancelOnOutsideClick: boolean = false;
+  noCancelOnOutsideClick = false;
 
   handleOpenedChanged(e: CustomEvent) {
     this.opened = e.detail.value;
