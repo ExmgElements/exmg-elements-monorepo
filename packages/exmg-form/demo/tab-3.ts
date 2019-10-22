@@ -45,7 +45,7 @@ export class Tab3El extends LitElement {
 
   onSubmit(event: any) {
     console.log('submit', event);
-    setTimeout(_ => {
+    setTimeout(() => {
       this.resetForm1();
       // event.path[0].error('User does not have permission to save data');
     }, 1500);
