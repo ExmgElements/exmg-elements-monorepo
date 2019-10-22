@@ -18,26 +18,26 @@ export class ExmgFormDialog extends LitElement {
    * Title of the dialog
    */
   @property({type: String})
-  public title: string = '';
+  public title = '';
 
   /**
    * Copy for submit button
    */
   @property({type: String, attribute: 'button-copy'})
-  public buttonCopy: string = '';
+  public buttonCopy = '';
 
   /**
    * Hide close button ?
    */
   @property({type: Boolean, attribute: 'hide-close-button'})
-  private hideCloseButton: boolean = false;
+  private hideCloseButton = false;
 
   /**
    * Indicator if submit is in progress This boolean will display the progress
    * bar at the bottom of the dialog
    */
   @property({type: Boolean, reflect: true})
-  private submitting: boolean = false;
+  private submitting = false;
 
   /**
    * When set this will be shown in the error section of the dialog

@@ -11,32 +11,32 @@ export class ExmgConfirmDialog extends LitElement {
    * Title of the dialog
    */
   @property({type: String})
-  public title: string = '';
+  public title = '';
 
   /**
    * Dialog message to display as confirmation question. Alternative would be to just add a slot body including a message.
    */
   @property({type: String})
-  private message: string = '';
+  private message = '';
 
   /**
    * Hide close button ?
    */
   @property({type: Boolean, attribute: 'hide-close-button'})
-  private hideCloseButton: boolean = false;
+  private hideCloseButton = false;
 
   /**
    * Copy for submit button
    */
   @property({type: String, attribute: 'button-copy'})
-  private buttonCopy: string = '';
+  private buttonCopy = '';
 
   /**
    * Indicator if submit is in progress This boolean will display the progress
    * bar at the bottom of the dialog
    */
   @property({type: Boolean, reflect: true})
-  private submitting: boolean = false;
+  private submitting = false;
 
   /**
    * When set this will be shown in the error section of the dialog
@@ -51,7 +51,7 @@ export class ExmgConfirmDialog extends LitElement {
   private submitBtnNode?: PaperDialogElement;
 
   @property({type: Boolean})
-  private hasSlotContent: boolean = false;
+  private hasSlotContent = false;
 
   private observer?: MutationObserver;
 
@@ -72,7 +72,7 @@ export class ExmgConfirmDialog extends LitElement {
 
     // Create an observer instance linked to the callback function
     this.observer = new MutationObserver((list: MutationRecord[]) => {
-      for (let mutation of list) {
+      for (const mutation of list) {
         if (mutation.type === 'childList') {
           console.log('A child node has been added or removed.');
           this.hasSlotContent = this.children.length > 0;
