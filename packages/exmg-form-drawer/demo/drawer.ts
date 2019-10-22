@@ -6,7 +6,7 @@ import '../exmg-drawer';
 
 @customElement('exmg-drawer-demo')
 export class Drawer extends LitElement {
-  @property({type: Boolean}) opened: boolean = false;
+  @property({type: Boolean}) opened = false;
 
   handleOpenedChanged(e: CustomEvent) {
     this.opened = e.detail.value;
@@ -33,13 +33,7 @@ export class Drawer extends LitElement {
           <paper-input label="password input" type="password"></paper-input>
           <paper-input label="disabled input" disabled value="batman"></paper-input>
           <paper-input name="name" label="Summary" required always-float-label></paper-input>
-          <paper-input
-            name="estimate"
-            label="Estimates"
-            type="number"
-            always-float-label
-            style="max-width:180px;"
-          ></paper-input>
+          <paper-input name="estimate" label="Estimates" type="number" always-float-label style="max-width:180px;"></paper-input>
 
           <exmg-paper-combobox label="Project" name="combobox" style="max-width:280px;" always-float-label required>
             <paper-item>PlayToTV</paper-item>

@@ -20,25 +20,25 @@ import '@exmg/exmg-button';
 @customElement('exmg-form-drawer' as any)
 export class ExmgFormDrawer extends LitElement {
   @property({type: Boolean})
-  public opened: boolean = false;
+  public opened = false;
 
   @property({type: String, attribute: 'submit-btn-title'})
-  public submitBtnTitle: string = 'Submit';
+  public submitBtnTitle = 'Submit';
 
   @property({type: String, attribute: 'cancel-btn-title'})
-  public cancelBtnTitle: string = 'Cancel';
+  public cancelBtnTitle = 'Cancel';
 
   @property({type: Boolean, attribute: 'keep-opened-on-submit-success'})
-  public keepOpenedOnSubmitSuccess: boolean = false;
+  public keepOpenedOnSubmitSuccess = false;
 
   @property({type: Boolean, attribute: 'reset-form-on-submit-success'})
-  public resetFormOnSubmitSuccess: boolean = false;
+  public resetFormOnSubmitSuccess = false;
 
   @property({type: Boolean, attribute: 'no-cancel-on-outside-click'})
-  noCancelOnOutsideClick: boolean = false;
+  noCancelOnOutsideClick = false;
 
   @property({type: Boolean, reflect: true})
-  private submitting: boolean = false;
+  private submitting = false;
 
   @query('exmg-form')
   private form?: ExmgForm;
@@ -147,12 +147,7 @@ export class ExmgFormDrawer extends LitElement {
           </div>
         </div>
         <div class="form-elements">
-          <exmg-form
-            @submit="${this.handleFormSubmit}"
-            @cancel="${this.handleFormCancel}"
-            hide-submit-button
-            hide-cancel-button
-          >
+          <exmg-form @submit="${this.handleFormSubmit}" @cancel="${this.handleFormCancel}" hide-submit-button hide-cancel-button>
             <slot></slot>
           </exmg-form>
         </div>
