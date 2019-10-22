@@ -18,7 +18,7 @@ import {
 @customElement('exmg-grid-smart-toolbar')
 export class ExmgGridSmartToolbar extends LitElement {
   @property({type: String})
-  description: string = '';
+  description = '';
 
   @property({type: Object})
   actions: ActionWithCondition[] = [];
@@ -30,16 +30,16 @@ export class ExmgGridSmartToolbar extends LitElement {
   settings: Setting[] = [];
 
   @property({type: Number, attribute: 'amount-of-selected-items'})
-  amountOfSelectedItems: number = 0;
+  amountOfSelectedItems = 0;
 
   @property({type: Boolean, attribute: 'show-column-filter'})
-  showColumnFilter: boolean = false;
+  showColumnFilter = false;
 
   @property({type: String, attribute: 'column-filter-button-tooltip'})
-  columnFilterButtonTooltip: string = 'Column selection';
+  columnFilterButtonTooltip = 'Column selection';
 
   @property({type: String, attribute: 'column-filter-dialog-title'})
-  columnFilterDialogTitle: string = 'Select columns';
+  columnFilterDialogTitle = 'Select columns';
 
   @property({type: Object, attribute: 'column-filter-columns'})
   columnFilterColumns: SettingSelectionListItem[] = [];

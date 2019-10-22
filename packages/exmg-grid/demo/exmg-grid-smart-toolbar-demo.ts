@@ -41,7 +41,7 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
     },
   ];
 
-  private description: string = 'Table 1';
+  private description = 'Table 1';
 
   private filters: Filter<FilterSingleSelectConfig>[] = [
     {
@@ -68,7 +68,7 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
   ];
 
   @property({type: Number})
-  private amountOfSelectedItems: number = 1;
+  private amountOfSelectedItems = 1;
 
   private columns: SettingSelectionListItem[] = [
     {

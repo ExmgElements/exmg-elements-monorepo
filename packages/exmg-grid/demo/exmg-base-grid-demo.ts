@@ -27,7 +27,7 @@ export interface Income {
   year: number;
 }
 
-const generateRows = (length: number = 50, startId: number = 1): Income[] => {
+const generateRows = (length = 50, startId = 1): Income[] => {
   const randomAmount = () => Number.parseFloat((Math.random() * 1000).toFixed(2));
   const source: Income[] = [
     {id: 1, month: 'January', amount: randomAmount(), year: 2000},
@@ -65,10 +65,10 @@ export abstract class ExmgBaseGridDemo extends LitElement {
   items: Income[];
 
   @property({type: Number})
-  protected pageIndex: number = 0;
+  protected pageIndex = 0;
 
   @property({type: Number})
-  protected pageSize: number = 10;
+  protected pageSize = 10;
 
   @property({type: Object})
   protected hiddenColumns: Record<string, string> = {};
@@ -83,7 +83,7 @@ export abstract class ExmgBaseGridDemo extends LitElement {
   protected selectedRowIds: Record<string, boolean> = {};
 
   @property({type: String})
-  protected theme: string = 'dark';
+  protected theme = 'dark';
 
   constructor() {
     super();
@@ -271,7 +271,7 @@ export abstract class ExmgBaseGridDemo extends LitElement {
     });
   }
 
-  private createRowIdToStateMap(state: boolean, start: number = 0, end: number = 3): Record<string, boolean> {
+  private createRowIdToStateMap(state: boolean, start = 0, end = 3): Record<string, boolean> {
     return this.items.slice(start, end).reduce((acc, it) => ({...acc, [it.id.toString()]: state}), {});
   }
 

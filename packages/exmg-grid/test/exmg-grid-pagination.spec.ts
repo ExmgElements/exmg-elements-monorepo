@@ -80,14 +80,12 @@ suite('<exmg-grid-pagination>', function() {
       const nextPageBtn = element.shadowRoot!.querySelector<HTMLButtonElement>('#nextPageBtn')!;
       const pageSizeOptionsElem = element.shadowRoot!.querySelector<PaperComboboxElement>('#pageSizeOptions')!;
       let pageChangedPromise;
-      let pageSizeChangedPromise;
-      let timeoutPromise;
 
       pageChangedPromise = onExmgGridPaginationPageChanged(element, true);
       nextPageBtn.click();
       assert.equal((await pageChangedPromise).detail.page, 1);
 
-      pageSizeChangedPromise = onExmgGridPaginationPageSizeChanged(element, true);
+      const pageSizeChangedPromise = onExmgGridPaginationPageSizeChanged(element, true);
       pageSizeOptionsElem.dispatchEvent(new CustomEvent('exmg-combobox-select', {bubbles: true, composed: true, detail: {value: 30}}));
       assert.deepEqual((await pageSizeChangedPromise).detail, {pageSize: 30, page: 0});
 
@@ -104,7 +102,7 @@ suite('<exmg-grid-pagination>', function() {
       pageChangedPromise = onExmgGridPaginationPageChanged(element, false);
       nextPageBtn.click();
 
-      timeoutPromise = new Promise(resolve => {
+      const timeoutPromise = new Promise(resolve => {
         setTimeout(() => {
           resolve();
         }, 500);

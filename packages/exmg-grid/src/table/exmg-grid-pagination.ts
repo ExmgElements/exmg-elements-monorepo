@@ -20,7 +20,7 @@ export class ExmgGridPagination extends LitElement {
   static styles = [style];
 
   @property({type: String, attribute: 'page-size-label'})
-  pageSizeLabel: string = 'Rows per page:';
+  pageSizeLabel = 'Rows per page:';
 
   @property({type: Array, attribute: 'page-size-options'})
   pageSizeOptions: number[] = [10, 20, 30];
@@ -29,10 +29,10 @@ export class ExmgGridPagination extends LitElement {
   pageSize: number = this.pageSizeOptions[0];
 
   @property({type: Number, attribute: 'page-index'})
-  pageIndex: number = 0;
+  pageIndex = 0;
 
   @property({type: Number, attribute: 'item-count'})
-  itemCount: number = 0;
+  itemCount = 0;
 
   private renderPageSizeLabel() {
     return html`

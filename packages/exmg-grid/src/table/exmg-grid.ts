@@ -61,7 +61,7 @@ export class ExmgGrid extends LitElement {
    * Feature that turn on sort by column
    */
   @property({type: Boolean, reflect: true})
-  sortable: boolean = false;
+  sortable = false;
 
   /**
    * Name of sort column which should be sorted by default
@@ -80,19 +80,19 @@ export class ExmgGrid extends LitElement {
    * If table has turn on feature `selectable` then it takes precedence and `rowSelectable` will be ignored
    */
   @property({type: Boolean, reflect: true, attribute: 'rows-sortable'})
-  rowsSortable: boolean = false;
+  rowsSortable = false;
 
   /**
    * Feature that allow select rows
    */
   @property({type: Boolean, attribute: 'rows-selectable'})
-  rowsSelectable: boolean = false;
+  rowsSelectable = false;
 
   /**
    * By default a ros is also selactable by clicking anywhere inside the row when the rowSElectable option is enabled
    */
   @property({type: Boolean, attribute: 'disable-row-click-selection'})
-  disableRowClickSelection: boolean = false;
+  disableRowClickSelection = false;
 
   /**
    * If rows are selectable you can also pass selector to checkboxes.
@@ -137,7 +137,7 @@ export class ExmgGrid extends LitElement {
   private querySelectors?: ExmgQuerySelectors;
 
   @property({type: Boolean, reflect: true, attribute: 'data-with-toolbar'})
-  private withToolbar: boolean = false;
+  private withToolbar = false;
 
   private rowSelectableFeature?: ExmgRowSelectable;
 
@@ -147,7 +147,7 @@ export class ExmgGrid extends LitElement {
 
   private columnSortableFeature?: ExmgColumnSortable;
 
-  private componentReady: boolean = false;
+  private componentReady = false;
 
   private getQuerySelectors(): ExmgQuerySelectors {
     if (!this.querySelectors) {
@@ -170,7 +170,7 @@ export class ExmgGrid extends LitElement {
     }
   }
 
-  private getColumns(selector: string = 'th'): NodeListOf<HTMLTableHeaderCellElement> {
+  private getColumns(selector = 'th'): NodeListOf<HTMLTableHeaderCellElement> {
     return this.getQuerySelectors().getColumns(selector);
   }
 

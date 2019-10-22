@@ -1,7 +1,6 @@
 import {LitElement, html, customElement, property} from 'lit-element';
 import '@material/mwc-checkbox';
 import '@material/mwc-icon/mwc-icon';
-import '@material/mwc-icon/mwc-icon-font';
 import '@material/mwc-button';
 import {style} from './button-demo-styles';
 import '../';

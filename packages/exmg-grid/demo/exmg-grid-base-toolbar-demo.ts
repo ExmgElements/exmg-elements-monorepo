@@ -28,7 +28,7 @@ export class ExmgGridBaseToolbarDemo extends LitElement {
     },
   ];
 
-  private description: string = 'Table 1';
+  private description = 'Table 1';
 
   private filters: any[] = [
     {

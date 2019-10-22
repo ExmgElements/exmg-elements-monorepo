@@ -18,13 +18,13 @@ export class ExmgGridBaseToolbar extends LitElement {
   static styles = [style];
 
   @property({type: Object})
-  private actionsCount: number = 0;
+  private actionsCount = 0;
 
   @property({type: Object})
-  private settingsCount: number = 0;
+  private settingsCount = 0;
 
   @property({type: Boolean, reflect: true})
-  private active: boolean = false;
+  private active = false;
 
   private observer?: MutationObserver;
 
