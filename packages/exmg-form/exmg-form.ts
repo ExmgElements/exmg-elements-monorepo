@@ -1,4 +1,4 @@
-import {customElement, html, LitElement, property, PropertyValues, query} from 'lit-element';
+import {customElement, html, LitElement, property, query} from 'lit-element';
 import '@polymer/iron-form';
 import '@exmg/exmg-button';
 import {style} from './styles/exmg-form-styles';
@@ -140,7 +140,7 @@ export class ExmgForm extends LitElement {
     super.disconnectedCallback();
   }
 
-  protected updated(_: PropertyValues): void {
+  protected updated(): void {
     if (this.inline) {
       Array.from(this.children).forEach((elem: Element) => {
         (elem as HTMLElement).style.display = 'inline-block';
@@ -152,7 +152,7 @@ export class ExmgForm extends LitElement {
     }
   }
 
-  private handleOnChange(_e: Event): void {
+  private handleOnChange(): void {
     if (this.dirty) {
       return;
     }
