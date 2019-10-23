@@ -33,7 +33,7 @@ export class FormDemo extends LitElement {
 
   render() {
     return html`
-      <mwc-tab-bar @MDCTabBar:activated=${(e: CustomEvent<{index: number}>) => (this.activeTabIndex = e.detail.index)}>
+      <mwc-tab-bar activeIndex="1" @MDCTabBar:activated=${(e: CustomEvent<{index: number}>) => (this.activeTabIndex = e.detail.index)}>
         <mwc-tab label="one"></mwc-tab>
         <mwc-tab label="two"></mwc-tab>
         <mwc-tab label="three"></mwc-tab>

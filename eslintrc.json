@@ -28,6 +28,7 @@
     ],
     "object-curly-spacing": ["error", "never"],
     "no-shadow": "error",
+    "@typescript-eslint/triple-slash-reference": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/explicit-member-accessibility": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
