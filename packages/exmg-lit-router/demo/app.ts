@@ -34,7 +34,6 @@ import {navigateToPath, BreadcrumbItem} from '../src/actions/router';
 import {BreadcrumbItem as CMSBreadcrumbItem} from './components/breadcrumb';
 
 class MyApp extends ConnectedLitElement<RootState> {
-  [x: string]: any;
   static styles = css`
     ${styles}
   `;

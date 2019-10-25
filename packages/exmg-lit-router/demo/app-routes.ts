@@ -1,4 +1,4 @@
-import {RouteItem} from '@vaadin/router';
+import {RouteItem} from '../index-router';
 
 // Can also be incl by lazy import
 import './broadcast/broadcast-page';
