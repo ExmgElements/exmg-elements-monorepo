@@ -7,7 +7,7 @@
     "moduleResolution": "node",
     "declaration": true,
     "lib": ["es2017", "dom"],
-    "typeRoots": ["./typings"],
+    "typeRoots": ["node_modules/@types", "./typings"],
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": false,
