@@ -38,7 +38,7 @@ export class Drawer extends LitElement {
   }
 
   onSubmit(event: any) {
-    setTimeout(_ => {
+    setTimeout((_: any) => {
       if (this.shouldFail) {
         event.path[0].error('Internal error occurred');
       } else {
