@@ -1,9 +1,6 @@
 @import '@material/typography/mdc-typography';
 @import '@material/theme/mdc-theme';
 
-/* Sass vars */
-@import './variables';
-
 :host {
   height: 100%;
   width: var(--exmg-paper-sidemenu-sidth);

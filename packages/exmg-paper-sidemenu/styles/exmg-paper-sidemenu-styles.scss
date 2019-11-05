@@ -1,18 +1,7 @@
 @import '@material/typography/mdc-typography';
 @import '@material/theme/mdc-theme';
 
-/* Sass vars */
-@import './variables';
-
 :host {
-  --mdc-theme-primary: #{$mdc-theme-primary};
-  --mdc-theme-secondary: #{$mdc-theme-secondary};
-  --mdc-theme-background: #{$mdc-theme-background};
-  --mdc-theme-surface: #{$mdc-theme-surface};
-  --mdc-theme-on-primary: #{$mdc-theme-on-primary};
-  --mdc-theme-on-secondary: #{$mdc-theme-on-secondary};
-  --mdc-theme-on-surface: #{$mdc-theme-on-surface};
-
   --default-paper-sidemenu-width: var(--paper-sidemenu-width, 256px);
   --default-paper-sidemenu-collapsed-width: var(--paper-sidemenu-collapsed-width, 64px);
   --default-paper-sidemenu-text-color: var(--paper-sidemenu-text-color, --mdc-theme-on-primary);
