@@ -731,7 +731,7 @@ export class PaperComboboxElement extends LitElement {
         <paper-menu-button id="menu" ?opened="${this.opened}" ?disabled="${this.disabled}"
           @paper-dropdown-open="${this.onMenuButtonOpen}"
           @paper-dropdown-close="${this.onMenuButtonClose}"
-          close-on-activate vertical-offset="40" horizontal-align="right">
+          close-on-activate vertical-offset="40" dynamic-align horizontal-align="right">
           <paper-icon-button icon="exmg-paper-combobox-icons:arrow-drop-down" ?data-opened="${this.opened}" slot="dropdown-trigger">
           </paper-icon-button>
           <paper-listbox
