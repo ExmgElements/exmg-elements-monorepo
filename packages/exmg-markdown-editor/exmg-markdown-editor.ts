@@ -621,7 +621,6 @@ export class EditorElement extends LitElement {
         ch: cursorEnd.ch + blockStyles[type].length,
       };
       codeMirror.getDoc().setSelection(start, end);
-      //this.replaceRangeLine(start + selectionText + end, cursorStart.line);
       codeMirror.getDoc().replaceSelection(selectionText);
       cursorStart.ch = start.ch;
     } else {
@@ -664,17 +663,31 @@ export class EditorElement extends LitElement {
           const result = /(^[\#]+)/.exec(text);
           if (result === null) {
             text = `${symbol} ${text}`;
-          } else {
-            text = result[0].length === 6 ? text.substring(7) : `${symbol}${text}`;
+            const offset = symbol!.length + 1; // +1 is space.
+            if (cursorStart.ch !== cursorEnd.ch) {
+              cursorEnd.ch += offset;
+            } else {
+              cursorStart.ch += offset;
+              cursorEnd.ch += offset;
+            }
+          } else if (symbol && result[0] === symbol) {
+            text = text.substring(symbol.length + 1);
+          } else if (symbol && result[0].length !== symbol.length) {
+            text = text.substring(result[0].length + 1);
+            text = `${symbol} ${text}`;
           }
           break;
         }
         case 'quote':
         case 'unordered-list':
           text = stateFound ? text.substring(2) : `${symbol} ${text}`;
+          cursorStart.ch += stateFound ? -2 : 2;
+          cursorEnd.ch += stateFound ? -2 : 2;
           break;
         case 'ordered-list':
           text = stateFound ? text.substring(3) : `${lineCount + 1}. ${text}`;
+          cursorStart.ch += stateFound ? -3 : 3;
+          cursorEnd.ch += stateFound ? -3 : 3;
           break;
       }
       this.replaceRangeLine(text, i);
