@@ -545,8 +545,8 @@ export class EditorElement extends LitElement {
       }
       this.markdown = editor.getValue();
       this.dispatchMarkdownUpdatedDebounce(() => {
-        this.dispatchEvent(new CustomEvent('value-change', {bubbles: true, composed: true, detail: editor.getValue()}));
-        this.dispatchEvent(new CustomEvent('change', {bubbles: true, composed: true, detail: editor.getValue()}));
+        this.dispatchEvent(new CustomEvent('value-change', {bubbles: true, composed: true, detail: this.value}));
+        this.dispatchEvent(new CustomEvent('change', {bubbles: true, composed: true, detail: this.value}));
       });
     });
 
