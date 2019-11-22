@@ -346,7 +346,7 @@ export class EditorElement extends LitElement {
   private isElementInitialized = false;
 
   get value() {
-    return this.markdown;
+    return (this.markdown || '').replace(/([^\r]|^)\n/g, '$1\r\n');
   }
 
   set value(value) {
