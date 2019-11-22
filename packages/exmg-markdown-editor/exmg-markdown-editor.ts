@@ -162,6 +162,7 @@ export class EditorElement extends LitElement {
     'quote',
     'hr',
     'table',
+    'table-paste',
     'code',
     '|',
     'unordered-list',
@@ -274,6 +275,13 @@ export class EditorElement extends LitElement {
       title: 'Table',
     },
     {
+      name: 'table-paste',
+      icon: 'exmg-markdown-editor-icons:grid-on',
+      action: this.pasteTable,
+      className: 'btn-table',
+      title: 'Paste Table',
+    },
+    {
       name: 'link',
       icon: 'exmg-markdown-editor-icons:link',
       action: this.insertLink,
@@ -336,6 +344,9 @@ export class EditorElement extends LitElement {
 
   @query('#editor')
   editorElement?: HTMLElement;
+
+  @query('.paste-table-window')
+  pasteTableWindow?: HTMLElement;
 
   private codeMirrorEditor?: Editor;
 
@@ -549,6 +560,17 @@ export class EditorElement extends LitElement {
         this.dispatchEvent(new CustomEvent('change', {bubbles: true, composed: true, detail: editor.getValue()}));
       });
     });
+
+    if (this.pasteTableWindow) {
+      const tableInput = this.pasteTableWindow.querySelector<HTMLInputElement>('textarea');
+      tableInput &&
+        tableInput.addEventListener('keypress', (e: KeyboardEvent) => {
+          e.preventDefault();
+          if (e.keyCode === 13) {
+            this.convertTableToMarkdown(tableInput.value);
+          }
+        });
+    }
 
     afterNextRender(this, () => this.updateDocHistory());
 
@@ -849,6 +871,57 @@ export class EditorElement extends LitElement {
     this.insertAtCursor(insertBlocks.table, 2, 8);
   }
 
+  private pasteTable(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
+    this.pasteTableWindow && this.pasteTableWindow.classList.toggle('active');
+  }
+
+  private convertTableToMarkdown(data: string) {
+    const columnWidth = (rows: string[][], columnIndex: number) => {
+      return Math.max.apply(
+        null,
+        rows.map(function(row) {
+          return row[columnIndex].length;
+        }),
+      );
+    };
+
+    const rows = data.split(/[\n\u0085\u2028\u2029]|\r\n?/g).map(function(row) {
+      return row.split('\t');
+    });
+    const columnWidths = rows[0].map(function(_column, columnIndex) {
+      return columnWidth(rows, columnIndex);
+    });
+    const markdownRows = rows.map(function(row) {
+      return (
+        '| ' +
+        row
+          .map(function(column, index) {
+            return column + Array(columnWidths[index] - column.length + 1).join(' ');
+          })
+          .join(' | ') +
+        ' |'
+      );
+      row.map;
+    });
+    markdownRows.splice(
+      1,
+      0,
+      '|' +
+        columnWidths
+          .map(function(_width, index) {
+            return Array(columnWidths[index] + 3).join('-');
+          })
+          .join('|') +
+        '|',
+    );
+    this.pasteTableWindow!.classList.remove('active');
+    const result = markdownRows.join('\n');
+    this.insertAtCursor(result);
+  }
+
   private toggleCode(event?: Event): void {
     if (event) {
       event.preventDefault();
@@ -1100,6 +1173,16 @@ export class EditorElement extends LitElement {
           margin: 0 8px;
           border-left: 1px solid var(--exmg-markdown-editor-toolbar-seperator-color, #ddd);
         }
+        .toolbar .paste-table-window {
+          padding: 0.5rem;
+          background-color: var(--exmg-markdown-editor-toolbar-background, #fafafa);
+          display: none;
+        }
+        .toolbar .paste-table-window.active {
+          display: block;
+          position: fixed;
+          z-index: 11;
+        }
       </style>
 
       <div id="toolbar" class="toolbar">
@@ -1119,7 +1202,13 @@ export class EditorElement extends LitElement {
             `;
           },
         )}
-
+        ${this.toolbarButtons.indexOf('table-paste') === -1
+          ? ''
+          : html`
+              <div class="paste-table-window">
+                <textarea placeholder="Paste your Excel or Google Doc table here ..."></textarea>
+              </div>
+            `}
         <div class=${classMap(classes)}>
           <div>EDITOR</div>
           ${this.splitView
