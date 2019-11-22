@@ -1,6 +1,6 @@
 {
   "name": "@exmg/exmg-grid",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "exmg grid element",
   "contributors": [
     "Ex Machina"
@@ -27,7 +27,7 @@
   "license": "MIT",
   "dependencies": {
     "@exmg/exmg-button": "^1.1.0",
-    "@exmg/exmg-paper-combobox": "^5.1.0",
+    "@exmg/exmg-paper-combobox": "^5.1.1",
     "@exmg/exmg-sortable": "^5.1.0",
     "@material/list": "^3.2.0",
     "@material/menu": "^3.2.0",
