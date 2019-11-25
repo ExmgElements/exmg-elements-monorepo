@@ -107,6 +107,12 @@ const ENTER_KEY_CODE = 13;
  *  # Events:
  *  - value-change - where detail is current markdown value
  *  - exmg-markdown-editor-fullscreen where detail is boolean with current fullscreen state
+ *  - exmg-markdown-editor-paste-table thrown when app should display a dialog to paste Excel Table
+ *
+ *  # Public method:
+ *  - insertTableAtCursor
+ *    @param data: String
+ *    Will convert data into a table and insert it at cursor.
  *
  * @customElement
  * @polymer
@@ -278,7 +284,7 @@ export class EditorElement extends LitElement {
       name: 'table-paste',
       icon: 'exmg-markdown-editor-icons:grid-on',
       action: this.pasteTable,
-      className: 'btn-table',
+      className: 'btn-table-paste',
       title: 'Paste Table',
     },
     {
@@ -344,9 +350,6 @@ export class EditorElement extends LitElement {
 
   @query('#editor')
   editorElement?: HTMLElement;
-
-  @query('.paste-table-window')
-  pasteTableWindow?: HTMLElement;
 
   private codeMirrorEditor?: Editor;
 
@@ -560,17 +563,6 @@ export class EditorElement extends LitElement {
         this.dispatchEvent(new CustomEvent('change', {bubbles: true, composed: true, detail: editor.getValue()}));
       });
     });
-
-    if (this.pasteTableWindow) {
-      const tableInput = this.pasteTableWindow.querySelector<HTMLInputElement>('textarea');
-      tableInput &&
-        tableInput.addEventListener('keypress', (e: KeyboardEvent) => {
-          e.preventDefault();
-          if (e.keyCode === 13) {
-            this.convertTableToMarkdown(tableInput.value);
-          }
-        });
-    }
 
     afterNextRender(this, () => this.updateDocHistory());
 
@@ -875,10 +867,10 @@ export class EditorElement extends LitElement {
     if (event) {
       event.preventDefault();
     }
-    this.pasteTableWindow && this.pasteTableWindow.classList.toggle('active');
+    this.dispatchEvent(new CustomEvent('exmg-markdown-editor-paste-table'));
   }
 
-  private convertTableToMarkdown(data: string) {
+  public insertTableAtCursor(data: string) {
     const columnWidth = (rows: string[][], columnIndex: number) => {
       return Math.max.apply(
         null,
@@ -917,7 +909,6 @@ export class EditorElement extends LitElement {
           .join('|') +
         '|',
     );
-    this.pasteTableWindow!.classList.remove('active');
     const result = markdownRows.join('\n');
     this.insertAtCursor(result);
   }
@@ -1173,18 +1164,7 @@ export class EditorElement extends LitElement {
           margin: 0 8px;
           border-left: 1px solid var(--exmg-markdown-editor-toolbar-seperator-color, #ddd);
         }
-        .toolbar .paste-table-window {
-          padding: 0.5rem;
-          background-color: var(--exmg-markdown-editor-toolbar-background, #fafafa);
-          display: none;
-        }
-        .toolbar .paste-table-window.active {
-          display: block;
-          position: fixed;
-          z-index: 11;
-        }
       </style>
-
       <div id="toolbar" class="toolbar">
         ${repeat<ToolBarConfigItem | Record<string, any>>(
           this.getToolbar(this.toolbarButtons),
@@ -1202,13 +1182,6 @@ export class EditorElement extends LitElement {
             `;
           },
         )}
-        ${this.toolbarButtons.indexOf('table-paste') === -1
-          ? ''
-          : html`
-              <div class="paste-table-window">
-                <textarea placeholder="Paste your Excel or Google Doc table here ..."></textarea>
-              </div>
-            `}
         <div class=${classMap(classes)}>
           <div>EDITOR</div>
           ${this.splitView
