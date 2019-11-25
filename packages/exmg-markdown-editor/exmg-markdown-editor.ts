@@ -282,7 +282,7 @@ export class EditorElement extends LitElement {
     },
     {
       name: 'table-paste',
-      icon: 'exmg-markdown-editor-icons:grid-on',
+      icon: 'exmg-markdown-editor-icons:paste-table',
       action: this.pasteTable,
       className: 'btn-table-paste',
       title: 'Paste Table',
