@@ -28,11 +28,38 @@
 
     <link rel="stylesheet" href="../node_modules/github-markdown-css/github-markdown.css">
     <script type="module" src="../exmg-markdown-editor.js"></script>
+    <script type="module" src="../node_modules/@exmg/exmg-dialogs/exmg-dialog-form.js"></script>
     
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
         .centered {
           max-width: 1000px;
+        }
+        html {
+          --exmg-markdown-editor-border: none;
+          --exmg-markdown-editor-toolbar-background: #333;
+          --exmg-markdown-editor-toolbar-color: #b9b9b9;
+          --exmg-markdown-editor-toolbar-color-disabled: #494949;
+          --exmg-markdown-editor-toolbar-button-background-hover: #666;
+          --exmg-markdown-editor-toolbar-seperator-color: #b9b9b9;
+          --exmg-markdown-editor-background-color: #fff;
+          --exmg-markdown-editor-code-hover: #ebecf0;
+          --exmg-markdown-editor-code: {
+            font-family: Lato, 'Helvetica Neue', Helvetica, sans-serif;
+          }
+          --exmg-markdown-editor-preview {
+            padding: 16px 32px;
+          }
+        }
+        .markdown-body h1,
+        .markdown-body h2 {
+          border-bottom: 1px solid #bbbcbe;
+        }
+        .markdown-body {
+          font-family: Lato, 'Helvetica Neue', Helvetica, sans-serif;
+        }
+        marked-element {
+          scroll-margin: 15px !important;
         }
         ul {
           list-style: none;
@@ -54,8 +81,8 @@
       </div>
       <demo-snippet>
         <template>
-          <exmg-markdown-editor>
-            <marked-element markdown="#TEXT *bold*">
+          <exmg-markdown-editor split-view show-helper-label>
+            <marked-element markdown="# TEXT *bold*">
               <div slot="markdown-html" class="markdown-body"></div>
             </marked-element>
           </exmg-markdown-editor>
@@ -68,6 +95,9 @@
           </ul>
         </code>
       </div>
+      <exmg-dialog-form id="tableDialog" title="Paste your Excel table" button-copy="Save">
+        <textarea name="data" style="resize: none; width: 100%; height: 200px;" placeholder="Paste your Excel or Sheet table here"></textarea>
+      </exmg-dialog-form>
       <script type="module">
         import init from './markdown-events';
         init();

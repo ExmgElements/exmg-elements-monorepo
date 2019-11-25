@@ -15,6 +15,7 @@ export type ToolBarOption =
   | 'quote'
   | 'hr'
   | 'table'
+  | 'table-paste'
   | 'code'
   | 'unordered-list'
   | 'ordered-list'
