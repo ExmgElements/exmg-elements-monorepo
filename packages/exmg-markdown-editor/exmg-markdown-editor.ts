@@ -360,7 +360,7 @@ export class EditorElement extends LitElement {
   private isElementInitialized = false;
 
   get value() {
-    return this.markdown;
+    return (this.markdown || '').replace(/([^\r]|^)\n/g, '$1\r\n');
   }
 
   set value(value) {
@@ -559,8 +559,8 @@ export class EditorElement extends LitElement {
       }
       this.markdown = editor.getValue();
       this.dispatchMarkdownUpdatedDebounce(() => {
-        this.dispatchEvent(new CustomEvent('value-change', {bubbles: true, composed: true, detail: editor.getValue()}));
-        this.dispatchEvent(new CustomEvent('change', {bubbles: true, composed: true, detail: editor.getValue()}));
+        this.dispatchEvent(new CustomEvent('value-change', {bubbles: true, composed: true, detail: this.value}));
+        this.dispatchEvent(new CustomEvent('change', {bubbles: true, composed: true, detail: this.value}));
       });
     });
 
