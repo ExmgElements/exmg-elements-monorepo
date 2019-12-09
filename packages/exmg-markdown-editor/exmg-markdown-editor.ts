@@ -139,7 +139,7 @@ export class EditorElement extends LitElement {
   showHelperLabel = false;
 
   @property({type: Boolean, reflect: true, attribute: 'split-view'})
-  splitView = true;
+  splitView = false;
 
   @property({type: Boolean, reflect: true, attribute: 'fullscreen'})
   fullscreen = false;
@@ -989,8 +989,8 @@ export class EditorElement extends LitElement {
           display: none;
           overflow: auto;
         }
-        ::slotted(marked-element) {
-          margin-top: ${this.showHelperLabel ? '30px' : '0'};
+        :host([show-helper-label]) ::slotted(marked-element) {
+          padding-top: 30px;
         }
         :host([split-view]) ::slotted(*) {
           display: block;
@@ -1036,14 +1036,18 @@ export class EditorElement extends LitElement {
           z-index: 1;
           padding: 16px;
           padding-bottom: 0;
-          background: var(--exmg-markdown-editor-code-background, #f4f5f7);
+          background: var(--exmg-markdown-editor-code-background, #f9f9f9);
         }
         .CodeMirror-scroll {
           min-height: 300px;
           margin-top: ${this.showHelperLabel ? '15px' : '0'};
         }
+        :host([show-helper-label]) .CodeMirror-scroll {
+          margin-top: 15px;
+        }
         .CodeMirror:not(.CodeMirror-focused):hover {
           background: var(--exmg-markdown-editor-code-hover, white);
+          cursor: text;
         }
         .CodeMirror-focused {
           box-shadow: inset 0 0 0 2px Highlight;
@@ -1121,12 +1125,16 @@ export class EditorElement extends LitElement {
         )}
 
         <div class=${classMap(classes)}>
-          <div>EDITOR</div>
-          ${this.splitView
+          ${this.showHelperLabel
             ? html`
-                <div class="preview">PREVIEW</div>
+                <div>EDITOR</div>
+                ${this.splitView
+                  ? html`
+                      <div class="preview">PREVIEW</div>
+                    `
+                  : ''}
               `
-            : ''}
+            : ``}
         </div>
       </div>
       <div class="container" style="height: ${this.height && !this.fullscreen ? `${this.height}px` : 'inherit'};">
