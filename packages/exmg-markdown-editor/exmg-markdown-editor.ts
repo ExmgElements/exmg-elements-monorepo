@@ -1196,7 +1196,7 @@ export class EditorElement extends LitElement {
                     `
                   : ''}
               `
-            : ``}
+            : ''}
         </div>
       </div>
       <div class="container" style="height: ${this.height && !this.fullscreen ? `${this.height}px` : 'inherit'};">
