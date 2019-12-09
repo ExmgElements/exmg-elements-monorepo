@@ -107,6 +107,12 @@ const ENTER_KEY_CODE = 13;
  *  # Events:
  *  - value-change - where detail is current markdown value
  *  - exmg-markdown-editor-fullscreen where detail is boolean with current fullscreen state
+ *  - exmg-markdown-editor-paste-table thrown when app should display a dialog to paste Excel Table
+ *
+ *  # Public method:
+ *  - insertTableAtCursor
+ *    @param data: String
+ *    Will convert data into a table and insert it at cursor.
  *
  * @customElement
  * @polymer
@@ -162,6 +168,7 @@ export class EditorElement extends LitElement {
     'quote',
     'hr',
     'table',
+    'table-paste',
     'code',
     '|',
     'unordered-list',
@@ -272,6 +279,13 @@ export class EditorElement extends LitElement {
       action: this.insertTable,
       className: 'btn-table',
       title: 'Table',
+    },
+    {
+      name: 'table-paste',
+      icon: 'exmg-markdown-editor-icons:paste-table',
+      action: this.pasteTable,
+      className: 'btn-table-paste',
+      title: 'Paste Table',
     },
     {
       name: 'link',
@@ -849,6 +863,56 @@ export class EditorElement extends LitElement {
     this.insertAtCursor(insertBlocks.table, 2, 8);
   }
 
+  private pasteTable(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
+    this.dispatchEvent(new CustomEvent('exmg-markdown-editor-paste-table'));
+  }
+
+  public insertTableAtCursor(data: string) {
+    const columnWidth = (rows: string[][], columnIndex: number) => {
+      return Math.max.apply(
+        null,
+        rows.map(function(row) {
+          return row[columnIndex].length;
+        }),
+      );
+    };
+
+    const rows = data.split(/[\n\u0085\u2028\u2029]|\r\n?/g).map(function(row) {
+      return row.split('\t');
+    });
+    const columnWidths = rows[0].map(function(_column, columnIndex) {
+      return columnWidth(rows, columnIndex);
+    });
+    const markdownRows = rows.map(function(row) {
+      return (
+        '| ' +
+        row
+          .map(function(column, index) {
+            return column + Array(columnWidths[index] - column.length + 1).join(' ');
+          })
+          .join(' | ') +
+        ' |'
+      );
+      row.map;
+    });
+    markdownRows.splice(
+      1,
+      0,
+      '|' +
+        columnWidths
+          .map(function(_width, index) {
+            return Array(columnWidths[index] + 3).join('-');
+          })
+          .join('|') +
+        '|',
+    );
+    const result = markdownRows.join('\n');
+    this.insertAtCursor(result);
+  }
+
   private toggleCode(event?: Event): void {
     if (event) {
       event.preventDefault();
@@ -1105,7 +1169,6 @@ export class EditorElement extends LitElement {
           border-left: 1px solid var(--exmg-markdown-editor-toolbar-seperator-color, #ddd);
         }
       </style>
-
       <div id="toolbar" class="toolbar">
         ${repeat<ToolBarConfigItem | Record<string, any>>(
           this.getToolbar(this.toolbarButtons),
@@ -1123,7 +1186,6 @@ export class EditorElement extends LitElement {
             `;
           },
         )}
-
         <div class=${classMap(classes)}>
           ${this.showHelperLabel
             ? html`
