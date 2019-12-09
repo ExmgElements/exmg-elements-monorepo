@@ -453,6 +453,9 @@ export class EditorElement extends LitElement {
     if (this.codeMirrorEditor) {
       if (this.codeMirrorEditor.getValue() !== this.markdown) {
         this.codeMirrorEditor.setValue(this.markdown || '');
+        setTimeout(() => {
+          this.codeMirrorEditor!.refresh();
+        }, 0);
       }
     }
 
