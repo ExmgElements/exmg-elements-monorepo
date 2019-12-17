@@ -22,6 +22,9 @@ export class ExmgDrawer extends LitElement {
   @property({type: Boolean, attribute: 'no-cancel-on-outside-click'})
   noCancelOnOutsideClick = false;
 
+  @property({type: Boolean})
+  private _resetSlot = false;
+
   handleOpenedChanged(e: CustomEvent) {
     this.opened = e.detail.value;
 
@@ -37,7 +40,10 @@ export class ExmgDrawer extends LitElement {
   }
 
   openDialog() {
-    this.opened = true;
+    // Workaround for issue with opening multiple times with form
+    // values. Issue is that if not reset theinputs will be empty second open
+    this._resetSlot = true;
+    setTimeout(() => (this.opened = true), 10);
   }
 
   static styles = [style];
@@ -58,7 +64,11 @@ export class ExmgDrawer extends LitElement {
         exit-animation="slide-right-animation"
         with-backdrop
       >
-        <slot></slot>
+        ${this._resetSlot
+          ? ''
+          : html`
+              <slot></slot>
+            `}
       </paper-dialog>
     `;
   }
