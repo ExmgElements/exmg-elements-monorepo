@@ -170,7 +170,11 @@ export class ExmgConfirmDialog extends LitElement {
               <span @click=${this.close} class="close-button">✕</span>
             `}
         <header>
-          <h2 class="title">${this.title}</h2>
+          ${!!this.title
+            ? html`
+                <h2 class="title">${this.title}</h2>
+              `
+            : ''}
         </header>
         <div class="body">
           <div class="error ${!!this.errorMessage ? 'show' : ''}">
