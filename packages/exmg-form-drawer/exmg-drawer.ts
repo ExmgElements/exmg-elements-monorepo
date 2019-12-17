@@ -43,7 +43,10 @@ export class ExmgDrawer extends LitElement {
     // Workaround for issue with opening multiple times with form
     // values. Issue is that if not reset theinputs will be empty second open
     this._resetSlot = true;
-    setTimeout(() => (this.opened = true), 10);
+    setTimeout(() => {
+      this.opened = true;
+      this._resetSlot = false;
+    }, 10);
   }
 
   static styles = [style];
