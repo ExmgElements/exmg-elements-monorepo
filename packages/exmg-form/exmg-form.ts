@@ -1,4 +1,7 @@
 import {customElement, html, LitElement, property, query} from 'lit-element';
+import {observer} from '@material/mwc-base/base-element';
+import {Debouncer} from '@polymer/polymer/lib/utils/debounce.js';
+import {timeOut} from '@polymer/polymer/lib/utils/async.js';
 import '@polymer/iron-form';
 import '@exmg/exmg-button';
 import {style} from './styles/exmg-form-styles';
@@ -32,6 +35,17 @@ export class ExmgForm extends LitElement {
   public inline = false;
 
   @property({type: Boolean})
+  @observer(function(this: ExmgForm, dirty: boolean) {
+    this.dispatchEvent(
+      new CustomEvent('dirty', {
+        bubbles: false,
+        composed: false,
+        detail: {
+          dirty,
+        },
+      }),
+    );
+  })
   private dirty = false;
 
   get isDirty(): boolean {
@@ -47,9 +61,47 @@ export class ExmgForm extends LitElement {
   @query('#ironForm')
   private ironFormElem?: IronFormElement;
 
+
+  @query('#form')
+  private form?: HTMLFormElement;
+
+  private _debouncer: any;
+  private observer?: FlattenedNodesObserver;
+
+  private originalState?: any;
+
+  createRenderRoot() {
+    return this;
+  }
+
   public done(): void {
     this.dirty = false;
     this.submitting = false;
+  }
+
+  updateOriginalState() {
+    console.log('_updateOriginalState');
+
+    var thisData = new FormData(this.form)
+    console.log('sssssss', thisData);
+
+    // After first render save original form data for later dirdty checks
+    this.ironFormElem!.reset()
+    this.originalState = this.serializeForm();
+
+    for (const key in this.originalState) {
+      if (this.originalState.hasOwnProperty(key)) {
+        let prop = this.originalState[key];
+        if(prop === undefined || prop == null) {
+          this.originalState[key] = '';
+        }
+      }
+    }
+    console.log('_updateOriginalState', this.originalState);
+  }
+
+  firstUpdated() {
+    this.updateOriginalState();
   }
 
   public error(errorMessage: string): void {
@@ -107,15 +159,37 @@ export class ExmgForm extends LitElement {
     return;
   }
 
-  private onSubmitBtnClick(): void {
+  private onSubmitBtnClick() {
     this.submit();
   }
 
-  private onCancelBtnClick(): void {
+  private onCancelBtnClick() {
     this.cancel();
   }
 
-  private onEnterPressed(e: KeyboardEvent) {
+  private checkDirty() {
+    this._debouncer = Debouncer.debounce(
+      this._debouncer,
+      timeOut.after(200),
+      () => {
+
+        const state = this.serializeForm();
+        for (const key in state) {
+          if (state.hasOwnProperty(key)) {
+            let prop = state[key];
+            if(prop === undefined || prop == null) {
+              state[key] = '';
+            }
+          }
+        }
+
+        this.dirty = !(JSON.stringify(this.originalState) === JSON.stringify(state));
+        console.log(this.originalState, state);
+        console.log(this.dirty);
+    });
+  }
+
+  private onKeyUp(e: KeyboardEvent) {
     switch (e.code || e.keyCode) {
       case ENTER_KEY_CODE:
       case 'Enter':
@@ -123,49 +197,64 @@ export class ExmgForm extends LitElement {
         e.stopPropagation();
         this.submit();
         break;
+      default:
+        this.checkDirty();
+        break;
     }
   }
+
 
   connectedCallback(): void {
     super.connectedCallback();
 
-    this.addEventListener('keydown', this.onEnterPressed);
+    // Options for the observer (which mutations to observe)
+    const config = {attributes: false, childList: true, subtree: false};
+
+    // Create an observer instance linked to the callback function
+    this.observer = new MutationObserver((list: MutationRecord[]) => {
+      for (const mutation of list) {
+        if (mutation.type === 'childList') {
+          console.log('A child node has been added or removed.');
+          this.updateOriginalState();
+        } else if (mutation.type === 'attributes') {
+          console.log('The ' + mutation.attributeName + ' attribute was modified.');
+        }
+      }
+    });
+
+    // Start observing the target node for configured mutations
+    this.observer!.observe(this, config);
+
+    this.addEventListener('keyup', this.onKeyUp);
     this.addEventListener('change', this.handleOnChange);
   }
 
-  disconnectedCallback(): void {
-    this.removeEventListener('keydown', this.onEnterPressed);
+  disconnectedCallback() {
+    this.removeEventListener('keyup', this.onKeyUp);
     this.removeEventListener('change', this.handleOnChange);
+
+    // Clean observer if needed
+    if (this.observer) {
+      this.observer.disconnect();
+    }
 
     super.disconnectedCallback();
   }
 
-  protected updated(): void {
+  protected updated() {
     if (this.inline) {
       Array.from(this.children).forEach((elem: Element) => {
         (elem as HTMLElement).style.display = 'inline-block';
       });
     } else {
       Array.from(this.children).forEach((elem: Element) => {
-        (elem as HTMLElement).style.display = null;
+        (elem as HTMLElement).style.display = '';
       });
     }
   }
 
-  private handleOnChange(): void {
-    if (this.dirty) {
-      return;
-    }
-    this.dirty = true;
-    this.dispatchEvent(
-      new CustomEvent('dirty', {
-        bubbles: false,
-        composed: false,
-        detail: {
-          dirty: true,
-        },
-      }),
-    );
+  private handleOnChange() {
+    this.checkDirty();
   }
 
   private renderCancelButton() {
@@ -211,6 +300,7 @@ export class ExmgForm extends LitElement {
       <iron-form id="ironForm">
         <form id="form">
           <slot></slot>
+          <input name="test" type="text" />
         </form>
       </iron-form>
       ${this.renderActions()}

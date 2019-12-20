@@ -1,4 +1,4 @@
-import {LitElement, html, customElement} from 'lit-element';
+import {LitElement, html, customElement, property} from 'lit-element';
 import '@polymer/paper-input/paper-input';
 import '@exmg/exmg-markdown-editor/exmg-markdown-editor';
 
@@ -7,11 +7,15 @@ import {ExmgForm} from '../exmg-form';
 
 @customElement('tab-1')
 export class Tab1El extends LitElement {
+
+  @property({type: String})
+  selectedValue = '';
+
   render() {
     return html`
-      <h1>Serializing form : A Study Case.</h1>
+      <h1>Serializing form : A Study Case. <button @click=${this._addInputElement}>Add input</button><button @click=${this._test}>Test</button></h1>
       <exmg-form @submit="${this.onSubmit}" @cancel="${this.onCancel}" @dirty=${this.displayFormDirty}>
-        <paper-input name="input1" label="text input" required></paper-input>
+        <paper-input name="input1" label="text input" value=${this.selectedValue} required></paper-input>
         <paper-input name="input2" label="text input" value="pre-filled"></paper-input>
         <p>Prefilled paper-input do not throw DIRTY event</p>
         <exmg-markdown-editor name="markdown" required>
@@ -23,6 +27,21 @@ export class Tab1El extends LitElement {
     `;
   }
 
+  _test() {
+    this.selectedValue = '123';
+    setTimeout(() => {
+      this.shadowRoot!.querySelector('exmg-form')!.updateOriginalState();
+    }, 100);
+  }
+
+  _addInputElement() {
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.name = 'test33';
+    input.value = 'tes111';
+    this.shadowRoot!.querySelector('exmg-form')!.appendChild(input);
+    this.shadowRoot!.querySelector('exmg-form')!.updateOriginalState();
+  }
   onSubmit(event: any) {
     console.log('submit', event);
     setTimeout(() => {

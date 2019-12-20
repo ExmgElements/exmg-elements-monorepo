@@ -18,13 +18,13 @@ export class FormDemo extends LitElement {
           <tab-1></tab-1>
         `;
       case 1:
-        return html`
-          <tab-2></tab-2>
-        `;
-      case 2:
-        return html`
-          <tab-3></tab-3>
-        `;
+         return html`
+           <tab-2></tab-2>
+         `;
+       case 2:
+         return html`
+           <tab-3></tab-3>
+         `;
     }
     return html`
       unknown
@@ -33,7 +33,7 @@ export class FormDemo extends LitElement {
 
   render() {
     return html`
-      <mwc-tab-bar activeIndex="1" @MDCTabBar:activated=${(e: CustomEvent<{index: number}>) => (this.activeTabIndex = e.detail.index)}>
+      <mwc-tab-bar activeIndex="0" @MDCTabBar:activated=${(e: CustomEvent<{index: number}>) => (this.activeTabIndex = e.detail.index)}>
         <mwc-tab label="one"></mwc-tab>
         <mwc-tab label="two"></mwc-tab>
         <mwc-tab label="three"></mwc-tab>
