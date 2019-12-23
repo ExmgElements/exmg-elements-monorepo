@@ -126,7 +126,6 @@ export class ExmgForm extends LitElement {
   public cancel(): void {
     this.submitting = false;
     this.errorMessage = '';
-    this.reset();
     this.dispatchEvent(
       new CustomEvent('cancel', {
         bubbles: false,
