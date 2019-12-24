@@ -1,4 +1,5 @@
 import {customElement, html, LitElement, property, query} from 'lit-element';
+import {classMap} from 'lit-html/directives/class-map.js';
 import {observer} from '@material/mwc-base/base-element';
 import {Debouncer} from '@polymer/polymer/lib/utils/debounce.js';
 import {timeOut} from '@polymer/polymer/lib/utils/async.js';
@@ -8,6 +9,11 @@ import {style} from './styles/exmg-form-styles';
 import {IronFormElement} from '@polymer/iron-form/iron-form';
 
 const ENTER_KEY_CODE = 13;
+
+interface InputDefault {
+  value?: string | string[];
+  checked?: boolean;
+}
 
 const warningIcon = html`
   <svg height="24" viewBox="0 0 24 24" width="24">
@@ -19,25 +25,43 @@ const warningIcon = html`
 export class ExmgForm extends LitElement {
   static styles = [style];
 
+  /**
+   * Option to hide submit button
+   */
   @property({type: Boolean, attribute: 'hide-submit-button'})
   public hideSubmitButton = false;
 
-  @property({type: Boolean, attribute: 'hide-cancel-button'})
-  public hideCancelButton = false;
+  /**
+   * Option to hide reset button
+   */
+  @property({type: Boolean, attribute: 'hide-reset-button'})
+  public hideResetButton = false;
 
+  /**
+   * default submit button copy
+   */
   @property({type: String, attribute: 'submit-button-copy'})
   public submitButtonCopy = 'Submit';
 
-  @property({type: String, attribute: 'cancel-button-copy'})
-  public cancelButtonCopy = 'Reset';
+  /**
+   * default reset button copy
+   */
+  @property({type: String, attribute: 'reset-button-copy'})
+  public resetButtonCopy = 'Reset';
 
-  @property({type: Boolean})
-  public inline = false;
+  /**
+   * with this option the disable button will be disabled while there are no changes in the form
+   */
+  @property({type: Boolean, reflect: true, attribute: 'disable-submit-no-changes'})
+  public disableSubmitNoChanges = false;
 
+  /**
+   * Indicator of the form has pending changes
+   */
   @property({type: Boolean})
   @observer(function(this: ExmgForm, dirty: boolean) {
     this.dispatchEvent(
-      new CustomEvent('dirty', {
+      new CustomEvent('dirty-change', {
         bubbles: false,
         composed: false,
         detail: {
@@ -61,47 +85,38 @@ export class ExmgForm extends LitElement {
   @query('#ironForm')
   private ironFormElem?: IronFormElement;
 
-
-  @query('#form')
-  private form?: HTMLFormElement;
-
   private _debouncer: any;
-  private observer?: FlattenedNodesObserver;
+  private observer?: MutationObserver;
 
-  private originalState?: any;
-
-  createRenderRoot() {
-    return this;
-  }
+  private _defaults = new WeakMap();
 
   public done(): void {
-    this.dirty = false;
     this.submitting = false;
   }
 
-  updateOriginalState() {
-    console.log('_updateOriginalState');
-
-    var thisData = new FormData(this.form)
-    console.log('sssssss', thisData);
-
-    // After first render save original form data for later dirdty checks
-    this.ironFormElem!.reset()
-    this.originalState = this.serializeForm();
-
-    for (const key in this.originalState) {
-      if (this.originalState.hasOwnProperty(key)) {
-        let prop = this.originalState[key];
-        if(prop === undefined || prop == null) {
-          this.originalState[key] = '';
-        }
+  addInput(node: any, overwriteValues = false) {
+    if (!this._defaults.has(node) || overwriteValues) {
+      const defaults: InputDefault = {
+        value: node.value === undefined || node.value === null ? '' : node.value,
+      };
+      if ('_hasIronCheckedElementBehavior' in node || (node.type && node.type === 'checkbox')) {
+        defaults.checked = node.checked;
       }
+      this._defaults.set(node, defaults);
     }
-    console.log('_updateOriginalState', this.originalState);
+  }
+
+  public saveDefaults(overwriteValues = false) {
+    // After first render save original form data for later dirdty checks
+    const nodes = Array.from(this.querySelectorAll<any>('*') || []).filter(n => !!n.name);
+    for (let i = 0; i < nodes.length; i++) {
+      const node: any = nodes[i];
+      this.addInput(node, overwriteValues);
+    }
   }
 
   firstUpdated() {
-    this.updateOriginalState();
+    this.saveDefaults();
   }
 
   public error(errorMessage: string): void {
@@ -123,68 +138,64 @@ export class ExmgForm extends LitElement {
     }
   }
 
-  public cancel(): void {
+  public validate(): void {
+    this.ironFormElem && this.ironFormElem.validate();
+  }
+
+  public reset(): void {
+    this.ironFormElem && this.ironFormElem.reset();
     this.submitting = false;
     this.errorMessage = '';
     this.dispatchEvent(
-      new CustomEvent('cancel', {
+      new CustomEvent('form-reset', {
         bubbles: false,
         composed: false,
       }),
     );
-  }
-
-  public validate(): void {
-    if (this.ironFormElem) {
-      this.ironFormElem.validate();
-    }
-  }
-
-  public reset(): void {
-    if (this.ironFormElem) {
-      this.ironFormElem.reset();
-    }
-
-    this.dirty = false;
-    this.submitting = false;
-    this.errorMessage = '';
+    this.checkDirty();
   }
 
   public serializeForm(): {[key: string]: any} | undefined {
-    if (this.ironFormElem) {
-      return this.ironFormElem.serializeForm();
-    }
-
-    return;
+    return this.ironFormElem && this.ironFormElem.serializeForm();
   }
 
   private onSubmitBtnClick() {
     this.submit();
   }
 
-  private onCancelBtnClick() {
-    this.cancel();
+  private onResetBtnClick() {
+    this.reset();
   }
 
   private checkDirty() {
-    this._debouncer = Debouncer.debounce(
-      this._debouncer,
-      timeOut.after(200),
-      () => {
+    this._debouncer = Debouncer.debounce(this._debouncer, timeOut.after(200), () => {
+      let dirty = false;
+      // Select all slot nodes and filter out the input based on a existing name property on the node
+      const nodes = Array.from(this.querySelectorAll<any>('*') || []).filter(n => !!n.name && !n.disabled);
 
-        const state = this.serializeForm();
-        for (const key in state) {
-          if (state.hasOwnProperty(key)) {
-            let prop = state[key];
-            if(prop === undefined || prop == null) {
-              state[key] = '';
-            }
+      for (const node of nodes) {
+        const def: InputDefault = this._defaults.get(node);
+        if (!def) {
+          throw Error('Unable to check dirty due to missing default');
+        }
+        // Special case for token input which has a array value
+        if (node.tagName === 'EXMG-PAPER-TOKEN-INPUT') {
+          if (!Array.isArray(node.value) || !Array.isArray(def.value)) {
+            throw Error('Expected value of token input not an array');
+          }
+          if (def.value.sort().join(',') !== [...node.value].sort().join(',')) {
+            dirty = true;
+          }
+        } else {
+          if (
+            ('checked' in def && def.checked !== node.checked) ||
+            def.value !== (node.value === undefined || node.value === null ? '' : node.value)
+          ) {
+            dirty = true;
           }
         }
-
-        this.dirty = !(JSON.stringify(this.originalState) === JSON.stringify(state));
-        console.log(this.originalState, state);
-        console.log(this.dirty);
+      }
+      this.dirty = dirty;
     });
   }
 
@@ -202,7 +213,6 @@ export class ExmgForm extends LitElement {
     }
   }
 
-
   connectedCallback(): void {
     super.connectedCallback();
 
@@ -213,10 +223,12 @@ export class ExmgForm extends LitElement {
     this.observer = new MutationObserver((list: MutationRecord[]) => {
       for (const mutation of list) {
         if (mutation.type === 'childList') {
-          console.log('A child node has been added or removed.');
-          this.updateOriginalState();
-        } else if (mutation.type === 'attributes') {
-          console.log('The ' + mutation.attributeName + ' attribute was modified.');
+          // Monitor slot for nodes created later
+          mutation.addedNodes.forEach((node: any) => {
+            if (!!node.name) {
+              this.addInput(node);
+            }
+          });
         }
       }
     });
@@ -240,26 +252,14 @@ export class ExmgForm extends LitElement {
     super.disconnectedCallback();
   }
 
-  protected updated() {
-    if (this.inline) {
-      Array.from(this.children).forEach((elem: Element) => {
-        (elem as HTMLElement).style.display = 'inline-block';
-      });
-    } else {
-      Array.from(this.children).forEach((elem: Element) => {
-        (elem as HTMLElement).style.display = '';
-      });
-    }
-  }
-
   private handleOnChange() {
     this.checkDirty();
   }
 
-  private renderCancelButton() {
-    return !this.hideCancelButton
+  private renderResetButton() {
+    return !this.hideResetButton
       ? html`
-          <exmg-button class="cancel" @click="${this.onCancelBtnClick}">${this.cancelButtonCopy}</exmg-button>
+          <exmg-button class="reset" @click="${this.onResetBtnClick}">${this.resetButtonCopy}</exmg-button>
         `
       : '';
   }
@@ -267,7 +267,11 @@ export class ExmgForm extends LitElement {
   private renderSubmitButton() {
     return !this.hideSubmitButton
       ? html`
-          <exmg-button unelevated @click="${this.onSubmitBtnClick}" ?disabled="${this.submitting}" ?loading=${this.submitting}
+          <exmg-button
+            unelevated
+            @click="${this.onSubmitBtnClick}"
+            ?disabled="${this.submitting || (this.disableSubmitNoChanges && !this.dirty)}"
+            ?loading=${this.submitting}
             >${this.submitButtonCopy}</exmg-button
           >
         `
@@ -275,20 +279,23 @@ export class ExmgForm extends LitElement {
   }
 
   private renderActions() {
-    if (this.hideSubmitButton && this.hideCancelButton) {
+    if (this.hideSubmitButton && this.hideResetButton) {
       return '';
     }
 
     return html`
-      <div class="actions ${this.inline ? 'inline' : ''}">
-        ${this.renderCancelButton()} ${this.renderSubmitButton()}
+      <div class="actions">
+        ${this.renderResetButton()} ${this.renderSubmitButton()}
       </div>
     `;
   }
 
   protected render() {
+    const classes = {
+      showError: !!this.errorMessage,
+    };
     return html`
-      <div class="error ${!!this.errorMessage ? 'show' : ''}">
+      <div class="error ${classMap(classes)}">
         <span class="body">
           <span class="body-content">
             ${warningIcon}
@@ -299,7 +306,6 @@ export class ExmgForm extends LitElement {
       <iron-form id="ironForm">
         <form id="form">
           <slot></slot>
-          <input name="test" type="text" />
         </form>
       </iron-form>
       ${this.renderActions()}

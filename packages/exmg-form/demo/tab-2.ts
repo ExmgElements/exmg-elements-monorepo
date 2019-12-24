@@ -1,4 +1,4 @@
-import {LitElement, html, customElement} from 'lit-element';
+import {LitElement, html, customElement, property} from 'lit-element';
 import '@polymer/paper-input/paper-input';
 import '@polymer/paper-input/paper-textarea';
 import '@polymer/paper-item/paper-item.js';
@@ -11,9 +11,13 @@ import {ExmgForm} from '../exmg-form';
 
 @customElement('tab-2')
 export class Tab2El extends LitElement {
+  @property({type: Boolean})
+  dirty = false;
+
   render() {
     return html`
-      <exmg-form @submit="${this.onSubmit}" @cancel="${this.onCancel}" @dirty="${this.displayFormDirty}" id="form1">
+      <i>Form Dirty: ${this.dirty}</i>
+      <exmg-form @submit="${this.onSubmit}" @cancel="${this.onCancel}" @dirty-change=${this._handleDirty} id="form1">
         <paper-input name="value1" label="text input" required></paper-input>
         <paper-input name="value2" label="text input" value="pre-filled"></paper-input>
         <paper-input label="password input" type="password"></paper-input>
@@ -54,6 +58,10 @@ export class Tab2El extends LitElement {
       this.resetForm1();
       // event.path[0].error('User does not have permission to save data');
     }, 1500);
+  }
+
+  _handleDirty(e: CustomEvent<{dirty: boolean}>) {
+    this.dirty = e.detail.dirty;
   }
 
   onCancel(event: any) {

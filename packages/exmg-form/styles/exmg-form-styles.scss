@@ -12,12 +12,9 @@
   text-align: right;
   padding-right: var(--exmg-form-actions-padding-right, 0rem);
   padding-bottom: var(--exmg-form-actions-padding-bottom, 0rem);
-  .cancel {
+  .reset {
     margin-right: 0.5rem;
   }
-}
-.inline {
-  display: inline-block;
 }
 .error {
   display: none;
@@ -55,6 +52,6 @@
 .error > .body > .body-content > svg {
   margin-right: 0.75rem;
 }
-.error.show {
+.error.showError {
   display: block;
 }
