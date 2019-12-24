@@ -25,12 +25,6 @@ export class Tab3El extends LitElement {
 
   render() {
     return html`
-      <h1>Inline form</h1>
-      <exmg-form id="horizontal" @submit="${this.onSubmit}" @cancel="${this.onCancel}">
-        <paper-input label="text input" required></paper-input>
-        <paper-input label="text input" value="pre-filled"></paper-input>
-      </exmg-form>
-
       <h1>Controlled height</h1>
       <exmg-form id="controlledHeight" @submit="${this.onSubmit}" @cancel="${this.onCancel}">
         <paper-input label="text input" required></paper-input>
