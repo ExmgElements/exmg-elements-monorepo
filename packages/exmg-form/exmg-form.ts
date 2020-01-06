@@ -62,8 +62,8 @@ export class ExmgForm extends LitElement {
   @observer(function(this: ExmgForm, dirty: boolean) {
     this.dispatchEvent(
       new CustomEvent('dirty-change', {
-        bubbles: false,
-        composed: false,
+        bubbles: this.bubbles,
+        composed: true,
         detail: {
           dirty,
         },
@@ -75,6 +75,13 @@ export class ExmgForm extends LitElement {
   get isDirty(): boolean {
     return this.dirty;
   }
+
+  /**
+   * By default, exmg-swagger-client events do not bubble. Setting this attribute will cause its
+   * events to bubble to the window object.
+   */
+  @property({type: Boolean})
+  public bubbles = false;
 
   @property({type: String, attribute: 'error-message'})
   private errorMessage = '';
@@ -130,8 +137,8 @@ export class ExmgForm extends LitElement {
       this.errorMessage = '';
       this.dispatchEvent(
         new CustomEvent('submit', {
-          bubbles: false,
-          composed: false,
+          bubbles: this.bubbles,
+          composed: true,
           detail: this.ironFormElem.serializeForm(),
         }),
       );
@@ -148,8 +155,8 @@ export class ExmgForm extends LitElement {
     this.errorMessage = '';
     this.dispatchEvent(
       new CustomEvent('form-reset', {
-        bubbles: false,
-        composed: false,
+        bubbles: this.bubbles,
+        composed: true,
       }),
     );
     this.checkDirty();
