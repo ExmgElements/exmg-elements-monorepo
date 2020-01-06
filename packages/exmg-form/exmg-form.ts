@@ -77,7 +77,7 @@ export class ExmgForm extends LitElement {
   }
 
   /**
-   * By default, exmg-swagger-client events do not bubble. Setting this attribute will cause its
+   * By default, exmg-form events do not bubble. Setting this attribute will cause its
    * events to bubble to the window object.
    */
   @property({type: Boolean})
