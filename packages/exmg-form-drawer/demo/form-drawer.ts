@@ -2,7 +2,9 @@ import {LitElement, html, customElement, property, query} from 'lit-element';
 import '@exmg/exmg-button';
 import '@polymer/paper-input/paper-input.js';
 import '@exmg/exmg-paper-combobox/exmg-paper-combobox.js';
+import '@polymer/paper-item/paper-item.js';
 import '@exmg/exmg-form/exmg-form';
+import '@vaadin/vaadin-date-picker/vaadin-date-picker.js';
 import '../exmg-form-drawer';
 import {ExmgFormDrawer} from '../exmg-form-drawer';
 
@@ -46,6 +48,7 @@ export class Drawer extends LitElement {
   }
 
   onSubmit() {
+    console.log('onSubmit');
     setTimeout(() => {
       if (this.shouldFail) {
         this.form!.error('Internal error occurred');
@@ -79,6 +82,7 @@ export class Drawer extends LitElement {
           Should Fail
         </label>
         <br /><br />
+        <vaadin-date-picker id="datepicker" label="Date" attr-for-value="value"> </vaadin-date-picker>
         <label>
           <input
             type="checkbox"
@@ -129,6 +133,7 @@ export class Drawer extends LitElement {
         <paper-input name="answer_b" label="Answer B" value="Eminem"></paper-input>
         <paper-input name="answer_c" label="Answer C" value="Ariana Grande"></paper-input>
         <br />
+
         <exmg-button unelevated>
           + Add answer
         </exmg-button>

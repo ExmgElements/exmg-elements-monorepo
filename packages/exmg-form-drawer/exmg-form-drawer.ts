@@ -102,17 +102,6 @@ export class ExmgFormDrawer extends LitElement {
     this.close();
   }
 
-  private handleFormSubmit(e: CustomEvent) {
-    this.submitting = true;
-    this.dispatchEvent(
-      new CustomEvent('submit', {
-        bubbles: false,
-        composed: false,
-        detail: e.detail,
-      }),
-    );
-  }
-
   private handleFormCancel() {
     this.submitting = false;
     this.opened = false;
@@ -152,7 +141,13 @@ export class ExmgFormDrawer extends LitElement {
           </div>
         </div>
         <div class="form-elements">
-          <exmg-form @submit="${this.handleFormSubmit}" @cancel="${this.handleFormCancel}" hide-submit-button hide-reset-button>
+          <exmg-form
+            @submit="${() => (this.submitting = true)}"
+            @cancel="${this.handleFormCancel}"
+            hide-submit-button
+            hide-reset-button
+            bubbles
+          >
             <slot></slot>
           </exmg-form>
         </div>
