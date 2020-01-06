@@ -57,6 +57,10 @@ export class ExmgFormDrawer extends LitElement {
     this.form!.done();
   }
 
+  public close() {
+    this.opened = false;
+  }
+
   public submit(): void {
     if (this.form && this.form.validate()) {
       this.form.submit();
@@ -94,7 +98,8 @@ export class ExmgFormDrawer extends LitElement {
   }
 
   private handleCancelBtnClick() {
-    this.form!.cancel();
+    this.form!.reset();
+    this.close();
   }
 
   private handleFormSubmit(e: CustomEvent) {
