@@ -147,7 +147,7 @@ export class ExmgFormDrawer extends LitElement {
           </div>
         </div>
         <div class="form-elements">
-          <exmg-form @submit="${this.handleFormSubmit}" @cancel="${this.handleFormCancel}" hide-submit-button hide-cancel-button>
+          <exmg-form @submit="${this.handleFormSubmit}" @cancel="${this.handleFormCancel}" hide-submit-button hide-reset-button>
             <slot></slot>
           </exmg-form>
         </div>
