@@ -21,6 +21,25 @@ const warningIcon = html`
   </svg>
 `;
 
+/**
+ * Emxg form element that serialize data to json and also facilitates dirty data detection.
+ *
+ * It is also possible to let the form reset custom elements when the form resets. Sometimes a element is
+ * not a form element but still needs a reset. This can be done by adding a attribute register-for-reset
+ * to the custom element.
+ *
+ *  * Example:
+ * ```html
+ * <exmg-form @submit="${this.onSubmit}" @cancel="${this.onCancel}" @dirty-change=${this._handleDirty}>
+ *  <paper-input name="pass" label="password input" type="password"></paper-input>
+ *  <paper-input name="test" label="disabled input" ></paper-input>
+ *  <exmg-upload register-for-reset>
+ *   <paper-input name="imageUrl" label="Image Url"></paper-input>
+ *  </exmg-upload
+ * </exmg-form>
+ * ```
+ *
+ */
 @customElement('exmg-form')
 export class ExmgForm extends LitElement {
   static styles = [style];
@@ -150,8 +169,52 @@ export class ExmgForm extends LitElement {
   }
 
   private resetRegisteredCustomElements() {
-    const elements = this.querySelectorAll('*[register-for-reset]');
-    Array.from(elements).map((e: any) => e.reset());
+    const nodes = this.getResetRegisteredElements(this);
+    nodes.forEach(n => n.reset());
+  }
+
+  _isRegisteredForSubmitElement(node: any) {
+    return !node.disabled && node.hasAttribute('register-for-reset');
+  }
+
+  _searchSubmittable(nodes: any[], node: any) {
+    if (this._isRegisteredForSubmitElement(node)) {
+      nodes.push(node);
+    } else if (node.root) {
+      this.getResetRegisteredElements(node.root, nodes);
+    }
+  }
+
+  _searchSubmittableInSlot(submittable: any[], e: any) {
+    const assignedNodes = e.assignedNodes();
+
+    for (let i = 0; i < assignedNodes.length; i++) {
+      if (assignedNodes[i].nodeType === Node.TEXT_NODE) {
+        continue;
+      }
+
+      // Note: assignedNodes does not contain <slot> or <content> because
+      // getDistributedNodes flattens the tree.
+      this._searchSubmittable(submittable, assignedNodes[i]);
+      const nestedAssignedNodes = assignedNodes[i].querySelectorAll('*');
+      for (let j = 0; j < nestedAssignedNodes.length; j++) {
+        this._searchSubmittable(submittable, nestedAssignedNodes[j]);
+      }
+    }
+  }
+
+  private getResetRegisteredElements(n: any, nodes: any[] = []) {
+    const elements = n.querySelectorAll('*');
+    for (let i = 0; i < elements.length; i++) {
+      const e = elements[i];
+      if (e.localName === 'slot' || e.localName === 'content') {
+        this._searchSubmittableInSlot(nodes, e);
+      } else {
+        this._searchSubmittable(nodes, e);
+      }
+    }
+
+    return nodes;
   }
 
   public reset(): void {
