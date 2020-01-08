@@ -1,10 +1,10 @@
 import {LitElement, html, customElement, property, query} from 'lit-element';
 import '@exmg/exmg-button';
 import '@polymer/paper-input/paper-input.js';
-import '@exmg/exmg-paper-combobox/exmg-paper-combobox.js';
+import '@exmg/exmg-paper-combobox/exmg-paper-combobox';
 import '@polymer/paper-item/paper-item.js';
 import '@exmg/exmg-form/exmg-form';
-import '@vaadin/vaadin-date-picker/vaadin-date-picker.js';
+import '@vaadin/vaadin-date-picker/vaadin-date-picker';
 import '../exmg-form-drawer';
 import {ExmgFormDrawer} from '../exmg-form-drawer';
 
@@ -82,7 +82,6 @@ export class Drawer extends LitElement {
           Should Fail
         </label>
         <br /><br />
-        <vaadin-date-picker id="datepicker" label="Date" attr-for-value="value"> </vaadin-date-picker>
         <label>
           <input
             type="checkbox"
@@ -115,13 +114,10 @@ export class Drawer extends LitElement {
       </div>
       <exmg-form-drawer
         ?opened="${this.opened}"
-        ?keep-opened-on-submit-success="${this.keepOpenedOnSubmitSuccess}"
-        ?reset-form-on-submit-success="${this.resetFormOnSubmitSuccess}"
-        ?no-cancel-on-outside-click="${this.noCancelOnOutsideClick}"
+        reset-form-on-submit-success
         @exmg-drawer-opened-changed="${this.handleOpenedChanged}"
         submit-btn-title="Create"
         @submit="${this.onSubmit}"
-        @cancel="${this.onCancel}"
       >
         <span slot="title">New event</span>
         <exmg-paper-combobox label="Type" name="type" selected="0" always-float-label>
@@ -137,6 +133,7 @@ export class Drawer extends LitElement {
         <exmg-button unelevated>
           + Add answer
         </exmg-button>
+        <vaadin-date-picker id="datepicker" label="Date" attr-for-value="value"> </vaadin-date-picker>
       </exmg-form-drawer>
     `;
   }

@@ -2,6 +2,7 @@ import {LitElement, html, customElement, property} from 'lit-element';
 import '@polymer/paper-input/paper-input';
 import '@polymer/paper-checkbox/paper-checkbox';
 import '@exmg/exmg-markdown-editor/exmg-markdown-editor';
+import './cust-el';
 
 import '../exmg-form';
 import {ExmgForm} from '../exmg-form';
@@ -31,6 +32,7 @@ export class Tab1El extends LitElement {
           <paper-item>Python</paper-item>
           <paper-item>java</paper-item>
         </exmg-paper-token-input>
+        <cust-el></cust-el>
       </exmg-form>
     `;
   }

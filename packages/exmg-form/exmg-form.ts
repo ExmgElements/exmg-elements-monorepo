@@ -149,8 +149,14 @@ export class ExmgForm extends LitElement {
     this.ironFormElem && this.ironFormElem.validate();
   }
 
+  private resetRegisteredCustomElements() {
+    const elements = this.querySelectorAll('*[register-for-reset]');
+    Array.from(elements).map((e: any) => e.reset());
+  }
+
   public reset(): void {
     this.ironFormElem && this.ironFormElem.reset();
+    this.resetRegisteredCustomElements();
     this.submitting = false;
     this.errorMessage = '';
     this.dispatchEvent(
