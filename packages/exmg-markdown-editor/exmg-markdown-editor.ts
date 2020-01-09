@@ -360,7 +360,7 @@ export class EditorElement extends LitElement {
   private isElementInitialized = false;
 
   get value() {
-    return (this.markdown || '').replace(/([^\r]|^)\n/g, '$1\r\n');
+    return (this.markdown || '').replace(/([^\r]|^)\n/g, '$1\n');
   }
 
   set value(value) {
