@@ -34,6 +34,7 @@ const BACKSPACE = 8;
 const ARROW_DOWN = 40;
 const DELETE = 127;
 const ESC = 27;
+const ENTER_KEY_CODE = 13;
 
 const debounce = (time: number) => {
   let timer: number;
@@ -201,9 +202,11 @@ export class PaperComboboxElement extends LitElement {
 
   private readonly inputChangeDebounce: (cb?: Function) => void = debounce(300);
 
+  private _onKeyUp: any;
+
   constructor() {
     super();
-    this.onKeyDown = this.onKeyDown.bind(this);
+    this._onKeyUp = this.onKeyUp.bind(this);
     this.onClick = this.onClick.bind(this);
     this.onIronResize = this.onIronResize.bind(this);
   }
@@ -374,12 +377,19 @@ export class PaperComboboxElement extends LitElement {
   }
 
   /************ EVENT HANDLERS *************/
-  private onKeyDown(e: KeyboardEvent): void {
+  private onKeyUp(e: KeyboardEvent): void {
     if (typeof this.inputValue !== 'string') {
       this.inputValue = '';
     }
 
     switch (e.code || e.keyCode) {
+      case ENTER_KEY_CODE:
+      case 'Enter':
+      case 'NumpadEnter':
+        if (!e.ctrlKey) {
+          e.stopPropagation();
+        }
+        break;
       case BACKSPACE:
       case 'Backspace':
       case DELETE:
@@ -503,7 +513,7 @@ export class PaperComboboxElement extends LitElement {
       this.inputWidthHelperElement.style.whiteSpace = 'pre';
     }
 
-    this.inputElement!.addEventListener('keydown', this.onKeyDown);
+    this.inputElement!.addEventListener('keyup', this._onKeyUp);
 
     if (this.autoValidate) {
       window.addEventListener('click', this.onClick);
@@ -575,7 +585,7 @@ export class PaperComboboxElement extends LitElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.inputElement && this.inputElement.removeEventListener('keydown', this.onKeyDown);
+    this.inputElement && this.inputElement.removeEventListener('keyup', this._onKeyUp);
     this.removeEventListener('iron-resize', this.onIronResize);
     if (this.autoValidate) {
       window.removeEventListener('click', this.onClick);
