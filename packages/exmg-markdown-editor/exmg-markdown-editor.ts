@@ -971,12 +971,10 @@ export class EditorElement extends LitElement {
     this._onKeyPressed = this.onKeyPressed.bind(this);
 
     // Cancel enter propogation
-    this.addEventListener('keydown', this._onKeyPressed);
     this.addEventListener('keyup', this._onKeyPressed);
   }
 
   disconnectedCallback(): void {
-    this.removeEventListener('keydown', this._onKeyPressed);
     this.removeEventListener('keyup', this._onKeyPressed);
     this.dispatchMarkdownUpdatedDebounce();
 
