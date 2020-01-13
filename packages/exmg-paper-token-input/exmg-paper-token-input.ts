@@ -19,6 +19,7 @@ const BACKSPACE = 8;
 const TAB = 9;
 const ESCAPE = 27;
 const ARROWDOWN = 40;
+const ENTER_KEY_CODE = 13;
 
 type SelectedValue = string | number | undefined;
 
@@ -164,10 +165,13 @@ export class PaperTokenInputElement extends LitElement {
 
   private previousClickWasInside = false;
 
+  private _onIronInputKeyUp: any;
+  private _onWindowClick: any;
+
   constructor() {
     super();
-    this.onIronInputKeyDown = this.onIronInputKeyDown.bind(this);
-    this.onWindowClick = this.onWindowClick.bind(this);
+    this._onIronInputKeyUp = this.onIronInputKeyUp.bind(this);
+    this._onWindowClick = this.onWindowClick.bind(this);
   }
 
   private indexOfItem(item: HTMLElement): number {
@@ -202,8 +206,15 @@ export class PaperTokenInputElement extends LitElement {
     this.previousClickWasInside = isInsideClick;
   }
 
-  private onIronInputKeyDown(e: KeyboardEvent): void {
+  private onIronInputKeyUp(e: KeyboardEvent) {
     switch (e.code || e.keyCode) {
+      case ENTER_KEY_CODE:
+      case 'Enter':
+      case 'NumpadEnter':
+        if (!e.ctrlKey) {
+          e.stopPropagation();
+        }
+        break;
       case BACKSPACE:
       case 'Backspace':
         const isRemoveListItem = !this.inputValue;
@@ -409,10 +420,10 @@ export class PaperTokenInputElement extends LitElement {
   public disconnectedCallback(): void {
     super.disconnectedCallback();
 
-    this.inputValueNode && this.inputValueNode.removeEventListener('keydown', this.onIronInputKeyDown);
+    this.inputValueNode && this.inputValueNode.removeEventListener('keyup', this._onIronInputKeyUp);
 
     if (this.autoValidate) {
-      window.removeEventListener('click', this.onWindowClick);
+      window.removeEventListener('click', this._onWindowClick);
     }
   }
 
@@ -425,8 +436,8 @@ export class PaperTokenInputElement extends LitElement {
     super.update(changedProperties);
   }
 
-  protected firstUpdated(): void {
-    this.inputValueNode!.addEventListener('keydown', this.onIronInputKeyDown);
+  protected firstUpdated() {
+    this.inputValueNode!.addEventListener('keyup', this._onIronInputKeyUp);
 
     if (this.inputWidthHelperNode) {
       this.inputWidthHelperNode.style.cssText = window.getComputedStyle(this.inputValueNode!, null).cssText;
@@ -439,7 +450,7 @@ export class PaperTokenInputElement extends LitElement {
     }
 
     if (this.autoValidate) {
-      window.addEventListener('click', this.onWindowClick);
+      window.addEventListener('click', this._onWindowClick);
     }
   }
 
