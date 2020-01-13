@@ -203,12 +203,14 @@ export class PaperComboboxElement extends LitElement {
   private readonly inputChangeDebounce: (cb?: Function) => void = debounce(300);
 
   private _onKeyUp: any;
+  private _onClick: any;
+  private _onIronResize: any;
 
   constructor() {
     super();
     this._onKeyUp = this.onKeyUp.bind(this);
-    this.onClick = this.onClick.bind(this);
-    this.onIronResize = this.onIronResize.bind(this);
+    this._onClick = this.onClick.bind(this);
+    this._onIronResize = this.onIronResize.bind(this);
   }
 
   get value() {
@@ -516,10 +518,10 @@ export class PaperComboboxElement extends LitElement {
     this.inputElement!.addEventListener('keyup', this._onKeyUp);
 
     if (this.autoValidate) {
-      window.addEventListener('click', this.onClick);
+      window.addEventListener('click', this._onClick);
     }
 
-    this.addEventListener('iron-resize', this.onIronResize);
+    this.addEventListener('iron-resize', this._onIronResize);
   }
 
   /**
@@ -586,9 +588,9 @@ export class PaperComboboxElement extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this.inputElement && this.inputElement.removeEventListener('keyup', this._onKeyUp);
-    this.removeEventListener('iron-resize', this.onIronResize);
+    this.removeEventListener('iron-resize', this._onIronResize);
     if (this.autoValidate) {
-      window.removeEventListener('click', this.onClick);
+      window.removeEventListener('click', this._onClick);
     }
     this.inputChangeDebounce();
     this.keyDownBackspaceDebounce();
