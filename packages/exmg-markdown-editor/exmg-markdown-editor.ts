@@ -352,6 +352,7 @@ export class EditorElement extends LitElement {
   editorElement?: HTMLElement;
 
   private codeMirrorEditor?: Editor;
+  private _onKeyPressed: any;
 
   private normalizedToolBarConfig: Map<ToolBarOption, ToolBarConfigItem> = new Map();
 
@@ -967,12 +968,16 @@ export class EditorElement extends LitElement {
     if (markedElement) {
       this.markdown = markedElement.getAttribute('markdown') || undefined;
     }
+    this._onKeyPressed = this.onKeyPressed.bind(this);
 
-    this.addEventListener('keydown', this.onKeyPressed);
+    // Cancel enter propogation
+    this.addEventListener('keydown', this._onKeyPressed);
+    this.addEventListener('keyup', this._onKeyPressed);
   }
 
   disconnectedCallback(): void {
-    this.removeEventListener('keydown', this.onKeyPressed);
+    this.removeEventListener('keydown', this._onKeyPressed);
+    this.removeEventListener('keyup', this._onKeyPressed);
     this.dispatchMarkdownUpdatedDebounce();
 
     super.disconnectedCallback();
