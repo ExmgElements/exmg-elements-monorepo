@@ -73,6 +73,7 @@ export class ExmgRadioGroupItem extends FormElement {
     if (this.selectionController) {
       this.selectionController.unregister(this);
     }
+    super.disconnectedCallback();
   }
 
   focusNative() {

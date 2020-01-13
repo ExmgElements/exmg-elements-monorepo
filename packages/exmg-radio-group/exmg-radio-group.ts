@@ -3,6 +3,8 @@ import {observer} from '@material/mwc-base/form-element';
 import {style as exmgRadioGroupStyles} from './styles/exmg-radio-group-styles';
 import {ExmgRadioGroupItem} from './exmg-radio-group-item';
 
+const ENTER_KEY_CODE = 13;
+
 @customElement('exmg-radio-group')
 export class ExmgRadioGroup extends LitElement {
   @property({type: String})
@@ -25,12 +27,33 @@ export class ExmgRadioGroup extends LitElement {
 
   private litItemName = '';
 
+  private _onKeyPressed: any;
+  private _handleRadioGroupItemChanged: any;
+
   get value() {
     return this.selected;
   }
 
   set value(value) {
     this.selected = value;
+  }
+
+  constructor() {
+    super();
+    this._onKeyPressed = this.onKeyPressed.bind(this);
+    this._handleRadioGroupItemChanged = this.handleRadioGroupItemChanged.bind(this);
+  }
+
+  private onKeyPressed(e: KeyboardEvent) {
+    switch (e.code || e.keyCode) {
+      case ENTER_KEY_CODE:
+      case 'Enter':
+      case 'NumpadEnter':
+        if (!e.ctrlKey) {
+          e.stopPropagation();
+        }
+        break;
+    }
   }
 
   public validate(): boolean {
@@ -61,7 +84,8 @@ export class ExmgRadioGroup extends LitElement {
   connectedCallback(): void {
     super.connectedCallback();
 
-    this.addEventListener('exmg-radio-group-item-changed', this.handleRadioGroupItemChanged);
+    this.addEventListener('keyup', this._onKeyPressed);
+    this.addEventListener('exmg-radio-group-item-changed', this._handleRadioGroupItemChanged);
 
     this.litItemName = `_${this.name}-options`;
 
@@ -69,7 +93,8 @@ export class ExmgRadioGroup extends LitElement {
   }
 
   disconnectedCallback(): void {
-    this.removeEventListener('exmg-radio-group-item-changed', this.handleRadioGroupItemChanged);
+    this.removeEventListener('keyup', this._onKeyPressed);
+    this.removeEventListener('exmg-radio-group-item-changed', this._handleRadioGroupItemChanged);
 
     super.disconnectedCallback();
   }
