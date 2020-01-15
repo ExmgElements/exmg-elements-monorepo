@@ -691,6 +691,7 @@ export class PaperComboboxElement extends LitElement {
           padding: 0;
           color: var(--paper-button-color);
           background-color: var(--paper-button-bg-color);
+          text-transform: capitalize;
         }
         .container {
           flex: 1;
@@ -767,7 +768,6 @@ export class PaperComboboxElement extends LitElement {
     if (!this.token) {
       return null;
     }
-
     return html`
       <paper-button tabindex="-1" @click="${this.onTokenClick}">
         <span>${this.token!.text}</span>
