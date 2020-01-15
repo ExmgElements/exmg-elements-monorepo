@@ -139,7 +139,7 @@ export class ExmgGridToolbar extends LitElement {
           (item: any) => item,
           item =>
             html`
-              <paper-item data-id="${item.id}">${filter.name}: ${item.title}</paper-item>
+              <paper-item data-id="${item.id}">${item.title}</paper-item>
             `,
         )}
       </exmg-paper-combobox>
