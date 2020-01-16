@@ -48,6 +48,7 @@ export class ExmgRowSortable {
         const handlerMouseUp = () => {
           const rowDetailToRevert = getRowDetail();
           if (rowDetailToRevert && rowDetailToRevert.hasAttribute('data-is-row-expanded')) {
+            //@ts-ignore
             rowDetailToRevert.style.display = null;
           }
 
