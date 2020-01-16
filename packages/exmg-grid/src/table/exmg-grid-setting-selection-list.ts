@@ -32,6 +32,7 @@ export class ExmgGridSettingSelectionList extends LitElement {
     const index = e.detail.index;
     this.settingData[index].selected = !this.settingData[index].selected;
     this.settingData = [...this.settingData];
+    this.saveSettingsListToLocalStorage();
 
     this.dispatchEvent(
       new CustomEvent<{value: SettingSelectionListItem[]}>('exmg-grid-setting-changed', {
@@ -55,6 +56,31 @@ export class ExmgGridSettingSelectionList extends LitElement {
       this.menu.setIsHoisted(false);
       this.menu.setAnchorCorner(Corner.BOTTOM_RIGHT);
     }
+    this.getSettingsListFromLocalStorage();
+  }
+
+  private saveSettingsListToLocalStorage() {
+    const key = `columnSettings:${window.location.pathname}`;
+    const value = this.settingData
+      .filter(d => d.selected)
+      .map(d => d.id)
+      .join(',');
+    localStorage.setItem(key, value);
+  }
+
+  private getSettingsListFromLocalStorage() {
+    const key = `columnSettings:${window.location.pathname}`;
+    const value = localStorage.getItem(key);
+    if (!value) {
+      return;
+    }
+    const selectedSettings = value.split(',');
+    this.settingData = this.settingData.map(sd => {
+      if (selectedSettings.indexOf(sd.id) !== -1) {
+        sd.selected = true;
+      }
+      return sd;
+    });
   }
 
   private blockEventPropagation(e: Event) {

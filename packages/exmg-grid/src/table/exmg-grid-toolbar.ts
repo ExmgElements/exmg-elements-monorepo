@@ -60,6 +60,7 @@ export class ExmgGridToolbar extends LitElement {
 
   private emitFilterChangedEvent(filter: Filter) {
     return (event: CustomEvent) => {
+      this.saveFilterInLocalStorage(filter.id, event.detail.value);
       this.dispatchEvent(
         new CustomEvent('exmg-grid-toolbar-filter-changed', {
           detail: {
@@ -71,6 +72,21 @@ export class ExmgGridToolbar extends LitElement {
         }),
       );
     };
+  }
+
+  private saveFilterInLocalStorage(filterId: string, value: string) {
+    if (filterId.length > 0) {
+      const key = `${filterId}${window.location.pathname}`;
+      localStorage.setItem(key, value);
+    }
+  }
+
+  private getFilterFromLocalStorage(filterId: string): string | null {
+    if (filterId.length > 0) {
+      const key = `${filterId}${window.location.pathname}`;
+      return localStorage.getItem(key);
+    }
+    return null;
   }
 
   private emitSettingChangedEvent(setting: Setting) {
@@ -124,6 +140,10 @@ export class ExmgGridToolbar extends LitElement {
     return filter.config.type === FilterConfigType.SingleSelect;
   }
 
+  private getSelectedFilter(filter: Filter<FilterSingleSelectConfig>) {
+    return this.getFilterFromLocalStorage(filter.id) || filter.config.data[0].id || 0;
+  }
+
   private renderSingleSelectFilter(filter: Filter<FilterSingleSelectConfig>) {
     return html`
       <exmg-paper-combobox
@@ -132,6 +152,7 @@ export class ExmgGridToolbar extends LitElement {
         no-float-label
         ?disabled="${!!filter.disabled}"
         label="${filter.name}"
+        selected=${this.getSelectedFilter(filter)}
         @exmg-combobox-select="${this.emitFilterChangedEvent(filter)}"
       >
         ${repeat(
@@ -139,7 +160,7 @@ export class ExmgGridToolbar extends LitElement {
           (item: any) => item,
           item =>
             html`
-              <paper-item data-id="${item.id}">${filter.name}: ${item.title}</paper-item>
+              <paper-item data-id="${item.id}">${item.title}</paper-item>
             `,
         )}
       </exmg-paper-combobox>

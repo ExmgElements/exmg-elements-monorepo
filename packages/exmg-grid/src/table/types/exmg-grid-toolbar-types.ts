@@ -5,6 +5,9 @@ export interface Action {
   tooltip?: string;
 }
 
+/**
+ * ID MUST BE UNIQUE HERE
+ */
 export interface Filter<TConfig extends BaseFilterConfig = BaseFilterConfig> {
   id: string;
   name: string;
