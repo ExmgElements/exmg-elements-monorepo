@@ -105,6 +105,7 @@ export class Drawer extends LitElement {
         ?reset-form-on-submit-success="${this.resetFormOnSubmitSuccess}"
         ?no-cancel-on-outside-click="${this.noCancelOnOutsideClick}"
         @exmg-drawer-opened-changed="${this.handleOpenedChanged}"
+        autofocus-on-open
         submit-btn-title="Create"
         @submit="${this.onSubmit}"
         @cancel="${this.onCancel}"
