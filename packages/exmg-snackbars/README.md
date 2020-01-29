@@ -17,7 +17,7 @@ The function hass two main parameters, `message` and `options`
 ```ts
 import {showSnackBar} from '@exmg/exmg-snackbars';
 
-showSnackbar('This is my message', {duration: 2000}); // Will display the message for 2 seconds
+showSnackBar('This is my message', {duration: 2000}); // Will display the message for 2 seconds
 ```
 
 ### Simple message with close button
@@ -27,7 +27,7 @@ Setting the `duration` paramater to 0 causes the snackbar to be displayed contin
 ```ts
 import {showSnackBar} from '@exmg/exmg-snackbars';
 
-showSnackbar('This is my message', {duration: 0, showCloseButton: true}); // Will display the message with close button
+showSnackBar('This is my message', {duration: 0, showCloseButton: true}); // Will display the message with close button
 ```
 
 ### Simple message with custom button
@@ -38,8 +38,8 @@ Setting the `copyButton` parameter creates a custom snackbar, if no callback is 
 import {showSnackBar} from '@exmg/exmg-snackbars';
 
 // With callback
-showSnackbar('This is my message', {duration: 0, copyButton: 'UNDO', callbackButton: mySuperUndoFcn});
+showSnackBar('This is my message', {duration: 0, copyButton: 'UNDO', callbackButton: mySuperUndoFcn});
 
 // Without callback
-showSnackbar('This is my message', {duration: 0, copyButton: 'CLOSE THIS '});
+showSnackBar('This is my message', {duration: 0, copyButton: 'CLOSE THIS '});
 ```
