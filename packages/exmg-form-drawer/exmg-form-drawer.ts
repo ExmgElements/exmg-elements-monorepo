@@ -34,6 +34,9 @@ export class ExmgFormDrawer extends LitElement {
   @property({type: Boolean, attribute: 'reset-form-on-submit-success'})
   public resetFormOnSubmitSuccess = false;
 
+  @property({type: Boolean, attribute: 'autofocus-on-open'})
+  public autofocusOnOpen = false;
+
   @property({type: Boolean, attribute: 'no-cancel-on-outside-click'})
   noCancelOnOutsideClick = false;
 
@@ -93,6 +96,15 @@ export class ExmgFormDrawer extends LitElement {
     this.form!.error(errorMessage);
   }
 
+  private _handleOpenChanged(e: CustomEvent<{value: boolean}>) {
+    setTimeout(() => {
+      if (e.detail.value && this.autofocusOnOpen) {
+        const firstChild = this.querySelector<HTMLInputElement>('*[name]');
+        firstChild && firstChild.focus();
+      }
+    }, 150);
+  }
+
   private handleSubmitBtnClick() {
     this.form!.submit();
   }
@@ -110,6 +122,7 @@ export class ExmgFormDrawer extends LitElement {
       <exmg-drawer
         ?opened="${this.opened}"
         ?no-cancel-on-outside-click="${this.noCancelOnOutsideClick}"
+        @exmg-drawer-opened-changed=${this._handleOpenChanged}
         style="max-width: ${this.style.maxWidth || '547px'}"
       >
         <div class="header">
