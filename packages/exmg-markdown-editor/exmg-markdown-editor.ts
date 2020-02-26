@@ -1016,7 +1016,6 @@ export class EditorElement extends LitElement {
         ${codeMirrorStylesText} :host {
           display: block;
           border: 1px solid var(--exmg-markdown-editor-border, #ddd);
-          overflow: hidden;
           font-family: 'Roboto', 'Noto', sans-serif;
           -webkit-font-smoothing: antialiased;
           font-size: 14px;

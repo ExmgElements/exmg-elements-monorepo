@@ -1,4 +1,4 @@
-@import "@material/typography/mixins";
+@import '@material/typography/mixins';
 
 $exmg-drawer-color: #02182b;
 $exmg-drawer-bg-color: #ffffff;
@@ -12,7 +12,6 @@ $exmg-drawer-bg-color: #ffffff;
     right: 0;
     bottom: 0;
     width: 100%;
-    overflow: auto;
     box-shadow: none;
 
     color: var(--exmg-drawer-color, var(--mdc-theme-on-surface, $exmg-drawer-color));
