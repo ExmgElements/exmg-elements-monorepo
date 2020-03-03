@@ -1059,13 +1059,13 @@ export class EditorElement extends LitElement {
           overflow: auto;
         }
         :host([show-helper-label]) ::slotted(marked-element) {
-          padding-top: 30px;
+          padding-top: 0px;
+          margin-top: 30px;
         }
         :host([split-view]) ::slotted(*) {
           display: block;
           background: var(--exmg-markdown-editor-preview-background, white);
           padding: 16px;
-          padding-top: 0px;
         }
         .container {
           box-sizing: border-box;
