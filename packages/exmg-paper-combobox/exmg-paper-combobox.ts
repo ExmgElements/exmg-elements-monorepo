@@ -304,7 +304,7 @@ export class PaperComboboxElement extends LitElement {
   /**
    * Opens the combo-box.
    */
-  open() {
+public  open() {
     this.opened = true;
   }
 
