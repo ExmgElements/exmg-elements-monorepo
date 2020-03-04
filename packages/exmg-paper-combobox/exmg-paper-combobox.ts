@@ -301,6 +301,27 @@ export class PaperComboboxElement extends LitElement {
     this.token = {id, text};
   }
 
+  /**
+   * Opens the combo-box.
+   */
+  open() {
+    this.opened = true;
+  }
+
+  /**
+   * Closes the combo-box.
+   */
+  close() {
+    this.opened = false;
+  }
+
+  /**
+   * Toggles the combo-box/
+   */
+  toggle() {
+    this.opened = !this.opened;
+  }
+
   filterItems(): boolean {
     const items: NodeListOf<HTMLElement> = this.querySelectorAll('paper-item, paper-icon-item');
     const hasFilterPhrase = !!this.inputValue && this.inputValue.length > 0;
@@ -429,7 +450,7 @@ export class PaperComboboxElement extends LitElement {
       : e.target === this;
 
     // Detect outside element click for auto validate input
-    if ((this.autoValidate && (this.previousInsideClick && !inside)) || this.token) {
+    if ((this.autoValidate && this.previousInsideClick && !inside) || this.token) {
       this.validate();
     }
 
