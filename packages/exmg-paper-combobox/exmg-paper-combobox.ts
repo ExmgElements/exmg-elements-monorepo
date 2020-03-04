@@ -304,21 +304,21 @@ export class PaperComboboxElement extends LitElement {
   /**
    * Opens the combo-box.
    */
-public  open() {
+  public  open() {
     this.opened = true;
   }
 
   /**
    * Closes the combo-box.
    */
-  close() {
+  public close() {
     this.opened = false;
   }
 
   /**
    * Toggles the combo-box/
    */
-  toggle() {
+  public toggle() {
     this.opened = !this.opened;
   }
 
