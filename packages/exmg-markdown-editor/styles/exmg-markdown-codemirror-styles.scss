@@ -241,6 +241,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
   height: 100%;
   outline: none; /* Prevent dragging from highlighting the element */
   position: relative;
+  box-sizing: border-box;
 }
 .CodeMirror-sizer {
   position: relative;
@@ -357,8 +358,6 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
   z-index: 2;
   padding: 0.1px; /* Force widget margins to stay inside of the container */
 }
-.CodeMirror-widget {
-}
 .CodeMirror-rtl pre {
   direction: rtl;
 }
@@ -366,7 +365,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
   outline: none;
 }
 /* Force content-box sizing for the elements where we expect it */
-.CodeMirror-scroll,
+/* .CodeMirror-scroll, */
 .CodeMirror-sizer,
 .CodeMirror-gutter,
 .CodeMirror-gutters,
