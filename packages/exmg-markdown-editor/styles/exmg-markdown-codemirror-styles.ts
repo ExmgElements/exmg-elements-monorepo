@@ -227,6 +227,7 @@ export const style = css`
     height: 100%;
     outline: none;
     position: relative;
+    box-sizing: border-box;
   }
   .CodeMirror-sizer {
     position: relative;
@@ -345,7 +346,6 @@ export const style = css`
   .CodeMirror-code {
     outline: none;
   }
-  .CodeMirror-scroll,
   .CodeMirror-sizer,
   .CodeMirror-gutter,
   .CodeMirror-gutters,
