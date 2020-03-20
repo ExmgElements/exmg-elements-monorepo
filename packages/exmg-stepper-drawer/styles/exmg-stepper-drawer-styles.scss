@@ -1,0 +1,74 @@
+@import '@material/typography/mixins';
+
+:host {
+  font-family: 'Roboto', 'Noto', sans-serif;
+
+  li {
+    list-style-type: none;
+    margin-bottom: 1.8em;
+  }
+
+  iron-collapse {
+    --iron-collapse-transition-duration: 150ms;
+  }
+
+  .step-head {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+  }
+
+  .container {
+    position: relative;
+    &:before {
+      background-color: #e0e0e0;
+      content: '';
+      margin-left: -12px;
+      position: absolute;
+      top: 1.7em;
+      left: 1.5em;
+      width: 2px;
+      height: 100%; //TODO: Calc height of the container somehow.
+      z-index: -1;
+    }
+  }
+
+  .step-conatiner {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .step-circle {
+    border-radius: 0.8em;
+    -moz-border-radius: 0.8em;
+    -webkit-border-radius: 0.8em;
+    color: #ffffff;
+    display: inline-block;
+    line-height: 1.6em;
+    margin-right: 1.4em;
+    text-align: center;
+    width: 1.6em;
+  }
+
+  .incomplete {
+    background: var(--mdc-theme-primary, var(--mdc-theme-primary, rgba(#02182b, 0.1)));
+  }
+  .completed {
+    background: slategray;
+  }
+
+  .step-content-container {
+    margin-left: 3.8em;
+    font-weight: 200;
+    font-size: 0.8rem;
+    min-height: 100%;
+  }
+
+  .step-content {
+    min-height: 100%;
+  }
+
+  .step-head-text {
+    font-weight: 500;
+  }
+}
