@@ -7,29 +7,43 @@ import '@polymer/iron-collapse/iron-collapse.js';
 export class ExmgStepperDrawer extends LitElement {
   /**
    * Set the amount of steps that the stepper will have
-   * DEFAULT IS 4
+   * Default: 4
    */
-  @property({type: Number}) amount = 4;
+  @property({type: Number, attribute: 'step-amount'}) amount = 4;
 
   /**
-   * Set the active step
+   * Show backbutton?
+   */
+  @property({type: Boolean, attribute: 'step-show-back-button'}) showBackButton = false;
+
+  /**
+   * Track what step is active
    */
   @property({type: Number}) private activeStep = 0;
 
   /**
    * Set the state of the collapsible
    */
-  @property({type: Boolean}) opened = true;
+  @property({type: Boolean}) private opened = true;
 
-  /**
-   * Show backbutton?
-   */
-  @property({type: Boolean}) showBackButton = false;
-
-  private steps = [...Array(this.amount)].map(() => false); // Add steps dynamically
+  private steps!: Array<boolean>;
+  private initialised = false;
 
   static styles = [stepperStyles];
 
+  /**
+   * Initialise the stepper to prevent properties to be set before they're loaded.
+   */
+  initStepper() {
+    if (!this.initialised) {
+      this.steps = [...Array(this.amount)].map(() => false);
+    }
+    this.initialised = true;
+  }
+
+  /**
+   * Toggle the collapsible
+   */
   toggle() {
     setTimeout(() => {
       // timeout for the animation to finish
@@ -37,6 +51,9 @@ export class ExmgStepperDrawer extends LitElement {
     }, 150);
   }
 
+  /**
+   * Handle the 'next' button and shift the active step
+   */
   handleNext() {
     if (this.activeStep >= 0 && this.activeStep < this.amount - 1) {
       this.opened = false;
@@ -51,6 +68,9 @@ export class ExmgStepperDrawer extends LitElement {
     }
   }
 
+  /**
+   * Handle the 'back' button and shift the active step
+   */
   handleBack() {
     if (this.activeStep > 0 && this.activeStep <= this.amount) {
       this.opened = false;
@@ -65,8 +85,12 @@ export class ExmgStepperDrawer extends LitElement {
     }
   }
 
+  /**
+   * Render the stepper and initialise it in order to
+   * make sure the right steps are provided
+   */
   private renderStepper() {
-    console.log(this.steps);
+    this.initStepper();
     return html`
       ${this.steps.map(
         (_, index) =>
@@ -79,6 +103,10 @@ export class ExmgStepperDrawer extends LitElement {
     `;
   }
 
+  /**
+   * Render the individual steps
+   * TODO: Clean up
+   */
   private renderStep(step: number) {
     return html`
       ${step === this.activeStep
@@ -107,6 +135,11 @@ export class ExmgStepperDrawer extends LitElement {
     `;
   }
 
+  /**
+   * Render the buttons
+   * TODO: add logic when buttons are shown, show submit button on last step
+   * and hide back button on first step
+   */
   private renderButtons() {
     if (this.showBackButton) {
       return html`
