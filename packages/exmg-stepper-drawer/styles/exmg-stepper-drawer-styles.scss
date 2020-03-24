@@ -27,9 +27,12 @@
       position: absolute;
       top: 1.7em;
       left: 1.5em;
-      width: 2px;
-      height: 100%; //TODO: Calc height of the container somehow.
+      width: 1px;
+      height: 100%;
       z-index: -1;
+    }
+    &:last-child:before {
+      content: none; //Hide the last element
     }
   }
 

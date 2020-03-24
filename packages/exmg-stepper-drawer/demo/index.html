@@ -15,7 +15,7 @@
   </head>
   <body>
     <script type="module" src="../exmg-stepper-drawer.js"></script>
-    <exmg-stepper-drawer step-amount="4">
+    <exmg-stepper-drawer show-back-button>
       <span slot="head-1">Set the basic values</span>
       <div slot="content-1">
         Enter the minimal and maximal bitrate you like to use for the test.
@@ -29,15 +29,18 @@
       <p slot="content-2">
         The following bitrates have been recommended to run the test with the best possible bitrate ladder for your setup.
       </p>
+      <span slot="head-3">Set the basic values</span>
+      <div slot="content-3">
+        Enter the minimal and maximal bitrate you like to use for the test.
+        <br />
+        <br />
+        <br />
+        <p>dynamic height</p>
+      </div>
 
-      <span slot="head-3">Recording</span>
-      <p slot="content-3">
-        You’re about to run a test. The recodring needs to match the real world scenario as close as possible before you press START.
-      </p>
-
-      <span slot="head-4">Results</span>
+      <span slot="head-4">Set bitrate option</span>
       <p slot="content-4">
-        We’re analyzing the video recording based on the bitrates settings, resolution and coded options.
+        The following bitrates have been recommended to run the test with the best possible bitrate ladder for your setup.
       </p>
     </exmg-stepper-drawer>
   </body>
