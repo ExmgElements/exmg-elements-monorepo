@@ -1,10 +1,19 @@
-import {LitElement, html, customElement} from 'lit-element';
+import {LitElement, html, customElement, property} from 'lit-element';
 import '@exmg/exmg-form/exmg-form';
-import '@exmg/exmg-drawer/drawer';
+import '@exmg/exmg-form-drawer/exmg-drawer';
 import '../exmg-stepper-drawer';
 
 @customElement('exmg-stepper-drawer-demo')
 export class StepperDrawer extends LitElement {
+  @property({type: Boolean}) opened = false;
+
+  handleOpenedChanged(e: CustomEvent) {
+    this.opened = e.detail.value;
+  }
+
+  openDialog() {
+    this.opened = true;
+  }
   render() {
     // language=html
     return html`
@@ -12,8 +21,13 @@ export class StepperDrawer extends LitElement {
         exmg-stepper-drawer {
           --mdc-theme-primary: #0071dc;
         }
+        exmg-drawer {
+          --exmg-drawer-max-width: 500px;
+        }
       </style>
-      <exmg-drawer>
+      <input type="button" @click="${this.openDialog}" value="Open dialog" />
+
+      <exmg-drawer ?opened="${this.opened}" @exmg-drawer-opened-changed="${this.handleOpenedChanged}">
         <exmg-stepper-drawer last-button-text="Test">
           <p slot="head-1">Set the basic values</p>
           <div slot="content-1">
