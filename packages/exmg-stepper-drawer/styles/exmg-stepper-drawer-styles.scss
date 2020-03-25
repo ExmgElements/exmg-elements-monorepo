@@ -20,12 +20,13 @@
 
   .container {
     position: relative;
+    width: 30em;
     &:before {
       background-color: #e0e0e0;
       content: '';
       margin-left: -12px;
       position: absolute;
-      top: 1.7em;
+      top: 2.8em;
       left: 1.5em;
       width: 1px;
       height: 100%;
@@ -53,11 +54,14 @@
     width: 1.6em;
   }
 
-  .incomplete {
-    background: var(--mdc-theme-primary, var(--mdc-theme-primary, rgba(#02182b, 0.1)));
+  .incomplete-circle {
+    background: #7289a6;
+  }
+  .incomplete-text {
+    color: #7289a6;
   }
   .completed {
-    background: slategray;
+    background: var(--mdc-theme-primary, var(--mdc-theme-primary, rgba(#02182b, 0.1)));
   }
 
   .step-content-container {

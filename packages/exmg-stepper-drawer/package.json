@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "dependencies": {
     "@exmg/exmg-button": "^1.1.0",
+    "@exmg/exmg-form": "^2.2.3",
     "@exmg/exmg-form-drawer": "^2.1.11",
     "@material/mwc-button": "^0.10.0",
     "@polymer/iron-collapse": "^3.0.1",
+    "@polymer/paper-input": "^3.2.1",
     "lit-element": "^2.2.1",
     "web-animations-js": "^2.3.2"
   },

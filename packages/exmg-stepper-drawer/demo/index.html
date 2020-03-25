@@ -5,43 +5,14 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
 
     <title>exmg-stepper-drawer demo</title>
-    <style>
-      exmg-stepper-drawer {
-        --mdc-theme-primary: #0071dc;
-      }
-    </style>
 
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
   </head>
   <body>
-    <script type="module" src="../exmg-stepper-drawer.js"></script>
-    <exmg-stepper-drawer show-back-button>
-      <span slot="head-1">Set the basic values</span>
-      <div slot="content-1">
-        Enter the minimal and maximal bitrate you like to use for the test.
-        <br />
-        <br />
-        <br />
-        <p>dynamic height</p>
-      </div>
-
-      <span slot="head-2">Set bitrate option</span>
-      <p slot="content-2">
-        The following bitrates have been recommended to run the test with the best possible bitrate ladder for your setup.
-      </p>
-      <span slot="head-3">Set the basic values</span>
-      <div slot="content-3">
-        Enter the minimal and maximal bitrate you like to use for the test.
-        <br />
-        <br />
-        <br />
-        <p>dynamic height</p>
-      </div>
-
-      <span slot="head-4">Set bitrate option</span>
-      <p slot="content-4">
-        The following bitrates have been recommended to run the test with the best possible bitrate ladder for your setup.
-      </p>
-    </exmg-stepper-drawer>
+    <h3>Stepper Demos</h3>
+    <ul class="horizontal-section">
+      <li><a href="stepper.html" target="_blank">Basic stepper</a></li>
+      <li><a href="stepper-drawer.html" target="_blank">Form stepper</a></li>
+    </ul>
   </body>
 </html>
