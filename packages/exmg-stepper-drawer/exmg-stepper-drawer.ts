@@ -2,10 +2,8 @@ import {html, property, customElement, LitElement} from 'lit-element';
 import {style as stepperStyles} from './styles/exmg-stepper-drawer-styles';
 import '@exmg/exmg-button';
 import '@polymer/iron-collapse/iron-collapse.js';
-
 import {classMap} from 'lit-html/directives/class-map.js';
-
-import {checkMark, editPen} from './exmg-stepper-icons';
+import '@material/mwc-icon';
 
 @customElement('exmg-stepper-drawer')
 export class ExmgStepperDrawer extends LitElement {
@@ -45,11 +43,6 @@ export class ExmgStepperDrawer extends LitElement {
    */
   @property({type: Array, attribute: false}) steps: Array<boolean> = [];
 
-  /**
-   * Hover array including all of the hover's states
-   */
-  @property({type: Array, attribute: false}) hover: Array<boolean> = [];
-
   static styles = [stepperStyles];
 
   /**
@@ -62,7 +55,6 @@ export class ExmgStepperDrawer extends LitElement {
     for (let i = 0; i < this.stepAmount; i++) {
       // Populate with all the states
       this.steps.push(false);
-      this.hover.push(false);
     }
   }
 
@@ -107,26 +99,10 @@ export class ExmgStepperDrawer extends LitElement {
   }
 
   /**
-   * Show the right icon for the right scenario
-   */
-  handleCompleted(step: number) {
-    if (this.steps[step] && step !== this.activeStep) {
-      if (this.hover[step]) {
-        return editPen;
-      } else {
-        return checkMark;
-      }
-    } else {
-      return step + 1;
-    }
-  }
-
-  /**
    * Handle the 'next' button and shift the active step
    */
   handleNext() {
     if (this.activeStep >= 0 && this.activeStep < this.stepAmount - 1) {
-      this.resetHover();
       this.opened = false;
       this.setStep(this.activeStep, 'next');
     } else {
@@ -139,7 +115,6 @@ export class ExmgStepperDrawer extends LitElement {
    */
   handleBack() {
     if (this.activeStep > 0 && this.activeStep <= this.stepAmount) {
-      this.resetHover();
       this.opened = false;
       this.setStep(this.activeStep, 'back');
     } else {
@@ -157,33 +132,6 @@ export class ExmgStepperDrawer extends LitElement {
       this.setStep(step, 'edit');
     } else {
       return;
-    }
-  }
-
-  /**
-   * Check when a step it's state is set to true and if the edit
-   * mode is enabled, then set the state of the hover
-   */
-  editHover(step: number, leave: boolean) {
-    const stepHover = this.hover[step];
-    const stepState = this.steps[step];
-    if (stepState && !leave && this.enableEdit && !stepHover) {
-      this.hover[step] = true;
-    }
-    if (stepState && leave && this.enableEdit) {
-      this.hover[step] = false;
-    }
-    return;
-  }
-
-  /**
-   * Reset the hover to prevent it for getting stuck after editing and then proceeding
-   * to the next step
-   */
-  resetHover() {
-    if (this.enableEdit) {
-      this.hover[this.activeStep] = false;
-      this.hover = [...this.hover];
     }
   }
 
@@ -215,18 +163,20 @@ export class ExmgStepperDrawer extends LitElement {
 
   /**
    * Render the individual steps
-   * TODO: Clean up
    */
   private renderStep(step: number) {
     const circleClasses = {incompletecircle: !this.steps[step], completedcircle: this.steps[step]};
     const textClasses = {incompletetext: !this.steps[step]};
+    const iconClasses = {completed: this.steps[step] && step !== this.activeStep, edit: this.enableEdit};
+    const showStep = !this.steps[step];
     const shownStep = step + 1;
+
     return html`
       ${step === this.activeStep
         ? html`
             <li class="step-container">
               <div class="step-head">
-                <span class="step-circle completedcircle">${this.handleCompleted(step)}</span>
+                <span class="step-circle completedcircle">${shownStep}</span>
                 <slot class="step-head-text" name="head-${shownStep}"></slot>
               </div>
               <iron-collapse ?opened="${this.opened}">
@@ -239,13 +189,16 @@ export class ExmgStepperDrawer extends LitElement {
           `
         : html`
             <li>
-              <div
-                class="step-head"
-                @click=${() => this.handleEdit(step)}
-                @mouseover="${() => this.editHover(step, false)}"
-                @mouseleave="${() => this.editHover(step, true)}"
-              >
-                <span class="step-circle ${classMap(circleClasses)}"> <span></span>${this.handleCompleted(step)}</span>
+              <div class="step-head" @click=${() => this.handleEdit(step)}>
+                <div class="step-circle ${classMap(circleClasses)}">
+                  ${!showStep
+                    ? html`
+                        <mwc-icon class="${classMap(iconClasses)}"></mwc-icon>
+                      `
+                    : html`
+                        ${shownStep}
+                      `}
+                </div>
                 <slot class="step-head-text ${classMap(textClasses)}" name="head-${shownStep}"></slot>
               </div>
             </li>

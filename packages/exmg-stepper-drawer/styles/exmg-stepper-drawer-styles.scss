@@ -8,6 +8,29 @@
     margin-bottom: 1.8em;
   }
 
+  .step-head {
+    .completed {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 1em;
+      &:after {
+        content: 'done';
+      }
+    }
+  }
+  .step-head:hover {
+    .edit {
+      font-size: 1em;
+      &:after {
+        content: 'edit';
+      }
+    }
+  }
+
+  .showstep {
+    display: hidden;
+  }
+
   iron-collapse {
     --iron-collapse-transition-duration: 150ms;
   }
@@ -49,6 +72,7 @@
     color: #ffffff;
     display: inline-block;
     line-height: 1.6em;
+    height: 1.6em;
     margin-right: 1.4em;
     text-align: center;
     width: 1.6em;

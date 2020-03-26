@@ -6,6 +6,7 @@
     "@exmg/exmg-form": "^2.2.3",
     "@exmg/exmg-form-drawer": "^2.1.11",
     "@material/mwc-button": "^0.10.0",
+    "@material/mwc-icon": "^0.14.1",
     "@polymer/iron-collapse": "^3.0.1",
     "@polymer/paper-input": "^3.2.1",
     "lit-element": "^2.2.1",
