@@ -168,10 +168,10 @@ export class ExmgStepperDrawer extends LitElement {
     const stepHover = this.hover[step];
     const stepState = this.steps[step];
     if (stepState && !leave && this.enableEdit && !stepHover) {
-      return true;
+      this.hover[step] = true;
     }
     if (stepState && leave && this.enableEdit) {
-      return false;
+      this.hover[step] = false;
     }
     return;
   }
