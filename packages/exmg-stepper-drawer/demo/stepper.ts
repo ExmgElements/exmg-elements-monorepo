@@ -12,7 +12,7 @@ export class Stepper extends LitElement {
           --mdc-theme-primary: #0071dc;
         }
       </style>
-      <exmg-stepper-drawer last-button-text="Submit" enable-edit-mode>
+      <exmg-stepper-drawer last-button-text="Submit" enable-edit-mode enable-back-button>
         <p slot="head-1">Set the basic values</p>
         <div slot="content-1">
           Enter the minimal and maximal bitrate you like to use for the test.

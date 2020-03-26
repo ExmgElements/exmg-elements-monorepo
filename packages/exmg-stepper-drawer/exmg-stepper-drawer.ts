@@ -3,6 +3,8 @@ import {style as stepperStyles} from './styles/exmg-stepper-drawer-styles';
 import '@exmg/exmg-button';
 import '@polymer/iron-collapse/iron-collapse.js';
 
+import {classMap} from 'lit-html/directives/class-map.js';
+
 import {checkMark, editPen} from './exmg-stepper-icons';
 
 @customElement('exmg-stepper-drawer')
@@ -41,27 +43,21 @@ export class ExmgStepperDrawer extends LitElement {
   /**
    * Steps array including all of the step's states
    */
-  @property({type: Array, attribute: false}) steps: Array<boolean>;
+  @property({type: Array, attribute: false}) steps: Array<boolean> = [];
 
   /**
    * Hover array including all of the hover's states
    */
-  @property({type: Array, attribute: false}) hover: Array<boolean>;
+  @property({type: Array, attribute: false}) hover: Array<boolean> = [];
 
   static styles = [stepperStyles];
-
-  constructor() {
-    super();
-    this.steps = []; // Always start with an empty array
-    this.hover = [];
-  }
 
   /**
    * Wait for the first update to populate the steps array with the right
    * amount of slots
    */
   firstUpdated() {
-    const slottedElements = this.parentNode!.querySelectorAll('[slot]');
+    const slottedElements = this.querySelectorAll('*[slot]')!;
     this.stepAmount = slottedElements!.length / 2; //Each step has 2 slots
     for (let i = 0; i < this.stepAmount; i++) {
       // Populate with all the states
@@ -172,12 +168,12 @@ export class ExmgStepperDrawer extends LitElement {
     const stepHover = this.hover[step];
     const stepState = this.steps[step];
     if (stepState && !leave && this.enableEdit && !stepHover) {
-      this.hover[step] = true;
+      return true;
     }
     if (stepState && leave && this.enableEdit) {
-      this.hover[step] = false;
+      return false;
     }
-    this.resetHover();
+    return;
   }
 
   /**
@@ -222,17 +218,20 @@ export class ExmgStepperDrawer extends LitElement {
    * TODO: Clean up
    */
   private renderStep(step: number) {
+    const circleClasses = {incompletecircle: !this.steps[step], completedcircle: this.steps[step]};
+    const textClasses = {incompletetext: !this.steps[step]};
+    const shownStep = step + 1;
     return html`
       ${step === this.activeStep
         ? html`
             <li class="step-container">
               <div class="step-head">
-                <span class="step-circle completed">${this.handleCompleted(step)}</span>
-                <slot class="step-head-text" name="head-${step + 1}"></slot>
+                <span class="step-circle completedcircle">${this.handleCompleted(step)}</span>
+                <slot class="step-head-text" name="head-${shownStep}"></slot>
               </div>
               <iron-collapse ?opened="${this.opened}">
               <div class="step-content-container" >
-                <slot class="step-content" name="content-${step + 1}"></slot>
+                <slot class="step-content" name="content-${shownStep}"></slot>
                 ${this.renderButtons()}
               </div>
               <iron-collapse>
@@ -246,10 +245,8 @@ export class ExmgStepperDrawer extends LitElement {
                 @mouseover="${() => this.editHover(step, false)}"
                 @mouseleave="${() => this.editHover(step, true)}"
               >
-                <span class="${this.steps[step] ? 'step-circle completed' : 'step-circle incomplete-circle'}"
-                  >${this.handleCompleted(step)}</span
-                >
-                <slot class="${this.steps[step] ? 'step-head-text' : 'step-head-text incomplete-text'}" name="head-${step + 1}"></slot>
+                <span class="step-circle ${classMap(circleClasses)}"> <span></span>${this.handleCompleted(step)}</span>
+                <slot class="step-head-text ${classMap(textClasses)}" name="head-${shownStep}"></slot>
               </div>
             </li>
           `}
