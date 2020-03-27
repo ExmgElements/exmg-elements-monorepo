@@ -1,7 +1,7 @@
 import {LitElement, html, customElement, property} from 'lit-element';
 import '@exmg/exmg-form/exmg-form';
 import '@exmg/exmg-form-drawer/exmg-drawer';
-import '../exmg-stepper-drawer';
+import '../exmg-stepper';
 
 @customElement('exmg-stepper-drawer-demo')
 export class StepperDrawer extends LitElement {
@@ -18,7 +18,7 @@ export class StepperDrawer extends LitElement {
     // language=html
     return html`
       <style>
-        exmg-stepper-drawer {
+        exmg-stepper {
           --mdc-theme-primary: #0071dc;
         }
         exmg-drawer {
@@ -28,7 +28,7 @@ export class StepperDrawer extends LitElement {
       <input type="button" @click="${this.openDialog}" value="Open dialog" />
 
       <exmg-drawer ?opened="${this.opened}" @exmg-drawer-opened-changed="${this.handleOpenedChanged}">
-        <exmg-stepper-drawer last-button-text="Test">
+        <exmg-stepper last-button-text="Test">
           <p slot="head-1">Set the basic values</p>
           <div slot="content-1">
             Enter the minimal and maximal bitrate you like to use for the test.
@@ -55,7 +55,7 @@ export class StepperDrawer extends LitElement {
           <p slot="content-4">
             The following bitrates have been recommended to run the test with the best possible bitrate ladder for your setup.
           </p>
-        </exmg-stepper-drawer>
+        </exmg-stepper>
       </exmg-drawer>
     `;
   }

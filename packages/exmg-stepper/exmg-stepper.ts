@@ -1,12 +1,12 @@
 import {html, property, customElement, LitElement} from 'lit-element';
-import {style as stepperStyles} from './styles/exmg-stepper-drawer-styles';
+import {style as stepperStyles} from './styles/exmg-stepper-styles';
 import '@exmg/exmg-button';
-import '@polymer/iron-collapse/iron-collapse.js';
-import {classMap} from 'lit-html/directives/class-map.js';
+import '@polymer/iron-collapse';
+import {classMap} from 'lit-html/directives/class-map';
 import '@material/mwc-icon';
 
-@customElement('exmg-stepper-drawer')
-export class ExmgStepperDrawer extends LitElement {
+@customElement('exmg-stepper')
+export class ExmgStepper extends LitElement {
   /**
    * Show backbutton?
    */
@@ -210,20 +210,26 @@ export class ExmgStepperDrawer extends LitElement {
    * Render the buttons
    */
   private renderButtons() {
-    console.log(this.stepAmount - 1);
-    console.log(this.activeStep);
     if (this.showBackButton && this.activeStep !== 0) {
       return html`
         <exmg-button class="dark" unelevated @click="${this.handleBack}">Back</exmg-button>
-        <exmg-button class="dark" unelevated @click="${this.handleNext}"
-          >${this.activeStep === this.stepAmount - 1 ? this.lastButtonText : 'Next'}</exmg-button
-        >
+        ${this.activeStep !== this.stepAmount - 1
+          ? html`
+              <exmg-button class="dark" unelevated @click="${this.handleNext}">Next</exmg-button>
+            `
+          : html`
+              <exmg-button class="dark" unelevated @click="${this.handleNext}">${this.lastButtonText}</exmg-button>
+            `}
       `;
     } else {
       return html`
-        <exmg-button class="dark" unelevated @click="${this.handleNext}"
-          >${this.activeStep === this.stepAmount - 1 ? this.lastButtonText : 'Next'}</exmg-button
-        >
+        ${this.activeStep !== this.stepAmount - 1
+          ? html`
+              <exmg-button class="dark" unelevated @click="${this.handleNext}">Next</exmg-button>
+            `
+          : html`
+              <exmg-button class="dark" unelevated @click="${this.handleNext}">${this.lastButtonText}</exmg-button>
+            `}
       `;
     }
   }

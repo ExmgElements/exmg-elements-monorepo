@@ -8,13 +8,13 @@
     <title>exmg-stepper demo</title>
   </head>
   <body>
-    <script type="module" src="../exmg-stepper-drawer.js"></script>
+    <script type="module" src="../exmg-stepper.js"></script>
     <style>
-      exmg-stepper-drawer {
+      exmg-stepper {
         --mdc-theme-primary: #0071dc;
       }
     </style>
-    <exmg-stepper-drawer last-button-text="Submit" enable-edit-mode enable-back-button>
+    <exmg-stepper last-button-text="Submit" enable-edit-mode enable-back-button>
       <p slot="head-1">Set the basic values</p>
       <div slot="content-1">
         Enter the minimal and maximal bitrate you like to use for the test.
@@ -41,6 +41,6 @@
       <p slot="content-4">
         The following bitrates have been recommended to run the test with the best possible bitrate ladder for your setup.
       </p>
-    </exmg-stepper-drawer>
+    </exmg-stepper>
   </body>
 </html>
