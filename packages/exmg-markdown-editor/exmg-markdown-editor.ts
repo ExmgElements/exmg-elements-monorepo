@@ -10,9 +10,17 @@ import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
 
 import './exmg-markdown-editor-icons';
 import {style as codeMirrorStylesText} from './styles/exmg-markdown-codemirror-styles';
-import {GenericPropertyValues, ToolBarOption, ToolBarConfigItem, isToolBarConfigItem} from './exmg-custom-types';
+import {
+  GenericPropertyValues,
+  ToolBarOption,
+  ToolBarConfigItem,
+  isToolBarConfigItem,
+  AvailableMarkdownExtension,
+  availableMarkdownExtensions,
+} from './exmg-custom-types';
 
 import Editor = CodeMirror.Editor;
+import {ExmgMarkdownRenderer} from 'exmg-markdown-renderer';
 
 type PrivateProps = 'toolbarButtonsConfig';
 
@@ -253,6 +261,27 @@ export class EditorElement extends LitElement {
       title: 'Strikethrough',
     },
     {
+      name: 'underline',
+      icon: 'exmg-markdown-editor-icons:format-underline',
+      action: this.toggleUnderline,
+      className: 'btn-underline',
+      title: 'Underline',
+    },
+    {
+      name: 'indent-in',
+      icon: 'exmg-markdown-editor-icons:format-indent-in',
+      action: this.increaseIndentation,
+      className: 'btn-indent-in',
+      title: 'Indent increase',
+    },
+    {
+      name: 'indent-out',
+      icon: 'exmg-markdown-editor-icons:format-indent-out',
+      action: this.decreaseIndentation,
+      className: 'btn-indent-out',
+      title: 'Indent decrease',
+    },
+    {
       name: 'quote',
       icon: 'exmg-markdown-editor-icons:format-quote',
       action: this.toggleBlockquote,
@@ -344,8 +373,16 @@ export class EditorElement extends LitElement {
     fullscreen: 'F11',
   };
 
+  @property({type: Array})
+  private enabledExtensions: AvailableMarkdownExtension[] = [];
+
   get markdownElement(): MarkdownElement | null {
-    return this.querySelector<MarkdownElement>('marked-element');
+    const markedElement = this.querySelector<MarkdownElement>('marked-element');
+    if (!markedElement) {
+      const re = this.querySelector<ExmgMarkdownRenderer>('exmg-markdown-renderer')!;
+      return re.querySelector<MarkdownElement>('marked-element');
+    }
+    return markedElement;
   }
 
   @query('#editor')
@@ -572,6 +609,19 @@ export class EditorElement extends LitElement {
 
     this.codeMirrorEditor = codeMirrorEditor;
 
+    const fetchedConfig = window.markdownEditorConfig;
+    if (fetchedConfig) {
+      this.enabledExtensions = fetchedConfig.extensions;
+    }
+    const baseToolbarButtons = this.toolbarButtons;
+    availableMarkdownExtensions.forEach(extension => {
+      if (baseToolbarButtons.includes(extension) && !this.enabledExtensions.includes(extension)) {
+        console.warn(`The extension ${extension} is not enabled on your markdownEditorConfig object, it was removed from the toolbar.`);
+        baseToolbarButtons.splice(baseToolbarButtons.indexOf(extension), 1);
+      }
+    });
+    this.toolbarButtons = baseToolbarButtons;
+
     return codeMirrorEditor;
   }
 
@@ -622,6 +672,7 @@ export class EditorElement extends LitElement {
       code: '```',
       em: '*',
       strikethrough: '~~',
+      underline: '+',
     };
 
     const cursorStart = codeMirror.getDoc().getCursor('start');
@@ -675,7 +726,6 @@ export class EditorElement extends LitElement {
       const states = this.getStates(lineStart);
       let text = codeMirror.getDoc().getLine(i);
       const stateFound = states.includes(type);
-
       switch (type) {
         case 'header': {
           const result = /(^[\#]+)/.exec(text);
@@ -697,8 +747,14 @@ export class EditorElement extends LitElement {
           break;
         }
         case 'quote':
+        case 'indent-in':
         case 'unordered-list':
           text = stateFound ? text.substring(2) : `${symbol} ${text}`;
+          cursorStart.ch += stateFound ? -2 : 2;
+          cursorEnd.ch += stateFound ? -2 : 2;
+          break;
+        case 'indent-out':
+          text = states.includes('quote') ? text.substring(2) : `${symbol} ${text}`;
           cursorStart.ch += stateFound ? -2 : 2;
           cursorEnd.ch += stateFound ? -2 : 2;
           break;
@@ -780,6 +836,13 @@ export class EditorElement extends LitElement {
     this.processBlock('strikethrough');
   }
 
+  private toggleUnderline(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
+    this.processBlock('underline');
+  }
+
   private toggleBold(event?: Event): void {
     if (event) {
       event.preventDefault();
@@ -841,6 +904,19 @@ export class EditorElement extends LitElement {
     }
 
     this.processLine('header', '###');
+  }
+
+  private increaseIndentation(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
+    this.processLine('indent-in', '>');
+  }
+  private decreaseIndentation(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
+    this.processLine('indent-out', '>');
   }
 
   private insertLink(event?: Event): void {
