@@ -235,99 +235,101 @@ export class PaperComboboxElement extends LitElement {
   private _onClick: any;
   private _onIronResize: any;
 
-  static styles = [css`
-    :host {
-      display: block;
-      min-width: 167px;
-      --paper-button-color: var(--exmg-paper-combobox-selected-item-color, #000);
-      --paper-button-bg-color: var(--exmg-paper-combobox-selected-item-bg-color, #fff);
-      --paper-icon-button-ink-color: var(--exmg-paper-combobox-dropdown-button-color, #000);
-      --paper-icon-button-ink-bg-color: var(--exmg-paper-combobox-dropdown-button-bg-color, transparent);
-      --paper-listbox-color: var(--exmg-paper-combobox-dropdown-list-color, #000);
-      --paper-listbox-background-color: var(--exmg-paper-combobox-dropdown-list-bg-color, #fff);
-    }
-    paper-icon-button {
-      color: var(--paper-icon-button-ink-color, var(--primary-text-color));
-      background-color: var(--paper-icon-button-ink-bg-color);
-    }
-    :host([focused]) {
-      outline: none;
-    }
-    :host([hidden]) {
-      display: none !important;
-    }
-    input {
-      /* Firefox sets a min-width on the input, which can cause layout issues */
-      min-width: 0;
-    }
-    .container {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    }
-    paper-input-container {
-      flex: 1;
-      flex-basis: 0.000000001px;
-      overflow: auto;
-      height: 56px;
-    }
-    .tokens {
-      margin-right: 6px;
-      min-height: 24px;
-      position: relative;
-      width: 100%;
-      white-space: nowrap;
-    }
-    .tokens paper-button {
-      margin: 0;
-      padding: 0 4px;
-      height: 22px;
-      font-size: 16px;
-      min-width: initial;
-      max-width: 100%
-    }
-    .tokens paper-button span {
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-    .tokens.selected input {
-      color: transparent;
-      width: 1px !important;
-    }
-    #inputValue {
-      font: inherit;
-      outline: none;
-      box-shadow: none;
-      background: transparent;
-      border: none;
-      width: auto;
-      max-width: 100%;
-    }
-    paper-icon-button {
-      margin: 0;
-    }
-    paper-button {
-      padding: 0;
-      color: var(--paper-button-color);
-      background-color: var(--paper-button-bg-color);
-      text-transform: capitalize;
-    }
-    .container {
-      flex: 1;
-      flex-basis: 0.000000001px;
-    }
-    iron-input {
-      line-height: 22px;
-    }
-    iron-dropdown {
-      box-shadow: var(--shadow-elevation-2dp_-_box-shadow);
-      position: relative;
-      border-radius: 2px;
-      background-color: var(--paper-menu-button-dropdown-background, var(--primary-background-color));
-      max-width: var(--exmg-paper-combobox-dropdown-list-max-width, 400px);
-    }
-  `];
+  static styles = [
+    css`
+      :host {
+        display: block;
+        min-width: 167px;
+        --paper-button-color: var(--exmg-paper-combobox-selected-item-color, #000);
+        --paper-button-bg-color: var(--exmg-paper-combobox-selected-item-bg-color, #fff);
+        --paper-icon-button-ink-color: var(--exmg-paper-combobox-dropdown-button-color, #000);
+        --paper-icon-button-ink-bg-color: var(--exmg-paper-combobox-dropdown-button-bg-color, transparent);
+        --paper-listbox-color: var(--exmg-paper-combobox-dropdown-list-color, #000);
+        --paper-listbox-background-color: var(--exmg-paper-combobox-dropdown-list-bg-color, #fff);
+      }
+      paper-icon-button {
+        color: var(--paper-icon-button-ink-color, var(--primary-text-color));
+        background-color: var(--paper-icon-button-ink-bg-color);
+      }
+      :host([focused]) {
+        outline: none;
+      }
+      :host([hidden]) {
+        display: none !important;
+      }
+      input {
+        /* Firefox sets a min-width on the input, which can cause layout issues */
+        min-width: 0;
+      }
+      .container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      paper-input-container {
+        flex: 1;
+        flex-basis: 0.000000001px;
+        overflow: auto;
+        height: 56px;
+      }
+      .tokens {
+        margin-right: 6px;
+        min-height: 24px;
+        position: relative;
+        width: 100%;
+        white-space: nowrap;
+      }
+      .tokens paper-button {
+        margin: 0;
+        padding: 0 4px;
+        height: 22px;
+        font-size: 16px;
+        min-width: initial;
+        max-width: 100%;
+      }
+      .tokens paper-button span {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      .tokens.selected input {
+        color: transparent;
+        width: 1px !important;
+      }
+      #inputValue {
+        font: inherit;
+        outline: none;
+        box-shadow: none;
+        background: transparent;
+        border: none;
+        width: auto;
+        max-width: 100%;
+      }
+      paper-icon-button {
+        margin: 0;
+      }
+      paper-button {
+        padding: 0;
+        color: var(--paper-button-color);
+        background-color: var(--paper-button-bg-color);
+        text-transform: capitalize;
+      }
+      .container {
+        flex: 1;
+        flex-basis: 0.000000001px;
+      }
+      iron-input {
+        line-height: 22px;
+      }
+      iron-dropdown {
+        box-shadow: var(--shadow-elevation-2dp_-_box-shadow);
+        position: relative;
+        border-radius: 2px;
+        background-color: var(--paper-menu-button-dropdown-background, var(--primary-background-color));
+        max-width: var(--exmg-paper-combobox-dropdown-list-max-width, 400px);
+      }
+    `,
+  ];
 
   constructor() {
     super();
@@ -626,7 +628,7 @@ export class PaperComboboxElement extends LitElement {
     }
 
     this.opened = false;
-    console.log('onItemActivated', this.opened)
+    console.log('onItemActivated', this.opened);
   }
 
   private onInputValueChange(e: Event): void {
@@ -664,7 +666,7 @@ export class PaperComboboxElement extends LitElement {
     this.addEventListener('iron-resize', this._onIronResize);
 
     const el = this.shadowRoot!.querySelector<Element>('.container');
-    if(el) {
+    if (el) {
       this.menuElement!.positionTarget = el;
     }
   }
@@ -768,15 +770,13 @@ export class PaperComboboxElement extends LitElement {
           ?invalid="${this.invalid}"
           id="paperInputContainer"
         >
-          ${
-            !this.selected || !this.noFloatLabel
-              ? html`
-                  <label slot="label" class="${eltPrefix ? 'with-prefix' : ''}" ?hidden="${!this.label}" aria-hidden="true"
-                    >${this.label}</label
-                  >
-                `
-              : ''
-          }
+          ${!this.selected || !this.noFloatLabel
+            ? html`
+                <label slot="label" class="${eltPrefix ? 'with-prefix' : ''}" ?hidden="${!this.label}" aria-hidden="true"
+                  >${this.label}</label
+                >
+              `
+            : ''}
           <iron-input bind-value="${this.inputValue}" slot="input">
             <slot name="prefix"></slot>
             <span class="${classMap({tokens: true, selected: !!this.token})}">
@@ -788,7 +788,8 @@ export class PaperComboboxElement extends LitElement {
                 @input="${this.onInputValueChange}"
                 ?autofocus="${this.autofocus}"
                 autocomplete="off"
-                ?disabled="${this.disabled}">
+                ?disabled="${this.disabled}"
+              />
             </span>
             <slot name="suffix"></slot>
           </iron-input>
@@ -796,9 +797,14 @@ export class PaperComboboxElement extends LitElement {
         </paper-input-container>
 
         <span id="inputWidthHelper">${this.inputValue} </span>
-        <paper-icon-button id="menuButton" icon="exmg-paper-combobox-icons:arrow-drop-down" @click=${() => this.toggle()}></paper-icon-button>
-        <iron-dropdown id="menu"
-          @opened-changed=${(e: CustomEvent<{value: boolean}>) => this.opened = e.detail.value}
+        <paper-icon-button
+          id="menuButton"
+          icon="exmg-paper-combobox-icons:arrow-drop-down"
+          @click=${() => this.toggle()}
+        ></paper-icon-button>
+        <iron-dropdown
+          id="menu"
+          @opened-changed=${(e: CustomEvent<{value: boolean}>) => (this.opened = e.detail.value)}
           ?opened="${this.opened}"
           no-overlap
           restore-focus-on-close
@@ -807,7 +813,8 @@ export class PaperComboboxElement extends LitElement {
           horizontal-align=${this.horizontalAlign}
           vertical-offset=${this.verticalOffset}
           horizontal-offset=${this.horizontalOffset}
-          vertical-align=${this.verticalAlign}>
+          vertical-align=${this.verticalAlign}
+        >
           <paper-listbox
             id="listbox"
             slot="dropdown-content"
@@ -817,7 +824,8 @@ export class PaperComboboxElement extends LitElement {
             class="dropdown-content"
             @iron-activate="${this.onItemActivated}"
             @iron-select="${this.onItemSelected}"
-            @iron-deselect="${this.onItemDeselected}">
+            @iron-deselect="${this.onItemDeselected}"
+          >
             <slot></slot>
           </paper-listbox>
         </iron-dropdown>
