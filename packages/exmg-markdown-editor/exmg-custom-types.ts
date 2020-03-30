@@ -42,6 +42,7 @@ declare global {
   interface Window {
     markdownEditorConfig: {
       extensions: AvailableMarkdownExtension[];
+      renderer: Function;
     };
   }
 }
