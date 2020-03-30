@@ -15,7 +15,7 @@ import '@polymer/paper-styles/paper-styles.js';
 import './exmg-paper-combobox-icons.js';
 import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
 
-import {EventSelectPayload, GenericPropertyValues, isEventWithPath, Token, LitEvent} from './exmg-custom-types';
+import {EventSelectPayload, GenericPropertyValues, Token} from './exmg-custom-types';
 import {PaperListboxElement} from '@polymer/paper-listbox/paper-listbox';
 
 type PrivateProps = 'inputValue' | 'selectedValue';
@@ -103,21 +103,25 @@ export class PaperComboboxElement extends LitElement {
    * Returns currently selected item.
    * @type {?Object}
    */
-  @property({type: Object, attribute: 'selected-item'}) selectedItem?: Element;
+  @property({type: Object, attribute: 'selected-item'})
+  selectedItem?: Element;
 
   /**
    * Gets or sets the selected element. The default is to use the index of the item.
    * @type {string|number}
    */
-  @property({type: String}) selected?: string | number;
+  @property({type: String})
+  selected?: string | number;
 
   /**
    * Set custom max width of menu list with items
    * @type {number = 200}
    */
-  @property({type: Number, attribute: 'max-width-menu-list'}) maxWidthMenuList = 200;
+  @property({type: Number, attribute: 'max-width-menu-list'})
+  maxWidthMenuList = 200;
 
-  @property({type: String}) private selectedValue?: string | number;
+  @property({type: String})
+  private selectedValue?: string | number;
 
   /**
    * The label for this input.
@@ -127,21 +131,26 @@ export class PaperComboboxElement extends LitElement {
   /**
    * Set to true to auto-validate the input value.
    */
-  @property({type: Boolean, attribute: 'auto-validate'}) autoValidate = false;
+  @property({type: Boolean, attribute: 'auto-validate'})
+  autoValidate = false;
 
-  @property({type: Boolean}) autofocus = false;
+  @property({type: Boolean})
+  autofocus = false;
 
   /**
    * Set to true to disable this input.
    */
-  @property({type: Boolean}) disabled = false;
+  @property({type: Boolean})
+  disabled = false;
 
   /**
    * The error message to display when the input is invalid.
    */
-  @property({type: String, attribute: 'error-message'}) errorMessage?: string = '';
+  @property({type: String, attribute: 'error-message'})
+  errorMessage?: string = '';
 
-  @property({type: Boolean, attribute: 'always-float-label'}) alwaysFloatLabel = false;
+  @property({type: Boolean, attribute: 'always-float-label'})
+  alwaysFloatLabel = false;
 
   /**
    * Set to true to mark the input as required. If you're using PaperInputBehavior to
@@ -155,29 +164,46 @@ export class PaperComboboxElement extends LitElement {
   /**
    * This field will be bind to the actual input field.
    */
-  @property({type: String, attribute: 'input-value'}) private inputValue = '';
+  @property({type: String, attribute: 'input-value'})
+  private inputValue = '';
 
   @property({type: Object}) private token?: Token;
 
   /**
    * Invalid is true if validation fails and is passed on.
    */
-  @property({type: Boolean}) invalid = false;
+  @property({type: Boolean})
+  invalid = false;
 
   /**
    * Focus input field if value has been set on element.
    */
-  @property({type: Boolean, attribute: 'input-focused'}) inputFocused = false;
+  @property({type: Boolean, attribute: 'input-focused'})
+  inputFocused = false;
 
-  @property({type: Boolean, attribute: 'no-float-label'}) noFloatLabel = false;
+  @property({type: Boolean, attribute: 'no-float-label'})
+  noFloatLabel = false;
 
   /**
    * Is menu button state open
    */
-  @property({type: Boolean}) private opened = false;
+  @property({type: Boolean})
+  public opened = false;
 
-  @property({type: Boolean, attribute: 'disable-dynamic-align'})
-  disableDynamicAlign = false;
+  @property({type: Boolean, attribute: 'dynamic-align'})
+  dynamicAlign = false;
+
+  @property({type: Boolean, attribute: 'horizontal-align'})
+  horizontalAlign = 'right';
+
+  @property({type: Boolean, attribute: 'vertical-align'})
+  verticalAlign = 'top';
+
+  @property({type: String, attribute: 'vertical-offset'})
+  verticalOffset = '4';
+
+  @property({type: String, attribute: 'horizontal-offset'})
+  horizontalOffset = '4';
 
   @query('#listbox')
   private listBox?: PaperListboxElement;
@@ -243,6 +269,7 @@ export class PaperComboboxElement extends LitElement {
       flex: 1;
       flex-basis: 0.000000001px;
       overflow: auto;
+      height: 56px;
     }
     .tokens {
       margin-right: 6px;
@@ -475,8 +502,10 @@ export class PaperComboboxElement extends LitElement {
     return !!this.token || this.inputFocused;
   }
 
-  private resetInput(): void {
+  private resetInput() {
+    console.log('resetInput', this.autoValidate);
     if (this.autoValidate) {
+      console.log('validate');
       this.validate();
     }
 
@@ -543,10 +572,8 @@ export class PaperComboboxElement extends LitElement {
     }
   }
 
-  private onClick(e: Event): void {
-    const inside: boolean = isEventWithPath(e)
-      ? !!(e as LitEvent).path && !!e.composedPath().find(path => path === this)
-      : e.target === this;
+  private onClick(e: Event) {
+    const inside = e.composedPath().findIndex(path => path === this) !== -1;
 
     // Detect outside element click for auto validate input
     if ((this.autoValidate && this.previousInsideClick && !inside) || this.token) {
@@ -636,7 +663,7 @@ export class PaperComboboxElement extends LitElement {
 
     this.addEventListener('iron-resize', this._onIronResize);
 
-    const el = this.shadowRoot!.querySelector<Element>('#paperInputContainer');
+    const el = this.shadowRoot!.querySelector<Element>('.container');
     if(el) {
       this.menuElement!.positionTarget = el;
     }
@@ -769,8 +796,18 @@ export class PaperComboboxElement extends LitElement {
         </paper-input-container>
 
         <span id="inputWidthHelper">${this.inputValue} </span>
-        <paper-icon-button id="menuButton" icon="exmg-paper-combobox-icons:arrow-drop-down" @click=${() => this.menuElement!.toggle()}></paper-icon-button>
-        <iron-dropdown id="menu" @opened-changed=${(e: CustomEvent<{value: boolean}>) => this.opened = e.detail.value} ?opened="${this.opened}" ?dynamic-align=${!this.disableDynamicAlign} no-overlap close-on-activate horizontal-align="right" vertical-offset="4" horizontal-offset="4" vertical-align="top">
+        <paper-icon-button id="menuButton" icon="exmg-paper-combobox-icons:arrow-drop-down" @click=${() => this.toggle()}></paper-icon-button>
+        <iron-dropdown id="menu"
+          @opened-changed=${(e: CustomEvent<{value: boolean}>) => this.opened = e.detail.value}
+          ?opened="${this.opened}"
+          no-overlap
+          restore-focus-on-close
+          close-on-activate
+          ?dynamic-align=${this.dynamicAlign}
+          horizontal-align=${this.horizontalAlign}
+          vertical-offset=${this.verticalOffset}
+          horizontal-offset=${this.horizontalOffset}
+          vertical-align=${this.verticalAlign}>
           <paper-listbox
             id="listbox"
             slot="dropdown-content"

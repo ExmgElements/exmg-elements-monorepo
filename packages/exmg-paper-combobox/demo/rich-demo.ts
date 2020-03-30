@@ -1,6 +1,8 @@
 import { customElement, LitElement, html, css } from "lit-element";
 import '@polymer/paper-item/paper-icon-item';
 import '@polymer/paper-item/paper-item-body';
+import '@polymer/paper-item/paper-item';
+import '@polymer/paper-input/paper-input';
 import '../exmg-paper-combobox';
 import '@material/mwc-icon';
 import countries from './world_countries.js';
@@ -21,6 +23,10 @@ export class RichDemo extends LitElement {
         width: 300px
         height: 100px;
 
+      }
+      .horizontal{
+        display: flex;
+        margin-right: 4px;
       }
     `
   ];
@@ -54,22 +60,27 @@ export class RichDemo extends LitElement {
         <exmg-paper-combobox
           name="area"
           label="Area"
-          disable-dynamic-align
+          dynamic-align
+          horizontal-align="right"
+          vertical-offset="0"
+          horizontal-offset="0"
+          vertical-align="top"
           attr-for-selected="data-id"
           selected-item-selector="div.calling-code"
 
         >
           ${this.renderOptions()}
         </exmg-paper-combobox>
-        <exmg-paper-combobox
-          name="area"
-          label="Area2"
 
-          attr-for-selected="data-id"
-          selected-item-selector="div.calling-code"
-        >
-          ${this.renderOptions()}
-        </exmg-paper-combobox>
+        <div class="horizontal">
+          <exmg-paper-combobox label="Select Users" required="" auto-validate="" error-message="Input required">
+            <paper-item>Rubin</paper-item>
+            <paper-item>Gennie</paper-item>
+            <paper-item>Ronna</paper-item>
+          </exmg-paper-combobox>
+          <paper-input label="Test input" required="" auto-validate=""></paper-input>
+        </div>
+
     </div>
   </div>
     `;
