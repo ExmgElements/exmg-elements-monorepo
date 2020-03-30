@@ -22,7 +22,8 @@ export type ToolBarOption =
   | 'link'
   | 'image'
   | 'fullscreen'
-  | 'split-view';
+  | 'split-view'
+  | AvailableMarkdownExtension;
 
 export interface ToolBarConfigItem extends Object {
   name: ToolBarOption;
@@ -33,3 +34,15 @@ export interface ToolBarConfigItem extends Object {
 }
 
 export const isToolBarConfigItem = (item: Record<string, any>): item is ToolBarConfigItem => item.hasOwnProperty('name');
+
+export type AvailableMarkdownExtension = 'underline' | 'indent-in' | 'indent-out';
+export const availableMarkdownExtensions: AvailableMarkdownExtension[] = ['underline', 'indent-in', 'indent-out'];
+
+declare global {
+  interface Window {
+    markdownEditorConfig: {
+      extensions: AvailableMarkdownExtension[];
+      renderer: Function;
+    };
+  }
+}
