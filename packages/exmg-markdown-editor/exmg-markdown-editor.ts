@@ -410,24 +410,12 @@ export class EditorElement extends LitElement {
    */
   private ready(): void {
     this.setupEditor();
+    this.setupToolbarExtensions();
 
     const markedElement = this.markdownElement;
     if (!markedElement) {
       throw new Error('Missing children <marked-element>');
     }
-
-    const fetchedConfig = window.markdownEditorConfig;
-    if (fetchedConfig) {
-      this.enabledExtensions = fetchedConfig.extensions;
-    }
-    const baseToolbarButtons = this.toolbarButtons;
-    availableMarkdownExtensions.forEach(extension => {
-      if (baseToolbarButtons.includes(extension) && !this.enabledExtensions.includes(extension)) {
-        console.warn(`The extension ${extension} is not enabled on your markdownEditorConfig object, it was removed from the toolbar.`);
-        baseToolbarButtons.splice(baseToolbarButtons.indexOf(extension), 1);
-      }
-    });
-    this.toolbarButtons = baseToolbarButtons;
 
     if (markedElement.markdown) {
       this.codeMirrorEditor!.setValue(markedElement.markdown);
@@ -456,6 +444,25 @@ export class EditorElement extends LitElement {
 
       return this.normalizedToolBarConfig.get(optionName) || {};
     });
+  }
+  /**
+   * Updates the Toolbar to take out disabled extensions that are active on the toolbar
+   */
+
+  private setupToolbarExtensions(): void {
+    const fetchedConfig = window.markdownEditorConfig;
+    if (fetchedConfig) {
+      this.enabledExtensions = fetchedConfig.extensions;
+    }
+    const baseToolbarButtons = this.toolbarButtons;
+    availableMarkdownExtensions.forEach(extension => {
+      if (baseToolbarButtons.includes(extension) && !this.enabledExtensions.includes(extension)) {
+        console.warn(`The extension ${extension} is not enabled on your markdownEditorConfig object, it was removed from the toolbar.`);
+        baseToolbarButtons.splice(baseToolbarButtons.indexOf(extension), 1);
+      }
+    });
+    this.toolbarButtons = baseToolbarButtons;
+    this.requestUpdate();
   }
 
   /**
