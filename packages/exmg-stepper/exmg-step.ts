@@ -5,8 +5,17 @@ import '@polymer/iron-collapse';
 import {classMap} from 'lit-html/directives/class-map';
 import '@material/mwc-icon';
 
-@customElement('exmg-stepper')
-export class ExmgStepper extends LitElement {
+@customElement('exmg-step')
+export class ExmgStep extends LitElement {
+  /**
+   * Show backbutton?
+   */
+  @property({type: Number, attribute: 'step'}) step = 0;
+
+  @property({type: Number, attribute: 'active-step'}) activeStep = 0;
+
+  @property({type: Boolean, attribute: 'active'}) isActive = false;
+
   /**
    * Show backbutton?
    */
@@ -23,46 +32,11 @@ export class ExmgStepper extends LitElement {
   @property({type: String, attribute: 'last-button-text'}) lastButtonText = 'submit';
 
   /**
-   * Set the amount of steps that the stepper will have
-   * the amount is dynamically set by the amount of slots the component has
-   */
-  @property({type: Number, attribute: false}) private stepAmount = 0;
-
-  /**
-   * Track what step is active
-   */
-  @property({type: Number, attribute: false}) private activeStep = 0;
-
-  /**
    * Set the state of the collapsible
    */
   @property({type: Boolean, attribute: false}) private opened = true;
 
-  /**
-   * Steps array including all of the step's states
-   */
-  @property({type: Array, attribute: false}) steps: Array<boolean> = [];
-
   static styles = [stepperStyles];
-
-  /**
-   * Wait for the first update to populate the steps array with the right
-   * amount of slots
-   */
-  firstUpdated() {
-    const slottedElements = this.querySelectorAll('exmg-step')!;
-    console.log(slottedElements);
-    this.stepAmount = slottedElements!.length;
-    for (let i = 0; i < this.stepAmount; i++) {
-      // Populate with all the states
-      this.steps.push(false);
-    }
-    this.querySelector('exmg-step')!.addEventListener('step-next', this.handleChange);
-  }
-
-  handleChange() {
-    console.log('changed');
-  }
 
   /**
    * Toggle the collapsible
@@ -72,6 +46,50 @@ export class ExmgStepper extends LitElement {
       // timeout for the animation to finish
       this.opened = !this.opened;
     }, 150);
+  }
+
+  /**
+   * Render the component
+   */
+  protected render() {
+    const circleClasses = {incompletecircle: !this.isActive, completedcircle: this.isActive};
+    const textClasses = {incompletetext: !this.isActive};
+    const iconClasses = {completed: this.isActive && this.step !== this.activeStep, edit: this.enableEdit};
+    const showStep = !this.isActive;
+    const shownStep = this.step;
+    return html`
+      ${this.isActive
+        ? html`
+            <li class="step-container">
+              <div class="step-head">
+                <span class="step-circle completedcircle">${this.step}</span>
+                <slot class="step-head-text" name="head"></slot>
+              </div>
+              <iron-collapse ?opened="${this.opened}">
+              <div class="step-content-container" >
+                <slot class="step-content" name="content"></slot>
+                ${this.renderButtons()}
+              </div>
+              <iron-collapse>
+            </li>
+          `
+        : html`
+            <li>
+              <div class="step-head" @click=${() => this.handleEdit(this.step)}>
+                <div class="step-circle ${classMap(circleClasses)}">
+                  ${!showStep
+                    ? html`
+                        <mwc-icon class="${classMap(iconClasses)}"></mwc-icon>
+                      `
+                    : html`
+                        ${shownStep}
+                      `}
+                </div>
+                <slot class="step-head-text ${classMap(textClasses)}" name="head"></slot>
+              </div>
+            </li>
+          `}
+    `;
   }
 
   /**
@@ -122,8 +140,12 @@ export class ExmgStepper extends LitElement {
    */
   handleNext() {
     if (this.activeStep >= 0) {
-      this.opened = false;
-      this.setStep(this.activeStep, 'next');
+      const stepNext = new CustomEvent('step-next', {
+        detail: {message: 'step-changed happened.'},
+        bubbles: true,
+        composed: true,
+      });
+      this.dispatchEvent(stepNext);
     } else {
       return;
     }
@@ -167,29 +189,5 @@ export class ExmgStepper extends LitElement {
             `}
       `;
     }
-  }
-
-  /**
-   * Render the component
-   */
-  protected render() {
-    return html`
-      ${this.renderStepper()}
-    `;
-  }
-
-  /**
-   * Render the stepper and initialise it in order to
-   * make sure the right steps are provided
-   */
-  private renderStepper() {
-    return html`
-      ${this.steps.map(
-        (_, index) =>
-          html`
-            <slot name=${index + 1}> </slot>
-          `,
-      )}
-    `;
   }
 }
