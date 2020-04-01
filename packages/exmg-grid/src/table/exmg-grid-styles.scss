@@ -228,12 +228,6 @@ th[data-sort] {
     &:not([data-sort-direction]) {
       @include sortable-col-padding();
     }
-
-    &:not([data-sort-direction])::after {
-      opacity: 1;
-      transition: transform 0.1s linear;
-      transform: rotate(0deg);
-    }
   }
 
   &::after {
