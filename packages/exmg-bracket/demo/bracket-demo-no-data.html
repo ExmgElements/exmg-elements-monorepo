@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
+
+    <title>exmg-button demo</title>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  </head>
+  <body>
+    <script type="module" src="../exmg-bracket.js"></script>
+    <script type="module" src="../exmg-bracket-column.js"></script>
+    <script type="module" src="../exmg-bracket-item.js"></script>
+
+    <exmg-bracket>
+      <exmg-bracket-column header="Round 1">
+        <exmg-bracket-item has-won="1" id="item_0" next-id="4">
+          <span slot="player-one-name">John Test</span>
+          <span slot="player-one-points">20</span>
+          <span slot="player-one-score">7</span>
+          <span slot="player-two-name">Luna Test</span>
+          <span slot="player-two-points">60</span>
+          <span slot="player-two-score">3</span>
+        </exmg-bracket-item>
+        <exmg-bracket-item has-won="2" id="item_1" next-id="4">
+          <span slot="player-one-name">John Test</span>
+          <span slot="player-one-points">40</span>
+          <span slot="player-one-score">8</span>
+          <span slot="player-two-name">Luna Test</span>
+          <span slot="player-two-points">60</span>
+          <span slot="player-two-score">3</span>
+        </exmg-bracket-item>
+        <exmg-bracket-item has-won="1" id="item_2" next-id="5">
+          <span slot="player-one-name">John Test</span>
+          <span slot="player-one-points">40</span>
+          <span slot="player-one-score">8</span>
+          <span slot="player-two-name">Luna Test</span>
+          <span slot="player-two-points">60</span>
+          <span slot="player-two-score">3</span>
+        </exmg-bracket-item>
+        <exmg-bracket-item has-won="1" id="item_3" next-id="5">
+          <span slot="player-one-name">John Test</span>
+          <span slot="player-one-points">40</span>
+          <span slot="player-one-score">8</span>
+          <span slot="player-two-name">Luna Test</span>
+          <span slot="player-two-points">60</span>
+          <span slot="player-two-score">3</span>
+        </exmg-bracket-item>
+      </exmg-bracket-column>
+      <exmg-bracket-column header="Round 2">
+        <exmg-bracket-item has-won="2" id="item_4" next-id="6">
+          <span slot="player-one-name">John Test</span>
+          <span slot="player-one-points">40</span>
+          <span slot="player-one-score">8</span>
+          <span slot="player-two-name">Luna Test</span>
+          <span slot="player-two-points">60</span>
+          <span slot="player-two-score">3</span>
+        </exmg-bracket-item>
+        <exmg-bracket-item has-won="2" id="item_5" next-id="6">
+          <span slot="player-one-name">John Test</span>
+          <span slot="player-one-points">40</span>
+          <span slot="player-one-score">8</span>
+          <span slot="player-two-name">Luna Test</span>
+          <span slot="player-two-points">60</span>
+          <span slot="player-two-score">3</span>
+        </exmg-bracket-item>
+      </exmg-bracket-column>
+      <exmg-bracket-column header="Round 3">
+        <exmg-bracket-item has-won="2" id="item_6" next-id="-">
+          <span slot="player-one-name">John Test</span>
+          <span slot="player-one-points">40</span>
+          <span slot="player-one-score">8</span>
+          <span slot="player-two-name">Luna Test</span>
+          <span slot="player-two-points">60</span>
+          <span slot="player-two-score">3</span>
+        </exmg-bracket-item>
+      </exmg-bracket-column>
+    </exmg-bracket>
+  </body>
+</html>

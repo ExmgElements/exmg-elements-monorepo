@@ -1,4 +1,4 @@
-import {LitElement, html, customElement, property} from 'lit-element';
+import {LitElement, html, customElement, property, queryAll} from 'lit-element';
 import {style as newStyles} from './styles/exmg-bracket-styles';
 import {classMap} from 'lit-html/directives/class-map.js';
 
@@ -31,9 +31,11 @@ export class ExmgBracketItem extends LitElement {
     this.dimensions = this.getBoundingClientRect();
     setTimeout(() => {
       //Exectute if event loop tick has finished
-      const element = document.body.querySelectorAll('*')[1];
-      this.item = element.shadowRoot!.querySelector('#item_' + this.nextId);
-      this.nextDimensions = this.item!.getBoundingClientRect();
+      const element = this.parentElement!.parentElement;
+      this.item = element!.querySelector('#item_' + this.nextId);
+      if (this.item) {
+        this.nextDimensions = this.item!.getBoundingClientRect();
+      }
     });
   }
 
