@@ -25,8 +25,8 @@ export class BracketDemo extends LitElement {
     return html`
       ${repeat(
         _roundItems,
-        (item: any) => html`
-          <exmg-bracket-item has-won="${item.hasWon}">
+        (item: any, index: number) => html`
+          <exmg-bracket-item has-won="${item.hasWon}" id="item_${item.id}" index="${index}" next-id="${item.nextid}">
             <span slot="player-one-name">${item.playerOne.name}</span>
             <span slot="player-one-points">${item.playerOne.totalPoints}</span>
             <span slot="player-one-score">${item.playerOne.score}</span>

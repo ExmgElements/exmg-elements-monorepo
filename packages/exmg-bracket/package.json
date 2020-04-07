@@ -9,6 +9,7 @@
     "@material/mwc-icon": "^0.14.1",
     "@polymer/iron-collapse": "^3.0.1",
     "@polymer/paper-input": "^3.2.1",
+    "jsbezier": "^0.9.5",
     "lit-element": "^2.2.1",
     "web-animations-js": "^2.3.2"
   },

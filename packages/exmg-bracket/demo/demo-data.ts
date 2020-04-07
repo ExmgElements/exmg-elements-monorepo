@@ -4,6 +4,7 @@ export const _items = [
     items: [
       {
         id: 0,
+        nextid: 4,
         hasWon: 1,
         hasStarted: true,
         playerOne: {
@@ -20,6 +21,7 @@ export const _items = [
       {
         id: 1,
         hasWon: 1,
+        nextid: 4,
         hasStarted: true,
         playerOne: {
           name: 'Stefano Pinna',
@@ -34,6 +36,23 @@ export const _items = [
       },
       {
         id: 2,
+        nextid: 5,
+        hasWon: 2,
+        hasStarted: true,
+        playerOne: {
+          name: 'Stefano Pinna',
+          totalPoints: 50,
+          score: 7,
+        },
+        playerTwo: {
+          name: 'Anatoliy Shcherbatykh',
+          totalPoints: 30,
+          score: 2,
+        },
+      },
+      {
+        id: 3,
+        nextid: 5,
         hasWon: 2,
         hasStarted: true,
 
@@ -54,7 +73,9 @@ export const _items = [
     header: 'Round 2',
     items: [
       {
-        id: 3,
+        id: 4,
+        nextid: 6,
+
         hasWon: 1,
         hasStarted: true,
 
@@ -70,7 +91,9 @@ export const _items = [
         },
       },
       {
-        id: 4,
+        id: 5,
+        nextid: 6,
+
         hasWon: 2,
         hasStarted: true,
 
@@ -91,18 +114,20 @@ export const _items = [
     header: 'Round 3',
     items: [
       {
-        id: 5,
-        hasWon: 2,
+        id: 6,
+        nextid: undefined,
+
+        hasWon: undefined,
         hasStarted: false,
         playerOne: {
           name: 'Stefano Pinna',
           totalPoints: 80,
-          score: 7,
+          score: '-',
         },
         playerTwo: {
           name: 'Anatoliy Shcherbatykh',
           totalPoints: 30,
-          score: 3,
+          score: '-',
         },
       },
     ],

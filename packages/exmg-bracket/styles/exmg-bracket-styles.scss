@@ -18,6 +18,7 @@
     font-weight: bold;
   }
   .player-container {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -64,5 +65,12 @@
       opacity: 0.5;
       color: #25283d;
     }
+  }
+  svg {
+    overflow: visible;
+  }
+  .line {
+    position: absolute;
+    left: 26rem;
   }
 }
