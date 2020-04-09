@@ -51,8 +51,8 @@ export class ExmgButton extends ButtonBase {
               <exmg-button-spinner active></exmg-button-spinner>
             `
           : ''}
-        <div class="progress-indicator-holder">
-          <div style="width:${this.progress}%" class="progress-indicator"></div>
+        <div class="progress-holder">
+          <progress max="100" value=${this.progress}></progress>
         </div>
       </button>
     `;

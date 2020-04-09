@@ -20,10 +20,10 @@ To show progress; add progress property with a number value from '0' to '100' to
 
 ## Styling
 
-|        Target        |           Variable           |  Value  |
-|:--------------------:|:----------------------------:|:-------:|
-| Spinner Size         | --exmg-spinner-size          | 28px    |
-| Spinner Color        | --exmg-spinner-color         | grey    |
-| Spinner Stroke Width | --exmg-spinner-stroke-width  | 3px     |
-| Progress Color       | --exmg-button-progress-color | #89c8ff |
-| Progress Right Align | --exmg-button-progress-right | 0       |
+|        Target        |           Variable               |  Value  |
+|:--------------------:|:--------------------------------:|:-------:|
+| Spinner Size         | --exmg-spinner-size              | 28px    |
+| Spinner Color        | --exmg-spinner-color             | grey    |
+| Spinner Stroke Width | --exmg-spinner-stroke-width      | 3px     |
+| Progress Color       | --exmg-button-progress-color     | #89c8ff |
+| Progress Direction   | --exmg-button-progress-direciton | rtl     |

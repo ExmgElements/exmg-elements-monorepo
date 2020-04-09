@@ -44,23 +44,44 @@
     transform: translateX(-50%);
     --exmg-spinner-size: 20px;
   }
-  .progress-indicator-holder {
-    position: absolute;
-    pointer-events: none;
+  .progress-holder {
     overflow: hidden;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
+    position: absolute;
+    pointer-events: none;
     left: 0;
     right: 0;
     top: 0;
+    width: 100%;
     height: 4px;
 
-    .progress-indicator {
+    progress {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 100%;
+      width: 100%;
       position: absolute;
       pointer-events: none;
+      left: 0;
+      top: 0;
+      direction: var(--exmg-button-progress-direciton, rtl);
+    }
+
+    progress::-moz-progress-value {
       background-color: var(--exmg-button-progress-color, #89c8ff);
-      height: 100%;
-      right: var(--exmg-button-progress-right, 0);
+    }
+
+    progress::-moz-progress-bar {
+      background: transparent;
+    }
+
+    progress::-webkit-progress-value {
+      background-color: var(--exmg-button-progress-color, #89c8ff);
+    }
+
+    progress::-webkit-progress-bar {
+      background-color: transparent;
     }
   }
 }
