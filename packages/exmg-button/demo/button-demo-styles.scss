@@ -14,3 +14,8 @@ div {
 div > * {
   padding: 8px;
 }
+
+exmg-button.progress-button {
+  --exmg-button-progress-color: blue;
+  --exmg-button-progress-right: 0;
+}

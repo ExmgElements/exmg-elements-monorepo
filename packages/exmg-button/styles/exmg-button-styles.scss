@@ -1,4 +1,4 @@
-@import "@material/typography/mixins";
+@import '@material/typography/mixins';
 
 :host {
   .header {
@@ -25,7 +25,7 @@
       }
     }
   }
-  .exmg-loading{
+  .exmg-loading {
     visibility: hidden;
   }
   .exmg-button-content {
@@ -33,15 +33,34 @@
     align-items: center;
     justify-content: center;
   }
-  button{
+  button {
     display: relative;
   }
-  exmg-button-spinner{
+  exmg-button-spinner {
     margin: 3px 0;
     position: absolute;
     bottom: 5px;
     left: 50%;
     transform: translateX(-50%);
     --exmg-spinner-size: 20px;
+  }
+  .progress-indicator-holder {
+    position: absolute;
+    pointer-events: none;
+    overflow: hidden;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 4px;
+    
+    .progress-indicator {
+      position: absolute;
+      pointer-events: none;
+      background-color: var(--exmg-button-progress-color,#89c8ff);
+      height: 100%;
+      right: var(--exmg-button-progress-right, 0);
+    }
   }
 }
