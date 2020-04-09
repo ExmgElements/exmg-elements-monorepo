@@ -54,11 +54,11 @@
     right: 0;
     top: 0;
     height: 4px;
-    
+
     .progress-indicator {
       position: absolute;
       pointer-events: none;
-      background-color: var(--exmg-button-progress-color,#89c8ff);
+      background-color: var(--exmg-button-progress-color, #89c8ff);
       height: 100%;
       right: var(--exmg-button-progress-right, 0);
     }
