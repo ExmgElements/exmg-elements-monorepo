@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
+
+    <title>exmg-bracket demo</title>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script type="module" src="bracket-demo.js"></script>
+  </head>
+  <body>
+    <style>
+      body {
+        background: linear-gradient(to bottom, #0f0c29, #24243e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        height: 100vh;
+      }
+      exmg-bracket-demo {
+        --exmg-bracket-primary: #fe5f55;
+        --exmg-bracket-secondary: linear-gradient(
+          to right,
+          #141e30,
+          #693668
+        ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        --exmg-bracket-item-height: 4rem;
+        --exmg-bracket-item-width: 20rem;
+        --exmg-bracket-text-color-won: white;
+        --exmg-bracket-text-color-lost: white;
+        --exmg-bracket-border-color: #693668;
+        --exmg-bracket-border-hover-color: yellow;
+        --exmg-bracket-opacity-lost: 1;
+        --exmg-bracket-column-head-color: white;
+        --exmg-bracket-line-color: #fe5f55;
+        --exmg-bracket-line-hover-color: yellow;
+      }
+    </style>
+    <exmg-bracket-demo> </exmg-bracket-demo>
+  </body>
+</html>

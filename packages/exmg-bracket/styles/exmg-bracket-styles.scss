@@ -7,7 +7,7 @@
     flex-direction: row;
   }
   .column-inner {
-    width: 26rem;
+    width: var(--exmg-bracket-item-width, 26rem);
     margin-right: 10rem;
   }
   .header-container {
@@ -16,6 +16,7 @@
   .header-round {
     font-size: 15px;
     font-weight: bold;
+    color: var(--exmg-bracket-column-head-color, black);
   }
   .player-container {
     position: relative;
@@ -24,15 +25,16 @@
     justify-content: space-evenly;
     margin-bottom: 2rem;
     border-radius: 4px;
-    border: solid 2px #bbcde2;
-    height: 5rem;
+    border: solid 2px var(--exmg-bracket-border-color, #bbcde2);
+    height: var(--exmg-bracket-item-height, 5rem);
+    background: var(--exmg-bracket-secondary, white);
     &.resolved {
-      background-color: rgba(241, 241, 241, 0.3);
+      background: var(--exmg-bracket-secondary, rgba(241, 241, 241, 0.3));
     }
   }
   .player-container:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border: solid 2px #0071dc;
+    border: solid 2px var(--exmg-bracket-border-hover-color, var(--exmg-bracket-primary, #0071dc));
   }
   .player {
     display: flex;
@@ -62,33 +64,36 @@
       }
     }
     &.won {
-      background-color: #0071dc;
-      color: white;
+      background-color: var(--exmg-bracket-primary, #0071dc);
+      color: var(--exmg-bracket-text-color-won, white);
     }
     &.lost {
-      opacity: 0.5;
-      color: #25283d;
+      opacity: var(--exmg-bracket-opacity-lost, 0.5);
+      color: var(--exmg-bracket-text-color-lost, #25283d);
     }
   }
   svg {
     overflow: visible;
     pointer-events: none;
+    path {
+      stroke: var(--exmg-bracket-line-color, lightgrey);
+    }
   }
   .highlight {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border: solid 2px #0071dc;
+    border: solid 2px var(--exmg-bracket-primary, #0071dc);
     svg {
       border: none;
       box-shadow: none;
       z-index: 2;
       path {
-        stroke: #0071dc;
+        stroke: var(--exmg-bracket-line-hover-color, var(--exmg-bracket-primary, #0071dc)); //fallback
       }
     }
   }
 
   .line {
     position: absolute;
-    left: 26rem;
+    left: var(--exmg-bracket-item-width, 26rem);
   }
 }

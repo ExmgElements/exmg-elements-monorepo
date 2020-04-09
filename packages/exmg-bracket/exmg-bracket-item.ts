@@ -56,31 +56,39 @@ export class ExmgBracketItem extends LitElement {
     const {top: sourceTop, height: sourceHeight} = sourceNodeElement;
     const {top: targetTop, height: targetHeight} = targetNodeElement;
     const {top: containerTop} = sourceNodeElement;
-    const sourceY = sourceTop - containerTop + sourceHeight / 2 + sourceHeight / 2;
-    const targetY = targetTop - containerTop + targetHeight / 2 + targetHeight / 2;
-    return [[0, sourceY], [160, targetY]];
+    const sourceY = sourceTop - containerTop + sourceHeight / 2 / ((sourceHeight / 100) * 0.65);
+    const targetY = targetTop - containerTop + targetHeight / 2 / ((sourceHeight / 100) * 0.65);
+    if (sourceY && targetY) {
+      return [[0, sourceY], [160, targetY]];
+    } else {
+      return [[0, 0], [0, 0]];
+    }
   };
 
   addHighlight(el: this) {
     const id = el.id.substring(5); // Remove item_ prefix
     const won = el.hasWon;
-    this.items.forEach((element: any) => {
-      if (id === element.getAttribute('next-id') && (won === element.plyOneId || won === element.plyTwoId)) {
-        element.highlighted = true;
-        this.addHighlight(element);
-      }
-    });
+    if (this.items) {
+      this.items.forEach((element: any) => {
+        if (id === element.getAttribute('next-id') && (won === element.plyOneId || won === element.plyTwoId)) {
+          element.highlighted = true;
+          this.addHighlight(element);
+        }
+      });
+    }
   }
 
   removeHighlight(el: this) {
     const id = el.id.substring(5); // Remove item_ prefix
     const won = el.hasWon;
-    this.items.forEach((element: any) => {
-      if (id === element.getAttribute('next-id') && (won === element.plyOneId || won === element.plyTwoId)) {
-        element.highlighted = false;
-        this.removeHighlight(element);
-      }
-    });
+    if (this.items) {
+      this.items.forEach((element: any) => {
+        if (id === element.getAttribute('next-id') && (won === element.plyOneId || won === element.plyTwoId)) {
+          element.highlighted = false;
+          this.removeHighlight(element);
+        }
+      });
+    }
   }
 
   renderLine() {
