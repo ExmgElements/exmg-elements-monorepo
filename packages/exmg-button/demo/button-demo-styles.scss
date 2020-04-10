@@ -15,7 +15,7 @@ div > * {
   padding: 8px;
 }
 
-exmg-button.progress-button {
+exmg-button[progress] {
   --exmg-button-progress-color: blue;
   --exmg-button-progress-direciton: ltr;
 }
