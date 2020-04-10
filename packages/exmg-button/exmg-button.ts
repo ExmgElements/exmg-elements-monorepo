@@ -11,6 +11,9 @@ export class ExmgButton extends ButtonBase {
   @property({type: Boolean})
   public loading = false;
 
+  @property({type: Number})
+  public progress = 0;
+
   static styles = [style, newStyles];
 
   protected render() {
@@ -48,6 +51,9 @@ export class ExmgButton extends ButtonBase {
               <exmg-button-spinner active></exmg-button-spinner>
             `
           : ''}
+        <div class="progress-holder">
+          <progress max="100" value=${this.progress}></progress>
+        </div>
       </button>
     `;
   }
