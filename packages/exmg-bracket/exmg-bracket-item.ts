@@ -19,10 +19,13 @@ export class ExmgBracketItem extends LitElement {
   itemId = '0';
 
   @property({type: String, attribute: 'next-id'})
-  nextId = '0';
+  nextId: string | undefined;
 
   @property({type: Boolean, attribute: 'highlighted'})
   highlighted = false;
+
+  @property({type: Boolean, attribute: 'enable-highlight'})
+  enableHighlight = true;
 
   @property({type: DOMRect, attribute: false})
   dimensions = this.getBoundingClientRect();
@@ -68,7 +71,7 @@ export class ExmgBracketItem extends LitElement {
   addHighlight(el: this) {
     const id = el.id.substring(5); // Remove item_ prefix
     const won = el.hasWon;
-    if (this.items) {
+    if (this.items && this.enableHighlight) {
       this.items.forEach((element: any) => {
         if (id === element.getAttribute('next-id') && (won === element.plyOneId || won === element.plyTwoId)) {
           element.highlighted = true;
@@ -81,7 +84,7 @@ export class ExmgBracketItem extends LitElement {
   removeHighlight(el: this) {
     const id = el.id.substring(5); // Remove item_ prefix
     const won = el.hasWon;
-    if (this.items) {
+    if (this.items && this.enableHighlight) {
       this.items.forEach((element: any) => {
         if (id === element.getAttribute('next-id') && (won === element.plyOneId || won === element.plyTwoId)) {
           element.highlighted = false;

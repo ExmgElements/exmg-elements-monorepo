@@ -271,7 +271,7 @@ export const _items = [
     items: [
       {
         id: 14,
-        nextid: undefined,
+        nextid: '',
         hasWon: 'player_5',
         hasStarted: false,
         playerOne: {
