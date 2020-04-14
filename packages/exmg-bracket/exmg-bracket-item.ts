@@ -15,11 +15,11 @@ export class ExmgBracketItem extends LitElement {
   @property({type: String, attribute: 'player-two-id'})
   plyTwoId: string | undefined;
 
-  @property({type: Number, attribute: 'id'})
-  itemId = 0;
+  @property({type: String, attribute: 'id'})
+  itemId = '0';
 
-  @property({type: Number, attribute: 'next-id'})
-  nextId = 0;
+  @property({type: String, attribute: 'next-id'})
+  nextId = '0';
 
   @property({type: Boolean, attribute: 'highlighted'})
   highlighted = false;
@@ -91,6 +91,15 @@ export class ExmgBracketItem extends LitElement {
     }
   }
 
+  itemClicked() {
+    const clicked = new CustomEvent('exmg-bracket-item-clicked', {
+      detail: {id: this.itemId.substring(5)}, //remove item_ prefix
+      bubbles: true,
+      composed: true,
+    });
+    this.dispatchEvent(clicked);
+  }
+
   renderLine() {
     const lineClasses = {highlight: this.highlighted ? true : false};
     const [startPoint, endPoint] = this.calculateLinkLinePoints(this.dimensions, this.nextDimensions);
@@ -115,6 +124,7 @@ export class ExmgBracketItem extends LitElement {
         class="player-container ${classMap(classes)}"
         @mouseover="${() => this.addHighlight(this)}"
         @mouseleave="${() => this.removeHighlight(this)}"
+        @click="${() => this.itemClicked()}"
       >
         ${this.renderLine()}
         <div class="player ${classMap(playerOneClasses)}">

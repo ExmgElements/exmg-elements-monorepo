@@ -7,6 +7,11 @@ import {_items} from './demo-data';
 
 @customElement('exmg-bracket-demo')
 export class BracketDemo extends LitElement {
+  firstUpdated() {
+    document.addEventListener('exmg-bracket-item-clicked', e => {
+      console.log(e);
+    });
+  }
   public render() {
     return html`
       <exmg-bracket>

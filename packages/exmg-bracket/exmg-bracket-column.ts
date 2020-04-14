@@ -15,6 +15,7 @@ export class ExmgBracketColumn extends LitElement {
       <div class="column-inner">
         <div class="header-container">
           <span class="header-round">${this.header}</span>
+          <slot name="header-content"></slot>
         </div>
         <slot></slot>
       </div>
