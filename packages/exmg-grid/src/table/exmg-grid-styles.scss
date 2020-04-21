@@ -225,9 +225,6 @@ th[data-sort] {
 
   &:hover {
     color: var(--exmg-table-th-sortable-hover-color);
-    &:not([data-sort-direction]) {
-      @include sortable-col-padding();
-    }
   }
 
   &::after {
@@ -243,10 +240,6 @@ th[data-sort] {
     vertical-align: middle;
     opacity: 0;
   }
-}
-
-th[data-sort-direction] {
-  @include sortable-col-padding();
 }
 
 th[data-sort-direction]::after {
