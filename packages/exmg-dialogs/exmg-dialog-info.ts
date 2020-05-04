@@ -29,10 +29,10 @@ export class ExmgInfoDialog extends LitElement {
   private hideCloseButton = false;
 
   /**
-   * Secondary attribute propagation
+   * Show close button as unelevated
    */
-  @property({type: Boolean, attribute: 'button-secondary'})
-  private buttonSecondary?: boolean = false;
+  @property({type: Boolean, attribute: 'button-unelevated'})
+  private buttonUnelevated?: boolean = false;
 
   @query('#dialog')
   private dialogNode?: PaperDialogElement;
@@ -56,26 +56,37 @@ export class ExmgInfoDialog extends LitElement {
     this.dispatchEvent(new CustomEvent('done'));
   }
 
+  renderHeader() {
+    return html`
+      ${!!this.title
+        ? html`
+            <header>
+              <h2 class="title">${this.title}</h2>
+            </header>
+          `
+        : html`
+            <div class="top-margin">&nbsp;</div>
+          `}
+    `;
+  }
+
   protected render() {
     return html`
       <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click>
         ${this.hideCloseButton
-          ? ''
+          ? html`
+              ${this.renderHeader()}
+            `
           : html`
               <mwc-icon-button @click=${this.close} class="close-button">${closeIcon}</mwc-icon-button>
+              ${this.renderHeader()}
             `}
-        <header>
-          ${!!this.title
-            ? html`
-                <h2 class="title">${this.title}</h2>
-              `
-            : ''}
-        </header>
+
         <paper-dialog-scrollable>
           <slot></slot>
         </paper-dialog-scrollable>
         <div class="actions">
-          <exmg-button id="doneBtn" @click=${this.done} ?unelevated=${!this.buttonSecondary}>${this.buttonCopy}</exmg-button>
+          <exmg-button id="doneBtn" @click=${this.done} ?unelevated=${this.buttonUnelevated}>${this.buttonCopy}</exmg-button>
         </div>
       </paper-dialog>
     `;

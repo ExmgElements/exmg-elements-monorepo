@@ -153,7 +153,7 @@ export class DialogDemo extends LitElement {
       </exmg-dialog-info>
       <exmg-button @click=${() => this.getElementBySelector('#dialog4a')!.open()}>Dialog Info with scroll and normal title</exmg-button>
 
-      <exmg-dialog-info id="dialog4b" hide-close-button button-copy="Close" @done="${this._done}">
+      <exmg-dialog-info id="dialog4b" title="Test" hhide-close-button button-copy="Close" @done="${this._done}">
         <div>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.
