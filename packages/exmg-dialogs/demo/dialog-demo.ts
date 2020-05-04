@@ -117,9 +117,32 @@ export class DialogDemo extends LitElement {
       </exmg-dialog-form>
       <exmg-button @click=${() => this.getElementBySelector('#dialog2')!.open()}>Dialog Error</exmg-button>
 
-      <exmg-dialog-info id="dialog4" hide-close-button button-copy="Continue" @done="${this._done}">
+      <exmg-dialog-info id="dialog4a" title="Title" button-copy="Close" @done="${this._done}">
         <div>
-          <h1>Title</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.
+          </p>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.
           </p>
@@ -128,7 +151,19 @@ export class DialogDemo extends LitElement {
           </p>
         </div>
       </exmg-dialog-info>
-      <exmg-button @click=${() => this.getElementBySelector('#dialog4')!.open()}>Dialog Info without close btn</exmg-button>
+      <exmg-button @click=${() => this.getElementBySelector('#dialog4a')!.open()}>Dialog Info with scroll and normal title</exmg-button>
+
+      <exmg-dialog-info id="dialog4b" hide-close-button button-copy="Close" @done="${this._done}">
+        <div>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.
+          </p>
+        </div>
+      </exmg-dialog-info>
+      <exmg-button @click=${() => this.getElementBySelector('#dialog4b')!.open()}>Dialog Info without close btn</exmg-button>
 
       <exmg-dialog-form
         id="dialog3"

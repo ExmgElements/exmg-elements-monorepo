@@ -1,9 +1,11 @@
 import {customElement, html, LitElement, property, query} from 'lit-element';
+import '@material/mwc-icon-button';
 import {PaperDialogElement} from '@polymer/paper-dialog';
 import '@polymer/paper-dialog';
 import '@exmg/exmg-button';
 import '@polymer/iron-form';
 import {style} from './styles/exmg-dialog-styles';
+import {closeIcon} from './exmg-dialog-icons';
 
 @customElement('exmg-dialog-confirm')
 export class ExmgConfirmDialog extends LitElement {
@@ -167,7 +169,7 @@ export class ExmgConfirmDialog extends LitElement {
         ${this.hideCloseButton
           ? ''
           : html`
-              <span @click=${this.close} class="close-button">✕</span>
+              <mwc-icon-button @click=${this.close} class="close-button">${closeIcon}</mwc-icon-button>
             `}
         <header>
           ${!!this.title
