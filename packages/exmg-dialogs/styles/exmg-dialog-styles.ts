@@ -151,8 +151,5 @@ export const style = css`
   .error.show {
     display: block;
   }
-  .empty-header {
-    margin-top: 1rem;
-  }
 `;
 export default style;
