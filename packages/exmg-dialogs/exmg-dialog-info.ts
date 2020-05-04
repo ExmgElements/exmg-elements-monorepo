@@ -64,15 +64,13 @@ export class ExmgInfoDialog extends LitElement {
           : html`
               <mwc-icon-button @click=${this.close} class="close-button">${closeIcon}</mwc-icon-button>
             `}
-        ${this.title
-          ? html`
-              <header>
+        <header>
+          ${!!this.title
+            ? html`
                 <h2 class="title">${this.title}</h2>
-              </header>
-            `
-          : html`
-              <div class="empty-header"></div>
-            `}
+              `
+            : ''}
+        </header>
         <paper-dialog-scrollable>
           <slot></slot>
         </paper-dialog-scrollable>
