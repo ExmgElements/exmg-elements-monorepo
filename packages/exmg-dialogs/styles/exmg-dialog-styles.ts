@@ -114,6 +114,7 @@ export const style = css`
     top: -0.8rem;
     right: -0.4rem;
     font-size: 1rem;
+    z-index: 1;
     color: var(--mdc-theme-primary);
   }
   paper-dialog > .close-button:hover {

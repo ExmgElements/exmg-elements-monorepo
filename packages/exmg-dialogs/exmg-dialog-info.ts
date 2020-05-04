@@ -1,12 +1,21 @@
 import {customElement, html, LitElement, property, query} from 'lit-element';
 import '@polymer/paper-dialog';
+import '@polymer/paper-dialog-scrollable';
 import '@exmg/exmg-button';
 import '@polymer/iron-form';
+import '@material/mwc-icon-button';
 import {style} from './styles/exmg-dialog-styles';
 import {PaperDialogElement} from '@polymer/paper-dialog';
+import {closeIcon} from './exmg-dialog-icons';
 
 @customElement('exmg-dialog-info')
 export class ExmgInfoDialog extends LitElement {
+  /**
+   * Title of the dialog
+   */
+  @property({type: String})
+  public title = '';
+
   /**
    * Copy for done button
    */
@@ -53,9 +62,18 @@ export class ExmgInfoDialog extends LitElement {
         ${this.hideCloseButton
           ? ''
           : html`
-              <span @click=${this.close} class="close-button">✕</span>
+              <mwc-icon-button @click=${this.close} class="close-button">${closeIcon}</mwc-icon-button>
             `}
-        <slot></slot>
+        <header>
+          ${!!this.title
+            ? html`
+                <h2 class="title">${this.title}</h2>
+              `
+            : ''}
+        </header>
+        <paper-dialog-scrollable>
+          <slot></slot>
+        </paper-dialog-scrollable>
         <div class="actions">
           <exmg-button id="doneBtn" @click=${this.done} ?unelevated=${!this.buttonSecondary}>${this.buttonCopy}</exmg-button>
         </div>
