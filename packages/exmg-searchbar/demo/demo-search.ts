@@ -17,7 +17,7 @@ export class DemoSearch extends LitElement {
       <div>
         <h3>ExmgSearchBar Demo</h3>
 
-        <exmg-searchbar suggestionsLoading placeholder="This search bar is loading suggestions"></exmg-searchbar>
+        <exmg-searchbar searchQuery="test" suggestionsLoading placeholder="This search bar is loading suggestions"></exmg-searchbar>
         <div style="height: 100px;"></div>
         <exmg-searchbar .suggestions=${this.mockSuggestions} placeholder="This search bar is showing suggestions"></exmg-searchbar>
       </div>

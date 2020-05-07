@@ -12,14 +12,16 @@ import styles from './styles/exmg-searchbar-styles';
 
 /**
  * A search bar based on mwc-textfield element.
- * More information about styling and the element
- * itself can be found on the link below:
- * https://github.com/material-components/material-components-web-components/tree/master/packages/textfield
  *
  * __Properties__
- * suggestions: ExmgSearchSuggestion[] => List of suggestions to be passed into and displayed.
- * keepSuggestionsOnSelect: Boolean => Option to whether keep suggestions visible or not on suggestion selection.
- * suggestionsLoading: Boolean => If true and there are no suggestions passed to element, a loading indicator should be shown.
+ * searchQuery: String = '' => Current query of search bar.
+ * suggestions: ExmgSearchSuggestion[] = [] => List of suggestions to be passed into and displayed.
+ * keepSuggestionsOnSelect: Boolean = false => Option to whether keep suggestions visible or not on suggestion selection.
+ * suggestionsLoading: Boolean = false => If true and there are no suggestions passed to element, a loading indicator should be shown.
+ * submitOnInputChange: Boolean = false => If true, dispatches `query-change` event with the current query on every change of search input.
+ * submitOnKeyPress: Boolean = false => If true, dispatches `query-submit` event with the current query upon receiving key press event with specific keys passed to `keys` string array.
+ * keys: String[] = ['ENTER'] => Determines which keys should trigger submitting search query.
+ * keepFocus: Boolean = false => If true, keeps focus on search bar after `query-submit` is fired.
  *
  * __Methods__
  * setSuggestions(suggestions: ExmgSearchSuggestion[]) => Sets `suggestions`.
@@ -28,6 +30,8 @@ import styles from './styles/exmg-searchbar-styles';
  *
  * __Events__
  *  @suggestion-select => Fired on suggestion selection. Payload: {value: any, index: number}
+ *  @query-change => Fired on query change. Payload: {value: string}
+ *  @query-submit => Fired on query submit. Payload: {value: string}
  *
  * __Styling__
  *  --exmg-searchbar-primary-color: #0071dc; => Primary theme color of search bar.
@@ -40,6 +44,10 @@ import styles from './styles/exmg-searchbar-styles';
  *  --exmg-searchbar-suggestions-min-height: 40px; => Suggestion item row height.
  *  --exmg-searchbar-suggestions-text-color: rgba(0, 0, 0, 0.6); => Suggestion item text color.
  *  --exmg-searchbar-suggestions-background-color: #ffffff; => Suggestions list background color.
+ *
+ *  __Info__
+ *  More information about styling and the element itself can be found on the link below:
+ * https://github.com/material-components/material-components-web-components/tree/master/packages/textfield
  */
 const KEY_ENTER = 'ENTER';
 @customElement('exmg-searchbar')
@@ -49,32 +57,80 @@ export class ExmgSearchBar extends LitElement {
   @query('mwc-textfield')
   private _mwcTextField?: TextField;
 
+  /**
+   * Current query of search bar.
+   */
+  @property({type: String})
+  searchQuery = '';
+
+  /**
+   * List of suggestions to be passed into and displayed.
+   */
   @property({type: Array})
   suggestions?: ExmgSearchSuggestion[];
 
+  /**
+   * Option to whether keep suggestions visible or not on
+   * suggestion selection.
+   */
   @property({type: Boolean})
   keepSuggestionsOnSelect = false;
 
+  /**
+   * If true and there are no suggestions passed to element,
+   * a loading indicator should be shown.
+   */
   @property({type: Boolean})
   suggestionsLoading = false;
 
+  /**
+   * If true, dispatches `query-change` event with the current
+   * query on every change of search input.
+   */
   @property({type: Boolean})
-  notifyOnInputChange = false;
+  submitOnQueryChange = false;
 
+  /**
+   * If true, dispatches `query-submit` event with the current
+   *  query upon receiving key press event with specific keys
+   * passed to `keys` string array.
+   */
   @property({type: Boolean})
-  notifyOnKeyPress = true;
+  submitOnKeyPress = true;
 
+  /**
+   * Determines which keys should trigger submitting
+   * search query.
+   */
   @property({type: Array})
   keys = [KEY_ENTER];
 
+  /**
+   * If true, keeps focus on search bar after
+   * `query-submit` is fired.
+   */
+  @property({type: Boolean})
+  keepFocus = false;
+
+  /**
+   * Sets `suggestions` property.
+   * @param suggestions List of ExmgSearchSuggestion[].
+   */
   setSuggestions(suggestions: ExmgSearchSuggestion[]) {
     this.suggestions = suggestions;
   }
 
+  /**
+   * Clears suggestions.
+   */
   clearSuggestions() {
     this.suggestions = [];
   }
 
+  /**
+   * Shows the loading indicator if there are
+   * no suggestions available.
+   */
   showSuggestionsLoading() {
     this.suggestionsLoading = true;
   }
@@ -95,18 +151,23 @@ export class ExmgSearchBar extends LitElement {
   private _handleInputChange() {
     if (this._mwcTextField) {
       const _query = this._mwcTextField!.value;
-      this.dispatchEvent(new CustomEvent('query-change', {bubbles: true, composed: true, detail: {value: _query}}));
+      this.searchQuery = _query;
+      if (this.submitOnQueryChange) {
+        this.dispatchEvent(new CustomEvent('query-change', {bubbles: true, composed: true, detail: {value: this.searchQuery}}));
+      }
     }
   }
 
   private _handleKeyEvent(event: KeyboardEvent) {
     const pressedKeyCode = event.key.toUpperCase();
-    //alert(pressedKeyCode);
     if (this.keys.includes(pressedKeyCode)) {
       const _query = this._mwcTextField!.value;
-      this.dispatchEvent(new CustomEvent('query-change', {bubbles: true, composed: true, detail: {value: _query}}));
-      //Lose focus for mobile devices so that keyboard automatically gets hidden.
-      this._mwcTextField!.blur();
+      this.searchQuery = _query;
+      this.dispatchEvent(new CustomEvent('query-submit', {bubbles: true, composed: true, detail: {value: this.searchQuery}}));
+      if (!this.keepFocus) {
+        //Lose focus for mobile devices so that keyboard automatically gets hidden.
+        this._mwcTextField!.blur();
+      }
     }
   }
 
@@ -159,6 +220,7 @@ export class ExmgSearchBar extends LitElement {
         type="search"
         icon="search"
         placeholder="Search"
+        value="${this.searchQuery}"
       ></mwc-textfield>
       <div class="exmg-searchbar-suggestions">
         ${this.renderSuggestions()}
