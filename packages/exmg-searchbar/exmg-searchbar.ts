@@ -16,10 +16,11 @@ import styles from './styles/exmg-searchbar-styles';
  * __Properties__
  * searchQuery: String = '' => Current query of search bar.
  * suggestions: ExmgSearchSuggestion[] = [] => List of suggestions to be passed into and displayed.
+ * ExmgSearchSuggestion = {icon?: string, text: string, value: any}
  * keepSuggestionsOnSelect: Boolean = false => Option to whether keep suggestions visible or not on suggestion selection.
  * suggestionsLoading: Boolean = false => If true and there are no suggestions passed to element, a loading indicator should be shown.
- * submitOnInputChange: Boolean = false => If true, dispatches `query-change` event with the current query on every change of search input.
- * submitOnKeyPress: Boolean = false => If true, dispatches `query-submit` event with the current query upon receiving key press event with specific keys passed to `keys` string array.
+ * submitOnQueryChange: Boolean = false => If true, dispatches `query-change` event with the current query on every change of search input.
+ * submitOnKeyPress: Boolean = true => If true, dispatches `query-submit` event with the current query upon receiving key press event with specific keys passed to `keys` string array.
  * keys: String[] = ['ENTER'] => Determines which keys should trigger submitting search query.
  * keepFocus: Boolean = false => If true, keeps focus on search bar after `query-submit` is fired.
  *
@@ -27,6 +28,8 @@ import styles from './styles/exmg-searchbar-styles';
  * setSuggestions(suggestions: ExmgSearchSuggestion[]) => Sets `suggestions`.
  * clearSuggestions() => Clears suggestions.
  * showSuggestionsLoading() => Shows the loading indicator if there are no suggestions available.
+ * hideSuggestionsLoading() => Hides the loading indicator.
+ * setQuery(query: string) => Sets query.
  *
  * __Events__
  *  @suggestion-select => Fired on suggestion selection. Payload: {value: any, index: number}
@@ -59,12 +62,15 @@ export class ExmgSearchBar extends LitElement {
 
   /**
    * Current query of search bar.
+   * Default: ''
    */
   @property({type: String})
   searchQuery = '';
 
   /**
    * List of suggestions to be passed into and displayed.
+   * ExmgSearchSuggestion = {icon?: string, text: string, value: any}
+   * Default: []
    */
   @property({type: Array})
   suggestions?: ExmgSearchSuggestion[];
@@ -72,6 +78,7 @@ export class ExmgSearchBar extends LitElement {
   /**
    * Option to whether keep suggestions visible or not on
    * suggestion selection.
+   * Default: false
    */
   @property({type: Boolean})
   keepSuggestionsOnSelect = false;
@@ -79,6 +86,7 @@ export class ExmgSearchBar extends LitElement {
   /**
    * If true and there are no suggestions passed to element,
    * a loading indicator should be shown.
+   * Default: false
    */
   @property({type: Boolean})
   suggestionsLoading = false;
@@ -86,6 +94,7 @@ export class ExmgSearchBar extends LitElement {
   /**
    * If true, dispatches `query-change` event with the current
    * query on every change of search input.
+   * Default: false
    */
   @property({type: Boolean})
   submitOnQueryChange = false;
@@ -94,6 +103,7 @@ export class ExmgSearchBar extends LitElement {
    * If true, dispatches `query-submit` event with the current
    *  query upon receiving key press event with specific keys
    * passed to `keys` string array.
+   * Default: true
    */
   @property({type: Boolean})
   submitOnKeyPress = true;
@@ -101,6 +111,7 @@ export class ExmgSearchBar extends LitElement {
   /**
    * Determines which keys should trigger submitting
    * search query.
+   * Default: ['ENTER']
    */
   @property({type: Array})
   keys = [KEY_ENTER];
@@ -108,6 +119,7 @@ export class ExmgSearchBar extends LitElement {
   /**
    * If true, keeps focus on search bar after
    * `query-submit` is fired.
+   * Default: false
    */
   @property({type: Boolean})
   keepFocus = false;
@@ -133,6 +145,21 @@ export class ExmgSearchBar extends LitElement {
    */
   showSuggestionsLoading() {
     this.suggestionsLoading = true;
+  }
+
+  /**
+   * Hides the loading indicator.
+   */
+  hideSuggestionsLoading() {
+    this.suggestionsLoading = false;
+  }
+
+  /**
+   * Sets query
+   * @param _query String query
+   */
+  setQuery(_query: string) {
+    this.searchQuery = _query;
   }
 
   firstUpdated() {
@@ -235,7 +262,7 @@ export class ExmgSearchBar extends LitElement {
  * icon (Optional): Displayed icon for suggestion. Uses mwc_icon material icon set.
  * value: Value of suggestion. Can be anything.
  * **/
-interface ExmgSearchSuggestion {
+export interface ExmgSearchSuggestion {
   icon?: string;
   text: string;
   value: any;
