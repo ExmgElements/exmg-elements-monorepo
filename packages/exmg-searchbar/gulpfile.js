@@ -16,5 +16,5 @@ gulp.task('serve', () => {
   };
   spawn('gulp', ['watch-styles'], spawnOptions);
   spawn('tsc', ['--watch'], spawnOptions);
-  spawn('polymer', ['serve'], spawnOptions);
+  spawn('polymer', ['serve --hostname 0.0.0.0'], spawnOptions);
 });
