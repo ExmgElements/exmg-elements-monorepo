@@ -149,9 +149,7 @@ export class ExmgGridToolbar extends LitElement {
       <exmg-paper-combobox
         class="filter"
         attr-for-selected="data-id"
-        no-float-label
         ?disabled="${!!filter.disabled}"
-        label="${filter.name}"
         selected=${this.getSelectedFilter(filter)}
         @exmg-combobox-select="${this.emitFilterChangedEvent(filter)}"
       >
