@@ -60,10 +60,186 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="exmg-searchbar">exmg-searchbar</h1>
-				<p>A search bar component to improve simple search experience.</p>
-				<h2 id="usage">Usage</h2>
-				
+				<a href="#exmg-searchbar" id="exmg-searchbar" style="color: inherit; text-decoration: none;">
+					<h1>exmg-searchbar</h1>
+				</a>
+				<p>A customizable search bar element.</p>
+				<blockquote>
+					<p>This search bar uses mwc-textfield for the input element.
+						More information about styling and the input element itself can be found on the link below:
+					<a href="https://github.com/material-components/material-components-web-components/tree/master/packages/textfield">https://github.com/material-components/material-components-web-components/tree/master/packages/textfield</a></p>
+				</blockquote>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<p>Import this element to your project with <code>npm i @exmg/exmg-searchbar</code>.</p>
+				<p>Then add the snippet below into your code.</p>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">exmg-searchbar</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">exmg-searchbar</span>&gt;</span></code></pre>
+				<p>Follow this document for available properties, events, methods and styling.</p>
+				<a href="#styling" id="styling" style="color: inherit; text-decoration: none;">
+					<h2>Styling</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Variable</th>
+							<th>Default</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>--exmg-searchbar-error-color</td>
+							<td>#b00020</td>
+							<td>Error color of search bar</td>
+						</tr>
+						<tr>
+							<td>--exmg-searchbar-hint-color</td>
+							<td>rgba(0, 0, 0, 0.6)</td>
+							<td>Hint text color of search bar</td>
+						</tr>
+						<tr>
+							<td>--exmg-searchbar-primary-color</td>
+							<td>#0071dc</td>
+							<td>Primary theme color of search bar</td>
+						</tr>
+						<tr>
+							<td>--exmg-searchbar-text-color</td>
+							<td>rgba(0, 0, 0, 0.87)</td>
+							<td>Text color of search bar</td>
+						</tr>
+						<tr>
+							<td>--exmg-searchbar-suggestions-spinner-color</td>
+							<td>#0071dc</td>
+							<td>Suggestions loading indicator color</td>
+						</tr>
+						<tr>
+							<td>--exmg-searchbar-suggestions-spinner-width</td>
+							<td>3px</td>
+							<td>Suggestions loading indicator spinner width</td>
+						</tr>
+						<tr>
+							<td>--exmg-searchbar-suggestions-min-height</td>
+							<td>40px</td>
+							<td>Suggestion item row height</td>
+						</tr>
+						<tr>
+							<td>--exmg-searchbar-suggestions-text-color</td>
+							<td>rgba(0, 0, 0, 0.6)</td>
+							<td>Suggestion item text color</td>
+						</tr>
+						<tr>
+							<td>--exmg-searchbar-suggestions-background-color</td>
+							<td>#ffffff</td>
+							<td>Suggestions list background color</td>
+						</tr>
+						<tr>
+							<td>--exmg-searchbar-width</td>
+							<td>100%</td>
+							<td>Width of search bar</td>
+						</tr>
+				</tbody></table>
+				<a href="#properties" id="properties" style="color: inherit; text-decoration: none;">
+					<h2>Properties</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Default</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>keepFocus</td>
+							<td>boolean</td>
+							<td><code>false</code></td>
+							<td>If true, keeps focus on search bar after <code>query-submit</code> is fired</td>
+						</tr>
+						<tr>
+							<td>keepSuggestionsOnSelect</td>
+							<td>boolean</td>
+							<td><code>false</code></td>
+							<td>Option to whether keep suggestions visible or not on suggestion selection</td>
+						</tr>
+						<tr>
+							<td>keys</td>
+							<td>string[]</td>
+							<td><code>[&#39;ENTER&#39;]</code></td>
+							<td>Determines which keys should trigger submitting search query</td>
+						</tr>
+						<tr>
+							<td>notifyOnQueryChange</td>
+							<td>boolean</td>
+							<td><code>true</code></td>
+							<td>If true, dispatches <code>query-change</code> event with the current query on every change of search input.</td>
+						</tr>
+						<tr>
+							<td>searchQuery</td>
+							<td>string</td>
+							<td><code>&#39;&#39;</code></td>
+							<td>Current query of search bar</td>
+						</tr>
+						<tr>
+							<td>submitOnKeyPress</td>
+							<td>boolean</td>
+							<td><code>true</code></td>
+							<td>If true, dispatches <code>query-submit</code> event with the current query upon receiving key press event with specific keys passed to <code>keys</code> string array</td>
+						</tr>
+						<tr>
+							<td>suggestions</td>
+							<td>ExmgSearchSuggestion[]</td>
+							<td><code>[]</code></td>
+							<td>List of suggestions to be passed into and displayed</td>
+						</tr>
+						<tr>
+							<td>suggestionsLoading</td>
+							<td>boolean</td>
+							<td><code>false</code></td>
+							<td>If true and there are no suggestions passed to element, a loading indicator should be shownbar</td>
+						</tr>
+				</tbody></table>
+				<a href="#events" id="events" style="color: inherit; text-decoration: none;">
+					<h2>Events</h2>
+				</a>
+				<a href="#query-change" id="query-change" style="color: inherit; text-decoration: none;">
+					<h4>@query-change</h4>
+				</a>
+				<p>Fired on query change.</p>
+				<p>Payload: <code>{value: string}</code></p>
+				<a href="#query-submit" id="query-submit" style="color: inherit; text-decoration: none;">
+					<h4>@query-submit</h4>
+				</a>
+				<p>Fired on query submit.</p>
+				<p>Payload: <code>{value: string}</code></p>
+				<a href="#suggestion-select" id="suggestion-select" style="color: inherit; text-decoration: none;">
+					<h4>@suggestion-select</h4>
+				</a>
+				<p>Fired on suggestion selection.</p>
+				<p>Payload: <code>{value: any, index: number}</code></p>
+				<a href="#methods" id="methods" style="color: inherit; text-decoration: none;">
+					<h2>Methods</h2>
+				</a>
+				<a href="#clearsuggestions" id="clearsuggestions" style="color: inherit; text-decoration: none;">
+					<h4>clearSuggestions()</h4>
+				</a>
+				<p>Clears suggestions.</p>
+				<a href="#hidesuggestionsloading" id="hidesuggestionsloading" style="color: inherit; text-decoration: none;">
+					<h4>hideSuggestionsLoading()</h4>
+				</a>
+				<p>Hides the loading indicator.</p>
+				<a href="#setqueryquery-string" id="setqueryquery-string" style="color: inherit; text-decoration: none;">
+					<h4>setQuery(query: string)</h4>
+				</a>
+				<p>Sets query.</p>
+				<a href="#setsuggestionssuggestions-exmgsearchsuggestion" id="setsuggestionssuggestions-exmgsearchsuggestion" style="color: inherit; text-decoration: none;">
+					<h4>setSuggestions(suggestions: ExmgSearchSuggestion[])</h4>
+				</a>
+				<p>Sets <code>suggestions</code>.</p>
+				<a href="#showsuggestionsloading" id="showsuggestionsloading" style="color: inherit; text-decoration: none;">
+					<h4>showSuggestionsLoading()</h4>
+				</a>
+				<p>Shows the loading indicator if there are no suggestions available.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -96,6 +272,7 @@
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -144,7 +321,7 @@
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>

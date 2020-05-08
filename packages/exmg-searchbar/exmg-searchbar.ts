@@ -19,7 +19,7 @@ import styles from './styles/exmg-searchbar-styles';
  * ExmgSearchSuggestion = {icon?: string, text: string, value: any}
  * keepSuggestionsOnSelect: Boolean = false => Option to whether keep suggestions visible or not on suggestion selection.
  * suggestionsLoading: Boolean = false => If true and there are no suggestions passed to element, a loading indicator should be shown.
- * submitOnQueryChange: Boolean = false => If true, dispatches `query-change` event with the current query on every change of search input.
+ * notifyOnQueryChange: Boolean = true => If true, dispatches `query-change` event with the current query on every change of search input.
  * submitOnKeyPress: Boolean = true => If true, dispatches `query-submit` event with the current query upon receiving key press event with specific keys passed to `keys` string array.
  * keys: String[] = ['ENTER'] => Determines which keys should trigger submitting search query.
  * keepFocus: Boolean = false => If true, keeps focus on search bar after `query-submit` is fired.
@@ -94,10 +94,10 @@ export class ExmgSearchBar extends LitElement {
   /**
    * If true, dispatches `query-change` event with the current
    * query on every change of search input.
-   * Default: false
+   * Default: true
    */
   @property({type: Boolean})
-  submitOnQueryChange = false;
+  notifyOnQueryChange = true;
 
   /**
    * If true, dispatches `query-submit` event with the current
@@ -179,7 +179,7 @@ export class ExmgSearchBar extends LitElement {
     if (this._mwcTextField) {
       const _query = this._mwcTextField!.value;
       this.searchQuery = _query;
-      if (this.submitOnQueryChange) {
+      if (this.notifyOnQueryChange) {
         this.dispatchEvent(new CustomEvent('query-change', {bubbles: true, composed: true, detail: {value: this.searchQuery}}));
       }
     }
@@ -187,7 +187,7 @@ export class ExmgSearchBar extends LitElement {
 
   private _handleKeyEvent(event: KeyboardEvent) {
     const pressedKeyCode = event.key.toUpperCase();
-    if (this.keys.includes(pressedKeyCode)) {
+    if (this.keys.includes(pressedKeyCode) && this.submitOnKeyPress) {
       const _query = this._mwcTextField!.value;
       this.searchQuery = _query;
       this.dispatchEvent(new CustomEvent('query-submit', {bubbles: true, composed: true, detail: {value: this.searchQuery}}));

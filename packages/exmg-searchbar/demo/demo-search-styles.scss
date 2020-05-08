@@ -35,4 +35,13 @@ div.options {
   border: 1px dashed gray;
   padding: 8px;
   margin-bottom: 12px;
+
+  table {
+    text-align: start;
+    border: none;
+  }
+
+  td {
+    border: none;
+  }
 }
