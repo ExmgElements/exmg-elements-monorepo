@@ -759,7 +759,7 @@ export class PaperComboboxElement extends LitElement {
           padding-left: ${labelPaddingLeft}px;
         }
       </style>
-      <div class="container ${this.label && !this.noFloatLabel ? 'with-label' : ''}">
+      <div class="container">
         <paper-input-container
           ?no-label-float="${this.noFloatLabel || !this.label}"
           ?always-float-label="${this.computeAlwaysFloatLabel()}"
