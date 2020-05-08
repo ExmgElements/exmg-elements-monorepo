@@ -761,7 +761,7 @@ export class PaperComboboxElement extends LitElement {
       </style>
       <div class="container">
         <paper-input-container
-          ?no-label-float="${this.noFloatLabel || !this.label}"
+          ?no-label-float="${this.noFloatLabel}"
           ?always-float-label="${this.computeAlwaysFloatLabel()}"
           @tap="${this.onContainerTap}"
           ?disabled="${this.disabled}"
