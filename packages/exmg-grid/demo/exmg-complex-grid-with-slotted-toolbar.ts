@@ -1,11 +1,11 @@
 import {html, customElement, TemplateResult, css} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 import '@material/mwc-checkbox';
-import '@exmg/exmg-paper-combobox';
 import '@polymer/paper-item';
 import '@material/mwc-icon-button';
 import '@exmg/exmg-button';
 
+import '../src/table/exmg-grid-toolbar-combobox.js';
 import '../src/table/exmg-grid.js';
 import '../src/table/exmg-grid-pagination';
 import {style as tableStyles} from '../src/table/exmg-grid-styles';
@@ -121,7 +121,7 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
           </div>
           <div slot="description">Income table</div>
           <div slot="filters">
-            <exmg-paper-combobox
+            <exmg-grid-toolbar-combobox
               attr-for-selected="data-id"
               selected="all"
               @exmg-combobox-select="${this.onFilterChangedComboboxDelegate('month')}"
@@ -130,7 +130,7 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
               <paper-item data-id="january">Month: January</paper-item>
               <paper-item data-id="february">Month: February</paper-item>
               <paper-item data-id="march">Month: March</paper-item>
-            </exmg-paper-combobox>
+            </exmg-grid-toolbar-combobox>
           </div>
         </exmg-grid-base-toolbar>
         <table>
