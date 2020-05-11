@@ -1,5 +1,5 @@
-import {ExmgSearchBar, ExmgSearchSuggestion} from '../exmg-searchbar';
-import {promisifyFlush, onExmgSearchbarQueryChange, onExmgSearchbarQuerySubmit, onExmgSearchbarSuggestionSelect} from './utils';
+import {ExmgSearchBar} from '../exmg-searchbar';
+import {promisifyFlush} from './utils';
 
 declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
 declare const flush: (cb?: Function) => void;
