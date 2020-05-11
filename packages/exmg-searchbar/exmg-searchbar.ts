@@ -30,6 +30,7 @@ import styles from './styles/exmg-searchbar-styles';
  * showSuggestionsLoading() => Shows the loading indicator if there are no suggestions available.
  * hideSuggestionsLoading() => Hides the loading indicator.
  * setQuery(query: string) => Sets query.
+ * search() => Fires `query-submit` event.
  *
  * __Events__
  *  @suggestion-select => Fired on suggestion selection. Payload: {value: any, index: number}
@@ -162,6 +163,21 @@ export class ExmgSearchBar extends LitElement {
     this.searchQuery = _query;
   }
 
+  /**
+   * The function which fires query-submit event.
+   * This function exsits to fire the query-submit event through not only
+   * key press but other actions which is up to developer.
+   */
+  search() {
+    const _query = this._mwcTextField!.value;
+    this.searchQuery = _query;
+    this.dispatchEvent(new CustomEvent('query-submit', {bubbles: true, composed: true, detail: {value: this.searchQuery}}));
+    if (!this.keepFocus) {
+      //Lose focus for mobile devices so that keyboard automatically gets hidden.
+      this._mwcTextField!.blur();
+    }
+  }
+
   firstUpdated() {
     //Transfer all the properties of host element to mwc-textfield.
     this._tryTransferProperties();
@@ -185,15 +201,12 @@ export class ExmgSearchBar extends LitElement {
   }
 
   private _handleKeyEvent(event: KeyboardEvent) {
+    if (!event || !event.key) {
+      return;
+    }
     const pressedKeyCode = event.key.toUpperCase();
     if (this.keys.includes(pressedKeyCode) && this.submitOnKeyPress) {
-      const _query = this._mwcTextField!.value;
-      this.searchQuery = _query;
-      this.dispatchEvent(new CustomEvent('query-submit', {bubbles: true, composed: true, detail: {value: this.searchQuery}}));
-      if (!this.keepFocus) {
-        //Lose focus for mobile devices so that keyboard automatically gets hidden.
-        this._mwcTextField!.blur();
-      }
+      this.search();
     }
   }
 

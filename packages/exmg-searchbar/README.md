@@ -76,6 +76,10 @@ Clears suggestions.
 
 Hides the loading indicator.
 
+#### search()
+
+Fires `query-submit` event with passed query into search bar.
+
 #### setQuery(query: string)
 
 Sets query.
