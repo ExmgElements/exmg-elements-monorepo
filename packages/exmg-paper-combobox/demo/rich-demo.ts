@@ -77,6 +77,7 @@ export class RichDemo extends LitElement {
             </exmg-paper-combobox>
             <paper-input label="Test input" required="" auto-validate=""></paper-input>
           </div>
+          <paper-input label="Test input2" required="" auto-validate="" error-message="Invalid input!" auto-validate></paper-input>
         </div>
       </div>
     `;

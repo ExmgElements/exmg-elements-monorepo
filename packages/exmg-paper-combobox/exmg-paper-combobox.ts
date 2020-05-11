@@ -269,8 +269,8 @@ export class PaperComboboxElement extends LitElement {
       paper-input-container {
         flex: 1;
         flex-basis: 0.000000001px;
-        overflow: auto;
-        height: 56px;
+        hheight: 56px;
+        box-sizing: border-box;
       }
       .tokens {
         margin-right: 6px;
