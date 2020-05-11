@@ -169,7 +169,6 @@ export class ExmgSearchBar extends LitElement {
 
   private _handleClickSuggestion(value: any, index: number) {
     this.dispatchEvent(new CustomEvent('suggestion-select', {bubbles: true, composed: true, detail: {index: index, value: value}}));
-    console.log({index: index, value: value});
     if (!this.keepSuggestionsOnSelect) {
       this.clearSuggestions();
     }

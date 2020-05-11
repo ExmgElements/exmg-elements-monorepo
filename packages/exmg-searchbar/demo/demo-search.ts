@@ -93,7 +93,6 @@ export class DemoSearch extends LitElement {
 
   private _handleQuerySubmit(event: CustomEvent<{value: string}>) {
     const _query = event.detail.value;
-    //console.log(_query);
     if (_query.length === 0) {
       this._searchResults = [];
       return;
@@ -154,7 +153,8 @@ export class DemoSearch extends LitElement {
           </tbody>
         </table>
         </div>
-        <exmg-searchbar @query-change=${this._handleQueryChange}
+        <exmg-searchbar
+         @query-change=${this._handleQueryChange}
         @query-submit=${this._handleQuerySubmit}
         @suggestion-select=${this._handleSuggestionSelect} placeholder="Search from available data"></exmg-searchbar>
         <h4>Search Results</h4>
