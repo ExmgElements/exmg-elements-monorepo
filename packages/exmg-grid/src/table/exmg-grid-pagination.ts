@@ -2,8 +2,8 @@ import {LitElement, html, customElement, TemplateResult, property} from 'lit-ele
 import {repeat} from 'lit-html/directives/repeat';
 import '@exmg/exmg-button';
 import '@material/mwc-icon-button';
-import '@exmg/exmg-paper-combobox';
 import '@polymer/paper-item';
+import './exmg-grid-toolbar-combobox';
 import {style} from './exmg-grid-pagination-styles';
 
 /**
@@ -42,7 +42,7 @@ export class ExmgGridPagination extends LitElement {
 
   private renderPageSizeOptions() {
     return html`
-      <exmg-paper-combobox
+      <exmg-grid-toolbar-combobox
         id="pageSizeOptions"
         attr-for-selected="data-id"
         selected="${this.pageSize}"
@@ -57,7 +57,7 @@ export class ExmgGridPagination extends LitElement {
               <paper-item data-id="${item}">${item}</paper-item>
             `,
         )}
-      </exmg-paper-combobox>
+      </exmg-grid-toolbar-combobox>
     `;
   }
 
@@ -172,6 +172,10 @@ export class ExmgGridPagination extends LitElement {
           --exmg-paper-combobox-dropdown-button-bg-color: var(--exmg-grid-pagination-bg-color, transparent);
           --exmg-paper-combobox-dropdown-list-color: var(--exmg-grid-pagination-color, var(--mdc-theme-on-surface));
           --exmg-paper-combobox-dropdown-list-bg-color: var(--exmg-grid-pagination-bg-color, var(--mdc-theme-surface));
+
+          exmg-grid-toolbar-combobox{
+            --exmg-paper-combobox-background-color: var(--exmg-grid-pagination-bg-color);
+          }
         }
       </style>
       <div class="wrapper">

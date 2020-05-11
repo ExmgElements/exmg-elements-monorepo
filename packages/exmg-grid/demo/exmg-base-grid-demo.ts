@@ -18,7 +18,7 @@ import {
   SettingSelectionListItem,
 } from '../src/table/types/exmg-grid-toolbar-types';
 import {EventDetailRowsOrderChanged, EventDetailSelectedRowsChange, EventDetailSortChange} from '../src/table/types/exmg-grid-types';
-import {EventSelectPayload} from '@exmg/exmg-paper-combobox/exmg-custom-types';
+import { EventSelectPayload } from 'src/table/exmg-grid-toolbar-combobox.js';
 
 export interface Income {
   id: number;

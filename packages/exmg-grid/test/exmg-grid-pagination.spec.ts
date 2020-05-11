@@ -1,6 +1,6 @@
 import {ExmgGridPagination} from '../src/table/exmg-grid-pagination';
 import {onExmgGridPaginationPageChanged, onExmgGridPaginationPageSizeChanged, promisifyFlush} from './utils';
-import {PaperComboboxElement} from '@exmg/exmg-paper-combobox/exmg-paper-combobox';
+import { PaperGridTooolbarComboboxElement } from 'src/table/exmg-grid-toolbar-combobox';
 
 declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
 declare const flush: (cb?: Function) => void;
@@ -78,7 +78,7 @@ suite('<exmg-grid-pagination>', function() {
       await flushCompleted();
 
       const nextPageBtn = element.shadowRoot!.querySelector<HTMLButtonElement>('#nextPageBtn')!;
-      const pageSizeOptionsElem = element.shadowRoot!.querySelector<PaperComboboxElement>('#pageSizeOptions')!;
+      const pageSizeOptionsElem = element.shadowRoot!.querySelector<PaperGridTooolbarComboboxElement>('#pageSizeOptions')!;
       let pageChangedPromise;
 
       pageChangedPromise = onExmgGridPaginationPageChanged(element, true);

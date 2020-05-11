@@ -17,7 +17,7 @@ Load this script in index.html
     <script src="../node_modules/web-animations-js/web-animations-next-lite.min.js"></script>
 ```
 
-Some dependencies `@exmg/exmg-paper-combobox, @plymer/paper-item` use `@apply` to apply css mixins.
+Some dependencies `@plymer/paper-item` use `@apply` to apply css mixins.
 This require to load script in index.html
 ```html
 <script src="../node_modules/@webcomponents/shadycss/apply-shim.min.js"></script>

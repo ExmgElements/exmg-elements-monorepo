@@ -22,19 +22,19 @@ const copyElementStyle = (source: HTMLElement, target: HTMLElement): void => {
   Array.from(computedStyle).forEach(key =>
     target.style.setProperty(key, computedStyle.getPropertyValue(key), computedStyle.getPropertyPriority(key)),
   );
-}
+};
 type GenericPropertyValues<T, V = unknown> = Map<T, V>;
 
 interface Token {
-   id: number | string;
-   text: string;
- }
+  id: number | string;
+  text: string;
+}
 
-interface EventSelectPayload {
-   value: number | string;
-   item: Element;
-   token: Token;
- }
+export interface EventSelectPayload {
+  value: number | string;
+  item: Element;
+  token: Token;
+}
 
 type PrivateProps = 'inputValue' | 'selectedValue';
 type Props = Exclude<keyof PaperGridTooolbarComboboxElement, number | symbol> | PrivateProps;
@@ -222,7 +222,7 @@ export class PaperGridTooolbarComboboxElement extends LitElement {
         display: block;
         min-width: 167px;
         padding-left: 8px;
-        background: var(--exmg-paper-combobox-background-color, white);
+        background-color: var(--exmg-paper-combobox-background-color);
         --paper-button-color: var(--exmg-paper-combobox-selected-item-color, #000);
         --paper-button-bg-color: var(--exmg-paper-combobox-selected-item-bg-color, #fff);
         --paper-icon-button-ink-color: var(--exmg-paper-combobox-dropdown-button-color, #000);
@@ -734,7 +734,6 @@ export class PaperGridTooolbarComboboxElement extends LitElement {
       <div class="container">
         <paper-input-container
           no-label-float
-
           @tap="${this.onContainerTap}"
           ?disabled="${this.disabled}"
           ?focused="${this.inputFocused}"
@@ -742,7 +741,6 @@ export class PaperGridTooolbarComboboxElement extends LitElement {
           ?invalid="${this.invalid}"
           id="paperInputContainer"
         >
-
           <iron-input bind-value="${this.inputValue}" slot="input">
             <slot name="prefix"></slot>
             <span class="${classMap({tokens: true, selected: !!this.token})}">
