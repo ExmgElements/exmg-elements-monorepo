@@ -1,6 +1,6 @@
 import {customElement, html, LitElement, property} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
-import '@exmg/exmg-paper-combobox';
+import '../src/table/exmg-grid-toolbar-combobox';
 import '@polymer/paper-item';
 import '@material/mwc-icon-button';
 
@@ -102,7 +102,7 @@ export class ExmgGridBaseToolbarDemo extends LitElement {
         <div slot="filters">
           ${repeat(this.filters, filter => {
             return html`
-              <exmg-paper-combobox
+              <exmg-grid-toolbar-combobox
                 id="pageSizeOptions"
                 attr-for-selected="data-id"
                 selected="${filter.selected}"
@@ -116,7 +116,7 @@ export class ExmgGridBaseToolbarDemo extends LitElement {
                       <paper-item data-id="${item.id}">${filter.name}: ${item.title}</paper-item>
                     `,
                 )}
-              </exmg-paper-combobox>
+              </exmg-grid-toolbar-combobox>
             `;
           })}
         </div>

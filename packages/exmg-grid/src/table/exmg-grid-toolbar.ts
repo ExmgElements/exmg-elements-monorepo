@@ -1,7 +1,7 @@
 import {css, customElement, html, LitElement, property} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 import '@material/mwc-icon-button';
-import '@exmg/exmg-paper-combobox';
+import './exmg-grid-toolbar-combobox';
 import '@polymer/paper-item';
 import './exmg-grid-base-toolbar';
 import './exmg-grid-setting-selection-list';
@@ -24,7 +24,7 @@ import {
 export class ExmgGridToolbar extends LitElement {
   static styles = [
     css`
-      exmg-paper-combobox {
+      exmg-grid-toolbar-combobox {
         background-color: var(--mdc-theme-surface);
         padding-left: 10px;
         border-radius: 4px;
@@ -146,7 +146,7 @@ export class ExmgGridToolbar extends LitElement {
 
   private renderSingleSelectFilter(filter: Filter<FilterSingleSelectConfig>) {
     return html`
-      <exmg-paper-combobox
+      <exmg-grid-toolbar-combobox
         class="filter"
         attr-for-selected="data-id"
         ?disabled="${!!filter.disabled}"
@@ -161,7 +161,7 @@ export class ExmgGridToolbar extends LitElement {
               <paper-item data-id="${item.id}">${item.title}</paper-item>
             `,
         )}
-      </exmg-paper-combobox>
+      </exmg-grid-toolbar-combobox>
     `;
   }
 
