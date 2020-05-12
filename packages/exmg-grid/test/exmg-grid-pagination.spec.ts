@@ -1,6 +1,6 @@
 import {ExmgGridPagination} from '../src/table/exmg-grid-pagination';
 import {onExmgGridPaginationPageChanged, onExmgGridPaginationPageSizeChanged, promisifyFlush} from './utils';
-import { PaperGridTooolbarComboboxElement } from 'src/table/exmg-grid-toolbar-combobox';
+import {PaperGridTooolbarComboboxElement} from 'src/table/exmg-grid-toolbar-combobox';
 
 declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
 declare const flush: (cb?: Function) => void;

@@ -173,7 +173,7 @@ export class ExmgGridPagination extends LitElement {
           --exmg-paper-combobox-dropdown-list-color: var(--exmg-grid-pagination-color, var(--mdc-theme-on-surface));
           --exmg-paper-combobox-dropdown-list-bg-color: var(--exmg-grid-pagination-bg-color, var(--mdc-theme-surface));
 
-          exmg-grid-toolbar-combobox{
+          exmg-grid-toolbar-combobox {
             --exmg-paper-combobox-background-color: var(--exmg-grid-pagination-bg-color);
           }
         }
