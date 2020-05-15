@@ -260,8 +260,9 @@ export class ExmgSearchBar extends LitElement {
         icon="search"
         placeholder="Search"
         value="${this.searchQuery}"
+        aria-owns="exmg-searchbar-suggestions"
       ></mwc-textfield>
-      <div class="exmg-searchbar-suggestions">
+      <div id="exmg-searchbar-suggestions" class="exmg-searchbar-suggestions">
         ${this.renderSuggestions()}
       </div>
     `;

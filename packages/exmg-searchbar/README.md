@@ -20,18 +20,20 @@ Follow this document for available properties, events, methods and styling.
 
 ## Styling
 
-| Variable                                      | Default             | Description                                 |
-| --------------------------------------------- | ------------------- | ------------------------------------------- |
-| --exmg-searchbar-error-color                  | #b00020             | Error color of search bar                   |
-| --exmg-searchbar-hint-color                   | rgba(0, 0, 0, 0.6)  | Hint text color of search bar               |
-| --exmg-searchbar-primary-color                | #0071dc             | Primary theme color of search bar           |
-| --exmg-searchbar-text-color                   | rgba(0, 0, 0, 0.87) | Text color of search bar                    |
-| --exmg-searchbar-suggestions-spinner-color    | #0071dc             | Suggestions loading indicator color         |
-| --exmg-searchbar-suggestions-spinner-width    | 3px                 | Suggestions loading indicator spinner width |
-| --exmg-searchbar-suggestions-min-height       | 40px                | Suggestion item row height                  |
-| --exmg-searchbar-suggestions-text-color       | rgba(0, 0, 0, 0.6)  | Suggestion item text color                  |
-| --exmg-searchbar-suggestions-background-color | #ffffff             | Suggestions list background color           |
-| --exmg-searchbar-width                        | 100%                | Width of search bar                         |
+| Variable                                             | Default             | Description                                      |
+| ---------------------------------------------------- | ------------------- | ------------------------------------------------ |
+| --exmg-searchbar-error-color                         | #b00020             | Error color of search bar                        |
+| --exmg-searchbar-hint-color                          | rgba(0, 0, 0, 0.6)  | Hint text color of search bar                    |
+| --exmg-searchbar-primary-color                       | #0071dc             | Primary theme color of search bar                |
+| --exmg-searchbar-text-color                          | rgba(0, 0, 0, 0.87) | Text color of search bar                         |
+| --exmg-searchbar-suggestions-spinner-color           | #0071dc             | Suggestions loading indicator color              |
+| --exmg-searchbar-suggestions-spinner-width           | 3px                 | Suggestions loading indicator spinner width      |
+| --exmg-searchbar-suggestions-max-visible-suggestions | 5                   | Max visible suggestions before showing scrollbar |
+| --exmg-searchbar-suggestions-min-height              | 40px                | Suggestion item row height                       |
+| --exmg-searchbar-suggestions-text-color              | rgba(0, 0, 0, 0.6)  | Suggestion item text color                       |
+| --exmg-searchbar-suggestions-background-color        | #ffffff             | Suggestions list background color                |
+| --exmg-searchbar-suggestions-z-index                 | 1                   | z-index of suggestions list                      |
+| --exmg-searchbar-width                               | 100%                | Width of search bar                              |
 
 ## Properties
 
