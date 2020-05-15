@@ -75,7 +75,43 @@
 				<p>Import this element to your project with <code>npm i @exmg/exmg-searchbar</code>.</p>
 				<p>Then add the snippet below into your code.</p>
 				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">exmg-searchbar</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">exmg-searchbar</span>&gt;</span></code></pre>
-				<p>Follow this document for available properties, events, methods and styling.</p>
+				<a href="#default-filtering" id="default-filtering" style="color: inherit; text-decoration: none;">
+					<h3>Default Filtering</h3>
+				</a>
+				<p>ExmgSearchBar has it&#39;s own filtering methods in it which you can also override.
+				To achieve default filtering, take the example of html code below:</p>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">exmg-searchbar</span> <span class="hljs-attr">.data</span>=<span class="hljs-string">"${dataArray}"</span> <span class="hljs-attr">.filterKeys</span>=<span class="hljs-string">"${filterKeys}"</span> <span class="hljs-attr">suggestion-label-key</span>=<span class="hljs-string">"url"</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">exmg-searchbar</span>&gt;</span></code></pre>
+				<p>When you pass the data array into <code>data</code> property along with <code>filterKeys</code>, exmg-search bar automatically filters
+				data and shows suggestions.</p>
+				<p><code>filterKeys</code> property has to contain specific key names from the type of each item in <code>data</code>.</p>
+				<p>For example; if you have <code>[{username:&quot;exmachina&quot;,name: &quot;Ex Machina&quot;},{username:&quot;livery&quot;,name:&quot;Livery&quot;}]</code> as the data array,
+				you can pass <code>[&#39;username&#39;]</code> to filter out <code>username</code> values of data. Or pass <code>[&#39;username&#39;, &#39;name&#39;]</code> to filter out values of both keys.</p>
+				<p>To determine which value of items passed into <code>data</code> should be shown as the label of each suggestion, use <code>suggestion-label-key</code> just like <code>filterKeys</code> but the only difference is, it accepts a single key as a simple string, not an array.</p>
+				<a href="#custom-suggestions-and-filtering" id="custom-suggestions-and-filtering" style="color: inherit; text-decoration: none;">
+					<h3>Custom Suggestions and Filtering</h3>
+				</a>
+				<p>By extending <code>ExmgSearchBar</code>, you can override any of
+					three functions of your selection.
+				These functions are:</p>
+				<ul>
+					<li><code>filter(data: any[], filterKeys: string[], query: string): ExmgSearchSuggestion[]: TemplateResult</code></li>
+					<li><code>renderSuggestions(suggestions: ExmgSearchSuggestion[])</code></li>
+					<li><code>renderSuggestionsLoading(): TemplateResult</code></li>
+				</ul>
+				<p><code>filter</code> expects array of <code>ExmgSearchSuggestion</code> objects. By implementing your own filtering method,
+				you might not need <code>suggestion-label-key</code> since you can place any string value into <code>text</code> property of <code>ExmgSearchSuggestion</code>.</p>
+				<p>Please check <code>ExmgSearchBar</code> class in order to see how these three functions are working. After that you can extend
+				<code>ExmgSearchBar</code> class and override those functions to create your fancy filtering methods or suggestions.</p>
+				<a href="#showing-suggestions-manually" id="showing-suggestions-manually" style="color: inherit; text-decoration: none;">
+					<h3>Showing Suggestions Manually</h3>
+				</a>
+				<p>If you are handling filtering logic manually on the parent, you can follow this way to
+					show suggestions manually.
+					To show suggestons, pass the suggestion data to <code>suggestions</code> property of <code>exmg-searchbar</code>.
+				It accepts array of <code>ExmgSearchSuggestion</code> type of elements into suggestions.</p>
+				<blockquote>
+					<p>Follow this document for available properties, events, methods and styling.</p>
+				</blockquote>
 				<a href="#styling" id="styling" style="color: inherit; text-decoration: none;">
 					<h2>Styling</h2>
 				</a>
@@ -161,6 +197,18 @@
 						</tr>
 					</thead>
 					<tbody><tr>
+							<td>filterKeys</td>
+							<td>string[]</td>
+							<td><code>undefined</code></td>
+							<td>Set of which keys of <code>data</code> should be checked to filter data by default.</td>
+						</tr>
+						<tr>
+							<td>data</td>
+							<td>any[]</td>
+							<td><code>undefined</code></td>
+							<td>The data in search bar to filter.</td>
+						</tr>
+						<tr>
 							<td>keepFocus</td>
 							<td>boolean</td>
 							<td><code>false</code></td>
@@ -173,7 +221,7 @@
 							<td>Option to whether keep suggestions visible or not on suggestion selection</td>
 						</tr>
 						<tr>
-							<td>keys</td>
+							<td>submitKeys</td>
 							<td>string[]</td>
 							<td><code>[&#39;ENTER&#39;]</code></td>
 							<td>Determines which keys should trigger submitting search query</td>
@@ -189,6 +237,12 @@
 							<td>string</td>
 							<td><code>&#39;&#39;</code></td>
 							<td>Current query of search bar</td>
+						</tr>
+						<tr>
+							<td>suggestionLabelKey</td>
+							<td>string</td>
+							<td><code>undefined</code></td>
+							<td>Defines which property of each data item should be placed into suggestions&#39; labels.</td>
 						</tr>
 						<tr>
 							<td>submitOnKeyPress</td>
@@ -264,6 +318,12 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_exmg_searchbar_.html">"exmg-<wbr>searchbar"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_exmg_searchbar_base_.html">"exmg-<wbr>searchbar-<wbr>base"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_exmg_searchbar_base_interface_.html">"exmg-<wbr>searchbar-<wbr>base-<wbr>interface"</a>
 					</li>
 				</ul>
 			</nav>

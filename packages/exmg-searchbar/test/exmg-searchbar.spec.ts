@@ -69,7 +69,7 @@ suite('<exmg-searchbar>', function() {
       const inputElement = element.shadowRoot!.querySelector('mwc-textfield')!;
       let handledQuerySubmit = false;
 
-      element.keys.push('SHIFT');
+      element.submitKeys.push('SHIFT');
       element.addEventListener('query-submit', function(event: any) {
         handledQuerySubmit = true;
         const input = event.detail.value;
@@ -88,7 +88,7 @@ suite('<exmg-searchbar>', function() {
       const inputElement = element.shadowRoot!.querySelector('mwc-textfield')!;
       let handledQuerySubmit = false;
 
-      element.keys = [];
+      element.submitKeys = [];
       element.addEventListener('query-submit', function(event: any) {
         handledQuerySubmit = true;
         const input = event.detail.value;

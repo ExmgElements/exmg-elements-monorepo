@@ -3,7 +3,8 @@ import {repeat} from 'lit-html/directives/repeat';
 import '../exmg-searchbar';
 import '@polymer/iron-demo-helpers/demo-snippet';
 import styles from './demo-search-styles';
-import {ExmgSearchSuggestion, ExmgSearchBar} from '../exmg-searchbar';
+import {ExmgSearchBar} from '../exmg-searchbar';
+import {ExmgSearchSuggestion} from '../exmg-searchbar-base';
 
 const mockData = [
   {username: 'livery', name: 'Livery Video', id: 1, url: 'https://www.liveryvideo.com/contact/'},
@@ -12,11 +13,13 @@ const mockData = [
   {username: 'ignitionstudio', name: 'Ignition Studio', id: 4, url: 'https://ignitionstudio.live/'},
 ];
 
+const filterKeys = ['id', 'name'];
+
 @customElement('demo-search')
 export class DemoSearch extends LitElement {
   static styles = [styles];
 
-  @query('exmg-searchbar')
+  @query('exmg-searchbar.demo')
   private _searchBar?: ExmgSearchBar;
 
   @query('input[name=showSuggestions]')
@@ -126,6 +129,9 @@ export class DemoSearch extends LitElement {
     return html`
       <div>
         <h1>ExmgSearchBar Demo</h1>
+        <h3>Filtering Handled in SearchBar</h3>
+        <exmg-searchbar suggestion-label-key="name" .data=${mockData} .filterKeys=${filterKeys}></exmg-searchbar>
+        <h3>Filtering Handled in Demo Page</h3>
         <h5>Options</h5>
         <div class="options">
         <table>
@@ -154,6 +160,7 @@ export class DemoSearch extends LitElement {
         </table>
         </div>
         <exmg-searchbar
+        class="demo"
          @query-change=${this._handleQueryChange}
         @query-submit=${this._handleQuerySubmit}
         @suggestion-select=${this._handleSuggestionSelect} placeholder="Search from available data"></exmg-searchbar>
