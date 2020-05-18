@@ -111,6 +111,10 @@ Payload: `{value: string}`
 
 Fired on suggestion selection.
 
+This event is also fired when 
+there is only one suggestion
+and user submits query.
+
 Payload: `{value: any, index: number}`
 
 ## Methods

@@ -28,7 +28,7 @@ export class ExmgSearchBar extends ExmgSearchBarBase {
 
   renderSuggestions(suggestions: ExmgSearchSuggestion[]) {
     return html`
-      <paper-listbox>
+      <div class="suggestions-list">
         ${suggestions!.map(
           (suggestion, index) =>
             html`
@@ -41,7 +41,7 @@ export class ExmgSearchBar extends ExmgSearchBarBase {
               >
             `,
         )}
-      </paper-listbox>
+      </div>
     `;
   }
 }

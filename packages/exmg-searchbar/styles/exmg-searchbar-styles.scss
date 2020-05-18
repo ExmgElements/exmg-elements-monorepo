@@ -6,7 +6,7 @@
   --exmg-searchbar-width: 100%;
   --exmg-searchbar-suggestions-spinner-color: #0071dc;
   --exmg-searchbar-suggestions-spinner-width: 3px;
-  --exmg-searchbar-suggestions-min-height: 40px;
+  --exmg-searchbar-suggestions-min-height: 48px;
   --exmg-searchbar-suggestions-text-color: rgba(0, 0, 0, 0.6);
   --exmg-searchbar-suggestions-background-color: #ffffff;
   --exmg-searchbar-suggestions-z-index: 1;
@@ -44,7 +44,7 @@ mwc-textfield {
     --paper-spinner-stroke-width: var(--exmg-searchbar-suggestions-spinner-width);
   }
 
-  paper-listbox {
+  .suggestions-list {
     overflow-y: scroll;
     overflow-x: hidden;
     max-height: calc(var(--exmg-searchbar-suggestions-min-height) * var(--exmg-searchbar-suggestions-max-visible-suggestions));

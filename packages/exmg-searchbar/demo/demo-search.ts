@@ -50,7 +50,9 @@ export class DemoSearch extends LitElement {
   }
 
   private _handleSuggestionSelect(event: CustomEvent<{value: {username: string; name: string; id: number; url: string}; index: number}>) {
-    this._searchBar!.setQuery(event.detail.value!.name);
+    setTimeout(() => {
+      this._searchBar!.setQuery(event.detail.value!.name);
+    }, 0);
     const _query = event.detail.value.name;
     if (query.length == 0) {
       return;

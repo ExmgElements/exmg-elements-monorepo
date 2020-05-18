@@ -1,5 +1,5 @@
 import {ExmgSearchBarBaseInterface} from './exmg-searchbar-base-interface';
-import {LitElement, html, query, property, TemplateResult} from 'lit-element';
+import {LitElement, html, query, property, TemplateResult, queryAll} from 'lit-element';
 import {TextField} from '@material/mwc-textfield';
 import '@material/mwc-textfield';
 import '@material/mwc-icon/mwc-icon-font';
@@ -59,11 +59,18 @@ import styles from './styles/exmg-searchbar-styles';
  */
 
 const KEY_ENTER = 'ENTER';
+const KEY_ARROW_UP = 'ArrowUp';
+const KEY_ARROW_DOWN = 'ArrowDown';
+const KEY_ESC = 'Escape';
+const KEY_BACKSPACE = 'Backspace';
 export abstract class ExmgSearchBarBase extends LitElement implements ExmgSearchBarBaseInterface {
   static styles = styles;
 
   @query('mwc-textfield')
   private _mwcTextField?: TextField;
+
+  @queryAll('[focusable]')
+  private _focusableFields?: NodeListOf<HTMLElement>;
 
   /**
    * Current query of search bar.
@@ -149,10 +156,16 @@ export abstract class ExmgSearchBarBase extends LitElement implements ExmgSearch
   keepFocus = false;
 
   /**
+   * Keyboard Event Listener of ExmgSearchBar
+   */
+  private _listener?: (event: KeyboardEvent) => void;
+
+  /**
    * Sets `suggestions` property.
    * @param suggestions List of ExmgSearchSuggestion[].
    */
   setSuggestions(suggestions: ExmgSearchSuggestion[]) {
+    this._focusIndex = 0;
     this.suggestions = suggestions;
   }
 
@@ -160,6 +173,7 @@ export abstract class ExmgSearchBarBase extends LitElement implements ExmgSearch
    * Clears suggestions.
    */
   clearSuggestions() {
+    this._focusIndex = 0;
     this.suggestions = [];
   }
 
@@ -188,7 +202,7 @@ export abstract class ExmgSearchBarBase extends LitElement implements ExmgSearch
 
   /**
    * The function which fires query-submit event.
-   * This function exsits to fire the query-submit event through not only
+   * This function exists to fire the query-submit event through not only
    * key press but other actions which is up to developer.
    */
   search() {
@@ -198,6 +212,7 @@ export abstract class ExmgSearchBarBase extends LitElement implements ExmgSearch
     if (!this.keepFocus) {
       //Lose focus for mobile devices so that keyboard automatically gets hidden.
       this._mwcTextField!.blur();
+      this._focusIndex = 0;
     }
   }
 
@@ -206,14 +221,58 @@ export abstract class ExmgSearchBarBase extends LitElement implements ExmgSearch
     this._tryTransferProperties();
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    this._listener = (event: KeyboardEvent) => {
+      if (event.key === KEY_ESC || event.key === KEY_ARROW_DOWN || event.key === KEY_ARROW_UP || event.key === KEY_BACKSPACE) {
+        this._handleArrowKeyEvents(event);
+      }
+      this._handleKeyEvent(event);
+    };
+    this.addEventListener('keydown', this._listener);
+  }
+
+  disconnectedCallback() {
+    if (this._listener) {
+      this.removeEventListener('keydown', this._listener!);
+    }
+    super.disconnectedCallback();
+  }
+
   protected _handleClickSuggestion(value: any, index: number) {
+    this._focusIndex = 0;
     this.dispatchEvent(new CustomEvent('suggestion-select', {bubbles: true, composed: true, detail: {index: index, value: value}}));
     if (!this.keepSuggestionsOnSelect) {
       this.clearSuggestions();
     }
   }
 
+  private _focusIndex = 0;
+  private _handleArrowKeyEvents(event: KeyboardEvent) {
+    if (event.key === KEY_ARROW_UP && this._focusIndex > 0) {
+      event.preventDefault();
+      this._focusIndex -= 1;
+      this._focusableFields![this._focusIndex].focus();
+    } else if (event.key === KEY_ARROW_DOWN && this._focusIndex < this._focusableFields!.length - 1) {
+      event.preventDefault();
+      this._focusIndex += 1;
+      this._focusableFields![this._focusIndex].focus();
+    } else if (event.key === KEY_ESC) {
+      event.preventDefault();
+      this.clearSuggestions();
+      this.setQuery('');
+      this._focusIndex = 0;
+      this._focusableFields![this._focusIndex].focus();
+    } else if (event.key === KEY_BACKSPACE) {
+      if (this._focusIndex > 0) {
+        this._focusIndex = 0;
+        this._focusableFields![this._focusIndex].focus();
+      }
+    }
+  }
+
   private _handleInputChange() {
+    this._focusIndex = 0;
     if (this._mwcTextField) {
       const _query = this._mwcTextField!.value;
       this.searchQuery = _query;
@@ -232,6 +291,11 @@ export abstract class ExmgSearchBarBase extends LitElement implements ExmgSearch
     }
     const pressedKeyCode = event.key.toUpperCase();
     if (this.submitKeys.includes(pressedKeyCode) && this.submitOnKeyPress) {
+      if (this.suggestions && this.suggestions.length === 1) {
+        this._handleClickSuggestion(this.suggestions[0].value, 0);
+      } else {
+        this.clearSuggestions();
+      }
       this.search();
     }
   }
@@ -256,7 +320,6 @@ export abstract class ExmgSearchBarBase extends LitElement implements ExmgSearch
   render() {
     return html`
       <mwc-textfield
-        @keypress=${this._handleKeyEvent}
         @input=${this._handleInputChange}
         type="search"
         icon="search"
