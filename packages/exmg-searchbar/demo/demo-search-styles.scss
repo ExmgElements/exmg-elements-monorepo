@@ -1,0 +1,47 @@
+:host {
+  width: 40%;
+  display: block;
+}
+
+h1 {
+  color: green;
+}
+
+h4 {
+  color: blue;
+}
+
+table {
+  width: 100%;
+  border: 1px solid black;
+  text-align: center;
+
+  th {
+    padding: 4px;
+    color: red;
+    border: 1px solid black;
+  }
+
+  td {
+    padding: 4px;
+    color: black;
+    font-style: normal;
+    font-weight: lighter;
+    border: 1px dashed gray;
+  }
+}
+
+div.options {
+  border: 1px dashed gray;
+  padding: 8px;
+  margin-bottom: 12px;
+
+  table {
+    text-align: start;
+    border: none;
+  }
+
+  td {
+    border: none;
+  }
+}
