@@ -289,6 +289,7 @@ export abstract class ExmgSearchBarBase extends LitElement implements ExmgSearch
     if (!event || !event.key) {
       return;
     }
+    console.log('Pressed Key!!!' + event.key);
     const pressedKeyCode = event.key.toUpperCase();
     if (this.submitKeys.includes(pressedKeyCode) && this.submitOnKeyPress) {
       if (this.suggestions && this.suggestions.length === 1) {

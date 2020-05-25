@@ -47,19 +47,19 @@ suite('<exmg-searchbar>', function() {
 
     test('fires on query submit with ENTER', async () => {
       await flushCompleted();
-
       const inputElement = element.shadowRoot!.querySelector('mwc-textfield')!;
       let handledQuerySubmit = false;
-
       element.addEventListener('query-submit', function(event: any) {
         handledQuerySubmit = true;
+        console.log('submit');
         const input = event.detail.value;
         assert.instanceOf(event, CustomEvent);
         assert.equal(input, element.searchQuery);
       });
       const query = keysToPress.join('');
       inputElement.value = query;
-      inputElement.dispatchEvent(new KeyboardEvent('keypress', {key: 'ENTER'}));
+      inputElement.dispatchEvent(new Event('input'));
+      element.dispatchEvent(new KeyboardEvent('keydown', {key: 'ENTER', code: 'ENTER'}));
       assert.equal(handledQuerySubmit, true);
     });
 
@@ -78,7 +78,7 @@ suite('<exmg-searchbar>', function() {
       });
       const query = keysToPress.join('');
       inputElement.value = query;
-      inputElement.dispatchEvent(new KeyboardEvent('keypress', {key: 'SHIFT'}));
+      element.dispatchEvent(new KeyboardEvent('keydown', {key: 'SHIFT'}));
       assert.equal(handledQuerySubmit, true);
     });
 
@@ -108,7 +108,7 @@ suite('<exmg-searchbar>', function() {
       element.suggestions = mockSuggestions;
       setTimeout(() => {
         const suggestionsElement = element.shadowRoot!.querySelector('.exmg-searchbar-suggestions')!;
-        const paperListBox = suggestionsElement!.querySelector('paper-listbox')!;
+        const paperListBox = suggestionsElement!.querySelector('.suggestions-list')!;
         assert.equal(mockSuggestions.length, paperListBox.children.length);
       }, 0);
     });
@@ -127,7 +127,7 @@ suite('<exmg-searchbar>', function() {
       element.suggestions = mockSuggestions;
       setTimeout(() => {
         const suggestionsElement = element.shadowRoot!.querySelector('.exmg-searchbar-suggestions')!;
-        const firstSuggestionElement = suggestionsElement!.querySelector('paper-listbox')!.firstElementChild!;
+        const firstSuggestionElement = suggestionsElement!.querySelector('.suggestions-list')!.firstElementChild!;
         firstSuggestionElement.dispatchEvent(new KeyboardEvent('click'));
         assert.equal(handledSuggestionSelect, true);
       }, 0);
