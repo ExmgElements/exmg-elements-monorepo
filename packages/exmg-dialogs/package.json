@@ -29,7 +29,6 @@
     "@exmg/exmg-paper-combobox": "^5.1.0",
     "@exmg/exmg-paper-token-input": "^5.1.0",
     "@polymer/iron-demo-helpers": "^3.0.0",
-    "@polymer/iron-iconset-svg": "^3.0.0",
     "@polymer/marked-element": "^3.0.0",
     "@polymer/paper-input": "^3.0.0",
     "@polymer/paper-item": "^3.0.0",

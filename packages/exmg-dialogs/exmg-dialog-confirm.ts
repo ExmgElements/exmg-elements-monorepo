@@ -5,7 +5,7 @@ import '@polymer/paper-dialog';
 import '@exmg/exmg-button';
 import '@polymer/iron-form';
 import {style} from './styles/exmg-dialog-styles';
-import {closeIcon} from './exmg-dialog-icons';
+import {closeIcon, warningIcon} from './exmg-dialog-icons';
 
 @customElement('exmg-dialog-confirm')
 export class ExmgConfirmDialog extends LitElement {
@@ -181,10 +181,8 @@ export class ExmgConfirmDialog extends LitElement {
         <div class="body">
           <div class="error ${!!this.errorMessage ? 'show' : ''}">
             <span class="body">
-              <span>
-                <iron-icon icon="exmg-icons:warning"></iron-icon>
-                <span class="msg">${this.errorMessage}</span>
-              </span>
+              ${warningIcon}
+              <span class="msg">${this.errorMessage}</span>
             </span>
           </div>
           ${this.hasSlotContent
