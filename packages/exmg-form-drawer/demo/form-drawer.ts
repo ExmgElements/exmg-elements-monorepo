@@ -15,6 +15,7 @@ export class Drawer extends LitElement {
   @property({type: Boolean}) keepOpenedOnSubmitSuccess = false;
   @property({type: Boolean}) resetFormOnSubmitSuccess = false;
   @property({type: Boolean}) noCancelOnOutsideClick = false;
+  @property({type: Boolean}) submitBtnHidden = false;
 
   @query('exmg-form-drawer') form?: ExmgFormDrawer;
 
@@ -111,12 +112,18 @@ export class Drawer extends LitElement {
           />
           No cancel on outside click
         </label>
+        <br /><br />
+        <label>
+          <input type="checkbox" name="hodeSubmitButton" @change="${() => (this.submitBtnHidden = !this.submitBtnHidden)}" />
+          Hide submit button
+        </label>
       </div>
       <exmg-form-drawer
         ?opened="${this.opened}"
         reset-form-on-submit-success
         @exmg-drawer-opened-changed="${this.handleOpenedChanged}"
         submit-btn-title="Create"
+        ?submit-btn-hidden=${this.submitBtnHidden}
         @submit="${this.onSubmit}"
       >
         <span slot="title">New event</span>
