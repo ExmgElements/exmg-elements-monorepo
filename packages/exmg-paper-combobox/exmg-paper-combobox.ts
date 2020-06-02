@@ -328,6 +328,9 @@ export class PaperComboboxElement extends LitElement {
         background-color: var(--paper-menu-button-dropdown-background, var(--primary-background-color));
         max-width: var(--exmg-paper-combobox-dropdown-list-max-width, 400px);
       }
+      #menuButton[disabled] {
+        opacity: 0.33;
+      }
     `,
   ];
 
@@ -505,7 +508,6 @@ export class PaperComboboxElement extends LitElement {
   }
 
   private resetInput() {
-    console.log('resetInput', this.autoValidate);
     if (this.autoValidate) {
       console.log('validate');
       this.validate();
@@ -799,6 +801,7 @@ export class PaperComboboxElement extends LitElement {
         <span id="inputWidthHelper">${this.inputValue} </span>
         <paper-icon-button
           id="menuButton"
+          ?disabled="${this.disabled}"
           icon="exmg-paper-combobox-icons:arrow-drop-down"
           @click=${() => this.toggle()}
         ></paper-icon-button>
