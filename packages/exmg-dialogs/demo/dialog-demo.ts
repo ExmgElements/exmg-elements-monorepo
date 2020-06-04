@@ -78,7 +78,7 @@ export class DialogDemo extends LitElement {
         message="Are you sure you want to delete this item [message]?"
         button-copy="Delete account"
         @cancel=${this._cancelCallback}
-        @submit="${this._delete}"
+        @submit="${this._saveDataError}"
       ></exmg-dialog-confirm>
 
       <exmg-button @click=${() => this.getElementBySelector('#dialog00')!.open()}>Dialog Confirm (Using slot)</exmg-button>

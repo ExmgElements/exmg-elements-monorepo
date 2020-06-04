@@ -1,0 +1,27 @@
+sudo: required
+language: node_js
+node_js: 8.0
+
+cache:
+ directories:
+   - node_modules
+
+install:
+- npm install
+- npm i polymer-cli
+
+before_script:
+- npm run build
+
+addons:
+ firefox: latest
+ apt:
+   sources:
+     - google-chrome
+   packages:
+     - google-chrome-stable
+
+script:
+- xvfb-run npm run test
+
+dist: trusty

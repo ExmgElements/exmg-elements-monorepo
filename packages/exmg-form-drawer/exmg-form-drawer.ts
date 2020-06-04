@@ -25,6 +25,9 @@ export class ExmgFormDrawer extends LitElement {
   @property({type: String, attribute: 'submit-btn-title'})
   public submitBtnTitle = 'Submit';
 
+  @property({type: Boolean, attribute: 'submit-btn-hidden'})
+  public submitBtnHidden = false;
+
   @property({type: String, attribute: 'cancel-btn-title'})
   public cancelBtnTitle = 'Cancel';
 
@@ -131,15 +134,19 @@ export class ExmgFormDrawer extends LitElement {
             <exmg-button title="${this.cancelBtnTitle}" @click="${this.handleCancelBtnClick}">
               ${this.cancelBtnTitle}
             </exmg-button>
-            <exmg-button
-              unelevated
-              ?loading="${this.submitting}"
-              ?disabled="${this.submitting}"
-              title="${this.submitBtnTitle}"
-              @click="${this.handleSubmitBtnClick}"
-            >
-              ${this.submitBtnTitle}
-            </exmg-button>
+            ${this.submitBtnHidden
+              ? ''
+              : html`
+                  <exmg-button
+                    unelevated
+                    ?loading="${this.submitting}"
+                    ?disabled="${this.submitting}"
+                    title="${this.submitBtnTitle}"
+                    @click="${this.handleSubmitBtnClick}"
+                  >
+                    ${this.submitBtnTitle}
+                  </exmg-button>
+                `}
           </div>
         </div>
         <div class="form-elements">

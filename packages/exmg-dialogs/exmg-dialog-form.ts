@@ -8,7 +8,7 @@ import '@polymer/iron-form';
 import {IronFormElement} from '@polymer/iron-form';
 import {style} from './styles/exmg-dialog-styles';
 import {ExmgButton} from '@exmg/exmg-button';
-import {closeIcon} from './exmg-dialog-icons';
+import {closeIcon, warningIcon} from './exmg-dialog-icons';
 
 interface ExmgCustomEvent extends CustomEvent {
   path: HTMLElement[];
@@ -160,9 +160,7 @@ export class ExmgFormDialog extends LitElement {
           <div class="body">
             <div class="error ${!!this.errorMessage ? 'show' : ''}">
               <span class="body">
-                <svg height="24" viewBox="0 0 24 24" width="24">
-                  <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" />
-                </svg>
+                ${warningIcon}
                 <span class="msg">${this.errorMessage}</span>
               </span>
             </div>
