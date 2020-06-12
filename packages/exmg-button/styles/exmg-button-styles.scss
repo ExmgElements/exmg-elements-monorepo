@@ -65,15 +65,11 @@
       pointer-events: none;
       left: 0;
       top: 0;
-      direction: var(--exmg-button-progress-direciton, rtl);
-    }
-
-    progress::-moz-progress-value {
-      background-color: var(--exmg-button-progress-color, #89c8ff);
+      direction: var(--exmg-button-progress-direction, ltr);
     }
 
     progress::-moz-progress-bar {
-      background: transparent;
+      background: var(--exmg-button-progress-color, #89c8ff);
     }
 
     progress::-webkit-progress-value {
