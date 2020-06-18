@@ -193,10 +193,10 @@ export class PaperComboboxElement extends LitElement {
   @property({type: Boolean, attribute: 'dynamic-align'})
   dynamicAlign = false;
 
-  @property({type: Boolean, attribute: 'horizontal-align'})
+  @property({type: String, attribute: 'horizontal-align'})
   horizontalAlign = 'right';
 
-  @property({type: Boolean, attribute: 'vertical-align'})
+  @property({type: String, attribute: 'vertical-align'})
   verticalAlign = 'top';
 
   @property({type: String, attribute: 'vertical-offset'})
@@ -269,7 +269,7 @@ export class PaperComboboxElement extends LitElement {
       paper-input-container {
         flex: 1;
         flex-basis: 0.000000001px;
-        hheight: 56px;
+        height: 56px;
         box-sizing: border-box;
       }
       .tokens {
@@ -373,7 +373,7 @@ export class PaperComboboxElement extends LitElement {
 
   private observeInputChange() {
     if (this.inputElement && this.inputWidthHelperElement) {
-      this.inputElement.style.width = `${this.inputWidthHelperElement.offsetWidth + 10}px`;
+      //this.inputElement.style.width = `${this.inputWidthHelperElement.offsetWidth + 10}px`;
     }
 
     if (!this.isElementInitialized) {
@@ -658,6 +658,10 @@ export class PaperComboboxElement extends LitElement {
       this.inputWidthHelperElement.style.width = 'auto';
       this.inputWidthHelperElement.style.whiteSpace = 'pre';
     }
+
+    /* This is a tweak for the input not to grow over the size of the combobox itself */
+    const container = this.shadowRoot!.querySelector('#paperInputContainer')!;
+    this.inputElement!.style.width = container.clientWidth === 0 ? 'auto' : `${container.clientWidth}px`;
 
     this.inputElement!.addEventListener('keyup', this._onKeyUp);
 
