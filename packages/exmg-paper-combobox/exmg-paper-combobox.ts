@@ -509,7 +509,6 @@ export class PaperComboboxElement extends LitElement {
 
   private resetInput() {
     if (this.autoValidate) {
-      console.log('validate');
       this.validate();
     }
 
@@ -630,7 +629,6 @@ export class PaperComboboxElement extends LitElement {
     }
 
     this.opened = false;
-    console.log('onItemActivated', this.opened);
   }
 
   private onInputValueChange(e: Event): void {
