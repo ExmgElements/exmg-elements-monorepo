@@ -373,7 +373,7 @@ export class PaperComboboxElement extends LitElement {
 
   private observeInputChange() {
     if (this.inputElement && this.inputWidthHelperElement) {
-      //this.inputElement.style.width = `${this.inputWidthHelperElement.offsetWidth + 10}px`;
+      this.inputElement.style.width = `${this.inputWidthHelperElement.offsetWidth + 10}px`;
     }
 
     if (!this.isElementInitialized) {
@@ -656,10 +656,6 @@ export class PaperComboboxElement extends LitElement {
       this.inputWidthHelperElement.style.width = 'auto';
       this.inputWidthHelperElement.style.whiteSpace = 'pre';
     }
-
-    /* This is a tweak for the input not to grow over the size of the combobox itself */
-    const container = this.shadowRoot!.querySelector('#paperInputContainer')!;
-    this.inputElement!.style.width = container.clientWidth === 0 ? 'auto' : `${container.clientWidth}px`;
 
     this.inputElement!.addEventListener('keyup', this._onKeyUp);
 
