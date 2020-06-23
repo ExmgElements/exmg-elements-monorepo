@@ -1,6 +1,6 @@
 {
   "name": "@exmg/exmg-form-drawer",
-  "version": "2.1.13",
+  "version": "2.1.14",
   "description": "Form drawer element",
   "contributors": [
     "Ex Machina"
@@ -31,8 +31,8 @@
   },
   "devDependencies": {
     "@exmg/exmg-cli": "^2.1.0",
-    "@exmg/exmg-form": "^2.2.4",
-    "@exmg/exmg-paper-combobox": "^6.0.0",
+    "@exmg/exmg-form": "^2.2.5",
+    "@exmg/exmg-paper-combobox": "^6.0.6",
     "@polymer/iron-component-page": "^4.0.1",
     "@polymer/iron-demo-helpers": "^3.1.0",
     "@polymer/paper-input": "^3.2.1",
@@ -42,7 +42,7 @@
     "@types/material-components-web": "^0.43.1",
     "@types/mocha": "^5.2.6",
     "@types/polymer": "^1.2.9",
-    "@vaadin/vaadin-date-picker": "^4.1.1",
+    "@vaadin/vaadin-date-picker": "^4.2.0",
     "@webcomponents/webcomponentsjs": "^2.4.3",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
