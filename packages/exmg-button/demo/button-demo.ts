@@ -8,7 +8,7 @@ import '../';
 @customElement('exmg-button-demo')
 export class ButtonDemo extends LitElement {
   @property({type: Boolean})
-  public loading: boolean = false;
+  public loading = false;
 
   public static styles = style;
 

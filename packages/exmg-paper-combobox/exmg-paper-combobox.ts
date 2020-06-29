@@ -193,10 +193,10 @@ export class PaperComboboxElement extends LitElement {
   @property({type: Boolean, attribute: 'dynamic-align'})
   dynamicAlign = false;
 
-  @property({type: Boolean, attribute: 'horizontal-align'})
+  @property({type: String, attribute: 'horizontal-align'})
   horizontalAlign = 'right';
 
-  @property({type: Boolean, attribute: 'vertical-align'})
+  @property({type: String, attribute: 'vertical-align'})
   verticalAlign = 'top';
 
   @property({type: String, attribute: 'vertical-offset'})
@@ -269,7 +269,7 @@ export class PaperComboboxElement extends LitElement {
       paper-input-container {
         flex: 1;
         flex-basis: 0.000000001px;
-        hheight: 56px;
+        height: 56px;
         box-sizing: border-box;
       }
       .tokens {
@@ -509,7 +509,6 @@ export class PaperComboboxElement extends LitElement {
 
   private resetInput() {
     if (this.autoValidate) {
-      console.log('validate');
       this.validate();
     }
 
@@ -630,7 +629,6 @@ export class PaperComboboxElement extends LitElement {
     }
 
     this.opened = false;
-    console.log('onItemActivated', this.opened);
   }
 
   private onInputValueChange(e: Event): void {

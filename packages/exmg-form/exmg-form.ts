@@ -248,30 +248,34 @@ export class ExmgForm extends LitElement {
       let dirty = false;
       // Select all slot nodes and filter out the input based on a existing name property on the node
       const nodes = Array.from(this.querySelectorAll<any>('*') || []).filter(n => !!n.name && !n.disabled);
-
-      for (const node of nodes) {
-        const def: InputDefault = this._defaults.get(node);
-        if (!def) {
-          throw Error('Unable to check dirty due to missing default');
+      try {
+        for (const node of nodes) {
+          const def: InputDefault = this._defaults.get(node);
+          if (!def) {
+            throw Error('Unable to check dirty due to missing default');
+          }
+          // Special case for token input which has a array value
+          if (node.tagName === 'EXMG-PAPER-TOKEN-INPUT') {
+            if (!Array.isArray(node.value) || !Array.isArray(def.value)) {
+              throw Error('Expected value of token input not an array');
+            }
+            if (def.value.sort().join(',') !== [...node.value].sort().join(',')) {
+              dirty = true;
+            }
+          } else {
+            if (
+              ('checked' in def && def.checked !== node.checked) ||
+              def.value !== (node.value === undefined || node.value === null ? '' : node.value)
+            ) {
+              dirty = true;
+            }
+          }
         }
-        // Special case for token input which has a array value
-        if (node.tagName === 'EXMG-PAPER-TOKEN-INPUT') {
-          if (!Array.isArray(node.value) || !Array.isArray(def.value)) {
-            throw Error('Expected value of token input not an array');
-          }
-          if (def.value.sort().join(',') !== [...node.value].sort().join(',')) {
-            dirty = true;
-          }
-        } else {
-          if (
-            ('checked' in def && def.checked !== node.checked) ||
-            def.value !== (node.value === undefined || node.value === null ? '' : node.value)
-          ) {
-            dirty = true;
-          }
-        }
+      } catch (err) {
+        console.warn(err);
+      } finally {
+        this.dirty = dirty;
       }
-      this.dirty = dirty;
     });
   }
 
