@@ -482,8 +482,10 @@ export class PaperTokenInputElement extends LitElement {
           background: var(--exmg-paper-token-input-badge-color, var(--primary-color));
           margin: 2px 0;
           color: var(--exmg-paper-token-input-badge-text-color, white);
+          text-transform: none;
           height: 18px;
           font-size: 12px;
+          line-height: 13px;
           min-width: initial;
           max-width: 100%;
         }
