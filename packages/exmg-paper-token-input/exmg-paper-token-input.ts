@@ -291,8 +291,8 @@ export class PaperTokenInputElement extends LitElement {
 
     if (this.selectedValues.indexOf(value) !== -1) {
       this.selectedValues.splice(this.selectedValues.indexOf(value), 1);
-      this.emitItemDeselectEvent(value, e.detail.item);
     }
+    this.emitItemDeselectEvent(value, e.detail.item);
 
     this.resetInput();
   }
