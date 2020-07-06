@@ -66,7 +66,8 @@ export class ExmgFormDialog extends LitElement {
 
   private onCloseDialog(e: ExmgCustomEvent) {
     /* only reset form if close event originates from dialog */
-    if (e.path[0].tagName === 'PAPER-DIALOG') {
+    const eventPath: EventTarget[] = (e as any).path ? (e as any).path : e.composedPath();
+    if (eventPath[0] instanceof Element && eventPath[0].tagName === 'PAPER-DIALOG') {
       this.reset();
     }
   }
