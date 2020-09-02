@@ -61,7 +61,11 @@ exmg-grid.dark {
   --exmg-theme-table-toolbar-border-bottom-radius: 0rem;
   --exmg-theme-table-toolbar-active-bg-color: rgba(0, 112, 219, 0.2);
   --exmg-theme-table-toolbar-active-color: white;
+}
 
-
+exmg-grid.dark .selectable-checkbox {
+  --mdc-checkbox-unchecked-color: white;
+  --mdc-checkbox-disabled-color: #adadad;
+  --mdc-checkbox-ink-color: #363636;
 }
 

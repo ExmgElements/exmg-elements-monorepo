@@ -28,6 +28,7 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
       .expandable-toggle {
         cursor: pointer;
       }
+
     `,
   ];
 
