@@ -1,9 +1,10 @@
-import {html, property, customElement} from 'lit-element';
+import {html, property, customElement, eventOptions} from 'lit-element';
+import '@material/mwc-ripple/mwc-ripple';
+
 import {classMap} from 'lit-html/directives/class-map.js';
-import {ButtonBase} from '@material/mwc-button/mwc-button-base';
+import {ButtonBase} from '@material/mwc-button/mwc-button-base.js';
 import {style} from '@material/mwc-button/mwc-button-css';
 import {style as newStyles} from './styles/exmg-button-styles';
-import {ripple} from '@material/mwc-ripple/ripple-directive.js';
 import './exmg-spinner';
 
 @customElement('exmg-button')
@@ -30,16 +31,21 @@ export class ExmgButton extends ButtonBase {
     const mdcButtonIcon = html`
       <span class="material-icons mdc-button__icon">${this.icon}</span>
     `;
-    const buttonRipple = ripple({unbounded: false});
     return html`
       <button
         id="button"
-        .ripple="${buttonRipple}"
         class="mdc-button ${classMap(classes)}"
         ?disabled="${this.disabled}"
         aria-label="${this.label || this.icon}"
-      >
-        <div class="mdc-button__ripple"></div>
+        @focus="${this.handleRippleFocusA}"
+        @blur="${this.handleRippleBlurA}"
+        @mousedown="${this.handleRippleActivateA}"
+        @mouseenter="${this.handleRippleMouseEnterA}"
+        @mouseleave="${this.handleRippleMouseLeaveA}"
+        @touchstart="${this.handleRippleActivateA}"
+        @touchend="${this.handleRippleDeactivateA}"
+        @touchcancel="${this.handleRippleDeactivateA}">
+        ${this.renderRipple()}
         <span class="${classMap(loadingClass)}">
           ${this.icon && !this.trailingIcon ? mdcButtonIcon : ''}
           <span class="mdc-button__label">${this.label}</span>
@@ -60,5 +66,37 @@ export class ExmgButton extends ButtonBase {
           : ''}
       </button>
     `;
+  }
+
+  @eventOptions({passive: true})
+  private handleRippleActivateA(evt?: Event) {
+    const onUp = () => {
+      window.removeEventListener('mouseup', onUp);
+
+      this.handleRippleDeactivateA();
+    };
+
+    window.addEventListener('mouseup', onUp);
+    this.rippleHandlers.startPress(evt);
+  }
+
+  private handleRippleDeactivateA() {
+    this.rippleHandlers.endPress();
+  }
+
+  private handleRippleMouseEnterA() {
+    this.rippleHandlers.startHover();
+  }
+
+  private handleRippleMouseLeaveA() {
+    this.rippleHandlers.endHover();
+  }
+
+  private handleRippleFocusA() {
+    this.rippleHandlers.startFocus();
+  }
+
+  private handleRippleBlurA() {
+    this.rippleHandlers.endFocus();
   }
 }
