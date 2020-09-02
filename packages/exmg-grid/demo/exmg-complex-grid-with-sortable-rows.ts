@@ -1,4 +1,5 @@
-import {html, customElement, TemplateResult, css} from 'lit-element';
+import {html, customElement, css} from 'lit-element';
+import {classMap} from 'lit-html/directives/class-map';
 import {repeat} from 'lit-html/directives/repeat';
 import '@material/mwc-checkbox';
 import '../src/table/exmg-grid.js';
@@ -9,12 +10,11 @@ import {dragIcon, expandIcon} from './exmg-icons';
 import '../src/table/exmg-grid-smart-toolbar';
 import {ExmgBaseGridDemo} from './exmg-base-grid-demo';
 import {style as demoStyles} from './styles/demo-styles';
-import {style as themeStyles} from './styles/dynamic-theme';
+
 
 @customElement('demo-complex-grid-sortable')
 export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
   static styles = [
-    themeStyles,
     tableStyles,
     demoStyles,
     // language=CSS
@@ -61,7 +61,7 @@ export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
     );
   }
 
-  protected render(): TemplateResult | void {
+  protected render(){
     return html`
       <div>
         <button class="demo-button" @click="${this.toggleMonthColumn}">Toggle Month</button>
@@ -71,7 +71,7 @@ export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
         <button class="demo-button" @click="${this.collapseFirstRows}">Collapse first Rows</button>
         <button class="demo-button" @click="${this.selectFirstRows}">Select first rows</button>
         <button class="demo-button" @click="${this.unSelectFirstRows}">Unselect first rows</button>
-        <button class="demo-button" @click="${this.toggleTheme}">Toggle theme</button>
+        <button class="demo-button" @click="${() => (this.dark = !this.dark)}">Toggle Dark Theme</button>
       </div>
       <h1>Complex table with sortable rows</h1>
       <h2>Current theme ${this.theme}</h2>
@@ -92,6 +92,7 @@ export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
         ?rows-selectable="${true}"
         expandable-toggle-selector=".expandable-toggle"
         table-layout="auto"
+        class=${classMap({dark: this.dark})}
         @exmg-grid-rows-order-changed="${this.onRowsOrderChanged}"
         @exmg-grid-selected-rows-change="${this.onSelectedRowsChange}"
       >

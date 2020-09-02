@@ -425,7 +425,6 @@ You should import table and theme styles
 
 ```
 import {style as tableStyles} from '../src/table/exmg-grid-styles';
-import {style as exmgThemeStyles} from '../src/table/theme/exmg-theme-styles';
 
 export class DemoSimpleGridTable extends LitELement {
   static styles = [

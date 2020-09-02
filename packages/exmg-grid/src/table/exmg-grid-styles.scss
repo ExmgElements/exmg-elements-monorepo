@@ -1,16 +1,11 @@
 @import '../../node_modules/@material/typography/mdc-typography';
-@import '../table/mixins';
 
-$exmgThemeTableSurface: null !default;
-$exmgThemeTableOnSurface: null !default;
-
-// color variants
-$exmgTableRowDividerColor: null !default;
-$exmgTableRowSelectedBackgroundColor: null !default;
-$exmgTableRowHoverBackgroundColor: null !default;
-$exmgTableRowsExpandedBackgroundColor: null !default;
-$exmgTableThColor: null !default;
-$exmgTableThSortableHoverColor: null !default;
+$exmgPrimaryColor: #0070db !default;
+$exmgSecondaryColor: #0070db !default;
+$exmgSurfaceColor: #ffffff !default;
+$exmgOnSurfaceColor: #02182b !default;
+$exmgBackground: transparent !default;
+$exmgOnBackground: #02182b !default;
 
 @mixin sortable-col-padding() {
   padding-right: calc(var(--exmg-table-th-sort-icon-height) + var(--exmg-table-th-sort-margin-left));
@@ -43,25 +38,35 @@ $exmgTableThSortableHoverColor: null !default;
 
 :host {
   @include mdc-typography-base;
+
+  $exmgPrimaryColor: #0070db !default;
+  $exmgSecondaryColor: #0070db !default;
+  $exmgSurfaceColor: #ffffff !default;
+  $exmgOnSurfaceColor: #02182b !default;
+  $exmgBackground: transparent !default;
+  $exmgOnBackground: #02182b !default;
+
   --exmg-arrow-upward-url: url('/node_modules/@exmg/exmg-grid/assets/arrow-upward.svg');
   --exmg-table-card-width: 100%;
   --exmg-table-card-margin-bottom: 5px;
 
-  --exmg-table-color: var(--exmg-theme-table-on-surface, var(--mdc-theme-on-surface, #{$exmgThemeTableOnSurface}));
-  --exmg-table-card-background-color: var(--exmg-theme-table-surface, var(--mdc-theme-surface, #{$exmgThemeTableSurface}));
-  --exmg-table-row-divider-color: #{$exmgTableRowDividerColor};
-  --exmg-table-row-selected-color: var(--exmg-theme-table-surface, var(--mdc-theme-on-surface, #{$exmgThemeTableOnSurface}));
-  --exmg-table-row-selected-background-color: #{$exmgTableRowSelectedBackgroundColor};
-  --exmg-table-row-hover-color: var(--exmg-theme-table-surface, var(--mdc-theme-on-surface, #{$exmgThemeTableOnSurface}));
-  --exmg-table-row-hover-background-color: #{$exmgTableRowHoverBackgroundColor};
-  --exmg-table-row-dragged-background-color: var(--exmg-theme-table-on-surface, var(--mdc-theme-on-surface, #{$exmgThemeTableOnSurface}));
-  --exmg-table-rows-expanded-divider-border: none;
-  --exmg-table-rows-expanded-border: none;
-  --exmg-table-rows-expanded-background-color: #{$exmgTableRowsExpandedBackgroundColor};
-  --exmg-table-rows-expanded-color: var(--exmg-theme-table-surface, var(--mdc-theme-on-surface, #{$exmgThemeTableOnSurface}));
-  --exmg-table-th-color: var(--exmg-theme-table-on-surface, var(--mdc-header, #{$exmgTableThColor}));
-  --exmg-table-th-sortable-hover-color: var(--exmg-theme-table-on-surface, var(--mdc-theme-on-surface, #{$exmgTableThSortableHoverColor}));
-  --exmg-table-columns-background-color: var(--exmg-theme-table-surface, var(--mdc-theme-surface, #{$exmgThemeTableSurface}));
+  --exmg-table-color: var(--exmg-theme-table-on-surface, #{$exmgOnSurfaceColor});
+  --exmg-table-card-background-color: var(--exmg-theme-table-surface, #{$exmgSurfaceColor});
+  --exmg-table-row-divider-color: var(--exmg-theme-table-row-divider-color, #{rgba($exmgOnSurfaceColor, .14)});
+
+  --exmg-table-row-selected-color: var(--exmg-theme-table-row-selected-color, #{$exmgOnSurfaceColor});
+  --exmg-table-row-selected-background-color: var(--exmg-theme-table-row-selected-background-color, #{rgba($exmgPrimaryColor, .7)});
+  --exmg-table-row-hover-color: var(--exmg-theme-table-row-hover-color, #{$exmgOnSurfaceColor});
+  --exmg-table-row-hover-background-color: var(--exmg-theme-table-row-hover-background-color, #{rgba($exmgPrimaryColor, .4)});
+  --exmg-table-row-dragged-background-color: var(--exmg-theme-table-row-dragged-background-color, #{$exmgOnSurfaceColor});
+  --exmg-table-rows-expanded-divider-border: var(--exmg-theme-table-rows-expanded-divider-border, none);
+  --exmg-table-rows-expanded-border: var(--exmg-theme-table-rows-expanded-border, none);
+  --exmg-table-rows-expanded-background-color: var(--exmg-theme-table-rows-expanded-background-color, #{$exmgSurfaceColor});
+  --exmg-table-rows-expanded-color: var(--exmg-theme-table-rows-expanded-color, #{$exmgOnSurfaceColor});
+  --exmg-table-th-color: var(--exmg-theme-table-th-on-surface, #{$exmgOnSurfaceColor});
+  --exmg-table-th-background-color: var(--exmg-theme-table-th-surface, #{$exmgSurfaceColor});
+  --exmg-table-th-sortable-hover-color: var(--exmg-theme-table-th-sortable-hover-color, #{$exmgOnSurfaceColor});
+  --exmg-table-columns-background-color: var(--exmg-theme-table-columns-background-color, #{$exmgSurfaceColor});
 
   --exmg-table-th-height: 48px;
   --exmg-table-th-sort-margin-left: 0px;
@@ -122,6 +127,7 @@ $exmgTableThSortableHoverColor: null !default;
 .table-container {
   overflow-x: auto;
 }
+
 table {
   @include table-layout-fixed();
   width: 100%;
@@ -167,7 +173,7 @@ td {
     line-height: 1.33;
     letter-spacing: 2px;
     color: var(--exmg-table-th-color);
-    background-color: var(--exmg-table-columns-background-color);
+    background-color: var(--exmg-table-th-background-color);
     vertical-align: middle;
     text-align: left;
 

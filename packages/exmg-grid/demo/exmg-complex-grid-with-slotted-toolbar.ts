@@ -1,4 +1,5 @@
-import {html, customElement, TemplateResult, css} from 'lit-element';
+import {html, customElement, css} from 'lit-element';
+import {classMap} from 'lit-html/directives/class-map';
 import {repeat} from 'lit-html/directives/repeat';
 import '@material/mwc-checkbox';
 import '@polymer/paper-item';
@@ -74,7 +75,7 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
     );
   }
 
-  protected render(): TemplateResult | void {
+  protected render() {
     return html`
       <div>
         <button class="demo-button" @click="${this.toggleMonthColumn}">Toggle Month</button>
@@ -84,6 +85,7 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
         <button class="demo-button" @click="${this.collapseFirstRows}">Collapse first Rows</button>
         <button class="demo-button" @click="${this.selectFirstRows}">Select first rows</button>
         <button class="demo-button" @click="${this.unSelectFirstRows}">Unselect first rows</button>
+        <button class="demo-button" @click="${() => (this.dark = !this.dark)}">Toggle Dark Theme</button>
       </div>
       <h1>Complex table with slotted toolbar and custom styles</h1>
       <ul>
@@ -104,6 +106,7 @@ export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {
         default-sort-column="${DEFAULT_SORT_COLUMN}"
         default-sort-direction="${DEFAULT_SORT_DIRECTION}"
         ?sortable="${true}"
+        class=${classMap({dark: this.dark})}
         @exmg-grid-sort-change="${this.onSortChange}"
       >
         <exmg-grid-base-toolbar slot="toolbar">

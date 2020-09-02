@@ -64,6 +64,9 @@ export abstract class ExmgBaseGridDemo extends LitElement {
   @property({type: Object})
   items: Income[];
 
+  @property({type: Boolean})
+  dark = false;
+
   @property({type: Number})
   protected pageIndex = 0;
 
@@ -293,13 +296,6 @@ export abstract class ExmgBaseGridDemo extends LitElement {
 
   protected unSelectFirstRows() {
     this.selectedRowIds = this.createRowIdToStateMap(false);
-  }
-
-  protected toggleTheme() {
-    const themes = ['dark', 'light', 'exmg', 'mdc'];
-    const index = themes.indexOf(this.theme);
-    const nextIndex = index === -1 || index + 1 === themes.length ? 0 : index + 1;
-    this.theme = themes[nextIndex];
   }
 
   protected onRowsOrderChanged(event: CustomEvent<EventDetailRowsOrderChanged>): void {
