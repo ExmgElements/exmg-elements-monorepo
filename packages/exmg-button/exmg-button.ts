@@ -44,7 +44,8 @@ export class ExmgButton extends ButtonBase {
         @mouseleave="${this.handleRippleMouseLeaveA}"
         @touchstart="${this.handleRippleActivateA}"
         @touchend="${this.handleRippleDeactivateA}"
-        @touchcancel="${this.handleRippleDeactivateA}">
+        @touchcancel="${this.handleRippleDeactivateA}"
+      >
         ${this.renderRipple()}
         <span class="${classMap(loadingClass)}">
           ${this.icon && !this.trailingIcon ? mdcButtonIcon : ''}
