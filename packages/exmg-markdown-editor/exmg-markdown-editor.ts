@@ -20,7 +20,6 @@ import {
 } from './exmg-custom-types';
 
 import Editor = CodeMirror.Editor;
-import {ExmgMarkdownRenderer} from 'exmg-markdown-renderer';
 
 type PrivateProps = 'toolbarButtonsConfig';
 
@@ -378,10 +377,6 @@ export class EditorElement extends LitElement {
 
   get markdownElement(): MarkdownElement | null {
     const markedElement = this.querySelector<MarkdownElement>('marked-element');
-    if (!markedElement) {
-      const re = this.querySelector<ExmgMarkdownRenderer>('exmg-markdown-renderer')!;
-      return re.querySelector<MarkdownElement>('marked-element');
-    }
     return markedElement;
   }
 

@@ -1,7 +1,7 @@
 import {html, property, customElement, LitElement} from 'lit-element';
 import {classMap} from 'lit-html/directives/class-map.js';
-import {observer} from '@material/mwc-base/observer';
-import {style} from './styles/exmg-spinner-styles';
+import {observer} from '@material/mwc-base/observer.js';
+import {style} from './styles/exmg-spinner-styles.js';
 
 @customElement('exmg-button-spinner')
 export class ExmgSpinner extends LitElement {
