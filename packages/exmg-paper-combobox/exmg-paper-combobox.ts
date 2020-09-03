@@ -1,5 +1,5 @@
 import {LitElement, html, customElement, property, query, css} from 'lit-element';
-import {classMap} from 'lit-html/directives/class-map';
+import {classMap} from 'lit-html/directives/class-map.js';
 
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
@@ -15,8 +15,8 @@ import '@polymer/paper-styles/paper-styles.js';
 import './exmg-paper-combobox-icons.js';
 import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
 
-import {EventSelectPayload, GenericPropertyValues, Token} from './exmg-custom-types';
-import {PaperListboxElement} from '@polymer/paper-listbox/paper-listbox';
+import {EventSelectPayload, GenericPropertyValues, Token} from './exmg-custom-types.js';
+import {PaperListboxElement} from '@polymer/paper-listbox/paper-listbox.js';
 
 type PrivateProps = 'inputValue' | 'selectedValue';
 type Props = Exclude<keyof PaperComboboxElement, number | symbol> | PrivateProps;
