@@ -28,7 +28,6 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
       .expandable-toggle {
         cursor: pointer;
       }
-
     `,
   ];
 
@@ -96,7 +95,6 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
         <button class="demo-button" @click="${this.selectFirstRows}">Select first rows</button>
         <button class="demo-button" @click="${this.unSelectFirstRows}">Unselect first rows</button>
         <button class="demo-button" @click="${() => (this.dark = !this.dark)}">Toggle Dark Theme</button>
-
       </div>
       <h1>Complex table with sortable columns</h1>
       <h2>Current theme ${this.theme}</h2>

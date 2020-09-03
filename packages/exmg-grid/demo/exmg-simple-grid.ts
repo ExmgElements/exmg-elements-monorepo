@@ -10,7 +10,6 @@ import {ExmgBaseGridDemo} from './exmg-base-grid-demo';
 
 @customElement('demo-simple-grid')
 export class DemoSimpleGridTable extends ExmgBaseGridDemo {
-
   static styles = [demoStyles, tableStyles];
 
   private renderTableBody() {

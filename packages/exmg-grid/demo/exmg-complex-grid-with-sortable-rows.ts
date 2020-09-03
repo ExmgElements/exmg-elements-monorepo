@@ -11,7 +11,6 @@ import '../src/table/exmg-grid-smart-toolbar';
 import {ExmgBaseGridDemo} from './exmg-base-grid-demo';
 import {style as demoStyles} from './styles/demo-styles';
 
-
 @customElement('demo-complex-grid-sortable')
 export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
   static styles = [
@@ -61,7 +60,7 @@ export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
     );
   }
 
-  protected render(){
+  protected render() {
     return html`
       <div>
         <button class="demo-button" @click="${this.toggleMonthColumn}">Toggle Month</button>
