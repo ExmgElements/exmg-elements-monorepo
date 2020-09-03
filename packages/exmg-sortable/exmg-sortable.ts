@@ -246,6 +246,7 @@ export class SortableElement extends LitElement {
      */
     this.style.userSelect = userSelect;
     (this.style as any).MozUserSelect = userSelect;
+    // @ts-ignore
     this.style.msUserSelect = userSelect;
     this.style.webkitUserSelect = userSelect;
   }
