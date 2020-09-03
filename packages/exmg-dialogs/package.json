@@ -34,7 +34,7 @@
     "@polymer/paper-item": "^3.0.0",
     "@polymer/test-fixture": "^4.0.2",
     "@types/chai": "^4.2.11",
-    "@types/material-components-web": "^0.43.1",
+    "@types/material-components-web": "^1.0.0",
     "@types/mocha": "^5.2.6",
     "@webcomponents/webcomponentsjs": "^2.4.4",
     "chai": "^4.2.0",
