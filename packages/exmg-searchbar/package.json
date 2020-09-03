@@ -22,7 +22,7 @@
   ],
   "homepage": "https://github.com/ExmgElements/",
   "name": "@exmg/exmg-searchbar",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "main": "exmg-searchbar.js",
   "license": "MIT",
   "author": "Ex Machina",
