@@ -5,13 +5,6 @@ import {style} from './exmg-grid-base-toolbar-styles';
  * ### Styling
  * The following custom properties  are available for styling:
  *
- * Custom property | Description | Default
- * ----------------|-------------|----------
- * `--exmg-grid-toolbar-bg-color` | toolbar background color | `var(--mdc-theme-surface, #ffffff);`
- * `--exmg-grid-toolbar-active-bg-color` | active toolbar background color (when .active class present) | `#e1f0fe;`
- * `--exmg-grid-toolbar-color` | toolbar foreground (mostly text) color | `#02182b;`
- * `--exmg-grid-toolbar-setting-position` | Toolbar Settings dialog container position | `relative`
- * `--exmg-grid-toolbar-overflow-x` | Toolbar container overflow-x | `initial`
  */
 @customElement('exmg-grid-base-toolbar')
 export class ExmgGridBaseToolbar extends LitElement {

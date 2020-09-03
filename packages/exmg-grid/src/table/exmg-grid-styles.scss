@@ -52,12 +52,12 @@ $exmgOnBackground: #02182b !default;
 
   --exmg-table-color: var(--exmg-theme-table-on-surface, #{$exmgOnSurfaceColor});
   --exmg-table-card-background-color: var(--exmg-theme-table-surface, #{$exmgSurfaceColor});
-  --exmg-table-row-divider-color: var(--exmg-theme-table-row-divider-color, #{rgba($exmgOnSurfaceColor, .14)});
+  --exmg-table-row-divider-color: var(--exmg-theme-table-row-divider-color, #{rgba($exmgOnSurfaceColor, 0.14)});
 
   --exmg-table-row-selected-color: var(--exmg-theme-table-row-selected-color, #{$exmgOnSurfaceColor});
-  --exmg-table-row-selected-background-color: var(--exmg-theme-table-row-selected-background-color, #{rgba($exmgPrimaryColor, .7)});
+  --exmg-table-row-selected-background-color: var(--exmg-theme-table-row-selected-background-color, #{rgba($exmgPrimaryColor, 0.7)});
   --exmg-table-row-hover-color: var(--exmg-theme-table-row-hover-color, #{$exmgOnSurfaceColor});
-  --exmg-table-row-hover-background-color: var(--exmg-theme-table-row-hover-background-color, #{rgba($exmgPrimaryColor, .4)});
+  --exmg-table-row-hover-background-color: var(--exmg-theme-table-row-hover-background-color, #{rgba($exmgPrimaryColor, 0.4)});
   --exmg-table-row-dragged-background-color: var(--exmg-theme-table-row-dragged-background-color, #{$exmgOnSurfaceColor});
   --exmg-table-rows-expanded-divider-border: var(--exmg-theme-table-rows-expanded-divider-border, none);
   --exmg-table-rows-expanded-border: var(--exmg-theme-table-rows-expanded-border, none);
@@ -68,19 +68,17 @@ $exmgOnBackground: #02182b !default;
   --exmg-table-th-sortable-hover-color: var(--exmg-theme-table-th-sortable-hover-color, #{$exmgOnSurfaceColor});
   --exmg-table-columns-background-color: var(--exmg-theme-table-columns-background-color, #{$exmgSurfaceColor});
 
-  --exmg-table-th-height: 48px;
-  --exmg-table-th-sort-margin-left: 0px;
-  --exmg-table-td-height: 48px;
-  --exmg-table-th-sort-icon-height: 1em;
-  --exmg-table-th-sort-icon-width: 1em;
+  --exmg-table-th-height: var(--exmg-theme-table-th-height, 48px);
+  --exmg-table-th-sort-margin-left: var(--exmg-theme-table-th-sort-margin-left, 0px);
+  --exmg-table-td-height: var(--exmg-theme-table-td-height, 48px);
+  --exmg-table-th-sort-icon-height: var(--exmg-theme-table-th-sort-icon-height, 1em);
+  --exmg-table-th-sort-icon-width: var(--exmg-theme-table-th-sort-icon-width, 1em);
 
-  --exmg-table-col-number-padding-right: 10px;
-  --exmg-table-checkbox-cell-width: 24px;
+  --exmg-table-col-number-padding-right: var(--exmg-theme-table-col-number-padding-right, 10px);
+  --exmg-table-checkbox-cell-width: var(--exmg-theme-table-checkbox-cell-width, 24px);
 
   /* Adjust toolbar to grid */
-  --exmg-grid-toolbar-setting-position: absolute;
-  --exmg-grid-toolbar-overflow-x: auto;
-  --exmg-grid-toolbar-border-top-radius: 4px;
+  --exmg-table-toolbar-setting-position: var(--exmg-theme-table-toolbar-setting-position, absolute);
   /* End Adjust toolbar to grid */
 }
 

@@ -12,7 +12,7 @@
 :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item::before,
 :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item::after {
   background-color: var(
-    --exmg-grid-toolbar-setting-list-item-active-bg-color,
+    --exmg-theme-table-toolbar-setting-list-item-active-bg-color,
     var(--exmg-theme-table-on-surface-low, var(--mdc-theme-secondary))
   );
 }
@@ -22,11 +22,11 @@
 }
 
 mwc-checkbox {
-  --mdc-theme-secondary: var(--exmg-grid-setting-checkbox-bg-color, var(--exmg-theme-secondary));
+  --mdc-theme-secondary: var(--exmg-theme-grid-setting-checkbox-bg-color, var(--exmg-theme-secondary));
 }
 
 .mdc-menu-surface--anchor {
-  position: var(--exmg-grid-toolbar-setting-position, relative);
+  position: var(--exmg-table-toolbar-setting-position, relative);
   top: 45px;
   right: 15px;
   display: inline-block;
