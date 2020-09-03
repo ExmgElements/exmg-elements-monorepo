@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const watch = require('gulp-watch');
 const glob = require('glob');
 const {exec} = require('child_process');
@@ -33,16 +34,9 @@ function renderSass(pathWithFileName: string, stopOnError: boolean, template: st
  * @param {string} template - path to template
  * @param {string} newFileSuffix - .css or .scss files will be replaced with given suffix default is .ts
  */
-exports.registerTasks = (
-  gulp: GulpClient.Gulp,
-  filesPattern: string,
-  template: string | null,
-  newFileSuffix: string = '.ts',
-) => {
+exports.registerTasks = (gulp: GulpClient.Gulp, filesPattern: string, template: string | null, newFileSuffix = '.ts') => {
   gulp.task('render-styles', (done: Function) => {
-    glob
-      .sync(filesPattern, {absolute: true})
-      .forEach((path: string) => renderSass(path, true, template, newFileSuffix));
+    glob.sync(filesPattern, {absolute: true}).forEach((path: string) => renderSass(path, true, template, newFileSuffix));
 
     done();
   });

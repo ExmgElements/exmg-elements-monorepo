@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /**
  @license
  Copyright 2018 Google Inc. All Rights Reserved.
@@ -26,10 +27,10 @@ const writeFile = util.promisify(fs.writeFile);
 
 const delim = /<%\s*content\s*%>/;
 
-async function sassToCss(sassFile) {
+async function sassToCss(sassFile: any) {
   const result = await renderSass({
     file: sassFile,
-    importer: (url, ...otherArgs) => {
+    importer: (url: string, ...otherArgs: any[]) => {
       if (url.split('/').length === 2) {
         url += '/_index.scss';
       }

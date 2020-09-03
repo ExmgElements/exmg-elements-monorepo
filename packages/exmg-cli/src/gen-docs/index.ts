@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /**
  * This script is replacing all absolute paths generated inside /docs/**\/*.html
  */
@@ -8,7 +9,7 @@ const fs = require('fs');
 
 const escapePattern = (text: string) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-const fixGenDocs = (projectDir: string, docsDir: string, apply: boolean = false, verbose: boolean = false): void => {
+const fixGenDocs = (projectDir: string, docsDir: string, apply = false, verbose = false): void => {
   const isVerbose = !apply || verbose;
   const projectPath = path.join(process.cwd(), projectDir);
 
@@ -40,12 +41,7 @@ const fixGenDocs = (projectDir: string, docsDir: string, apply: boolean = false,
   });
 };
 
-const doFixGenDocs = (
-  projectDir: string,
-  docsDir: string,
-  dryRun: boolean = true,
-  verbose: boolean = false,
-): Promise<boolean> =>
+const doFixGenDocs = (projectDir: string, docsDir: string, dryRun = true, verbose = false): Promise<boolean> =>
   new Promise(resolve => {
     fixGenDocs(projectDir, docsDir, dryRun, verbose);
     resolve(true);
