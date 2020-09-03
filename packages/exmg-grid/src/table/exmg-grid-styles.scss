@@ -47,8 +47,8 @@ $exmgOnBackground: #02182b !default;
   $exmgOnBackground: #02182b !default;
 
   --exmg-arrow-upward-url: url('/node_modules/@exmg/exmg-grid/assets/arrow-upward.svg');
-  --exmg-table-card-width: 100%;
-  --exmg-table-card-margin-bottom: 5px;
+  --exmg-table-card-width: var(--exmg-theme-table-card-width, 100%);
+  --exmg-table-card-margin-bottom: var(--exmg-theme-table-card-margin-bottom, 5px);
 
   --exmg-table-color: var(--exmg-theme-table-on-surface, #{$exmgOnSurfaceColor});
   --exmg-table-card-background-color: var(--exmg-theme-table-surface, #{$exmgSurfaceColor});
@@ -107,7 +107,7 @@ $exmgOnBackground: #02182b !default;
   width: var(--exmg-table-card-width);
   margin: 0;
   padding: 0;
-  box-shadow: var(--exmg-table-box-shadow, none);
+  box-shadow: var(--exmg-theme-table-box-shadow, none);
 }
 :host([with-toolbar]) {
   .table-card {

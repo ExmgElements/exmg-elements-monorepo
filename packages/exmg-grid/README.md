@@ -421,57 +421,74 @@ whenever you want to change column visibility update property `hiddenColumnNames
 
 ## Styles
 
-You should import table and theme styles
+You should import table styles
 
 ```
 import {style as tableStyles} from '../src/table/exmg-grid-styles';
 
 export class DemoSimpleGridTable extends LitELement {
   static styles = [
-    exmgThemeStyles,
     tableStyles,
   ];
 }
 ```
 
-It is also possible to compose custom theme. You can use mixin `exmg-generate-theme-table-variables`
+It is also possible to compose custom theme. 
 
-Example of light theme:
+Example of dark theme:
 
 ```scss
-@import "src/table/mixins";
-exmg-grid {
-  $primaryColor: #0070db;
-  $secondaryColor: #0070db;
-  $surfaceColor: #ffffff;
-  $onSurfaceColor: #02182b;
-  $backgroundColor: #ffffff;
-  $onBackgroundColor: #02182b;
-  @include exmg-generate-theme-table-variables($primaryColor, $secondaryColor, $surfaceColor, $onSurfaceColor, $backgroundColor, $onBackgroundColor);
+
+exmg-grid.dark {
+  --mdc-theme-primary: rgba(0, 112, 219, 1);
+  --mdc-theme-secondary: rgba(0, 112, 219, 1);
+  --mdc-theme-surface: black;
+  --mdc-theme-on-surface: white;
+
+  --exmg-theme-table-on-surface: var(--mdc-theme-on-surface);
+  --exmg-theme-table-surface: var(--mdc-theme-surface);
+  --exmg-theme-table-row-divider-color: #333;
+  --exmg-theme-table-row-selected-color: var(--mdc-theme-on-surface);
+  --exmg-theme-table-row-selected-background-color: rgba(0, 112, 219, 0.4);
+  --exmg-theme-table-row-hover-color: var(--mdc-theme-on-surface);
+  --exmg-theme-table-row-hover-background-color: rgba(0, 112, 219, 0.2);
+  --exmg-theme-table-row-dragged-background-color: var(--mdc-theme-on-surface);
+  --exmg-theme-table-rows-expanded-divider-border: none;
+  --exmg-theme-table-rows-expanded-border: none;
+  --exmg-theme-table-rows-expanded-background-color: var(--mdc-theme-surface);
+  --exmg-theme-table-rows-expanded-color: var(--mdc-theme-on-surface);
+  --exmg-theme-table-th-on-surface: var(--mdc-theme-on-surface);
+  --exmg-theme-table-th-surface: var(--mdc-theme-surface);
+  --exmg-theme-table-th-sortable-hover-color: var(--mdc-theme-on-surface);
+  --exmg-theme-table-columns-background-color: var(--mdc-theme-surface);
+
+  // Toolbar
+  --exmg-theme-table-toolbar-color: var(--mdc-theme-on-surface);
+  --exmg-theme-table-toolbar-background-color: var(--mdc-theme-surface);
+  --exmg-theme-table-toolbar-border-top-radius: 1rem;
+  --exmg-theme-table-toolbar-border-bottom-radius: 0rem;
+  --exmg-theme-table-toolbar-active-bg-color: rgba(0, 112, 219, 0.2);
+  --exmg-theme-table-toolbar-active-color: white;
+}
+
+exmg-grid.dark .selectable-checkbox {
+  --mdc-checkbox-unchecked-color: white;
+  --mdc-checkbox-disabled-color: #adadad;
+  --mdc-checkbox-ink-color: #363636;
 }
 ```
-Where local variables map to material design:
-
-Local sass variable | mdc variable | css variable
-----------------|-------------|------------
-  $primaryColor | $mdcThemePrimary | --mdc-theme-primary
-  $secondaryColor | $mdcThemeSecondary | --mdc-theme-secondary
-  $surfaceColor | $dcThemeSurface | --mdc-theme-surface
-  $onSurfaceColor | $mdcThemeOnSurface | --mdc-theme-on-surface
-  $background | $mdcThemeBackground | --mdc-theme-background
-  $onBackground | $mdcThemeOnBackground | --mdc-theme-on-background
 
 Additionally you cna also override css variables:
 
  Custom property | Description | Default
  ----------------|-------------|----------
  `--exmg-arrow-upward-url` | Url to icon that is used for soring direction indicator | `url('/node_modules/@exmg/exmg-grid/assets/arrow-upward.svg');`
- `--exmg-table-card-width` | table card width | `100%;`
- `--exmg-table-card-margin-bottom` | table bottom margin  | `5px;`
- `--exmg-table-color` | table text color | `#02182b;`
- `--exmg-table-background-color` | table background color | `#ffffff;`
- `--exmg-table-box-shadow` | table box shadow | `#{0px 1px 5px 0px rgba($onSurface, .2), 0px 2px 2px 0px rgba($onSurface, .14), 0px 3px 1px -2px rgba($onSurface, .12)},`
- `--exmg-table-row-divider-color` | table rows separator color | `#dbdbdb;`
+ `--exmg-theme-table-card-width` | table card width | `100%;`
+ `--exmg-theme-table-card-margin-bottom` | table bottom margin  | `5px;`
+ `--exmg-theme-table-on-surface` | table text color | `#02182b;`
+ `--exmg-theme-table-surface` | table background color | `#ffffff;`
+ `--exmg-theme-table-box-shadow` | table box shadow | `none`
+ `--exmg-theme-table-row-divider-color` | table rows separator color | `#02182b; 0.14`
  `--exmg-table-row-selected-color` | selected row text color | `#02182b;`
  `--exmg-table-row-selected-background-color` | selected row background color | `#e2f1fe;`
  `--exmg-table-row-hover-color` | row hover text color | `#02182b;`
