@@ -1,5 +1,4 @@
-#!/usr/bin/env node
-
+/* eslint-disable @typescript-eslint/no-var-requires */
 import {Section} from 'command-line-usage';
 import {OptionDefinition} from 'command-line-args';
 

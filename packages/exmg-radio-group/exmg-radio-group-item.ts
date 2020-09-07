@@ -1,4 +1,5 @@
-import {FormElement, observer, HTMLElementWithRipple} from '@material/mwc-base/form-element.js';
+import {FormElement, HTMLElementWithRipple} from '@material/mwc-base/form-element.js';
+import {observer} from '@material/mwc-base/observer.js';
 import {property, customElement, html, query} from 'lit-element';
 import {MDCFoundation} from '@material/base';
 import {style} from '@material/mwc-radio/mwc-radio-css';
@@ -81,10 +82,6 @@ export class ExmgRadioGroupItem extends FormElement {
   }
 
   static styles = [style, exmgRadioGroupItemStyles];
-
-  get ripple() {
-    return this.mdcRoot.ripple;
-  }
 
   protected createAdapter(): Record<string, any> {
     return {

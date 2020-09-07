@@ -10,4 +10,3 @@ export * from './src/table/exmg-grid-smart-toolbar';
 export * from './src/table/types/exmg-grid-smart-toolbar-types';
 export * from './src/table/exmg-grid-toolbar';
 export * from './src/table/types/exmg-grid-toolbar-types';
-export {style as exmgThemeStyles} from './src/table/theme/exmg-theme-styles';

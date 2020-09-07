@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 /**
  @license
@@ -58,7 +58,7 @@ function printUsage() {
   const sections = [
     {
       header: 'sass-render',
-      content: 'Render sass into an element\'s lit template',
+      content: "Render sass into an element's lit template",
     },
     {
       header: 'Options',

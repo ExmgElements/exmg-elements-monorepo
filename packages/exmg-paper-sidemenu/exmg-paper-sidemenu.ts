@@ -1,5 +1,5 @@
-import {observer} from '@material/mwc-base/form-element';
 import {property, customElement, html, LitElement} from 'lit-element';
+import {observer} from '@material/mwc-base/observer.js';
 import {style} from './styles/exmg-paper-sidemenu-base-styles';
 import '@polymer/paper-listbox';
 

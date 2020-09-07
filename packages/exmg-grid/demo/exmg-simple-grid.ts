@@ -1,15 +1,16 @@
-import {html, customElement, TemplateResult} from 'lit-element';
+import {html, customElement} from 'lit-element';
+import {classMap} from 'lit-html/directives/class-map';
 import {repeat} from 'lit-html/directives/repeat';
 import '../src/table/exmg-grid';
 import '../src/table/exmg-grid-pagination';
 import {style as tableStyles} from '../src/table/exmg-grid-styles';
-import {style as exmgThemeStyles} from '../src/table/theme/exmg-theme-styles';
+import {style as demoStyles} from './styles/demo-styles';
 
 import {ExmgBaseGridDemo} from './exmg-base-grid-demo';
 
 @customElement('demo-simple-grid')
 export class DemoSimpleGridTable extends ExmgBaseGridDemo {
-  static styles = [exmgThemeStyles, tableStyles];
+  static styles = [demoStyles, tableStyles];
 
   private renderTableBody() {
     return repeat(
@@ -28,11 +29,14 @@ export class DemoSimpleGridTable extends ExmgBaseGridDemo {
     );
   }
 
-  protected render(): TemplateResult | void {
+  protected render() {
     return html`
+      <div>
+        <button class="demo-button" @click="${() => (this.dark = !this.dark)}">Toggle Dark Theme</button>
+      </div>
       <h1>Simple table</h1>
       <h2>Exmg Theme</h2>
-      <exmg-grid .items="${this.items}">
+      <exmg-grid .items="${this.items}" class=${classMap({dark: this.dark})}>
         <table>
           <thead>
             <tr class="grid-columns">

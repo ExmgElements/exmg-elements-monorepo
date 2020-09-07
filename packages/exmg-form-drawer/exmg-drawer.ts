@@ -1,7 +1,7 @@
 import {LitElement, html, customElement, property} from 'lit-element';
-import {observer} from '@material/mwc-base/form-element';
-import '@polymer/neon-animation/animations/slide-from-right-animation';
-import '@polymer/neon-animation/animations/slide-right-animation';
+import {observer} from '@material/mwc-base/observer.js';
+import '@polymer/neon-animation/animations/slide-from-right-animation.js';
+import '@polymer/neon-animation/animations/slide-right-animation.js';
 import '@polymer/paper-dialog/paper-dialog.js';
 import {style} from './styles/exmg-drawer-styles';
 

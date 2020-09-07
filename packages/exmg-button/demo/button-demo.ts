@@ -1,9 +1,9 @@
 import {LitElement, html, customElement, property} from 'lit-element';
-import '@material/mwc-checkbox';
-import '@material/mwc-icon/mwc-icon';
-import '@material/mwc-button';
+import '@material/mwc-checkbox/mwc-checkbox.js';
+import '@material/mwc-icon/mwc-icon.js';
+import '@material/mwc-button/mwc-button.js';
 import {style} from './button-demo-styles';
-import '../';
+import '../exmg-button.js';
 
 @customElement('exmg-button-demo')
 export class ButtonDemo extends LitElement {
@@ -20,6 +20,7 @@ export class ButtonDemo extends LitElement {
       <style></style>
       <div><mwc-checkbox .checked="${this.loading}" @click="${this.changeHandler}"></mwc-checkbox> Toggle Loading</div>
       <div>
+        <mwc-button unelevated>sdadasd</mwc-button>
         <exmg-button ?loading="${this.loading}">Test 1</exmg-button>
         <exmg-button class="dark" unelevated ?loading="${this.loading}">Test 2</exmg-button>
         <exmg-button class="dark" unelevated ?loading="${this.loading}" disabled>Test 3</exmg-button>

@@ -203,17 +203,17 @@ export class ExmgGridToolbar extends LitElement {
         :host {
           --paper-item-focused: {
             background-color: var(
-              --exmg-grid-toolbar-filter-item-active-bg-color,
+              --exmg-theme-table-toolbar-filter-item-active-bg-color,
               var(--exmg-theme-table-on-surface-low, var(--mdc-theme-secondary))
             );
           }
           --paper-item-selected: {
             background-color: var(
-              --exmg-grid-toolbar-filter-item-active-bg-color,
+              --exmg-theme-table-toolbar-filter-item-active-bg-color,
               var(--exmg-theme-table-on-surface-low, var(--mdc-theme-secondary))
             );
           }
-          --paper-button-ink-color: var(--exmg-grid-toolbar-filter-item-active-bg-color, var(--mdc-theme-surface));
+          --paper-button-ink-color: var(--exmg-theme-table-toolbar-filter-item-active-bg-color, var(--mdc-theme-surface));
           --paper-input-container-color: var(--exmg-grid-toolbar-on-surface-color, var(--mdc-theme-on-surface));
           --paper-input-container-focus-color: var(--exmg-grid-toolbar-on-surface-color, var(--mdc-theme-primary));
 
@@ -227,17 +227,17 @@ export class ExmgGridToolbar extends LitElement {
         :host exmg-grid-base-toolbar[active] {
           --paper-item-focused: {
             background-color: var(
-              --exmg-grid-toolbar-filter-item-active-bg-color,
+              --exmg-theme-table-toolbar-filter-item-active-bg-color,
               var(--exmg-theme-table-on-surface-low, var(--mdc-theme-secondary))
             );
           }
           --paper-item-selected: {
             background-color: var(
-              --exmg-grid-toolbar-filter-item-active-bg-color,
+              --exmg-theme-table-toolbar-filter-item-active-bg-color,
               var(--exmg-theme-table-on-surface-low, var(--mdc-theme-secondary))
             );
           }
-          --paper-button-ink-color: var(--exmg-grid-toolbar-filter-item-active-bg-color, var(--mdc-theme-secondary));
+          --paper-button-ink-color: var(--exmg-theme-table-toolbar-filter-item-active-bg-color, var(--mdc-theme-secondary));
           --paper-input-container-color: var(--exmg-grid-toolbar-active-on-surface-color, var(--mdc-theme-on-surface));
           --paper-input-container-focus-color: var(--exmg-grid-toolbar-active-on-surface-color, var(--mdc-theme-primary));
 

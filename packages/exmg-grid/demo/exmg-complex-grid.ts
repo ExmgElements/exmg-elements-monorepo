@@ -1,11 +1,17 @@
-import {html, customElement, TemplateResult, css} from 'lit-element';
+import {html, customElement, css} from 'lit-element';
+import {classMap} from 'lit-html/directives/class-map';
 import {repeat} from 'lit-html/directives/repeat';
 import '@material/mwc-checkbox';
+import '@material/mwc-icon-button';
+
+import '@polymer/paper-listbox/paper-listbox.js';
+import '@polymer/paper-item/paper-item.js';
+import '@polymer/paper-menu-button/paper-menu-button.js';
+import '@polymer/iron-dropdown/iron-dropdown.js';
 
 import '../src/table/exmg-grid.js';
 import '../src/table/exmg-grid-pagination';
 import {style as tableStyles} from '../src/table/exmg-grid-styles';
-import {style as dynamicTheme} from './styles/dynamic-theme';
 import '../src/table/exmg-grid-smart-toolbar';
 import {style as demoStyles} from './styles/demo-styles';
 
@@ -16,7 +22,6 @@ import {DEFAULT_SORT_COLUMN, DEFAULT_SORT_DIRECTION, ExmgBaseGridDemo} from './e
 export class ExmgComplexGrid extends ExmgBaseGridDemo {
   // language=CSS
   static styles = [
-    dynamicTheme,
     tableStyles,
     demoStyles,
     css`
@@ -79,7 +84,7 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
     );
   }
 
-  protected render(): TemplateResult | void {
+  protected render() {
     return html`
       <div>
         <button class="demo-button" @click="${this.toggleMonthColumn}">Toggle Month</button>
@@ -89,7 +94,7 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
         <button class="demo-button" @click="${this.collapseFirstRows}">Collapse first Rows</button>
         <button class="demo-button" @click="${this.selectFirstRows}">Select first rows</button>
         <button class="demo-button" @click="${this.unSelectFirstRows}">Unselect first rows</button>
-        <button class="demo-button" @click="${this.toggleTheme}">Toggle theme</button>
+        <button class="demo-button" @click="${() => (this.dark = !this.dark)}">Toggle Dark Theme</button>
       </div>
       <h1>Complex table with sortable columns</h1>
       <h2>Current theme ${this.theme}</h2>
@@ -115,6 +120,7 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
         ?sortable="${true}"
         @exmg-grid-sort-change="${this.onSortChange}"
         table-layout="fixed"
+        class=${classMap({dark: this.dark})}
       >
         <exmg-grid-smart-toolbar
           slot="toolbar"
@@ -133,7 +139,7 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
             <tr class="grid-columns">
               <th class="grid-checkbox-cell"><mwc-checkbox class="selectable-checkbox"></mwc-checkbox></th>
               <th><span>ID</span></th>
-              <th style="width: 80%" data-column-key="month" data-sort>
+              <th style="width: 60%" data-column-key="month" data-sort>
                 <span>Month with quite long name which should stay on one line</span>
               </th>
               <th class="grid-col-number" data-column-key="year" data-sort>

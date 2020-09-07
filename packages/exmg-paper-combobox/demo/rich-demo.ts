@@ -1,10 +1,9 @@
 import {customElement, LitElement, html, css} from 'lit-element';
-import '@polymer/paper-item/paper-icon-item';
-import '@polymer/paper-item/paper-item-body';
-import '@polymer/paper-item/paper-item';
-import '@polymer/paper-input/paper-input';
-import '../exmg-paper-combobox';
-import '@material/mwc-icon';
+import '@polymer/paper-item/paper-icon-item.js';
+import '@polymer/paper-item/paper-item-body.js';
+import '@polymer/paper-item/paper-item.js';
+import '@polymer/paper-input/paper-input.js';
+import '../exmg-paper-combobox.js';
 import countries from './world_countries.js';
 
 @customElement('rich-demo')

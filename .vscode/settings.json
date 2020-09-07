@@ -7,7 +7,6 @@
     "**/*.js.map": true
   },
   "eslint.enable": true,
-  "eslint.autoFixOnSave": true,
   "eslint.options": {
     "configFile": "./eslintrc.json"
   },

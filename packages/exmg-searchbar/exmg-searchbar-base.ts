@@ -1,13 +1,11 @@
-import {ExmgSearchBarBaseInterface} from './exmg-searchbar-base-interface';
+import {ExmgSearchBarBaseInterface} from './exmg-searchbar-base-interface.js';
 import {LitElement, html, query, property, TemplateResult, queryAll} from 'lit-element';
 import {TextField} from '@material/mwc-textfield';
-import '@material/mwc-textfield';
-import '@material/mwc-icon/mwc-icon-font';
-import '@material/mwc-icon/mwc-icon';
-import '@polymer/paper-listbox';
-import '@polymer/paper-item/paper-item';
-import '@polymer/paper-item/paper-icon-item';
-import '@polymer/paper-spinner/paper-spinner-lite';
+import '@material/mwc-textfield/mwc-textfield.js';
+import '@polymer/paper-listbox/paper-listbox.js';
+import '@polymer/paper-item/paper-item.js';
+import '@polymer/paper-item/paper-icon-item.js';
+import '@polymer/paper-spinner/paper-spinner-lite.js';
 
 import styles from './styles/exmg-searchbar-styles';
 
