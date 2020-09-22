@@ -20,7 +20,8 @@ export class ButtonDemo extends LitElement {
       <style></style>
       <div><mwc-checkbox .checked="${this.loading}" @click="${this.changeHandler}"></mwc-checkbox> Toggle Loading</div>
       <div>
-        <mwc-button unelevated>sdadasd</mwc-button>
+        <mwc-button unelevated>unelevated</mwc-button>
+        <exmg-button unelevated dense ?loading="${this.loading}">unelevated dense</exmg-button>
         <exmg-button ?loading="${this.loading}">Test 1</exmg-button>
         <exmg-button class="dark" unelevated ?loading="${this.loading}">Test 2</exmg-button>
         <exmg-button class="dark" unelevated ?loading="${this.loading}" disabled>Test 3</exmg-button>

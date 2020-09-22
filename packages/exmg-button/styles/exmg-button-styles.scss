@@ -1,4 +1,7 @@
 :host {
+  &[dense] {
+    bottom: 1px;
+  }
   .header {
     display: flex;
     flex-direction: row;
@@ -74,4 +77,8 @@
       background-color: transparent;
     }
   }
+}
+
+:host([dense]) exmg-button-spinner {
+  bottom: 1px;
 }
