@@ -366,7 +366,7 @@ export class ExmgGrid extends LitElement {
       <exmg-sortable
         orientation="${'vertical'}"
         animation-enabled
-        item-selector="tbody.grid-data tr:not(.grid-row-detail)"
+        item-selector="tbody.grid-data > tr:not(.grid-row-detail)"
         handle-selector=".grid-row-drag-handler"
         .sortableHostNode="${this.findTableBody()}"
         @dom-order-change="${this.rowsOrderChange}"
