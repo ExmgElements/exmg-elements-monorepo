@@ -64,7 +64,10 @@ suite('<exmg-grid-smart-toolbar>', function() {
 
       const smartToolbarElem = element.shadowRoot!.querySelector<ExmgGridToolbar>('exmg-grid-toolbar')!;
 
-      assert.deepEqual(smartToolbarElem.actions, element.actions.filter(action => action.id !== 'merge'));
+      assert.deepEqual(
+        smartToolbarElem.actions,
+        element.actions.filter(action => action.id !== 'merge'),
+      );
     });
 
     test('item filters passed properly', async () => {
