@@ -29,8 +29,8 @@ export const style = css`
     border-radius: 0.5rem;
     min-width: 31.25rem;
     box-shadow: var(--shadow-elevation-8dp_-_box-shadow);
-    background: var(--exmg-dialog-background-color, initial);
-    color: var(--exmg-dialog-color, initial);
+    background: var(--exmg-dialog-background-color, white);
+    color: var(--exmg-dialog-color, #000);
   }
   paper-dialog > .actions {
     margin: 1.5rem 0;
