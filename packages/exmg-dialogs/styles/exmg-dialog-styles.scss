@@ -8,6 +8,8 @@ paper-dialog {
   border-radius: 0.5rem;
   min-width: 31.25rem;
   box-shadow: var(--shadow-elevation-8dp_-_box-shadow);
+  background: var(--exmg-dialog-background-color, initial);
+  color: var(--exmg-dialog-color, initial);
 }
 paper-dialog > .actions {
   margin: 1.5rem 0;
@@ -32,7 +34,7 @@ paper-dialog > header > paper-icon-button {
 paper-dialog > header > .title {
   -webkit-flex-shrink: 0;
   flex-shrink: 0;
-  color: #000;
+  color: var(--exmg-dialog-color, #000);
   font-size: 1.25rem;
   font-weight: 500;
   line-height: 1.75rem;
@@ -62,7 +64,7 @@ p,
 ::slotted(p) {
   font-size: 0.875rem;
   line-height: 1.25rem;
-  color: rgba(0, 0, 0, 0.54);
+  color: var(--exmg-dialog-color, rgba(0, 0, 0, 0.54));
 }
 ::slotted(label) {
   font-size: 0.75rem;

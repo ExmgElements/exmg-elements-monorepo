@@ -1,4 +1,4 @@
-import {LitElement, html, customElement} from 'lit-element';
+import {LitElement, html, customElement, css} from 'lit-element';
 import '@exmg/exmg-paper-combobox/exmg-paper-combobox.js';
 import '@exmg/exmg-paper-token-input/exmg-paper-token-input.js';
 import '@exmg/exmg-markdown-editor/exmg-markdown-editor.js';
@@ -10,6 +10,15 @@ import {ExmgConfirmDialog} from '../index';
 
 @customElement('dialog-demo')
 export class DialogDemo extends LitElement {
+  static styles = [
+    css`
+      .dark {
+        --exmg-dialog-background-color: black;
+        --exmg-dialog-color: white;
+      }
+    `,
+  ];
+
   getElementBySelector(selector: string): ExmgConfirmDialog | null {
     return this.shadowRoot ? this.shadowRoot.querySelector(selector) : null;
   }
@@ -74,6 +83,7 @@ export class DialogDemo extends LitElement {
       <exmg-button @click=${() => this.getElementBySelector('#dialog0')!.open()}>Dialog Confirm</exmg-button>
       <exmg-dialog-confirm
         id="dialog0"
+        class="dark"
         title="Confirmation"
         message="Are you sure you want to delete this item [message]?"
         button-copy="Delete account"
@@ -96,13 +106,21 @@ export class DialogDemo extends LitElement {
       </exmg-dialog-confirm>
 
       <exmg-button @click=${() => this.getElementBySelector('#dialog1')!.open()}>Dialog Normal</exmg-button>
-      <exmg-dialog-form id="dialog1" title="Create account" button-copy="Save" @cancel=${this._cancelCallback} @submit="${this._saveData}">
+      <exmg-dialog-form
+        class="dark"
+        id="dialog1"
+        title="Create account"
+        button-copy="Save"
+        @cancel=${this._cancelCallback}
+        @submit="${this._saveData}"
+      >
         <paper-input name="name" label="Name" required></paper-input>
         <paper-input name="test" label="Test"></paper-input>
       </exmg-dialog-form>
 
       <exmg-dialog-form
         id="dialog2"
+        class="dark"
         title="Create account"
         button-copy="Save"
         @cancel=${this._cancelCallback}
@@ -117,7 +135,7 @@ export class DialogDemo extends LitElement {
       </exmg-dialog-form>
       <exmg-button @click=${() => this.getElementBySelector('#dialog2')!.open()}>Dialog Error</exmg-button>
 
-      <exmg-dialog-info id="dialog4a" title="Title" button-copy="Close" @done="${this._done}">
+      <exmg-dialog-info class="dark" id="dialog4a" title="Title" button-copy="Close" @done="${this._done}">
         <div>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet pharetra turpis. Nullam tincidunt aliquet condimentum.
