@@ -365,7 +365,7 @@ row selection:
 To turn on this feature attribute `rows-sortable` has to be set on `exmg-grid`. Element `tr` or any descend `tr` element
 must have class `grid-row-drag-handler`.
 
-Each time order will be changed event `exmg-grid-rows-order-changed` is triggered and has o be handled.
+Each time order will be changed event `exmg-grid-rows-order-changed` and `exmg-grid-rows-order-updated` is triggered and has o be handled.
 Handling this event `must to trigger` update property `items` otherwise it won't take effect.
 
 Event details of `CustomEvent<EventDetailRowsOrderChanged>` has such structure:
@@ -374,6 +374,15 @@ Event details of `CustomEvent<EventDetailRowsOrderChanged>` has such structure:
 export type EventDetailRowsOrderChanged<T extends object = any> = {
   items: T[];
 };
+```
+
+Event details of `CustomEvent<EventDetailRowsOrderUpdated>` has such structure:
+
+```typescript
+export interface EventDetailRowsOrderUpdated {
+  sourceIndex: number;
+  targetIndex: number;
+}
 ```
 
 `Items are sorted as it is done in UI.`

@@ -7,7 +7,7 @@ import {ExmgQuerySelectors} from './utils/exmg-query-selectors';
 import {ExmgRowExpandable} from './featrues/exmg-row-expandable';
 import {ExmgColumnSortable} from './featrues/exmg-column-sortable';
 import {ExmgRowSortable} from './featrues/exmg-row-sortable';
-import {EventDetailRowsOrderChanged, SORT_DIRECTION} from './types/exmg-grid-types';
+import {EventDetailRowsOrderChanged, EventDetailRowsOrderUpdated, SORT_DIRECTION} from './types/exmg-grid-types';
 
 type GenericPropertyValues<T, V = unknown> = Map<T, V>;
 type Props = Exclude<keyof ExmgGrid, number | symbol>;
@@ -191,6 +191,13 @@ export class ExmgGrid extends LitElement {
       items.splice(sourceIndex, 1);
       items.splice(targetIndex, 0, movedElement);
 
+      this.dispatchEvent(
+        new CustomEvent<EventDetailRowsOrderUpdated>('exmg-grid-rows-order-updated', {
+          composed: true,
+          bubbles: true,
+          detail: {sourceIndex, targetIndex},
+        }),
+      );
       this.dispatchEvent(
         new CustomEvent<EventDetailRowsOrderChanged<object>>('exmg-grid-rows-order-changed', {
           composed: true,

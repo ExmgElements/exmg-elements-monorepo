@@ -12,3 +12,7 @@ export interface EventDetailSelectedRowsChange {
 export interface EventDetailRowsOrderChanged<T extends object = any> {
   items: T[];
 }
+export interface EventDetailRowsOrderUpdated {
+  sourceIndex: number;
+  targetIndex: number;
+}
