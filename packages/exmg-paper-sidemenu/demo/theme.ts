@@ -78,7 +78,7 @@ export class XDemo extends LitElement {
           html`
             <a href="${this.debug ? '#' : subitem.path}" data-path="${subitem.path}" tabindex="-1" class="menu-item">
               <paper-item data-path=${subitem.path} role="menuitem">
-                <svg height="24" viewBox="0 0 24 24" width="24"><path d="${subitem.iconPath}"></path></svg>
+                ${subitem.iconPath ? html`<svg height="24" viewBox="0 0 24 24" width="24"><path d="${subitem.iconPath}"></path></svg>` : subitem.icon}
                 <span class="title">
                   ${subitem.title}
                 </span>
@@ -95,7 +95,7 @@ export class XDemo extends LitElement {
     return html`
       <a href=${this.debug ? '#' : i.path} data-path=${i.path} tabindex="-1" class="menu-item solo">
         <paper-item data-path=${i.path} role="menuitem">
-          <svg height="24" viewBox="0 0 24 24" width="24"><path d=${i.iconPath}></path></svg>
+          ${i.iconPath ? html`<svg height="24" viewBox="0 0 24 24" width="24"><path d="${i.iconPath}"></path></svg>` : i.icon}
           <span class="title">${i.title}</span>
         </paper-item>
         <paper-tooltip position="right">${i.title}</paper-tooltip>

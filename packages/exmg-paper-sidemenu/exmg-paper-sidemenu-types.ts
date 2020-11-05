@@ -1,6 +1,9 @@
+import { TemplateResult } from "lit-element";
+
 export interface MenuItem {
   path: string;
-  iconPath: string;
+  iconPath?: string;
+  icon?: TemplateResult;
   title: string;
 }
 
