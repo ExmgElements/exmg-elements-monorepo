@@ -2,13 +2,15 @@ import '@polymer/test-fixture';
 import '@polymer/paper-item/paper-item';
 import '../exmg-paper-sidemenu';
 import {ExmgPaperSidemenu} from '../index';
-declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
-declare const flush: (cb?: Function) => void;
+declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: any) => T;
+declare const flush: (cb?: any) => void;
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const {assert} = chai;
 
-export const promisifyFlush = (f: Function) => () => new Promise(resolve => f(resolve));
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const promisifyFlush = (f: any) => () => new Promise((resolve) => f(resolve));
 
 suite('<exmg-paper-sidemenu></exmg-paper-sidemenu>', () => {
   let el: ExmgPaperSidemenu;

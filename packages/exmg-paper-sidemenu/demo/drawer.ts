@@ -14,7 +14,7 @@ import {isItemGroup, MenuItem, MenuGroupItem, MenuItemOrGroupItem} from '../exmg
 
 export const installMediaQueryWatcher = (mediaQuery: string, layoutChangedCallback: (mediaQueryMatches: boolean) => void) => {
   const mql = window.matchMedia(mediaQuery);
-  mql.addListener(e => layoutChangedCallback(e.matches));
+  mql.addListener((e) => layoutChangedCallback(e.matches));
   layoutChangedCallback(mql.matches);
 };
 
@@ -58,7 +58,7 @@ export class XDemo extends LitElement {
     super.connectedCallback();
 
     // Update narrow state
-    installMediaQueryWatcher('(min-width: 840px)', wide => {
+    installMediaQueryWatcher('(min-width: 840px)', (wide) => {
       this.narrow = !wide;
       this.drawerOpened = !this.narrow;
 
@@ -71,15 +71,13 @@ export class XDemo extends LitElement {
   private renderGroupItem(i: MenuGroupItem) {
     return html`
       <div class="menu-group-title">${i.title}</div>
-      ${i.items.map(
+      ${i.items?.map(
         (subitem: MenuItem) =>
           html`
             <a href=${this.debug ? '#' : subitem.path} data-path=${subitem.path} tabindex="-1" class="menu-item">
               <paper-item data-path="${subitem.path}" role="menuitem">
                 <svg height="24" viewBox="0 0 24 24" width="24"><path d=${subitem.iconPath}></path></svg>
-                <span class="title">
-                  ${subitem.title}
-                </span>
+                <span class="title"> ${subitem.title} </span>
               </paper-item>
               <paper-tooltip position="right">${subitem.title}</paper-tooltip>
             </a>
@@ -103,9 +101,7 @@ export class XDemo extends LitElement {
   }
 
   private renderMenu() {
-    return html`
-      ${menu.map((i: MenuItemOrGroupItem) => (isItemGroup(i) ? this.renderGroupItem(i) : this.renderItem(i)))}
-    `;
+    return html` ${menu.map((i: MenuItemOrGroupItem) => (isItemGroup(i) ? this.renderGroupItem(i) : this.renderItem(i)))} `;
   }
 
   private openChanged(e: CustomEvent) {

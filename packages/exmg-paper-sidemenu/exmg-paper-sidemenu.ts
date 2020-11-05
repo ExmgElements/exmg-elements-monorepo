@@ -43,7 +43,7 @@ export const settingsIcon = html`
 @customElement('exmg-paper-sidemenu')
 export class ExmgPaperSidemenu extends LitElement {
   @property({type: Boolean, reflect: true})
-  @observer(function(this: LitElement, collapsed: boolean) {
+  @observer(function (this: LitElement, collapsed: boolean) {
     this.dispatchEvent(new CustomEvent('collapsed', {bubbles: false, composed: true, detail: collapsed}));
   })
   collapsed = false;
@@ -52,7 +52,7 @@ export class ExmgPaperSidemenu extends LitElement {
    * Contains the path of the selected menu item
    */
   @property({type: String})
-  @observer(function(this: LitElement, selected: string) {
+  @observer(function (this: LitElement, selected: string) {
     this.dispatchEvent(new CustomEvent('selected-changed', {bubbles: false, composed: true, detail: selected}));
   })
   selected!: string;

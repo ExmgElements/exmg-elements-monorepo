@@ -99,7 +99,7 @@ export class CmsSidemenuHeader extends LitElement {
    * Contains the path of the selected menu item
    */
   @property({type: String})
-  @observer(function(this: LitElement, selected: string) {
+  @observer(function (this: LitElement, selected: string) {
     this.dispatchEvent(new CustomEvent('selected-changed', {bubbles: false, composed: true, detail: selected}));
   })
   selected!: string;
@@ -117,9 +117,7 @@ export class CmsSidemenuHeader extends LitElement {
           <paper-tooltip position="right">${this.homeLabel}</paper-tooltip>
         </a>
         <a href=${this.debug ? '#' : this.settingsUrl} tabindex="-1" class="menu-item">
-          <paper-item role="menuitem" aria-label=${this.settingsLabel}>
-            ${settingsIcon}
-          </paper-item>
+          <paper-item role="menuitem" aria-label=${this.settingsLabel}> ${settingsIcon} </paper-item>
           <paper-tooltip position="right">${this.settingsLabel}</paper-tooltip>
         </a>
       </paper-listbox>
