@@ -5,6 +5,7 @@ export interface MenuItem {
   iconPath?: string;
   icon?: TemplateResult;
   title: string;
+  badge?: number;
 }
 
 export interface MenuGroupItem {

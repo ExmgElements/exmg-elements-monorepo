@@ -53,6 +53,19 @@ export class XDemo extends LitElement {
       app-toolbar {
         background: yellow;
       }
+
+      div[slot="footer"] {
+        margin: 4px 0px;
+        width: 100%;
+        height: 100%;
+        border-right: 1px solid var(--exmg-paper-sidemenu-menu-border-color, #ddd);
+      }
+      div[slot="footer"] svg {
+        fill: white;
+      }
+      exmg-paper-sidemenu[collapsed] div[slot="footer"] .title {
+        display: none;
+      }
     `,
   ];
 
@@ -82,6 +95,7 @@ export class XDemo extends LitElement {
                   ? html`<svg height="24" viewBox="0 0 24 24" width="24"><path d="${subitem.iconPath}"></path></svg>`
                   : subitem.icon}
                 <span class="title"> ${subitem.title} </span>
+                ${subitem.badge ? html`<exmg-paper-sidemenu-badge ?collapsed=${this.collapsed}>${subitem.badge}</exmg-paper-sidemenu-badge>` : ''}
               </paper-item>
               <paper-tooltip position="right">${subitem.title}</paper-tooltip>
             </a>
@@ -97,6 +111,7 @@ export class XDemo extends LitElement {
         <paper-item data-path=${i.path} role="menuitem">
           ${i.iconPath ? html`<svg height="24" viewBox="0 0 24 24" width="24"><path d="${i.iconPath}"></path></svg>` : i.icon}
           <span class="title">${i.title}</span>
+          ${i.badge ? html`<exmg-paper-sidemenu-badge ?collapsed=${this.collapsed}>${i.badge}</exmg-paper-sidemenu-badge>` : ''}
         </paper-item>
         <paper-tooltip position="right">${i.title}</paper-tooltip>
       </a>
@@ -126,6 +141,20 @@ export class XDemo extends LitElement {
     this.drawerOpened = !this.drawerOpened;
   }
 
+  renderFooterButton() {
+    return html`
+      <div slot="footer">
+        <a href="${'#'}"  tabindex="-1" class="menu-item">
+          <paper-item role="menuitem" data-path="notifications/" tabindex="0" aria-disabled="false">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+            <span class="title"> Mark </span>
+          </paper-item>
+          <paper-tooltip position="right" role="tooltip" tabindex="-1">Signout</paper-tooltip>
+        </a>
+      </div>
+    `;
+  }
+
   render() {
     const classes = {collapsed: this.collapsed, narrow: this.narrow};
 
@@ -148,6 +177,7 @@ export class XDemo extends LitElement {
         >
           <exmg-paper-sidemenu-header slot="header" ?collapsed=${this.collapsed}></exmg-paper-sidemenu-header>
           ${this.renderMenu()}
+          ${this.renderFooterButton()}
         </exmg-paper-sidemenu>
       </app-drawer>
 
