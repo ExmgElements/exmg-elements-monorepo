@@ -540,5 +540,17 @@ export const style = css`
   .main-content.collapsed {
     margin-left: var(--default-paper-sidemenu-collapsed-width);
   }
+  div[slot='footer'] {
+    margin: 4px 0px;
+    width: 100%;
+    height: 100%;
+    border-right: 1px solid var(--exmg-paper-sidemenu-menu-border-color, #ddd);
+  }
+  div[slot='footer'] svg {
+    fill: #fff;
+  }
+  exmg-paper-sidemenu[collapsed] div[slot='footer'] .title {
+    display: none;
+  }
 `;
 export default style;
