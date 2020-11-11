@@ -53,19 +53,6 @@ export class XDemo extends LitElement {
       app-toolbar {
         background: yellow;
       }
-
-      div[slot='footer'] {
-        margin: 4px 0px;
-        width: 100%;
-        height: 100%;
-        border-right: 1px solid var(--exmg-paper-sidemenu-menu-border-color, #ddd);
-      }
-      div[slot='footer'] svg {
-        fill: white;
-      }
-      exmg-paper-sidemenu[collapsed] div[slot='footer'] .title {
-        display: none;
-      }
     `,
   ];
 
