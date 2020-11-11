@@ -72,7 +72,7 @@ export class ExmgPaperSidemenuBase extends LitElement {
   firstUpdated() {
     // Check if footer slot contains data
     const slotEl = this.shadowRoot!.querySelector('slot[name="footer"]');
-    if(slotEl) {
+    if (slotEl) {
       this.footerItem = true;
       return;
     }
@@ -99,7 +99,6 @@ export class ExmgPaperSidemenuBase extends LitElement {
       ${this.disableCollapse
         ? html``
         : html`
-
             <!-- Sidemenu Footer -->
             <div class="menu-footer">
               <slot name="footer"></slot>
