@@ -96,7 +96,9 @@ export class XDemo extends LitElement {
                   : subitem.icon}
                 <span class="title"> ${subitem.title} </span>
                 ${subitem.badge
-                  ? html`<exmg-paper-sidemenu-badge ?collapsed=${this.collapsed}>${subitem.badge === true ? html`&nbsp;` : subitem.badge}</exmg-paper-sidemenu-badge>`
+                  ? html`<exmg-paper-sidemenu-badge ?collapsed=${this.collapsed}
+                      >${subitem.badge === true ? html`&nbsp;` : subitem.badge}</exmg-paper-sidemenu-badge
+                    >`
                   : ''}
               </paper-item>
               <paper-tooltip position="right">${subitem.title}</paper-tooltip>
@@ -113,7 +115,11 @@ export class XDemo extends LitElement {
         <paper-item data-path=${i.path} role="menuitem">
           ${i.iconPath ? html`<svg height="24" viewBox="0 0 24 24" width="24"><path d="${i.iconPath}"></path></svg>` : i.icon}
           <span class="title">${i.title}</span>
-          ${i.badge ? html`<exmg-paper-sidemenu-badge ?collapsed=${this.collapsed}>${i.badge === true ? html`&nbsp;` : i.badge}</exmg-paper-sidemenu-badge>` : ''}
+          ${i.badge
+            ? html`<exmg-paper-sidemenu-badge ?collapsed=${this.collapsed}
+                >${i.badge === true ? html`&nbsp;` : i.badge}</exmg-paper-sidemenu-badge
+              >`
+            : ''}
         </paper-item>
         <paper-tooltip position="right">${i.title}</paper-tooltip>
       </a>
