@@ -15,7 +15,7 @@
   "files": [
     "src/**/*.js",
     "src/**/*.d.ts",
-    "src/**/*.tpl",
+    "src/**/*.tmpl",
     "bin"
   ],
   "repository": {
