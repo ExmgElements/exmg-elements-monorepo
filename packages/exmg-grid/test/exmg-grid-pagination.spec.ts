@@ -2,21 +2,23 @@ import {ExmgGridPagination} from '../src/table/exmg-grid-pagination';
 import {onExmgGridPaginationPageChanged, onExmgGridPaginationPageSizeChanged, promisifyFlush} from './utils';
 import {PaperGridTooolbarComboboxElement} from 'src/table/exmg-grid-toolbar-combobox';
 
-declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
+declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: any) => T;
+
+// eslint-disable-next-line @typescript-eslint/ban-types
 declare const flush: (cb?: Function) => void;
 
 const {assert} = chai;
 
-suite('<exmg-grid-pagination>', function() {
+suite('<exmg-grid-pagination>', function () {
   let element: ExmgGridPagination;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('base usage', function() {
+  suite('base usage', function () {
     setup(() => {
       element = fixture('BasicTestFixture');
     });
 
-    test('element is upgraded', function() {
+    test('element is upgraded', function () {
       assert.instanceOf(element, ExmgGridPagination);
     });
 
@@ -48,7 +50,7 @@ suite('<exmg-grid-pagination>', function() {
       pageChangedPromise = onExmgGridPaginationPageChanged(element, false);
       nextPageBtn.click();
 
-      timeoutPromise = new Promise(resolve => {
+      timeoutPromise = new Promise<void>((resolve) => {
         setTimeout(() => {
           resolve();
         }, 500);
@@ -66,7 +68,7 @@ suite('<exmg-grid-pagination>', function() {
       pageChangedPromise = onExmgGridPaginationPageChanged(element, false);
       prevPageBtn.click();
 
-      timeoutPromise = new Promise(resolve => {
+      timeoutPromise = new Promise<void>((resolve) => {
         setTimeout(() => {
           resolve();
         }, 500);
@@ -102,7 +104,7 @@ suite('<exmg-grid-pagination>', function() {
       pageChangedPromise = onExmgGridPaginationPageChanged(element, false);
       nextPageBtn.click();
 
-      const timeoutPromise = new Promise(resolve => {
+      const timeoutPromise = new Promise<void>((resolve) => {
         setTimeout(() => {
           resolve();
         }, 500);

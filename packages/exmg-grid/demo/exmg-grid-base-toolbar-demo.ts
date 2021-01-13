@@ -1,4 +1,4 @@
-import {customElement, html, LitElement, property} from 'lit-element';
+import {customElement, html, LitElement, property, TemplateResult} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 import '../src/table/exmg-grid-toolbar-combobox';
 import '@polymer/paper-item';
@@ -71,7 +71,7 @@ export class ExmgGridBaseToolbarDemo extends LitElement {
     this.actions = [...this.actions];
   }
 
-  render() {
+  render(): TemplateResult {
     return html`
       <style>
         :host {
@@ -86,7 +86,7 @@ export class ExmgGridBaseToolbarDemo extends LitElement {
       <hr />
       <exmg-grid-base-toolbar>
         <div slot="actions">
-          ${repeat(this.actions, action => {
+          ${repeat(this.actions, (action) => {
             return html`
               <mwc-icon-button
                 class="action"
@@ -100,7 +100,7 @@ export class ExmgGridBaseToolbarDemo extends LitElement {
         </div>
         <div slot="description">${this.description}</div>
         <div slot="filters">
-          ${repeat(this.filters, filter => {
+          ${repeat(this.filters, (filter) => {
             return html`
               <exmg-grid-toolbar-combobox
                 id="pageSizeOptions"
@@ -111,10 +111,7 @@ export class ExmgGridBaseToolbarDemo extends LitElement {
                 ${repeat(
                   filter.config.data,
                   (item: any) => item,
-                  item =>
-                    html`
-                      <paper-item data-id="${item.id}">${filter.name}: ${item.title}</paper-item>
-                    `,
+                  (item) => html` <paper-item data-id="${item.id}">${filter.name}: ${item.title}</paper-item> `,
                 )}
               </exmg-grid-toolbar-combobox>
             `;

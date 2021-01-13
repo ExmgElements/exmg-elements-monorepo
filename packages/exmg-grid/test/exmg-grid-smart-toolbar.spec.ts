@@ -8,21 +8,23 @@ import {
   ActionWithCondition,
 } from '../src/table/types/exmg-grid-smart-toolbar-types';
 
-declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
+declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: any) => T;
+
+// eslint-disable-next-line @typescript-eslint/ban-types
 declare const flush: (cb?: Function) => void;
 
 const {assert} = chai;
 
-suite('<exmg-grid-smart-toolbar>', function() {
+suite('<exmg-grid-smart-toolbar>', function () {
   let element: ExmgGridSmartToolbar;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('base usage', function() {
+  suite('base usage', function () {
     setup(() => {
       element = fixture('BasicTestFixture');
     });
 
-    test('element is upgraded', function() {
+    test('element is upgraded', function () {
       assert.instanceOf(element, ExmgGridSmartToolbar);
     });
 
@@ -66,7 +68,7 @@ suite('<exmg-grid-smart-toolbar>', function() {
 
       assert.deepEqual(
         smartToolbarElem.actions,
-        element.actions.filter(action => action.id !== 'merge'),
+        element.actions.filter((action) => action.id !== 'merge'),
       );
     });
 

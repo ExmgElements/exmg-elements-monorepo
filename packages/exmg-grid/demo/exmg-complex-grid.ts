@@ -1,4 +1,4 @@
-import {html, customElement, css} from 'lit-element';
+import {html, customElement, css, TemplateResult} from 'lit-element';
 import {classMap} from 'lit-html/directives/class-map';
 import {repeat} from 'lit-html/directives/repeat';
 import '@material/mwc-checkbox';
@@ -44,7 +44,7 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
   }
 
   // get more menu items for row
-  moreMenu() {
+  moreMenu(): TemplateResult {
     return html`
       <paper-menu-button dynamic-align>
         <mwc-icon-button class="ignore-select" icon="more_vert" slot="dropdown-trigger"></mwc-icon-button>
@@ -60,7 +60,7 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
     return repeat(
       this.items,
       ({id}) => id,
-      i => {
+      (i) => {
         return html`
           <tr data-row-key="${i.id}">
             <td class="grid-checkbox-cell"><mwc-checkbox class="selectable-checkbox"></mwc-checkbox></td>
@@ -69,9 +69,7 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
             <td class="grid-col-number">${i.year}</td>
             <td class="grid-col-number">${i.amount}</td>
             <td class="grid-cell-visible-on-hover"><span class="expandable-toggle">${createIcon}</span></td>
-            <td class="grid-col no-ellipsis">
-              ${this.moreMenu()}
-            </td>
+            <td class="grid-col no-ellipsis">${this.moreMenu()}</td>
           </tr>
           <tr class="grid-row-detail" data-row-detail-key="${i.id}">
             <td data-auto-colspan>
@@ -84,7 +82,7 @@ export class ExmgComplexGrid extends ExmgBaseGridDemo {
     );
   }
 
-  protected render() {
+  protected render(): TemplateResult {
     return html`
       <div>
         <button class="demo-button" @click="${this.toggleMonthColumn}">Toggle Month</button>

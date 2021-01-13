@@ -6,6 +6,7 @@ export interface ActionWithCondition<TCondition extends BaseActionCondition = Ba
   condition?: TCondition;
 }
 
+// eslint-disable-next-line no-shadow
 export enum ActionConditionType {
   AmountOfSelectedItemsRange = 'amount_of_items_range',
 }

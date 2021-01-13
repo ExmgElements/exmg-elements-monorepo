@@ -2,7 +2,7 @@ import {ExmgQuerySelectors} from '../../../src/table/utils/exmg-query-selectors'
 import {ExmgColumnSortable} from '../../../src/table/featrues/exmg-column-sortable';
 import {EventDetailSortChange} from '../../../src/table/types/exmg-grid-types';
 
-declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
+declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: any) => T;
 
 const {assert} = chai;
 
@@ -65,7 +65,7 @@ suite('exmg-column-sortable', () => {
 
     testInstance.initFeature();
     const assertEventDetailsSortChange = async (expected: EventDetailSortChange) => {
-      const eventListener = new Promise<CustomEvent<EventDetailSortChange>>(resolve => {
+      const eventListener = new Promise<CustomEvent<EventDetailSortChange>>((resolve) => {
         element.addEventListener('exmg-grid-sort-change', (event: Event) => {
           resolve(event as CustomEvent<EventDetailSortChange>);
         });

@@ -2,21 +2,23 @@ import {ExmgGridToolbar} from '../src/table/exmg-grid-toolbar';
 import {promisifyFlush, onExmgGridToolbarActionExecuted, onExmgGridToolbarFilterChanged} from './utils';
 import {Filter, FilterConfigType, FilterSingleSelectConfig} from '../src/table/types/exmg-grid-toolbar-types';
 
-declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
+declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: any) => T;
+
+// eslint-disable-next-line @typescript-eslint/ban-types
 declare const flush: (cb?: Function) => void;
 
 const {assert} = chai;
 
-suite('<exmg-grid-toolbar>', function() {
+suite('<exmg-grid-toolbar>', function () {
   let element: ExmgGridToolbar;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('base usage', function() {
+  suite('base usage', function () {
     setup(() => {
       element = fixture('BasicTestFixture');
     });
 
-    test('element is upgraded', function() {
+    test('element is upgraded', function () {
       assert.instanceOf(element, ExmgGridToolbar);
     });
 

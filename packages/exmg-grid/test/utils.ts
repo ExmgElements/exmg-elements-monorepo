@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import {LitElement} from 'lit-element';
 import {EventDetailSelectedRowsChange, EventDetailSortChange} from '../src/table/types/exmg-grid-types';
 
-export const promisifyFlush = (flush: Function) => () => new Promise(resolve => flush(resolve));
+// eslint-disable-next-line @typescript-eslint/ban-types
+export const promisifyFlush = (flush: Function) => () => new Promise((resolve) => flush(resolve));
 
 type OnEventType = <T extends Event = CustomEvent>(eventName: string) => (element: LitElement, shouldResolve: boolean) => Promise<T>;
 

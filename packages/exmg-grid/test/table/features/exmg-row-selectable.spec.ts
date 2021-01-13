@@ -2,7 +2,7 @@ import {ExmgQuerySelectors} from '../../../src/table/utils/exmg-query-selectors'
 import {ExmgRowSelectable} from '../../../src/table/featrues/exmg-row-selectable';
 import {EventDetailSelectedRowsChange} from '../../../src/table/types/exmg-grid-types';
 
-declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
+declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: any) => T;
 
 const {assert} = chai;
 const checkboxSelector = '.checkbox-class';
@@ -13,7 +13,7 @@ suite('exmg-row-selectable', () => {
   let testInstance: ExmgRowSelectable;
   const dispatchEvent = (elem: HTMLElement) => (event: Event) => elem.dispatchEvent(event);
   const createEventListener = async (elem: HTMLElement) =>
-    new Promise<CustomEvent<EventDetailSelectedRowsChange>>(resolve => {
+    new Promise<CustomEvent<EventDetailSelectedRowsChange>>((resolve) => {
       elem.addEventListener('exmg-grid-selected-rows-change', (event: Event) => {
         resolve(event as CustomEvent<EventDetailSelectedRowsChange>);
       });
@@ -92,7 +92,7 @@ suite('exmg-row-selectable', () => {
       assert.equal(testInstance.selectedRows.length, 0, 'Before init any row is selected');
       assert.isFalse(headerCheckbox.checked, 'Header checkbox is not select');
 
-      querySelectors.getBodyRows().forEach(row => row.click());
+      querySelectors.getBodyRows().forEach((row) => row.click());
 
       assert.equal(testInstance.selectedRows.length, 2, 'All rows selected');
       assert.isTrue(headerCheckbox.checked, 'Header checkbox is synced');

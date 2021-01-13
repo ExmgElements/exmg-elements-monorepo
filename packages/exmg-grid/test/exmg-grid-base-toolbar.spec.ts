@@ -1,22 +1,24 @@
 import {ExmgGridBaseToolbar} from '../src/table/exmg-grid-base-toolbar';
 import {promisifyFlush} from './utils';
 
-declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
+declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: any) => T;
+
+// eslint-disable-next-line @typescript-eslint/ban-types
 declare const flush: (cb?: Function) => void;
 
 const {assert} = chai;
 
-suite('<exmg-grid-base-toolbar>', function() {
+suite('<exmg-grid-base-toolbar>', function () {
   let element: ExmgGridBaseToolbar;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('base usage', function() {
+  suite('base usage', function () {
     setup(async () => {
       element = fixture('BasicTestFixture');
       await flushCompleted();
     });
 
-    test('element is upgraded', function() {
+    test('element is upgraded', function () {
       assert.instanceOf(element, ExmgGridBaseToolbar);
     });
 

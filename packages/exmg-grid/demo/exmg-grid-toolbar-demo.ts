@@ -1,4 +1,4 @@
-import {customElement, html, LitElement} from 'lit-element';
+import {customElement, html, LitElement, TemplateResult} from 'lit-element';
 import {Action, Filter, FilterSingleSelectConfig, FilterConfigType} from '../src/table/types/exmg-grid-toolbar-types';
 
 @customElement('exmg-grid-toolbar-demo')
@@ -58,7 +58,7 @@ export class ExmgGridToolbarDemo extends LitElement {
     console.log('onFilterChanged', e.detail);
   }
 
-  render() {
+  render(): TemplateResult {
     return html`
       <style>
         :host {

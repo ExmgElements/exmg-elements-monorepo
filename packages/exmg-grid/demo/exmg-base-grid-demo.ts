@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import {LitElement, property} from 'lit-element';
 import '@material/mwc-checkbox';
 import '../src/table/exmg-grid.js';
@@ -38,7 +39,7 @@ const generateRows = (length = 50, startId = 1): Income[] => {
   const rows: Income[] = [];
   let id: number = startId - 1;
   while (rows.length < length) {
-    const items = source.map(it => {
+    const items = source.map((it) => {
       id = id + 1;
       return {...it, id, amount: randomAmount()};
     });
@@ -162,19 +163,21 @@ export abstract class ExmgBaseGridDemo extends LitElement {
     {id: 'amount', title: 'Amount', selected: true},
   ];
 
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   protected onActionExecuted(e: CustomEvent<{id: string}>) {
     console.log('onActionExecuted', e.detail);
     this.handleAction(e.detail.id);
   }
 
-  protected onActionDelegate(actionId: string): Function {
+  protected onActionDelegate(actionId: string) {
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     return () => this.handleAction(actionId);
   }
 
   private handleAction(actionId: string): void {
     switch (actionId) {
       case 'delete': {
-        const rowIds = this.selectedRows.map(row => row.getAttribute('data-row-key'));
+        const rowIds = this.selectedRows.map((row) => row.getAttribute('data-row-key'));
         allItems = allItems.filter(({id}) => !rowIds.includes(id.toString()));
         filteredItems = filteredItems.filter(({id}) => !rowIds.includes(id.toString()));
         this.selectedRows = [];
@@ -182,7 +185,7 @@ export abstract class ExmgBaseGridDemo extends LitElement {
         break;
       }
       case 'merge': {
-        const rowIds = this.selectedRows.map(row => row.getAttribute('data-row-key'));
+        const rowIds = this.selectedRows.map((row) => row.getAttribute('data-row-key'));
         const [idToReplace, ...idsToRemove] = rowIds;
         const mergedRow = allItems
           .filter(({id}) => rowIds.includes(id.toString()))
@@ -196,7 +199,7 @@ export abstract class ExmgBaseGridDemo extends LitElement {
 
         allItems = allItems
           .filter(({id}) => !idsToRemove.includes(id.toString()))
-          .map(it => {
+          .map((it) => {
             if (it.id.toString() === idToReplace) {
               return {...mergedRow};
             }
@@ -205,7 +208,7 @@ export abstract class ExmgBaseGridDemo extends LitElement {
 
         filteredItems = filteredItems
           .filter(({id}) => !idsToRemove.includes(id.toString()))
-          .map(it => {
+          .map((it) => {
             if (it.id.toString() === idToReplace) {
               return {...mergedRow};
             }
@@ -223,7 +226,7 @@ export abstract class ExmgBaseGridDemo extends LitElement {
     this.handleFilterChanged(id, value);
   }
 
-  protected onFilterChangedComboboxDelegate(filterId: string): Function {
+  protected onFilterChangedComboboxDelegate(filterId: string) {
     return (e: CustomEvent<EventSelectPayload>) => {
       const filterValue = e.detail.value as string;
       this.handleFilterChanged(filterId, filterValue);

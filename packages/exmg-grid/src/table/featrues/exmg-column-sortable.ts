@@ -15,7 +15,7 @@ export class ExmgColumnSortable {
   }
 
   initFeature(): void {
-    this.querySelectors.getColumns('th[data-sort]').forEach(column => {
+    this.querySelectors.getColumns('th[data-sort]').forEach((column) => {
       const columnId = column.getAttribute('data-sort') || column.getAttribute('data-column-key')!;
 
       //  set default sort column if any
@@ -32,7 +32,7 @@ export class ExmgColumnSortable {
       const columnSortDirection = column.getAttribute('data-sort-direction');
       const nextSortDirection = columnSortDirection === 'ASC' ? 'DESC' : columnSortDirection === 'DESC' ? undefined : 'ASC';
       // reset previous
-      this.querySelectors.getColumns('th[data-sort-direction=ASC], th[data-sort-direction=DESC]').forEach(alreadySortedColumn => {
+      this.querySelectors.getColumns('th[data-sort-direction=ASC], th[data-sort-direction=DESC]').forEach((alreadySortedColumn) => {
         if (alreadySortedColumn !== column) {
           alreadySortedColumn.removeAttribute('data-sort-direction');
         }

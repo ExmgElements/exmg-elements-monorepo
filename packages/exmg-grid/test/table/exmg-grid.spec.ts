@@ -1,8 +1,9 @@
 import {ExmgGrid} from '../../src/table/exmg-grid';
 import {promisifyFlush, onExmgGridSortChange, onExmgGridSelectedRowsChange, onEventListenerExmgGridSelectedRowsChange} from '../utils';
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 declare const flush: (cb?: Function) => void;
-declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
+declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: any) => T;
 
 const {assert} = chai;
 
@@ -39,11 +40,11 @@ suite('exmg-grid', () => {
     test('toggle column visibility', async () => {
       const areAllMonthRowsVisible = (): boolean =>
         Array.from<HTMLElement>(table.querySelectorAll('tr:not(.grid-row-detail) td:nth-child(3)')).every(
-          row => row.style.display !== 'none',
+          (row) => row.style.display !== 'none',
         );
       const isAnyMonthRowsVisible = (): boolean =>
         Array.from<HTMLElement>(table.querySelectorAll('tr:not(.grid-row-detail) td:nth-child(3)')).some(
-          row => row.style.display !== 'none',
+          (row) => row.style.display !== 'none',
         );
 
       assert.isTrue(areAllMonthRowsVisible());

@@ -1,4 +1,4 @@
-import {customElement, html, LitElement, property} from 'lit-element';
+import {customElement, html, LitElement, property, TemplateResult} from 'lit-element';
 import './exmg-grid-toolbar';
 import {
   Filter,
@@ -45,7 +45,7 @@ export class ExmgGridSmartToolbar extends LitElement {
   columnFilterColumns: SettingSelectionListItem[] = [];
 
   private getActions() {
-    return this.actions.filter(action => {
+    return this.actions.filter((action) => {
       return this.shouldActionBeVisible(action);
     });
   }
@@ -82,7 +82,7 @@ export class ExmgGridSmartToolbar extends LitElement {
   }
 
   private getFilters() {
-    return this.filters.map(filter => {
+    return this.filters.map((filter) => {
       return {
         ...filter,
         disabled: this.amountOfSelectedItems > 0,
@@ -108,7 +108,7 @@ export class ExmgGridSmartToolbar extends LitElement {
     ];
   }
 
-  render() {
+  render(): TemplateResult {
     return html`
       <exmg-grid-toolbar
         .actions="${this.getActions()}"

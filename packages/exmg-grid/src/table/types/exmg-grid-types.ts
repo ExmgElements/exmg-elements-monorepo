@@ -9,7 +9,7 @@ export interface EventDetailSelectedRowsChange {
   rows: HTMLTableRowElement[];
 }
 
-export interface EventDetailRowsOrderChanged<T extends object = any> {
+export interface EventDetailRowsOrderChanged<T extends any = any> {
   items: T[];
 }
 export interface EventDetailRowsOrderUpdated {

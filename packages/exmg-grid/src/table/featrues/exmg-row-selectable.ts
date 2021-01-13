@@ -62,7 +62,7 @@ export class ExmgRowSelectable {
     }
   }
 
-  syncSelectedItems() {
+  syncSelectedItems(): void {
     if (this.syncRowSelectionWithBodyCheckboxes()) {
       this.fireSelectableRows();
     }
@@ -81,7 +81,7 @@ export class ExmgRowSelectable {
   }
 
   private updateBodyRowsListeners(bodyRows: NodeListOf<HTMLTableRowElement>): void {
-    bodyRows.forEach(row => {
+    bodyRows.forEach((row) => {
       row.setAttribute('data-is-selectable', '');
 
       row.addEventListener('click', (e: Event) => {
@@ -151,7 +151,7 @@ export class ExmgRowSelectable {
       this.querySelectors
         .getTableBody()
         .querySelectorAll(`tr[data-selected] ${this.selectableCheckboxSelector}:not([checked])`)
-        .forEach(uncheckedCheckbox => {
+        .forEach((uncheckedCheckbox) => {
           const row = uncheckedCheckbox.closest('tr');
           if (row) {
             row.removeAttribute('data-selected');
@@ -163,7 +163,7 @@ export class ExmgRowSelectable {
       this.querySelectors
         .getTableBody()
         .querySelectorAll(`tr:not([data-selected]) ${this.selectableCheckboxSelector}[checked]`)
-        .forEach(checkedCheckbox => {
+        .forEach((checkedCheckbox) => {
           const row = checkedCheckbox.closest('tr');
           if (row) {
             row.setAttribute('data-selected', '');
@@ -197,11 +197,11 @@ export class ExmgRowSelectable {
     if (this.allCheckbox!.checked) {
       this.allCheckbox!.removeAttribute('indeterminate');
       this.selectedRows = [];
-      this.querySelectors.getBodyRows().forEach(row => {
+      this.querySelectors.getBodyRows().forEach((row) => {
         row.setAttribute('data-selected', '');
         this.selectedRows.push(row);
       });
-      this.getBodyCheckboxes().forEach(checkbox => {
+      this.getBodyCheckboxes().forEach((checkbox) => {
         checkCheckbox(checkbox);
       });
     } else {
@@ -210,10 +210,10 @@ export class ExmgRowSelectable {
       this.querySelectors
         .getTableBody()
         .querySelectorAll<HTMLTableRowElement>('tr[data-selected]')
-        .forEach(row => {
+        .forEach((row) => {
           row.removeAttribute('data-selected');
         });
-      this.getBodyCheckboxes().forEach(checkbox => {
+      this.getBodyCheckboxes().forEach((checkbox) => {
         uncheckCheckbox(checkbox);
       });
     }

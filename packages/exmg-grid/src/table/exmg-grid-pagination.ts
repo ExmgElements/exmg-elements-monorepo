@@ -35,9 +35,7 @@ export class ExmgGridPagination extends LitElement {
   itemCount = 0;
 
   private renderPageSizeLabel() {
-    return html`
-      ${this.pageSizeLabel}
-    `;
+    return html` ${this.pageSizeLabel} `;
   }
 
   private renderPageSizeOptions() {
@@ -51,11 +49,8 @@ export class ExmgGridPagination extends LitElement {
       >
         ${repeat(
           this.pageSizeOptions,
-          item => item,
-          item =>
-            html`
-              <paper-item data-id="${item}">${item}</paper-item>
-            `,
+          (item) => item,
+          (item) => html` <paper-item data-id="${item}">${item}</paper-item> `,
         )}
       </exmg-grid-toolbar-combobox>
     `;
@@ -70,15 +65,11 @@ export class ExmgGridPagination extends LitElement {
       `;
     }
 
-    return html`
-      <span>${this.pageIndex * this.pageSize + 1}-${(this.pageIndex + 1) * this.pageSize}</span>
-    `;
+    return html` <span>${this.pageIndex * this.pageSize + 1}-${(this.pageIndex + 1) * this.pageSize}</span> `;
   }
 
   private renderPageRangeActions() {
-    return html`
-      ${this.renderPrevPage()} ${this.renderNextPage()}
-    `;
+    return html` ${this.renderPrevPage()} ${this.renderNextPage()} `;
   }
 
   private renderPrevPage() {
@@ -180,20 +171,12 @@ export class ExmgGridPagination extends LitElement {
       </style>
       <div class="wrapper">
         <div class="page-size">
-          <div class="page-size-label">
-            ${this.renderPageSizeLabel()}
-          </div>
-          <div class="page-size-options">
-            ${this.renderPageSizeOptions()}
-          </div>
+          <div class="page-size-label">${this.renderPageSizeLabel()}</div>
+          <div class="page-size-options">${this.renderPageSizeOptions()}</div>
         </div>
         <div class="page-range">
-          <div class="page-range-label">
-            ${this.renderPageRangeLabel()}
-          </div>
-          <div class="page-range-actions">
-            ${this.renderPageRangeActions()}
-          </div>
+          <div class="page-range-label">${this.renderPageRangeLabel()}</div>
+          <div class="page-range-actions">${this.renderPageRangeActions()}</div>
         </div>
         <div></div>
       </div>

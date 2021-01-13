@@ -1,4 +1,4 @@
-import {customElement, html, LitElement, property} from 'lit-element';
+import {customElement, html, LitElement, property, TemplateResult} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 
 import '@material/mwc-icon-button';
@@ -62,8 +62,8 @@ export class ExmgGridSettingSelectionList extends LitElement {
   private saveSettingsListToLocalStorage() {
     const key = `columnSettings:${window.location.pathname}`;
     const value = this.settingData
-      .filter(d => d.selected)
-      .map(d => d.id)
+      .filter((d) => d.selected)
+      .map((d) => d.id)
       .join(',');
     localStorage.setItem(key, value);
   }
@@ -75,7 +75,7 @@ export class ExmgGridSettingSelectionList extends LitElement {
       return;
     }
     const selectedSettings = value.split(',');
-    this.settingData = this.settingData.map(sd => {
+    this.settingData = this.settingData.map((sd) => {
       if (selectedSettings.indexOf(sd.id) !== -1) {
         sd.selected = true;
       }
@@ -88,7 +88,7 @@ export class ExmgGridSettingSelectionList extends LitElement {
     e.stopPropagation();
   }
 
-  render() {
+  render(): TemplateResult {
     return html`
       <mwc-icon-button
         icon="${this.icon}"
@@ -108,8 +108,8 @@ export class ExmgGridSettingSelectionList extends LitElement {
           >
             ${repeat(
               this.settingData,
-              item => item.id,
-              item => html`
+              (item) => item.id,
+              (item) => html`
                 <li class="mdc-list-item">
                   <mwc-checkbox class="mdc-list-item__graphic" ?checked="${item.selected}"></mwc-checkbox>
                   <span class="mdc-list-item__text">${item.title}</span>

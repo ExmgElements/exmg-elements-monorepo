@@ -1,4 +1,4 @@
-import {html, customElement, css} from 'lit-element';
+import {html, customElement, css, TemplateResult} from 'lit-element';
 import {classMap} from 'lit-html/directives/class-map';
 import {repeat} from 'lit-html/directives/repeat';
 import '@material/mwc-checkbox';
@@ -36,7 +36,7 @@ export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
     return repeat(
       this.items,
       ({id}) => id,
-      i => {
+      (i) => {
         return html`
           <tr data-row-key="${i.id}">
             <td class="grid-checkbox-cell"><mwc-checkbox class="selectable-checkbox"></mwc-checkbox></td>
@@ -60,7 +60,7 @@ export class ExmgComplexGridWithSortableRows extends ExmgBaseGridDemo {
     );
   }
 
-  protected render() {
+  protected render(): TemplateResult {
     return html`
       <div>
         <button class="demo-button" @click="${this.toggleMonthColumn}">Toggle Month</button>

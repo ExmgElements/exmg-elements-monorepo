@@ -1,4 +1,4 @@
-import {property, customElement, html, LitElement} from 'lit-element';
+import {property, customElement, html, LitElement, TemplateResult} from 'lit-element';
 import {cache} from 'lit-html/directives/cache';
 import '@exmg/exmg-sortable';
 import {style as exmgGridTableStyles} from './exmg-grid-styles';
@@ -55,7 +55,7 @@ export class ExmgGrid extends LitElement {
    * Array of data which mapped to rows
    */
   @property({type: Object})
-  items: object[] = [];
+  items: any[] = [];
 
   /**
    * Feature that turn on sort by column
@@ -199,7 +199,7 @@ export class ExmgGrid extends LitElement {
         }),
       );
       this.dispatchEvent(
-        new CustomEvent<EventDetailRowsOrderChanged<object>>('exmg-grid-rows-order-changed', {
+        new CustomEvent<EventDetailRowsOrderChanged<any>>('exmg-grid-rows-order-changed', {
           composed: true,
           bubbles: true,
           detail: {items},
@@ -218,7 +218,7 @@ export class ExmgGrid extends LitElement {
         column.style.display = nextDisplayValue;
         this.getTable()
           .querySelectorAll<HTMLInputElement>(`tbody.grid-data tr:not(.grid-row-detail) td:nth-child(${index + 1})`)
-          .forEach(cell => {
+          .forEach((cell) => {
             cell.style.display = nextDisplayValue;
           });
       }
@@ -229,7 +229,7 @@ export class ExmgGrid extends LitElement {
   private updateAutoColspan(visibleColumns: number): void {
     this.getTable()
       .querySelectorAll('[data-auto-colspan]')
-      .forEach(element => {
+      .forEach((element) => {
         const offset = Number.parseInt(element.getAttribute('data-auto-span') || '0', 10);
         element.setAttribute('colspan', (visibleColumns - offset).toString());
       });
@@ -324,9 +324,9 @@ export class ExmgGrid extends LitElement {
 
     this.updateColumnVisibility();
 
-    bodyRows.forEach(row => row.setAttribute('data-initialized', ''));
+    bodyRows.forEach((row) => row.setAttribute('data-initialized', ''));
 
-    this.querySelectors.getColumns('th:not([title])').forEach(col => col.setAttribute('title', col.innerText));
+    this.querySelectors.getColumns('th:not([title])').forEach((col) => col.setAttribute('title', col.innerText));
 
     this.querySelectors.getTable().setAttribute('data-table-layout', this.tableLayout);
 
@@ -358,14 +358,12 @@ export class ExmgGrid extends LitElement {
         this.rowSortableFeature.updateFeature();
       }
 
-      bodyRows.forEach(row => row.setAttribute('data-initialized', ''));
+      bodyRows.forEach((row) => row.setAttribute('data-initialized', ''));
     }
   }
 
   private renderWithoutSortable() {
-    return html`
-      <slot></slot>
-    `;
+    return html` <slot></slot> `;
   }
 
   private renderWithSortable() {
@@ -383,14 +381,12 @@ export class ExmgGrid extends LitElement {
     `;
   }
 
-  protected render() {
+  protected render(): TemplateResult {
     return html`
       <div class="table-card-container">
         <slot name="toolbar"></slot>
         <div class="table-card">
-          <div class="table-container">
-            ${cache(this.canSortRows() ? this.renderWithSortable() : this.renderWithoutSortable())}
-          </div>
+          <div class="table-container">${cache(this.canSortRows() ? this.renderWithSortable() : this.renderWithoutSortable())}</div>
           <slot name="pagination"></slot>
         </div>
       </div>

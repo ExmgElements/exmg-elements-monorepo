@@ -1,7 +1,7 @@
 import {ExmgQuerySelectors} from '../../../src/table/utils/exmg-query-selectors';
 import {ExmgRowExpandable} from '../../../src/table/featrues/exmg-row-expandable';
 
-declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
+declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: any) => T;
 
 const {assert} = chai;
 

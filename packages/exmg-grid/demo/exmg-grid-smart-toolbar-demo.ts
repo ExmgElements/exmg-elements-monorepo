@@ -1,4 +1,4 @@
-import {customElement, html, LitElement, property} from 'lit-element';
+import {customElement, html, LitElement, property, TemplateResult} from 'lit-element';
 import {Filter, FilterSingleSelectConfig, FilterConfigType, SettingSelectionListItem} from '../src/table/types/exmg-grid-toolbar-types';
 import {
   ActionAmountSelectedItemsCondition,
@@ -102,7 +102,7 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
     this.amountOfSelectedItems = parseInt(this.shadowRoot!.querySelector<HTMLInputElement>('#amount-of-selected-items')!.value, 10);
   }
 
-  render() {
+  render(): TemplateResult {
     return html`
       <style>
         :host {

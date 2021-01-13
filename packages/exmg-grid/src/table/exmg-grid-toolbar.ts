@@ -1,4 +1,4 @@
-import {css, customElement, html, LitElement, property} from 'lit-element';
+import {css, customElement, html, LitElement, property, TemplateResult} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 import '@material/mwc-icon-button';
 import './exmg-grid-toolbar-combobox';
@@ -107,7 +107,7 @@ export class ExmgGridToolbar extends LitElement {
   private renderActions() {
     return repeat(
       this.actions,
-      action => html`
+      (action) => html`
         <mwc-icon-button
           class="action"
           icon="${action.icon}"
@@ -119,13 +119,11 @@ export class ExmgGridToolbar extends LitElement {
   }
 
   private renderDescription() {
-    return html`
-      ${this.description}
-    `;
+    return html` ${this.description} `;
   }
 
   private renderFilters() {
-    return repeat(this.filters, filter => this.renderFilter(filter));
+    return repeat(this.filters, (filter) => this.renderFilter(filter));
   }
 
   private renderFilter(filter: Filter) {
@@ -156,17 +154,14 @@ export class ExmgGridToolbar extends LitElement {
         ${repeat(
           filter.config.data,
           (item: any) => item,
-          item =>
-            html`
-              <paper-item data-id="${item.id}">${item.title}</paper-item>
-            `,
+          (item) => html` <paper-item data-id="${item.id}">${item.title}</paper-item> `,
         )}
       </exmg-grid-toolbar-combobox>
     `;
   }
 
   private renderSettings() {
-    return repeat(this.settings, setting => this.renderSetting(setting));
+    return repeat(this.settings, (setting) => this.renderSetting(setting));
   }
 
   private renderSetting(setting: Setting) {
@@ -196,7 +191,7 @@ export class ExmgGridToolbar extends LitElement {
     `;
   }
 
-  render() {
+  render(): TemplateResult {
     // tslint:disable:max-line-length
     return html`
       <style>
@@ -250,18 +245,10 @@ export class ExmgGridToolbar extends LitElement {
         }
       </style>
       <exmg-grid-base-toolbar>
-        <div slot="actions">
-          ${this.renderActions()}
-        </div>
-        <div slot="description">
-          ${this.renderDescription()}
-        </div>
-        <div slot="filters">
-          ${this.renderFilters()}
-        </div>
-        <div slot="settings">
-          ${this.renderSettings()}
-        </div>
+        <div slot="actions">${this.renderActions()}</div>
+        <div slot="description">${this.renderDescription()}</div>
+        <div slot="filters">${this.renderFilters()}</div>
+        <div slot="settings">${this.renderSettings()}</div>
       </exmg-grid-base-toolbar>
     `;
     // tslint:enable:max-line-length

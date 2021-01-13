@@ -15,6 +15,7 @@ export interface Filter<TConfig extends BaseFilterConfig = BaseFilterConfig> {
   config: TConfig;
 }
 
+// eslint-disable-next-line no-shadow
 export enum FilterConfigType {
   SingleSelect = 'single_select',
 }
@@ -35,10 +36,12 @@ export interface Setting<TConfig extends BaseSettingConfig = BaseSettingConfig> 
   config: TConfig;
 }
 
+// eslint-disable-next-line no-shadow
 export enum SettingConfigType {
   SelectionList = 'selection_list',
 }
 
+// eslint-disable-next-line no-shadow
 export enum SettingConfigId {
   ColumnSelector = 'column-selector',
 }

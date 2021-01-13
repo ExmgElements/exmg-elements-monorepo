@@ -1,4 +1,4 @@
-import {customElement, html, LitElement, property} from 'lit-element';
+import {customElement, html, LitElement, property, TemplateResult} from 'lit-element';
 
 @customElement('exmg-grid-pagination-demo')
 export class ExmgGridSmartToolbarDemo extends LitElement {
@@ -19,7 +19,7 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
     console.log('onGridPageChanged', e.detail);
   }
 
-  render() {
+  render(): TemplateResult {
     return html`
       <style>
         :host {

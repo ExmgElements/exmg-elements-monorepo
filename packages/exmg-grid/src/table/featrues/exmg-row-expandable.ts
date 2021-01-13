@@ -13,7 +13,7 @@ export class ExmgRowExpandable {
     this.querySelectors
       .getTableBody()
       .querySelectorAll<HTMLElement>(`${this.expandableToggleSelector}:not([data-is-expandable])`)
-      .forEach(triggerElement => {
+      .forEach((triggerElement) => {
         triggerElement.setAttribute('data-is-expandable', '');
         this.registerClickListener(triggerElement);
       });

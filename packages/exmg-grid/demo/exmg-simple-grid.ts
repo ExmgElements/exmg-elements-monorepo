@@ -1,4 +1,4 @@
-import {html, customElement} from 'lit-element';
+import {html, customElement, TemplateResult} from 'lit-element';
 import {classMap} from 'lit-html/directives/class-map';
 import {repeat} from 'lit-html/directives/repeat';
 import '../src/table/exmg-grid';
@@ -16,7 +16,7 @@ export class DemoSimpleGridTable extends ExmgBaseGridDemo {
     return repeat(
       this.items,
       ({id}) => id,
-      i => {
+      (i) => {
         return html`
           <tr data-row-key="${i.id}">
             <td>#${i.id}</td>
@@ -29,7 +29,7 @@ export class DemoSimpleGridTable extends ExmgBaseGridDemo {
     );
   }
 
-  protected render() {
+  protected render(): TemplateResult {
     return html`
       <div>
         <button class="demo-button" @click="${() => (this.dark = !this.dark)}">Toggle Dark Theme</button>

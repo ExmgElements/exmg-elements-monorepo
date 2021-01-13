@@ -1,4 +1,4 @@
-import {customElement, html, LitElement, property} from 'lit-element';
+import {customElement, html, LitElement, property, TemplateResult} from 'lit-element';
 import {style} from './exmg-grid-base-toolbar-styles';
 
 /**
@@ -29,7 +29,7 @@ export class ExmgGridBaseToolbar extends LitElement {
   connectedCallback(): void {
     super.connectedCallback();
 
-    this.observer = new MutationObserver(mutationsList => {
+    this.observer = new MutationObserver((mutationsList) => {
       setTimeout(() => {
         for (const mutation of mutationsList) {
           if (mutation.type === 'childList') {
@@ -51,7 +51,7 @@ export class ExmgGridBaseToolbar extends LitElement {
     this.observer!.disconnect();
   }
 
-  render() {
+  render(): TemplateResult {
     return html`
       <div class="wrapper ${this.active ? 'active' : ''}">
         ${this.actionsCount > 0

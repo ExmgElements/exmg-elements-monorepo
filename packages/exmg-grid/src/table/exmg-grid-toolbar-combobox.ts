@@ -1,4 +1,4 @@
-import {LitElement, html, customElement, property, query, css} from 'lit-element';
+import {LitElement, html, customElement, property, query, css, TemplateResult} from 'lit-element';
 import {classMap} from 'lit-html/directives/class-map';
 
 import '@polymer/paper-listbox/paper-listbox.js';
@@ -19,7 +19,7 @@ import {PaperListboxElement} from '@polymer/paper-listbox/paper-listbox';
 
 const copyElementStyle = (source: HTMLElement, target: HTMLElement): void => {
   const computedStyle = window.getComputedStyle(source, null);
-  Array.from(computedStyle).forEach(key =>
+  Array.from(computedStyle).forEach((key) =>
     target.style.setProperty(key, computedStyle.getPropertyValue(key), computedStyle.getPropertyPriority(key)),
   );
 };
@@ -50,6 +50,7 @@ const ENTER_KEY_CODE = 13;
 const debounce = (time: number) => {
   let timer: number;
 
+  // eslint-disable-next-line @typescript-eslint/ban-types
   return (cb?: Function): void => {
     clearTimeout(timer);
     if (cb) {
@@ -206,10 +207,13 @@ export class PaperGridTooolbarComboboxElement extends LitElement {
 
   private isElementInitialized = false;
 
+  // eslint-disable-next-line @typescript-eslint/ban-types
   private readonly observers: {[K in Props]?: Function} = this.getObservers();
 
+  // eslint-disable-next-line @typescript-eslint/ban-types
   private readonly keyDownBackspaceDebounce: (cb?: Function) => void = debounce(200);
 
+  // eslint-disable-next-line @typescript-eslint/ban-types
   private readonly inputChangeDebounce: (cb?: Function) => void = debounce(300);
 
   private _onKeyUp: any;
@@ -321,11 +325,11 @@ export class PaperGridTooolbarComboboxElement extends LitElement {
     this._onIronResize = this.onIronResize.bind(this);
   }
 
-  get value() {
+  get value(): string | number | undefined {
     return this.selected;
   }
 
-  set value(value) {
+  set value(value: string | number | undefined) {
     this.selected = value;
   }
 
@@ -334,6 +338,7 @@ export class PaperGridTooolbarComboboxElement extends LitElement {
   /**
    * Register observed properties and actions to perform
    */
+  // eslint-disable-next-line @typescript-eslint/ban-types
   private getObservers(): {[K in Props]?: Function} {
     return {
       inputValue: () => this.observeInputChange(),
@@ -415,21 +420,21 @@ export class PaperGridTooolbarComboboxElement extends LitElement {
   /**
    * Opens the combo-box.
    */
-  public open() {
+  public open(): void {
     this.opened = true;
   }
 
   /**
    * Closes the combo-box.
    */
-  public close() {
+  public close(): void {
     this.opened = false;
   }
 
   /**
    * Toggles the combo-box/
    */
-  public toggle() {
+  public toggle(): void {
     this.opened = !this.opened;
   }
 
@@ -439,7 +444,7 @@ export class PaperGridTooolbarComboboxElement extends LitElement {
     const phrase = hasFilterPhrase ? this.inputValue.toLowerCase().trim() : '';
     let isAnyItemActive = false;
 
-    items.forEach(item => {
+    items.forEach((item) => {
       if (hasFilterPhrase && item.textContent && item.textContent.toLowerCase().indexOf(phrase) === -1) {
         item.setAttribute('hidden', '');
       } else {
@@ -472,7 +477,7 @@ export class PaperGridTooolbarComboboxElement extends LitElement {
   /**
    * this method can be used to set the focus of the element
    */
-  focus() {
+  focus(): void {
     this.inputElement!.focus();
   }
 
@@ -547,7 +552,7 @@ export class PaperGridTooolbarComboboxElement extends LitElement {
   }
 
   private onClick(e: Event) {
-    const inside = e.composedPath().findIndex(path => path === this) !== -1;
+    const inside = e.composedPath().findIndex((path) => path === this) !== -1;
 
     // Detect outside element click for auto validate input
     if ((this.autoValidate && this.previousInsideClick && !inside) || this.token) {
@@ -671,6 +676,7 @@ export class PaperGridTooolbarComboboxElement extends LitElement {
     const props: (keyof this | PrivateProps)[] = ['selected', 'selectedItem'];
     const anyPropChanged = props.some(
       (it: keyof this | PrivateProps) =>
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         changedProperties.has(it) && changedProperties.get(it) !== this[it],
     );
@@ -687,7 +693,7 @@ export class PaperGridTooolbarComboboxElement extends LitElement {
     this.isElementInitialized = true;
   }
 
-  protected updated(changedProperties: ChangedProps) {
+  protected updated(changedProperties: ChangedProps): void {
     this.executeObservers(changedProperties);
     if (this.shouldFireEvent(changedProperties)) {
       if (typeof this.selected !== 'undefined') {
@@ -704,7 +710,7 @@ export class PaperGridTooolbarComboboxElement extends LitElement {
     }
   }
 
-  disconnectedCallback() {
+  disconnectedCallback(): void {
     super.disconnectedCallback();
     this.inputElement && this.inputElement.removeEventListener('keyup', this._onKeyUp);
     this.removeEventListener('iron-resize', this._onIronResize);
@@ -715,10 +721,8 @@ export class PaperGridTooolbarComboboxElement extends LitElement {
     this.keyDownBackspaceDebounce();
   }
 
-  protected render() {
-    return html`
-      ${this.getTemplate()}
-    `;
+  protected render(): TemplateResult {
+    return html` ${this.getTemplate()} `;
   }
 
   private getTemplate() {
