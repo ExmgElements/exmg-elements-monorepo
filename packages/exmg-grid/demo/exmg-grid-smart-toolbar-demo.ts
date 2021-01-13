@@ -109,7 +109,6 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
           --mdc-theme-primary: #0071dc;
           --exmg-theme-grid-setting-checkbox-bg-color: #0071dc;
           --exmg-theme-table-toolbar-setting-list-item-active-bg-color: #0071dc;
-          --exmg-theme-table-toolbar-filter-item-active-bg-color: rgba(0, 113, 220, 0.44);
 
           padding: 10px;
           display: block;

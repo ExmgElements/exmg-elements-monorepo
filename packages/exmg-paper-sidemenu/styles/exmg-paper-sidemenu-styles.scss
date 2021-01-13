@@ -54,7 +54,23 @@ paper-listbox {
   padding: 0;
 }
 
-paper-item {
+exmg-paper-sidemenu paper-item {
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-columns: 3rem auto 3rem;
+  height: 100%;
+  min-height: auto;
+  box-sizing: border-box;
+  padding: 0 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--exmg-paper-sidemenu-item-text-color, rgba(0, 0, 0, var(--dark-secondary-opacity)));
+  cursor: pointer;
+}
+
+exmg-paper-sidemenu[collapsed] paper-item {
+  display: flex;
+  align-items: center;
   height: 100%;
   min-height: auto;
   box-sizing: border-box;
@@ -76,11 +92,11 @@ paper-item .title {
   overflow: hidden;
   opacity: 1;
   transition: all 0.4s ease;
+  grid-column-start: 2;
 }
 
 exmg-paper-sidemenu[collapsed] paper-item .title {
-  opacity: 0;
-  max-width: 0px;
+  display: none;
 }
 
 paper-item svg {
@@ -89,6 +105,12 @@ paper-item svg {
   max-width: 24px;
   height: 20px;
   margin: 0 auto;
+  grid-column-start: 1;
+}
+
+paper-item exmg-paper-sidemenu-badge {
+  grid-column-start: 3;
+  justify-self: end;
 }
 
 exmg-paper-tooltip {
