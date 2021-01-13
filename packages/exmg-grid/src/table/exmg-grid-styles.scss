@@ -99,7 +99,6 @@ $exmgOnBackground: #02182b !default;
 }
 
 .table-card-container {
-  position: relative;
   @include typography.base;
   border: none;
   width: var(--exmg-table-card-width);
