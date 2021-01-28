@@ -279,7 +279,7 @@ export abstract class ExmgBaseGridDemo extends LitElement {
 
   protected onSettingChanged(e: CustomEvent<EventDetailGridToolbarSettingChanged>) {
     const {id, value} = e.detail;
-    console.log('onSettingChanged', e.detail)
+    console.log('onSettingChanged', e.detail);
     if (id === SettingConfigId.ColumnSelector) {
       this.hiddenColumns = value
         .filter((it: SettingSelectionListItem) => !it.selected)
