@@ -10,4 +10,4 @@ export * from './src/table/exmg-grid-smart-toolbar';
 export * from './src/table/types/exmg-grid-smart-toolbar-types';
 export * from './src/table/exmg-grid-toolbar';
 export * from './src/table/types/exmg-grid-toolbar-types';
-export * from './src/search/toolbar-search';
+export * from './src/search/exmg-toolbar-search';

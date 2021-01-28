@@ -5,7 +5,7 @@ import './exmg-grid-toolbar-combobox';
 import '@polymer/paper-item';
 import './exmg-grid-base-toolbar';
 import './exmg-grid-setting-selection-list';
-import '../search/toolbar-search.js';
+import '../search/exmg-toolbar-search.js';
 
 import {
   Action,
@@ -122,7 +122,7 @@ export class ExmgGridToolbar extends LitElement {
   }
 
   private renderSearch() {
-    return html`<toolbar-search></toolbar-search> `;
+    return html`<exmg-toolbar-search></exmg-toolbar-search> `;
   }
 
   private renderDescription() {

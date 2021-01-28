@@ -21,7 +21,7 @@ export const clearIcon = html`
   </svg>
 `;
 
-@customElement('toolbar-search')
+@customElement('exmg-toolbar-search')
 export class ToolbarSearch extends LitElement {
   @property({type: Boolean})
   _isSearch = false;
