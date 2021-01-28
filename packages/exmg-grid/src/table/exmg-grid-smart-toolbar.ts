@@ -47,11 +47,13 @@ export class ExmgGridSmartToolbar extends LitElement {
   @property({type: Boolean})
   searchEnabled = false;
 
-  static styles = [css`
-    :host{
-      display: block;
-    }
-  `]
+  static styles = [
+    css`
+      :host {
+        display: block;
+      }
+    `,
+  ];
 
   private getActions() {
     return this.actions.filter((action) => {

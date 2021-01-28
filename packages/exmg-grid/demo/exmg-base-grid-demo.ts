@@ -77,7 +77,7 @@ export abstract class ExmgBaseGridDemo extends LitElement {
   @property({type: Number})
   protected pageSize = 10;
 
-  protected searchValue: string | null = null
+  protected searchValue: string | null = null;
 
   @property({type: Object})
   protected hiddenColumns: Record<string, string> = {};
@@ -230,15 +230,15 @@ export abstract class ExmgBaseGridDemo extends LitElement {
   public updateSearchItems() {
     const fi: any[] = [];
     allItems.forEach((i: any) => {
-        this.searchProperties!.some((prop: any) => {
-          if (isString(i[prop])) {
-            const v = i[prop].toUpperCase();
-            const s = (this.searchValue || '').toUpperCase();
-            return v.indexOf(s) !== -1;
-          }
-          return false;
-        }) && fi.push(i);
-      });
+      this.searchProperties!.some((prop: any) => {
+        if (isString(i[prop])) {
+          const v = i[prop].toUpperCase();
+          const s = (this.searchValue || '').toUpperCase();
+          return v.indexOf(s) !== -1;
+        }
+        return false;
+      }) && fi.push(i);
+    });
 
     filteredItems = [...fi];
     this.pageIndex = 0;

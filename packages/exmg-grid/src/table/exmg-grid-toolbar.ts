@@ -5,7 +5,7 @@ import './exmg-grid-toolbar-combobox';
 import '@polymer/paper-item';
 import './exmg-grid-base-toolbar';
 import './exmg-grid-setting-selection-list';
-import '../search/toolbar-search.js'
+import '../search/toolbar-search.js';
 
 import {
   Action,
@@ -252,7 +252,9 @@ export class ExmgGridToolbar extends LitElement {
       </style>
       <exmg-grid-base-toolbar>
         <div slot="actions">${this.renderActions()}</div>
-        ${this.searchEnabled ? html`<div slot="description">${this.renderSearch()}</div>` : html`<div slot="description">${this.renderDescription()}</div>`}
+        ${this.searchEnabled
+          ? html`<div slot="description">${this.renderSearch()}</div>`
+          : html`<div slot="description">${this.renderDescription()}</div>`}
 
         <div slot="filters">${this.renderFilters()}</div>
         <div slot="settings">${this.renderSettings()}</div>

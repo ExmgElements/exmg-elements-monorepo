@@ -7,7 +7,7 @@ import {
 import '../src/table/exmg-grid-smart-toolbar.js';
 import '../src/table/exmg-grid-smart-toolbar.js';
 import {repeat} from 'lit-html/directives/repeat';
-import { ExmgBaseGridDemo } from './exmg-base-grid-demo';
+import {ExmgBaseGridDemo} from './exmg-base-grid-demo';
 import '../src/table/exmg-grid';
 import '../src/table/exmg-grid-pagination';
 import {style as tableStyles} from '../src/table/exmg-grid-styles';
@@ -91,7 +91,7 @@ export class SearchToolbarDemo extends ExmgBaseGridDemo {
       </style>
       <h1>With search</h1>
 
-      <br><br><br>
+      <br /><br /><br />
       <exmg-grid .items="${this.items}">
         <exmg-grid-smart-toolbar
           searchEnabled
@@ -128,7 +128,6 @@ export class SearchToolbarDemo extends ExmgBaseGridDemo {
         >
         </exmg-grid-pagination>
       </exmg-grid>
-
     `;
   }
 }

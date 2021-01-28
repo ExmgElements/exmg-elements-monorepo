@@ -1,25 +1,23 @@
-import {
-  html,
-  property,
-  customElement,
-  LitElement,
-  css,
-  query,
-} from 'lit-element';
+import {html, property, customElement, LitElement, css, query} from 'lit-element';
 import {classMap} from 'lit-html/directives/class-map';
 import '@polymer/paper-icon-button/paper-icon-button.js';
-import { Debouncer } from '@polymer/polymer/lib/utils/debounce';
-import { timeOut } from '@polymer/polymer/lib/utils/async';
+import {Debouncer} from '@polymer/polymer/lib/utils/debounce';
+import {timeOut} from '@polymer/polymer/lib/utils/async';
 
 export const searchIcon = html`
-  <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/>
-    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+  <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+    <path d="M0 0h24v24H0z" fill="none" />
+    <path
+      d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+    />
   </svg>
 `;
 
 export const clearIcon = html`
-  <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/>
-    <path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+  <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+    <path d="M0 0h24v24H0z" fill="none" />
+    <path d="M0 0h24v24H0z" fill="none" />
+    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
   </svg>
 `;
 
@@ -130,22 +128,11 @@ export class ToolbarSearch extends LitElement {
                 @keyup=${this._handleKeyUp}
                 @blur=${this._handleInputBlur}
               />
-              ${this.filterValue
-                ? html`
-                    <button
-                      class="clear-button"
-                      @mousedown=${this._handleClear}
-                    >
-                      ${clearIcon}
-                    </button>
-                  `
-                : html``}
+              ${this.filterValue ? html` <button class="clear-button" @mousedown=${this._handleClear}>${clearIcon}</button> ` : html``}
             `
           : html`
               ${searchIcon}
-              <span class="interactive-content"
-                >${this._getValue()}</span
-              >
+              <span class="interactive-content">${this._getValue()}</span>
               <slot></slot>
             `}
       </div>
@@ -176,19 +163,15 @@ export class ToolbarSearch extends LitElement {
   }
 
   _notifyChange() {
-    this._debouncer = Debouncer.debounce(
-      this._debouncer,
-      timeOut.after(200),
-      () => {
-        this.dispatchEvent(
-          new CustomEvent('exmg-grid-toolbar-search-changed', {
-            bubbles: false,
-            composed: true,
-            detail: {value: this.filterValue},
-          })
-        );
-      }
-    );
+    this._debouncer = Debouncer.debounce(this._debouncer, timeOut.after(200), () => {
+      this.dispatchEvent(
+        new CustomEvent('exmg-grid-toolbar-search-changed', {
+          bubbles: false,
+          composed: true,
+          detail: {value: this.filterValue},
+        }),
+      );
+    });
   }
 
   _handleInputBlur() {
@@ -198,14 +181,8 @@ export class ToolbarSearch extends LitElement {
     this._isSearch = false;
   }
   _showSearch() {
-    if(this._isSearch) return;
+    if (this._isSearch) return;
     this._isSearch = true;
-    setTimeout(
-      () =>
-        this.shadowRoot!.querySelector<HTMLInputElement>(
-          '#searchInput'
-        )!.focus(),
-      200
-    );
+    setTimeout(() => this.shadowRoot!.querySelector<HTMLInputElement>('#searchInput')!.focus(), 200);
   }
 }
