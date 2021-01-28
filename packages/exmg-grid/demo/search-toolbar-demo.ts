@@ -69,6 +69,7 @@ export class SearchToolbarDemo extends ExmgBaseGridDemo {
   }
 
   render(): TemplateResult {
+    console.log('render', this.filters, this.hiddenColumns);
     return html`
       <style>
         :host {
@@ -89,12 +90,14 @@ export class SearchToolbarDemo extends ExmgBaseGridDemo {
           background: white;
         }
       </style>
+              <button class="demo-button" @click="${this.toggleMonthColumn}">Toggle Month</button>
       <h1>With search</h1>
 
       <br /><br /><br />
-      <exmg-grid .items="${this.items}">
+      <exmg-grid .items="${this.items}" .hiddenColumnNames="${this.hiddenColumns}">
         <exmg-grid-smart-toolbar
           searchEnabled
+          searchPlaceholder="Search for income by month or year"
           .actions="${this.actions}"
           description="${this.description}"
           .filters="${this.filters}"
@@ -109,9 +112,9 @@ export class SearchToolbarDemo extends ExmgBaseGridDemo {
           <thead>
             <tr class="grid-columns">
               <th><span>ID</span></th>
-              <th><span>Month</span></th>
-              <th class="grid-col-number"><span>Year</span></th>
-              <th class="grid-col-number"><span>Income</span></th>
+              <th data-column-key="month"><span>Month</span></th>
+              <th data-column-key="year" class="grid-col-number"><span>Year</span></th>
+              <th data-column-key="amount" class="grid-col-number"><span>Income</span></th>
             </tr>
           </thead>
           <tbody class="grid-data">

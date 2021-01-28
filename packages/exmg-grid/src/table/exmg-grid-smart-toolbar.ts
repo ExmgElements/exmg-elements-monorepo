@@ -47,6 +47,9 @@ export class ExmgGridSmartToolbar extends LitElement {
   @property({type: Boolean})
   searchEnabled = false;
 
+  @property({type: String})
+  searchPlaceholder = 'Search';
+
   static styles = [
     css`
       :host {
@@ -122,6 +125,7 @@ export class ExmgGridSmartToolbar extends LitElement {
   render(): TemplateResult {
     return html`
       <exmg-grid-toolbar
+        searchPlaceholder=${this.searchPlaceholder}
         .searchEnabled=${this.searchEnabled}
         .actions="${this.getActions()}"
         description="${this.description}"

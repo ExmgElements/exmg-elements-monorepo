@@ -47,6 +47,9 @@ export class ExmgGridToolbar extends LitElement {
   @property({type: Boolean})
   searchEnabled = false;
 
+  @property({type: String})
+  searchPlaceholder = 'Search';
+
   private emitActionExecutedEvent(action: Action) {
     return () => {
       this.dispatchEvent(
@@ -122,7 +125,7 @@ export class ExmgGridToolbar extends LitElement {
   }
 
   private renderSearch() {
-    return html`<exmg-toolbar-search></exmg-toolbar-search> `;
+    return html`<exmg-toolbar-search placeHolder=${this.searchPlaceholder}></exmg-toolbar-search> `;
   }
 
   private renderDescription() {
