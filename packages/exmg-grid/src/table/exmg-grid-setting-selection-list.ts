@@ -5,7 +5,7 @@ import '@material/mwc-icon-button';
 
 import {SettingSelectionListItem} from './types/exmg-grid-toolbar-types';
 import {style} from './exmg-grid-setting-selection-list-styles';
-import { Menu } from '@material/mwc-menu';
+import {Menu} from '@material/mwc-menu';
 
 @customElement('exmg-grid-setting-selection-list')
 export class ExmgGridSettingSelectionList extends LitElement {
@@ -23,11 +23,11 @@ export class ExmgGridSettingSelectionList extends LitElement {
 
   private toggleMenuOpenState(e: Event) {
     e.stopPropagation();
-    if(!this.menu) {
+    if (!this.menu) {
       return;
     }
     this.menu.anchor = e.target as HTMLElement;
-    this.menu.open =  true;
+    this.menu.open = true;
   }
 
   private dispatchSettingsChanged() {
@@ -92,16 +92,10 @@ export class ExmgGridSettingSelectionList extends LitElement {
         data-mdc-ripple-is-unbounded="true"
       ></mwc-icon-button>
 
-      <mwc-menu
-        id="menu"
-        absolute
-        activatable
-        multi
-        @action="${this.handleListAction}">
-        ${this.settingData.map((item) => html`
-          <mwc-list-item ?selected=${item.selected} ?activated=${item.selected}>
-            ${item.title}
-          </mwc-list-item>`)}
+      <mwc-menu id="menu" absolute activatable multi @action="${this.handleListAction}">
+        ${this.settingData.map(
+          (item) => html` <mwc-list-item ?selected=${item.selected} ?activated=${item.selected}> ${item.title} </mwc-list-item>`,
+        )}
       </mwc-menu>
     `;
   }

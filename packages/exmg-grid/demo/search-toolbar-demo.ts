@@ -90,7 +90,7 @@ export class SearchToolbarDemo extends ExmgBaseGridDemo {
           background: white;
         }
       </style>
-              <button class="demo-button" @click="${this.toggleMonthColumn}">Toggle Month</button>
+      <button class="demo-button" @click="${this.toggleMonthColumn}">Toggle Month</button>
       <h1>With search</h1>
 
       <br /><br /><br />
