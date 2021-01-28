@@ -249,12 +249,18 @@ export class ExmgGridToolbar extends LitElement {
           --exmg-paper-combobox-dropdown-list-color: var(--exmg-grid-toolbar-active-on-surface-color, var(--mdc-theme-on-surface));
           --exmg-paper-combobox-dropdown-list-bg-color: var(--exmg-grid-toolbar-bg-active-surface-color, var(--mdc-theme-surface));
         }
+        .title {
+          display: flex;
+          align-items: center;
+          height: 48px;
+          flex: 1;
+        }
       </style>
       <exmg-grid-base-toolbar>
         <div slot="actions">${this.renderActions()}</div>
         ${this.searchEnabled
           ? html`<div slot="description">${this.renderSearch()}</div>`
-          : html`<div slot="description">${this.renderDescription()}</div>`}
+          : html`<div class="title" slot="description">${this.renderDescription()}</div>`}
 
         <div slot="filters">${this.renderFilters()}</div>
         <div slot="settings">${this.renderSettings()}</div>
