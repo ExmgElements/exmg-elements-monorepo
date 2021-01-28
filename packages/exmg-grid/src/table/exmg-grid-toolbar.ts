@@ -5,6 +5,7 @@ import './exmg-grid-toolbar-combobox';
 import '@polymer/paper-item';
 import './exmg-grid-base-toolbar';
 import './exmg-grid-setting-selection-list';
+import '../search/toolbar-search.js'
 
 import {
   Action,
@@ -25,7 +26,6 @@ export class ExmgGridToolbar extends LitElement {
   static styles = [
     css`
       exmg-grid-toolbar-combobox {
-        background-color: var(--mdc-theme-surface);
         padding-left: 10px;
         border-radius: 4px;
         --paper-icon-button-ink-color: var(--mdc-theme-primary);
@@ -43,6 +43,9 @@ export class ExmgGridToolbar extends LitElement {
 
   @property({type: Object})
   settings: Setting[] = [];
+
+  @property({type: Boolean})
+  searchEnabled = false;
 
   private emitActionExecutedEvent(action: Action) {
     return () => {
@@ -116,6 +119,10 @@ export class ExmgGridToolbar extends LitElement {
         ></mwc-icon-button>
       `,
     );
+  }
+
+  private renderSearch() {
+    return html`<toolbar-search></toolbar-search> `;
   }
 
   private renderDescription() {
@@ -192,7 +199,6 @@ export class ExmgGridToolbar extends LitElement {
   }
 
   render(): TemplateResult {
-    // tslint:disable:max-line-length
     return html`
       <style>
         :host {
@@ -246,11 +252,11 @@ export class ExmgGridToolbar extends LitElement {
       </style>
       <exmg-grid-base-toolbar>
         <div slot="actions">${this.renderActions()}</div>
-        <div slot="description">${this.renderDescription()}</div>
+        ${this.searchEnabled ? html`<div slot="description">${this.renderSearch()}</div>` : html`<div slot="description">${this.renderDescription()}</div>`}
+
         <div slot="filters">${this.renderFilters()}</div>
         <div slot="settings">${this.renderSettings()}</div>
       </exmg-grid-base-toolbar>
     `;
-    // tslint:enable:max-line-length
   }
 }

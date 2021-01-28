@@ -21,6 +21,9 @@ import {
 import {EventDetailRowsOrderChanged, EventDetailSelectedRowsChange, EventDetailSortChange} from '../src/table/types/exmg-grid-types';
 import {EventSelectPayload} from 'src/table/exmg-grid-toolbar-combobox.js';
 
+function isString(x: any): x is string {
+  return typeof x === 'string';
+}
 export interface Income {
   id: number;
   month: string;
@@ -73,6 +76,8 @@ export abstract class ExmgBaseGridDemo extends LitElement {
 
   @property({type: Number})
   protected pageSize = 10;
+
+  protected searchValue: string | null = null
 
   @property({type: Object})
   protected hiddenColumns: Record<string, string> = {};
@@ -128,6 +133,8 @@ export abstract class ExmgBaseGridDemo extends LitElement {
       },
     },
   ];
+
+  protected searchProperties = ['month', 'income'];
 
   protected filters: Filter<FilterSingleSelectConfig>[] = [
     {
@@ -218,6 +225,30 @@ export abstract class ExmgBaseGridDemo extends LitElement {
         break;
       }
     }
+  }
+
+  public updateSearchItems() {
+    const fi: any[] = [];
+    allItems.forEach((i: any) => {
+        this.searchProperties!.some((prop: any) => {
+          if (isString(i[prop])) {
+            const v = i[prop].toUpperCase();
+            const s = (this.searchValue || '').toUpperCase();
+            return v.indexOf(s) !== -1;
+          }
+          return false;
+        }) && fi.push(i);
+      });
+
+    filteredItems = [...fi];
+    this.pageIndex = 0;
+    this.items = getItemByPage(this.pageIndex, this.pageSize);
+  }
+
+  protected onSearchChanged(e: CustomEvent<{value: string}>) {
+    console.log('onSearchChanged', e);
+    this.searchValue = e.detail.value;
+    this.updateSearchItems();
   }
 
   protected onFilterChanged(e: CustomEvent<{id: string; value: string}>) {

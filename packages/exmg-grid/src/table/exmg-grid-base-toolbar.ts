@@ -61,7 +61,8 @@ export class ExmgGridBaseToolbar extends LitElement {
               </div>
             `
           : ''}
-        <div class="description ${this.actionsCount > 0 ? 'with-action-separator' : ''}">
+        <div class="seperator ${this.actionsCount > 0 ? 'with-action-separator' : ''}">&nbsp;</div>
+        <div class="description">
           <slot name="description"></slot>
         </div>
         <div class="filters">

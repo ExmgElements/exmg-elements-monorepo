@@ -34,22 +34,27 @@ $exmg-grid-toolbar-active-color: #000000;
     background-color: var(--active-toolbar-bg-color);
     color: var(--active-toolbar-color);
 
-    .description {
-      color: var(--active-toolbar-color);
+    .seperator {
       &.with-action-separator {
         border-left: 1px solid var(--active-toolbar-color);
       }
     }
+    .description {
+      color: var(--active-toolbar-color);
+      flex: 1;
+    }
   }
-
+  .seperator {
+    min-height:32px;
+    &.with-action-separator {
+      border-left: 1px solid var(--active-toolbar-color);
+    }
+  }
   .description {
     @include typography.typography('headline5');
     color: var(--toolbar-color);
     padding: 0 16px;
-
-    &.with-action-separator {
-      border-left: 1px solid var(--toolbar-color);
-    }
+    height: 48px;
   }
 }
 
@@ -61,7 +66,6 @@ $exmg-grid-toolbar-active-color: #000000;
 .filters {
   display: flex;
   flex-direction: row;
-  flex: 1;
   justify-content: flex-end;
   padding: 0 16px;
 }

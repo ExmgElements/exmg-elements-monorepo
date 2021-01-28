@@ -1,4 +1,4 @@
-import {customElement, html, LitElement, property, TemplateResult} from 'lit-element';
+import {customElement, html, LitElement, property, TemplateResult, css} from 'lit-element';
 import './exmg-grid-toolbar';
 import {
   Filter,
@@ -43,6 +43,15 @@ export class ExmgGridSmartToolbar extends LitElement {
 
   @property({type: Object, attribute: 'column-filter-columns'})
   columnFilterColumns: SettingSelectionListItem[] = [];
+
+  @property({type: Boolean})
+  searchEnabled = false;
+
+  static styles = [css`
+    :host{
+      display: block;
+    }
+  `]
 
   private getActions() {
     return this.actions.filter((action) => {
@@ -111,6 +120,7 @@ export class ExmgGridSmartToolbar extends LitElement {
   render(): TemplateResult {
     return html`
       <exmg-grid-toolbar
+        .searchEnabled=${this.searchEnabled}
         .actions="${this.getActions()}"
         description="${this.description}"
         .filters="${this.getFilters()}"
