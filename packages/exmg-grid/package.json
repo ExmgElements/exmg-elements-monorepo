@@ -28,8 +28,6 @@
   "dependencies": {
     "@exmg/exmg-button": "^2.0.0",
     "@exmg/exmg-sortable": "^5.1.1",
-    "@material/list": "^7.0.0",
-    "@material/menu": "^7.0.0",
     "@material/mwc-menu": "^0.18.0",
     "@material/mwc-list": "^0.18.0",
     "@material/mwc-base": "^0.18.0",
