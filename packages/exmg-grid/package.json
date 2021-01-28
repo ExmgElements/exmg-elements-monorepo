@@ -1,6 +1,6 @@
 {
   "name": "@exmg/exmg-grid",
-  "version": "3.0.9",
+  "version": "3.0.10",
   "description": "exmg grid element",
   "contributors": [
     "Ex Machina"
@@ -30,6 +30,8 @@
     "@exmg/exmg-sortable": "^5.1.1",
     "@material/list": "^7.0.0",
     "@material/menu": "^7.0.0",
+    "@material/mwc-menu": "^0.18.0",
+    "@material/mwc-list": "^0.18.0",
     "@material/mwc-base": "^0.18.0",
     "@material/mwc-checkbox": "^0.18.0",
     "@material/mwc-icon-button": "^0.18.0",
