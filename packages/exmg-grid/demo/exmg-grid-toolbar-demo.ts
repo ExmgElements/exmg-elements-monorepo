@@ -84,6 +84,14 @@ export class ExmgGridToolbarDemo extends LitElement {
         @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
         @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
       ></exmg-grid-toolbar>
+      <h1>Without actions with search</h1>
+      <exmg-grid-toolbar
+        searchEnabled
+        description="${this.description}"
+        .filters="${this.filters}"
+        @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
+        @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
+      ></exmg-grid-toolbar>
     `;
   }
 }

@@ -255,11 +255,14 @@ export class ExmgGridToolbar extends LitElement {
           height: 48px;
           flex: 1;
         }
+        .title > exmg-toolbar-search {
+          flex: 1;
+        }
       </style>
       <exmg-grid-base-toolbar>
         <div slot="actions">${this.renderActions()}</div>
         ${this.searchEnabled
-          ? html`<div slot="description">${this.renderSearch()}</div>`
+          ? html`<div class="title" slot="description">${this.renderSearch()}</div>`
           : html`<div class="title" slot="description">${this.renderDescription()}</div>`}
 
         <div slot="filters">${this.renderFilters()}</div>
