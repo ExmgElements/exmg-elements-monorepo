@@ -60,25 +60,51 @@ export class ExmgGridSettingSelectionList extends LitElement {
   }
 
   private saveSettingsListToLocalStorage() {
-    const key = `columnSettings:${window.location.pathname}`;
-    const value = this.settingData
-      .filter((d) => d.selected)
-      .map((d) => d.id)
-      .join(',');
-    localStorage.setItem(key, value);
+    const key = `columnSettingsV2:${window.location.pathname}`;
+    const value = this.settingData;
+    // .filter((d) => d.selected)
+    // .map((d) => d.id)
+    // .join(',');
+    localStorage.setItem(key, JSON.stringify(value));
+    return JSON.stringify(value);
   }
 
   private getSettingsListFromLocalStorage() {
-    const key = `columnSettings:${window.location.pathname}`;
-    const value = localStorage.getItem(key);
+    const key = `columnSettingsV2:${window.location.pathname}`;
+    let value = localStorage.getItem(key);
     if (!value) {
-      return;
+      value = this.saveSettingsListToLocalStorage();
     }
-    const selectedSettings = value.split(',');
+
+    const storageSettings: SettingSelectionListItem[] | null = JSON.parse(value);
+
     for (const setting of this.settingData) {
-      setting.selected = selectedSettings.includes(setting.id);
+      const ss = storageSettings?.find((s: SettingSelectionListItem) => s.id === setting.id);
+      // setting not found in storage add
+      if (!ss) {
+        storageSettings?.push(setting);
+      }
+      // do not update checked state from settingsData if exists in storage
     }
-    this.settingData = [...this.settingData];
+
+    const toBeDeleted = [];
+    for (const storageSetting of storageSettings || []) {
+      const ss = this.settingData.find((s: SettingSelectionListItem) => s.id === storageSetting.id);
+      // setting not found in settingdate -> remove entry from storage
+      if (!ss) {
+        toBeDeleted.push(storageSetting.id);
+      }
+    }
+
+    for (const id of toBeDeleted) {
+      const index = storageSettings?.findIndex((s) => s.id === id);
+      if (index && index > -1) {
+        storageSettings?.splice(index, 1);
+      }
+    }
+
+    this.settingData = [...(storageSettings || [])];
+    this.saveSettingsListToLocalStorage();
     this.dispatchSettingsChanged();
   }
 

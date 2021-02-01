@@ -29,14 +29,15 @@ export interface Income {
   month: string;
   amount: number;
   year: number;
+  test: string;
 }
 
 const generateRows = (length = 50, startId = 1): Income[] => {
   const randomAmount = () => Number.parseFloat((Math.random() * 1000).toFixed(2));
   const source: Income[] = [
-    {id: 1, month: 'January', amount: randomAmount(), year: 2000},
-    {id: 2, month: 'February', amount: randomAmount(), year: 2000},
-    {id: 3, month: 'March', amount: randomAmount(), year: 2000},
+    {id: 1, month: 'January', amount: randomAmount(), year: 2000, test: '1'},
+    {id: 2, month: 'February', amount: randomAmount(), year: 2000, test: '1'},
+    {id: 3, month: 'March', amount: randomAmount(), year: 2000, test: '1'},
   ];
 
   const rows: Income[] = [];

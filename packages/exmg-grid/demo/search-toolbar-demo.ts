@@ -69,7 +69,6 @@ export class SearchToolbarDemo extends ExmgBaseGridDemo {
   }
 
   render(): TemplateResult {
-    console.log('render', this.filters, this.hiddenColumns);
     return html`
       <style>
         :host {
