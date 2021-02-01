@@ -62,9 +62,9 @@ export class ExmgGridSettingSelectionList extends LitElement {
   private saveSettingsListToLocalStorage() {
     const key = `columnSettingsV2:${window.location.pathname}`;
     const value = this.settingData;
-      // .filter((d) => d.selected)
-      // .map((d) => d.id)
-      // .join(',');
+    // .filter((d) => d.selected)
+    // .map((d) => d.id)
+    // .join(',');
     localStorage.setItem(key, JSON.stringify(value));
     return JSON.stringify(value);
   }
@@ -81,7 +81,7 @@ export class ExmgGridSettingSelectionList extends LitElement {
     for (const setting of this.settingData) {
       const ss = storageSettings?.find((s: SettingSelectionListItem) => s.id === setting.id);
       // setting not found in storage add
-      if(!ss) {
+      if (!ss) {
         storageSettings?.push(setting);
       }
       // do not update checked state from settingsData if exists in storage
@@ -91,18 +91,17 @@ export class ExmgGridSettingSelectionList extends LitElement {
     for (const storageSetting of storageSettings || []) {
       const ss = this.settingData.find((s: SettingSelectionListItem) => s.id === storageSetting.id);
       // setting not found in settingdate -> remove entry from storage
-      if(!ss) {
+      if (!ss) {
         toBeDeleted.push(storageSetting.id);
       }
     }
 
     for (const id of toBeDeleted) {
-      const index = storageSettings?.findIndex(s => s.id === id);
+      const index = storageSettings?.findIndex((s) => s.id === id);
       if (index && index > -1) {
         storageSettings?.splice(index, 1);
       }
     }
-
 
     this.settingData = [...(storageSettings || [])];
     this.saveSettingsListToLocalStorage();
