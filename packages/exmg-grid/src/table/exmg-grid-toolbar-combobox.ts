@@ -482,9 +482,7 @@ export class PaperGridTooolbarComboboxElement extends LitElement {
   }
 
   private resetInput() {
-    console.log('resetInput', this.autoValidate);
     if (this.autoValidate) {
-      console.log('validate');
       this.validate();
     }
 
@@ -605,7 +603,6 @@ export class PaperGridTooolbarComboboxElement extends LitElement {
     }
 
     this.opened = false;
-    console.log('onItemActivated', this.opened);
   }
 
   private onInputValueChange(e: Event): void {
