@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="../node_modules/github-markdown-css/github-markdown.css">
     <script type="module" src="../exmg-markdown-editor.js"></script>
     <script type="module" src="../node_modules/@exmg/exmg-dialogs/exmg-dialog-form.js"></script>
-    
+
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
         .centered {
@@ -63,7 +63,7 @@
         }
         ul {
           list-style: none;
-        } 
+        }
         #actions > ul > li {
           display: inline;
         }
@@ -81,11 +81,7 @@
       </div>
       <demo-snippet>
         <template>
-          <exmg-markdown-editor split-view show-helper-label>
-            <marked-element markdown="# TEXT *bold*">
-              <div slot="markdown-html" class="markdown-body"></div>
-            </marked-element>
-          </exmg-markdown-editor>
+          <exmg-markdown-editor split-view show-helper-label markdown="# TEXT *bold*" class="markdown-body"></exmg-markdown-editor>
         </template>
       </demo-snippet>
       <div id="event-list">

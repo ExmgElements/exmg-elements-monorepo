@@ -107,7 +107,13 @@ export class EditorElement extends LitElement {
 
   @property({type: String})
   @observer(function (this: EditorElement, markdown: string) {
-    console.log('@observer markdown', markdown);
+    if (this.codeMirrorEditor && this.codeMirrorEditor.getValue() !== markdown) {
+      this.codeMirrorEditor.setValue(markdown || '');
+    }
+    this.dispatchMarkdownUpdatedDebounce(() => {
+      this.fire('value-change', this.value);
+      this.fire('change', this.value);
+    });
     this.renderHTML();
     this.updateDocHistory();
   })
@@ -120,6 +126,17 @@ export class EditorElement extends LitElement {
   splitView = false;
 
   @property({type: Boolean, reflect: true, attribute: 'fullscreen'})
+  @observer(function (this: EditorElement, fullscreen: boolean) {
+    if (!this.codeMirrorEditor) {
+      return;
+    }
+    // @ts-ignore
+    this.codeMirrorEditor.setOption('fullScreen', fullscreen);
+
+    if (this.isElementInitialized) {
+      this.fire('exmg-markdown-editor-fullscreen', !!fullscreen);
+    }
+  })
   fullscreen = false;
 
   @property({type: Array, attribute: 'toolbar-buttons'})
@@ -133,11 +150,6 @@ export class EditorElement extends LitElement {
 
   @property({type: Boolean, reflect: true, attribute: 'invalid'})
   private invalid = false;
-
-  private get outputElement() {
-    return this;
-    //return this.querySelector<HTMLElement>('.markdown-body');
-  }
 
   bubbles = false;
 
@@ -206,13 +218,6 @@ export class EditorElement extends LitElement {
       action: this.toggleStrikethrough,
       className: 'btn-strikethrough',
       title: 'Strikethrough',
-    },
-    {
-      name: 'underline',
-      icon: 'exmg-markdown-editor-icons:format-underline',
-      action: this.toggleUnderline,
-      className: 'btn-underline',
-      title: 'Underline',
     },
     {
       name: 'indent-in',
@@ -313,11 +318,6 @@ export class EditorElement extends LitElement {
   @property({type: Array})
   private enabledExtensions: AvailableMarkdownExtension[] = [];
 
-  // get markdownElement(): MarkdownElement | null {
-  //   const markedElement = this.querySelector<MarkdownElement>('marked-element');
-  //   return markedElement;
-  // }
-
   @query('#editor')
   editorElement?: HTMLElement;
 
@@ -399,12 +399,8 @@ export class EditorElement extends LitElement {
   }
 
   renderHTML(): void {
-    console.log('renderHTML', this.outputElement);
-    if (!this.outputElement) {
-      return;
-    }
     if (!this.markdown) {
-      this.outputElement!.innerHTML = '';
+      this.innerHTML = '';
       return;
     }
 
@@ -416,7 +412,7 @@ export class EditorElement extends LitElement {
       smartypants: false,
     };
 
-    this.outputElement!.innerHTML = window.marked(this.markdown, opts);
+    this.innerHTML = `<div class="preview-body">${window.marked(this.markdown, opts)}</div>`;
     this.focus();
     this.fire('html-render-complete', {});
   }
@@ -482,20 +478,6 @@ export class EditorElement extends LitElement {
     }
   }
 
-  /********* Observers *************/
-
-  private observeFullscreen(): void {
-    if (!this.codeMirrorEditor) {
-      return;
-    }
-    // @ts-ignore
-    this.codeMirrorEditor.setOption('fullScreen', this.fullscreen);
-
-    if (this.isElementInitialized) {
-      this.dispatchEvent(new CustomEvent('exmg-markdown-editor-fullscreen', {detail: !!this.fullscreen, composed: true, bubbles: true}));
-    }
-  }
-
   /********* TOOL BAR HANDLERS *************/
   private toggleFullscreen(event?: Event): void {
     if (event) {
@@ -553,10 +535,6 @@ export class EditorElement extends LitElement {
         return;
       }
       this.markdown = editor.getValue();
-      this.dispatchMarkdownUpdatedDebounce(() => {
-        this.dispatchEvent(new CustomEvent('value-change', {bubbles: true, composed: true, detail: this.value}));
-        this.dispatchEvent(new CustomEvent('change', {bubbles: true, composed: true, detail: this.value}));
-      });
     });
 
     afterNextRender(this, () => this.updateDocHistory());
@@ -613,7 +591,6 @@ export class EditorElement extends LitElement {
       code: '```',
       em: '*',
       strikethrough: '~~',
-      underline: '+',
     };
 
     const cursorStart = codeMirror.getDoc().getCursor('start');
@@ -772,13 +749,6 @@ export class EditorElement extends LitElement {
     }
 
     this.processBlock('strikethrough');
-  }
-
-  private toggleUnderline(event?: Event): void {
-    if (event) {
-      event.preventDefault();
-    }
-    this.processBlock('underline');
   }
 
   private toggleBold(event?: Event): void {

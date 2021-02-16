@@ -60,72 +60,72 @@
     <div class="vertical-section-container centered">
       <demo-snippet>
         <template>
-          <exmg-markdown-editor height="800" split-view show-helper-label>
-            <marked-element>
-              <div slot="markdown-html" class="markdown-body"></div>
-              <script type="text/markdown">
-                # Headers
-
-                # H1`
-
-                ## H2
-
-                ### H3
-
-                #### H4
-
-                ##### H5
-
-                ###### H6
-
-                # Text
-
-                Lorem **ipsum** dolor sit amet, ~~consectetur adipiscing~~ elit, sed do _eiusmod_ tempor incididunt
-                ut labore et dolore magna aliqua.
-
-                # Table
-
-                | User Name | Email            |
-                | --------- | ---------------- |
-                | Pete      | Pete@example.com |
-
-                # Quote
-
-                > Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-                # Lists
-
-                ## Unordered
-
-                - List option 1
-                - List option 2
-
-                ## Ordered
-
-                1. List option 1
-                2. List option 2
-
-                # Images
-
-                ![Yes](https://www.polymer-project.org/images/logos/p-logo.png)
-
-                # HR
-
-                ---
-
-                # Code
-
-                `Inline code`
-
-                ```
-                Block
-                code
-                ```
-              </script>
-            </marked-element>
-          </exmg-markdown-editor>
+          <exmg-markdown-editor height="800" split-view show-helper-label class="markdown-body"> </exmg-markdown-editor>
         </template>
       </demo-snippet>
+
+      <script type="module">
+        const markdown = `# Headers
+
+# H1
+
+## H2
+
+### H3
+
+#### H4
+
+##### H5
+
+###### H6
+
+# Text
+
+Lorem **ipsum** dolor sit amet, ~~consectetur adipiscing~~ elit, sed do _eiusmod_ tempor incididunt
+ut labore et dolore magna aliqua.
+
+# Table
+
+| User Name | Email            |
+| --------- | ---------------- |
+| Pete      | Pete@example.com |
+
+# Quote
+
+> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+# Lists
+
+## Unordered
+
+- List option 1
+- List option 2
+
+## Ordered
+
+1. List option 1
+2. List option 2
+
+# Images
+
+![Yes](https://www.polymer-project.org/images/logos/p-logo.png)
+
+# HR
+
+---
+
+# Code
+
+\`Inline code\`
+
+\`\`\`
+Block
+code
+\`\`\`
+`;
+        const mdEditor = document.body.querySelector('exmg-markdown-editor');
+        mdEditor.markdown = markdown;
+      </script>
     </div>
   </body>
 </html>

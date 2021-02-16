@@ -25,7 +25,7 @@
     <script type="module" src="../exmg-markdown-editor.js"></script>
     <script>
       window.markdownEditorConfig = {
-        extensions: ['underline', 'indent-in', 'indent-out'],
+        extensions: ['indent-in', 'indent-out'],
       };
     </script>
     <custom-style>
@@ -40,16 +40,12 @@
     <div class="vertical-section-container centered">
       <demo-snippet>
         <template>
-          <exmg-markdown-editor auto-focus split-view toolbar-buttons='["undo", "redo", "underline", "indent-in", "indent-out"]'>
-            <marked-element>
-              <div slot="markdown-html" class="markdown-body"></div>
-              <script type="text/markdown">
-                # Text
-
-                Lorem **ipsum** dolor sit amet, ~~consectetur adipiscing~~ elit, sed do _eiusmod_ tempor incididunt
-                ut labore et dolore magna aliqua.
-              </script>
-            </marked-element>
+          <exmg-markdown-editor
+            auto-focus
+            split-view
+            toolbar-buttons='["undo", "redo", "strong", "indent-in", "indent-out"]'
+            class="markdown-body"
+          >
           </exmg-markdown-editor>
         </template>
       </demo-snippet>
