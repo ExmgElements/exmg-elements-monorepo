@@ -42,8 +42,7 @@ import {MarkedOptions} from 'marked';
  * for more details on how to use this element.
  *
  * ```
- * <exmg-markdown-editor markdown="{{markdown}}">
- * </exmg-markdown-editor>
+ * <exmg-markdown-editor markdown="# Header 1"></exmg-markdown-editor>
  * ```
  *
  * ## Custom Toolbar
@@ -51,15 +50,22 @@ import {MarkedOptions} from 'marked';
  * the _toolbarButtons item name values.
  *
  * ```html
- * <exmg-markdown-editor toolbar-buttons='["strong","italic","strikethrough","|","quote","hr","table"]'>
- *  ...
- * </exmg-markdown-editor>
+ * <exmg-markdown-editor toolbar-buttons='["strong","italic","strikethrough","|","quote","hr","table"]'></exmg-markdown-editor>
  * ```
  *
  * ### Styling
  *
  * The preview panel markdown output can be styled from outside th element. See the demo/styling.html example
  * on how to do this. In this demo the github-markdown-css project is used for styling the html output.
+ *
+ * The HTML output will we inserted into the element slot and will have a container div arround it
+ * with the class preview-html:
+ *
+ * ```
+ * <exmg-markdown-editor markdown="# Header 1">
+ *  <div class="preview-body"><h1>Header 1</h1></div>
+ * </exmg-markdown-editor>
+ * ```
  *
  * `<exmg-markdown-editor>` provides the following custom properties and mixins
  *  for styling:
@@ -70,6 +76,8 @@ import {MarkedOptions} from 'marked';
  *  `--exmg-markdown-editor-background-color` | Editor Background Color | `white`
  *  `--exmg-markdown-editor-fullscreen-top-offset` | Top offset in fullscreen mode | `0px`
  *  `--exmg-markdown-editor-toolbar-background` | Toolbar background color | `#fafafa`
+ *  `--exmg-markdown-editor-toolbar-label-background` | Toolbar label background color | `#fafafa`
+ *  `--exmg-markdown-editor-label-color` | Toolbar text color | `54% black`
  *  `--exmg-markdown-editor-toolbar-color` | Toolbar text color | `87% black`
  *  `--exmg-markdown-editor-toolbar-color-disabled` | Toolbar text color disabled | `54% black`
  *  `--exmg-markdown-editor-preview-background` | Preview background color | `white`
@@ -81,7 +89,6 @@ import {MarkedOptions} from 'marked';
  *  - value-change - where detail is current markdown value
  *  - exmg-markdown-editor-fullscreen where detail is boolean with current fullscreen state
  *  - exmg-markdown-editor-paste-table thrown when app should display a dialog to paste Excel Table
-
  *
  * @customElement
  * @group Exmg Core Elements
@@ -855,7 +862,7 @@ export class EditorElement extends LitElement {
     if (event) {
       event.preventDefault();
     }
-    this.dispatchEvent(new CustomEvent('exmg-markdown-editor-paste-table'));
+    this.fire('exmg-markdown-editor-paste-table');
   }
 
   public insertTableAtCursor(data: string): void {
