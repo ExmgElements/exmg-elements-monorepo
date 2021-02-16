@@ -32,7 +32,7 @@ import {
   SHORTCUTS,
 } from './exmg-markdown-utils.js';
 import {EditorConfiguration} from 'codemirror';
-import {MarkedOptions} from 'marked';
+import {MarkedOptions, Renderer} from 'marked';
 // import * as marked from 'marked';
 
 /**
@@ -418,6 +418,13 @@ export class EditorElement extends LitElement {
       pedantic: false,
       smartypants: false,
     };
+
+    debugger;
+    let customRenderer;
+    if (window.markdownEditorConfig && window.markdownEditorConfig.renderer) {
+      customRenderer = window.markdownEditorConfig.renderer as Renderer;
+    }
+    window.marked.use({renderer: customRenderer});
 
     this.innerHTML = `<div class="preview-body">${window.marked(this.markdown, opts)}</div>`;
     this.focus();

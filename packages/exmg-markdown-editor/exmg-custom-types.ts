@@ -38,8 +38,8 @@ export interface ToolBarConfigItem extends Object {
 
 export const isToolBarConfigItem = (item: Record<string, any>): item is ToolBarConfigItem => item.hasOwnProperty('name');
 
-export type AvailableMarkdownExtension = 'underline' | 'indent-in' | 'indent-out';
-export const availableMarkdownExtensions: AvailableMarkdownExtension[] = ['underline', 'indent-in', 'indent-out'];
+export type AvailableMarkdownExtension = 'indent-in' | 'indent-out';
+export const availableMarkdownExtensions: AvailableMarkdownExtension[] = ['indent-in', 'indent-out'];
 
 export type PrivateProps = 'toolbarButtonsConfig';
 
