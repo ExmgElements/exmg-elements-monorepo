@@ -1,4 +1,7 @@
 // it just create better type definition than lit-element type PropertyValues
+
+import {EditorElement} from 'exmg-markdown-editor';
+
 // now editor should show what kind of field names are allowed
 export type GenericPropertyValues<T extends PropertyKey, V = unknown> = Map<T, V>;
 
@@ -28,7 +31,7 @@ export type ToolBarOption =
 export interface ToolBarConfigItem extends Object {
   name: ToolBarOption;
   icon: string;
-  action: Function;
+  action: unknown;
   className: string;
   title: string;
 }
@@ -59,7 +62,7 @@ declare global {
     marked: MarkdownElement;
     markdownEditorConfig: {
       extensions: AvailableMarkdownExtension[];
-      renderer: Function;
+      renderer: unknown;
     };
   }
 }
