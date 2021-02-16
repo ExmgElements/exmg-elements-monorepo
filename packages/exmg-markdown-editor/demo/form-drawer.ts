@@ -1,13 +1,8 @@
 import {LitElement, html, customElement, property, query} from 'lit-element';
 import '@exmg/exmg-button';
-import '@exmg/exmg-markdown-editor';
-import '@polymer/paper-input/paper-input.js';
-import '@exmg/exmg-paper-combobox/exmg-paper-combobox';
-import '@polymer/paper-item/paper-item.js';
-import '@exmg/exmg-form/exmg-form';
-import '@vaadin/vaadin-date-picker/vaadin-date-picker';
-import '../exmg-form-drawer';
-import {ExmgFormDrawer} from '../exmg-form-drawer';
+import '@exmg/exmg-form-drawer';
+import '../exmg-markdown-editor';
+import {ExmgFormDrawer} from '@exmg/exmg-form-drawer';
 
 @customElement('exmg-drawer-demo')
 export class Drawer extends LitElement {
@@ -29,7 +24,7 @@ export class Drawer extends LitElement {
 
   openDialog() {
     this.opened = true;
-    setTimeout(() => (this.markdownValue = 'ssdasdasdas'), 10);
+    //setTimeout(() => (this.markdownValue = 'ssdasdasdas'), 1000);
   }
 
   openAndResetDialog() {
@@ -122,6 +117,7 @@ export class Drawer extends LitElement {
           Hide submit button
         </label>
       </div>
+
       <exmg-form-drawer
         ?opened="${this.opened}"
         reset-form-on-submit-success
@@ -131,18 +127,7 @@ export class Drawer extends LitElement {
         @submit="${this.onSubmit}"
       >
         <span slot="title">New event</span>
-        <exmg-paper-combobox label="Type" name="type" selected="0" always-float-label>
-          <paper-item>Trivia</paper-item>
-          <paper-item>Other</paper-item>
-        </exmg-paper-combobox>
-        <paper-input name="question" label="Question" value="Who's Dylan Hartigan's favorite artist?" required></paper-input>
-        <paper-input name="answer_a" label="Answer A" value="Beyoncé"></paper-input>
-        <paper-input name="answer_b" label="Answer B" value="Eminem"></paper-input>
-        <paper-input name="answer_c" label="Answer C" value="Ariana Grande"></paper-input>
-        <exmg-markdown-editor name="markdownContentBody" split-view show-helper-label height="340">
-          <marked-element markdown=${this.markdownValue}>
-            <div slot="markdown-html"></div>
-          </marked-element>
+        <exmg-markdown-editor name="markdownContentBody" split-view show-helper-label height="340" markdown=${this.markdownValue}>
         </exmg-markdown-editor>
       </exmg-form-drawer>
     `;

@@ -33,6 +33,7 @@
     "@exmg/exmg-cli": "^2.1.0",
     "@exmg/exmg-form": "^3.0.0",
     "@exmg/exmg-paper-combobox": "^6.0.7",
+    "@exmg/exmg-markdown-editor": "^5.1.14",
     "@polymer/iron-component-page": "^4.0.1",
     "@polymer/iron-demo-helpers": "^3.1.0",
     "@polymer/paper-input": "^3.2.1",

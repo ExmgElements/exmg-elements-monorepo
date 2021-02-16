@@ -38,8 +38,25 @@ export const isToolBarConfigItem = (item: Record<string, any>): item is ToolBarC
 export type AvailableMarkdownExtension = 'underline' | 'indent-in' | 'indent-out';
 export const availableMarkdownExtensions: AvailableMarkdownExtension[] = ['underline', 'indent-in', 'indent-out'];
 
+export type PrivateProps = 'toolbarButtonsConfig';
+
+export type Props = Exclude<keyof EditorElement, number | symbol> | PrivateProps;
+
+export type ChangedProps = GenericPropertyValues<Props>;
+
+export interface Position {
+  ch: number;
+  line: number;
+  sticky?: string;
+}
+
+export interface MarkdownElement extends HTMLElement {
+  markdown?: string;
+}
+
 declare global {
   interface Window {
+    marked: MarkdownElement;
     markdownEditorConfig: {
       extensions: AvailableMarkdownExtension[];
       renderer: Function;

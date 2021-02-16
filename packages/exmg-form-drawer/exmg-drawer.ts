@@ -18,7 +18,7 @@ import {style} from './styles/exmg-drawer-styles';
 @customElement('exmg-drawer')
 export class ExmgDrawer extends LitElement {
   @property({type: Boolean})
-  @observer(function(this: ExmgDrawer, opened: boolean) {
+  @observer(function (this: ExmgDrawer, opened: boolean) {
     if (opened) {
       // Workaround for issue with opening multiple times with form
       // values. Issue is that if not reset theinputs will be empty second open
@@ -57,7 +57,6 @@ export class ExmgDrawer extends LitElement {
   static styles = [style];
 
   render() {
-    // language=html
     return html`
       <style>
         paper-dialog {
@@ -72,11 +71,7 @@ export class ExmgDrawer extends LitElement {
         exit-animation="slide-right-animation"
         with-backdrop
       >
-        ${this._openReset
-          ? ''
-          : html`
-              <slot></slot>
-            `}
+        ${this._openReset ? '' : html` <slot></slot> `}
       </paper-dialog>
     `;
   }

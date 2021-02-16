@@ -33,47 +33,28 @@
   </head>
   <body>
     <div class="vertical-section-container centered">
-      <h2>Markdown inside script</h2>
+      <h2>Markdown (label + split-view) unstyled output</h2>
       <demo-snippet>
         <template>
-          <exmg-markdown-editor>
-            <marked-element>
-              <div slot="markdown-html" class="markdown-body"></div>
-              <script type="text/markdown">
-                # Text
-
-                Lorem **ipsum** dolor sit amet, ~~consectetur adipiscing~~ elit, sed do _eiusmod_ tempor incididunt
-                ut labore et dolore magna aliqua.
-
-                > test
-              </script>
-            </marked-element>
-          </exmg-markdown-editor>
+          <exmg-markdown-editor split-view show-helper-label markdown="# Hello Word!"> </exmg-markdown-editor>
         </template>
       </demo-snippet>
 
-      <h2>Markdown in remote file</h2>
+      <h2>Markdown (split-view) styled output</h2>
       <demo-snippet>
         <template>
-          <exmg-markdown-editor split-view>
-            <marked-element>
-              <div slot="markdown-html"></div>
-              <script type="text/markdown" src="test.md"></script>
-            </marked-element>
-          </exmg-markdown-editor>
+          <exmg-markdown-editor split-view markdown="# Hello Word!" class="markdown-body"> </exmg-markdown-editor>
         </template>
       </demo-snippet>
 
-      <h2>Markdown through property</h2>
+      <h2>Markdown styled output</h2>
       <demo-snippet>
         <template>
-          <exmg-markdown-editor split-view show-helper-label>
-            <marked-element markdown="# Hello Word!">
-              <div slot="markdown-html"></div>
-            </marked-element>
-          </exmg-markdown-editor>
+          <exmg-markdown-editor markdown="# Hello Word!" class="markdown-body"> </exmg-markdown-editor>
         </template>
       </demo-snippet>
     </div>
+
+    <script></script>
   </body>
 </html>

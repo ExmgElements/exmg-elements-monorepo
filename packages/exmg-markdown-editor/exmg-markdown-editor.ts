@@ -1,66 +1,39 @@
-import {LitElement, html, customElement, query, property} from 'lit-element';
+import {LitElement, html, customElement, query, property, TemplateResult} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 import {classMap} from 'lit-html/directives/class-map';
+import {observer} from '@material/mwc-base/observer.js';
 
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@polymer/iron-icon/iron-icon.js';
-import '@polymer/marked-element/marked-element';
 
 import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
+import './exmg-import-helper.js';
 
 import './exmg-markdown-editor-icons';
 import {style as codeMirrorStylesText} from './styles/exmg-markdown-codemirror-styles';
 import {
-  GenericPropertyValues,
   ToolBarOption,
   ToolBarConfigItem,
   isToolBarConfigItem,
   AvailableMarkdownExtension,
   availableMarkdownExtensions,
+  Position,
+  ChangedProps,
 } from './exmg-custom-types';
 
 import Editor = CodeMirror.Editor;
-
-type PrivateProps = 'toolbarButtonsConfig';
-
-type Props = Exclude<keyof EditorElement, number | symbol> | PrivateProps;
-
-type ChangedProps = GenericPropertyValues<Props>;
-
-interface Position {
-  ch: number;
-  line: number;
-  sticky?: string;
-}
-
-interface MarkdownElement extends HTMLElement {
-  markdown?: string;
-}
-
-const isMac = /Mac/.test(navigator.platform);
-const convertShortcut = (name: string): string => {
-  return isMac ? name : name.replace('Cmd', 'Ctrl');
-};
-const insertBlocks = {
-  hr: '---',
-  link: (text?: string) => `[${text !== '' ? text : 'Link description'}](https://www.exmachinagroup.com/)`,
-  image: (text?: string) =>
-    `![${text !== '' ? text : 'ExMachina'}](https://pbs.twimg.com/profile_images/748525267153477632/5BistsD7_400x400.jpg)`,
-  table: '| Column 1 | Column 2 |\n| -------- | -------- |\n| Text     | Text     |',
-};
-
-const debounce = (time: number) => {
-  let timer: number;
-
-  return (cb?: Function): void => {
-    clearTimeout(timer);
-    if (cb) {
-      timer = window.setTimeout(cb, time);
-    }
-  };
-};
-
-const ENTER_KEY_CODE = 13;
+import {
+  convertShortcut,
+  debounce,
+  DEFAULT_TOOLBAR_OPTIONS,
+  ENTER_KEY_CODE,
+  insertBlocks,
+  KEY_MAPS,
+  SHORTCUTS,
+} from './exmg-markdown-utils.js';
+import {EditorConfiguration} from 'codemirror';
+import {MarkedOptions} from 'marked';
+// import * as marked from 'marked';
 
 /**
  * Markdown WYSIWYG editor element.
@@ -70,13 +43,6 @@ const ENTER_KEY_CODE = 13;
  *
  * ```
  * <exmg-markdown-editor markdown="{{markdown}}">
- *   <marked-element markdown="{{markdown}}">
- *     <div slot="markdown-html"></div>
- *     <script type="text/markdown"\>
- *     # Header
- *     ...
- *     </script\>
- *   </marked-element>
  * </exmg-markdown-editor>
  * ```
  *
@@ -115,15 +81,9 @@ const ENTER_KEY_CODE = 13;
  *  - value-change - where detail is current markdown value
  *  - exmg-markdown-editor-fullscreen where detail is boolean with current fullscreen state
  *  - exmg-markdown-editor-paste-table thrown when app should display a dialog to paste Excel Table
- *
- *  # Public method:
- *  - insertTableAtCursor
- *    @param data: String
- *    Will convert data into a table and insert it at cursor.
+
  *
  * @customElement
- * @polymer
- * @litElement
  * @group Exmg Core Elements
  * @element exmg-markdown-editor
  * @demo demo/index.html
@@ -146,6 +106,11 @@ export class EditorElement extends LitElement {
   indentWithTabs = true;
 
   @property({type: String})
+  @observer(function (this: EditorElement, markdown: string) {
+    console.log('@observer markdown', markdown);
+    this.renderHTML();
+    this.updateDocHistory();
+  })
   markdown?: string;
 
   @property({type: Boolean, attribute: 'show-helper-label'})
@@ -158,32 +123,7 @@ export class EditorElement extends LitElement {
   fullscreen = false;
 
   @property({type: Array, attribute: 'toolbar-buttons'})
-  toolbarButtons: ToolBarOption[] = [
-    'undo',
-    'redo',
-    '|',
-    'header_one',
-    'header_two',
-    'header_three',
-    'strong',
-    'italic',
-    'strikethrough',
-    '|',
-    'link',
-    'image',
-    '|',
-    'quote',
-    'hr',
-    'table',
-    'table-paste',
-    'code',
-    '|',
-    'unordered-list',
-    'ordered-list',
-    '|',
-    'fullscreen',
-    'split-view',
-  ];
+  toolbarButtons: ToolBarOption[] = DEFAULT_TOOLBAR_OPTIONS;
 
   @property({type: String})
   public name?: string;
@@ -192,8 +132,16 @@ export class EditorElement extends LitElement {
   public required = false;
 
   @property({type: Boolean, reflect: true, attribute: 'invalid'})
-  // @ts-ignore
   private invalid = false;
+
+  private get outputElement() {
+    return this;
+    //return this.querySelector<HTMLElement>('.markdown-body');
+  }
+
+  bubbles = false;
+
+  static styles = [codeMirrorStylesText];
 
   public validate(): boolean {
     this.invalid = this.required && !this.markdown;
@@ -360,25 +308,15 @@ export class EditorElement extends LitElement {
   ];
 
   @property({type: Object, attribute: 'shortcuts'})
-  shortcuts: Record<string, string> = {
-    undo: 'Cmd-Z',
-    redo: 'Cmd-Y',
-    strong: 'Cmd-B',
-    italic: 'Cmd-I',
-    quote: "Cmd-'",
-    'unordered-list': 'Cmd-Alt-L',
-    'ordered-list': 'Cmd-L',
-    'split-view': 'F9',
-    fullscreen: 'F11',
-  };
+  shortcuts: Record<string, string> = SHORTCUTS;
 
   @property({type: Array})
   private enabledExtensions: AvailableMarkdownExtension[] = [];
 
-  get markdownElement(): MarkdownElement | null {
-    const markedElement = this.querySelector<MarkdownElement>('marked-element');
-    return markedElement;
-  }
+  // get markdownElement(): MarkdownElement | null {
+  //   const markedElement = this.querySelector<MarkdownElement>('marked-element');
+  //   return markedElement;
+  // }
 
   @query('#editor')
   editorElement?: HTMLElement;
@@ -388,44 +326,100 @@ export class EditorElement extends LitElement {
 
   private normalizedToolBarConfig: Map<ToolBarOption, ToolBarConfigItem> = new Map();
 
-  private dispatchMarkdownUpdatedDebounce: (cb?: Function) => void = debounce(300);
+  private dispatchMarkdownUpdatedDebounce: (cb?: unknown) => void = debounce(300);
 
   private isElementInitialized = false;
 
-  get value() {
+  get value(): string {
     return (this.markdown || '').replace(/([^\r]|^)\n/g, '$1\n');
   }
 
-  set value(value) {
-    this.markdown = value;
+  focus(): void {
+    if (!this.codeMirrorEditor) return;
+    this.refresh();
+    this.codeMirrorEditor!.focus();
+  }
+
+  refresh(): void {
+    if (!this.codeMirrorEditor) return;
+    this.codeMirrorEditor!.refresh();
+  }
+
+  constructor() {
+    super();
+    this._onKeyPressed = this.onKeyPressed.bind(this);
+
+    // Cancel enter propogation
+    this.addEventListener('keyup', this._onKeyPressed);
+  }
+
+  protected update(changedProperties: ChangedProps): void {
+    if (changedProperties.has('toolbarButtonsConfig')) {
+      const normalizedToolBartConfig: Map<ToolBarOption, ToolBarConfigItem> = new Map();
+      (this.toolbarButtonsConfig || []).forEach((it) => normalizedToolBartConfig.set(it.name, it));
+      this.normalizedToolBarConfig = normalizedToolBartConfig;
+    }
+
+    super.update(changedProperties);
+  }
+
+  protected async firstUpdated(): Promise<void> {
+    await this.updateComplete;
+    this.setupEditor();
+    this.setupToolbarExtensions();
+    this.isElementInitialized = true;
+    this.renderHTML();
+  }
+
+  protected fire<T>(eventName: string, detail?: T, bubbles?: boolean): boolean {
+    return this.dispatchEvent(
+      new CustomEvent(eventName, {
+        bubbles: bubbles || this.bubbles,
+        composed: true,
+        detail,
+      }),
+    );
   }
 
   /**
-   * When ready check if markdown property is set or otherwise look for script tag
+   * Fired when the content is being processed and before it is rendered.
+   * Provides an opportunity to highlight code blocks based on the programming
+   * language used. This is also known as syntax highlighting. One example would
+   * be to use a prebuilt syntax highlighting library, e.g with
+   * [highlightjs](https://highlightjs.org/).
+   *
+   * @param {string} code
+   * @param {string} lang
+   * @return {string}
+   * @event syntax-highlight
    */
-  private ready(): void {
-    this.setupEditor();
-    this.setupToolbarExtensions();
-
-    const markedElement = this.markdownElement;
-    if (!markedElement) {
-      throw new Error('Missing children <marked-element>');
-    }
-
-    if (markedElement.markdown) {
-      this.codeMirrorEditor!.setValue(markedElement.markdown);
-      setTimeout(() => {
-        this.codeMirrorEditor!.refresh();
-      }, 0);
-    } else {
-      const onMarkedLoadend = () => {
-        markedElement.removeEventListener('marked-render-complete', onMarkedLoadend);
-        this.markdown = markedElement.markdown;
-      };
-      markedElement.addEventListener('marked-render-complete', onMarkedLoadend);
-    }
+  _highlight(code: string, lang: string): string {
+    this.fire<{code: string; lang: string}>('syntax-highlight', {code: code, lang: lang});
+    return code;
   }
 
+  renderHTML(): void {
+    console.log('renderHTML', this.outputElement);
+    if (!this.outputElement) {
+      return;
+    }
+    if (!this.markdown) {
+      this.outputElement!.innerHTML = '';
+      return;
+    }
+
+    const opts: MarkedOptions = {
+      highlight: this._highlight.bind(this),
+      breaks: false,
+      sanitize: false,
+      pedantic: false,
+      smartypants: false,
+    };
+
+    this.outputElement!.innerHTML = window.marked(this.markdown, opts);
+    this.focus();
+    this.fire('html-render-complete', {});
+  }
   /**
    * Helper method that creates button array from toolbar config property
    * @param {Array} toolBarOptions
@@ -450,7 +444,7 @@ export class EditorElement extends LitElement {
       this.enabledExtensions = fetchedConfig.extensions;
     }
     const baseToolbarButtons = this.toolbarButtons;
-    availableMarkdownExtensions.forEach(extension => {
+    availableMarkdownExtensions.forEach((extension) => {
       if (baseToolbarButtons.includes(extension) && !this.enabledExtensions.includes(extension)) {
         console.warn(`The extension ${extension} is not enabled on your markdownEditorConfig object, it was removed from the toolbar.`);
         baseToolbarButtons.splice(baseToolbarButtons.indexOf(extension), 1);
@@ -502,25 +496,7 @@ export class EditorElement extends LitElement {
     }
   }
 
-  private observeMarkdownChanged(): void {
-    if (this.codeMirrorEditor) {
-      if (this.codeMirrorEditor.getValue() !== this.markdown) {
-        this.codeMirrorEditor.setValue(this.markdown || '');
-        setTimeout(() => {
-          this.codeMirrorEditor!.refresh();
-        }, 0);
-      }
-    }
-
-    if (this.markdownElement) {
-      this.markdownElement!.markdown = this.markdown;
-    }
-
-    this.updateDocHistory();
-  }
-
   /********* TOOL BAR HANDLERS *************/
-
   private toggleFullscreen(event?: Event): void {
     if (event) {
       event.preventDefault();
@@ -538,46 +514,8 @@ export class EditorElement extends LitElement {
   }
 
   setupEditor(): Editor {
-    /* initialize key map */
-    const keyMaps: Record<string, Function> = {
-      Tab: (codeMirror: Editor) => {
-        const ranges = codeMirror.getDoc().listSelections();
-        const pos = ranges[0].head;
-        const eolState = codeMirror.getStateAfter(pos.line);
-        const inList = eolState.list !== false;
-
-        if (inList) {
-          codeMirror.execCommand('indentMore');
-          return;
-        }
-
-        if (codeMirror.getOption('indentWithTabs')) {
-          codeMirror.execCommand('insertTab');
-        } else {
-          // @ts-ignore
-          const spaces = Array(codeMirror!.getOption('tabSize') + 1).join(' ');
-          codeMirror.getDoc().replaceSelection(spaces);
-        }
-      },
-      'Shift-Tab': (codeMirror: Editor) => {
-        const ranges = codeMirror.getDoc().listSelections();
-        const pos = ranges[0].head;
-        const eolState = codeMirror.getStateAfter(pos.line);
-        const inList = eolState.list !== false;
-
-        if (codeMirror && inList) {
-          codeMirror.execCommand('indentLess');
-          return;
-        }
-
-        if (codeMirror.getOption('indentWithTabs')) {
-          codeMirror.execCommand('insertTab');
-        } else {
-          // @ts-ignore
-          const spaces = Array(codeMirror.getOption('tabSize') + 1).join(' ');
-          codeMirror.getDoc().replaceSelection(spaces);
-        }
-      },
+    const extraKeys = {
+      ...KEY_MAPS,
       Esc: (codeMirror: Editor) => {
         // @ts-ignore
         if (codeMirror!.getOption('fullScreen')) {
@@ -586,16 +524,16 @@ export class EditorElement extends LitElement {
       },
     };
 
-    Object.keys(this.shortcuts).forEach(shortcut => {
+    Object.keys(this.shortcuts).forEach((shortcut) => {
       const actionBtn = this.normalizedToolBarConfig.get(shortcut as ToolBarOption);
       if (actionBtn && !!this.shortcuts[shortcut]) {
-        keyMaps[convertShortcut(this.shortcuts[shortcut])] = () => actionBtn.action.bind(this)();
+        // @ts-ignore
+        extraKeys[convertShortcut(this.shortcuts[shortcut])] = () => actionBtn.action.bind(this)();
       }
     });
 
     /* initialize code mirror */
-    // @ts-ignore
-    const codeMirrorEditor: Editor = CodeMirror(this.editorElement, {
+    const editorConfig: EditorConfiguration = {
       mode: 'markdown',
       value: this.markdown || '',
       tabSize: 2,
@@ -603,10 +541,11 @@ export class EditorElement extends LitElement {
       indentWithTabs: this.indentWithTabs,
       lineNumbers: this.lineNumbers,
       autofocus: this.autoFocus,
-      extraKeys: keyMaps,
+      extraKeys,
       lineWrapping: true,
-      allowDropFileTypes: ['text/plain'],
-    });
+    };
+
+    const codeMirrorEditor: Editor = window.CodeMirror(this.editorElement!, editorConfig);
 
     /* Update markdown property with latest changes */
     codeMirrorEditor.on('change', (editor: Editor) => {
@@ -659,7 +598,7 @@ export class EditorElement extends LitElement {
       return true;
     }
 
-    const result = mappings.find(m => {
+    const result = mappings.find((m) => {
       return m.key === type;
     });
     return result ? states.includes(result.value) : false;
@@ -818,10 +757,7 @@ export class EditorElement extends LitElement {
 
     const codeMirrorEditor = this.codeMirrorEditor!;
     const cursorStart = codeMirrorEditor.getDoc().getCursor('start');
-    const lineLength = codeMirrorEditor
-      .getDoc()
-      .getLine(cursorStart.line)
-      .trim().length;
+    const lineLength = codeMirrorEditor.getDoc().getLine(cursorStart.line).trim().length;
     const newLine = cursorStart.ch === 0 && lineLength === 0;
     const appendStr = newLine ? '\n' : '\n\n';
     this.insertAtCursor(appendStr + insertBlocks.hr + appendStr);
@@ -952,27 +888,27 @@ export class EditorElement extends LitElement {
     this.dispatchEvent(new CustomEvent('exmg-markdown-editor-paste-table'));
   }
 
-  public insertTableAtCursor(data: string) {
+  public insertTableAtCursor(data: string): void {
     const columnWidth = (rows: string[][], columnIndex: number) => {
       return Math.max.apply(
         null,
-        rows.map(function(row) {
+        rows.map(function (row) {
           return row[columnIndex].length;
         }),
       );
     };
 
-    const rows = data.split(/[\n\u0085\u2028\u2029]|\r\n?/g).map(function(row) {
+    const rows = data.split(/[\n\u0085\u2028\u2029]|\r\n?/g).map(function (row) {
       return row.split('\t');
     });
-    const columnWidths = rows[0].map(function(_column, columnIndex) {
+    const columnWidths = rows[0].map(function (_column, columnIndex) {
       return columnWidth(rows, columnIndex);
     });
-    const markdownRows = rows.map(function(row) {
+    const markdownRows = rows.map(function (row) {
       return (
         '| ' +
         row
-          .map(function(column, index) {
+          .map(function (column, index) {
             return column + Array(columnWidths[index] - column.length + 1).join(' ');
           })
           .join(' | ') +
@@ -985,7 +921,7 @@ export class EditorElement extends LitElement {
       0,
       '|' +
         columnWidths
-          .map(function(_width, index) {
+          .map(function (_width, index) {
             return Array(columnWidths[index] + 3).join('-');
           })
           .join('|') +
@@ -1037,254 +973,38 @@ export class EditorElement extends LitElement {
     }
   }
 
-  /*****  LIT ELEMENT HOOKS ******/
-  connectedCallback() {
-    super.connectedCallback();
-
-    const markedElement = this.markdownElement;
-
-    if (markedElement) {
-      this.markdown = markedElement.getAttribute('markdown') || undefined;
-    }
-    this._onKeyPressed = this.onKeyPressed.bind(this);
-
-    // Cancel enter propogation
-    this.addEventListener('keyup', this._onKeyPressed);
-  }
-
-  disconnectedCallback(): void {
-    this.removeEventListener('keyup', this._onKeyPressed);
-    this.dispatchMarkdownUpdatedDebounce();
-
-    super.disconnectedCallback();
-  }
-
-  protected update(changedProperties: ChangedProps): void {
-    if (changedProperties.has('toolbarButtonsConfig')) {
-      const normalizedToolBartConfig: Map<ToolBarOption, ToolBarConfigItem> = new Map();
-      (this.toolbarButtonsConfig || []).forEach(it => normalizedToolBartConfig.set(it.name, it));
-      this.normalizedToolBarConfig = normalizedToolBartConfig;
-    }
-
-    super.update(changedProperties);
-  }
-
-  protected async firstUpdated(): Promise<void> {
-    await this.updateComplete;
-    this.ready();
-    this.isElementInitialized = true;
-  }
-
-  protected updated(changedProperties: ChangedProps): void {
-    if (changedProperties.has('fullscreen')) {
-      this.observeFullscreen();
-    }
-
-    if (changedProperties.has('markdown')) {
-      this.observeMarkdownChanged();
-    }
-  }
-
-  protected render() {
+  protected render(): TemplateResult {
     const classes = {fullscreen: this.fullscreen, labels: true};
-    // noinspection CssUnresolvedCustomPropertySet
     return html`
-      <!--suppress CssUnresolvedCustomProperty -->
-      <style>
-        ${codeMirrorStylesText} :host {
-          display: block;
-          border: 1px solid var(--exmg-markdown-editor-border, #ddd);
-          font-family: 'Roboto', 'Noto', sans-serif;
-          -webkit-font-smoothing: antialiased;
-          font-size: 14px;
-          font-weight: 400;
-          line-height: 20px;
-        }
-        :host([invalid]) {
-          border: 1px solid red;
-        }
-        #editor {
-          overflow: hidden;
-        }
-        .labels {
-          background: transparent;
-          position: relative;
-          width: 100%;
-          z-index: 10;
-          height: 0;
-        }
-        .labels.fullscreen {
-          height: 30px;
-          position: fixed;
-        }
-        .labels > * {
-          box-sizing: border-box;
-          display: inline-block;
-          width: 49%;
-          height: 30px;
-          line-height: 30px;
-          color: var(--exmg-markdown-editor-label-color, #ddd);
-          font-size: 12px;
-          font-weight: 500;
-          padding-left: 12px;
-          padding-top: 8px;
-        }
-        .labels > .preview {
-          padding-left: 0;
-        }
-        ::slotted(*) {
-          display: none;
-          overflow: auto;
-        }
-        :host([show-helper-label]) ::slotted(marked-element) {
-          padding-top: 0px;
-          margin-top: 30px;
-        }
-        :host([split-view]) ::slotted(*) {
-          display: block;
-          background: var(--exmg-markdown-editor-preview-background, white);
-          padding: 16px;
-        }
-        .container {
-          box-sizing: border-box;
-          background: var(--exmg-markdown-editor-background-color, #f1f1f1);
-          display: -ms-flexbox;
-          display: -webkit-flex;
-          display: flex;
-          -ms-flex-direction: row;
-          -webkit-flex-direction: row;
-          flex-direction: row;
-        }
-        /* No importants! */
-        :host([fullscreen]) .container {
-          position: fixed !important;
-          top: calc(50px + var(--exmg-markdown-editor-fullscreen-top-offset, 0px));
-          left: 0;
-          right: 0;
-          bottom: 0;
-          z-index: 9;
-        }
-        :host([split-view]) ::slotted(*),
-        .container > * {
-          -ms-flex: 1 1 0.000000001px;
-          -webkit-flex: 1;
-          flex: 1;
-          -webkit-flex-basis: 0.000000001px;
-          flex-basis: 0.000000001px;
-        }
-        :host([line-numbers]) .container #editor {
-          padding: 0;
-        }
-        /* No importants! */
-        .CodeMirror {
-          height: calc(100% - 16px) !important;
-          min-height: 300px;
-          font: inherit;
-          z-index: 1;
-          padding: 16px;
-          padding-bottom: 0;
-          background: var(--exmg-markdown-editor-code-background, #f9f9f9);
-        }
-        .CodeMirror-scroll {
-          min-height: 300px;
-          margin-top: ${this.showHelperLabel ? '15px' : '0'};
-        }
-        :host([show-helper-label]) .CodeMirror-scroll {
-          margin-top: 15px;
-        }
-        .CodeMirror:not(.CodeMirror-focused):hover {
-          background: var(--exmg-markdown-editor-code-hover, white);
-          cursor: text;
-        }
-        .CodeMirror-focused {
-          box-shadow: inset 0 0 0 2px Highlight;
-          box-shadow: inset 0 0 0 2px -webkit-focus-ring-color;
-          overflow: hidden;
-          background: white;
-        }
-        .toolbar {
-          position: relative;
-          padding: 8px 10px;
-          border-bottom: 1px solid var(--exmg-markdown-editor-border, #ddd);
-          background: var(--exmg-markdown-editor-toolbar-background, #fafafa);
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          -ms-user-select: none;
-          -o-user-select: none;
-          user-select: none;
-        }
-        :host([fullscreen]) .toolbar {
-          width: 100%;
-          box-sizing: border-box;
-          height: 50px;
-          overflow-x: auto;
-          overflow-y: hidden;
-          white-space: nowrap;
-          padding: 10px 10px;
-          position: fixed;
-          top: calc(0px + var(--exmg-markdown-editor-fullscreen-top-offset, 0px));
-          left: 0;
-          z-index: 12;
-        }
-        .toolbar a {
-          display: inline-block;
-          text-align: center;
-          text-decoration: none;
-          margin: 0;
-          border-radius: 4px;
-          color: var(--exmg-markdown-editor-toolbar-color, rgba(0, 0, 0, 0.87));
-          border: 1px solid transparent;
-          cursor: pointer;
-        }
-        .toolbar a iron-icon {
-          margin: 4px;
-          width: 22px;
-          height: 22px;
-        }
-        .toolbar a[disabled] {
-          color: var(--exmg-markdown-editor-toolbar-color-disabled, rgba(0, 0, 0, 0.54));
-        }
-        .toolbar a:hover {
-          background: var(--exmg-markdown-editor-toolbar-button-background-hover, #fafafa);
-        }
-        .toolbar .seperator {
-          margin: 0 8px;
-          border-left: 1px solid var(--exmg-markdown-editor-toolbar-seperator-color, #ddd);
-        }
-      </style>
       <div id="toolbar" class="toolbar">
-        ${repeat<ToolBarConfigItem | Record<string, any>>(
-          this.getToolbar(this.toolbarButtons),
-          (it, index: number) => (isToolBarConfigItem(it) ? it.name : `empty_${index}`),
-          it => {
-            if (isToolBarConfigItem(it)) {
-              return html`
-                <a href="#" title="${it.name}" class="${it.className}" @click="${it.action}">
-                  <iron-icon icon="${it.icon}"></iron-icon>
-                </a>
-              `;
-            }
-            return html`
-              <span class="seperator"></span>
-            `;
-          },
-        )}
+        <div class="items">
+          ${repeat<ToolBarConfigItem | Record<string, any>>(
+            this.getToolbar(this.toolbarButtons),
+            (it, index: number) => (isToolBarConfigItem(it) ? it.name : `empty_${index}`),
+            (it) => {
+              if (isToolBarConfigItem(it)) {
+                return html`
+                  <a href="#" title="${it.name}" class="${it.className}" @click="${it.action}">
+                    <iron-icon icon="${it.icon}"></iron-icon>
+                  </a>
+                `;
+              }
+              return html` <span class="seperator"></span> `;
+            },
+          )}
+        </div>
         <div class=${classMap(classes)}>
           ${this.showHelperLabel
             ? html`
                 <div>EDITOR</div>
-                ${this.splitView
-                  ? html`
-                      <div class="preview">PREVIEW</div>
-                    `
-                  : ''}
+                ${this.splitView ? html` <div class="preview">PREVIEW</div> ` : ''}
               `
             : ''}
         </div>
       </div>
       <div class="container" style="height: ${this.height && !this.fullscreen ? `${this.height}px` : 'inherit'};">
         <div id="editor"></div>
-        <slot> </slot>
+        <div id="preview" class="preview-html"><slot></slot></div>
       </div>
     `;
   }
