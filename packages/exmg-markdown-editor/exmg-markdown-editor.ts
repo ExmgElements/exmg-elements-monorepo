@@ -419,7 +419,6 @@ export class EditorElement extends LitElement {
       smartypants: false,
     };
 
-    debugger;
     let customRenderer;
     if (window.markdownEditorConfig && window.markdownEditorConfig.renderer) {
       customRenderer = window.markdownEditorConfig.renderer as Renderer;
