@@ -1,6 +1,6 @@
 {
   "name": "@exmg/exmg-tooltip",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "dependencies": {
     "lit-element": "^2.4.0"
   },
