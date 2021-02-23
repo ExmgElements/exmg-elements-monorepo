@@ -1,24 +1,24 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./",
-    "target": "es2017",
+    "target": "es2018",
     "module": "esnext",
     "moduleResolution": "node",
-    "declaration": true,
+    "noEmitOnError": true,
     "lib": ["es2017", "dom"],
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "checkJs": false,
     "experimentalDecorators": true,
+    "importHelpers": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "baseUrl": "./",
+    "outDir": "./",
     "skipLibCheck": true,
+    "declaration": true
   },
-  "include": [
-    "**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
 }
