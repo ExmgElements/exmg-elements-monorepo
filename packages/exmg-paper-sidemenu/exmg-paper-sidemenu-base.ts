@@ -1,5 +1,5 @@
 import {property, html, LitElement} from 'lit-element';
-//import {observer} from '@material/mwc-base/observer.js';
+import {observer} from '@material/mwc-base/observer.js';
 import '@polymer/paper-listbox';
 
 export const chevronLeftIcon = html`
@@ -43,12 +43,18 @@ export const settingsIcon = html`
 
 export class ExmgPaperSidemenuBase extends LitElement {
   @property({type: Boolean, reflect: true})
+  @observer(function (this: LitElement, collapsed: boolean) {
+    this.dispatchEvent(new CustomEvent('collapsed', {bubbles: false, composed: true, detail: collapsed}));
+  })
   collapsed = false;
 
   /**
    * Contains the path of the selected menu item
    */
   @property({type: String})
+  @observer(function (this: LitElement, selected: string) {
+    this.dispatchEvent(new CustomEvent('selected-changed', {bubbles: false, composed: true, detail: selected}));
+  })
   selected!: string;
 
   /**
