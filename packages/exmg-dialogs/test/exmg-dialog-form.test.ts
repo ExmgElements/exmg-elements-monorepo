@@ -3,19 +3,19 @@ import {ExmgFormDialog} from '../exmg-dialog-form';
 import {ExmgButton} from '@exmg/exmg-button';
 
 const {assert} = chai;
-declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
-declare const flush: (cb?: Function) => void;
+declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: any) => T;
+declare const flush: (cb?: any) => void;
 
 suite('exmg-dialog-form', () => {
   let element: ExmgFormDialog;
 
-  setup(done => {
+  setup((done) => {
     element = fixture('BasicTestFixture');
     flush(done);
   });
 
-  test('instantiating the element with default properties works', done => {
-    element.addEventListener('submit', event => {
+  test('instantiating the element with default properties works', (done) => {
+    element.addEventListener('submit', (event) => {
       assert.isNotNull(event, 'Event "submit" is thrown');
       done();
     });

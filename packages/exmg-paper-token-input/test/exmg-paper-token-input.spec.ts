@@ -1,21 +1,21 @@
 import {PaperTokenInputElement} from '../exmg-paper-token-input';
 import {promisifyFlush, onExmgTokenInputDeselected, onExmgTokenInputSelected, onExmgTokenInputChange} from './utils';
 
-declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
-declare const flush: (cb?: Function) => void;
+declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: any) => T;
+declare const flush: (cb?: any) => void;
 
 const {assert} = chai;
 
-suite('<exmg-paper-token-input>', function() {
+suite('<exmg-paper-token-input>', function () {
   let element: PaperTokenInputElement;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('base usage', function() {
+  suite('base usage', function () {
     setup(() => {
       element = fixture('ExmgPaperTokenInputBasicElement');
     });
 
-    test('element is upgraded', function() {
+    test('element is upgraded', function () {
       assert.instanceOf(element, PaperTokenInputElement);
     });
 
@@ -29,7 +29,7 @@ suite('<exmg-paper-token-input>', function() {
     });
   });
 
-  suite('element with children', function() {
+  suite('element with children', function () {
     setup(() => {
       element = fixture('ExmgPaperTokenInputList');
     });
@@ -54,7 +54,7 @@ suite('<exmg-paper-token-input>', function() {
     });
   });
 
-  suite('element with children and selection', function() {
+  suite('element with children and selection', function () {
     setup(() => {
       element = fixture('ExmgPaperTokenInputListWithSelection');
     });
@@ -152,7 +152,7 @@ suite('<exmg-paper-token-input>', function() {
     });
   });
 
-  suite('element should follow required constraint', function() {
+  suite('element should follow required constraint', function () {
     const makeElementTouched = async (targetElement: HTMLElement): Promise<void> => {
       targetElement.click();
       targetElement.parentElement!.click();
@@ -207,7 +207,7 @@ suite('<exmg-paper-token-input>', function() {
       chai.assert.equal(inputError.innerText, '', 'Error message is not visible');
     });
 
-    suite('element is disabled', function() {
+    suite('element is disabled', function () {
       setup(() => {
         element = fixture('ExmgPaperTokenInputDisabled');
       });

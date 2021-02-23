@@ -14,21 +14,13 @@ export class FormDemo extends LitElement {
   renderTab() {
     switch (this.activeTabIndex) {
       case 0:
-        return html`
-          <tab-1></tab-1>
-        `;
+        return html` <tab-1></tab-1> `;
       case 1:
-        return html`
-          <tab-2></tab-2>
-        `;
+        return html` <tab-2></tab-2> `;
       case 2:
-        return html`
-          <tab-3></tab-3>
-        `;
+        return html` <tab-3></tab-3> `;
     }
-    return html`
-      unknown
-    `;
+    return html` unknown `;
   }
 
   render() {

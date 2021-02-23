@@ -1,6 +1,7 @@
 import {LitElement} from 'lit-element';
 
-export const promisifyFlush = (flush: Function) => () => new Promise(resolve => flush(resolve));
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const promisifyFlush = (flush: any) => () => new Promise((resolve) => flush(resolve));
 
 type onEventType = (eventName: string) => (element: LitElement, shouldResolve: boolean) => Promise<any>;
 

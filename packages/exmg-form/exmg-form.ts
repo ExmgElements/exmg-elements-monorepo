@@ -78,7 +78,7 @@ export class ExmgForm extends LitElement {
    * Indicator of the form has pending changes
    */
   @property({type: Boolean})
-  @observer(function(this: ExmgForm, dirty: boolean) {
+  @observer(function (this: ExmgForm, dirty: boolean) {
     this.dispatchEvent(
       new CustomEvent('dirty-change', {
         bubbles: this.bubbles,
@@ -134,7 +134,7 @@ export class ExmgForm extends LitElement {
 
   public saveDefaults(overwriteValues = false) {
     // After first render save original form data for later dirdty checks
-    const nodes = Array.from(this.querySelectorAll<any>('*') || []).filter(n => !!n.name);
+    const nodes = Array.from(this.querySelectorAll<any>('*') || []).filter((n) => !!n.name);
     for (let i = 0; i < nodes.length; i++) {
       const node: any = nodes[i];
       this.addInput(node, overwriteValues);
@@ -170,7 +170,7 @@ export class ExmgForm extends LitElement {
 
   private resetRegisteredCustomElements() {
     const nodes = this.getResetRegisteredElements(this);
-    nodes.forEach(n => n.reset());
+    nodes.forEach((n) => n.reset());
   }
 
   _isRegisteredForSubmitElement(node: any) {
@@ -247,7 +247,7 @@ export class ExmgForm extends LitElement {
     this._debouncer = Debouncer.debounce(this._debouncer, timeOut.after(200), () => {
       let dirty = false;
       // Select all slot nodes and filter out the input based on a existing name property on the node
-      const nodes = Array.from(this.querySelectorAll<any>('*') || []).filter(n => !!n.name && !n.disabled);
+      const nodes = Array.from(this.querySelectorAll<any>('*') || []).filter((n) => !!n.name && !n.disabled);
       try {
         for (const node of nodes) {
           const def: InputDefault = this._defaults.get(node);
@@ -338,9 +338,7 @@ export class ExmgForm extends LitElement {
 
   private renderResetButton() {
     return !this.hideResetButton
-      ? html`
-          <exmg-button class="reset" @click="${this.onResetBtnClick}">${this.resetButtonCopy}</exmg-button>
-        `
+      ? html` <exmg-button class="reset" @click="${this.onResetBtnClick}">${this.resetButtonCopy}</exmg-button> `
       : '';
   }
 
@@ -363,11 +361,7 @@ export class ExmgForm extends LitElement {
       return '';
     }
 
-    return html`
-      <div class="actions">
-        ${this.renderResetButton()} ${this.renderSubmitButton()}
-      </div>
-    `;
+    return html` <div class="actions">${this.renderResetButton()} ${this.renderSubmitButton()}</div> `;
   }
 
   protected render() {

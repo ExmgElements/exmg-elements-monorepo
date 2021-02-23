@@ -7,7 +7,7 @@ export class ExmgSearchBar extends ExmgSearchBarBase {
   filter(data: any[], filterKeys: string[], query: string): ExmgSearchSuggestion[] {
     const results: ExmgSearchSuggestion[] = [];
     if (query.length == 0) return results;
-    data.forEach(obj => {
+    data.forEach((obj) => {
       for (let i = 0; i < filterKeys.length; i++) {
         const lookingIn = String(obj[filterKeys[i]]);
         if (lookingIn.toLowerCase().includes(query.toLowerCase())) {
@@ -34,11 +34,7 @@ export class ExmgSearchBar extends ExmgSearchBarBase {
           (suggestion, index) =>
             html`
               <paper-item focusable class="suggestion" @click=${() => this._handleClickSuggestion(suggestion.value, index)}
-                >${suggestion.icon
-                  ? html`
-                      <mwc-icon>${suggestion.icon}</mwc-icon>
-                    `
-                  : html``}${suggestion.text}</paper-item
+                >${suggestion.icon ? html` <mwc-icon>${suggestion.icon}</mwc-icon> ` : html``}${suggestion.text}</paper-item
               >
             `,
         )}

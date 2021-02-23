@@ -1,26 +1,26 @@
 import {ExmgSearchBar} from '../exmg-searchbar';
 import {promisifyFlush} from './utils';
 
-declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
-declare const flush: (cb?: Function) => void;
+declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: any) => T;
+declare const flush: (cb?: any) => void;
 
 const {assert} = chai;
 const keysToPress = ['e', 'x', 'm', 'a', 'c', 'h', 'i', 'n', 'a'];
 
-suite('<exmg-searchbar>', function() {
+suite('<exmg-searchbar>', function () {
   let element: ExmgSearchBar;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('base usage', function() {
+  suite('base usage', function () {
     setup(async () => {
       element = fixture('ExmgSearchbarBasicElement');
     });
 
-    test('element is upgraded', function() {
+    test('element is upgraded', function () {
       assert.instanceOf(element, ExmgSearchBar);
     });
 
-    test('element can be focused', function() {
+    test('element can be focused', function () {
       element.click();
     });
 
@@ -30,14 +30,14 @@ suite('<exmg-searchbar>', function() {
       const inputElement = element.shadowRoot!.querySelector('mwc-textfield')!;
       let handledQueryChange = false;
 
-      element.addEventListener('query-change', function(event: any) {
+      element.addEventListener('query-change', function (event: any) {
         handledQueryChange = true;
         const input = event.detail.value;
         assert.instanceOf(event, CustomEvent);
         assert.equal(input, element.searchQuery);
       });
 
-      keysToPress.forEach(key => {
+      keysToPress.forEach((key) => {
         handledQueryChange = false;
         inputElement.value += key;
         inputElement.dispatchEvent(new Event('input'));
@@ -49,7 +49,7 @@ suite('<exmg-searchbar>', function() {
       await flushCompleted();
       const inputElement = element.shadowRoot!.querySelector('mwc-textfield')!;
       let handledQuerySubmit = false;
-      element.addEventListener('query-submit', function(event: any) {
+      element.addEventListener('query-submit', function (event: any) {
         handledQuerySubmit = true;
         console.log('submit');
         const input = event.detail.value;
@@ -70,7 +70,7 @@ suite('<exmg-searchbar>', function() {
       let handledQuerySubmit = false;
 
       element.submitKeys.push('SHIFT');
-      element.addEventListener('query-submit', function(event: any) {
+      element.addEventListener('query-submit', function (event: any) {
         handledQuerySubmit = true;
         const input = event.detail.value;
         assert.instanceOf(event, CustomEvent);
@@ -89,7 +89,7 @@ suite('<exmg-searchbar>', function() {
       let handledQuerySubmit = false;
 
       element.submitKeys = [];
-      element.addEventListener('query-submit', function(event: any) {
+      element.addEventListener('query-submit', function (event: any) {
         handledQuerySubmit = true;
         const input = event.detail.value;
         assert.instanceOf(event, CustomEvent);
@@ -101,7 +101,10 @@ suite('<exmg-searchbar>', function() {
       assert.equal(handledQuerySubmit, false);
     });
 
-    const mockSuggestions = [{text: 'Ex', value: 1}, {text: 'Machina', value: 2}];
+    const mockSuggestions = [
+      {text: 'Ex', value: 1},
+      {text: 'Machina', value: 2},
+    ];
 
     test('lists suggestions', async () => {
       await flushCompleted();
@@ -118,7 +121,7 @@ suite('<exmg-searchbar>', function() {
 
       let handledSuggestionSelect = false;
 
-      element.addEventListener('suggestion-select', function(event: any) {
+      element.addEventListener('suggestion-select', function (event: any) {
         handledSuggestionSelect = true;
         assert.instanceOf(event, CustomEvent);
         assert.equal(event.detail.index, 0);

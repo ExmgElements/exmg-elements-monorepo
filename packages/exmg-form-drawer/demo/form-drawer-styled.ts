@@ -120,9 +120,7 @@ export class Drawer extends LitElement {
         <paper-input name="answer_b" label="Answer B" value="Eminem"></paper-input>
         <paper-input name="answer_c" label="Answer C" value="Ariana Grande"></paper-input>
         <br />
-        <exmg-button unelevated>
-          + Add answer
-        </exmg-button>
+        <exmg-button unelevated> + Add answer </exmg-button>
       </exmg-form-drawer>
     `;
   }

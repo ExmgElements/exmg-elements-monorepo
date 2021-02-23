@@ -7,7 +7,7 @@ export class ExmgTooltipBase extends LitElement {
    * must be a sibling of the tooltip.
    */
   @property({type: String})
-  @observer(function(this: ExmgTooltipBase) {
+  @observer(function (this: ExmgTooltipBase) {
     this._findTarget();
   })
   for?: string;

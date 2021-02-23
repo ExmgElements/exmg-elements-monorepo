@@ -310,6 +310,7 @@ export abstract class ExmgSearchBarBase extends LitElement implements ExmgSearch
     }
   }
 
+  // eslint-disable-next-line no-shadow
   abstract filter(data: any[], filterKeys: string[], query: string): ExmgSearchSuggestion[];
 
   abstract renderSuggestions(suggestions: ExmgSearchSuggestion[]): TemplateResult;

@@ -45,7 +45,7 @@ export class DemoSearch extends LitElement {
 
   private filterData(q: string): {username: string; name: string; id: number; url: string}[] {
     return mockData.filter(
-      data => data.name.toLowerCase().includes(q.toLowerCase()) || data.username.toLowerCase().includes(q.toLowerCase()),
+      (data) => data.name.toLowerCase().includes(q.toLowerCase()) || data.username.toLowerCase().includes(q.toLowerCase()),
     );
   }
 
@@ -74,7 +74,7 @@ export class DemoSearch extends LitElement {
     }
     const filteredData = this.filterData(_query);
     const _suggestions: ExmgSearchSuggestion[] = [];
-    filteredData.forEach(data => {
+    filteredData.forEach((data) => {
       const sugg = {text: data.name, value: data};
       _suggestions.push(sugg);
     });
@@ -180,8 +180,8 @@ export class DemoSearch extends LitElement {
           <tbody>
             ${repeat(
               this._searchResults,
-              data => data.id,
-              data => {
+              (data) => data.id,
+              (data) => {
                 return html`
                   <tr>
                     <td>${data.id}</td>
@@ -208,8 +208,8 @@ export class DemoSearch extends LitElement {
           <tbody>
             ${repeat(
               mockData,
-              data => data.id,
-              data => {
+              (data) => data.id,
+              (data) => {
                 return html`
                   <tr>
                     <td>${data.id}</td>

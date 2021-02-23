@@ -28,9 +28,7 @@ export class ExmgButton extends ButtonBase {
       'exmg-loading': this.loading,
       'exmg-button-content': true,
     };
-    const mdcButtonIcon = html`
-      <span class="material-icons mdc-button__icon">${this.icon}</span>
-    `;
+    const mdcButtonIcon = html` <span class="material-icons mdc-button__icon">${this.icon}</span> `;
     return html`
       <button
         id="button"
@@ -53,11 +51,7 @@ export class ExmgButton extends ButtonBase {
           ${this.icon && this.trailingIcon ? mdcButtonIcon : ''}
           <slot></slot>
         </span>
-        ${this.loading
-          ? html`
-              <exmg-button-spinner active></exmg-button-spinner>
-            `
-          : ''}
+        ${this.loading ? html` <exmg-button-spinner active></exmg-button-spinner> ` : ''}
         ${this.progress
           ? html`
               <div class="progress-holder">

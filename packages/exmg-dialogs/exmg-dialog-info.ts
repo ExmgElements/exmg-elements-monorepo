@@ -64,9 +64,7 @@ export class ExmgInfoDialog extends LitElement {
               <h2 class="title">${this.title}</h2>
             </header>
           `
-        : html`
-            <div class="top-margin">&nbsp;</div>
-          `}
+        : html` <div class="top-margin">&nbsp;</div> `}
     `;
   }
 
@@ -74,9 +72,7 @@ export class ExmgInfoDialog extends LitElement {
     return html`
       <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click>
         ${this.hideCloseButton
-          ? html`
-              ${this.renderHeader()}
-            `
+          ? html` ${this.renderHeader()} `
           : html`
               <mwc-icon-button @click=${this.close} class="close-button">${closeIcon}</mwc-icon-button>
               ${this.renderHeader()}

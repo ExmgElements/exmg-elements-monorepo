@@ -166,18 +166,8 @@ export class ExmgConfirmDialog extends LitElement {
   protected render() {
     return html`
       <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click @iron-overlay-closed="${this.onCloseDialog}">
-        ${this.hideCloseButton
-          ? ''
-          : html`
-              <mwc-icon-button @click=${this.close} class="close-button">${closeIcon}</mwc-icon-button>
-            `}
-        <header>
-          ${!!this.title
-            ? html`
-                <h2 class="title">${this.title}</h2>
-              `
-            : ''}
-        </header>
+        ${this.hideCloseButton ? '' : html` <mwc-icon-button @click=${this.close} class="close-button">${closeIcon}</mwc-icon-button> `}
+        <header>${!!this.title ? html` <h2 class="title">${this.title}</h2> ` : ''}</header>
         <div class="body">
           <div class="error ${!!this.errorMessage ? 'show' : ''}">
             <span class="body">
@@ -185,13 +175,7 @@ export class ExmgConfirmDialog extends LitElement {
               <span class="msg">${this.errorMessage}</span>
             </span>
           </div>
-          ${this.hasSlotContent
-            ? html`
-                <slot></slot>
-              `
-            : html`
-                <p>${this.message}</p>
-              `}
+          ${this.hasSlotContent ? html` <slot></slot> ` : html` <p>${this.message}</p> `}
         </div>
         <div class="actions">
           <exmg-button dialog-dismiss @click=${this.cancel}>Cancel</exmg-button>

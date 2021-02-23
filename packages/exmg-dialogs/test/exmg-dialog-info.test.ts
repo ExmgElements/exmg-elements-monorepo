@@ -3,13 +3,13 @@ import {ExmgInfoDialog} from '../exmg-dialog-info';
 import {ExmgButton} from '@exmg/exmg-button';
 
 const {assert} = chai;
-declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
-declare const flush: (cb?: Function) => void;
+declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: any) => T;
+declare const flush: (cb?: any) => void;
 
 suite('ExmgDialogPlain', () => {
   let el: ExmgInfoDialog;
 
-  setup(done => {
+  setup((done) => {
     el = fixture('BasicTestFixture');
     flush(done);
   });
@@ -19,8 +19,8 @@ suite('ExmgDialogPlain', () => {
     assert.instanceOf(el, ExmgInfoDialog);
   });
 
-  test('Instantiating the element with default properties works', done => {
-    el.addEventListener('done', event => {
+  test('Instantiating the element with default properties works', (done) => {
+    el.addEventListener('done', (event) => {
       assert.isNotNull(event, 'Event "done" is thrown');
       done();
     });

@@ -97,7 +97,7 @@ export class SelectionController {
       set.ordered = Array.from(set.set);
       set.ordered.sort((a, b) => (a.compareDocumentPosition(b) === Node.DOCUMENT_POSITION_PRECEDING ? 1 : 0));
     }
-    return set.ordered.filter(item => !item.disabled);
+    return set.ordered.filter((item) => !item.disabled);
   }
 
   getSet(name: string) {

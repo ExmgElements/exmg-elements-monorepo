@@ -9,7 +9,7 @@ export class ExmgSpinner extends LitElement {
   public coolingDown = false;
 
   @property({type: Boolean, reflect: true})
-  @observer(function(this: ExmgSpinner, value: boolean) {
+  @observer(function (this: ExmgSpinner, value: boolean) {
     this.setAriaHidden(!value);
     this.coolingDown = !value;
   })

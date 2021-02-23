@@ -1,16 +1,16 @@
 import {ExmgCopyToClipboard} from '../exmg-copy-to-clipboard';
 import {promisifyFlush, onCopied} from './utils';
 
-declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
-declare const flush: (cb?: Function) => void;
+declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: any) => T;
+declare const flush: (cb?: any) => void;
 
 const {assert} = chai;
 
-suite('<exmg-copy-to-clipboard>', function() {
+suite('<exmg-copy-to-clipboard>', function () {
   let element: ExmgCopyToClipboard;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('base usage', function() {
+  suite('base usage', function () {
     setup(() => {
       element = fixture('BasicTestFixture');
     });

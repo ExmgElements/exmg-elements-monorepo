@@ -14,8 +14,6 @@ export class CustEl extends LitElement {
     console.log('RESET EL');
   }
   render() {
-    return html`
-      <main>Test El</main>
-    `;
+    return html` <main>Test El</main> `;
   }
 }

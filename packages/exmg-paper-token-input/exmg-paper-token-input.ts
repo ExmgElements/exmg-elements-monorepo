@@ -183,7 +183,7 @@ export class PaperTokenInputElement extends LitElement {
   }
 
   private getStringSelectedValues(): string[] {
-    return this.selectedValues.map(value => (typeof value === 'number' ? value.toString() : (value || '').toString()));
+    return this.selectedValues.map((value) => (typeof value === 'number' ? value.toString() : (value || '').toString()));
   }
 
   get value(): SelectedValue[] {
@@ -197,7 +197,7 @@ export class PaperTokenInputElement extends LitElement {
   /** EVENT HANDLERS */
 
   private onWindowClick(e: MouseEvent): void {
-    const isInsideClick = !!e.composedPath().find(path => path === this);
+    const isInsideClick = !!e.composedPath().find((path) => path === this);
 
     if (this.autoValidate && !isInsideClick && this.previousClickWasInside) {
       this.validate();
@@ -543,8 +543,8 @@ export class PaperTokenInputElement extends LitElement {
           <span class="tokens">
             ${repeat(
               this.getSelectedItems(),
-              item => item.id,
-              item => html`
+              (item) => item.id,
+              (item) => html`
                 <paper-button tabindex="-1" @tap="${this.onInputContainerButtonTap(item.id)}">
                   <span>${item.text}</span>
                   <iron-icon icon="exmg-paper-token-input-icons:clear"></iron-icon>
@@ -566,11 +566,7 @@ export class PaperTokenInputElement extends LitElement {
           </span>
         </div>
 
-        ${this.errorMessage
-          ? html`
-              <paper-input-error slot="add-on" aria-live="assertive">${this.errorMessage}</paper-input-error>
-            `
-          : ''}
+        ${this.errorMessage ? html` <paper-input-error slot="add-on" aria-live="assertive">${this.errorMessage}</paper-input-error> ` : ''}
       </paper-input-container>
 
       <span id="inputWidthHelper">${this.inputValue}</span>

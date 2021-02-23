@@ -1,21 +1,21 @@
 import {ExmgForm} from '../exmg-form';
 import {promisifyFlush, onExmgFormCancel, onExmgFormSubmit} from './utils';
 
-declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
-declare const flush: (cb?: Function) => void;
+declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: any) => T;
+declare const flush: (cb?: any) => void;
 
 const {assert} = chai;
 
-suite('<exmg-form>', function() {
+suite('<exmg-form>', function () {
   let element: ExmgForm;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('base usage', function() {
+  suite('base usage', function () {
     setup(async () => {
       element = fixture('ExmgFormBasicElement');
     });
 
-    test('element is upgraded', function() {
+    test('element is upgraded', function () {
       assert.instanceOf(element, ExmgForm);
     });
 
@@ -44,7 +44,7 @@ suite('<exmg-form>', function() {
 
       submitBtn.click();
 
-      const timeoutPromise = new Promise(resolve => {
+      const timeoutPromise = new Promise((resolve) => {
         setTimeout(() => {
           resolve();
         }, 1000);

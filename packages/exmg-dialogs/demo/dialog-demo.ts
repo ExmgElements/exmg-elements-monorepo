@@ -25,7 +25,7 @@ export class DialogDemo extends LitElement {
   _delete(e: CustomEvent) {
     const target = e.target as ExmgConfirmDialog;
     // Trigger done after 1s
-    setTimeout(_ => {
+    setTimeout((_) => {
       // finished
       target.done();
     }, 1000);
@@ -35,7 +35,7 @@ export class DialogDemo extends LitElement {
     // Save data
     console.log('Data: ', e.detail);
     // Trigger done after 1s
-    setTimeout(_ => {
+    setTimeout((_) => {
       // finished
       target.done();
     }, 1000);
@@ -45,7 +45,7 @@ export class DialogDemo extends LitElement {
     // Save data
     console.log('Data: ', e.detail);
     // Trigger done after 1s
-    setTimeout(_ => {
+    setTimeout((_) => {
       // finished
       target.done();
     }, 1000);
@@ -65,7 +65,7 @@ export class DialogDemo extends LitElement {
     const target = e.target as ExmgConfirmDialog;
 
     // Trigger done after 1s
-    setTimeout(_ => {
+    setTimeout((_) => {
       try {
         // Throw error to simulate error
         if (true) {
@@ -100,9 +100,7 @@ export class DialogDemo extends LitElement {
         @cancel=${this._cancelCallback}
         @submit="${this._delete}"
       >
-        <p>
-          Are you sure you want to delete this item [slot]?
-        </p>
+        <p>Are you sure you want to delete this item [slot]?</p>
       </exmg-dialog-confirm>
 
       <exmg-button @click=${() => this.getElementBySelector('#dialog1')!.open()}>Dialog Normal</exmg-button>
@@ -199,9 +197,7 @@ export class DialogDemo extends LitElement {
           <paper-item>Story</paper-item>
           <paper-item>Bug</paper-item>
         </exmg-paper-combobox>
-        <p class="help">
-          Some issue types are unavailable due to incompatible field configuration and/or workflow associations.
-        </p>
+        <p class="help">Some issue types are unavailable due to incompatible field configuration and/or workflow associations.</p>
         <hr />
         <paper-input name="name" label="Summary" required always-float-label></paper-input>
         <paper-input name="reporter" label="Reporter" required always-float-label></paper-input>

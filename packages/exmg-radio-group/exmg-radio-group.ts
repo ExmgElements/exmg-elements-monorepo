@@ -11,7 +11,7 @@ export class ExmgRadioGroup extends LitElement {
   name?: string;
 
   @property({type: String, reflect: true})
-  @observer(function(this: ExmgRadioGroup) {
+  @observer(function (this: ExmgRadioGroup) {
     this.setProperSelectedItem();
   })
   selected = '';

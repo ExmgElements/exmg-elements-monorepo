@@ -1,21 +1,21 @@
 import {ExmgFormDrawer} from '../exmg-form-drawer';
 import {promisifyFlush, onExmgDrawerOpenedChanged} from './utils';
 
-declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
-declare const flush: (cb?: Function) => void;
+declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: any) => T;
+declare const flush: (cb?: any) => void;
 
 const {assert} = chai;
 
-suite('<exmg-form-drawer>', function() {
+suite('<exmg-form-drawer>', function () {
   let element: ExmgFormDrawer;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('base usage', function() {
+  suite('base usage', function () {
     setup(() => {
       element = fixture('BasicTestFixture');
     });
 
-    test('element is upgraded', function() {
+    test('element is upgraded', function () {
       assert.instanceOf(element, ExmgFormDrawer);
     });
 

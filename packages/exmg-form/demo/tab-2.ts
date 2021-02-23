@@ -31,9 +31,7 @@ export class Tab2El extends LitElement {
           <paper-item>PlayToTV</paper-item>
           <paper-item>Website</paper-item>
         </exmg-paper-combobox>
-        <p class="help">
-          Some issue types are unavailable due to incompatible field configuration and/or workflow associations.
-        </p>
+        <p class="help">Some issue types are unavailable due to incompatible field configuration and/or workflow associations.</p>
         <hr />
         <p class="help">Start typing to get a list of possible matches.</p>
         <exmg-paper-token-input name="tokens" label="Components" always-float-label>

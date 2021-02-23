@@ -25,7 +25,7 @@ type ChangedProps = GenericPropertyValues<Props>;
 
 const copyElementStyle = (source: HTMLElement, target: HTMLElement): void => {
   const computedStyle = window.getComputedStyle(source, null);
-  Array.from(computedStyle).forEach(key =>
+  Array.from(computedStyle).forEach((key) =>
     target.style.setProperty(key, computedStyle.getPropertyValue(key), computedStyle.getPropertyPriority(key)),
   );
 };
@@ -39,7 +39,7 @@ const ENTER_KEY_CODE = 13;
 const debounce = (time: number) => {
   let timer: number;
 
-  return (cb?: Function): void => {
+  return (cb?: any): void => {
     clearTimeout(timer);
     if (cb) {
       timer = window.setTimeout(cb, time);
@@ -225,11 +225,11 @@ export class PaperComboboxElement extends LitElement {
 
   private isElementInitialized = false;
 
-  private readonly observers: {[K in Props]?: Function} = this.getObservers();
+  private readonly observers: {[K in Props]?: any} = this.getObservers();
 
-  private readonly keyDownBackspaceDebounce: (cb?: Function) => void = debounce(200);
+  private readonly keyDownBackspaceDebounce: (cb?: any) => void = debounce(200);
 
-  private readonly inputChangeDebounce: (cb?: Function) => void = debounce(300);
+  private readonly inputChangeDebounce: (cb?: any) => void = debounce(300);
 
   private _onKeyUp: any;
   private _onClick: any;
@@ -354,7 +354,7 @@ export class PaperComboboxElement extends LitElement {
   /**
    * Register observed properties and actions to perform
    */
-  private getObservers(): {[K in Props]?: Function} {
+  private getObservers(): {[K in Props]?: any} {
     return {
       inputValue: () => this.observeInputChange(),
       selectedItem: () => this.observeSelectedItem(),
@@ -459,7 +459,7 @@ export class PaperComboboxElement extends LitElement {
     const phrase = hasFilterPhrase ? this.inputValue.toLowerCase().trim() : '';
     let isAnyItemActive = false;
 
-    items.forEach(item => {
+    items.forEach((item) => {
       if (hasFilterPhrase && item.textContent && item.textContent.toLowerCase().indexOf(phrase) === -1) {
         item.setAttribute('hidden', '');
       } else {
@@ -576,7 +576,7 @@ export class PaperComboboxElement extends LitElement {
   }
 
   private onClick(e: Event) {
-    const inside = e.composedPath().findIndex(path => path === this) !== -1;
+    const inside = e.composedPath().findIndex((path) => path === this) !== -1;
 
     // Detect outside element click for auto validate input
     if ((this.autoValidate && this.previousInsideClick && !inside) || this.token) {
@@ -744,9 +744,7 @@ export class PaperComboboxElement extends LitElement {
   }
 
   protected render() {
-    return html`
-      ${this.getTemplate()}
-    `;
+    return html` ${this.getTemplate()} `;
   }
 
   private getTemplate() {

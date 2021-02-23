@@ -145,18 +145,8 @@ export class ExmgFormDialog extends LitElement {
   protected render() {
     return html`
       <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click @iron-overlay-closed="${this.onCloseDialog}">
-        ${this.hideCloseButton
-          ? ''
-          : html`
-              <mwc-icon-button @click=${this.close} class="close-button">${closeIcon}</mwc-icon-button>
-            `}
-        <header>
-          ${!!this.title
-            ? html`
-                <h2 class="title">${this.title}</h2>
-              `
-            : ''}
-        </header>
+        ${this.hideCloseButton ? '' : html` <mwc-icon-button @click=${this.close} class="close-button">${closeIcon}</mwc-icon-button> `}
+        <header>${!!this.title ? html` <h2 class="title">${this.title}</h2> ` : ''}</header>
         <paper-dialog-scrollable>
           <div class="body">
             <div class="error ${!!this.errorMessage ? 'show' : ''}">

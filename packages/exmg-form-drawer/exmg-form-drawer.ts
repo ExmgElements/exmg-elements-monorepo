@@ -131,9 +131,7 @@ export class ExmgFormDrawer extends LitElement {
         <div class="header">
           <slot name="title" class="title"></slot>
           <div class="header-buttons">
-            <exmg-button title="${this.cancelBtnTitle}" @click="${this.handleCancelBtnClick}">
-              ${this.cancelBtnTitle}
-            </exmg-button>
+            <exmg-button title="${this.cancelBtnTitle}" @click="${this.handleCancelBtnClick}"> ${this.cancelBtnTitle} </exmg-button>
             ${this.submitBtnHidden
               ? ''
               : html`
