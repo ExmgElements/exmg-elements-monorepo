@@ -148,7 +148,7 @@ export class SortableDemo extends LitElement {
       <h2>List</h2>
       <exmg-sortable orientation="vertical" @dom-order-change="${this.orderChange}">
         <ul>
-          ${this.users.map(user => {
+          ${this.users.map((user) => {
             return html`
               <li>
                 <strong>${user.firstName}</strong>
@@ -167,12 +167,8 @@ export class SortableDemo extends LitElement {
         @dom-order-change="${this.orderChange}"
       ></exmg-sortable>
         <div class="boxes">
-          ${this.users.map(user => {
-            return html`
-              <div class="box">
-                ${user.firstName}
-              </div>
-            `;
+          ${this.users.map((user) => {
+            return html` <div class="box">${user.firstName}</div> `;
           })}
         </div>
       </exmg-sortable>
@@ -185,7 +181,7 @@ export class SortableDemo extends LitElement {
         @dom-order-change="${this.orderChange}"
       >
         <table>
-          ${this.users.map(user => {
+          ${this.users.map((user) => {
             return html`
               <tr>
                 <td class="handle"><span></span></td>
@@ -200,7 +196,7 @@ export class SortableDemo extends LitElement {
 
       <h2>Table with custom handle and external sortable node host</h2>
       <table id="externalSortableHost">
-        ${this.users.map(user => {
+        ${this.users.map((user) => {
           return html`
             <tr>
               <td class="handle"><span></span></td>
@@ -222,7 +218,7 @@ export class SortableDemo extends LitElement {
       <h2>Manipulate sorted data</h2>
       <exmg-sortable item-selector="div.box" @dom-order-change="${this.orderChange}">
         <div class="boxes">
-          ${this.users.map(user => {
+          ${this.users.map((user) => {
             return html`
               <div class="box">
                 ${user.firstName}<br />

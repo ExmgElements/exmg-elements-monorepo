@@ -1,17 +1,17 @@
 import {SortableElement} from '../exmg-sortable';
 import {promisifyFlush} from './utils';
 
-declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
-declare const flush: (cb?: Function) => void;
+declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: any) => T;
+declare const flush: (cb?: any) => void;
 
 const {assert} = chai;
 
-suite('<exmg-sortable>', function() {
+suite('<exmg-sortable>', function () {
   let element: SortableElement;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('element with children', function() {
-    test('default sorting works properly', done => {
+  suite('element with children', function () {
+    test('default sorting works properly', (done) => {
       element = fixture('ExmgSortableList');
 
       element.addEventListener('dom-order-change', (event: Event) => {
@@ -54,7 +54,7 @@ suite('<exmg-sortable>', function() {
       parent!.removeChild(element.querySelector('li.cloned')!);
     });
 
-    test('custom handle sorting works properly', done => {
+    test('custom handle sorting works properly', (done) => {
       element = fixture('ExmgSortableListWithCustomHandle');
 
       element.addEventListener('dom-order-change', (event: Event) => {
@@ -105,8 +105,8 @@ suite('<exmg-sortable>', function() {
       await flushCompleted();
       element.sortableHostNode = hostSortableElement;
       await flushCompleted();
-      let done: Function;
-      const donePromise = new Promise(resolve => {
+      let done: any;
+      const donePromise = new Promise((resolve) => {
         done = resolve;
       });
 

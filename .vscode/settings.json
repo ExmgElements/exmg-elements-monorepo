@@ -6,7 +6,6 @@
     "**/*.ts": {"when": "$(basename).scss"},
     "**/*.js.map": true
   },
-  "eslint.enable": true,
   "eslint.options": {
     "configFile": "./eslintrc.json"
   },

@@ -264,7 +264,7 @@ export class SortableElement extends LitElement {
     const x = l + w / 2;
     const y = t + h / 2;
 
-    return targets.filter(item => {
+    return targets.filter((item) => {
       const {left, right, top, bottom} = item.getBoundingClientRect();
       return !(x < left || x > right || y < top || y > bottom);
     });
@@ -320,7 +320,7 @@ export class SortableElement extends LitElement {
     });
 
     // animate from dx/dy (old node position) to none (new node position)
-    this.animationPromise = new Promise(resolve => {
+    this.animationPromise = new Promise((resolve) => {
       node
         .animate([{transform: `translate3d(${dx}px, ${dy}px, 0)`}, {transform: 'none'}], this.animationTiming)
         .addEventListener('finish', () => {
@@ -351,7 +351,7 @@ export class SortableElement extends LitElement {
   private insertAtTarget(node: Node, target: HTMLElement): void {
     let offsets: any[] = [];
     if (this.animationEnabled) {
-      offsets = this.sortableNodes.map(item => ({
+      offsets = this.sortableNodes.map((item) => ({
         x: item.offsetLeft,
         y: item.offsetTop,
       }));
@@ -403,8 +403,8 @@ export class SortableElement extends LitElement {
      * Lit element prefixes custom properties with '__' so that's why we check for it.
      */
     Object.keys(node)
-      .filter(prop => prop.startsWith('__'))
-      .forEach(prop => ((clone as any)[prop] = (node as any)[prop]));
+      .filter((prop) => prop.startsWith('__'))
+      .forEach((prop) => ((clone as any)[prop] = (node as any)[prop]));
 
     const {offsetLeft: x, offsetTop: y} = node;
 
