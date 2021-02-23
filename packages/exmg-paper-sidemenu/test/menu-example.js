@@ -25,3 +25,4 @@ export const menu = [
         ],
     },
 ];
+//# sourceMappingURL=menu-example.js.map

@@ -33,7 +33,7 @@ const submitTableToEditor = (e: CustomEvent<{data: string}>) => {
   tableDialog.done();
 };
 
-export default function() {
+export default function () {
   const mdEditor = document.body.querySelector<EditorElement>('exmg-markdown-editor')!;
   const loadBtn = document.body.querySelector<HTMLButtonElement>('#load-md')!;
   const resetBtn = document.body.querySelector<HTMLButtonElement>('#reset-md')!;
