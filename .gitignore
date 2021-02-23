@@ -3,3 +3,4 @@ node_modules/
 lerna-debug.log
 packages/**/.DS_Store
 .DS_Store
+*.map
