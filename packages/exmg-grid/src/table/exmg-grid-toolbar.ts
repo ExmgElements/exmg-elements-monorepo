@@ -261,6 +261,9 @@ export class ExmgGridToolbar extends LitElement {
         .title > exmg-toolbar-search {
           flex: 1;
         }
+        .extra {
+          margin-right: 1rem;
+        }
       </style>
       <exmg-grid-base-toolbar>
         <div slot="actions">${this.renderActions()}</div>
@@ -270,6 +273,7 @@ export class ExmgGridToolbar extends LitElement {
 
         <div slot="filters">${this.renderFilters()}</div>
         <div slot="settings">${this.renderSettings()}</div>
+        <div class="extra" slot="extra"><slot name="extra"></slot></div>
       </exmg-grid-base-toolbar>
     `;
   }
