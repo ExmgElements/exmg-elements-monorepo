@@ -1,5 +1,5 @@
 import {customElement, html, LitElement, property, TemplateResult} from 'lit-element';
-import '@exmg/exmg-button'
+import '@exmg/exmg-button';
 import {Filter, FilterSingleSelectConfig, FilterConfigType, SettingSelectionListItem} from '../src/table/types/exmg-grid-toolbar-types';
 import {
   ActionAmountSelectedItemsCondition,
