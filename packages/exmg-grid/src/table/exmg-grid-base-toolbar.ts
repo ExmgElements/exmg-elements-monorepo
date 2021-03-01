@@ -71,6 +71,9 @@ export class ExmgGridBaseToolbar extends LitElement {
         <div class="settings ${this.settingsCount > 0 ? 'has-settings' : ''}">
           <slot name="settings"></slot>
         </div>
+        <div class="extra">
+          <slot name="extra"></slot>
+        </div>
       </div>
     `;
   }

@@ -131,7 +131,9 @@ export class ExmgGridSmartToolbar extends LitElement {
         description="${this.description}"
         .filters="${this.getFilters()}"
         .settings="${this.getSettings()}"
-      ></exmg-grid-toolbar>
+      >
+        <slot name="extra" slot="extra"></slot>
+      </exmg-grid-toolbar>
     `;
   }
 }
