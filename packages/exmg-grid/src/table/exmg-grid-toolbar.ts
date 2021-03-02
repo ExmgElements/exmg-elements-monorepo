@@ -50,6 +50,9 @@ export class ExmgGridToolbar extends LitElement {
   @property({type: String})
   searchPlaceholder = 'Search';
 
+  @property({type: Boolean})
+  disableSeperator = false;
+
   private emitActionExecutedEvent(action: Action) {
     return () => {
       this.dispatchEvent(
@@ -265,7 +268,7 @@ export class ExmgGridToolbar extends LitElement {
           margin-right: 1rem;
         }
       </style>
-      <exmg-grid-base-toolbar>
+      <exmg-grid-base-toolbar ?disableSeperator=${this.disableSeperator}>
         <div slot="actions">${this.renderActions()}</div>
         ${this.searchEnabled
           ? html`<div class="title" slot="description">${this.renderSearch()}</div>`
