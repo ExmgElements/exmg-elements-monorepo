@@ -50,6 +50,9 @@ export class ExmgGridSmartToolbar extends LitElement {
   @property({type: String})
   searchPlaceholder = 'Search';
 
+  @property({type: Boolean})
+  disableSeperator = false;
+
   static styles = [
     css`
       :host {
@@ -131,6 +134,7 @@ export class ExmgGridSmartToolbar extends LitElement {
         description="${this.description}"
         .filters="${this.getFilters()}"
         .settings="${this.getSettings()}"
+        ?disableSeperator=${this.disableSeperator}
       >
         <slot name="extra" slot="extra"></slot>
       </exmg-grid-toolbar>
