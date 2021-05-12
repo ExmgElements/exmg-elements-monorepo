@@ -38,7 +38,7 @@
     "@types/mocha": "^5.2.6",
     "@webcomponents/webcomponentsjs": "^2.4.4",
     "chai": "^4.2.0",
-    "codemirror": "^5.54.0",
+    "codemirror": "^5.58.2",
     "eslint": "^7.8.1",
     "gulp": "^4.0.2",
     "gulp-watch": "^5.0.1",
