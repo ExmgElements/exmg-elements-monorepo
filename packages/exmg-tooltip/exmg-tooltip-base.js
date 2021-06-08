@@ -11,7 +11,7 @@ export class ExmgTooltipBase extends LitElement {
         /**
          * If true, no parts of the tooltip will ever be shown offscreen.
          */
-        this.fitToVisibleBounds = true;
+        this.fitToVisibleBounds = false;
         this._showing = false;
         this.setAttribute('role', 'tooltip');
         this.setAttribute('tabindex', '-1');
@@ -121,10 +121,11 @@ export class ExmgTooltipBase extends LitElement {
                 tooltipTop = targetTop + verticalCenterOffset;
                 break;
         }
-        if (this.xOffset) {
+        if (this.xOffset !== undefined) {
             tooltipLeft += this.xOffset;
+            console.log(this.xOffset, tooltipLeft);
         }
-        if (this.yOffset) {
+        if (this.yOffset !== undefined) {
             tooltipTop += this.yOffset;
         }
         if (this.fitToVisibleBounds) {

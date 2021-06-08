@@ -22,7 +22,7 @@ export class ExmgTooltipBase extends LitElement {
    * If true, no parts of the tooltip will ever be shown offscreen.
    */
   @property({type: Boolean})
-  fitToVisibleBounds = true;
+  fitToVisibleBounds = false;
 
   /**
    * X axis offset from the parent's center
@@ -171,10 +171,11 @@ export class ExmgTooltipBase extends LitElement {
         break;
     }
 
-    if (this.xOffset) {
+    if (this.xOffset !== undefined) {
       tooltipLeft += this.xOffset;
+      console.log(this.xOffset, tooltipLeft);
     }
-    if (this.yOffset) {
+    if (this.yOffset !== undefined) {
       tooltipTop += this.yOffset;
     }
 
