@@ -41,7 +41,7 @@ let TooltipDemo = class TooltipDemo extends LitElement {
           <div id="dir_7" class="avatar green" tabindex="0"></div>
           <div id="dir_8" class="avatar orange" tabindex="0"></div>
 
-          <exmg-tooltip for="dir_5" position="left" xOffset="50">👈 With 50 offset</exmg-tooltip>
+          <exmg-tooltip for="dir_5" position="left" xOffset="-200">👈 With 50 offset</exmg-tooltip>
           <exmg-tooltip for="dir_6" position="right" xOffset="150">👉 With 150 offset</exmg-tooltip>
           <exmg-tooltip for="dir_7" position="top" yOffset="150">👍 With 200 offset</exmg-tooltip>
           <exmg-tooltip for="dir_8" position="bottom" yOffset="-100">👎 With -100 offset</exmg-tooltip>
