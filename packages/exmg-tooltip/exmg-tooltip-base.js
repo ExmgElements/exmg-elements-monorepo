@@ -12,11 +12,6 @@ export class ExmgTooltipBase extends LitElement {
          * If true, no parts of the tooltip will ever be shown offscreen.
          */
         this.fitToVisibleBounds = true;
-        /**
-         * The spacing between the top of the tooltip and the element it is
-         * anchored to.
-         */
-        this.offset = 10;
         this._showing = false;
         this.setAttribute('role', 'tooltip');
         this.setAttribute('tabindex', '-1');
@@ -100,7 +95,6 @@ export class ExmgTooltipBase extends LitElement {
         if (!this._target || !this.offsetParent) {
             return;
         }
-        const offset = this.offset;
         const parentRect = this.offsetParent.getBoundingClientRect();
         const targetRect = this._target.getBoundingClientRect();
         const thisRect = this.getBoundingClientRect();
@@ -112,20 +106,26 @@ export class ExmgTooltipBase extends LitElement {
         switch (this.position) {
             case 'top':
                 tooltipLeft = targetLeft + horizontalCenterOffset;
-                tooltipTop = targetTop - thisRect.height - offset;
+                tooltipTop = targetTop - thisRect.height;
                 break;
             case 'bottom':
                 tooltipLeft = targetLeft + horizontalCenterOffset;
-                tooltipTop = targetTop + targetRect.height + offset;
+                tooltipTop = targetTop + targetRect.height;
                 break;
             case 'left':
-                tooltipLeft = targetLeft - thisRect.width - offset;
+                tooltipLeft = targetLeft - thisRect.width;
                 tooltipTop = targetTop + verticalCenterOffset;
                 break;
             case 'right':
-                tooltipLeft = targetLeft + targetRect.width + offset;
+                tooltipLeft = targetLeft + targetRect.width;
                 tooltipTop = targetTop + verticalCenterOffset;
                 break;
+        }
+        if (this.xOffset) {
+            tooltipLeft += this.xOffset;
+        }
+        if (this.yOffset) {
+            tooltipTop += this.yOffset;
         }
         if (this.fitToVisibleBounds) {
             // Clip the left/right side
@@ -199,7 +199,10 @@ __decorate([
 ], ExmgTooltipBase.prototype, "fitToVisibleBounds", void 0);
 __decorate([
     property({ type: Number })
-], ExmgTooltipBase.prototype, "offset", void 0);
+], ExmgTooltipBase.prototype, "xOffset", void 0);
+__decorate([
+    property({ type: Number })
+], ExmgTooltipBase.prototype, "yOffset", void 0);
 __decorate([
     property({ type: Boolean })
 ], ExmgTooltipBase.prototype, "_showing", void 0);
