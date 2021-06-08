@@ -7,7 +7,7 @@ export class ExmgTooltipBase extends LitElement {
    * must be a sibling of the tooltip.
    */
   @property({type: String})
-  @observer(function (this: ExmgTooltipBase) {
+  @observer(function(this: ExmgTooltipBase) {
     this._findTarget();
   })
   for?: string;
@@ -25,11 +25,16 @@ export class ExmgTooltipBase extends LitElement {
   fitToVisibleBounds = true;
 
   /**
-   * The spacing between the top of the tooltip and the element it is
-   * anchored to.
+   * X axis offset from the parent's center
    */
   @property({type: Number})
-  offset = 10;
+  xOffset?: number;
+
+  /**
+   * Y axis offset from the parent's center
+   */
+  @property({type: Number})
+  yOffset?: number;
 
   @property({type: Boolean})
   _showing = false;
@@ -134,7 +139,6 @@ export class ExmgTooltipBase extends LitElement {
       return;
     }
 
-    const offset = this.offset;
     const parentRect = this.offsetParent.getBoundingClientRect();
     const targetRect = this._target.getBoundingClientRect();
     const thisRect = this.getBoundingClientRect();
@@ -151,20 +155,27 @@ export class ExmgTooltipBase extends LitElement {
     switch (this.position) {
       case 'top':
         tooltipLeft = targetLeft + horizontalCenterOffset;
-        tooltipTop = targetTop - thisRect.height - offset;
+        tooltipTop = targetTop - thisRect.height;
         break;
       case 'bottom':
         tooltipLeft = targetLeft + horizontalCenterOffset;
-        tooltipTop = targetTop + targetRect.height + offset;
+        tooltipTop = targetTop + targetRect.height;
         break;
       case 'left':
-        tooltipLeft = targetLeft - thisRect.width - offset;
+        tooltipLeft = targetLeft - thisRect.width;
         tooltipTop = targetTop + verticalCenterOffset;
         break;
       case 'right':
-        tooltipLeft = targetLeft + targetRect.width + offset;
+        tooltipLeft = targetLeft + targetRect.width;
         tooltipTop = targetTop + verticalCenterOffset;
         break;
+    }
+
+    if (this.xOffset) {
+      tooltipLeft += this.xOffset;
+    }
+    if (this.yOffset) {
+      tooltipTop += this.yOffset;
     }
 
     if (this.fitToVisibleBounds) {

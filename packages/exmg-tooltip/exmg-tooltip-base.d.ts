@@ -14,10 +14,13 @@ export declare class ExmgTooltipBase extends LitElement {
      */
     fitToVisibleBounds: boolean;
     /**
-     * The spacing between the top of the tooltip and the element it is
-     * anchored to.
+     * X axis offset from the parent's center
      */
-    offset: number;
+    xOffset?: number;
+    /**
+     * Y axis offset from the parent's center
+     */
+    yOffset?: number;
     _showing: boolean;
     tooltip?: HTMLElement;
     private _target?;
