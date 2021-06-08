@@ -123,7 +123,6 @@ export class ExmgTooltipBase extends LitElement {
         }
         if (this.xOffset !== undefined) {
             tooltipLeft += this.xOffset;
-            console.log(this.xOffset, tooltipLeft);
         }
         if (this.yOffset !== undefined) {
             tooltipTop += this.yOffset;
