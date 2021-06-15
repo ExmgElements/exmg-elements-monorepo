@@ -30,12 +30,12 @@ async function addToQueue(fileName) {
     console.log(stdout);
     console.log('ERROR:', stderr);
   }
-  console.log('watcher build complete!');
+  console.log('');
   updating = false;
 }
 
 async function watcher() {
-  console.log('exmg-cli SASS watcher has started.');
+  console.log('Exmg-CLI SASS watcher has started.');
   watch("./", watchOptions, (_event, fileName) => {
     addToQueue(fileName);
   });
