@@ -23,6 +23,7 @@ async function sassToCss(sassFile) {
 const templateFile = path.join(__dirname, './sass-template.tmpl');
 
 async function sassRender(sourceFile) {
+  console.log('Source file', sourceFile);
   const template = await readFile(templateFile, 'utf-8');
   const match = delimiter.exec(template);
   if (!match) {

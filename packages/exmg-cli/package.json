@@ -18,6 +18,9 @@
     "src/**/*.tmpl",
     "bin"
   ],
+  "bin": {
+    "exmg-cli": "src/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/ExmgElements/exmg-cli.git"
