@@ -57,6 +57,12 @@ if (!source && !watch) {
   process.exit(-1);
 }
 
+if (source && watch) {
+  console.error('In watch mode no source should be specified.');
+  printUsage();
+  process.exit(-1);
+}
+
 if (watch) {
   console.log('Running in watch mode ! ');
   watcher();
