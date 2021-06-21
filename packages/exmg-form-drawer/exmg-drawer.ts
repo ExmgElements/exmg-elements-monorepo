@@ -1,4 +1,5 @@
 import {LitElement, html, customElement, property} from 'lit-element';
+import {nothing} from 'lit-html';
 import {observer} from '@material/mwc-base/observer.js';
 import '@polymer/neon-animation/animations/slide-from-right-animation.js';
 import '@polymer/neon-animation/animations/slide-right-animation.js';
@@ -56,6 +57,13 @@ export class ExmgDrawer extends LitElement {
 
   static styles = [style];
 
+  renderSlot() {
+    if (this._openReset) {
+      return nothing;
+    }
+    return html`<slot></slot>`;
+  }
+
   render() {
     return html`
       <style>
@@ -71,7 +79,7 @@ export class ExmgDrawer extends LitElement {
         exit-animation="slide-right-animation"
         with-backdrop
       >
-        ${this._openReset ? '' : html` <slot></slot> `}
+        ${this.renderSlot()}
       </paper-dialog>
     `;
   }
