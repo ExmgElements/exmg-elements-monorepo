@@ -43,6 +43,9 @@ export class ExmgFormDrawer extends LitElement {
   @property({type: Boolean, attribute: 'no-cancel-on-outside-click'})
   noCancelOnOutsideClick = false;
 
+  @property({type: Boolean, attribute: 'disable-sticky-header'})
+  disableStickyHeader = false;
+
   @property({type: Boolean, reflect: true})
   private submitting = false;
 

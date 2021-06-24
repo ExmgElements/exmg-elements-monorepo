@@ -1,5 +1,8 @@
 @use "@material/typography/mixins" as typography;
 
+$exmg-drawer-color: #02182b;
+$exmg-drawer-bg-color: #ffffff;
+
 :host {
   display: flex;
   @include typography.base;
@@ -32,4 +35,11 @@
   .form-elements {
     padding: 0 20px;
   }
+}
+
+:host(:not([disable-sticky-header])) .header {
+  position: sticky;
+  top: 0;
+  background: var(--exmg-drawer-bg-color, var(--mdc-theme-surface, $exmg-drawer-bg-color));
+  z-index: 1;
 }
