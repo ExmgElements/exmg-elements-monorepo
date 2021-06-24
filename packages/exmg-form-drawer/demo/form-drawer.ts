@@ -17,6 +17,7 @@ export class Drawer extends LitElement {
   @property({type: Boolean}) resetFormOnSubmitSuccess = false;
   @property({type: Boolean}) noCancelOnOutsideClick = false;
   @property({type: Boolean}) submitBtnHidden = false;
+  @property({type: Boolean}) disableStickyHeader = true;
 
   @property({type: String})
   markdownValue?: string = '123';
@@ -53,6 +54,10 @@ export class Drawer extends LitElement {
     this.noCancelOnOutsideClick = (e.composedPath()[0] as HTMLInputElement).checked;
   }
 
+  handleDisableStickyHeaderClick(e: CustomEvent) {
+    this.disableStickyHeader = (e.composedPath()[0] as HTMLInputElement).checked;
+  }
+
   onSubmit() {
     console.log('onSubmit');
     setTimeout(() => {
@@ -83,7 +88,7 @@ export class Drawer extends LitElement {
         />
         <br /><br />
         <label>
-          <input type="checkbox" name="shouldFail" value="${this.shouldFail}" @change="${this.handleShouldFailChange}" />
+          <input type="checkbox" name="shouldFail" ?checked="${this.shouldFail}" @change="${this.handleShouldFailChange}" />
           Should Fail
         </label>
         <br /><br />
@@ -91,7 +96,7 @@ export class Drawer extends LitElement {
           <input
             type="checkbox"
             name="keepOpenedOnSubmitSuccess"
-            value="${this.keepOpenedOnSubmitSuccess}"
+            ?checked="${this.keepOpenedOnSubmitSuccess}"
             @change="${this.handleKeepOpenedOnSubmitSuccess}"
           />
           Keep opened on submit success
@@ -101,7 +106,7 @@ export class Drawer extends LitElement {
           <input
             type="checkbox"
             name="resetFormOnSubmitSuccess"
-            value="${this.resetFormOnSubmitSuccess}"
+            ?checked="${this.resetFormOnSubmitSuccess}"
             @change="${this.handleResetFormOnSubmitSuccess}"
           />
           Reset form on submit success
@@ -111,15 +116,26 @@ export class Drawer extends LitElement {
           <input
             type="checkbox"
             name="noCancelOnOutsideClick"
-            value="${this.noCancelOnOutsideClick}"
+            ?checked="${this.noCancelOnOutsideClick}"
             @change="${this.handleNoCancelOnOutsideClick}"
           />
           No cancel on outside click
         </label>
+
         <br /><br />
         <label>
           <input type="checkbox" name="hodeSubmitButton" @change="${() => (this.submitBtnHidden = !this.submitBtnHidden)}" />
           Hide submit button
+        </label>
+        <br /><br />
+        <label>
+          <input
+            type="checkbox"
+            name="noCancelOnOutsideClick"
+            ?checked="${this.disableStickyHeader}"
+            @change="${this.handleDisableStickyHeaderClick}"
+          />
+          Disable sticky header
         </label>
       </div>
       <exmg-form-drawer
@@ -128,6 +144,7 @@ export class Drawer extends LitElement {
         @exmg-drawer-opened-changed="${this.handleOpenedChanged}"
         submit-btn-title="Create"
         ?submit-btn-hidden=${this.submitBtnHidden}
+        ?disable-sticky-header=${this.disableStickyHeader}
         @submit="${this.onSubmit}"
       >
         <span slot="title">New event</span>
