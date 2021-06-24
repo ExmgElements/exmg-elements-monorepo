@@ -1,0 +1,68 @@
+{
+  "name": "@exmg/exmg-stepper",
+  "version": "1.0.0",
+  "dependencies": {
+    "@exmg/exmg-button": "^1.1.0",
+    "@exmg/exmg-form": "^2.2.3",
+    "@exmg/exmg-form-drawer": "^2.1.11",
+    "@material/mwc-button": "^0.10.0",
+    "@material/mwc-icon": "^0.14.1",
+    "@polymer/iron-collapse": "^3.0.1",
+    "@polymer/paper-input": "^3.2.1",
+    "lit-element": "^2.2.1",
+    "web-animations-js": "^2.3.2"
+  },
+  "keywords": [
+    "web-components",
+    "polymer",
+    "lit-element"
+  ],
+  "main": "index.js",
+  "files": [
+    "styles/**/*.scss",
+    "exmg-*.js",
+    "exmg-*.d.ts",
+    "index.js",
+    "index.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@exmg/exmg-cli": "^2.1.0",
+    "@polymer/iron-component-page": "^4.0.1",
+    "@polymer/iron-demo-helpers": "^3.1.0",
+    "@polymer/test-fixture": "^4.0.2",
+    "@types/chai": "^4.2.3",
+    "@types/material-components-web": "^0.43.1",
+    "@types/mocha": "^5.2.6",
+    "@webcomponents/webcomponentsjs": "^2.3.0",
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "gulp": "^4.0.0",
+    "gulp-watch": "^5.0.1",
+    "mocha": "^5.2.0",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.6.4",
+    "wct-mocha": "^1.0.0"
+  },
+  "scripts": {
+    "package-install": "npm i",
+    "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts",
+    "tsc": "tsc -b ./tsconfig.json",
+    "lint": "tsc --noEmit && eslint '**/*ts' --ignore-path ../../.eslintignore -c ../../eslintrc.json --quiet --fix",
+    "build:styles": "gulp render-styles",
+    "build": "npm run build:styles && npm run lint && npm run tsc",
+    "prepublishOnly": "npm run build",
+    "preversion": "npm run build",
+    "publishDryRun": "npm publish --dry-run",
+    "start": "npm run build:styles && gulp serve",
+    "test-dev": "polymer test --npm -p",
+    "test": "polymer test --npm --expanded"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
