@@ -8,10 +8,13 @@ export const convertShortcut = (name: string): string => {
 export const insertBlocks = {
   hr: '---',
   link: (text?: string): string =>
-    `[${text !== '' ? text : 'Link description'}](${window.markdownEditorConfig.urlPlaceholder || 'https://www.exmachinagroup.com/'})`,
+    `[${text !== '' ? text : 'Link description'}](${
+      (window.markdownEditorConfig && window.markdownEditorConfig.urlPlaceholder) || 'https://www.exmachinagroup.com/'
+    })`,
   image: (text?: string): string =>
     `![${text !== '' ? text : 'Image'}](${
-      window.markdownEditorConfig.imagePlaceholder || 'https://pbs.twimg.com/profile_images/748525267153477632/5BistsD7_400x400.jpg'
+      (window.markdownEditorConfig && window.markdownEditorConfig.imagePlaceholder) ||
+      'https://pbs.twimg.com/profile_images/748525267153477632/5BistsD7_400x400.jpg'
     })`,
   table: '| Column 1 | Column 2 |\n| -------- | -------- |\n| Text     | Text     |',
 };
