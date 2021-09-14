@@ -61,6 +61,8 @@ declare global {
   interface Window {
     marked: MarkdownElement;
     markdownEditorConfig: {
+      urlPlaceholder: string;
+      imagePlaceholder: string;
       extensions: AvailableMarkdownExtension[];
       renderer: unknown;
     };
