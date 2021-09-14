@@ -12,8 +12,11 @@
     "url": "git@github.com:ExmgElements/exmg-elements-monorepo.git"
   },
   "files": [
+    "styles/**/*.scss",
     "exmg-*.js",
-    "exmg-*.d.ts"
+    "exmg-*.d.ts",
+    "index.js",
+    "index.d.ts"
   ],
   "homepage": "https://github.com/ExmgElements/",
   "name": "@exmg/exmg-copy-to-clipboard",
@@ -22,9 +25,12 @@
   "license": "MIT",
   "author": "Ex Machina",
   "dependencies": {
-    "lit-element": "^2.4.0"
+    "lit-element": "^2.5.1"
   },
   "devDependencies": {
+    "@exmg/exmg-cli": "^4.0.0",
+    "@web/dev-server": "0.0.29",
+    "concurrently": "^6.2.1",
     "@polymer/iron-demo-helpers": "^3.1.0",
     "@polymer/iron-icons": "^3.0.1",
     "@polymer/iron-iconset-svg": "^3.0.1",
@@ -33,7 +39,7 @@
     "@polymer/test-fixture": "^4.0.2",
     "@types/chai": "^4.2.12",
     "@types/mocha": "^5.2.6",
-    "@webcomponents/webcomponentsjs": "^2.4.4",
+    "@webcomponents/webcomponentsjs": "^2.6.0",
     "chai": "^4.2.0",
     "eslint": "^7.8.1",
     "gulp": "^4.0.0",
@@ -45,13 +51,16 @@
   "scripts": {
     "package-install": "npm i",
     "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts",
+    "tsc:watch": "tsc -b ./tsconfig.json --watch",
     "tsc": "tsc -b ./tsconfig.json",
+    "build-styles": "exmg-cli -s ./styles/*",
+    "watch-styles": "exmg-cli -w",
     "lint": "tsc --noEmit && eslint '**/*ts' --ignore-path ../../.eslintignore -c ../../eslintrc.json --quiet --fix",
-    "build": "npm run lint && npm run tsc",
+    "build": "npm run build-styles && npm run lint && npm run tsc",
     "prepublishOnly": "npm run build",
     "preversion": "npm run build",
     "publishDryRun": "npm publish --dry-run",
-    "start": "gulp serve",
+    "start": "concurrently --kill-others --names tsc,web-dev-server \"npm run tsc:watch\" \"web-dev-server --app-index demo/index.html --node-resolve --open --watch\"",
     "test-dev": "polymer test --npm -p",
     "test": "polymer test --npm --expanded"
   },

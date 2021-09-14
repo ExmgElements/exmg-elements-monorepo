@@ -2,6 +2,7 @@ import {LitElement, html, customElement, property, TemplateResult} from 'lit-ele
 
 import {FlattenedNodesObserver} from '@polymer/polymer/lib/utils/flattened-nodes-observer';
 import {addListener, removeListener} from '@polymer/polymer/lib/utils/gestures';
+import {style} from './styles/exmg-copy-to-clipboard-styles-css.js';
 
 /**
  * `<exmg-copy-to-clipboard>` Helper element to create icon/buttons that
@@ -34,6 +35,8 @@ export class ExmgCopyToClipboard extends LitElement {
   private observer?: FlattenedNodesObserver;
   private htmlElement?: HTMLElement;
 
+  static styles = [style];
+
   public constructor() {
     super();
     this.handleCopy = this.handleCopy.bind(this);
@@ -56,7 +59,7 @@ export class ExmgCopyToClipboard extends LitElement {
     }
 
     if (this.htmlElement) {
-      removeListener(this.htmlElement, 'tap', this.handleCopy);
+      removeListener(this.htmlElement, 'click', this.handleCopy);
     }
   }
 
@@ -67,7 +70,7 @@ export class ExmgCopyToClipboard extends LitElement {
     this.htmlElement = (FlattenedNodesObserver.getFlattenedNodes(this) || []).filter((n: Node) => n.nodeType === Node.ELEMENT_NODE)[0];
 
     if (this.htmlElement) {
-      addListener(this.htmlElement, 'tap', this.handleCopy);
+      addListener(this.htmlElement, 'click', this.handleCopy);
     }
   }
 
@@ -125,14 +128,6 @@ export class ExmgCopyToClipboard extends LitElement {
 
   protected render(): TemplateResult {
     return html`
-      <style>
-        :host {
-          display: inline-block;
-        }
-        #clipboard {
-          display: none;
-        }
-      </style>
       <slot></slot>
       <span id="clipboard">${this.value}</span>
     `;
