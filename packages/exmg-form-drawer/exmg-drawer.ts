@@ -1,6 +1,4 @@
 import {LitElement, html, customElement, property} from 'lit-element';
-import {nothing} from 'lit-html';
-import {observer} from '@material/mwc-base/observer.js';
 import '@polymer/neon-animation/animations/slide-from-right-animation.js';
 import '@polymer/neon-animation/animations/slide-right-animation.js';
 import '@polymer/paper-dialog/paper-dialog.js';
@@ -19,23 +17,10 @@ import {style} from './styles/exmg-drawer-styles';
 @customElement('exmg-drawer')
 export class ExmgDrawer extends LitElement {
   @property({type: Boolean})
-  @observer(function (this: ExmgDrawer, opened: boolean) {
-    if (opened) {
-      // Workaround for issue with opening multiple times with form
-      // values. Issue is that if not reset theinputs will be empty second open
-      this._openReset = true;
-      setTimeout(() => {
-        this._openReset = false;
-      }, 100);
-    }
-  })
   opened = false;
 
   @property({type: Boolean, attribute: 'no-cancel-on-outside-click'})
   noCancelOnOutsideClick = false;
-
-  @property({type: Boolean})
-  _openReset = false;
 
   handleOpenedChanged(e: CustomEvent) {
     this.opened = e.detail.value;
@@ -57,13 +42,6 @@ export class ExmgDrawer extends LitElement {
 
   static styles = [style];
 
-  renderSlot() {
-    if (this._openReset) {
-      return nothing;
-    }
-    return html`<slot></slot>`;
-  }
-
   render() {
     return html`
       <style>
@@ -79,7 +57,7 @@ export class ExmgDrawer extends LitElement {
         exit-animation="slide-right-animation"
         with-backdrop
       >
-        ${this.renderSlot()}
+        <slot></slot>
       </paper-dialog>
     `;
   }

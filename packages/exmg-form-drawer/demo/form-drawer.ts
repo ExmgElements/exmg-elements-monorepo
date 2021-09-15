@@ -11,18 +11,32 @@ import {ExmgFormDrawer} from '../exmg-form-drawer';
 
 @customElement('exmg-drawer-demo')
 export class Drawer extends LitElement {
-  @property({type: Boolean}) opened = false;
-  @property({type: Boolean}) shouldFail = false;
-  @property({type: Boolean}) keepOpenedOnSubmitSuccess = false;
-  @property({type: Boolean}) resetFormOnSubmitSuccess = false;
-  @property({type: Boolean}) noCancelOnOutsideClick = false;
-  @property({type: Boolean}) submitBtnHidden = false;
-  @property({type: Boolean}) disableStickyHeader = true;
+  @property({type: Boolean})
+  opened = false;
+
+  @property({type: Boolean})
+  shouldFail = false;
+
+  @property({type: Boolean})
+  keepOpenedOnSubmitSuccess = false;
+
+  @property({type: Boolean})
+  resetFormOnSubmitSuccess = false;
+
+  @property({type: Boolean})
+  noCancelOnOutsideClick = false;
+
+  @property({type: Boolean})
+  submitBtnHidden = false;
+
+  @property({type: Boolean})
+  disableStickyHeader = true;
 
   @property({type: String})
   markdownValue?: string = '123';
 
-  @query('exmg-form-drawer') form?: ExmgFormDrawer;
+  @query('exmg-form-drawer')
+  form?: ExmgFormDrawer;
 
   handleOpenedChanged(e: CustomEvent) {
     this.opened = e.detail.value;
@@ -156,11 +170,13 @@ export class Drawer extends LitElement {
         <paper-input name="answer_a" label="Answer A" value="Beyoncé"></paper-input>
         <paper-input name="answer_b" label="Answer B" value="Eminem"></paper-input>
         <paper-input name="answer_c" label="Answer C" value="Ariana Grande"></paper-input>
-        <exmg-markdown-editor name="markdownContentBody" split-view show-helper-label height="340">
-          <marked-element markdown=${this.markdownValue}>
-            <div slot="markdown-html"></div>
-          </marked-element>
-        </exmg-markdown-editor>
+        <exmg-markdown-editor
+          name="markdownContentBody"
+          split-view
+          show-helper-label
+          height="340"
+          .markdown=${this.markdownValue}
+        ></exmg-markdown-editor>
       </exmg-form-drawer>
     `;
   }
