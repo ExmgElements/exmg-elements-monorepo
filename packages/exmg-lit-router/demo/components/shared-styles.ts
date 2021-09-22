@@ -8,7 +8,7 @@
  subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-import {css} from 'lit-element';
+import {css} from 'lit';
 
 // language=CSS
 export const SharedStyles = css`

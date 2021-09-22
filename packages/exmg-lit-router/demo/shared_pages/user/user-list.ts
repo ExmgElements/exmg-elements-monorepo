@@ -1,5 +1,6 @@
-import {customElement, html, property, PropertyValues} from 'lit-element';
-import {repeat} from 'lit-html/directives/repeat';
+import {html, PropertyValues} from 'lit';
+import {customElement, property} from 'lit/decorators';
+import {repeat} from 'lit/directives/repeat';
 
 // These are the shared styles needed by this element.
 import {SharedStyles} from '../../components/shared-styles';
@@ -28,11 +29,8 @@ export class ExmgUserList extends PageLitElement<StateWithRouter> {
   private renderUserList(users: string[], userListUrl: string) {
     return repeat(
       users,
-      user => user,
-      user =>
-        html`
-          <li><a class="user" href="${userListUrl}/details/${user.toLowerCase()}">${user}</a></li>
-        `,
+      (user) => user,
+      (user) => html` <li><a class="user" href="${userListUrl}/details/${user.toLowerCase()}">${user}</a></li> `,
     );
   }
 

@@ -1,9 +1,10 @@
-import {LitElement, html, customElement, property, query} from 'lit-element';
+import {LitElement, html} from 'lit';
+import {customElement, property, query} from 'lit/decorators';
 import '@polymer/neon-animation/animations/slide-from-right-animation';
 import '@polymer/neon-animation/animations/slide-right-animation';
 import '@polymer/paper-dialog/paper-dialog.js';
 import './exmg-drawer';
-import {style} from './styles/exmg-form-drawer-styles';
+import {style} from './styles/exmg-form-drawer-styles-css.js';
 import '@exmg/exmg-form/exmg-form';
 import {ExmgForm} from '@exmg/exmg-form/exmg-form';
 import '@exmg/exmg-button';

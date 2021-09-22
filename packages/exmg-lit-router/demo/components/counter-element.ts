@@ -8,7 +8,8 @@
  subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-import {LitElement, html, css, property} from 'lit-element';
+import {LitElement, html, css} from 'lit';
+import {property} from 'lit/decorators';
 
 // These are the elements needed by this element.
 import {plusIcon, minusIcon} from './my-icons.js';

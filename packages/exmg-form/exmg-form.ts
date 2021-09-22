@@ -1,11 +1,12 @@
-import {customElement, html, LitElement, property, query} from 'lit-element';
+import {html, LitElement} from 'lit';
+import {customElement, property, query} from 'lit/decorators';
 import {classMap} from 'lit-html/directives/class-map.js';
 import {observer} from '@material/mwc-base/observer.js';
 import {Debouncer} from '@polymer/polymer/lib/utils/debounce.js';
 import {timeOut} from '@polymer/polymer/lib/utils/async.js';
 import '@polymer/iron-form/iron-form.js';
 import '@exmg/exmg-button/exmg-button.js';
-import {style} from './styles/exmg-form-styles.js';
+import {style} from './styles/exmg-form-styles-css.js';
 import {IronFormElement} from '@polymer/iron-form/iron-form.js';
 
 const ENTER_KEY_CODE = 13;

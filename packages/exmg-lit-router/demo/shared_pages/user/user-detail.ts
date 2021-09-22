@@ -1,4 +1,5 @@
-import {customElement, html, property} from 'lit-element';
+import {html} from 'lit';
+import {customElement, property} from 'lit/decorators';
 import {BeforeEnterCommand, Location, Router} from '@vaadin/router';
 
 import {SharedStyles} from '../../components/shared-styles';

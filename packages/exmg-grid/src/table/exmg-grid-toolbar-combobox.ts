@@ -1,4 +1,5 @@
-import {LitElement, html, customElement, property, query, css, TemplateResult} from 'lit-element';
+import {LitElement, html, css, TemplateResult} from 'lit';
+import {customElement, property, query} from 'lit/decorators';
 import {classMap} from 'lit-html/directives/class-map';
 
 import '@polymer/paper-listbox/paper-listbox.js';

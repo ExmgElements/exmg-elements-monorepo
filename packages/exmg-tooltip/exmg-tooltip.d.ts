@@ -24,7 +24,7 @@ import { ExmgTooltipBase } from './exmg-tooltip-base.js';
  * `--exmg-tooltip-min-width` | Breadcrumb container background color | initial
  */
 export declare class ExmgTooltip extends ExmgTooltipBase {
-    static styles: import("lit-element").CSSResult;
+    static styles: import("lit").CSSResult;
 }
 declare global {
     interface HTMLElementTagNameMap {

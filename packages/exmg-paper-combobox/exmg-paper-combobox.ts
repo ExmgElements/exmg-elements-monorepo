@@ -1,5 +1,6 @@
-import {LitElement, html, customElement, property, query, css} from 'lit-element';
-import {classMap} from 'lit-html/directives/class-map.js';
+import {LitElement, html, css} from 'lit';
+import {customElement, property, query} from 'lit/decorators';
+import {classMap} from 'lit/directives/class-map.js';
 
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';

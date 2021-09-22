@@ -1,4 +1,5 @@
-import {property, customElement, html, LitElement, TemplateResult} from 'lit-element';
+import {html, LitElement, TemplateResult} from 'lit';
+import {property, customElement} from 'lit/decorators';
 import {cache} from 'lit-html/directives/cache';
 import '@exmg/exmg-sortable';
 import {style as exmgGridTableStyles} from './exmg-grid-styles';

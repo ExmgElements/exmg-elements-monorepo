@@ -1,4 +1,4 @@
-import {TemplateResult} from 'lit-html';
+import {TemplateResult} from 'lit';
 import {ExmgSearchSuggestion} from './exmg-searchbar-base';
 
 export interface ExmgSearchBarBaseInterface {

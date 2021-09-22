@@ -1,4 +1,5 @@
-import {LitElement, html, customElement, css} from 'lit-element';
+import {LitElement, html, css} from 'lit';
+import {customElement} from 'lit/decorators';
 import '@exmg/exmg-paper-combobox/exmg-paper-combobox.js';
 import '@exmg/exmg-paper-token-input/exmg-paper-token-input.js';
 import '@exmg/exmg-markdown-editor/exmg-markdown-editor.js';

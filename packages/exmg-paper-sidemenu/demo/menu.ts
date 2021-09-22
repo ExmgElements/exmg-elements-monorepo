@@ -1,4 +1,4 @@
-import {html} from 'lit-element';
+import {html} from 'lit';
 
 /* eslint max-len: 0*/
 export const menu = [

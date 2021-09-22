@@ -1,5 +1,6 @@
-import {LitElement, html, property, customElement, TemplateResult} from 'lit-element';
-import {repeat} from 'lit-html/directives/repeat';
+import {LitElement, html, TemplateResult} from 'lit';
+import {property, customElement} from 'lit/decorators';
+import {repeat} from 'lit/directives/repeat';
 
 import {arrowSeparator} from './exmg-cms-breadcrumbs-icons';
 import {style as exmgCmsBreadcrumbsStyles} from './styles/exmg-cms-breadcrumbs-styles';
@@ -47,7 +48,7 @@ export interface BreadcrumbItem {
  */
 @customElement('exmg-cms-breadcrumbs')
 export class BreadcrumbsElement extends LitElement {
-  @property({type: Object})
+  @property({type: Array})
   items: BreadcrumbItem[] = [];
 
   @property({type: Number})
@@ -73,14 +74,10 @@ export class BreadcrumbsElement extends LitElement {
     }
 
     if (this.hasCustomSeparator) {
-      return html`
-        <span class="separator"></span>
-      `;
+      return html` <span class="separator"></span> `;
     }
 
-    return html`
-      <span class="separator">${this.separatorText || arrowSeparator}</span>
-    `;
+    return html` <span class="separator">${this.separatorText || arrowSeparator}</span> `;
   }
 
   private renderItems() {
@@ -100,7 +97,7 @@ export class BreadcrumbsElement extends LitElement {
   }
 
   private prepareItems(): void {
-    let preparedItems = this.items.map(item => {
+    let preparedItems = this.items.map((item) => {
       const {href, disabled} = item;
       const isDisabled = !href || !!disabled;
 
@@ -129,10 +126,6 @@ export class BreadcrumbsElement extends LitElement {
   }
 
   protected render(): TemplateResult | void {
-    return html`
-      <div class="container">
-        ${this.renderItems()}
-      </div>
-    `;
+    return html` <div class="container">${this.renderItems()}</div> `;
   }
 }

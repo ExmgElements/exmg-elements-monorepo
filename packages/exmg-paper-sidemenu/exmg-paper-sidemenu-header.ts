@@ -1,5 +1,5 @@
-import {customElement} from 'lit-element';
-import {style} from './styles/exmg-paper-sidemenu-header-styles';
+import {customElement} from 'lit/decorators';
+import {style} from './styles/exmg-paper-sidemenu-header-styles-css.js';
 import {ExmgPaperSidemenuHeaderBase} from './exmg-paper-sidemenu-header-base';
 
 @customElement('exmg-paper-sidemenu-header')

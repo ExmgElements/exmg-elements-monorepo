@@ -1,4 +1,5 @@
-import {LitElement, html, customElement, property, TemplateResult} from 'lit-element';
+import {LitElement, html, TemplateResult} from 'lit';
+import {customElement, property} from 'lit/decorators';
 
 import {FlattenedNodesObserver} from '@polymer/polymer/lib/utils/flattened-nodes-observer';
 import {addListener, removeListener} from '@polymer/polymer/lib/utils/gestures';

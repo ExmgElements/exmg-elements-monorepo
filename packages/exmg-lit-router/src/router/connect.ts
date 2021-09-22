@@ -1,4 +1,4 @@
-import {LitElement} from 'lit-element';
+import {LitElement} from 'lit';
 import {Store, Unsubscribe} from 'redux';
 import {LazyStore} from 'pwa-helpers/lazy-reducer-enhancer';
 
@@ -58,9 +58,7 @@ export abstract class ConnectedLitElement<S extends StateWithRouter = StateWithR
   }
 
   connectedCallback() {
-    if (super.connectedCallback) {
-      super.connectedCallback();
-    }
+    this.connectedCallback();
 
     this.storeUnsubscribe = this.getStore().subscribe(() => {
       const nextState = this.getStore().getState();
@@ -91,10 +89,7 @@ export abstract class ConnectedLitElement<S extends StateWithRouter = StateWithR
 
   disconnectedCallback(): void {
     this.storeUnsubscribe && this.storeUnsubscribe();
-
-    if (super.disconnectedCallback) {
-      super.disconnectedCallback();
-    }
+    this.disconnectedCallback();
   }
 
   /**

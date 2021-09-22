@@ -2,9 +2,9 @@
   "name": "@exmg/exmg-button",
   "version": "2.0.2",
   "dependencies": {
-    "@material/mwc-button": "^0.18.0",
-    "@material/typography": "^7.0.0",
-    "lit-element": "^2.4.0"
+    "@material/mwc-button": "^0.25.1",
+    "@material/typography": "^12.0.0",
+    "lit": "^2.0.0"
   },
   "keywords": [
     "web-components",
@@ -26,9 +26,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@exmg/exmg-cli": "^2.1.0",
-    "@material/mwc-checkbox": "^0.18.0",
-    "@material/mwc-icon": "^0.18.0",
+    "@exmg/exmg-cli": "^4.1.0",
+    "@web/dev-server": "0.0.29",
+    "concurrently": "^6.2.1",
+    "@material/mwc-checkbox": "^0.25.1",
+    "@material/mwc-icon": "^0.25.1",
     "@polymer/iron-component-page": "^4.0.1",
     "@polymer/iron-demo-helpers": "^3.1.0",
     "@polymer/test-fixture": "^4.0.2",
@@ -49,14 +51,16 @@
   "scripts": {
     "package-install": "npm i",
     "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts",
+    "tsc:watch": "tsc -b ./tsconfig.json --watch",
     "tsc": "tsc -b ./tsconfig.json",
     "lint": "tsc --noEmit && eslint '**/*ts' --ignore-path ../../.eslintignore -c ../../eslintrc.json --quiet --fix",
-    "build:styles": "gulp render-styles",
-    "build": "npm run build:styles && npm run lint && npm run tsc",
+    "build-styles": "exmg-cli -s \"styles/**/*.scss\"",
+    "watch-styles": "exmg-cli -w",
+    "build": "npm run build-styles && npm run lint && npm run tsc",
     "prepublishOnly": "npm run build",
     "preversion": "npm run build",
     "publishDryRun": "npm publish --dry-run",
-    "start": "npm run build:styles && gulp serve",
+    "start": "concurrently --kill-others --names tsc,web-dev-server \"npm run tsc:watch\" \"web-dev-server --app-index demo/index.html --node-resolve --open --watch\"",
     "test-dev": "polymer test --npm -p",
     "test": "polymer test --npm --expanded"
   },

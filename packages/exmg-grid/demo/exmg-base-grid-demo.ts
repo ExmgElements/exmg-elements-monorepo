@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import {LitElement, property} from 'lit-element';
+import {LitElement} from 'lit';
+import {property} from 'lit/decorators';
 import '@material/mwc-checkbox';
 import '../src/table/exmg-grid.js';
 import '../src/table/exmg-grid-pagination';

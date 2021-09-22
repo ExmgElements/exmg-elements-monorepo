@@ -33,7 +33,7 @@
   ],
   "dependencies": {
     "@vaadin/router": "^1.5.0",
-    "lit-element": "^2.2.1",
+    "lit": "^2.0.0",
     "pwa-helpers": "^0.9.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
@@ -66,12 +66,15 @@
   "scripts": {
     "package-install": "npm i",
     "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ src/**/*.ts",
-    "build": "npm run lint && npm run tsc",
+    "build": "npm run build-styles && npm run lint && npm run tsc",
+    "tsc:watch": "tsc -b ./tsconfig.json --watch",
     "tsc": "tsc -b ./tsconfig.json",
+     "build-styles": "exmg-cli -s \"styles/**/*.scss\"",
+    "watch-styles": "exmg-cli -w",
     "prepublishOnly": "npm run build",
     "preversion": "npm run build",
     "publish-dry-run": "npm publish --dry-run",
-    "start": "gulp serve",
+    "start": "concurrently --kill-others --names tsc,web-dev-server \"npm run tsc:watch\" \"web-dev-server --app-index demo/index.html --node-resolve --open --watch\"",
     "lint": "tsc --noEmit && eslint '**/*ts' --ignore-path ../../.eslintignore -c ../../eslintrc.json --quiet --fix",
     "test-dev": "polymer test --npm -l chrome -p",
     "test": "polymer test --npm --expanded",

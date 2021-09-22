@@ -1,4 +1,5 @@
-import {customElement, html, property} from 'lit-element';
+import {html} from 'lit';
+import {customElement, property} from 'lit/decorators';
 
 // These are the shared styles needed by this element.
 import {SharedStyles} from '../components/shared-styles';

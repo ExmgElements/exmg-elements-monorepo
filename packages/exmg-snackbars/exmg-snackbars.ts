@@ -48,7 +48,7 @@ const getToastCloseBtnNode = (): HTMLDivElement => {
 
   node.innerHTML = closeIcon;
 
-  node.onclick = function() {
+  node.onclick = function () {
     const that = this as HTMLElement;
     // eslint-disable-next-line
     (that.parentElement as any).toggle();
@@ -75,7 +75,7 @@ const getCustomToastNode = ({copyButton, callbackButton}: {copyButton: string; c
 
   node.innerHTML = `<a>${copyButton}</a>`;
 
-  node.onclick = function() {
+  node.onclick = function () {
     const that = this as HTMLElement;
     if (callbackButton) {
       callbackButton();

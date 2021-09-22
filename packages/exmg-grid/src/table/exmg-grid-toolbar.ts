@@ -1,5 +1,6 @@
-import {css, customElement, html, LitElement, property, TemplateResult} from 'lit-element';
-import {repeat} from 'lit-html/directives/repeat';
+import {css, html, LitElement, TemplateResult} from 'lit';
+import {customElement, property} from 'lit/decorators';
+import {repeat} from 'lit/directives/repeat';
 import '@material/mwc-icon-button';
 import './exmg-grid-toolbar-combobox';
 import '@polymer/paper-item';

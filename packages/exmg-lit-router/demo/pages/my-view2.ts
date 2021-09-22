@@ -8,7 +8,8 @@
  subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-import {html, property} from 'lit-element';
+import {html} from 'lit';
+import {property} from 'lit/decorators';
 
 // This element is connected to the Redux store.
 import {store, RootState} from '../store';

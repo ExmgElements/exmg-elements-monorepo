@@ -1,4 +1,5 @@
-import {property, html, LitElement} from 'lit-element';
+import {html, LitElement} from 'lit';
+import {property} from 'lit/decorators';
 import {observer} from '@material/mwc-base/observer.js';
 import '@polymer/paper-listbox';
 

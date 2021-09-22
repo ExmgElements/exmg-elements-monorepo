@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import {LitElement} from 'lit-element';
+import {LitElement} from 'lit';
 import {EventDetailSelectedRowsChange, EventDetailSortChange} from '../src/table/types/exmg-grid-types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types

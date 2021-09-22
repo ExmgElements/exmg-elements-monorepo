@@ -1,4 +1,5 @@
-import {LitElement, html, customElement, query, TemplateResult} from 'lit-element';
+import {LitElement, html, TemplateResult} from 'lit';
+import {customElement, query} from 'lit/decorators';
 import '@exmg/exmg-button';
 import '@exmg/exmg-markdown-editor';
 import '@polymer/paper-input/paper-input.js';

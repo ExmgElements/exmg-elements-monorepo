@@ -8,7 +8,8 @@
  subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-import {html, css, property} from 'lit-element';
+import {html, css} from 'lit';
+import {property} from 'lit/decorators';
 import {BeforeLeaveCommand, Location, PreventResult, RouteItem} from '@vaadin/router';
 
 // This element is connected to the Redux store.
@@ -103,9 +104,7 @@ class MyView3 extends PageLitElement<RootState> {
         <div>${this.error}</div>
         <br />
         <p>
-          <button ?hidden="${this.quantity === 0}" @click="${this.checkoutButtonClicked}">
-            Checkout
-          </button>
+          <button ?hidden="${this.quantity === 0}" @click="${this.checkoutButtonClicked}">Checkout</button>
         </p>
       </section>
     `;

@@ -1,5 +1,6 @@
-import {LitElement, html, customElement, query, property, TemplateResult} from 'lit-element';
-import {repeat} from 'lit-html/directives/repeat';
+import {LitElement, html, TemplateResult} from 'lit';
+import {customElement, query, property} from 'lit/decorators';
+import {repeat} from 'lit/directives/repeat';
 import {classMap} from 'lit-html/directives/class-map';
 import {observer} from '@material/mwc-base/observer.js';
 

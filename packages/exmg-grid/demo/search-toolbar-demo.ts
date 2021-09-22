@@ -1,4 +1,5 @@
-import {customElement, html, TemplateResult} from 'lit-element';
+import {html, TemplateResult} from 'lit';
+import {customElement} from 'lit/decorators';
 import {
   ActionAmountSelectedItemsCondition,
   ActionWithCondition,
@@ -6,7 +7,7 @@ import {
 } from '../src/table/types/exmg-grid-smart-toolbar-types';
 import '../src/table/exmg-grid-smart-toolbar.js';
 import '../src/table/exmg-grid-smart-toolbar.js';
-import {repeat} from 'lit-html/directives/repeat';
+import {repeat} from 'lit/directives/repeat';
 import {ExmgBaseGridDemo} from './exmg-base-grid-demo';
 import '../src/table/exmg-grid';
 import '../src/table/exmg-grid-pagination';

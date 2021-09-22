@@ -1,5 +1,6 @@
 import {ExmgSearchBarBaseInterface} from './exmg-searchbar-base-interface.js';
-import {LitElement, html, query, property, TemplateResult, queryAll} from 'lit-element';
+import {LitElement, html, TemplateResult} from 'lit';
+import {query, property, queryAll} from 'lit/decorators';
 import {TextField} from '@material/mwc-textfield';
 import '@material/mwc-textfield/mwc-textfield.js';
 import '@polymer/paper-listbox/paper-listbox.js';

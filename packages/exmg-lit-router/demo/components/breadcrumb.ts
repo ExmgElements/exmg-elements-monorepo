@@ -1,5 +1,6 @@
-import {customElement, html, LitElement, property, css} from 'lit-element';
-import {repeat} from 'lit-html/directives/repeat';
+import {html, LitElement, css} from 'lit';
+import {customElement, property} from 'lit/decorators';
+import {repeat} from 'lit/directives/repeat';
 
 // These are the shared styles needed by this element.
 type GenericPropertyValues<T, V = unknown> = Map<T, V>;
@@ -56,14 +57,10 @@ export class BreadcrumbsElement extends LitElement {
     }
 
     if (this.hasCustomSeparator) {
-      return html`
-        <span class="separator"></span>
-      `;
+      return html` <span class="separator"></span> `;
     }
 
-    return html`
-      <span class="separator">${this.separatorText || arrowSeparator}</span>
-    `;
+    return html` <span class="separator">${this.separatorText || arrowSeparator}</span> `;
   }
 
   private renderItems() {
@@ -83,7 +80,7 @@ export class BreadcrumbsElement extends LitElement {
   }
 
   private prepareItems(): void {
-    let preparedItems = this.items.map(item => {
+    let preparedItems = this.items.map((item) => {
       const {href, disabled} = item;
       const isDisabled = !href || !!disabled;
 
@@ -112,10 +109,6 @@ export class BreadcrumbsElement extends LitElement {
   }
 
   protected render() {
-    return html`
-      <div class="container">
-        ${this.renderItems()}
-      </div>
-    `;
+    return html` <div class="container">${this.renderItems()}</div> `;
   }
 }

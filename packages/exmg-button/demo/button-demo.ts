@@ -1,4 +1,6 @@
-import {LitElement, html, customElement, property} from 'lit-element';
+import {LitElement, html} from 'lit';
+import {customElement, property} from 'lit/decorators';
+
 import '@material/mwc-checkbox/mwc-checkbox.js';
 import '@material/mwc-icon/mwc-icon.js';
 import '@material/mwc-button/mwc-button.js';

@@ -8,7 +8,7 @@
  subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-import {html, LitElement} from 'lit-element';
+import {html, LitElement} from 'lit';
 import {generateUrlByNameOrComponentName} from '../../index';
 
 // These are the shared styles needed by this element.

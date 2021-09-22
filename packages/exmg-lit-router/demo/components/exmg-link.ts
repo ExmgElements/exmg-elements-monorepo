@@ -1,4 +1,5 @@
-import {html, property, customElement, PropertyValues} from 'lit-element';
+import {html, PropertyValues} from 'lit';
+import {property, customElement} from 'lit/decorators';
 
 import {ConnectedLitElement, StateWithRouter} from '../../src/router/connect';
 import {RouterState} from '../../src/reducers/router';
@@ -44,9 +45,7 @@ export class ExmgLink extends ConnectedLitElement<StateWithRouter> {
   }
 
   protected render() {
-    return html`
-      <slot></slot>
-    `;
+    return html` <slot></slot> `;
   }
 
   private preparePathFromHref(href: string): string | void {

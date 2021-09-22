@@ -1,6 +1,7 @@
-import {html, customElement, css, TemplateResult} from 'lit-element';
+import {html, css, TemplateResult} from 'lit';
+import {customElement} from 'lit/decorators';
 import {classMap} from 'lit-html/directives/class-map';
-import {repeat} from 'lit-html/directives/repeat';
+import {repeat} from 'lit/directives/repeat';
 import '@material/mwc-checkbox';
 import '@material/mwc-icon-button';
 

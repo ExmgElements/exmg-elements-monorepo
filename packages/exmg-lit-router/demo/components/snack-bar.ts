@@ -8,7 +8,8 @@
  subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-import {LitElement, html, css, property} from 'lit-element';
+import {LitElement, html, css} from 'lit';
+import {property} from 'lit/decorators';
 
 class SnackBar extends LitElement {
   @property({type: Boolean})
@@ -49,9 +50,7 @@ class SnackBar extends LitElement {
   ];
 
   protected render() {
-    return html`
-      <slot></slot>
-    `;
+    return html` <slot></slot> `;
   }
 }
 

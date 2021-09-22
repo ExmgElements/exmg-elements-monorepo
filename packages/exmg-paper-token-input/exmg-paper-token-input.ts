@@ -1,6 +1,7 @@
 /* eslint(lit/no-property-change-update) 0 */
-import {customElement, html, LitElement, property, PropertyValues, query} from 'lit-element';
-import {repeat} from 'lit-html/directives/repeat';
+import {html, LitElement, PropertyValues} from 'lit';
+import {customElement, property, query} from 'lit/decorators';
+import {repeat} from 'lit/directives/repeat';
 import '@polymer/paper-menu-button/paper-menu-button.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';

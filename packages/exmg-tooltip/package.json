@@ -2,7 +2,7 @@
   "name": "@exmg/exmg-tooltip",
   "version": "2.0.2",
   "dependencies": {
-    "lit-element": "^2.4.0"
+    "lit": "^2.0.0"
   },
   "keywords": [
     "web-components",
@@ -24,7 +24,9 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@exmg/exmg-cli": "^2.1.0",
+    "@exmg/exmg-cli": "^4.1.0",
+    "@web/dev-server": "0.0.29",
+    "concurrently": "^6.2.1",
     "@material/mwc-checkbox": "^0.18.0",
     "@material/mwc-icon": "^0.18.0",
     "@polymer/iron-component-page": "^4.0.1",
@@ -48,13 +50,15 @@
     "package-install": "npm i",
     "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts",
     "tsc": "tsc -b ./tsconfig.json",
+    "tsc:watch": "tsc -b ./tsconfig.json --watch",
     "lint": "tsc --noEmit && eslint '**/*ts' --ignore-path ../../.eslintignore -c ../../eslintrc.json --quiet --fix",
-    "build:styles": "gulp render-styles",
-    "build": "npm run build:styles && npm run lint && npm run tsc",
+    "build-styles": "exmg-cli -s \"styles/**/*.scss\"",
+    "watch-styles": "exmg-cli -w",
+    "build": "npm run build-styles && npm run lint && npm run tsc",
     "prepublishOnly": "npm run build",
     "preversion": "npm run build",
     "publishDryRun": "npm publish --dry-run",
-    "start": "npm run build:styles && gulp serve",
+    "start": "concurrently --kill-others --names tsc,web-dev-server \"npm run tsc:watch\" \"web-dev-server --app-index demo/index.html --node-resolve --open --watch\"",
     "test-dev": "polymer test --npm -p",
     "test": "polymer test --npm --expanded"
   },

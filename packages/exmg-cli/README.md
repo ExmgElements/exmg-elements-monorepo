@@ -29,7 +29,7 @@ Process single file
 on the output file `test-css.ts` looks:
 
 ```text
-import {css} from 'lit-element';
+import {css} from 'lit';
 
 export const style = css`a{color:red}`;
 export default style;
@@ -38,7 +38,7 @@ export default style;
 Finally we can import to LitElement
 
 ```typescript
-import {LitElement} from 'lit-element';
+import {LitElement} from 'lit';
 import style from './test-css.js';
 
 class MyElement extends LitElement {

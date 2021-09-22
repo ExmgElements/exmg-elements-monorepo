@@ -1,11 +1,4 @@
-import {css} from 'lit-element';
+import {css} from 'lit';
 
-export const style = css`
-  :host {
-    display: inline-block;
-  }
-  #clipboard {
-    display: none;
-  }
-`;
+export const style = css`:host{display:inline-block}#clipboard{display:none}`;
 export default style;

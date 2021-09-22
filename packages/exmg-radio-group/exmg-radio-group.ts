@@ -1,6 +1,7 @@
-import {property, customElement, html, LitElement} from 'lit-element';
+import {html, LitElement} from 'lit';
+import {property, customElement} from 'lit/decorators';
 import {observer} from '@material/mwc-base/observer.js';
-import {style as exmgRadioGroupStyles} from './styles/exmg-radio-group-styles.js';
+import {style as exmgRadioGroupStyles} from './styles/exmg-radio-group-styles-css.js';
 import {ExmgRadioGroupItem} from './exmg-radio-group-item.js';
 
 const ENTER_KEY_CODE = 13;

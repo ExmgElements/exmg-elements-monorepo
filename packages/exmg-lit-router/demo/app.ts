@@ -1,4 +1,5 @@
-import {html, css, property, PropertyValues} from 'lit-element';
+import {html, css, PropertyValues} from 'lit';
+import {property} from 'lit/decorators';
 import {setPassiveTouchGestures} from '@polymer/polymer/lib/utils/settings.js';
 import {installMediaQueryWatcher} from 'pwa-helpers/media-query.js';
 
@@ -94,9 +95,7 @@ class MyApp extends ConnectedLitElement<RootState> {
       <app-header condenses reveals effects="waterfall">
         <app-toolbar class="toolbar-top">
           <button class="menu-btn" title="Menu" @click="${this.menuButtonClicked}">${menuIcon}</button>
-          <div main-title>
-            ${this.appTitle}
-          </div>
+          <div main-title>${this.appTitle}</div>
         </app-toolbar>
 
         <!-- This gets hidden on a small screen-->

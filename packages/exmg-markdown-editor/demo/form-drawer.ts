@@ -1,4 +1,5 @@
-import {LitElement, html, customElement, property, query} from 'lit-element';
+import {LitElement, html} from 'lit';
+import {customElement, property, query} from 'lit/decorators';
 import '@exmg/exmg-button';
 import '@exmg/exmg-form-drawer';
 import '../exmg-markdown-editor';
