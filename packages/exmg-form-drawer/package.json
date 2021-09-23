@@ -34,7 +34,7 @@
     "@web/dev-server": "0.0.29",
     "concurrently": "^6.2.1",
     "@exmg/exmg-form": "^8.0.0",
-    "@exmg/exmg-paper-combobox": "^8.0.0",
+    "@exmg/exmg-paper-combobox": "^8.0.1",
     "@exmg/exmg-markdown-editor": "^8.0.0",
     "@polymer/iron-component-page": "^4.0.1",
     "@polymer/iron-demo-helpers": "^3.1.0",

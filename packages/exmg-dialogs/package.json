@@ -28,7 +28,7 @@
     "@web/dev-server": "0.0.29",
     "concurrently": "^6.2.1",
     "@exmg/exmg-markdown-editor": "^8.0.0",
-    "@exmg/exmg-paper-combobox": "^8.0.0",
+    "@exmg/exmg-paper-combobox": "^8.0.1",
     "@exmg/exmg-paper-token-input": "^8.0.0",
     "@polymer/iron-demo-helpers": "^3.0.0",
     "@polymer/marked-element": "^3.0.0",
