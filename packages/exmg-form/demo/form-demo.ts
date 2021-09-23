@@ -10,7 +10,7 @@ import './tab-3';
 @customElement('form-demo')
 export class FormDemo extends LitElement {
   @property({type: Number})
-  private activeTabIndex = 0;
+  private activeTabIndex = 1;
 
   renderTab() {
     switch (this.activeTabIndex) {
@@ -26,7 +26,7 @@ export class FormDemo extends LitElement {
 
   render() {
     return html`
-      <mwc-tab-bar activeIndex="0" @MDCTabBar:activated=${(e: CustomEvent<{index: number}>) => (this.activeTabIndex = e.detail.index)}>
+      <mwc-tab-bar activeIndex="1" @MDCTabBar:activated=${(e: CustomEvent<{index: number}>) => (this.activeTabIndex = e.detail.index)}>
         <mwc-tab label="one"></mwc-tab>
         <mwc-tab label="two"></mwc-tab>
         <mwc-tab label="three"></mwc-tab>

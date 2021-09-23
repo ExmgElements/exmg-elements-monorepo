@@ -1,5 +1,4 @@
-import {LitElement, html} from 'lit';
-import {customElement, property} from 'lit/decorators';
+import {LitElement, html, customElement, property} from 'lit-element';
 import '@polymer/paper-input/paper-input';
 import '@polymer/paper-input/paper-textarea';
 import '@polymer/paper-item/paper-item.js';

@@ -45,5 +45,5 @@ export declare class ExmgTooltipBase extends LitElement {
     _addListeners(): void;
     _findTarget(): void;
     _removeListeners(): void;
-    protected render(): import("lit").TemplateResult<1>;
+    protected render(): import("lit-html").TemplateResult<1>;
 }
