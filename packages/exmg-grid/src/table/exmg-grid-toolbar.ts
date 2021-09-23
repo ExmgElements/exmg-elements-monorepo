@@ -36,13 +36,13 @@ export class ExmgGridToolbar extends LitElement {
   @property({type: String})
   description = '';
 
-  @property({type: Object})
+  @property({type: Array})
   actions: Action[] = [];
 
-  @property({type: Object})
+  @property({type: Array})
   filters: Filter[] = [];
 
-  @property({type: Object})
+  @property({type: Array})
   settings: Setting[] = [];
 
   @property({type: Boolean})

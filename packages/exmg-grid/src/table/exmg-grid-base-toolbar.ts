@@ -1,6 +1,6 @@
 import {html, LitElement, TemplateResult} from 'lit';
 import {customElement, property} from 'lit/decorators';
-import {style} from './exmg-grid-base-toolbar-styles';
+import {style} from '../styles/exmg-grid-base-toolbar-styles-css.js';
 
 /**
  * ### Styling
@@ -11,10 +11,10 @@ import {style} from './exmg-grid-base-toolbar-styles';
 export class ExmgGridBaseToolbar extends LitElement {
   static styles = [style];
 
-  @property({type: Object})
+  @property({type: Number})
   private actionsCount = 0;
 
-  @property({type: Object})
+  @property({type: Number})
   private settingsCount = 0;
 
   @property({type: Boolean, reflect: true})

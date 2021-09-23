@@ -1,6 +1,6 @@
 import {html, LitElement, css} from 'lit';
 import {property, customElement, query} from 'lit/decorators';
-import {classMap} from 'lit-html/directives/class-map';
+import {classMap} from 'lit/directives/class-map';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import {Debouncer} from '@polymer/polymer/lib/utils/debounce';
 import {timeOut} from '@polymer/polymer/lib/utils/async';

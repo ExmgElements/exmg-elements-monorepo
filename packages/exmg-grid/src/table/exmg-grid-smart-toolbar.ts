@@ -21,13 +21,13 @@ export class ExmgGridSmartToolbar extends LitElement {
   @property({type: String})
   description = '';
 
-  @property({type: Object})
+  @property({type: Array})
   actions: ActionWithCondition[] = [];
 
-  @property({type: Object})
+  @property({type: Array})
   filters: Filter[] = [];
 
-  @property({type: Object})
+  @property({type: Array})
   settings: Setting[] = [];
 
   @property({type: Number, attribute: 'amount-of-selected-items'})
@@ -42,7 +42,7 @@ export class ExmgGridSmartToolbar extends LitElement {
   @property({type: String, attribute: 'column-filter-dialog-title'})
   columnFilterDialogTitle = 'Select columns';
 
-  @property({type: Object, attribute: 'column-filter-columns'})
+  @property({type: Array, attribute: 'column-filter-columns'})
   columnFilterColumns: SettingSelectionListItem[] = [];
 
   @property({type: Boolean})

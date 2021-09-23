@@ -72,7 +72,8 @@ export class DialogDemo extends LitElement {
         if (true) {
           throw Error('User does not have permission to save data');
         }
-      } catch (error) {
+      } catch (error: unknown) {
+        // @ts-ignore
         target.error(error);
       }
     }, 1000);

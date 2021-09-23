@@ -1,11 +1,10 @@
 import {LitElement, html, TemplateResult} from 'lit';
 import {customElement, property} from 'lit/decorators';
 import {repeat} from 'lit/directives/repeat';
-import '@exmg/exmg-button';
 import '@material/mwc-icon-button';
 import '@polymer/paper-item';
 import './exmg-grid-toolbar-combobox';
-import {style} from './exmg-grid-pagination-styles';
+import {style} from '../styles/exmg-grid-pagination-styles-css.js';
 
 /**
  * ### Styling

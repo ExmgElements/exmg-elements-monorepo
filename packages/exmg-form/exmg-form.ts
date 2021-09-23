@@ -1,6 +1,6 @@
 import {html, LitElement} from 'lit';
 import {customElement, property, query} from 'lit/decorators';
-import {classMap} from 'lit-html/directives/class-map.js';
+import {classMap} from 'lit/directives/class-map.js';
 import {observer} from '@material/mwc-base/observer.js';
 import {Debouncer} from '@polymer/polymer/lib/utils/debounce.js';
 import {timeOut} from '@polymer/polymer/lib/utils/async.js';
@@ -121,7 +121,7 @@ export class ExmgForm extends LitElement {
     this.submitting = false;
   }
 
-  addInput(node: any, overwriteValues = false) {
+  addInput(node: any, overwriteValues = false): void {
     if (!this._defaults.has(node) || overwriteValues) {
       const defaults: InputDefault = {
         value: node.value === undefined || node.value === null ? '' : node.value,
@@ -133,7 +133,7 @@ export class ExmgForm extends LitElement {
     }
   }
 
-  public saveDefaults(overwriteValues = false) {
+  public saveDefaults(overwriteValues = false): void {
     // After first render save original form data for later dirdty checks
     const nodes = Array.from(this.querySelectorAll<any>('*') || []).filter((n) => !!n.name);
     for (let i = 0; i < nodes.length; i++) {
@@ -142,7 +142,7 @@ export class ExmgForm extends LitElement {
     }
   }
 
-  firstUpdated() {
+  firstUpdated(): void {
     this.saveDefaults();
   }
 
@@ -250,6 +250,7 @@ export class ExmgForm extends LitElement {
       // Select all slot nodes and filter out the input based on a existing name property on the node
       const nodes = Array.from(this.querySelectorAll<any>('*') || []).filter((n) => !!n.name && !n.disabled);
       try {
+        console.log('checkDirty', nodes);
         for (const node of nodes) {
           const def: InputDefault = this._defaults.get(node);
           if (!def) {
@@ -281,6 +282,7 @@ export class ExmgForm extends LitElement {
   }
 
   private onKeyUp(e: KeyboardEvent) {
+    console.log('onKeyUp');
     switch (e.code || e.keyCode) {
       case ENTER_KEY_CODE:
       case 'Enter':
@@ -316,12 +318,11 @@ export class ExmgForm extends LitElement {
 
     // Start observing the target node for configured mutations
     this.observer!.observe(this, config);
-
     this.addEventListener('keyup', this.onKeyUp);
     this.addEventListener('change', this.handleOnChange);
   }
 
-  disconnectedCallback() {
+  disconnectedCallback(): void {
     this.removeEventListener('keyup', this.onKeyUp);
     this.removeEventListener('change', this.handleOnChange);
 

@@ -11,8 +11,8 @@ import {repeat} from 'lit/directives/repeat';
 import {ExmgBaseGridDemo} from './exmg-base-grid-demo';
 import '../src/table/exmg-grid';
 import '../src/table/exmg-grid-pagination';
-import {style as tableStyles} from '../src/table/exmg-grid-styles';
-import {style as demoStyles} from './styles/demo-styles';
+import {style as tableStyles} from '../src/styles/exmg-grid-styles-css.js';
+import {style as demoStyles} from './styles/demo-styles-css.js';
 
 @customElement('search-toolbar-demo')
 export class SearchToolbarDemo extends ExmgBaseGridDemo {

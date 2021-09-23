@@ -1,6 +1,6 @@
 import {LitElement, html, css} from 'lit';
 import {property, customElement} from 'lit/decorators';
-import {classMap} from 'lit-html/directives/class-map.js';
+import {classMap} from 'lit/directives/class-map.js';
 import {sidemenuStyles} from '../index';
 import {style as themeStyles} from '../styles/theme-styles-css.js';
 import '../index';
