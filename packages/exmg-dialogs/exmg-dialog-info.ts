@@ -35,6 +35,9 @@ export class ExmgInfoDialog extends LitElement {
   @property({type: Boolean, attribute: 'button-unelevated'})
   private buttonUnelevated?: boolean = false;
 
+  @property({type: Boolean, attribute: 'without-backdrop'})
+  withoutBackdrop = false;
+
   @query('#dialog')
   private dialogNode?: PaperDialogElement;
 
@@ -71,7 +74,7 @@ export class ExmgInfoDialog extends LitElement {
 
   protected render() {
     return html`
-      <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click>
+      <paper-dialog id="dialog" ?with-backdrop=${!this.withoutBackdrop} no-cancel-on-outside-click>
         ${this.hideCloseButton
           ? html` ${this.renderHeader()} `
           : html`

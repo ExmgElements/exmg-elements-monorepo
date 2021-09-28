@@ -48,6 +48,9 @@ export class ExmgFormDialog extends LitElement {
   @property({type: String, attribute: 'error-message'})
   private errorMessage?: string;
 
+  @property({type: Boolean, attribute: 'without-backdrop'})
+  withoutBackdrop = false;
+
   @query('#dialog')
   private dialogNode?: PaperDialogElement;
 
@@ -145,7 +148,12 @@ export class ExmgFormDialog extends LitElement {
 
   protected render() {
     return html`
-      <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click @iron-overlay-closed="${this.onCloseDialog}">
+      <paper-dialog
+        id="dialog"
+        ?with-backdrop=${!this.withoutBackdrop}
+        no-cancel-on-outside-click
+        @iron-overlay-closed="${this.onCloseDialog}"
+      >
         ${this.hideCloseButton ? '' : html` <mwc-icon-button @click=${this.close} class="close-button">${closeIcon}</mwc-icon-button> `}
         <header>${!!this.title ? html` <h2 class="title">${this.title}</h2> ` : ''}</header>
         <paper-dialog-scrollable>

@@ -56,6 +56,9 @@ export class ExmgConfirmDialog extends LitElement {
   @property({type: Boolean})
   private hasSlotContent = false;
 
+  @property({type: Boolean, attribute: 'without-backdrop'})
+  withoutBackdrop = false;
+
   private observer?: MutationObserver;
 
   static styles = [style];
@@ -166,7 +169,12 @@ export class ExmgConfirmDialog extends LitElement {
 
   protected render() {
     return html`
-      <paper-dialog id="dialog" with-backdrop no-cancel-on-outside-click @iron-overlay-closed="${this.onCloseDialog}">
+      <paper-dialog
+        id="dialog"
+        ?with-backdrop=${!this.withoutBackdrop}
+        no-cancel-on-outside-click
+        @iron-overlay-closed="${this.onCloseDialog}"
+      >
         ${this.hideCloseButton ? '' : html` <mwc-icon-button @click=${this.close} class="close-button">${closeIcon}</mwc-icon-button> `}
         <header>${!!this.title ? html` <h2 class="title">${this.title}</h2> ` : ''}</header>
         <div class="body">

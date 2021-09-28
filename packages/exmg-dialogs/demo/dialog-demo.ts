@@ -122,6 +122,7 @@ export class DialogDemo extends LitElement {
         id="dialog2"
         class="dark"
         title="Create account"
+        without-backdrop
         button-copy="Save"
         @cancel=${this._cancelCallback}
         @submit="${this._saveDataError}"
