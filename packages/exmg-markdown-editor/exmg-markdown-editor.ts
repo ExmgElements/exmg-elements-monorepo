@@ -89,6 +89,7 @@ import {MarkedOptions, Renderer} from 'marked';
  *  - value-change - where detail is current markdown value
  *  - exmg-markdown-editor-fullscreen where detail is boolean with current fullscreen state
  *  - exmg-markdown-editor-paste-table thrown when app should display a dialog to paste Excel Table
+ *  - exmg-markdown-editor-image-open when image-ext button is clicked. Can be used to insert external images
  *
  * @customElement
  * @group Exmg Core Elements
@@ -286,6 +287,13 @@ export class EditorElement extends LitElement {
       name: 'image',
       icon: 'exmg-markdown-editor-icons:image',
       action: this.insertImage,
+      className: 'btn-image',
+      title: 'Image',
+    },
+    {
+      name: 'image-ext',
+      icon: 'exmg-markdown-editor-icons:image',
+      action: this.insertImageExt,
       className: 'btn-image',
       title: 'Image',
     },
@@ -848,6 +856,13 @@ export class EditorElement extends LitElement {
     this.insertAtCursor(insertBlocks.link(selection), 2, 8);
   }
 
+  private insertImageExt(event?: Event) {
+    if (event) {
+      event.preventDefault();
+    }
+    this.fire('exmg-markdown-editor-image-open');
+  }
+
   private insertImage(event?: Event): void {
     if (event) {
       event.preventDefault();
@@ -869,6 +884,10 @@ export class EditorElement extends LitElement {
       event.preventDefault();
     }
     this.fire('exmg-markdown-editor-paste-table');
+  }
+
+  public insertMarkdown(data: string): void {
+    this.insertAtCursor(data);
   }
 
   public insertTableAtCursor(data: string): void {

@@ -24,6 +24,7 @@ export type ToolBarOption =
   | 'ordered-list'
   | 'link'
   | 'image'
+  | 'image-ext'
   | 'fullscreen'
   | 'split-view'
   | AvailableMarkdownExtension;

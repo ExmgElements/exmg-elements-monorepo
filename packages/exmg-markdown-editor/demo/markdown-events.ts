@@ -16,6 +16,13 @@ const loadMarkdown = () => {
   ut labore et dolore magna aliqua. `;
 };
 
+const insertImage = () => {
+  const mdEditor = document.body.querySelector<EditorElement>('exmg-markdown-editor')!;
+  mdEditor.insertMarkdown(
+    '![Tux, the Linux mascot](https://d33wubrfki0l68.cloudfront.net/e7ed9fe4bafe46e275c807d63591f85f9ab246ba/e2d28/assets/images/tux.png)',
+  );
+};
+
 const resetMarkdown = () => {
   const mdEditor = document.body.querySelector<EditorElement>('exmg-markdown-editor')!;
   mdEditor.markdown = undefined;
@@ -39,6 +46,8 @@ export default function () {
   const resetBtn = document.body.querySelector<HTMLButtonElement>('#reset-md')!;
   const tableDialog = document.body.querySelector<ExmgFormDialog>('#tableDialog')!;
 
+  const imageBtn = document.body.querySelector<HTMLButtonElement>('#image-md')!;
+
   tableDialog.addEventListener('submit', submitTableToEditor as EventListener);
   tableDialog.addEventListener('cancel', () => {
     tableDialog.close();
@@ -48,4 +57,5 @@ export default function () {
   mdEditor.addEventListener('exmg-markdown-editor-paste-table', tablePaste);
   loadBtn.onclick = loadMarkdown;
   resetBtn.onclick = resetMarkdown;
+  imageBtn.onclick = insertImage;
 }

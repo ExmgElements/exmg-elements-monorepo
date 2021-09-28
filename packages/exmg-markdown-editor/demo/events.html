@@ -77,11 +77,12 @@
         <ul>
           <li><button id="load-md">Load Markdown</button></li>
           <li><button id="reset-md">Reset</button></li>
+          <li><button id="image-md">Insert Image</button></li>
         </ul>
       </div>
       <demo-snippet>
         <template>
-          <exmg-markdown-editor split-view show-helper-label markdown="# TEXT *bold*" class="markdown-body"></exmg-markdown-editor>
+          <exmg-markdown-editor split-view show-helper-label markdown="# TEXT *bold*" class="markdown-body" toolbar-buttons='["undo", "redo", "strong", "indent-in", "indent-out", "image-ext"]'></exmg-markdown-editor>
         </template>
       </demo-snippet>
       <div id="event-list">
