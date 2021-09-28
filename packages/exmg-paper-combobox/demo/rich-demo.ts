@@ -1,4 +1,5 @@
-import {customElement, LitElement, html, css} from 'lit-element';
+import {LitElement, html, css} from 'lit';
+import {customElement} from 'lit/decorators';
 import '@polymer/paper-item/paper-icon-item.js';
 import '@polymer/paper-item/paper-item-body.js';
 import '@polymer/paper-item/paper-item.js';
@@ -29,7 +30,7 @@ export class RichDemo extends LitElement {
     `,
   ];
 
-  private renderOptions() {
+  private renderOptions1() {
     return countries.slice(0, 100).map((country) => {
       const cssClass = `flag-icon flag-icon-${country.value.toLowerCase()}`;
       const callingCode = `+${country.value}`;
@@ -65,7 +66,7 @@ export class RichDemo extends LitElement {
             attr-for-selected="data-id"
             selected-item-selector="div.calling-code"
           >
-            ${this.renderOptions()}
+            ${this.renderOptions1()}
           </exmg-paper-combobox>
 
           <div class="horizontal">

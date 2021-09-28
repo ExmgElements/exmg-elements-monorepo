@@ -1,4 +1,4 @@
-import {TemplateResult} from 'lit-element';
+import {TemplateResult} from 'lit';
 
 export interface MenuItem {
   path: string;

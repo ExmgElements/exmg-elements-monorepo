@@ -1,5 +1,6 @@
-import {LitElement, html, customElement, property, query, css, TemplateResult} from 'lit-element';
-import {classMap} from 'lit-html/directives/class-map';
+import {LitElement, html, css, TemplateResult} from 'lit';
+import {customElement, property, query} from 'lit/decorators';
+import {classMap} from 'lit/directives/class-map';
 
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
@@ -175,10 +176,10 @@ export class PaperGridTooolbarComboboxElement extends LitElement {
   @property({type: Boolean, attribute: 'dynamic-align'})
   dynamicAlign = false;
 
-  @property({type: Boolean, attribute: 'horizontal-align'})
+  @property({type: String, attribute: 'horizontal-align'})
   horizontalAlign = 'right';
 
-  @property({type: Boolean, attribute: 'vertical-align'})
+  @property({type: String, attribute: 'vertical-align'})
   verticalAlign = 'top';
 
   @property({type: String, attribute: 'vertical-offset'})

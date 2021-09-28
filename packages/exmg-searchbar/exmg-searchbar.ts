@@ -1,4 +1,5 @@
-import {customElement, html} from 'lit-element';
+import {html} from 'lit';
+import {customElement} from 'lit/decorators';
 import '@material/mwc-icon/mwc-icon.js';
 import {ExmgSearchBarBase, ExmgSearchSuggestion} from './exmg-searchbar-base.js';
 

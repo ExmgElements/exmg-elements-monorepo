@@ -1,4 +1,5 @@
-import {LitElement, html, customElement, css} from 'lit-element';
+import {LitElement, html, css} from 'lit';
+import {customElement} from 'lit/decorators';
 import '@exmg/exmg-paper-combobox/exmg-paper-combobox.js';
 import '@exmg/exmg-paper-token-input/exmg-paper-token-input.js';
 import '@exmg/exmg-markdown-editor/exmg-markdown-editor.js';
@@ -71,7 +72,8 @@ export class DialogDemo extends LitElement {
         if (true) {
           throw Error('User does not have permission to save data');
         }
-      } catch (error) {
+      } catch (error: unknown) {
+        // @ts-ignore
         target.error(error);
       }
     }, 1000);

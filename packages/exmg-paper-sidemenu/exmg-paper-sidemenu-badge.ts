@@ -1,5 +1,5 @@
-import {customElement} from 'lit-element';
-import {style} from './styles/exmg-paper-sidemenu-badge-styles';
+import {customElement} from 'lit/decorators';
+import {style} from './styles/exmg-paper-sidemenu-badge-styles-css.js';
 import {ExmgPaperSidemenuBadgeBase} from './exmg-paper-sidemenu-badge-base.js';
 
 @customElement('exmg-paper-sidemenu-badge')

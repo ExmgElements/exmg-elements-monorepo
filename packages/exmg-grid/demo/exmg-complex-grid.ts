@@ -1,6 +1,7 @@
-import {html, customElement, css, TemplateResult} from 'lit-element';
-import {classMap} from 'lit-html/directives/class-map';
-import {repeat} from 'lit-html/directives/repeat';
+import {html, css, TemplateResult} from 'lit';
+import {customElement} from 'lit/decorators';
+import {classMap} from 'lit/directives/class-map';
+import {repeat} from 'lit/directives/repeat';
 import '@material/mwc-checkbox';
 import '@material/mwc-icon-button';
 
@@ -11,9 +12,9 @@ import '@polymer/iron-dropdown/iron-dropdown.js';
 
 import '../src/table/exmg-grid.js';
 import '../src/table/exmg-grid-pagination';
-import {style as tableStyles} from '../src/table/exmg-grid-styles';
 import '../src/table/exmg-grid-smart-toolbar';
-import {style as demoStyles} from './styles/demo-styles';
+import {style as tableStyles} from '../src/styles/exmg-grid-styles-css.js';
+import {style as demoStyles} from './styles/demo-styles-css.js';
 
 import {createIcon} from './exmg-icons';
 import {DEFAULT_SORT_COLUMN, DEFAULT_SORT_DIRECTION, ExmgBaseGridDemo} from './exmg-base-grid-demo';

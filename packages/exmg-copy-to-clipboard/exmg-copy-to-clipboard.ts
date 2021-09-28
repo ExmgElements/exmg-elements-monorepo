@@ -1,4 +1,5 @@
-import {LitElement, html, customElement, property, TemplateResult} from 'lit-element';
+import {LitElement, html, TemplateResult} from 'lit';
+import {customElement, property} from 'lit/decorators';
 
 import {FlattenedNodesObserver} from '@polymer/polymer/lib/utils/flattened-nodes-observer';
 import {addListener, removeListener} from '@polymer/polymer/lib/utils/gestures';
@@ -59,7 +60,7 @@ export class ExmgCopyToClipboard extends LitElement {
     }
 
     if (this.htmlElement) {
-      removeListener(this.htmlElement, 'click', this.handleCopy);
+      removeListener(this.htmlElement, 'tap', this.handleCopy);
     }
   }
 
@@ -68,9 +69,8 @@ export class ExmgCopyToClipboard extends LitElement {
    */
   private initSlottedElement(): void {
     this.htmlElement = (FlattenedNodesObserver.getFlattenedNodes(this) || []).filter((n: Node) => n.nodeType === Node.ELEMENT_NODE)[0];
-
     if (this.htmlElement) {
-      addListener(this.htmlElement, 'click', this.handleCopy);
+      addListener(this.htmlElement, 'tap', this.handleCopy);
     }
   }
 

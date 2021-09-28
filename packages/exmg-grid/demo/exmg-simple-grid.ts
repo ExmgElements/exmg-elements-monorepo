@@ -1,10 +1,11 @@
-import {html, customElement, TemplateResult} from 'lit-element';
-import {classMap} from 'lit-html/directives/class-map';
-import {repeat} from 'lit-html/directives/repeat';
+import {html, TemplateResult} from 'lit';
+import {customElement} from 'lit/decorators';
+import {classMap} from 'lit/directives/class-map';
+import {repeat} from 'lit/directives/repeat';
 import '../src/table/exmg-grid';
 import '../src/table/exmg-grid-pagination';
-import {style as tableStyles} from '../src/table/exmg-grid-styles';
-import {style as demoStyles} from './styles/demo-styles';
+import {style as tableStyles} from '../src/styles/exmg-grid-styles-css.js';
+import {style as demoStyles} from './styles/demo-styles-css.js';
 
 import {ExmgBaseGridDemo} from './exmg-base-grid-demo';
 

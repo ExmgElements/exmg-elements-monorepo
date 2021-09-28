@@ -1,4 +1,4 @@
-import { LitElement } from 'lit-element';
+import { LitElement } from 'lit';
 export declare class ExmgTooltipBase extends LitElement {
     /**
      * The id of the element that the tooltip is anchored to. This element
@@ -45,5 +45,5 @@ export declare class ExmgTooltipBase extends LitElement {
     _addListeners(): void;
     _findTarget(): void;
     _removeListeners(): void;
-    protected render(): import("lit-element").TemplateResult;
+    protected render(): import("lit-html").TemplateResult<1>;
 }

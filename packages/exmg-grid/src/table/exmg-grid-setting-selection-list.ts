@@ -1,10 +1,11 @@
-import {customElement, html, LitElement, property, query, TemplateResult} from 'lit-element';
+import {html, LitElement, TemplateResult} from 'lit';
+import {customElement, property, query} from 'lit/decorators';
 import '@material/mwc-menu';
 import '@material/mwc-list/mwc-list-item';
 import '@material/mwc-icon-button';
 
 import {SettingSelectionListItem} from './types/exmg-grid-toolbar-types';
-import {style} from './exmg-grid-setting-selection-list-styles';
+import {style} from '../styles/exmg-grid-setting-selection-list-styles-css.js';
 import {Menu} from '@material/mwc-menu';
 
 @customElement('exmg-grid-setting-selection-list')
@@ -15,7 +16,7 @@ export class ExmgGridSettingSelectionList extends LitElement {
   @property({type: String})
   icon = 'filter_list';
 
-  @property({type: Object})
+  @property({type: Array})
   settingData: SettingSelectionListItem[] = [];
 
   @query('#menu')

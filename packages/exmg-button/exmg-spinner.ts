@@ -1,7 +1,8 @@
-import {html, property, customElement, LitElement} from 'lit-element';
-import {classMap} from 'lit-html/directives/class-map.js';
+import {html, LitElement} from 'lit';
+import {property, customElement} from 'lit/decorators';
+import {classMap} from 'lit/directives/class-map.js';
 import {observer} from '@material/mwc-base/observer.js';
-import {style} from './styles/exmg-spinner-styles.js';
+import {style} from './styles/exmg-spinner-styles-css.js';
 
 @customElement('exmg-button-spinner')
 export class ExmgSpinner extends LitElement {
@@ -31,7 +32,7 @@ export class ExmgSpinner extends LitElement {
     }
   }
 
-  public render() {
+  public render(): any {
     const classes = {
       'exmg-active': this.active || this.coolingDown,
       'exmg-cooldown': this.coolingDown,

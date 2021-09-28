@@ -29,7 +29,8 @@
     <div class="vertical-section-container centered">
       <h3>Basic exmg-snackbars demo</h3>
       <script type="module">
-        import {LitElement, html, customElement} from 'lit-element';
+        import {LitElement, html} from 'lit';
+        import {customElement} from 'lit/decorators';
         import {showSnackBar} from '../exmg-snackbars';
         class Demo extends LitElement {
           _showSnackbar() {

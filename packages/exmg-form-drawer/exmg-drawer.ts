@@ -1,8 +1,9 @@
-import {LitElement, html, customElement, property} from 'lit-element';
+import {LitElement, html} from 'lit';
+import {customElement, property} from 'lit/decorators';
 import '@polymer/neon-animation/animations/slide-from-right-animation.js';
 import '@polymer/neon-animation/animations/slide-right-animation.js';
 import '@polymer/paper-dialog/paper-dialog.js';
-import {style} from './styles/exmg-drawer-styles';
+import {style} from './styles/exmg-drawer-styles-css.js';
 
 /**
  * ### Styling

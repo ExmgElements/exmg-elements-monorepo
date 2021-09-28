@@ -1,5 +1,6 @@
 import { __decorate } from "tslib";
-import { LitElement, html, customElement, css } from 'lit-element';
+import { LitElement, html, css } from 'lit';
+import { customElement } from 'lit/decorators';
 import '../exmg-tooltip.js';
 let TooltipDemo = class TooltipDemo extends LitElement {
     render() {

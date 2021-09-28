@@ -20,15 +20,15 @@
   ],
   "homepage": "https://github.com/ExmgElements/",
   "name": "@exmg/exmg-copy-to-clipboard",
-  "version": "6.1.2",
+  "version": "8.0.0",
   "main": "exmg-copy-to-clipboard.js",
   "license": "MIT",
   "author": "Ex Machina",
   "dependencies": {
-    "lit-element": "^2.5.1"
+    "lit": "^2.0.0"
   },
   "devDependencies": {
-    "@exmg/exmg-cli": "^4.0.0",
+    "@exmg/exmg-cli": "^4.1.0",
     "@web/dev-server": "0.0.29",
     "concurrently": "^6.2.1",
     "@polymer/iron-demo-helpers": "^3.1.0",
@@ -53,14 +53,14 @@
     "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts",
     "tsc:watch": "tsc -b ./tsconfig.json --watch",
     "tsc": "tsc -b ./tsconfig.json",
-    "build-styles": "exmg-cli -s ./styles/*",
+    "build-styles": "exmg-cli -s \"styles/**/*.scss\"",
     "watch-styles": "exmg-cli -w",
     "lint": "tsc --noEmit && eslint '**/*ts' --ignore-path ../../.eslintignore -c ../../eslintrc.json --quiet --fix",
     "build": "npm run build-styles && npm run lint && npm run tsc",
     "prepublishOnly": "npm run build",
     "preversion": "npm run build",
     "publishDryRun": "npm publish --dry-run",
-    "start": "concurrently --kill-others --names tsc,web-dev-server \"npm run tsc:watch\" \"web-dev-server --app-index demo/index.html --node-resolve --open --watch\"",
+    "start": "npm run build-styles && concurrently --kill-others --names tsc,web-dev-server \"npm run watch-styles\" \"web-dev-server --app-index demo/index.html --node-resolve --open\" \"npm run tsc:watch\"",
     "test-dev": "polymer test --npm -p",
     "test": "polymer test --npm --expanded"
   },

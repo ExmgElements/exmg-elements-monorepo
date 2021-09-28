@@ -1,21 +1,21 @@
 import {BreadcrumbsElement} from '../exmg-cms-breadcrumbs';
 import {promisifyFlush} from './utils';
 
-declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: object) => T;
-declare const flush: (cb?: Function) => void;
+declare const fixture: <T extends HTMLElement = HTMLElement>(id: string, model?: any) => T;
+declare const flush: (cb?: any) => void;
 
 const {assert} = chai;
 
-suite('<exmg-cms-breadcrumbs>', function() {
+suite('<exmg-cms-breadcrumbs>', function () {
   let element: BreadcrumbsElement;
   const flushCompleted = promisifyFlush(flush);
 
-  suite('base usage', function() {
+  suite('base usage', function () {
     setup(() => {
       element = fixture('BreadcrumbElementBasicElement');
     });
 
-    test('element is upgraded', function() {
+    test('element is upgraded', function () {
       assert.instanceOf(element, BreadcrumbsElement);
     });
 
@@ -27,7 +27,7 @@ suite('<exmg-cms-breadcrumbs>', function() {
     });
   });
 
-  suite('element with items', function() {
+  suite('element with items', function () {
     setup(async () => {
       element = fixture('BreadcrumbElementBasicElement');
       element.items = [
@@ -80,7 +80,10 @@ suite('<exmg-cms-breadcrumbs>', function() {
       );
 
       assert.equal(separatorsContent.length, 4, 'There is 4 separators');
-      assert.isTrue(separatorsContent.every(it => it === separator), 'Separator content is updated');
+      assert.isTrue(
+        separatorsContent.every((it) => it === separator),
+        'Separator content is updated',
+      );
     });
   });
 });

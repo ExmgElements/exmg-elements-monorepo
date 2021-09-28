@@ -46,7 +46,7 @@ suite('<exmg-form>', function () {
 
       const timeoutPromise = new Promise((resolve) => {
         setTimeout(() => {
-          resolve();
+          resolve(null);
         }, 1000);
       });
 

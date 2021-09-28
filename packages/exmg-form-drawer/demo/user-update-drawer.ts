@@ -1,4 +1,5 @@
-import {html, customElement, property, TemplateResult, query} from 'lit-element';
+import {html, TemplateResult} from 'lit';
+import {customElement, property, query} from 'lit/decorators';
 import {ExmgFormDrawer} from '../exmg-form-drawer.js';
 import '@exmg/exmg-markdown-editor';
 import '@polymer/paper-input/paper-input.js';

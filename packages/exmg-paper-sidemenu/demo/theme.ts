@@ -1,7 +1,8 @@
-import {LitElement, html, css, property, customElement} from 'lit-element';
-import {classMap} from 'lit-html/directives/class-map.js';
+import {LitElement, html, css} from 'lit';
+import {property, customElement} from 'lit/decorators';
+import {classMap} from 'lit/directives/class-map.js';
 import {sidemenuStyles} from '../index';
-import {style as themeStyles} from './theme-styles';
+import {style as themeStyles} from '../styles/theme-styles-css.js';
 import '../index';
 import '@material/mwc-drawer/mwc-drawer';
 import '@material/mwc-icon-button';

@@ -1,10 +1,11 @@
-import {html, property, customElement, eventOptions} from 'lit-element';
+import {html} from 'lit';
+import {property, customElement, eventOptions} from 'lit/decorators';
 import '@material/mwc-ripple/mwc-ripple';
 
-import {classMap} from 'lit-html/directives/class-map.js';
+import {classMap} from 'lit/directives/class-map.js';
 import {ButtonBase} from '@material/mwc-button/mwc-button-base.js';
-import {style} from '@material/mwc-button/mwc-button-css';
-import {style as newStyles} from './styles/exmg-button-styles';
+import {style} from '@material/mwc-button/styles-css.js';
+import {style as newStyles} from './styles/exmg-button-styles-css.js';
 import './exmg-spinner';
 
 @customElement('exmg-button')
@@ -17,7 +18,7 @@ export class ExmgButton extends ButtonBase {
 
   static styles = [style, newStyles];
 
-  protected render() {
+  protected render(): any {
     const classes = {
       'mdc-button--raised': this.raised,
       'mdc-button--unelevated': this.unelevated,

@@ -1,5 +1,6 @@
-import {customElement, LitElement, html, query, property} from 'lit-element';
-import {repeat} from 'lit-html/directives/repeat';
+import {LitElement, html} from 'lit';
+import {customElement, query, property} from 'lit/decorators';
+import {repeat} from 'lit/directives/repeat';
 import '../exmg-searchbar';
 import '@polymer/iron-demo-helpers/demo-snippet';
 import styles from './demo-search-styles';
@@ -142,8 +143,8 @@ export class DemoSearch extends LitElement {
               <td><input name="showSuggestions" type="checkbox" checked>Show Suggestions</input></td>
               <td><input name="showLoading" type="checkbox">Show Suggestions Loading</input></td>
             </tr>
-            <tr>       
-              <td> 
+            <tr>
+              <td>
               <input @change=${
                 this._handleKeepSuggestionsOnSelectCheckboxChange
               } name="keepSuggestions" type="checkbox">Keep Suggestions On Select</input></td>       <td>      <input @change=${
@@ -151,13 +152,13 @@ export class DemoSearch extends LitElement {
     } name="notifyOnQueryChange" type="checkbox" checked>Notify On Query Change</input>
               </td>
             </tr>
-            <tr>      
+            <tr>
              <td><input @change=${
                this._handleSubmitOnKeyPressCheckboxChange
-             } name="submitOnKeyPress" type="checkbox" checked>Submit On Key Press</input></td>       
+             } name="submitOnKeyPress" type="checkbox" checked>Submit On Key Press</input></td>
              <td><input @change=${this._handleKeepFocusCheckboxChange} name="keepFocus" type="checkbox">Keep Focus After Submit</input>
     </td>
-    </tr> 
+    </tr>
           </tbody>
         </table>
         </div>
@@ -193,7 +194,7 @@ export class DemoSearch extends LitElement {
               },
             )}
           </tbody>
-        </table> 
+        </table>
         </div>
         <h4>Available Data</h4>
         <table>

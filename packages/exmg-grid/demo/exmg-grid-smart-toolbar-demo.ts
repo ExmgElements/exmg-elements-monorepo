@@ -1,5 +1,6 @@
-import {customElement, html, LitElement, property, TemplateResult} from 'lit-element';
-import '@exmg/exmg-button';
+import {html, LitElement, TemplateResult} from 'lit';
+import {customElement, property} from 'lit/decorators';
+import '@material/mwc-button';
 import {Filter, FilterSingleSelectConfig, FilterConfigType, SettingSelectionListItem} from '../src/table/types/exmg-grid-toolbar-types';
 import {
   ActionAmountSelectedItemsCondition,
@@ -146,7 +147,7 @@ export class ExmgGridSmartToolbarDemo extends LitElement {
         @exmg-grid-toolbar-action-executed="${this.onActionExecuted}"
         @exmg-grid-toolbar-filter-changed="${this.onFilterChanged}"
       >
-        <exmg-button slot="extra">+ Add User</exmg-button>
+        <mwc-button slot="extra">+ Add User</mwc-button>
       </exmg-grid-smart-toolbar>
     `;
   }

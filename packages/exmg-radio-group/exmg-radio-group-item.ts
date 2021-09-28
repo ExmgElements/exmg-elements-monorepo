@@ -1,12 +1,13 @@
 import {FormElement, HTMLElementWithRipple} from '@material/mwc-base/form-element.js';
 import {observer} from '@material/mwc-base/observer.js';
-import {property, customElement, html, query} from 'lit-element';
+import {html} from 'lit';
+import {property, customElement, query} from 'lit/decorators';
 import {MDCFoundation} from '@material/base';
 import {style} from '@material/mwc-radio/mwc-radio-css';
 import {ripple} from '@material/mwc-ripple/ripple-directive';
 import foundation from '@material/radio/foundation';
 import {SelectionController} from './exmg-selection-controller';
-import {style as exmgRadioGroupItemStyles} from './styles/exmg-radio-group-item-styles';
+import {style as exmgRadioGroupItemStyles} from './styles/exmg-radio-group-item-styles-css.js';
 
 export interface RadioFoundation extends MDCFoundation {
   setDisabled(disabled: boolean): void;
@@ -63,21 +64,21 @@ export class ExmgRadioGroupItem extends FormElement {
     }
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     super.connectedCallback();
     if (this.selectionController) {
       this.selectionController.register(this);
     }
   }
 
-  disconnectedCallback() {
+  disconnectedCallback(): void {
     if (this.selectionController) {
       this.selectionController.unregister(this);
     }
     super.disconnectedCallback();
   }
 
-  focusNative() {
+  focusNative(): void {
     this.formElement.focus();
   }
 

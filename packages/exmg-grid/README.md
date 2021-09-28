@@ -180,7 +180,7 @@ Simple pagination component that gives you all features described in material de
 
 - Body has to be added to `table > tbody.grid-data`
 
-- You should use `import {repeat} from 'lit-html/directives/repeat';` function to map you items to rows.
+- You should use `import {repeat} from 'lit/directives/repeat';` function to map you items to rows.
 
 - Each row inside `tbody.grid-data` should have attribute `data-row-key` with unique value
 

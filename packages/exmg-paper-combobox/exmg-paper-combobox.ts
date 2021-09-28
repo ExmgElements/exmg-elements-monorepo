@@ -1,5 +1,7 @@
-import {LitElement, html, customElement, property, query, css} from 'lit-element';
-import {classMap} from 'lit-html/directives/class-map.js';
+import {LitElement, html, css} from 'lit';
+import {customElement, property, query} from 'lit/decorators';
+import {classMap} from 'lit/directives/class-map.js';
+import {ifDefined} from 'lit/directives/if-defined';
 
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
@@ -594,7 +596,6 @@ export class PaperComboboxElement extends LitElement {
 
   private onItemSelected(e: CustomEvent<{item: Element}>): void {
     e.stopPropagation();
-
     if (this.selected && !this.selectedItem) {
       this.selectedItem = e.detail.item;
     }
@@ -819,7 +820,7 @@ export class PaperComboboxElement extends LitElement {
             slot="dropdown-content"
             selectable="paper-item:not([hidden]),paper-icon-item:not([hidden])"
             attr-for-selected="${this.attrForSelected}"
-            selected="${this.selectedValue}"
+            .selected="${this.selectedValue}"
             class="dropdown-content"
             @iron-activate="${this.onItemActivated}"
             @iron-select="${this.onItemSelected}"

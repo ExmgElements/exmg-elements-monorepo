@@ -1,5 +1,5 @@
-import {property, html, TemplateResult} from 'lit-element';
-
+import {html, TemplateResult} from 'lit';
+import {property} from 'lit/decorators';
 import '../exmg-form-drawer.js';
 import {style} from './form-drawer-base-styles.js';
 import {BaseElement} from './base-element.js';

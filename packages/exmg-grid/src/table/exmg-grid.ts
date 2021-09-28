@@ -1,7 +1,8 @@
-import {property, customElement, html, LitElement, TemplateResult} from 'lit-element';
-import {cache} from 'lit-html/directives/cache';
+import {html, LitElement, TemplateResult} from 'lit';
+import {property, customElement} from 'lit/decorators';
+import {cache} from 'lit/directives/cache';
 import '@exmg/exmg-sortable';
-import {style as exmgGridTableStyles} from './exmg-grid-styles';
+import {style as exmgGridTableStyles} from '../styles/exmg-grid-styles-css.js';
 import {ExmgRowSelectable} from './featrues/exmg-row-selectable';
 import {ExmgQuerySelectors} from './utils/exmg-query-selectors';
 import {ExmgRowExpandable} from './featrues/exmg-row-expandable';
@@ -54,7 +55,7 @@ export class ExmgGrid extends LitElement {
   /**
    * Array of data which mapped to rows
    */
-  @property({type: Object})
+  @property({type: Array})
   items: any[] = [];
 
   /**

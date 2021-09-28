@@ -1,6 +1,7 @@
-import {LitElement, html, customElement, query, property, TemplateResult} from 'lit-element';
-import {repeat} from 'lit-html/directives/repeat';
-import {classMap} from 'lit-html/directives/class-map';
+import {LitElement, html, TemplateResult} from 'lit';
+import {customElement, query, property} from 'lit/decorators';
+import {repeat} from 'lit/directives/repeat';
+import {classMap} from 'lit/directives/class-map';
 import {observer} from '@material/mwc-base/observer.js';
 
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
@@ -10,7 +11,7 @@ import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
 import './exmg-import-helper.js';
 
 import './exmg-markdown-editor-icons';
-import {style as codeMirrorStylesText} from './styles/exmg-markdown-codemirror-styles';
+import {style as codeMirrorStylesText} from './styles/exmg-markdown-codemirror-styles-css.js';
 import {
   ToolBarOption,
   ToolBarConfigItem,

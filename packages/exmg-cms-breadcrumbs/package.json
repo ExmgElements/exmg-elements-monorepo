@@ -1,7 +1,7 @@
 {
   "name": "@exmg/exmg-cms-breadcrumbs",
   "flat": true,
-  "version": "2.1.0",
+  "version": "8.0.0",
   "description": "Element to display breadcrumbs navigation",
   "main": "index.html",
   "contributors": [
@@ -27,10 +27,12 @@
     "index.d.ts"
   ],
   "dependencies": {
-    "lit-element": "^2.2.1"
+    "lit": "^2.0.0"
   },
   "devDependencies": {
-    "@exmg/exmg-cli": "^2.1.0",
+    "@exmg/exmg-cli": "^4.1.0",
+    "@web/dev-server": "0.0.29",
+    "concurrently": "^6.2.1",
     "@polymer/iron-demo-helpers": "^3.1.0",
     "@polymer/paper-styles": "^3.0.1",
     "@polymer/test-fixture": "^4.0.2",
@@ -51,14 +53,16 @@
   "scripts": {
     "package-install": "npm i",
     "gen-docs": "typedoc --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --ignoreCompilerErrors --exclude '{**/*test*,**/node_modules/**,**/test/**}' --out docs/ *.ts",
+    "tsc:watch": "tsc -b ./tsconfig.json --watch",
     "tsc": "tsc -b ./tsconfig.json",
     "lint": "tsc --noEmit && eslint '**/*ts' --ignore-path ../../.eslintignore -c ../../eslintrc.json --quiet --fix",
-    "build:styles": "gulp render-styles",
-    "build": "npm run build:styles && npm run lint && npm run tsc",
+    "build-styles": "exmg-cli -s \"styles/**/*.scss\"",
+    "watch-styles": "exmg-cli -w",
+    "build": "npm run build-styles && npm run lint && npm run tsc",
     "prepublishOnly": "npm run build",
     "preversion": "npm run build",
     "publishDryRun": "npm publish --dry-run",
-    "start": "npm run build:styles && gulp serve",
+    "start": "concurrently --kill-others --names tsc,web-dev-server \"npm run tsc:watch\" \"web-dev-server --app-index demo/index.html --node-resolve --open --watch\"",
     "test-dev": "polymer test --npm -p",
     "test": "polymer test --npm --expanded"
   },

@@ -1,4 +1,5 @@
-import {customElement, html, LitElement, TemplateResult} from 'lit-element';
+import {html, LitElement, TemplateResult} from 'lit';
+import {customElement} from 'lit/decorators';
 import {Action, Filter, FilterSingleSelectConfig, FilterConfigType} from '../src/table/types/exmg-grid-toolbar-types';
 
 @customElement('exmg-grid-toolbar-demo')
