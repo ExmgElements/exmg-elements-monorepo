@@ -7,7 +7,7 @@ import './exmg-drawer.js';
 import {style} from './styles/exmg-form-drawer-styles-css.js';
 import '@exmg/exmg-form/exmg-form.js';
 import {ExmgForm} from '@exmg/exmg-form/exmg-form.js';
-import '@exmg/exmg-button.js';
+import '@exmg/exmg-button/exmg-button.js';
 
 /**
  * ### Styling
