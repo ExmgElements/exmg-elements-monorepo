@@ -1,13 +1,13 @@
 import {LitElement, html, customElement, property} from 'lit-element';
-import '@polymer/paper-input';
+import '@polymer/paper-input/paper-input.js';
 import '@polymer/paper-input/paper-textarea.js';
-import '@polymer/paper-item';
+import '@polymer/paper-item/paper-item.js';
 import '@exmg/exmg-paper-combobox/exmg-paper-combobox.js';
 import '@exmg/exmg-paper-token-input/exmg-paper-token-input.js';
 import '@exmg/exmg-markdown-editor/exmg-markdown-editor.js';
 
-import '../exmg-form';
-import {ExmgForm} from '../exmg-form';
+import '../exmg-form.js';
+import {ExmgForm} from '../exmg-form.js';
 
 @customElement('tab-2')
 export class Tab2El extends LitElement {
