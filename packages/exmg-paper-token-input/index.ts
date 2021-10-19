@@ -1,1 +1,1 @@
-export * from './exmg-paper-token-input';
+export * from './exmg-paper-token-input.js';

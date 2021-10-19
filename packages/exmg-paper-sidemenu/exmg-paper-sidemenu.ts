@@ -1,4 +1,4 @@
-import {customElement} from 'lit/decorators';
+import {customElement} from 'lit/decorators.js';
 import {style} from './styles/exmg-paper-sidemenu-base-styles-css.js';
 import {ExmgPaperSidemenuBase} from './exmg-paper-sidemenu-base.js';
 

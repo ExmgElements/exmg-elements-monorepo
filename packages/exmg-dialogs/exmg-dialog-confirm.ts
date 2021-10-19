@@ -1,12 +1,12 @@
 import {html, LitElement} from 'lit';
-import {customElement, property, query} from 'lit/decorators';
+import {customElement, property, query} from 'lit/decorators.js';
 import '@material/mwc-icon-button';
 import {PaperDialogElement} from '@polymer/paper-dialog';
 import '@polymer/paper-dialog';
 import '@exmg/exmg-button';
 import '@polymer/iron-form';
 import {style} from './styles/exmg-dialog-styles-css.js';
-import {closeIcon, warningIcon} from './exmg-dialog-icons';
+import {closeIcon, warningIcon} from './exmg-dialog-icons.js';
 
 @customElement('exmg-dialog-confirm')
 export class ExmgConfirmDialog extends LitElement {

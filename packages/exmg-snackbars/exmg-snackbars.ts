@@ -1,6 +1,6 @@
-import '@polymer/paper-toast';
-import {closeIcon} from './exmg-snackbars-icons';
-import {PaperToastElement} from '@polymer/paper-toast';
+import '@polymer/paper-toast/paper-toast.js';
+import {closeIcon} from './exmg-snackbars-icons.js';
+import {PaperToastElement} from '@polymer/paper-toast/paper-toast.js';
 
 export interface ExmgSnackbarsOptionsInterface {
   showCloseButton?: boolean;

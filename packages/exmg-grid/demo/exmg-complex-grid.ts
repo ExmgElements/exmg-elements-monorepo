@@ -1,7 +1,7 @@
 import {html, css, TemplateResult} from 'lit';
-import {customElement} from 'lit/decorators';
-import {classMap} from 'lit/directives/class-map';
-import {repeat} from 'lit/directives/repeat';
+import {customElement} from 'lit/decorators.js';
+import {classMap} from 'lit/directives/class-map.js';
+import {repeat} from 'lit/directives/repeat.js';
 import '@material/mwc-checkbox';
 import '@material/mwc-icon-button';
 
@@ -11,13 +11,13 @@ import '@polymer/paper-menu-button/paper-menu-button.js';
 import '@polymer/iron-dropdown/iron-dropdown.js';
 
 import '../src/table/exmg-grid.js';
-import '../src/table/exmg-grid-pagination';
-import '../src/table/exmg-grid-smart-toolbar';
+import '../src/table/exmg-grid-pagination.js';
+import '../src/table/exmg-grid-smart-toolbar.js';
 import {style as tableStyles} from '../src/styles/exmg-grid-styles-css.js';
 import {style as demoStyles} from './styles/demo-styles-css.js';
 
-import {createIcon} from './exmg-icons';
-import {DEFAULT_SORT_COLUMN, DEFAULT_SORT_DIRECTION, ExmgBaseGridDemo} from './exmg-base-grid-demo';
+import {createIcon} from './exmg-icons.js';
+import {DEFAULT_SORT_COLUMN, DEFAULT_SORT_DIRECTION, ExmgBaseGridDemo} from './exmg-base-grid-demo.js';
 
 @customElement('demo-complex-grid')
 export class ExmgComplexGrid extends ExmgBaseGridDemo {

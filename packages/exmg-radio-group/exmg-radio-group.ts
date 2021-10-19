@@ -1,5 +1,5 @@
 import {html, LitElement} from 'lit';
-import {property, customElement} from 'lit/decorators';
+import {property, customElement} from 'lit/decorators.js';
 import {observer} from '@material/mwc-base/observer.js';
 import {style as exmgRadioGroupStyles} from './styles/exmg-radio-group-styles-css.js';
 import {ExmgRadioGroupItem} from './exmg-radio-group-item.js';

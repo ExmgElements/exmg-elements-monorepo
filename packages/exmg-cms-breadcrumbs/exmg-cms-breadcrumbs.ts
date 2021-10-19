@@ -1,8 +1,8 @@
 import {LitElement, html, TemplateResult} from 'lit';
-import {property, customElement} from 'lit/decorators';
-import {repeat} from 'lit/directives/repeat';
+import {property, customElement} from 'lit/decorators.js';
+import {repeat} from 'lit/directives/repeat.js';
 
-import {arrowSeparator} from './exmg-cms-breadcrumbs-icons';
+import {arrowSeparator} from './exmg-cms-breadcrumbs-icons.js';
 import {style as exmgCmsBreadcrumbsStyles} from './styles/exmg-cms-breadcrumbs-styles-css.js';
 
 type GenericPropertyValues<T, V = unknown> = Map<T, V>;

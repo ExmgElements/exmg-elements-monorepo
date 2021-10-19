@@ -1,13 +1,13 @@
 import {html, TemplateResult} from 'lit';
-import {customElement} from 'lit/decorators';
-import {classMap} from 'lit/directives/class-map';
-import {repeat} from 'lit/directives/repeat';
-import '../src/table/exmg-grid';
-import '../src/table/exmg-grid-pagination';
+import {customElement} from 'lit/decorators.js';
+import {classMap} from 'lit/directives/class-map.js';
+import {repeat} from 'lit/directives/repeat.js';
+import '../src/table/exmg-grid.js';
+import '../src/table/exmg-grid-pagination.js';
 import {style as tableStyles} from '../src/styles/exmg-grid-styles-css.js';
 import {style as demoStyles} from './styles/demo-styles-css.js';
 
-import {ExmgBaseGridDemo} from './exmg-base-grid-demo';
+import {ExmgBaseGridDemo} from './exmg-base-grid-demo.js';
 
 @customElement('demo-simple-grid')
 export class DemoSimpleGridTable extends ExmgBaseGridDemo {

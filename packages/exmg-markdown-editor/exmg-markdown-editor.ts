@@ -1,7 +1,7 @@
 import {LitElement, html, TemplateResult} from 'lit';
-import {customElement, query, property} from 'lit/decorators';
-import {repeat} from 'lit/directives/repeat';
-import {classMap} from 'lit/directives/class-map';
+import {customElement, query, property} from 'lit/decorators.js';
+import {repeat} from 'lit/directives/repeat.js';
+import {classMap} from 'lit/directives/class-map.js';
 import {observer} from '@material/mwc-base/observer.js';
 
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
@@ -10,7 +10,7 @@ import '@polymer/iron-icon/iron-icon.js';
 import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
 import './exmg-import-helper.js';
 
-import './exmg-markdown-editor-icons';
+import './exmg-markdown-editor-icons.js';
 import {style as codeMirrorStylesText} from './styles/exmg-markdown-codemirror-styles-css.js';
 import {
   ToolBarOption,
@@ -20,7 +20,7 @@ import {
   availableMarkdownExtensions,
   Position,
   ChangedProps,
-} from './exmg-custom-types';
+} from './exmg-custom-types.js';
 
 import Editor = CodeMirror.Editor;
 import {

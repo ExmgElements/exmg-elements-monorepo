@@ -1,4 +1,4 @@
-import {customElement} from 'lit/decorators';
+import {customElement} from 'lit/decorators.js';
 
 import {style} from './styles/exmg-tooltip-styles-css.js';
 import {ExmgTooltipBase} from './exmg-tooltip-base.js';

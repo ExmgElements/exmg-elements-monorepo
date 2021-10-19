@@ -1,1 +1,1 @@
-export * from './exmg-sortable';
+export * from './exmg-sortable.js';

@@ -1,6 +1,6 @@
 import {html, LitElement, TemplateResult, css} from 'lit';
-import {customElement, property} from 'lit/decorators';
-import './exmg-grid-toolbar';
+import {customElement, property} from 'lit/decorators.js';
+import './exmg-grid-toolbar.js';
 import {
   Filter,
   Setting,
@@ -8,13 +8,13 @@ import {
   SettingConfigType,
   SettingSelectionListConfig,
   SettingSelectionListItem,
-} from './types/exmg-grid-toolbar-types';
+} from './types/exmg-grid-toolbar-types.js';
 import {
   ActionAmountSelectedItemsCondition,
   ActionConditionType,
   ActionWithCondition,
   BaseActionCondition,
-} from './types/exmg-grid-smart-toolbar-types';
+} from './types/exmg-grid-smart-toolbar-types.js';
 
 @customElement('exmg-grid-smart-toolbar')
 export class ExmgGridSmartToolbar extends LitElement {

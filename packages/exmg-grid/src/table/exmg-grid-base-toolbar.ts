@@ -1,5 +1,5 @@
 import {html, LitElement, TemplateResult} from 'lit';
-import {customElement, property} from 'lit/decorators';
+import {customElement, property} from 'lit/decorators.js';
 import {style} from '../styles/exmg-grid-base-toolbar-styles-css.js';
 
 /**

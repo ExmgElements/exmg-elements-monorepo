@@ -1,18 +1,18 @@
 import {LitElement, html, css} from 'lit';
-import {property, customElement} from 'lit/decorators';
+import {property, customElement} from 'lit/decorators.js';
 import {classMap} from 'lit/directives/class-map.js';
-import {sidemenuStyles} from '../index';
+import {sidemenuStyles} from '../index.js';
 import {style as themeStyles} from '../styles/theme-styles-css.js';
-import '../index';
-import '@material/mwc-drawer/mwc-drawer';
-import '@material/mwc-icon-button';
+import '../index.js';
+import '@material/mwc-drawer/mwc-drawer.js';
+import '@material/mwc-icon-button/mwc-icon-button.js';
 import '@polymer/paper-item/paper-item.js';
 import '@polymer/paper-tooltip/paper-tooltip.js';
-import '@polymer/app-layout/app-drawer/app-drawer';
-import '@polymer/app-layout/app-toolbar/app-toolbar';
+import '@polymer/app-layout/app-drawer/app-drawer.js';
+import '@polymer/app-layout/app-toolbar/app-toolbar.js';
 
 import {menu} from './menu.js';
-import {isItemGroup, MenuItem, MenuGroupItem, MenuItemOrGroupItem} from '../exmg-paper-sidemenu-types';
+import {isItemGroup, MenuItem, MenuGroupItem, MenuItemOrGroupItem} from '../exmg-paper-sidemenu-types.js';
 
 export const installMediaQueryWatcher = (mediaQuery: string, layoutChangedCallback: (mediaQueryMatches: boolean) => void) => {
   const mql = window.matchMedia(mediaQuery);

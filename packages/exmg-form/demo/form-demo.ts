@@ -1,11 +1,11 @@
 import {LitElement, html} from 'lit';
-import {customElement, property} from 'lit/decorators';
-import '@material/mwc-tab/mwc-tab';
-import '@material/mwc-tab-bar/mwc-tab-bar';
+import {customElement, property} from 'lit/decorators.js';
+import '@material/mwc-tab';
+import '@material/mwc-tab-bar';
 
-import './tab-1';
-import './tab-2';
-import './tab-3';
+import './tab-1.js';
+import './tab-2.js';
+import './tab-3.js';
 
 @customElement('form-demo')
 export class FormDemo extends LitElement {

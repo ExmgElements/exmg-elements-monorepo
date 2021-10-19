@@ -1,10 +1,10 @@
 import {html, LitElement, TemplateResult} from 'lit';
-import {customElement, property, query} from 'lit/decorators';
+import {customElement, property, query} from 'lit/decorators.js';
 import '@material/mwc-menu';
 import '@material/mwc-list/mwc-list-item';
 import '@material/mwc-icon-button';
 
-import {SettingSelectionListItem} from './types/exmg-grid-toolbar-types';
+import {SettingSelectionListItem} from './types/exmg-grid-toolbar-types.js';
 import {style} from '../styles/exmg-grid-setting-selection-list-styles-css.js';
 import {Menu} from '@material/mwc-menu';
 

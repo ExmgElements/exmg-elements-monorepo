@@ -1,5 +1,5 @@
 import {LitElement, html, TemplateResult} from 'lit';
-import {customElement, property} from 'lit/decorators';
+import {customElement, property} from 'lit/decorators.js';
 import '@polymer/iron-ajax/iron-ajax.js';
 import '../exmg-sortable.js';
 

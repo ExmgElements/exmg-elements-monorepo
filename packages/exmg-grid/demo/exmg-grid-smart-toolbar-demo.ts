@@ -1,12 +1,12 @@
 import {html, LitElement, TemplateResult} from 'lit';
-import {customElement, property} from 'lit/decorators';
+import {customElement, property} from 'lit/decorators.js';
 import '@material/mwc-button';
-import {Filter, FilterSingleSelectConfig, FilterConfigType, SettingSelectionListItem} from '../src/table/types/exmg-grid-toolbar-types';
+import {Filter, FilterSingleSelectConfig, FilterConfigType, SettingSelectionListItem} from '../src/table/types/exmg-grid-toolbar-types.js';
 import {
   ActionAmountSelectedItemsCondition,
   ActionWithCondition,
   ActionConditionType,
-} from '../src/table/types/exmg-grid-smart-toolbar-types';
+} from '../src/table/types/exmg-grid-smart-toolbar-types.js';
 
 @customElement('exmg-grid-smart-toolbar-demo')
 export class ExmgGridSmartToolbarDemo extends LitElement {

@@ -1,7 +1,7 @@
 import {html, LitElement, TemplateResult} from 'lit';
-import {customElement, property} from 'lit/decorators';
-import {repeat} from 'lit/directives/repeat';
-import '../src/table/exmg-grid-toolbar-combobox';
+import {customElement, property} from 'lit/decorators.js';
+import {repeat} from 'lit/directives/repeat.js';
+import '../src/table/exmg-grid-toolbar-combobox.js';
 import '@polymer/paper-item';
 import '@material/mwc-icon-button';
 

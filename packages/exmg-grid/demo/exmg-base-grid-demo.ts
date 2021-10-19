@@ -1,16 +1,15 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import {LitElement} from 'lit';
-import {property} from 'lit/decorators';
+import {property} from 'lit/decorators.js';
 import '@material/mwc-checkbox';
 import '../src/table/exmg-grid.js';
-import '../src/table/exmg-grid-pagination';
-
-import '../src/table/exmg-grid-smart-toolbar';
+import '../src/table/exmg-grid-pagination.js';
+import '../src/table/exmg-grid-smart-toolbar.js';
 import {
   ActionAmountSelectedItemsCondition,
   ActionConditionType,
   ActionWithCondition,
-} from '../src/table/types/exmg-grid-smart-toolbar-types';
+} from '../src/table/types/exmg-grid-smart-toolbar-types.js';
 import {
   EventDetailGridToolbarSettingChanged,
   Filter,
@@ -18,8 +17,8 @@ import {
   FilterSingleSelectConfig,
   SettingConfigId,
   SettingSelectionListItem,
-} from '../src/table/types/exmg-grid-toolbar-types';
-import {EventDetailRowsOrderChanged, EventDetailSelectedRowsChange, EventDetailSortChange} from '../src/table/types/exmg-grid-types';
+} from '../src/table/types/exmg-grid-toolbar-types.js';
+import {EventDetailRowsOrderChanged, EventDetailSelectedRowsChange, EventDetailSortChange} from '../src/table/types/exmg-grid-types.js';
 import {EventSelectPayload} from 'src/table/exmg-grid-toolbar-combobox.js';
 
 function isString(x: any): x is string {

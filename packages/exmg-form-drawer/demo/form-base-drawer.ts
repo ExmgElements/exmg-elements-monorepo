@@ -1,5 +1,5 @@
 import {LitElement, html, TemplateResult} from 'lit';
-import {customElement, query} from 'lit/decorators';
+import {customElement, query} from 'lit/decorators.js';
 import '@exmg/exmg-button';
 import '@exmg/exmg-markdown-editor';
 import '@polymer/paper-input/paper-input.js';
@@ -8,8 +8,8 @@ import '@polymer/paper-item/paper-item.js';
 import '@exmg/exmg-form/exmg-form';
 import '@vaadin/vaadin-date-picker/vaadin-date-picker';
 import '../exmg-form-drawer';
-import './user-update-drawer';
-import {UserUpdateDrawer} from './user-update-drawer';
+import './user-update-drawer.js';
+import {UserUpdateDrawer} from './user-update-drawer.js';
 
 @customElement('exmg-base-drawer-demo')
 export class BaseDrawer extends LitElement {

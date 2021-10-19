@@ -1,6 +1,6 @@
-import {customElement} from 'lit/decorators';
+import {customElement} from 'lit/decorators.js';
 import {style} from './styles/exmg-paper-sidemenu-header-styles-css.js';
-import {ExmgPaperSidemenuHeaderBase} from './exmg-paper-sidemenu-header-base';
+import {ExmgPaperSidemenuHeaderBase} from './exmg-paper-sidemenu-header-base.js';
 
 @customElement('exmg-paper-sidemenu-header')
 export class ExmgPaperSidemenuHeader extends ExmgPaperSidemenuHeaderBase {

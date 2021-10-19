@@ -1,1 +1,1 @@
-export * from './exmg-snackbars';
+export * from './exmg-snackbars.js';

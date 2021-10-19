@@ -1,9 +1,9 @@
 import {html, LitElement, css} from 'lit';
-import {property, customElement, query} from 'lit/decorators';
-import {classMap} from 'lit/directives/class-map';
+import {property, customElement, query} from 'lit/decorators.js';
+import {classMap} from 'lit/directives/class-map.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
-import {Debouncer} from '@polymer/polymer/lib/utils/debounce';
-import {timeOut} from '@polymer/polymer/lib/utils/async';
+import {Debouncer} from '@polymer/polymer/lib/utils/debounce.js';
+import {timeOut} from '@polymer/polymer/lib/utils/async.js';
 
 export const searchIcon = html`
   <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
