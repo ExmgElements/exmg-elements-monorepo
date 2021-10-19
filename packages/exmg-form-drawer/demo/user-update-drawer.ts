@@ -45,6 +45,7 @@ export class UserUpdateDrawer extends FormDrawerBase<UserData> {
 
       target.done();
     } catch (error) {
+      // @ts-ignore
       target.error(`${error.message}`);
     }
   }

@@ -24,8 +24,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@exmg/exmg-button": "^8.0.0",
-    "@material/typography": "^12.0.0",
+    "@exmg/exmg-button": "^8.1.0",
+    "@material/typography": "^13.0.0",
     "@polymer/paper-dialog": "^3.0.1",
     "lit": "^2.0.0"
   },
@@ -33,7 +33,7 @@
     "@exmg/exmg-cli": "^4.1.0",
     "@web/dev-server": "0.0.29",
     "concurrently": "^6.2.1",
-    "@exmg/exmg-form": "^8.0.1",
+    "@exmg/exmg-form": "^8.1.0",
     "@exmg/exmg-paper-combobox": "^8.0.2",
     "@exmg/exmg-markdown-editor": "^8.0.2",
     "@polymer/iron-component-page": "^4.0.1",
