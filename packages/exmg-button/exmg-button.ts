@@ -4,7 +4,7 @@ import '@material/mwc-ripple/mwc-ripple.js';
 
 import {classMap} from 'lit/directives/class-map.js';
 import {ButtonBase} from '@material/mwc-button/mwc-button-base.js';
-import {style} from '@material/mwc-button/styles-css.js';
+import {styles} from '@material/mwc-button/styles.css.js';
 import {style as newStyles} from './styles/exmg-button-styles-css.js';
 import './exmg-spinner.js';
 
@@ -16,7 +16,7 @@ export class ExmgButton extends ButtonBase {
   @property({type: Number})
   public progress?: number;
 
-  static styles = [style, newStyles];
+  static styles = [styles, newStyles];
 
   protected render(): any {
     const classes = {
