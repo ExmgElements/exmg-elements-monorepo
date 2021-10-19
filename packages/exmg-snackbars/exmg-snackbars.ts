@@ -5,7 +5,7 @@ import {PaperToastElement} from '@polymer/paper-toast/paper-toast.js';
 export interface ExmgSnackbarsOptionsInterface {
   showCloseButton?: boolean;
   copyButton?: string;
-  callbackButton?: Function;
+  callbackButton?: any;
   duration?: number;
   toastContainerNodeId?: string;
   position?: {
@@ -57,7 +57,7 @@ const getToastCloseBtnNode = (): HTMLDivElement => {
   return node;
 };
 
-const getCustomToastNode = ({copyButton, callbackButton}: {copyButton: string; callbackButton?: Function}): HTMLDivElement => {
+const getCustomToastNode = ({copyButton, callbackButton}: {copyButton: string; callbackButton?: any}): HTMLDivElement => {
   const node = document.createElement('div');
 
   node.className = 'close-btn';
