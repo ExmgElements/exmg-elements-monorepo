@@ -4,7 +4,7 @@ import {customElement, property} from 'lit/decorators.js';
 import '@material/mwc-checkbox/mwc-checkbox.js';
 import '@material/mwc-icon/mwc-icon.js';
 import '@material/mwc-button/mwc-button.js';
-import {style} from './button-demo-styles.js';
+import {style} from './styles/button-demo-styles-css.js';
 import '../exmg-button.js';
 
 @customElement('exmg-button-demo')

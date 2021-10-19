@@ -1,6 +1,6 @@
 {
   "name": "@exmg/exmg-dialogs",
-  "version": "8.0.2",
+  "version": "8.0.3",
   "main": "index.js",
   "files": [
     "styles/**/*.scss",
@@ -16,7 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "@exmg/exmg-button": "^8.0.0",
-    "@material/mwc-icon-button": "^0.25.1",
+    "@material/mwc-icon-button": "0.25.2",
     "@polymer/iron-form": "^3.0.0",
     "@polymer/paper-dialog": "^3.0.0",
     "@polymer/paper-dialog-scrollable": "^3.0.0",

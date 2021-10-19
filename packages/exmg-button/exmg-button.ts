@@ -1,4 +1,4 @@
-import {html} from 'lit';
+import {html, TemplateResult} from 'lit';
 import {property, customElement, eventOptions} from 'lit/decorators.js';
 import '@material/mwc-ripple/mwc-ripple.js';
 
@@ -18,7 +18,7 @@ export class ExmgButton extends ButtonBase {
 
   static styles = [styles, newStyles];
 
-  protected render(): any {
+  protected render(): TemplateResult {
     const classes = {
       'mdc-button--raised': this.raised,
       'mdc-button--unelevated': this.unelevated,

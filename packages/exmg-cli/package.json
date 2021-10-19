@@ -35,9 +35,9 @@
     "gulp-replace": "^1.0.0",
     "gulp-watch": "^5.0.1",
     "node-sass-import": "^2.0.1",
+    "sass": "~1.34.1",
     "replace": "^1.2.0",
     "node-watch": "^0.6.2",
-    "sass": "^1.26.10"
   },
   "devDependencies": {
     "@types/command-line-args": "^5.0.0",
