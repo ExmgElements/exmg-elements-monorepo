@@ -1,6 +1,6 @@
 {
   "name": "@exmg/exmg-grid",
-  "version": "8.0.2",
+  "version": "8.1.0",
   "description": "exmg grid element",
   "contributors": [
     "Ex Machina"
@@ -27,14 +27,14 @@
   "license": "MIT",
   "dependencies": {
     "@exmg/exmg-sortable": "^8.0.1",
-    "@material/mwc-menu": "0.25.2",
-    "@material/mwc-button": "0.25.2",
-    "@material/mwc-list": "0.25.2",
-    "@material/mwc-base": "0.25.2",
-    "@material/mwc-checkbox": "0.25.2",
-    "@material/mwc-icon-button": "0.25.2",
-    "@material/theme": "^12.0.0",
-    "@material/typography": "^12.0.0",
+    "@material/mwc-menu": "^0.25.2",
+    "@material/mwc-button": "^0.25.2",
+    "@material/mwc-list": "^0.25.2",
+    "@material/mwc-base": "^0.25.2",
+    "@material/mwc-checkbox": "^0.25.2",
+    "@material/mwc-icon-button": "^0.25.2",
+    "@material/theme": "^13.0.0",
+    "@material/typography": "^13.0.0",
     "@polymer/iron-dropdown": "^3.0.1",
     "@polymer/paper-button": "^3.0.1",
     "@polymer/paper-input": "^3.2.1",
