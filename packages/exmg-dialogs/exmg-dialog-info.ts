@@ -1,5 +1,5 @@
 import {html, LitElement} from 'lit';
-import {customElement, property, query} from 'lit/decorators';
+import {customElement, property, query} from 'lit/decorators.js';
 import '@polymer/paper-dialog';
 import '@polymer/paper-dialog-scrollable';
 import '@exmg/exmg-button';
@@ -7,7 +7,7 @@ import '@polymer/iron-form';
 import '@material/mwc-icon-button';
 import {style} from './styles/exmg-dialog-styles-css.js';
 import {PaperDialogElement} from '@polymer/paper-dialog';
-import {closeIcon} from './exmg-dialog-icons';
+import {closeIcon} from './exmg-dialog-icons.js';
 
 @customElement('exmg-dialog-info')
 export class ExmgInfoDialog extends LitElement {

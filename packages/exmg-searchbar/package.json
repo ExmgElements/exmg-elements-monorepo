@@ -27,8 +27,8 @@
   "license": "MIT",
   "author": "Ex Machina",
   "dependencies": {
-    "@material/mwc-icon": "^0.25.1",
-    "@material/mwc-textfield": "^0.25.1",
+    "@material/mwc-icon": "2",
+    "@material/mwc-textfield": "0.25.2",
     "@polymer/paper-item": "^3.0.1",
     "@polymer/paper-listbox": "^3.0.1",
     "@polymer/paper-spinner": "^3.0.2",

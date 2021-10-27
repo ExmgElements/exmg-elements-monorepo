@@ -1,14 +1,14 @@
 import {LitElement, html} from 'lit';
-import {customElement, property, query} from 'lit/decorators';
-import '@exmg/exmg-button';
-import '@exmg/exmg-markdown-editor';
+import {customElement, property, query} from 'lit/decorators.js';
+import '@exmg/exmg-button/exmg-button.js';
+import '@exmg/exmg-markdown-editor/exmg-markdown-editor.js';
 import '@polymer/paper-input/paper-input.js';
-import '@exmg/exmg-paper-combobox/exmg-paper-combobox';
+import '@exmg/exmg-paper-combobox/exmg-paper-combobox.js';
 import '@polymer/paper-item/paper-item.js';
-import '@exmg/exmg-form/exmg-form';
-import '@vaadin/vaadin-date-picker/vaadin-date-picker';
-import '../exmg-form-drawer';
-import {ExmgFormDrawer} from '../exmg-form-drawer';
+import '@exmg/exmg-form/exmg-form.js';
+import '@vaadin/vaadin-date-picker/vaadin-date-picker.js';
+import '../exmg-form-drawer.js';
+import {ExmgFormDrawer} from '../exmg-form-drawer.js';
 
 @customElement('exmg-drawer-demo')
 export class Drawer extends LitElement {

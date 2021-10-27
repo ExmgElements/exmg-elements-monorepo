@@ -1,5 +1,5 @@
 import {LitElement, html, PropertyValues} from 'lit';
-import {customElement, property} from 'lit/decorators';
+import {customElement, property} from 'lit/decorators.js';
 import {addListener, removeListener} from '@polymer/polymer/lib/utils/gestures.js';
 import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
 

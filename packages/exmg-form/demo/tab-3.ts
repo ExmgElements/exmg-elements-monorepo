@@ -1,10 +1,10 @@
 import {LitElement, html, css} from 'lit';
-import {customElement} from 'lit/decorators';
-import '@polymer/paper-input/paper-input';
-import '@exmg/exmg-markdown-editor/exmg-markdown-editor';
+import {customElement} from 'lit/decorators.js';
+import '@polymer/paper-input/paper-input.js';
+import '@exmg/exmg-markdown-editor/exmg-markdown-editor.js';
 
-import '../exmg-form';
-import {ExmgForm} from '../exmg-form';
+import '../exmg-form.js';
+import {ExmgForm} from '../exmg-form.js';
 
 @customElement('tab-3')
 export class Tab3El extends LitElement {

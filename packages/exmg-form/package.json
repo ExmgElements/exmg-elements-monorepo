@@ -1,6 +1,6 @@
 {
   "name": "@exmg/exmg-form",
-  "version": "8.0.0",
+  "version": "8.1.0",
   "description": "Form helper element",
   "contributors": [
     "Ex Machina"
@@ -26,7 +26,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@exmg/exmg-button": "^8.0.0",
+    "@exmg/exmg-button": "^8.0.3",
     "@polymer/iron-form": "^3.0.1",
     "lit": "^2.0.0"
   },
@@ -37,8 +37,8 @@
     "@exmg/exmg-markdown-editor": "^8.0.0",
     "@exmg/exmg-paper-combobox": "^8.0.1",
     "@exmg/exmg-paper-token-input": "^8.0.0",
-    "@material/mwc-tab": "^0.25.1",
-    "@material/mwc-tab-bar": "^0.25.1",
+    "@material/mwc-tab": "^0.25.2",
+    "@material/mwc-tab-bar": "^0.25.2",
     "@polymer/iron-component-page": "^4.0.1",
     "@polymer/iron-demo-helpers": "^3.1.0",
     "@polymer/iron-flex-layout": "^3.0.1",

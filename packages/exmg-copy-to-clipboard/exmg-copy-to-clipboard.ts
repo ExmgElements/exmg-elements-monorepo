@@ -1,8 +1,8 @@
 import {LitElement, html, TemplateResult} from 'lit';
-import {customElement, property} from 'lit/decorators';
+import {customElement, property} from 'lit/decorators.js';
 
-import {FlattenedNodesObserver} from '@polymer/polymer/lib/utils/flattened-nodes-observer';
-import {addListener, removeListener} from '@polymer/polymer/lib/utils/gestures';
+import {FlattenedNodesObserver} from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
+import {addListener, removeListener} from '@polymer/polymer/lib/utils/gestures.js';
 import {style} from './styles/exmg-copy-to-clipboard-styles-css.js';
 
 /**

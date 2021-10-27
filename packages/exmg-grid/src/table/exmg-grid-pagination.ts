@@ -1,9 +1,9 @@
 import {LitElement, html, TemplateResult} from 'lit';
-import {customElement, property} from 'lit/decorators';
-import {repeat} from 'lit/directives/repeat';
+import {customElement, property} from 'lit/decorators.js';
+import {repeat} from 'lit/directives/repeat.js';
 import '@material/mwc-icon-button';
 import '@polymer/paper-item';
-import './exmg-grid-toolbar-combobox';
+import './exmg-grid-toolbar-combobox.js';
 import {style} from '../styles/exmg-grid-pagination-styles-css.js';
 
 /**

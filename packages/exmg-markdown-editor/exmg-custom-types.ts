@@ -1,6 +1,6 @@
 // it just create better type definition than lit-element type PropertyValues
 
-import {EditorElement} from 'exmg-markdown-editor';
+import {EditorElement} from 'exmg-markdown-editor.js';
 
 // now editor should show what kind of field names are allowed
 export type GenericPropertyValues<T extends PropertyKey, V = unknown> = Map<T, V>;

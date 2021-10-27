@@ -1,10 +1,10 @@
 import {LitElement, html} from 'lit';
-import {customElement, property} from 'lit/decorators';
-import '@polymer/paper-input/paper-input';
-import '@polymer/paper-checkbox/paper-checkbox';
-import '@exmg/exmg-markdown-editor/exmg-markdown-editor';
-import './cust-el';
-import './wrapper-el';
+import {customElement, property} from 'lit/decorators.js';
+import '@polymer/paper-input/paper-input.js';
+import '@polymer/paper-checkbox/paper-checkbox.js';
+import '@exmg/exmg-markdown-editor/exmg-markdown-editor.js';
+import './cust-el.js';
+import './wrapper-el.js';
 
 @customElement('tab-1')
 export class Tab1El extends LitElement {

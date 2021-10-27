@@ -1,5 +1,5 @@
 import {html, LitElement} from 'lit';
-import {customElement, property, query} from 'lit/decorators';
+import {customElement, property, query} from 'lit/decorators.js';
 import {classMap} from 'lit/directives/class-map.js';
 import {observer} from '@material/mwc-base/observer.js';
 import {Debouncer} from '@polymer/polymer/lib/utils/debounce.js';

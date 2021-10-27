@@ -1,16 +1,16 @@
 import {html, TemplateResult} from 'lit';
-import {customElement} from 'lit/decorators';
+import {customElement} from 'lit/decorators.js';
 import {
   ActionAmountSelectedItemsCondition,
   ActionWithCondition,
   ActionConditionType,
-} from '../src/table/types/exmg-grid-smart-toolbar-types';
+} from '../src/table/types/exmg-grid-smart-toolbar-types.js';
 import '../src/table/exmg-grid-smart-toolbar.js';
 import '../src/table/exmg-grid-smart-toolbar.js';
-import {repeat} from 'lit/directives/repeat';
-import {ExmgBaseGridDemo} from './exmg-base-grid-demo';
-import '../src/table/exmg-grid';
-import '../src/table/exmg-grid-pagination';
+import {repeat} from 'lit/directives/repeat.js';
+import {ExmgBaseGridDemo} from './exmg-base-grid-demo.js';
+import '../src/table/exmg-grid.js';
+import '../src/table/exmg-grid-pagination.js';
 import {style as tableStyles} from '../src/styles/exmg-grid-styles-css.js';
 import {style as demoStyles} from './styles/demo-styles-css.js';
 

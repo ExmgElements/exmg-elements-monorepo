@@ -1,14 +1,14 @@
 import {ExmgSearchBarBaseInterface} from './exmg-searchbar-base-interface.js';
 import {LitElement, html, TemplateResult} from 'lit';
-import {query, property, queryAll} from 'lit/decorators';
-import {TextField} from '@material/mwc-textfield';
+import {query, property, queryAll} from 'lit/decorators.js';
+import {TextField} from '@material/mwc-textfield/mwc-textfield.js';
 import '@material/mwc-textfield/mwc-textfield.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-item/paper-item.js';
 import '@polymer/paper-item/paper-icon-item.js';
 import '@polymer/paper-spinner/paper-spinner-lite.js';
 
-import styles from './styles/exmg-searchbar-styles';
+import styles from './styles/exmg-searchbar-styles.js';
 
 /**
  * A search bar based on mwc-textfield element.

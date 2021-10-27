@@ -1,5 +1,5 @@
 import {html, LitElement} from 'lit';
-import {property} from 'lit/decorators';
+import {property} from 'lit/decorators.js';
 import {observer} from '@material/mwc-base/observer.js';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@polymer/paper-listbox/paper-listbox.js';

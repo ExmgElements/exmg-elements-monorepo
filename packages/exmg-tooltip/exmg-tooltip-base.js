@@ -1,6 +1,6 @@
 import { __decorate } from "tslib";
 import { LitElement, html } from 'lit';
-import { property, query } from 'lit/decorators';
+import { property, query } from 'lit/decorators.js';
 import { observer } from '@material/mwc-base/observer.js';
 export class ExmgTooltipBase extends LitElement {
     constructor() {

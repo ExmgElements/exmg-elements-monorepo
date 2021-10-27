@@ -1,9 +1,9 @@
 import {LitElement, html} from 'lit';
-import {customElement, property, query} from 'lit/decorators';
+import {customElement, property, query} from 'lit/decorators.js';
 import '@exmg/exmg-button';
 import '@exmg/exmg-form-drawer';
-import '../exmg-markdown-editor';
-import {ExmgFormDrawer} from '@exmg/exmg-form-drawer';
+import '../exmg-markdown-editor.js';
+import {ExmgFormDrawer} from '@exmg/exmg-form-drawer/exmg-form-drawer.js';
 
 @customElement('exmg-drawer-demo')
 export class Drawer extends LitElement {

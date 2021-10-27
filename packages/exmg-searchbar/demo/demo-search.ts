@@ -1,11 +1,11 @@
 import {LitElement, html} from 'lit';
-import {customElement, query, property} from 'lit/decorators';
-import {repeat} from 'lit/directives/repeat';
-import '../exmg-searchbar';
-import '@polymer/iron-demo-helpers/demo-snippet';
-import styles from './demo-search-styles';
-import {ExmgSearchBar} from '../exmg-searchbar';
-import {ExmgSearchSuggestion} from '../exmg-searchbar-base';
+import {customElement, query, property} from 'lit/decorators.js';
+import {repeat} from 'lit/directives/repeat.js';
+import '../exmg-searchbar.js';
+import '@polymer/iron-demo-helpers/demo-snippet.js';
+import styles from './demo-search-styles.js';
+import {ExmgSearchBar} from '../exmg-searchbar.js';
+import {ExmgSearchSuggestion} from '../exmg-searchbar-base.js';
 
 const mockData = [
   {username: 'livery', name: 'Livery Video', id: 1, url: 'https://www.liveryvideo.com/contact/'},

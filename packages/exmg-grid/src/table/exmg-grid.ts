@@ -1,14 +1,14 @@
 import {html, LitElement, TemplateResult} from 'lit';
-import {property, customElement} from 'lit/decorators';
-import {cache} from 'lit/directives/cache';
-import '@exmg/exmg-sortable';
+import {property, customElement} from 'lit/decorators.js';
+import {cache} from 'lit/directives/cache.js';
+import '@exmg/exmg-sortable/exmg-sortable.js';
 import {style as exmgGridTableStyles} from '../styles/exmg-grid-styles-css.js';
-import {ExmgRowSelectable} from './featrues/exmg-row-selectable';
-import {ExmgQuerySelectors} from './utils/exmg-query-selectors';
-import {ExmgRowExpandable} from './featrues/exmg-row-expandable';
-import {ExmgColumnSortable} from './featrues/exmg-column-sortable';
-import {ExmgRowSortable} from './featrues/exmg-row-sortable';
-import {EventDetailRowsOrderChanged, EventDetailRowsOrderUpdated, SORT_DIRECTION} from './types/exmg-grid-types';
+import {ExmgRowSelectable} from './featrues/exmg-row-selectable.js';
+import {ExmgQuerySelectors} from './utils/exmg-query-selectors.js';
+import {ExmgRowExpandable} from './featrues/exmg-row-expandable.js';
+import {ExmgColumnSortable} from './featrues/exmg-column-sortable.js';
+import {ExmgRowSortable} from './featrues/exmg-row-sortable.js';
+import {EventDetailRowsOrderChanged, EventDetailRowsOrderUpdated, SORT_DIRECTION} from './types/exmg-grid-types.js';
 
 type GenericPropertyValues<T, V = unknown> = Map<T, V>;
 type Props = Exclude<keyof ExmgGrid, number | symbol>;

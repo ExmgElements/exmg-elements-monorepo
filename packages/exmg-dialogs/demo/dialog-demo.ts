@@ -1,13 +1,13 @@
 import {LitElement, html, css} from 'lit';
-import {customElement} from 'lit/decorators';
+import {customElement} from 'lit/decorators.js';
 import '@exmg/exmg-paper-combobox/exmg-paper-combobox.js';
 import '@exmg/exmg-paper-token-input/exmg-paper-token-input.js';
 import '@exmg/exmg-markdown-editor/exmg-markdown-editor.js';
 import '@exmg/exmg-button';
 import '@polymer/paper-input/paper-input.js';
 import '@polymer/paper-item/paper-item.js';
-import '../index';
-import {ExmgConfirmDialog} from '../index';
+import '../index.js';
+import {ExmgConfirmDialog} from '../index.js';
 
 @customElement('dialog-demo')
 export class DialogDemo extends LitElement {

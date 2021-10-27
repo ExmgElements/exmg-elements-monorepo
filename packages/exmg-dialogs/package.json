@@ -1,6 +1,6 @@
 {
   "name": "@exmg/exmg-dialogs",
-  "version": "8.0.1",
+  "version": "8.1.0",
   "main": "index.js",
   "files": [
     "styles/**/*.scss",
@@ -15,8 +15,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@exmg/exmg-button": "^8.0.0",
-    "@material/mwc-icon-button": "^0.25.1",
+    "@exmg/exmg-button": "^8.1.0",
+    "@material/mwc-icon-button": "^0.25.2",
     "@polymer/iron-form": "^3.0.0",
     "@polymer/paper-dialog": "^3.0.0",
     "@polymer/paper-dialog-scrollable": "^3.0.0",
@@ -27,9 +27,9 @@
     "@exmg/exmg-cli": "^4.1.0",
     "@web/dev-server": "0.0.29",
     "concurrently": "^6.2.1",
-    "@exmg/exmg-markdown-editor": "^8.0.0",
-    "@exmg/exmg-paper-combobox": "^8.0.1",
-    "@exmg/exmg-paper-token-input": "^8.0.0",
+    "@exmg/exmg-markdown-editor": "^8.0.2",
+    "@exmg/exmg-paper-combobox": "^8.0.3",
+    "@exmg/exmg-paper-token-input": "^8.0.2",
     "@polymer/iron-demo-helpers": "^3.0.0",
     "@polymer/marked-element": "^3.0.0",
     "@polymer/paper-input": "^3.2.1",

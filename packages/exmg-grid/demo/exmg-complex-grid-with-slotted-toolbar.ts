@@ -1,21 +1,21 @@
 import {html, css, TemplateResult} from 'lit';
-import {customElement} from 'lit/decorators';
-import {classMap} from 'lit/directives/class-map';
-import {repeat} from 'lit/directives/repeat';
+import {customElement} from 'lit/decorators.js';
+import {classMap} from 'lit/directives/class-map.js';
+import {repeat} from 'lit/directives/repeat.js';
 import '@material/mwc-checkbox';
 import '@polymer/paper-item';
 import '@material/mwc-icon-button';
 
 import '../src/table/exmg-grid-toolbar-combobox.js';
 import '../src/table/exmg-grid.js';
-import '../src/table/exmg-grid-pagination';
-import '../src/table/exmg-grid-base-toolbar';
+import '../src/table/exmg-grid-pagination.js';
+import '../src/table/exmg-grid-base-toolbar.js';
 
 import {style as tableStyles} from '../src/styles/exmg-grid-styles-css.js';
 import {style as demoStyles} from './styles/demo-styles-css.js';
 
-import {createIcon} from './exmg-icons';
-import {DEFAULT_SORT_COLUMN, DEFAULT_SORT_DIRECTION, ExmgBaseGridDemo} from './exmg-base-grid-demo';
+import {createIcon} from './exmg-icons.js';
+import {DEFAULT_SORT_COLUMN, DEFAULT_SORT_DIRECTION, ExmgBaseGridDemo} from './exmg-base-grid-demo.js';
 
 @customElement('demo-complex-grid-with-slotted-toolbar')
 export class ExmgComplexGridWithSlottedToolbar extends ExmgBaseGridDemo {

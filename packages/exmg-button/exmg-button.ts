@@ -1,12 +1,12 @@
-import {html} from 'lit';
-import {property, customElement, eventOptions} from 'lit/decorators';
-import '@material/mwc-ripple/mwc-ripple';
+import {html, TemplateResult} from 'lit';
+import {property, customElement, eventOptions} from 'lit/decorators.js';
+import '@material/mwc-ripple/mwc-ripple.js';
 
 import {classMap} from 'lit/directives/class-map.js';
 import {ButtonBase} from '@material/mwc-button/mwc-button-base.js';
-import {style} from '@material/mwc-button/styles-css.js';
+import {styles} from '@material/mwc-button/styles.css.js';
 import {style as newStyles} from './styles/exmg-button-styles-css.js';
-import './exmg-spinner';
+import './exmg-spinner.js';
 
 @customElement('exmg-button')
 export class ExmgButton extends ButtonBase {
@@ -16,9 +16,9 @@ export class ExmgButton extends ButtonBase {
   @property({type: Number})
   public progress?: number;
 
-  static styles = [style, newStyles];
+  static styles = [styles, newStyles];
 
-  protected render(): any {
+  protected render(): TemplateResult {
     const classes = {
       'mdc-button--raised': this.raised,
       'mdc-button--unelevated': this.unelevated,

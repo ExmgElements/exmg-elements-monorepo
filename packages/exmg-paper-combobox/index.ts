@@ -1,1 +1,1 @@
-export * from './exmg-paper-combobox';
+export * from './exmg-paper-combobox.js';

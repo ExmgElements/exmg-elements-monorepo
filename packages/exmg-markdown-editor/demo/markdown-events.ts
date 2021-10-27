@@ -1,5 +1,5 @@
-import {EditorElement} from '../exmg-markdown-editor';
-import {ExmgFormDialog} from '@exmg/exmg-dialogs/exmg-dialog-form';
+import {EditorElement} from '../exmg-markdown-editor.js';
+import {ExmgFormDialog} from '@exmg/exmg-dialogs/exmg-dialog-form.js';
 
 const writeToEventList = (e: CustomEvent) => {
   console.log(e);

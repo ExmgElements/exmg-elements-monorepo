@@ -1,7 +1,6 @@
 import {LitElement, html, css} from 'lit';
-import {customElement, property, query} from 'lit/decorators';
+import {customElement, property, query} from 'lit/decorators.js';
 import {classMap} from 'lit/directives/class-map.js';
-import {ifDefined} from 'lit/directives/if-defined';
 
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';

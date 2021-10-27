@@ -1,5 +1,5 @@
 import {html, LitElement, TemplateResult} from 'lit';
-import {customElement, property} from 'lit/decorators';
+import {customElement, property} from 'lit/decorators.js';
 
 @customElement('exmg-grid-pagination-demo')
 export class ExmgGridSmartToolbarDemo extends LitElement {

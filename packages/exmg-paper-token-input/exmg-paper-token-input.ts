@@ -1,7 +1,7 @@
 /* eslint(lit/no-property-change-update) 0 */
 import {html, LitElement, PropertyValues} from 'lit';
-import {customElement, property, query} from 'lit/decorators';
-import {repeat} from 'lit/directives/repeat';
+import {customElement, property, query} from 'lit/decorators.js';
+import {repeat} from 'lit/directives/repeat.js';
 import '@polymer/paper-menu-button/paper-menu-button.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
@@ -12,9 +12,9 @@ import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@polymer/paper-input/paper-input-container.js';
 import '@polymer/paper-styles/paper-styles.js';
 import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
-import './exmg-paper-token-input-icons';
-import {PaperMenuButton} from '@polymer/paper-menu-button/paper-menu-button';
-import {PaperListboxElement} from '@polymer/paper-listbox/paper-listbox';
+import './exmg-paper-token-input-icons.js';
+import {PaperMenuButton} from '@polymer/paper-menu-button/paper-menu-button.js';
+import {PaperListboxElement} from '@polymer/paper-listbox/paper-listbox.js';
 
 const BACKSPACE = 8;
 const TAB = 9;

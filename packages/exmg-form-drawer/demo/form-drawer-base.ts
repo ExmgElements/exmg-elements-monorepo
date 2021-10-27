@@ -1,9 +1,8 @@
-import {html, TemplateResult} from 'lit';
-import {property} from 'lit/decorators';
+import {html, PropertyValues, TemplateResult} from 'lit';
+import {property} from 'lit/decorators.js';
 import '../exmg-form-drawer.js';
 import {style} from './form-drawer-base-styles.js';
 import {BaseElement} from './base-element.js';
-import {PropertyValues} from 'lit-element/lib/updating-element';
 
 export interface Observer {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

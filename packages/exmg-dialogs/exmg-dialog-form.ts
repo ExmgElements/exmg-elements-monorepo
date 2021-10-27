@@ -1,5 +1,5 @@
 import {html, LitElement} from 'lit';
-import {customElement, property, query} from 'lit/decorators';
+import {customElement, property, query} from 'lit/decorators.js';
 import '@polymer/paper-dialog';
 import '@material/mwc-icon-button';
 import {PaperDialogElement} from '@polymer/paper-dialog';
@@ -9,7 +9,7 @@ import '@polymer/iron-form';
 import {IronFormElement} from '@polymer/iron-form';
 import {style} from './styles/exmg-dialog-styles-css.js';
 import {ExmgButton} from '@exmg/exmg-button';
-import {closeIcon, warningIcon} from './exmg-dialog-icons';
+import {closeIcon, warningIcon} from './exmg-dialog-icons.js';
 
 interface ExmgCustomEvent extends CustomEvent {
   path: HTMLElement[];

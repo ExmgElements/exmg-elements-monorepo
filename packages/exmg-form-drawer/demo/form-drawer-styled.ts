@@ -1,10 +1,10 @@
 import {LitElement, html} from 'lit';
-import {customElement, property} from 'lit/decorators';
-import '@exmg/exmg-button';
+import {customElement, property} from 'lit/decorators.js';
+import '@exmg/exmg-button/exmg-button.js';
 import '@polymer/paper-input/paper-input.js';
 import '@exmg/exmg-paper-combobox/exmg-paper-combobox.js';
-import '@exmg/exmg-form/exmg-form';
-import '../exmg-form-drawer';
+import '@exmg/exmg-form/exmg-form.js';
+import '../exmg-form-drawer.js';
 
 @customElement('exmg-drawer-demo')
 export class Drawer extends LitElement {

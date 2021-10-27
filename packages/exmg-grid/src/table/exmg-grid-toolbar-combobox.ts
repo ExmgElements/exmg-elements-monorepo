@@ -1,6 +1,6 @@
 import {LitElement, html, css, TemplateResult} from 'lit';
-import {customElement, property, query} from 'lit/decorators';
-import {classMap} from 'lit/directives/class-map';
+import {customElement, property, query} from 'lit/decorators.js';
+import {classMap} from 'lit/directives/class-map.js';
 
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
@@ -16,7 +16,7 @@ import '@polymer/paper-styles/paper-styles.js';
 import './exmg-grid-toolbar-combobox-icons.js';
 import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
 
-import {PaperListboxElement} from '@polymer/paper-listbox/paper-listbox';
+import {PaperListboxElement} from '@polymer/paper-listbox/paper-listbox.js';
 
 const copyElementStyle = (source: HTMLElement, target: HTMLElement): void => {
   const computedStyle = window.getComputedStyle(source, null);

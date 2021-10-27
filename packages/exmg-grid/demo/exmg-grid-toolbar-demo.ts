@@ -1,6 +1,6 @@
 import {html, LitElement, TemplateResult} from 'lit';
-import {customElement} from 'lit/decorators';
-import {Action, Filter, FilterSingleSelectConfig, FilterConfigType} from '../src/table/types/exmg-grid-toolbar-types';
+import {customElement} from 'lit/decorators.js';
+import {Action, Filter, FilterSingleSelectConfig, FilterConfigType} from '../src/table/types/exmg-grid-toolbar-types.js';
 
 @customElement('exmg-grid-toolbar-demo')
 export class ExmgGridToolbarDemo extends LitElement {

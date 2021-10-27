@@ -1,11 +1,11 @@
 import {css, html, LitElement, TemplateResult} from 'lit';
-import {customElement, property} from 'lit/decorators';
-import {repeat} from 'lit/directives/repeat';
+import {customElement, property} from 'lit/decorators.js';
+import {repeat} from 'lit/directives/repeat.js';
 import '@material/mwc-icon-button';
-import './exmg-grid-toolbar-combobox';
+import './exmg-grid-toolbar-combobox.js';
 import '@polymer/paper-item';
-import './exmg-grid-base-toolbar';
-import './exmg-grid-setting-selection-list';
+import './exmg-grid-base-toolbar.js';
+import './exmg-grid-setting-selection-list.js';
 import '../search/exmg-toolbar-search.js';
 
 import {

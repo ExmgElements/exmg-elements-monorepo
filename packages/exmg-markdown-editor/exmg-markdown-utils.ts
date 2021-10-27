@@ -1,5 +1,5 @@
 import {Editor, KeyMap} from 'codemirror';
-import {ToolBarOption} from 'exmg-custom-types';
+import {ToolBarOption} from './exmg-custom-types.js';
 
 const isMac = /Mac/.test(navigator.platform);
 export const convertShortcut = (name: string): string => {

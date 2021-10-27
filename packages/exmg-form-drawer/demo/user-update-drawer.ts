@@ -1,11 +1,11 @@
 import {html, TemplateResult} from 'lit';
-import {customElement, property, query} from 'lit/decorators';
+import {customElement, property, query} from 'lit/decorators.js';
 import {ExmgFormDrawer} from '../exmg-form-drawer.js';
-import '@exmg/exmg-markdown-editor';
+import '@exmg/exmg-markdown-editor/exmg-markdown-editor.js';
 import '@polymer/paper-input/paper-input.js';
 import '@polymer/paper-input/paper-textarea.js';
 import {FormDrawerBase} from './form-drawer-base.js';
-import {EditorElement} from '@exmg/exmg-markdown-editor';
+import {EditorElement} from '@exmg/exmg-markdown-editor/exmg-markdown-editor.js';
 
 interface UserData {
   from: string;
@@ -45,6 +45,7 @@ export class UserUpdateDrawer extends FormDrawerBase<UserData> {
 
       target.done();
     } catch (error) {
+      // @ts-ignore
       target.error(`${error.message}`);
     }
   }

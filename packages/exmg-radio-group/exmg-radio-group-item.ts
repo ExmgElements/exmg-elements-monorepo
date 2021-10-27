@@ -1,7 +1,7 @@
 import {FormElement, HTMLElementWithRipple} from '@material/mwc-base/form-element.js';
 import {observer} from '@material/mwc-base/observer.js';
 import {html} from 'lit';
-import {property, customElement, query} from 'lit/decorators';
+import {property, customElement, query} from 'lit/decorators.js';
 import {MDCFoundation} from '@material/base';
 import {style} from '@material/mwc-radio/mwc-radio-css';
 import {ripple} from '@material/mwc-ripple/ripple-directive';
