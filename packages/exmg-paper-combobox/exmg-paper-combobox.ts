@@ -26,7 +26,7 @@ type ChangedProps = GenericPropertyValues<Props>;
 
 const copyElementStyle = (source: HTMLElement, target: HTMLElement): void => {
   const computedStyle = window.getComputedStyle(source, null);
-  Array.from(computedStyle).forEach((key) =>
+  Array.from(computedStyle).forEach(key =>
     target.style.setProperty(key, computedStyle.getPropertyValue(key), computedStyle.getPropertyPriority(key)),
   );
 };
@@ -460,7 +460,7 @@ export class PaperComboboxElement extends LitElement {
     const phrase = hasFilterPhrase ? this.inputValue.toLowerCase().trim() : '';
     let isAnyItemActive = false;
 
-    items.forEach((item) => {
+    items.forEach(item => {
       if (hasFilterPhrase && item.textContent && item.textContent.toLowerCase().indexOf(phrase) === -1) {
         item.setAttribute('hidden', '');
       } else {
@@ -577,7 +577,7 @@ export class PaperComboboxElement extends LitElement {
   }
 
   private onClick(e: Event) {
-    const inside = e.composedPath().findIndex((path) => path === this) !== -1;
+    const inside = e.composedPath().findIndex(path => path === this) !== -1;
 
     // Detect outside element click for auto validate input
     if ((this.autoValidate && this.previousInsideClick && !inside) || this.token) {
@@ -744,7 +744,9 @@ export class PaperComboboxElement extends LitElement {
   }
 
   protected render() {
-    return html` ${this.getTemplate()} `;
+    return html`
+      ${this.getTemplate()}
+    `;
   }
 
   private getTemplate() {

@@ -31,7 +31,7 @@ export class RichDemo extends LitElement {
   ];
 
   private renderOptions1() {
-    return countries.slice(0, 100).map((country) => {
+    return countries.slice(0, 100).map(country => {
       const cssClass = `flag-icon flag-icon-${country.value.toLowerCase()}`;
       const callingCode = `+${country.value}`;
       return html`
