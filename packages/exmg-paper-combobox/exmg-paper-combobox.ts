@@ -1,4 +1,4 @@
-import {LitElement, html, css} from 'lit';
+import {LitElement, html, css, nothing} from 'lit';
 import {customElement, property, query} from 'lit/decorators.js';
 import {classMap} from 'lit/directives/class-map.js';
 
@@ -26,7 +26,7 @@ type ChangedProps = GenericPropertyValues<Props>;
 
 const copyElementStyle = (source: HTMLElement, target: HTMLElement): void => {
   const computedStyle = window.getComputedStyle(source, null);
-  Array.from(computedStyle).forEach(key =>
+  Array.from(computedStyle).forEach((key) =>
     target.style.setProperty(key, computedStyle.getPropertyValue(key), computedStyle.getPropertyPriority(key)),
   );
 };
@@ -143,6 +143,12 @@ export class PaperComboboxElement extends LitElement {
    */
   @property({type: Boolean})
   disabled = false;
+
+  /**
+   * Set to true to disable this input.
+   */
+  @property({type: Boolean})
+  searchDisabled = true;
 
   /**
    * The error message to display when the input is invalid.
@@ -460,7 +466,7 @@ export class PaperComboboxElement extends LitElement {
     const phrase = hasFilterPhrase ? this.inputValue.toLowerCase().trim() : '';
     let isAnyItemActive = false;
 
-    items.forEach(item => {
+    items.forEach((item) => {
       if (hasFilterPhrase && item.textContent && item.textContent.toLowerCase().indexOf(phrase) === -1) {
         item.setAttribute('hidden', '');
       } else {
@@ -577,7 +583,7 @@ export class PaperComboboxElement extends LitElement {
   }
 
   private onClick(e: Event) {
-    const inside = e.composedPath().findIndex(path => path === this) !== -1;
+    const inside = e.composedPath().findIndex((path) => path === this) !== -1;
 
     // Detect outside element click for auto validate input
     if ((this.autoValidate && this.previousInsideClick && !inside) || this.token) {
@@ -744,9 +750,7 @@ export class PaperComboboxElement extends LitElement {
   }
 
   protected render() {
-    return html`
-      ${this.getTemplate()}
-    `;
+    return html` ${this.getTemplate()} `;
   }
 
   private getTemplate() {
@@ -781,15 +785,17 @@ export class PaperComboboxElement extends LitElement {
             <slot name="prefix"></slot>
             <span class="${classMap({tokens: true, selected: !!this.token})}">
               ${this.renderTokenButton()}
-              <input
-                id="inputValue"
-                aria-labelledby="label"
-                value="${this.inputValue}"
-                @input="${this.onInputValueChange}"
-                ?autofocus="${this.autofocus}"
-                autocomplete="off"
-                ?disabled="${this.disabled}"
-              />
+              ${this.searchDisabled
+                ? nothing
+                : html` <input
+                    id="inputValue"
+                    aria-labelledby="label"
+                    value="${this.inputValue}"
+                    @input="${this.onInputValueChange}"
+                    ?autofocus="${this.autofocus}"
+                    autocomplete="off"
+                    ?disabled="${this.disabled}"
+                  />`}
             </span>
             <slot name="suffix"></slot>
           </iron-input>
