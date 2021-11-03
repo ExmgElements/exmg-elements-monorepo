@@ -1,6 +1,6 @@
 // it just create better type definition than lit-element type PropertyValues
 
-import {EditorElement} from 'exmg-markdown-editor.js';
+import {EditorElement} from './exmg-markdown-editor.js';
 
 // now editor should show what kind of field names are allowed
 export type GenericPropertyValues<T extends PropertyKey, V = unknown> = Map<T, V>;
@@ -27,7 +27,8 @@ export type ToolBarOption =
   | 'image-ext'
   | 'fullscreen'
   | 'split-view'
-  | AvailableMarkdownExtension;
+  | 'indent-in'
+  | 'indent-out';
 
 export interface ToolBarConfigItem extends Object {
   name: ToolBarOption;
@@ -38,9 +39,6 @@ export interface ToolBarConfigItem extends Object {
 }
 
 export const isToolBarConfigItem = (item: Record<string, any>): item is ToolBarConfigItem => item.hasOwnProperty('name');
-
-export type AvailableMarkdownExtension = 'indent-in' | 'indent-out';
-export const availableMarkdownExtensions: AvailableMarkdownExtension[] = ['indent-in', 'indent-out'];
 
 export type PrivateProps = 'toolbarButtonsConfig';
 
@@ -64,7 +62,7 @@ declare global {
     markdownEditorConfig: {
       urlPlaceholder: string;
       imagePlaceholder: string;
-      extensions: AvailableMarkdownExtension[];
+      extensions: any[];
       renderer: unknown;
     };
   }
