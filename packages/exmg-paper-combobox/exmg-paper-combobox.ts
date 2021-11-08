@@ -26,7 +26,7 @@ type ChangedProps = GenericPropertyValues<Props>;
 
 const copyElementStyle = (source: HTMLElement, target: HTMLElement): void => {
   const computedStyle = window.getComputedStyle(source, null);
-  Array.from(computedStyle).forEach(key =>
+  Array.from(computedStyle).forEach((key) =>
     target.style.setProperty(key, computedStyle.getPropertyValue(key), computedStyle.getPropertyPriority(key)),
   );
 };
@@ -466,7 +466,7 @@ export class PaperComboboxElement extends LitElement {
     const phrase = hasFilterPhrase ? this.inputValue.toLowerCase().trim() : '';
     let isAnyItemActive = false;
 
-    items.forEach(item => {
+    items.forEach((item) => {
       if (hasFilterPhrase && item.textContent && item.textContent.toLowerCase().indexOf(phrase) === -1) {
         item.setAttribute('hidden', '');
       } else {
@@ -500,7 +500,7 @@ export class PaperComboboxElement extends LitElement {
    * this method can be used to set the focus of the element
    */
   focus() {
-    this.inputElement!.focus();
+    this.inputElement?.focus();
   }
 
   /**
@@ -583,7 +583,7 @@ export class PaperComboboxElement extends LitElement {
   }
 
   private onClick(e: Event) {
-    const inside = e.composedPath().findIndex(path => path === this) !== -1;
+    const inside = e.composedPath().findIndex((path) => path === this) !== -1;
 
     // Detect outside element click for auto validate input
     if ((this.autoValidate && this.previousInsideClick && !inside) || this.token) {
@@ -638,6 +638,9 @@ export class PaperComboboxElement extends LitElement {
   }
 
   private onInputValueChange(e: Event): void {
+    if (this.searchDisabled) {
+      return;
+    }
     this.inputValue = (e.target as HTMLInputElement).value;
   }
 
@@ -750,9 +753,7 @@ export class PaperComboboxElement extends LitElement {
   }
 
   protected render() {
-    return html`
-      ${this.getTemplate()}
-    `;
+    return html` ${this.getTemplate()} `;
   }
 
   private getTemplate() {
@@ -787,19 +788,16 @@ export class PaperComboboxElement extends LitElement {
             <slot name="prefix"></slot>
             <span class="${classMap({tokens: true, selected: !!this.token})}">
               ${this.renderTokenButton()}
-              ${this.searchDisabled
-                ? nothing
-                : html`
-                    <input
-                      id="inputValue"
-                      aria-labelledby="label"
-                      value="${this.inputValue}"
-                      @input="${this.onInputValueChange}"
-                      ?autofocus="${this.autofocus}"
-                      autocomplete="off"
-                      ?disabled="${this.disabled}"
-                    />
-                  `}
+              <input
+                id="inputValue"
+                aria-labelledby="label"
+                value="${this.inputValue}"
+                @input="${this.onInputValueChange}"
+                ?readonly="${this.searchDisabled}"
+                ?autofocus="${this.autofocus}"
+                autocomplete="off"
+                ?disabled="${this.disabled}"
+              />
             </span>
             <slot name="suffix"></slot>
           </iron-input>
