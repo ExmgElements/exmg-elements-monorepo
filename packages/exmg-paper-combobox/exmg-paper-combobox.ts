@@ -1,4 +1,4 @@
-import {LitElement, html, css} from 'lit';
+import {LitElement, html, css, nothing} from 'lit';
 import {customElement, property, query} from 'lit/decorators.js';
 import {classMap} from 'lit/directives/class-map.js';
 
@@ -143,6 +143,12 @@ export class PaperComboboxElement extends LitElement {
    */
   @property({type: Boolean})
   disabled = false;
+
+  /**
+   * Set to true to disable this input.
+   */
+  @property({type: Boolean})
+  searchDisabled = true;
 
   /**
    * The error message to display when the input is invalid.
@@ -494,7 +500,7 @@ export class PaperComboboxElement extends LitElement {
    * this method can be used to set the focus of the element
    */
   focus() {
-    this.inputElement!.focus();
+    this.inputElement ? this.inputElement.focus() : null;
   }
 
   /**
@@ -632,6 +638,9 @@ export class PaperComboboxElement extends LitElement {
   }
 
   private onInputValueChange(e: Event): void {
+    if (this.searchDisabled) {
+      return;
+    }
     this.inputValue = (e.target as HTMLInputElement).value;
   }
 
@@ -786,6 +795,7 @@ export class PaperComboboxElement extends LitElement {
                 aria-labelledby="label"
                 value="${this.inputValue}"
                 @input="${this.onInputValueChange}"
+                ?readonly="${this.searchDisabled}"
                 ?autofocus="${this.autofocus}"
                 autocomplete="off"
                 ?disabled="${this.disabled}"
