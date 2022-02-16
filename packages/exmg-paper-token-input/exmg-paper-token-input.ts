@@ -149,6 +149,9 @@ export class PaperTokenInputElement extends LitElement {
   @property({type: Boolean})
   public inputFocused = false;
 
+  @property({type: Boolean, attribute: 'disable-close-on-activate'})
+  public disableCloseOnActivate = false;
+
   @property({type: Boolean})
   private opened = false;
 
@@ -375,8 +378,6 @@ export class PaperTokenInputElement extends LitElement {
   }
 
   private resetInput(): void {
-    this.menuElement!.close();
-
     if (this.autoValidate) {
       this.validate();
     }
@@ -575,10 +576,9 @@ export class PaperTokenInputElement extends LitElement {
       </paper-input-container>
 
       <span id="inputWidthHelper">${this.inputValue}</span>
-
       <paper-menu-button
         id="menu"
-        close-on-activate
+        ?close-on-activate=${!this.disableCloseOnActivate}
         ?opened="${this.opened}"
         @opened-changed="${this.onPaperMenuVisibilityChanged}"
         vertical-offset="60"
