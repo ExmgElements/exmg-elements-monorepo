@@ -1,5 +1,5 @@
 /* eslint(lit/no-property-change-update) 0 */
-import {html, LitElement, PropertyValues} from 'lit';
+import {html, LitElement, PropertyValues, TemplateResult} from 'lit';
 import {customElement, property, query} from 'lit/decorators.js';
 import {repeat} from 'lit/directives/repeat.js';
 import '@polymer/paper-menu-button/paper-menu-button.js';
@@ -275,6 +275,7 @@ export class PaperTokenInputElement extends LitElement {
   }
 
   private onPaperListBoxItemSelect(e: CustomEvent): void {
+    e.stopPropagation();
     if (this.maxTokens && this.selectedValues.length >= this.maxTokens) {
       e.stopPropagation();
     } else {
@@ -304,7 +305,6 @@ export class PaperTokenInputElement extends LitElement {
   /** END OF EVENT HANDLERS */
 
   /** HELPERS */
-
   private emitItemSelectEvent(value: SelectedValue, item: HTMLElement): void {
     this.dispatchEvent(
       new CustomEvent('exmg-token-input-select', {
@@ -366,6 +366,7 @@ export class PaperTokenInputElement extends LitElement {
   }
 
   private focusInputValue(): void {
+    console.log('focusInputValue');
     this.inputValueNode!.focus();
   }
 
@@ -420,13 +421,12 @@ export class PaperTokenInputElement extends LitElement {
   /** LIT ELEMENT LIFECYCLE */
 
   public disconnectedCallback(): void {
-    super.disconnectedCallback();
-
     this.inputValueNode && this.inputValueNode.removeEventListener('keyup', this._onIronInputKeyUp);
 
     if (this.autoValidate) {
       window.removeEventListener('click', this._onWindowClick);
     }
+    super.disconnectedCallback();
   }
 
   protected update(changedProperties: PropertyValues): void {
@@ -438,7 +438,7 @@ export class PaperTokenInputElement extends LitElement {
     super.update(changedProperties);
   }
 
-  protected firstUpdated() {
+  protected firstUpdated(): void {
     this.inputValueNode!.addEventListener('keyup', this._onIronInputKeyUp);
 
     if (this.inputWidthHelperNode) {
@@ -456,7 +456,7 @@ export class PaperTokenInputElement extends LitElement {
     }
   }
 
-  protected render() {
+  protected render(): TemplateResult {
     return html`
       <!--suppress CssUnresolvedCustomPropertySet, CssUnresolvedCustomProperty -->
       <style>
