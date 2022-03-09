@@ -1,0 +1,109 @@
+@import '@material/typography/mixins';
+
+:host {
+  font-family: 'Roboto', 'Noto', sans-serif;
+
+  li {
+    list-style-type: none;
+    margin-bottom: 1.8rem;
+  }
+
+  .step-head {
+    .completed {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 1rem;
+      &:after {
+        content: 'done';
+      }
+    }
+  }
+  .step-head:hover {
+    .edit {
+      font-size: 1rem;
+      &:after {
+        content: 'edit';
+      }
+    }
+  }
+
+  .showstep {
+    display: hidden;
+  }
+
+  iron-collapse {
+    --iron-collapse-transition-duration: 150ms;
+  }
+
+  .step-head {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+  }
+
+  li {
+    position: relative;
+    width: 30rem;
+    &:before {
+      background-color: #e0e0e0;
+      content: '';
+      margin-left: -12px;
+      position: absolute;
+      top: 2.5rem;
+      left: 1.5rem;
+      width: 1px;
+      height: 100%;
+      z-index: -1;
+    }
+    &:last-child:before {
+      content: none; //Hide the last element
+    }
+  }
+
+  .step-conatiner {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .step-circle {
+    border-radius: 0.8rem;
+    -moz-border-radius: 0.8rem;
+    -webkit-border-radius: 0.8rem;
+    color: #ffffff;
+    display: inline-block;
+    line-height: 1.6rem;
+    height: 1.6rem;
+    margin-right: 1.4rem;
+    text-align: center;
+    width: 1.6rem;
+  }
+
+  .incompletecircle {
+    background: #7289a6;
+  }
+  .incompletetext {
+    color: #7289a6;
+  }
+  .completedcircle {
+    background: var(--mdc-theme-primary, var(--mdc-theme-primary, rgba(#02182b, 0.1)));
+  }
+
+  .hidden {
+    display: hidden;
+  }
+
+  .step-content-container {
+    margin-left: 3.1rem;
+    font-weight: 200;
+    font-size: 0.8rem;
+    min-height: 100%;
+  }
+
+  .step-content {
+    min-height: 100%;
+  }
+
+  .step-head-text {
+    font-weight: 500;
+  }
+}
