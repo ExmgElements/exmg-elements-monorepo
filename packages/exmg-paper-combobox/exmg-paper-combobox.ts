@@ -327,6 +327,7 @@ export class PaperComboboxElement extends LitElement {
       }
       iron-input {
         line-height: 22px;
+        height: 24px;
       }
       iron-dropdown {
         box-shadow: var(--shadow-elevation-2dp_-_box-shadow);
